@@ -9,7 +9,7 @@ module Cobudget
       actor :budget, repository: Budget
       actor :name
       actor :description, optional: true
-      #actor :sponsor, respository: User, optional: true
+      actor :sponsor, optional: true#, respository: User
 
       def perform
         Bucket.create!(actors)
