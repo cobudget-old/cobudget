@@ -29,3 +29,4 @@ end
 
 require "bundler/capistrano"
 after "deploy:restart", "deploy:cleanup"
+after "deploy:update_code", "site:symlink"
