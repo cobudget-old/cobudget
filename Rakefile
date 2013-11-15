@@ -24,4 +24,9 @@ namespace :db do
     ActiveRecord::Base.establish_connection(YAML.load(File.read(File.join('config','database.yml')))[ENV['ENV'] ? ENV['ENV'] : 'development'])
     ActiveRecord::Migrator.migrate("db/migrate/")
   end
+
+  desc "Populate fixtures"
+  task :load do
+
+  end
 end
