@@ -31,10 +31,13 @@ end
 When /^([^ ]+) views the buckets in the budget (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
-  @buckets_viewing = api.Buckets::List(budget: budget, user: user)
+  @buckets_viewing = api.list_buckets(budget: budget, user: user)
 end
 
 
+Then /^they should see (#{CAPTURE_BUCKET}) in the bucket list$/ do |bucket|
+  @buckets_viewing.include?bucket
+end
 
 
 
@@ -81,8 +84,4 @@ Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CA
   budget = budgets[budget_name]
 
   api.user_allocation_balance_enquiry(bucket: bucket).should == amount
-end
-
-Then /^they should see (#{CAPTURE_BUCKET}) in the bucket list$/ do |bucket|
-  @budget.buckets.include?bucket
 end
