@@ -23,6 +23,7 @@ end
 desc "Set environment"
 task :environment do
   @environment = ENV['ENV'] || 'development'
+  @environment = 'test' if ENV['TRAVIS']
 end
 
 namespace :db do
