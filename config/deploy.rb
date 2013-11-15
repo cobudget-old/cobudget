@@ -2,6 +2,7 @@ set :application, "cobudget-api"
 set :repository,  "git@github.com:enspiral/#{application}.git"
 set :use_sudo,    false
 
+set :normalize_asset_timestamps, false
 default_run_options[:shell] = '/bin/bash --login'
 set :scm, :git
 
@@ -27,5 +28,4 @@ namespace :site do
 end
 
 require "bundler/capistrano"
-
 after "deploy:restart", "deploy:cleanup"

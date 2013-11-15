@@ -1,0 +1,16 @@
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  host: localhost
+  adapter: postgresql
+  username: postgres
+  password:
+  encoding: unicode
+
+development:
+  <<: *defaults
+  database: cobudget_development
+
+test:
+  <<: *defaults
+  database: cobudget_test

@@ -1,0 +1,18 @@
+language: ruby
+env:
+  - DB=postgres
+rvm:
+  - 2.0.0
+bundler_args: --without development
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - bundle exec rake db:create
+addons:
+  code_climate:
+    repo_token: effc3fb597716a3eba53c6ce38e5ea7bf87d6ceb8956cedaba10aed6e7504e93
+notifications:
+  hipchat:
+    rooms:
+      - 3d318fc3e1f401238a50171784b534@Craftworks General
+    template: '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
+    format: html

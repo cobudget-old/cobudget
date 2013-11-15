@@ -97,6 +97,7 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    pg (0.16.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
@@ -150,6 +151,7 @@ DEPENDENCIES
   cucumber
   database_cleaner
   money
+  pg
   playhouse!
   playhouse-console!
   playhouse-sinatra!
