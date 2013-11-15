@@ -27,6 +27,14 @@ namespace :site do
   end
 end
 
+namespace :rake do
+  desc "Run a task on a remote server."
+  # run like: cap staging rake:invoke task=a_certain_task
+  task :invoke do
+    run("cd #{deploy_to}/current; /usr/bin/env rake #{ENV['task']} ENV=#{rails_env}")
+  end
+end
+
 require "bundler/capistrano"
 after "deploy:restart", "deploy:cleanup"
 after "deploy:update_code", "site:symlink"
