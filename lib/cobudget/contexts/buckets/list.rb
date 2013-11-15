@@ -7,7 +7,6 @@ module Cobudget
   module Buckets
     class List < Playhouse::Context
       actor :budget, repository: Budget
-      actor :user, repository: User
 
       def perform
         budget.buckets.load

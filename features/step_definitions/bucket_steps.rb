@@ -39,12 +39,31 @@ Then /^they should see (#{CAPTURE_BUCKET}) in the bucket list$/ do |bucket|
   @buckets_viewing.include?bucket
 end
 
+When /^[^ ]* creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |budget, table|
+  options = table.rows_hash.symbolize_keys
+  options[:budget] = budget
+  api.create_buckets(options)
+end
 
+Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
+  options = table.rows_hash.symbolize_keys
+  options[:budget] = budget
+  result = api.list_buckets(options)
 
+  expected = table.hashes
 
+  result.each_with_index do |row, result_index|
+    expected_row = expected[result_index]
+
+    expected_row.each do |key, value|
+      row.send(key).should == value
+    end
+  end
+end
 
 
 #--------------- experimental stuff below --------------#
+
 
 
 Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |bucket, amount|
