@@ -15,7 +15,7 @@ task default: :ci
 
 desc "Setup databases, gems and other requirements for all apps"
 task :setup_ci do
-  #do nothing
+  task('db:schema:load').invoke
 end
 
 Cucumber::Rake::Task.new(:features) do |t|
