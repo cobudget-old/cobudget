@@ -13,5 +13,9 @@ gem 'money'
 gem 'coveralls'
 gem 'activerecord', :require => 'active_record'
 
+env :development do
+  gem 'capistrano'
+end
+
 env :test do
 end
