@@ -10,7 +10,7 @@ module Cobudget
       actor :user, repository: User
 
       def perform
-        budget.buckets.all
+        budget.buckets.load
       end
 
       private
