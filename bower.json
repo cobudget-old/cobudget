@@ -9,6 +9,7 @@
     "angular-cookies": "~1.2.0",
     "angular-sanitize": "~1.2.0",
     "angular-route": "~1.2.0",
+    "angular-ui-router": "~0.2.0",
     "sass-bootstrap": "~3.0.2"
   },
   "devDependencies": {
