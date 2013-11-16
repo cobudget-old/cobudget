@@ -11,12 +11,6 @@ module Cobudget
       def perform
         budget.buckets.load
       end
-
-      private
-
-      def buckets_scope
-        user.filter_accounts_by_viewable(budget.buckets).readonly
-      end
     end
   end
 end
