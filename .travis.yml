@@ -6,7 +6,6 @@ rvm:
 bundler_args: --without development
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - bundle exec rake db:migrate ENV=test
   - bundle exec rake setup_ci
 addons:
   code_climate:

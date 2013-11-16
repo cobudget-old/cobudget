@@ -2,6 +2,7 @@ require 'playhouse/support/files'
 require 'playhouse/play'
 require_all File.dirname(__FILE__), 'contexts/**/*.rb'
 
+
 module Cobudget
   class API < Playhouse::Play
     #context UpdateAllocations
@@ -16,9 +17,7 @@ module Cobudget
     #context ListAllocations
     #context UserAllocationBalanceEnquiry
 
-    # TODO: Need a way of grouping these in the API
-    context Buckets::Create
-    context Buckets::List
+    contexts_for Buckets
 
     def self.name
       'cobudget'

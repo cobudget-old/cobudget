@@ -28,7 +28,7 @@ Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
   #api.create_buckets(budget: budget, bucket_name: bucket_name)
 end
 
-When /^([^ ]+) views the buckets in the budget (#{CAPTURE_BUDGET})$/ do |user_name, budget|
+When /^([^ ]+) views the buckets in the (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
   @buckets_viewing = api.list_buckets(budget: budget, user: user)
@@ -42,11 +42,12 @@ end
 When /^[^ ]* creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |budget, table|
   options = table.rows_hash.symbolize_keys
   options[:budget] = budget
+  options[:sponsor] = @users[options[:sponsor]]
   api.create_buckets(options)
 end
 
 Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
-  options = table.rows_hash.symbolize_keys
+  options = {}
   options[:budget] = budget
   result = api.list_buckets(options)
 
@@ -60,6 +61,17 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
     end
   end
 end
+
+Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
+  table.hashes.map! do |h|
+    h.each_pair do |k,v|
+      h[k] = nil if v == ''
+    end
+  end
+
+  table
+end
+
 
 
 #--------------- experimental stuff below --------------#

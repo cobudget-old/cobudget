@@ -15,7 +15,8 @@ task default: :ci
 
 desc "Setup databases, gems and other requirements for all apps"
 task :setup_ci => :environment do
-  task('db:setup').invoke
+  task('db:create').invoke
+  task('db:migrate').invoke
   task('db:schema:load').invoke
 end
 
