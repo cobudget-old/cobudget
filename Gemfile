@@ -8,11 +8,11 @@ gem 'playhouse-console', git: 'git://github.com/enspiral/playhouse-console.git'
 gem 'playhouse-sinatra', git: 'git://github.com/enspiral/playhouse-sinatra.git'
 
 gem 'capybara'
-gem 'cucumber'
+gem 'cucumber', '1.3.6'
 gem 'database_cleaner'
 gem 'money'
 gem 'coveralls'
-gem 'activerecord', :require => 'active_record'
+gem 'activerecord', '~>4.0.1'
 
 env :development do
   gem 'capistrano'

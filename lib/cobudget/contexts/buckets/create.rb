@@ -12,7 +12,7 @@ module Cobudget
       actor :description, optional: true
       actor :minimum, composer: MoneyComposer, optional: true
       actor :maximum, composer: MoneyComposer, optional: true
-      actor :sponsor, optional: true#, respository: User
+      actor :sponsor, optional: true, repository: User
 
       def perform
         Bucket.create!(actors)
