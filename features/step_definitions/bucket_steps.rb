@@ -42,6 +42,7 @@ end
 When /^[^ ]* creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |budget, table|
   options = table.rows_hash.symbolize_keys
   options[:budget] = budget
+  options[:sponsor] = @users[options[:sponsor]]
   api.create_buckets(options)
 end
 

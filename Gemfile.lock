@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git://github.com/enspiral/playhouse.git
-  revision: 0c35e3b47cc5e4692e9c841c107b3a06967b11f7
+  revision: 38812df389c3afd95a1ddd56ff9983026d3c57b4
   specs:
     playhouse (0.1.0)
       activerecord
