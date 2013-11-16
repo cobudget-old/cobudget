@@ -64,13 +64,14 @@ end
 Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
   table.hashes.map! do |h|
     h.each_pair do |k,v|
-      puts 'blah'
       h[k] = nil if v == ''
     end
   end
 
   table
 end
+
+
 
 #--------------- experimental stuff below --------------#
 

@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 201311152333) do
     t.integer "budget_id",     null: false
     t.string  "name",          null: false
     t.text    "description"
-    t.integer "minimum_cents"
-    t.integer "maximum_cents"
+    t.decimal "minimum_cents"
+    t.decimal "maximum_cents"
     t.integer "sponsor_id"
   end
 
