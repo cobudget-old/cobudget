@@ -30,7 +30,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8" ui-view="main"></div>
-        <div class="col-md-4" ui-view="sidebar"></div>
+        <div class="col-md-4 paint on-bg" ui-view="sidebar"></div>
       </div>
     </div>
 
@@ -49,6 +49,8 @@
     <script src="bower_components/angular/angular.js"></script>
 
         <!-- build:js scripts/modules.js -->
+        <script src="bower_components/showdown/compressed/showdown.js"></script>
+        <script src="bower_components/angular-markdown-directive/markdown.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -60,7 +62,6 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/common/resources/budgets.js"></script>
         <script src="scripts/states/budget_states.js"></script>
-        <script src="scripts/controllers/main.js"></script>
         <!-- endbuild -->
 </body>
 </html>

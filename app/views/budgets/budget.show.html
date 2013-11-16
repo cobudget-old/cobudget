@@ -1,3 +1,9 @@
-<h1>Budget</h1>
-<p>Description of budget</p>
-<div ui-view="bucket-list">
+<div class="l-padded paint clr3-bold">
+  <h1>Budget</h1>
+  <btf-markdown>Markdown... of budget
+  *it works*
+  </btf-markdown>
+</div>
+<a href="" ui-sref="budgets.propose_bucket" class="m-btn m-btn-wide paint clr2-bold">Propose a bucket</a>
+<div ui-view="bucket-create"></div>
+<div ui-view="bucket-list"></div>

@@ -4,6 +4,7 @@ app = angular.module('cobudget', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'btford.markdown'
   'ui.router'
   'states.budget'
   'resources.budgets'

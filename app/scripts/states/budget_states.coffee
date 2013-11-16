@@ -23,5 +23,16 @@ angular.module('states.budget', [])
        'sidebar@':
          template: '<h1>sidebar</h1>'
   ) #end state
+  .state('budgets.propose_bucket',
+    url: '/propose-bucket'
+    views:
+      'bucket-create':
+        template: 'create me'
+        controller: (['$scope', '$state', ($scope, $state)->
+          console.log "create me"
+        ]) #end controller
+      'sidebar@':
+        template: '<h1>Instructions</h1>'
+  ) #end state
 ]) #end config
 

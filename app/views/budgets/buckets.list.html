@@ -1,19 +1,17 @@
 <section>
   <article class="m-bucket l-padded" ng-repeat="b in buckets">
     <div class="m-labels list-inline clearfix">
-      <div class="m-labels-label">
+      <div class="m-labels-label paint clr2">
         Fred Smith
       </div>
-      <div class="m-labels-label">
+      <div class="m-labels-label paint clr1">
         <strong>
           $1000
         </strong>
       </div>
     </div>
-    <h2>
-      {{b.name}}
-    </h2>
-    </p>
-    <p class="description">{{b.description}}</p>
+    <h2>{{b.name}}</h2>
+
+    <div btf-markdown="b.description"></div>
   </article>
- </section>
+</section>
