@@ -6,26 +6,27 @@ require 'cobudget/entities/user'
 
 module Cobudget
   module Buckets
-    class Create < Playhouse::Context
-      class NotAuthorizedToCreateBucket < Exception; end
+    class Update < Playhouse::Context
+      class NotAuthorizedToUpdateBucket < Exception; end
 
       actor :user, repository: User#, role: BucketAuthorizer
+      actor :bucket, repository: Bucket
 
       actor :budget, repository: Budget
-      actor :name
+      actor :name, optional: true
       actor :description, optional: true
+      actor :sponsor, optional: true, repository: User
       actor :minimum, optional: true
       actor :maximum, optional: true
-      actor :sponsor, repository: User, optional: true
 
       def attributes
-        actors_except :user
+        actors_except :bucket, :user
       end
 
       def perform
-        #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
+        #raise NotAuthorizedToUpdateBucket unless user.can_update_bucket?(bucket)
 
-        Bucket.create!(attributes)
+        bucket.update_attributes(attributes)
       end
     end
   end

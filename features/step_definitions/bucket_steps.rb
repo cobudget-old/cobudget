@@ -10,11 +10,11 @@ CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
   Money.new(amount.gsub(',', '').to_f)
 end
 
-CAPTURE_BUCKET = Transform /^([^ ]*) bucket/ do |bucket_identifier|
+CAPTURE_BUCKET = Transform /^the ([^ ]*) bucket/ do |bucket_identifier|
   @buckets[bucket_identifier] || (raise 'Bucket not found')
 end
 
-CAPTURE_BUDGET = Transform /^([^ ]*) budget/ do |budget_identifier|
+CAPTURE_BUDGET = Transform /^the ([^ ]*) budget/ do |budget_identifier|
   @budgets[budget_identifier] || (raise 'Budget not found')
 end
 
@@ -22,11 +22,6 @@ CAPTURE_WITH_DESCRIPTION = Transform /^( ?with description "([^"]*)")?$/ do |unu
   description
 end
 
-Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
-  @buckets ||= {}
-  @buckets[bucket_name] = Cobudget::Bucket.create!(name: bucket_name, description: 'Special bucket', budget_id: budget.id)
-  #api.create_buckets(budget: budget, bucket_name: bucket_name)
-end
 
 When /^([^ ]+) views the buckets in the (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
@@ -37,29 +32,6 @@ end
 
 Then /^they should see (#{CAPTURE_BUCKET}) in the bucket list$/ do |bucket|
   @buckets_viewing.include?bucket
-end
-
-When /^[^ ]* creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |budget, table|
-  options = table.rows_hash.symbolize_keys
-  options[:budget] = budget
-  options[:sponsor] = @users[options[:sponsor]]
-  api.create_buckets(options)
-end
-
-Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
-  options = {}
-  options[:budget] = budget
-  result = api.list_buckets(options)
-
-  expected = table.hashes
-
-  result.each_with_index do |row, result_index|
-    expected_row = expected[result_index]
-
-    expected_row.each do |key, value|
-      row.send(key).should == value
-    end
-  end
 end
 
 Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
@@ -82,7 +54,7 @@ Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |buc
   api.bucket_balance_enquiry(bucket: bucket).should == amount
 end
 
-When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to the bucket (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
+When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to the (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
   user = users[user_name]
 
   options = table.rows_hash.symbolize_keys
