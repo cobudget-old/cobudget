@@ -3,7 +3,7 @@ require 'cobudget/entities/budget'
 require 'cobudget/entities/user'
 
 module Cobudget
-  module Buckets
+  module Budgets
     class Update < Playhouse::Context
       class NotAuthorizedToUpdateBudget < Exception; end
 

@@ -20,6 +20,10 @@ Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
   #api.create_buckets(budget: budget, bucket_name: bucket_name)
 end
 
+Given /^a list of budgets$/ do
+  puts budgets.inspect
+end
+
 When /^([^ ]+) views the buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
@@ -82,6 +86,14 @@ end
 Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budget_name, budget_description|
   budget = budgets[budget_name]
 
+  budget.description.should == budget_description
+end
+
+Then /^the ([^ ]*) budget should not exist$/ do |budget_name|
+  budgets[budget_name].should be_nil
+end
+
+Then /^(#{CAPTURE_BUDGET}) should have the description "(.*?)"$/ do |budget, budget_description|
   budget.description.should == budget_description
 end
 

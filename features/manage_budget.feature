@@ -11,3 +11,10 @@ Feature: Manage Budget
     When Janine creates a budget GhostbustersQuarterly with description "Spring 2013"
     Then there should be a budget GhostbustersQuarterly with the description "Spring 2013"
 
+  Scenario: Successfully modify a budget
+    Given a budget GhostbustersQuarterly
+    When Janine updates the GhostbustersQuarterly budget with:
+      | name        | Ghostbusters                            |
+      | description | Spring 2013                             |
+    Then the Ghostbusters budget should not exist
+    Then the GhostbustersQuarterly budget should have the description "Spring 2013"
