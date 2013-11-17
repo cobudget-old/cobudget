@@ -11,17 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201311152333) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 201311172007) do
 
   create_table "buckets", force: true do |t|
     t.integer "budget_id",     null: false
     t.string  "name",          null: false
     t.text    "description"
-    t.decimal "minimum_cents"
-    t.decimal "maximum_cents"
+    t.integer "minimum_cents"
+    t.integer "maximum_cents"
     t.integer "sponsor_id"
   end
 

@@ -9,15 +9,72 @@ Given /^a budget ([^ ]+)$/ do |budget_name|
   budgets[budget_name] = Cobudget::Budget.create!(name: budget_name)
 end
 
+Given /^a user ([^ ]*) who can administer (#{CAPTURE_BUDGET})$/ do |user_name, budget|
+  step("a user #{user_name}")
+  #Cobudget::BudgetAdministratorRole.create!(user_id: @user.id, budget_id: budget.id)
+end
+
+Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
+  @buckets ||= {}
+  @buckets[bucket_name] = Cobudget::Bucket.create!(name: bucket_name, description: 'Special bucket', budget_id: budget.id)
+  #api.create_buckets(budget: budget, bucket_name: bucket_name)
+end
+
+When /^([^ ]+) views the buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
+  user = users[user_name]
+
+  @buckets_viewing = api.list_buckets(budget: budget, user: user)
+end
+
+
+When /^([^ ]+) creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |user_name, budget, table|
+  user = users[user_name]
+
+  options = table.rows_hash.symbolize_keys
+  options[:user] = user
+  options[:budget] = budget
+  api.create_buckets(options).to_s
+end
+
+Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
+  options = {}
+  options[:budget] = budget
+  result = api.list_buckets(options)
+
+  expected = table.hashes
+
+  result.each_with_index do |row, result_index|
+    expected_row = expected[result_index]
+
+    expected_row.each do |key, value|
+      row.send(key).should == value
+    end
+  end
+end
+
+When /^([^ ]*) updates (#{CAPTURE_BUCKET}) in (#{CAPTURE_BUDGET}) with:$/ do |user_name, bucket, budget, table|
+  user = users[user_name]
+
+  options = table.rows_hash.symbolize_keys
+  options.merge!(bucket: bucket, user: user, budget: budget)
+  @buckets[bucket.name] = api.update_buckets(options)
+end
+
+
+Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
+  table.hashes.map! do |h|
+    h.each_pair do |k,v|
+      h[k] = nil if v == ''
+    end
+  end
+
+  table
+end
 
 
 
 #----------- experimental stuff below -------- #
 
-Given /^a user ([^ ]*) who can administer (#{CAPTURE_BUDGET})$/ do |user_name, budget|
-  step("a user #{user_name}")
-  Cobudget::BudgetAdministratorRole.create!(user_id: @user.id, budget_id: budget.id)
-end
 
 Given /^a user ([^ ]*) who has allocation rights of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do  |user_name, amount, budget|
   step("a user #{user_name}")
