@@ -1,8 +1,3 @@
-if ENV['TRAVIS']
-  require 'coveralls'
-  Coveralls.wear!
-end
-
 require 'cobudget_core'
 require 'database_cleaner'
 require 'playhouse/theatre'
