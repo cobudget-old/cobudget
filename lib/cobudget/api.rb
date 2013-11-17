@@ -17,6 +17,7 @@ module Cobudget
     #context ListAllocations
     #context UserAllocationBalanceEnquiry
 
+    contexts_for Budgets
     contexts_for Buckets
 
     def self.name

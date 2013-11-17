@@ -1,4 +1,4 @@
-Feature:
+Feature: Bucket Allocations
   In order to participate in the collaborative budgeting process
   As a budget participant
   I want to be able to assign my allocation to buckets in a budget

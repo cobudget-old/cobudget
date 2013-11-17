@@ -1,4 +1,4 @@
-Feature:
+Feature: Manage Buckets
   In order to participate in the collaborative budgeting process
   As a user
   I want to be able to view a budget

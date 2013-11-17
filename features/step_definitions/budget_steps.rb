@@ -57,6 +57,14 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   end
 end
 
+When /^([^ ]*) updates (#{CAPTURE_BUDGET}) with:$/ do |user_name, budget, table|
+  user = users[user_name]
+
+  options = table.rows_hash.symbolize_keys
+  options.merge!(user: user, budget: budget)
+  api.update_budgets(options)
+end
+
 When /^([^ ]*) updates (#{CAPTURE_BUCKET}) in (#{CAPTURE_BUDGET}) with:$/ do |user_name, bucket, budget, table|
   user = users[user_name]
 
@@ -65,6 +73,17 @@ When /^([^ ]*) updates (#{CAPTURE_BUCKET}) in (#{CAPTURE_BUDGET}) with:$/ do |us
   api.update_buckets(options)
 end
 
+When /^([^ ]*) creates a budget ([^ ]*) with description "(.*?)"$/ do |user_name, budget_name, budget_description|
+  user = users[user_name]
+
+  budgets[budget_name] = api.create_budgets(user: user, name: budget_name, description: budget_description)
+end
+
+Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budget_name, budget_description|
+  budget = budgets[budget_name]
+
+  budget.description.should == budget_description
+end
 
 Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
   table.hashes.map! do |h|
