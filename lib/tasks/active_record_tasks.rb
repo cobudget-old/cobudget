@@ -5,7 +5,6 @@ config_dir = File.join(@root, 'config')
 
 ENV['ENV'] = 'test' if ENV['TRAVIS']
 DatabaseTasks.env = ENV['ENV'] || 'development'
-puts DatabaseTasks.env
 DatabaseTasks.root = @root
 DatabaseTasks.db_dir = db_dir
 DatabaseTasks.database_configuration = YAML.load(File.read(File.join(config_dir, 'database.yml')))

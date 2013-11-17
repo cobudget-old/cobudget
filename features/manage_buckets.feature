@@ -29,24 +29,24 @@ Feature:
     Then the bucket list for the BatBudget budget should be:
       | name                   | description                                      | minimum | maximum | sponsor  |
       | CleaningSupplies       | Special bucket                                   |      |      |           |
-      | BatmobilePetrol       | Running out of petrol mid-chase was embarrassing |  $500    |  $5000    |   Batman    |
+      | BatmobilePetrol       | Running out of petrol mid-chase was embarrassing |  500    |  5000    |   Batman    |
 
   Scenario: A user updates a bucket and views the resulting list
 
     Then the bucket list for the BatBudget budget should be:
       | name                   | description                                      | minimum | maximum | sponsor  |
       | CleaningSupplies       | Special bucket                                   |      |      |           |
-      | BatmobilePetrol       | Running out of petrol mid-chase was embarrassing |  $500    |  $5000    |   Batman    |
+      | BatmobilePetrol       | Running out of petrol mid-chase was embarrassing |  500    |  5000    |   Batman    |
 
     When Batman updates the CleaningSupplies bucket in the BatBudget budget with:
       | name        | CleaningSupplies                            |
       | description | Caves are very filthy |
-      | minimum     | $3                                              |
-      | maximum     | $60                                             |
+      | minimum     | 3                                              |
+      | maximum     | 60                                             |
       | sponsor     | Joker                                           |
 
     Then the bucket list for the BatBudget budget should be:
       | name                   | description                                      | minimum | maximum | sponsor  |
-      | CleaningSupplies       | Caves are very filthy                            |  $3     | $60     |   Joker        |
-      | BatmobilePetrol       | Running out of petrol mid-chase was embarrassing |  $500    |  $5000    |   Batman    |
+      | CleaningSupplies       | Caves are very filthy                            |  3     | 60     |   Joker        |
+      | BatmobilePetrol       | Running out of petrol mid-chase was embarrassing |  500    |  5000    |   Batman    |
 

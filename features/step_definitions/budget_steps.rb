@@ -32,6 +32,7 @@ When /^([^ ]+) creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |user_name, bu
 
   options = table.rows_hash.symbolize_keys
   options[:user] = user
+  options[:sponsor] = user
   options[:budget] = budget
   api.create_buckets(options).to_s
 end
@@ -39,7 +40,7 @@ end
 Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   options = {}
   options[:budget] = budget
-  result = api.list_buckets(options)
+  result = api.list_buckets(options).reload
 
   expected = table.hashes
 
@@ -47,6 +48,10 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
     expected_row = expected[result_index]
 
     expected_row.each do |key, value|
+      if value
+        value = Money.new(value.to_f) if ['minimum', 'maximum'].include?(key)
+        value = users[value] if key == 'sponsor'
+      end
       row.send(key).should == value
     end
   end
@@ -56,8 +61,8 @@ When /^([^ ]*) updates (#{CAPTURE_BUCKET}) in (#{CAPTURE_BUDGET}) with:$/ do |us
   user = users[user_name]
 
   options = table.rows_hash.symbolize_keys
-  options.merge!(bucket: bucket, user: user, budget: budget)
-  @buckets[bucket.name] = api.update_buckets(options)
+  options.merge!(bucket: bucket, user: user, budget: budget, sponsor: users[options[:sponsor]])
+  api.update_buckets(options)
 end
 
 
