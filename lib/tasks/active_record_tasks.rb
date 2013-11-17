@@ -3,6 +3,7 @@ include ActiveRecord::Tasks
 db_dir = File.join(@root, 'db')
 config_dir = File.join(@root, 'config')
 
+ENV['ENV'] = 'test' if ENV['TRAVIS']
 DatabaseTasks.env = ENV['ENV'] || 'development'
 puts DatabaseTasks.env
 DatabaseTasks.root = @root
