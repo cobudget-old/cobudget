@@ -16,13 +16,8 @@ Given /^a user ([^ ]*) who can administer (#{CAPTURE_BUDGET})$/ do |user_name, b
 end
 
 Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
-  @buckets ||= {}
-  @buckets[bucket_name] = Cobudget::Bucket.create!(name: bucket_name, description: 'Special bucket', budget_id: budget.id)
+  buckets[bucket_name] = Cobudget::Bucket.create!(name: bucket_name, description: 'Special bucket', budget_id: budget.id)
   #api.create_buckets(budget: budget, bucket_name: bucket_name)
-end
-
-Given /^a list of budgets$/ do
-  puts budgets.inspect
 end
 
 When /^([^ ]+) views the buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
@@ -45,8 +40,8 @@ end
 Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   options = {}
   options[:budget] = budget
-  @buckets = api.list_buckets(options).reload
-  result = @buckets
+  buckets = api.list_buckets(options).reload
+  result = buckets
 
   expected = table.hashes
 

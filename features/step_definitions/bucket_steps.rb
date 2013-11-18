@@ -6,12 +6,16 @@ require 'cobudget/entities/user'
 #require 'cobudget/contexts/create_allocation'
 #require 'cobudget/contexts/allocation_balance_enquiry'
 
+def buckets
+  @buckets ||= {}
+end
+
 CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
   Money.new(amount.gsub(',', '').to_f)
 end
 
 CAPTURE_BUCKET = Transform /^the ([^ ]*) bucket/ do |bucket_identifier|
-  @buckets[bucket_identifier] || (raise 'Bucket not found')
+  buckets[bucket_identifier] || (raise 'Bucket not found')
 end
 
 CAPTURE_BUDGET = Transform /^the ([^ ]*) budget/ do |budget_identifier|

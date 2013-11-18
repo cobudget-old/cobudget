@@ -31,8 +31,8 @@ Feature: Manage Buckets
     Then the bucket list for the BatBudget budget should be:
       | name                   | description                                      | minimum | maximum | sponsor  |
       | CleaningSupplies       | Special bucket                                   |      |      |           |
-      | Batarangs       | Special bucket                                   |      |      |           |
-      | BatmobilePetrol       | Running out of petrol mid-chase was embarrassing |  500    |  5000    |   Batman    |
+      | Batarangs              | Special bucket                                   |      |      |           |
+      | BatmobilePetrol        | Running out of petrol mid-chase was embarrassing |  500    |  5000    |   Batman    |
 
   Scenario: A user updates a bucket and views the resulting list
 
@@ -54,7 +54,13 @@ Feature: Manage Buckets
       | Batarangs              | Special bucket                                   |      |      |           |
 
   Scenario: A user deletes a bucket
+    Then the bucket list for the BatBudget budget should be:
+      | name                   | description                                      | minimum | maximum | sponsor  |
+      | CleaningSupplies       | Special bucket                                   |      |      |           |
+      | Batarangs       | Special bucket                                         |        |       |        |
+
     When Batman deletes the Batarangs bucket
+
     Then the bucket list for the BatBudget budget should be:
       | name                   | description                                      | minimum | maximum | sponsor  |
       | CleaningSupplies       | Special bucket                                   |      |      |           |
