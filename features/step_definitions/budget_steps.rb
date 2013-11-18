@@ -63,7 +63,6 @@ When /^([^ ]*) grants ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAP
   user = users[user_name]
   admin = users[admin_name]
 
-  puts "Granting $" + amount.inspect
   allocation_rights[user_name] = api.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
 end
 
@@ -71,7 +70,6 @@ When /^([^ ]*) modifies ([^ ]*)'s allocation rights to (#{CAPTURE_MONEY}) for (#
   user = users[user_name]
   admin = users[admin_name]
 
-  puts "Granting $" + amount.inspect
   allocation_rights[user_name] = api.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
 end
 

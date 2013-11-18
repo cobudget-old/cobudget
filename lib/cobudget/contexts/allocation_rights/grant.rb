@@ -22,7 +22,6 @@ module Cobudget
       end
 
       def perform
-        puts "GRANT ALLOCATION RIGHTS: amount=" + amount.inspect
         right = user.get_allocation_rights(budget)
         if right
           right.update(attributes)
