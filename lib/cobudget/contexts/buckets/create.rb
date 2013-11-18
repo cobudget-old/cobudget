@@ -3,7 +3,8 @@ require 'cobudget/entities/budget'
 require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 require 'cobudget/composers/money_composer'
-#require 'cobudget/roles/bucket_authorizer'
+require 'playhouse/role'
+#require 'cobudget/roles/budget_administrator'
 
 module Cobudget
   module Buckets
@@ -25,6 +26,7 @@ module Cobudget
 
       def perform
         #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
+
         Bucket.create!(attributes)
       end
     end

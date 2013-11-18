@@ -8,7 +8,7 @@ Feature: Bucket Allocations
     Given a budget ThunderaNovemberBudget
     Given a bucket Treats in the ThunderaNovemberBudget budget
     Given a bucket LaserPointers in the ThunderaNovemberBudget budget
-    Given a bucket Tuna in the ThunderaNovemberBudget budget
+    Given a bucket  Tuna in the ThunderaNovemberBudget budget
     Given a user Liono who has allocation rights of $50 in the ThunderaNovemberBudget budget
     Given a user Tygra who has allocation rights of $20 in the ThunderaNovemberBudget budget
 

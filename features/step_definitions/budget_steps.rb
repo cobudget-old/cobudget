@@ -1,14 +1,6 @@
 #require 'cobudget/entities/budget_role'
 #require 'cobudget/contexts/allocation_balance_enquiry'
 
-def budgets
-  @budgets ||= {}
-end
-
-def allocation_rights
-  @allocation_rights ||= {}
-end
-
 Given /^a budget ([^ ]+)$/ do |budget_name|
   @budget = Cobudget::Budget.create!(name: budget_name)
   budgets[budget_name] = @budget
@@ -62,16 +54,17 @@ When /^([^ ]*) creates a budget ([^ ]*) with description "(.*?)"$/ do |user_name
   budgets[budget_name] = api.create_budgets(user: user, name: budget_name, description: budget_description)
 end
 
-When /^([^ ]*) gives ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
-  user = users[user_name]
-  admin = users[admin_name]
-
-  allocation_rights[user_name] = api.create_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
-end
-
 When /^([^ ]*) deletes (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
   user = users[user_name]
   api.delete_buckets(bucket: bucket, user: user)
+end
+
+When /^([^ ]*) grants ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
+  user = users[user_name]
+  admin = users[admin_name]
+
+  #puts amount.inspect
+  allocation_rights[user_name] = api.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
 end
 
 Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
@@ -95,12 +88,6 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   end
 end
 
-Then /^([^ ]*) should have allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |user_name, amount, budget|
-  user = users[user_name]
-
-  api.allocation_rights_enquiry(user: user, budget: budget).should == amount
-end
-
 Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budget_name, budget_description|
   budget = budgets[budget_name]
 
@@ -115,6 +102,12 @@ Then /^(#{CAPTURE_BUDGET}) should have the description "(.*?)"$/ do |budget, bud
   budget.description.should == budget_description
 end
 
+Then /^([^ ]*) should have allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |user_name, amount, budget|
+  user = users[user_name]
+
+  api.get_allocation_rights(user: user, budget: budget).should == amount
+end
+
 
 
 #----------- experimental stuff below -------- #
@@ -122,8 +115,7 @@ end
 
 Given /^a user ([^ ]*) who has allocation rights of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do  |user_name, amount, budget|
   step("a user #{user_name}")
-  Cobudget::BudgetParticipantRole.create!(user_id: @user_id, budget_id: budget.id)
-  api.set_allocation_for_user(budget: budget, amount: amount, user: @user)
+  api.grant_allocation_right(budget: budget, amount: amount, user: @user)
 end
 
 When /^the admin gives an allocation of (#{CAPTURE_MONEY}) to ([^ ]*) for (#{CAPTURE_BUDGET})$/ do |admin_name, amount, user_name, budget|

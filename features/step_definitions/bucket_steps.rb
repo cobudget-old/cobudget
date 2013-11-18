@@ -6,26 +6,6 @@ require 'cobudget/entities/user'
 #require 'cobudget/contexts/create_allocation'
 #require 'cobudget/contexts/allocation_balance_enquiry'
 
-def buckets
-  @buckets ||= {}
-end
-
-CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
-  Money.new(amount.gsub(',', '').to_f)
-end
-
-CAPTURE_BUCKET = Transform /^the ([^ ]*) bucket/ do |bucket_identifier|
-  buckets[bucket_identifier] || (raise 'Bucket not found')
-end
-
-CAPTURE_BUDGET = Transform /^the ([^ ]*) budget/ do |budget_identifier|
-  @budgets[budget_identifier] || (raise 'Budget not found')
-end
-
-CAPTURE_WITH_DESCRIPTION = Transform /^( ?with description "([^"]*)")?$/ do |unused, description|
-  description
-end
-
 
 When /^([^ ]+) views the buckets in the (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
@@ -94,3 +74,4 @@ Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CA
 
   api.user_allocation_balance_enquiry(bucket: bucket).should == amount
 end
+
