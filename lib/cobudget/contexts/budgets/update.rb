@@ -20,7 +20,9 @@ module Cobudget
       def perform
         #raise NotAuthorizedToUpdateBudget unless user.can_update_budget?(budget)
 
-        budget.update_attributes!(attributes)
+        data = budget.update_attributes!(attributes)
+        Pusher.trigger('budgets', 'updated', {budget: data})
+        data
       end
     end
   end

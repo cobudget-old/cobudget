@@ -8,7 +8,9 @@ module Cobudget
       actor :description, optional: true
 
       def perform
-        Budget.create!(actors)
+        data = Budget.create!(actors)
+        Pusher.trigger('budgets', 'created', {budget: data})
+        data
       end
     end
   end

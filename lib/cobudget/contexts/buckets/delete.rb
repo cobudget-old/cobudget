@@ -13,7 +13,8 @@ module Cobudget
 
       def perform
         #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
-        bucket.destroy!
+        data = bucket.destroy!
+        Pusher.trigger('buckets', 'deleted', {bucket: data})
       end
     end
   end

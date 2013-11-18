@@ -27,7 +27,9 @@ module Cobudget
       def perform
         #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
 
-        Bucket.create!(attributes)
+        data = Bucket.create!(attributes)
+        Pusher.trigger('buckets', 'created', {bucket: data})
+        data
       end
     end
   end
