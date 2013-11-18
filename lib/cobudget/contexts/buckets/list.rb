@@ -9,7 +9,7 @@ module Cobudget
       actor :budget, repository: Budget
 
       def perform
-        budget.buckets.load
+        budget.buckets.order('updated_at desc').load
       end
     end
   end

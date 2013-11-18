@@ -7,8 +7,8 @@ Feature: Manage Buckets
     Given a budget BatBudget
     Given a user Batman
     Given a user Joker
-    Given a bucket CleaningSupplies in the BatBudget budget
     Given a bucket Batarangs in the BatBudget budget
+    Given a bucket CleaningSupplies in the BatBudget budget
 
   Scenario: Successfully view a budget
     When Batman views the buckets in the BatBudget budget
@@ -29,9 +29,9 @@ Feature: Manage Buckets
 
     Then the bucket list for the BatBudget budget should be:
       | name                   | description                                      | minimum | maximum | sponsor  |
+      | BatmobilePetrol        | Running out of petrol mid-chase was embarrassing |  500    |  5000    |   Batman    |
       | CleaningSupplies       | Special bucket                                   |      |      |           |
       | Batarangs              | Special bucket                                   |      |      |           |
-      | BatmobilePetrol        | Running out of petrol mid-chase was embarrassing |  500    |  5000    |   Batman    |
 
   Scenario: A user updates a bucket and views the resulting list
 
