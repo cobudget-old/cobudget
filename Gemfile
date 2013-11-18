@@ -13,6 +13,7 @@ gem 'database_cleaner'
 gem 'money'
 gem 'coveralls'
 gem 'activerecord', '~>4.0.1'
+gem 'pusher'
 
 env :development do
   gem 'capistrano'
