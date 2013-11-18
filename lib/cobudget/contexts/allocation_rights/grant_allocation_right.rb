@@ -3,16 +3,17 @@ require 'cobudget/entities/budget'
 require 'cobudget/entities/user'
 require 'cobudget/entities/allocation_right'
 require 'cobudget/composers/money_composer'
+require 'cobudget/roles/budget_participant'
 #require 'cobudget/roles/bucket_authorizer'
 
 module Cobudget
   module AllocationRights
-    class Create < Playhouse::Context
-      class NotAuthorizedToCreateAllocationRight < Exception; end
+    class Grant < Playhouse::Context
+      class NotAuthorizedToGrantAllocationRight < Exception; end
 
       actor :admin, repository: User#, role: BucketAuthorizer
 
-      actor :user, repository: User
+      actor :user, repository: User, role: BudgetParticipant
       actor :budget, repository: Budget
       actor :amount, composer: MoneyComposer
 
@@ -21,8 +22,13 @@ module Cobudget
       end
 
       def perform
-        #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
-        AllocationRight.create!(attributes)
+        puts "GRANT ALLOCATION RIGHTS: amount=" + amount.inspect
+        right = user.get_allocation_rights(budget)
+        if right
+          right.update(attributes)
+        else
+          AllocationRight.create!(attributes)
+        end
       end
     end
   end

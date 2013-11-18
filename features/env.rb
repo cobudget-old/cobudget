@@ -9,3 +9,32 @@ theatre.start_staging
 def api
   @api ||= Cobudget::API.new
 end
+
+def budgets
+  @budgets ||= {}
+end
+
+def allocation_rights
+  @allocation_rights ||= {}
+end
+
+def buckets
+  @buckets ||= {}
+end
+
+CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
+  Money.new(amount.gsub(',', '').to_f)
+end
+
+CAPTURE_BUCKET = Transform /^the ([^ ]*) bucket/ do |bucket_identifier|
+  buckets[bucket_identifier] || (raise 'Bucket not found')
+end
+
+CAPTURE_BUDGET = Transform /^the ([^ ]*) budget/ do |budget_identifier|
+  @budgets[budget_identifier] || (raise 'Budget not found')
+end
+
+CAPTURE_WITH_DESCRIPTION = Transform /^( ?with description "([^"]*)")?$/ do |unused, description|
+  description
+end
+
