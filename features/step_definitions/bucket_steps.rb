@@ -30,12 +30,6 @@ Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
 end
 
 
-
-
-#--------------- experimental stuff below --------------#
-
-
-
 Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |bucket, amount|
   api.bucket_balance_enquiry(bucket: bucket).should == amount
 end
@@ -43,10 +37,12 @@ end
 When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
   user = users[user_name]
 
-  options = table.rows_hash.symbolize_keys
+  options = {}
   options[:bucket] = bucket
   options[:amount] = amount
-  api.update_allocations(options)
+  options[:admin] = user
+  options[:user] = user
+  api.perform_allocations(options)
 end
 
 When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKET})$/ do |user_name, from_bucket, to_bucket|
@@ -57,21 +53,18 @@ When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKE
   options = table.rows_hash.symbolize_keys
   options[:from_bucket] = bucket
   options[:to_bucket] = to_bucket
-  api.transfer_allocation(options)
+  api.perform_allocation(options)
 end
 
 When /^([^ ]*) removes the allocation in (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
   user = users[user_name]
 
-  options = table.rows_hash.symbolize_keys
-  options[:bucket] = bucket
-  api.update_allocations(options)
+  api.remove_allocations(bucket: bucket, admin: user, user: user)
 end
 
-Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do |user_name, budget_name|
+Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do |user_name, amount, budget|
   user = users[user_name]
-  budget = budgets[budget_name]
 
-  api.user_allocation_balance_enquiry(bucket: bucket).should == amount
+  api.user_remaining_balance_enquiry(budget: budget, user: user).should == amount
 end
 

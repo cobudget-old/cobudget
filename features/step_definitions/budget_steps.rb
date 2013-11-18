@@ -127,26 +127,22 @@ Then /^([^ ]*) should not have allocation rights for (#{CAPTURE_BUDGET})$/ do  |
   api.get_allocation_rights(user: user, budget: budget).should == nil
 end
 
-#----------- experimental stuff below -------- #
-
-
 Given /^a user ([^ ]*) who has allocation rights of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do  |user_name, amount, budget|
   step("a user #{user_name}")
-  api.grant_allocation_right(budget: budget, amount: amount, user: @user)
+  api.grant_allocation_rights(budget: budget, amount: amount, user: @user, admin: @user)
 end
 
-When /^the admin gives an allocation of (#{CAPTURE_MONEY}) to ([^ ]*) for (#{CAPTURE_BUDGET})$/ do |admin_name, amount, user_name, budget|
-  user = users[user_name]
-  Cobudget::BudgetParticipantRole.create!(user_id: user.id, budget_id: budget.id)
-  api.set_allocation_for_user(budget: budget, amount: amount, user: user)
-end
 
-Then /^total allocations in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
+Then /^total used allocations in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
   api.budget_allocated_balance_enquiry(budget: budget).should == expected_balance
 end
 
 Then /^total unallocated in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
   api.budget_unallocated_balance_enquiry(budget: budget).should == expected_balance
+end
+
+Then /^total allocation rights in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
+  api.budget_total_available_for_allocation_enquiry(budget: budget).should == expected_balance
 end
 
 Then /^total budget in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|

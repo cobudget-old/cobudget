@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201311181944) do
+ActiveRecord::Schema.define(version: 201311182348) do
 
   create_table "allocation_rights", force: true do |t|
     t.integer  "amount_cents", default: 0, null: false
     t.integer  "user_id",                  null: false
     t.integer  "budget_id",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "allocations", force: true do |t|
+    t.integer  "amount_cents", default: 0, null: false
+    t.integer  "user_id",                  null: false
+    t.integer  "bucket_id",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
