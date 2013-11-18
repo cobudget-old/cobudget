@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 201311182348) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "allocation_rights", force: true do |t|
     t.integer  "amount_cents", default: 0, null: false
     t.integer  "user_id",                  null: false

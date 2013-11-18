@@ -1,4 +1,5 @@
 require 'playhouse/context'
+require 'cobudget/entities/budget'
 require 'cobudget/roles/budget_of_buckets'
 
 module Cobudget

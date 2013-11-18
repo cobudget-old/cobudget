@@ -16,7 +16,7 @@ gem 'activerecord', '~>4.0.1'
 gem 'pusher'
 
 env :development do
-  gem 'capistrano'
+  gem 'capistrano', '2.15.5'
 end
 
 env :test do
