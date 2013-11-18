@@ -15,3 +15,7 @@ Feature: Manage Allocation Rights
   Scenario: Administrator modifies user's allocation rights
     When Jon modifies Garfield's allocation rights to $80 for the ArbuckleHouse budget
     Then Garfield should have allocation rights of $80 for the ArbuckleHouse budget
+
+  Scenario: Administrator revokes user's allocation rights
+    When Jon revokes Garfield's allocation rights for the ArbuckleHouse budget
+    Then Garfield should not have allocation rights for the ArbuckleHouse budget

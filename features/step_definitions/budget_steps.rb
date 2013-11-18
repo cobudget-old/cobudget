@@ -63,8 +63,23 @@ When /^([^ ]*) grants ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAP
   user = users[user_name]
   admin = users[admin_name]
 
-  #puts amount.inspect
+  puts "Granting $" + amount.inspect
   allocation_rights[user_name] = api.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
+end
+
+When /^([^ ]*) modifies ([^ ]*)'s allocation rights to (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
+  user = users[user_name]
+  admin = users[admin_name]
+
+  puts "Granting $" + amount.inspect
+  allocation_rights[user_name] = api.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
+end
+
+When /^([^ ]*) revokes ([^ ]*)'s allocation rights for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, budget|
+  user = users[user_name]
+  admin = users[admin_name]
+
+  api.revoke_allocation_rights(admin: admin, user: user, budget: budget)
 end
 
 Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
@@ -108,7 +123,11 @@ Then /^([^ ]*) should have allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTUR
   api.get_allocation_rights(user: user, budget: budget).should == amount
 end
 
+Then /^([^ ]*) should not have allocation rights for (#{CAPTURE_BUDGET})$/ do  |user_name, budget|
+  user = users[user_name]
 
+  api.get_allocation_rights(user: user, budget: budget).should == nil
+end
 
 #----------- experimental stuff below -------- #
 
