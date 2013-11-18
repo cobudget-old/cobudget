@@ -51,6 +51,7 @@ end
 
 
 
+
 #--------------- experimental stuff below --------------#
 
 
@@ -59,7 +60,7 @@ Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |buc
   api.bucket_balance_enquiry(bucket: bucket).should == amount
 end
 
-When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to the (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
+When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
   user = users[user_name]
 
   options = table.rows_hash.symbolize_keys

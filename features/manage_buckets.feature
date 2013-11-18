@@ -7,7 +7,6 @@ Feature: Manage Buckets
     Given a budget BatBudget
     Given a user Batman
     Given a user Joker
-    #Given a user Alfred who can administer BatBudget
     Given a bucket CleaningSupplies in the BatBudget budget
     Given a bucket Batarangs in the BatBudget budget
 

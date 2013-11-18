@@ -1,7 +1,5 @@
 require 'active_record'
 require 'support/money_attribute'
-require 'cobudget/entities/budget'
-require 'cobudget/entities/user'
 
 module Cobudget
   class Bucket < ActiveRecord::Base

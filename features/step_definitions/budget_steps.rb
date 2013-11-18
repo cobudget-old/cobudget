@@ -5,6 +5,10 @@ def budgets
   @budgets ||= {}
 end
 
+def allocation_rights
+  @allocation_rights ||= {}
+end
+
 Given /^a budget ([^ ]+)$/ do |budget_name|
   @budget = Cobudget::Budget.create!(name: budget_name)
   budgets[budget_name] = @budget
@@ -26,7 +30,6 @@ When /^([^ ]+) views the buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   @buckets_viewing = api.list_buckets(budget: budget, user: user)
 end
 
-
 When /^([^ ]+) creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |user_name, budget, table|
   user = users[user_name]
 
@@ -35,27 +38,6 @@ When /^([^ ]+) creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |user_name, bu
   options[:sponsor] = user
   options[:budget] = budget
   api.create_buckets(options).to_s
-end
-
-Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
-  options = {}
-  options[:budget] = budget
-  buckets = api.list_buckets(options).reload
-  result = buckets
-
-  expected = table.hashes
-
-  result.each_with_index do |row, result_index|
-    expected_row = expected[result_index]
-
-    expected_row.each do |key, value|
-      if value
-        value = Money.new(value.to_f) if ['minimum', 'maximum'].include?(key)
-        value = users[value] if key == 'sponsor'
-      end
-      row.send(key).should == value
-    end
-  end
 end
 
 When /^([^ ]*) updates (#{CAPTURE_BUDGET}) with:$/ do |user_name, budget, table|
@@ -80,9 +62,43 @@ When /^([^ ]*) creates a budget ([^ ]*) with description "(.*?)"$/ do |user_name
   budgets[budget_name] = api.create_budgets(user: user, name: budget_name, description: budget_description)
 end
 
+When /^([^ ]*) gives ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
+  user = users[user_name]
+  admin = users[admin_name]
+
+  allocation_rights[user_name] = api.create_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
+end
+
 When /^([^ ]*) deletes (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
   user = users[user_name]
   api.delete_buckets(bucket: bucket, user: user)
+end
+
+Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
+  options = {}
+  options[:budget] = budget
+  buckets = api.list_buckets(options).reload
+  result = buckets
+
+  expected = table.hashes
+
+  result.each_with_index do |row, result_index|
+    expected_row = expected[result_index]
+
+    expected_row.each do |key, value|
+      if value
+        value = Money.new(value.to_f) if ['minimum', 'maximum'].include?(key)
+        value = users[value] if key == 'sponsor'
+      end
+      row.send(key).should == value
+    end
+  end
+end
+
+Then /^([^ ]*) should have allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |user_name, amount, budget|
+  user = users[user_name]
+
+  api.allocation_rights_enquiry(user: user, budget: budget).should == amount
 end
 
 Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budget_name, budget_description|
@@ -97,16 +113,6 @@ end
 
 Then /^(#{CAPTURE_BUDGET}) should have the description "(.*?)"$/ do |budget, budget_description|
   budget.description.should == budget_description
-end
-
-Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
-  table.hashes.map! do |h|
-    h.each_pair do |k,v|
-      h[k] = nil if v == ''
-    end
-  end
-
-  table
 end
 
 

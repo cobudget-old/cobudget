@@ -7,9 +7,9 @@ Feature: Bucket Allocations
     Given a budget ThunderaNovemberBudget
     Given a bucket Treats in the ThunderaNovemberBudget budget
     Given a bucket LaserPointers in the ThunderaNovemberBudget budget
-    Given a bucket Tuna in  the ThunderaNovemberBudget budget
-    Given a user Liono who has allocation rights of $50 in the ThunderaNovemberBudget
-    Given a user Tygra who has allocation rights of $20 in the ThunderaNovemberBudget
+    Given a bucket Tuna in the ThunderaNovemberBudget budget
+    Given a user Liono who has allocation rights of $50 in the ThunderaNovemberBudget budget
+    Given a user Tygra who has allocation rights of $20 in the ThunderaNovemberBudget budget
 
   Scenario: Successfully allocate money into a bucket
     When Liono allocates $50 to the Tuna bucket
@@ -41,7 +41,7 @@ Feature: Bucket Allocations
 
   Scenario: Add up allocations in a budget
     When Tygra allocates $20 to the Tuna bucket
-    When Liono allocates $15 to the Laser Pointers bucket
+    When Liono allocates $15 to the LaserPointers bucket
     When Liono allocates $25 to the Treats bucket
     Then total allocations in the ThunderaNovemberBudget budget should be $60
     Then total unallocated in the ThunderaNovemberBudget budget should be $10
