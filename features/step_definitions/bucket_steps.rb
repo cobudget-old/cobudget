@@ -31,6 +31,7 @@ end
 
 
 Then /^they should see (#{CAPTURE_BUCKET}) in the bucket list$/ do |bucket|
+  @buckets_viewing = api.list_buckets(budget: @budget, user: @user)
   @buckets_viewing.include?bucket
 end
 

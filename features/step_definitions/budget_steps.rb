@@ -6,7 +6,8 @@ def budgets
 end
 
 Given /^a budget ([^ ]+)$/ do |budget_name|
-  budgets[budget_name] = Cobudget::Budget.create!(name: budget_name)
+  @budget = Cobudget::Budget.create!(name: budget_name)
+  budgets[budget_name] = @budget
 end
 
 Given /^a user ([^ ]*) who can administer (#{CAPTURE_BUDGET})$/ do |user_name, budget|
@@ -44,7 +45,8 @@ end
 Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   options = {}
   options[:budget] = budget
-  result = api.list_buckets(options).reload
+  @buckets = api.list_buckets(options).reload
+  result = @buckets
 
   expected = table.hashes
 
@@ -81,6 +83,11 @@ When /^([^ ]*) creates a budget ([^ ]*) with description "(.*?)"$/ do |user_name
   user = users[user_name]
 
   budgets[budget_name] = api.create_budgets(user: user, name: budget_name, description: budget_description)
+end
+
+When /^([^ ]*) deletes (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
+  user = users[user_name]
+  api.delete_buckets(bucket: bucket, user: user)
 end
 
 Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budget_name, budget_description|
