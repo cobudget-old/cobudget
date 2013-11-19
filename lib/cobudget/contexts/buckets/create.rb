@@ -27,7 +27,6 @@ module Cobudget
 
       def perform
         #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
-
         puts attributes.inspect
         data = Bucket.create!(attributes)
         #This wouldn't work with options in a core level so moved it here to test it.
