@@ -1,0 +1,23 @@
+.utl-expander
+  +single-transition(all, 0.2s, ease-out, 0)
+  max-height: 150px
+  overflow: hidden
+  &.j-expanded
+    padding-bottom: 1.8em
+    max-height: 1500px
+
+.utl-expander-btn
+  height: 1.8em
+  line-height: 1.8em
+  color: $clr-blue-bold
+  font-weight: bold
+  width: 100%
+  position: absolute
+  bottom: 0
+  left: 0
+  cursor: pointer
+  border-top: solid 1px transparent
+  +background( linear-gradient(top, rgba(236,236,236, 0.8), #ececec))
+  &:hover
+    border-top: solid 1px #ccc
+    background: #ececec

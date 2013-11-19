@@ -14,3 +14,8 @@ sudo npm install grunt-contrib-haml --save-dev
 *Start the server:*
 
 grunt server
+
+*Gems*
+compass
+capistrano -v2.15.5
+railsless-deploy

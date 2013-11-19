@@ -1,12 +1,17 @@
 <section>
-  <article class="m-bucket l-padded" ng-repeat="b in buckets">
+  <article class="m-bucket l-padded utl-expander" ng-repeat="b in buckets" d-expander>
     <div class="m-labels list-inline clearfix">
       <div class="m-labels-label paint clr2">
         Fred Smith
       </div>
       <div class="m-labels-label paint clr1">
         <strong>
-          $1000
+          <span ng-show="bucket.minimum != bucket.maximum">
+            {{bucket.minimum}} - {{bucket.maximum}}
+          </span>
+          <span ng-show="bucket.minimum == bucket.maximum">
+            {{bucket.minimum}}
+          </span>
         </strong>
       </div>
     </div>

@@ -1,4 +1,4 @@
-angular.module('states.budget', [])
+angular.module('states.budget', ['controllers.buckets'])
 .config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider)->
   $stateProvider.state('budgets',
     url: '/budgets/:id'
@@ -6,18 +6,20 @@ angular.module('states.budget', [])
       'main':
         templateUrl: '/views/budgets/budget.show.html'
         controller: (['$scope', '$state', ($scope, $state)->
-          console.log $state
-
         ]) #end controller
   ) #end state
   .state('budgets.buckets',
     url: '/buckets'
     views:
       'bucket-list':
-        templateUrl: '/views/budgets/buckets.list.html'
-        controller: (['$scope', '$state', "Budget", ($scope, $state, Budget)->
-          Budget.query(id: $state.params.id, (response)->
+        templateUrl: '/views/buckets/buckets.list.html'
+        controller: (['$scope', '$rootScope', '$state', "Bucket", ($scope, $rootScope, $state, Bucket)->
+          Bucket.query(budget_id: $state.params.id, (response)->
             $scope.buckets = response
+          )
+          $rootScope.channel.bind('bucket_created', (bucket) ->
+            $scope.buckets.unshift bucket.bucket
+            $scope.$apply()
           )
         ]) #end controller
        'sidebar@':
@@ -27,10 +29,8 @@ angular.module('states.budget', [])
     url: '/propose-bucket'
     views:
       'bucket-create':
-        template: 'create me'
-        controller: (['$scope', '$state', ($scope, $state)->
-          console.log "create me"
-        ]) #end controller
+        templateUrl: '/views/buckets/buckets.create.html'
+        controller: 'BucketController'
       'sidebar@':
         template: '<h1>Instructions</h1>'
   ) #end state

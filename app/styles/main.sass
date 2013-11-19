@@ -1,10 +1,11 @@
 @import 'compass/css3'
-
+@import '../bower_components/sass-bootstrap/lib/bootstrap'
 @import 'layout'
 @import 'settings'
 @import 'modules/btn'
 @import 'modules/labels'
 @import 'modules/buckets'
+@import 'modules/utils'
 
 html
   overflow-y: scroll
@@ -13,3 +14,18 @@ body
   margin: 0
   background: $clr-darkest-gray
 
+.l-panel
+  background: #ececec
+  margin-top: 1em
+
+.field  
+  @extend .form-group
+  input[type="text"], input[type="number"], input[type="password"], textarea
+    @extend .form-control
+
+.actions 
+  @extend .form-group
+  input[type="submit"], button
+    @extend .btn, .btn-primary
+  a 
+    @extend .btn, .btn-warning

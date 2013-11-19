@@ -1,5 +1,6 @@
 node_modules
 dist
+deploy_package.tar.gz
 .tmp
 .sass-cache
 app/bower_components
