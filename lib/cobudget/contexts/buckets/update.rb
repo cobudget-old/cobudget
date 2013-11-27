@@ -26,9 +26,14 @@ module Cobudget
 
       def perform
         #raise NotAuthorizedToUpdateBucket unless user.can_update_bucket?(bucket)
-
+        #This wouldn't work with options in a core level so moved it here to test it.
+        Pusher.key = '6ea7addcc0137ddf6cf0'
+        Pusher.secret = '882cd62d5475bc7edee3'
+        Pusher.app_id = '59272'
         data = bucket.update_attributes!(attributes)
-        Pusher.trigger('cobudget', 'bucket_updated', {bucket: data})
+        Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket})
+        puts bucket.inspect
+        bucket
       end
     end
   end
