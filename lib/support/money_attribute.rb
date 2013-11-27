@@ -14,12 +14,9 @@ module MoneyAttribute
       end
 
       define_method "#{attr_name}=" do |money|
-        puts money.inspect
         if money.nil?
           write_attribute(numeric_field, nil)
         else
-          #write_attribute(numeric_field, nil)
-          #######CENTS DOESNT EXIST####
           write_attribute(numeric_field, money.cents)
         end
       end
