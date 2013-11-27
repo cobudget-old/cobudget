@@ -18,9 +18,9 @@ module MoneyAttribute
         if money.nil?
           write_attribute(numeric_field, nil)
         else
-          write_attribute(numeric_field, nil)
+          #write_attribute(numeric_field, nil)
           #######CENTS DOESNT EXIST####
-          #write_attribute(numeric_field, money.cents)
+          write_attribute(numeric_field, money.cents)
         end
       end
     end
