@@ -15,7 +15,7 @@ module Cobudget
       def perform
         right = user.get_allocation_rights(budget)
         if right
-          right.amount
+          right.amount.to_f
         else
           nil
         end

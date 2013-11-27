@@ -25,7 +25,7 @@ def buckets
 end
 
 CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
-  Money.new(amount.gsub(',', '').to_f)
+  amount.gsub(',', '').to_f
 end
 
 CAPTURE_BUCKET = Transform /^the ([^ ]*) bucket/ do |bucket_identifier|
