@@ -28,7 +28,7 @@ module Cobudget
         #raise NotAuthorizedToUpdateBucket unless user.can_update_bucket?(bucket)
 
         data = bucket.update_attributes!(attributes)
-        Pusher.trigger('buckets', 'updated', {bucket: data})
+        Pusher.trigger('cobudget', 'bucket_updated', {bucket: data})
       end
     end
   end
