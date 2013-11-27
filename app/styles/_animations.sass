@@ -1,0 +1,21 @@
+.ani-fadeout-fast
+  +single-transition(all, 0.2s, ease-out, 0)
+  +opacity(0)
+ 
+//ng-specific
+.ani-fade-fast.ng-enter, .ani-fade-fast.ng-leave, .ani-fade-fast.ng-hide-add, .ani-fade-fast.ng-hide-remove
+  +single-transition(opacity, 0.1s, ease-in, 0)
+  display: block !important
+
+.ani-fade-fast.ng-enter, 
+.ani-fade-fast.ng-hide-add 
+  +opacity(1)
+.ani-fade-fast.ng-enter-active,
+.ani-fade-fast.ng-hide-add-active
+  +opacity(0)
+.ani-fade-fast.ng-leave, 
+.ani-fade-fast.ng-hide-remove
+  +opacity(0)
+.ani-fade-fast.ng-enter-active,
+.ani-fade-fast.ng-hide-remove-active
+  +opacity(1)
