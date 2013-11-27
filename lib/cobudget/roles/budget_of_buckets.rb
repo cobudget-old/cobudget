@@ -9,13 +9,13 @@ module Cobudget
     actor_dependency :allocation_rights
 
     def total_allocated
-      buckets.sum do |bucket|
+      buckets.to_a.sum do |bucket|
         AllocationCollection.cast_actor(bucket).total_allocation_balance
       end
     end
 
     def total_available_for_allocation
-      allocation_rights.sum do |right|
+      allocation_rights.to_a.sum do |right|
         right.amount
       end
     end
