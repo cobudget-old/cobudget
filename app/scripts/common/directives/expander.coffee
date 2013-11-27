@@ -2,7 +2,6 @@ angular.module("directives.expander", [])
 .directive('dExpander', [() ->
   restrict: 'A'
   link: (scope, element, attr)->
-    console.log "papa"
     expander_button = angular.element("<div class='utl-expander-btn text-center'>more...</div>")
     expander_button.css
     expander_button.on "click", (e)->

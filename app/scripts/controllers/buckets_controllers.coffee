@@ -1,31 +1,55 @@
 angular.module('controllers.buckets', [])
-.controller('BucketController', ['API_PREFIX', '$http', '$scope', '$state', 'Bucket', (API_PREFIX, $http, $scope, $state, Bucket)->
-  $scope.bucket = {}
+.controller('BucketController', ['API_PREFIX', '$http', '$scope', '$state', 'Bucket', 'flash', (API_PREFIX, $http, $scope, $state, Bucket, flash)->
+  if $state.params.bucket_id?
+    setMinMax = (bucket)->
+      if bucket.minimum_cents?
+        bucket.minimum = parseFloat(bucket.minimum_cents) / 100
+      if bucket.maximum_cents?
+        bucket.maximum = parseFloat(bucket.maximum_cents) / 100
+      bucket
+    $http(
+      method: 'GET',
+      url: "#{API_PREFIX}/show_buckets"
+      params:
+        bucket_id: $state.params.bucket_id
+    ).success((data, status, headers, config)->
+      setMinMax(data)
+      $scope.bucket = data
+    )
+    .error((data, status, headers, config)->
+      console.log "Error", data
+    )
+  else
+    $scope.bucket = {}
+
   $scope.update = (bucket)->
-    $http(method: 'POST', url: "#{API_PREFIX}/update_buckets?bucket_id=#{$state.params.id}&name=test&description=testtst&minimum=1&maximum=2").
-      success((data, status, headers, config)->
-        console.log data
-      )
-      .error((data, status, headers, config)->
-        console.log "Error", data
-      )
+    bucket.user_id = 1
+    bucket.bucket_id = 1
+    $http(
+      method: 'POST'
+      url: "#{API_PREFIX}/update_buckets"
+      params: bucket
+    ).success((data, status, headers, config)->
+      $scope.bucket = data
+      flash('Bucket Updated')
+      $state.go('budgets.buckets', id: data.budget_id)
+    )
+    .error((data, status, headers, config)->
+      console.log "Error", data
+    )
 
   $scope.create = (bucket)->
     bucket.budget_id = $state.params.id
-    delete bucket.name
-    delete bucket.description 
-    delete bucket.minimum
-    delete bucket.maximum 
     bucket.user_id = "1"
-    bucket.name = "ned:"
-    bucket.description = "wals"
     
     $http(
       method: 'POST'
       url: "#{API_PREFIX}/create_buckets"
-      data: $scope.bucket
+      params: bucket
       ).success((data, status, headers, config)->
-        console.log data
+        bucket = {}
+        $scope.bucket = {}
+        flash('Whoopee, Bucket created!')
       )
       .error((data, status, headers, config)->
         console.log "Error", data

@@ -1,4 +1,30 @@
+body
+  padding-top: 50px
+
 .l-padded
   padding: 1em
   h1, h2, h3, h4
     margin-top: 0
+
+.m-flash
+  position: fixed
+  top: 50px
+  left: 0
+  z-index: 1050
+  width: 100%
+//Bootstrap overrides
+.actions
+  @extend .clearfix
+  margin-bottom: 0
+.alert
+  padding: 0.5em
+  font-weight: bold
+  +border-radius(0)
+  .close
+    position: relative
+    top: -1px
+    right: 3px
+
+  &:hover
+    cursor: pointer
+    +opacity(0.9)

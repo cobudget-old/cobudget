@@ -13,12 +13,31 @@ angular.module('states.budget', ['controllers.buckets'])
     views:
       'bucket-list':
         templateUrl: '/views/buckets/buckets.list.html'
-        controller: (['$scope', '$rootScope', '$state', "Bucket", ($scope, $rootScope, $state, Bucket)->
+        controller: (['$scope', '$rootScope', '$state', '$filter', "Bucket", ($scope, $rootScope, $state, $filter, Bucket)->
+          $scope.buckets = []
+          setMinMax = (bucket)->
+            if bucket.minimum_cents?
+              bucket.minimum = parseFloat(bucket.minimum_cents) / 100
+            if bucket.maximum_cents?
+              bucket.maximum = parseFloat(bucket.maximum_cents) / 100
+            bucket
           Bucket.query(budget_id: $state.params.id, (response)->
-            $scope.buckets = response
+            for b in response
+              setMinMax(b)
+              $scope.buckets.push b
           )
           $rootScope.channel.bind('bucket_created', (bucket) ->
+            setMinMax(bucket.bucket)
             $scope.buckets.unshift bucket.bucket
+            $scope.$apply()
+          )
+
+          $rootScope.channel.bind('bucket_updated', (bucket) ->
+            for i in [0...$scope.buckets.length]
+              bk = $scope.buckets[i]
+              if bk.id == bucket.bucket.id
+                $scope.buckets[i] = bucket.bucket
+                setMinMax($scope.buckets[i])
             $scope.$apply()
           )
         ]) #end controller

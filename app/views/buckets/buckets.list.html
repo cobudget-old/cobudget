@@ -1,22 +1,29 @@
 <section>
-  <article class="m-bucket l-padded utl-expander" ng-repeat="b in buckets" d-expander>
-    <div class="m-labels list-inline clearfix">
-      <div class="m-labels-label paint clr2">
-        Fred Smith
+  <article ng-repeat="b in buckets" class="m-bucket-wrapper" >
+    <nav class="m-nav m-nav-full" ng-show="admin == true">
+      <ul>
+        <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
+      </ul>
+    </nav>
+    <div class="m-bucket l-padded utl-expander ani-fade-fast" d-expander>
+      <div class="m-labels list-inline clearfix">
+        <div class="m-labels-label paint clr2">
+          Fred Smith
+        </div>
+        <div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label paint clr1">
+          <strong >
+            <span ng-show="b.minimum != b.maximum">
+              ${{b.minimum}} - ${{b.maximum}}
+            </span>
+            <span ng-show="b.minimum == b.maximum">
+              ${{b.minimum}}
+            </span>
+          </strong>
+        </div>
       </div>
-      <div class="m-labels-label paint clr1">
-        <strong>
-          <span ng-show="bucket.minimum != bucket.maximum">
-            {{bucket.minimum}} - {{bucket.maximum}}
-          </span>
-          <span ng-show="bucket.minimum == bucket.maximum">
-            {{bucket.minimum}}
-          </span>
-        </strong>
-      </div>
-    </div>
-    <h2>{{b.name}}</h2>
+      <h2>{{b.name}}</h2>
 
-    <div btf-markdown="b.description"></div>
+      <div btf-markdown="b.description"></div>
+    </div>
   </article>
 </section>

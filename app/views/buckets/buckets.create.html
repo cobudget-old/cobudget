@@ -18,12 +18,14 @@
       <label for="bucket-description">Description: </label>
       <textarea id="bucket-description" rows="10" ng-model="bucket.description"></textarea>
     </div>
-    <strong>Preview:</strong>
-    <div class="well">
-      <div btf-markdown="bucket.description"></div>
+    <div class="ani-fade-fast" ng-hide="bucket.description == undefined || bucket.description ==''">
+      <strong>Preview:</strong>
+      <div class="well">
+        <div btf-markdown="bucket.description"></div>
+      </div>
     </div>
     <div class="actions">
-      <button ng-click="create(bucket)">SAVE</button>
+      <button class="pull-right" ng-click="create(bucket)">Create Bucket</button>
     </div>
   </form>
 </div>
