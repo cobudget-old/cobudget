@@ -17,7 +17,8 @@ module MoneyAttribute
         if money.nil?
           write_attribute(numeric_field, nil)
         else
-          write_attribute(numeric_field, money.cents)
+          mny = Money.new(money * 100)
+          write_attribute(numeric_field, mny.cents)
         end
       end
     end

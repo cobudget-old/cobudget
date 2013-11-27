@@ -27,7 +27,7 @@ module Cobudget
       - Cross browser testing & fixes
       - Deploy"
       buckets.each do |b|
-        Cobudget::Bucket.create(budget: budget, name: b, description: description, minimum: rand(1000..90000), maximum: rand(1000..90000), sponsor: nil)
+        Cobudget::Bucket.create(budget: budget, name: b, description: description, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: nil)
       end
     end
   end
