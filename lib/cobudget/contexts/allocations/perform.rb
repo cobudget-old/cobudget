@@ -2,6 +2,7 @@ require 'playhouse/context'
 require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 require 'cobudget/composers/money_composer'
+require 'cobudget/roles/allocator'
 #require 'cobudget/roles/bucket_authorizer'
 
 module Cobudget

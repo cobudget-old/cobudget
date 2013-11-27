@@ -1,4 +1,3 @@
-@wip
 Feature: Bucket Allocations
   In order to participate in the collaborative budgeting process
   As a budget participant
