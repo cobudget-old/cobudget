@@ -1,3 +1,4 @@
+<a href="" ui-sref="budgets.propose_bucket" class="m-btn m-btn-wide paint clr4-bold">Propose a bucket</a>
 <section>
   <article ng-repeat="b in buckets" class="m-bucket-wrapper" >
     <nav class="m-nav m-nav-full" ng-show="admin == true">
@@ -5,7 +6,7 @@
         <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
       </ul>
     </nav>
-    <div class="m-bucket l-padded utl-expander ani-fade-fast" d-expander>
+    <div class="m-bucket l-padded utl-expander" d-expander>
       <div class="m-labels list-inline clearfix">
         <div class="m-labels-label paint clr2">
           Fred Smith

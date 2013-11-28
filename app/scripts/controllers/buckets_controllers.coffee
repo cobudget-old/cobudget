@@ -1,5 +1,7 @@
 angular.module('controllers.buckets', [])
 .controller('BucketController', ['API_PREFIX', '$http', '$scope', '$state', 'Bucket', 'flash', (API_PREFIX, $http, $scope, $state, Bucket, flash)->
+  $scope.budget_id = $state.params.budget_id
+  #for create view vs edit view
   if $state.params.bucket_id?
     setMinMax = (bucket)->
       if bucket.minimum_cents?
@@ -39,7 +41,7 @@ angular.module('controllers.buckets', [])
     )
 
   $scope.create = (bucket)->
-    bucket.budget_id = $state.params.id
+    bucket.budget_id = $state.params.budget_id
     bucket.user_id = "1"
     
     $http(

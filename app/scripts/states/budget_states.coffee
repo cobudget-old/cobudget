@@ -1,7 +1,7 @@
 angular.module('states.budget', ['controllers.buckets'])
 .config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider)->
   $stateProvider.state('budgets',
-    url: '/budgets/:id'
+    url: '/budgets/:budget_id'
     views:
       'main':
         templateUrl: '/views/budgets/budget.show.html'
@@ -13,7 +13,7 @@ angular.module('states.budget', ['controllers.buckets'])
     views:
       'bucket-list':
         templateUrl: '/views/buckets/buckets.list.html'
-        controller: (['$scope', '$rootScope', '$state', '$filter', "Bucket", ($scope, $rootScope, $state, $filter, Bucket)->
+        controller: (['$scope', '$rootScope', '$state', "Bucket", ($scope, $rootScope, $state, Bucket)->
           $scope.buckets = []
           setMinMax = (bucket)->
             if bucket.minimum_cents?
@@ -21,7 +21,7 @@ angular.module('states.budget', ['controllers.buckets'])
             if bucket.maximum_cents?
               bucket.maximum = parseFloat(bucket.maximum_cents) / 100
             bucket
-          Bucket.query(budget_id: $state.params.id, (response)->
+          Bucket.query(budget_id: $state.params.budget_id, (response)->
             for b in response
               setMinMax(b)
               $scope.buckets.push b
