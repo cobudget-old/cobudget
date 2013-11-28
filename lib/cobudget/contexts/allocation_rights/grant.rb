@@ -22,12 +22,7 @@ module Cobudget
       end
 
       def perform
-        right = user.get_allocation_rights(budget)
-        if right
-          right.update(attributes)
-        else
-          AllocationRight.create!(attributes)
-        end
+        AllocationRight.create!(attributes)
       end
     end
   end

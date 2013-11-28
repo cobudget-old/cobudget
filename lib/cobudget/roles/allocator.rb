@@ -28,6 +28,10 @@ module Cobudget
       rights.to_f - allocations.to_f
     end
 
+    def can_allocate?(bucket)
+      rights = BudgetParticipant.cast_actor(self).has_allocation_rights?(bucket.budget)
+    end
+
     private
 
     def budget_scope(budget)

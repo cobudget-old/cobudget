@@ -42,7 +42,18 @@ When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_na
   options[:amount] = amount
   options[:admin] = user
   options[:user] = user
-  api.perform_allocations(options)
+  api.create_allocations(options)
+end
+
+When /^([^ ]*) tries to allocate (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET}) but fails$/ do |user_name, amount, bucket|
+  user = users[user_name]
+
+  options = {}
+  options[:bucket] = bucket
+  options[:amount] = amount
+  options[:admin] = user
+  options[:user] = user
+  expect{ api.create_allocations(options)}.to raise_error#(Cobudget::Allocations::Create::NotAuthorisedToAllocate)
 end
 
 When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKET})$/ do |user_name, from_bucket, to_bucket|
@@ -53,13 +64,13 @@ When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKE
   options = table.rows_hash.symbolize_keys
   options[:from_bucket] = bucket
   options[:to_bucket] = to_bucket
-  api.perform_allocation(options)
+  api.create_allocation(options)
 end
 
-When /^([^ ]*) removes the allocation in (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
+When /^([^ ]*) removes the (#{CAPTURE_MONEY}) allocation in (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
   user = users[user_name]
 
-  api.remove_allocations(bucket: bucket, admin: user, user: user)
+  api.remove_allocations(bucket: bucket, amount: amount, admin: user, user: user)
 end
 
 Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do |user_name, amount, budget|

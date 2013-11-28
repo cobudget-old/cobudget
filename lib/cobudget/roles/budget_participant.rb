@@ -11,26 +11,21 @@ module Cobudget
     SUM_COLUMN = :amount_cents
 
     def allocation_rights_total(budget)
-      right = base_scope(budget)
-      if right.nil?
-        0
-      else
-        Money.new(right.amount)
-      end
+      Money.new(base_scope(budget).map(&:amount).sum)
     end
 
     def has_allocation_rights?(budget)
-      base_scope(budget).nil? || base_scope(budget).amount == 0
+      !base_scope(budget).blank?
     end
 
     def get_allocation_rights(budget)
-      base_scope(budget).amount unless base_scope(budget).nil?
+      Money.new(base_scope(budget).map(&:amount).sum)
     end
 
     private
 
     def base_scope(budget)
-      allocation_rights.where(budget: budget).first
+      allocation_rights.where(budget: budget)
     end
   end
 end
