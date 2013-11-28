@@ -2,18 +2,19 @@
   "name": "try",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.2.0",
+    "angular": "~1.2.3",
     "json3": "~3.2.4",
     "es5-shim": "~2.1.0",
-    "angular-resource": "~1.2.0",
-    "angular-cookies": "~1.2.0",
-    "angular-sanitize": "~1.2.0",
-    "angular-route": "~1.2.0",
-		"angular-markdown-directive": "0.1.0",
+    "angular-resource": "~1.2.3",
+    "angular-cookies": "~1.2.3",
+    "angular-sanitize": "~1.2.3",
+    "angular-route": "~1.2.3",
+    "angular-markdown-directive": "0.1.0",
     "sass-bootstrap": "~3.0.2",
     "angular-ui-router": "~0.2.0",
-    "sass-bootstrap": "~3.0.2",
-		"showdown": "0.3.1"
+    "angular-flash": "~0.1.10",
+    "angular-animate": "~1.2.3",
+    "showdown": "0.3.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
