@@ -42,7 +42,7 @@
       </div>
     </header>
 
-    <div flash:messages></div flash:messages>
+    <flash:messages class="slide-down" ng-show="messages"></flash:messages>
 
     <div class="container">
       <div class="row">
@@ -65,9 +65,9 @@
         <!-- build:js scripts/modules.js -->
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <script src="bower_components/angular-flash-messages/angular-flash.js"></script>
+        <script src="modded_components/angular-flash-messages/angular-flash.js"></script>
+        <script src="modded_components/angular-markdown-directive/markdown.js"></script>
         <script src="bower_components/showdown/compressed/showdown.js"></script>
-        <script src="bower_components/angular-markdown-directive/markdown.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>

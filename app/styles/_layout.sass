@@ -6,12 +6,21 @@ body
   h1, h2, h3, h4
     margin-top: 0
 
-.m-flash
+#flash-messages
   position: fixed
   top: 50px
   left: 0
-  z-index: 1050
   width: 100%
+  text-align: center
+  list-style: none
+  margin: 0
+  padding: 0
+  font-size: 1.2em
+  li.success
+    padding: 5px 15px
+    @extend .alert-success
+    
+
 //Bootstrap overrides
 .actions
   @extend .clearfix

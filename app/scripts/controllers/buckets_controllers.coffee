@@ -33,7 +33,7 @@ angular.module('controllers.buckets', [])
       params: bucket
     ).success((data, status, headers, config)->
       $scope.bucket = data
-      flash('Bucket Updated')
+      flash('success', 'Bucket updated.', 2000)
       $state.go('budgets.buckets', id: data.budget_id)
     )
     .error((data, status, headers, config)->
@@ -51,7 +51,7 @@ angular.module('controllers.buckets', [])
       ).success((data, status, headers, config)->
         bucket = {}
         $scope.bucket = {}
-        flash('Whoopee, Bucket created!')
+        flash('success', 'Bucket created.', 2000)
       )
       .error((data, status, headers, config)->
         console.log "Error", data

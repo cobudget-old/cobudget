@@ -23,7 +23,8 @@
         </div>
       </div>
       <h2>{{b.name}}</h2>
-
+      <slider floor="10" ceiling="60" ng-model-low="b.money" ng-model-high="b.money"></slider>
+      <slider floor="0" ceiling="100" step="1" precision="2" ng-model="b.money"></slider>
       <div btf-markdown="b.description"></div>
     </div>
   </article>
