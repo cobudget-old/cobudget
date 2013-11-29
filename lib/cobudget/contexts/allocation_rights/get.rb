@@ -13,12 +13,7 @@ module Cobudget
       actor :budget, repository: Budget
 
       def perform
-        right = user.get_allocation_rights(budget)
-        if right
-          right.amount.to_f
-        else
-          nil
-        end
+        user.get_allocation_rights(budget)
       end
     end
   end

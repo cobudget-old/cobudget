@@ -29,7 +29,7 @@ When /^([^ ]+) creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |user_name, bu
   options[:user] = user
   options[:sponsor] = user
   options[:budget] = budget
-  api.create_buckets(options).to_s
+  api.create_buckets(options)
 end
 
 When /^([^ ]*) updates (#{CAPTURE_BUDGET}) with:$/ do |user_name, budget, table|
@@ -91,6 +91,9 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   result.each_with_index do |row, result_index|
     expected_row = expected[result_index]
 
+    puts expected.inspect
+    puts result.inspect
+
     expected_row.each do |key, value|
       if value
         value = Money.new(value.to_f) if ['minimum', 'maximum'].include?(key)
@@ -118,13 +121,13 @@ end
 Then /^([^ ]*) should have allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |user_name, amount, budget|
   user = users[user_name]
 
-  api.get_allocation_rights(user: user, budget: budget).should == amount
+  api.user_remaining_balance_enquiry(user: user, budget: budget).should == amount
 end
 
 Then /^([^ ]*) should not have allocation rights for (#{CAPTURE_BUDGET})$/ do  |user_name, budget|
   user = users[user_name]
 
-  api.get_allocation_rights(user: user, budget: budget).should == nil
+  api.get_allocation_rights(user: user, budget: budget).should == []
 end
 
 Given /^a user ([^ ]*) who has allocation rights of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do  |user_name, amount, budget|

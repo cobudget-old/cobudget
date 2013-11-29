@@ -10,4 +10,6 @@ module Cobudget
   Pusher.key = '6ea7addcc0137ddf6cf0'
   Pusher.secret = '882cd62d5475bc7edee3'
   Pusher.app_id = '59272'
+
+  Money.default_currency = Money::Currency.new('NZD')
 end

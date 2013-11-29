@@ -24,7 +24,7 @@ Feature: Bucket Allocations
     When Liono allocates $10 to the Treats bucket
     When Liono allocates $20 to the LaserPointers bucket
     When Liono allocates $10 to the LaserPointers bucket
-    Then Liono should have a remaining allocation of $30 in the Thundera budget
+    Then Liono should have a remaining allocation of $10 in the Thundera budget
 
   Scenario: Successfully remove an allocation
     When Liono allocates $10 to the Treats bucket

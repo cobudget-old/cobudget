@@ -22,7 +22,7 @@ module Cobudget
 
       def perform
         right = user.get_allocation_rights(budget)
-        right.delete unless right.nil?
+        right.delete(right.all) unless right.nil?
       end
     end
   end

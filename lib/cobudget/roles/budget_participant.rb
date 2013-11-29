@@ -19,7 +19,7 @@ module Cobudget
     end
 
     def get_allocation_rights(budget)
-      Money.new(base_scope(budget).map(&:amount).sum)
+      base_scope(budget)
     end
 
     private
