@@ -41,9 +41,9 @@ Feature: Bucket Allocations
     Then total allocation rights in the Thundera budget should be $70
 
   Scenario: Allocate too much into a bucket
-    When Tygra allocates $500 to the Treats bucket
-    Then the Treats bucket should have a balance of $20
-    Then Tygra should have a remaining allocation of $0 in the Thundera budget
+    When Tygra tries to allocate $500 to the Treats bucket but fails
+    Then the Treats bucket should have a balance of $0
+    Then Tygra should have a remaining allocation of $20 in the Thundera budget
 
   Scenario: Cannot allocate across buckets in different budgets
     Given a budget MummRasCookieFund

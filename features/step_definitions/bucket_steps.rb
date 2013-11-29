@@ -53,7 +53,7 @@ When /^([^ ]*) tries to allocate (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET}) but f
   options[:amount] = amount
   options[:admin] = user
   options[:user] = user
-  expect{ api.create_allocations(options)}.to raise_error#(Cobudget::Allocations::Create::NotAuthorisedToAllocate)
+  expect{ api.create_allocations(options)}.to raise_error
 end
 
 When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKET})$/ do |user_name, from_bucket, to_bucket|

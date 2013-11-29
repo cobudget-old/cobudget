@@ -89,10 +89,7 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   expected = table.hashes
 
   result.each_with_index do |row, result_index|
-    puts "ROW=" + row.inspect
     expected_row = expected[result_index]
-
-    puts "EXPECTED=" + expected.inspect
 
     expected_row.each do |key, value|
       if value

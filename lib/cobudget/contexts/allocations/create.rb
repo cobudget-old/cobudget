@@ -9,6 +9,7 @@ module Cobudget
   module Allocations
     class Create < Playhouse::Context
       class NotAuthorizedToAllocate < Exception; end
+      class InvalidAmount < Exception; end
 
       actor :admin, repository: User#, role: BucketAuthorizer
 
@@ -16,27 +17,17 @@ module Cobudget
       actor :bucket, repository: Bucket
       actor :amount, composer: MoneyComposer
 
-      def attributes
+      def get_attributes
         actors_except :admin
       end
 
       def perform
         raise NotAuthorizedToAllocate unless user.can_allocate?(bucket)
 
-        #puts attributes.inspect
-
         remaining = Money.new(user.remaining_allocation_balance(bucket.budget))
-        #puts amount.inspect
-        #puts remaining.inspect
+        raise InvalidAmount unless amount.amount <= remaining.amount
 
-        if amount.amount > remaining.amount
-          puts 'Too much'
-          attributes[:amount] = Money.new(remaining.amount)
-        end
-
-        #puts attributes.inspect
-
-        Allocation.create!(attributes)
+        Allocation.create!(get_attributes)
       end
     end
   end
