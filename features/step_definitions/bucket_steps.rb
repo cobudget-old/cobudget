@@ -31,7 +31,7 @@ end
 
 
 Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |bucket, amount|
-  api.bucket_balance_enquiry(bucket: bucket).should == amount
+  api.bucket_balance_enquiry(bucket: bucket).should == Money.new(amount*100)
 end
 
 When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|

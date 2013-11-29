@@ -22,20 +22,19 @@ module Cobudget
 
       def perform
         raise NotAuthorizedToAllocate unless user.can_allocate?(bucket)
-        allocation = user.get_allocation_for_bucket(bucket)
 
-        puts attributes.inspect
+        #puts attributes.inspect
 
         remaining = Money.new(user.remaining_allocation_balance(bucket.budget))
-        puts amount.inspect
-        puts remaining.inspect
+        #puts amount.inspect
+        #puts remaining.inspect
 
         if amount.amount > remaining.amount
           puts 'Too much'
           attributes[:amount] = Money.new(remaining.amount)
         end
 
-        puts attributes.inspect
+        #puts attributes.inspect
 
         Allocation.create!(attributes)
       end

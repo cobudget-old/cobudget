@@ -7,7 +7,7 @@ module Cobudget
     actor :bucket, role: AllocationCollection, repository: Bucket
 
     def perform
-      bucket.total_allocation_balance
+      Money.new(bucket.total_allocation_balance)
     end
   end
 end

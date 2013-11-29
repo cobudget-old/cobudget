@@ -89,14 +89,14 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   expected = table.hashes
 
   result.each_with_index do |row, result_index|
+    puts "ROW=" + row.inspect
     expected_row = expected[result_index]
 
-    puts expected.inspect
-    puts result.inspect
+    puts "EXPECTED=" + expected.inspect
 
     expected_row.each do |key, value|
       if value
-        value = Money.new(value.to_f) if ['minimum', 'maximum'].include?(key)
+        value = Money.new(value.to_f*100) if ['minimum', 'maximum'].include?(key)
         value = users[value] if key == 'sponsor'
       end
       row.send(key).should == value
