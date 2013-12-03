@@ -26,10 +26,14 @@
       <div ng-if="b.maximum > b.minimum" class="o-slider-container">
         <div class="o-slider-labels">
           <div class="o-slider-range-low">0</div>
-          <div class="o-slider-selection">Allocation: ${{b.allocation | number: 0}} ({{(b.allocation / allocatable) * 100 | number: 2}}%)</div>
+          <div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>
           <div class="o-slider-range-high">${{b.maximum}}</div>
         </div>
-        <slider min="0" max="{{b.maximum}}" ng-model="b.allocation"></slider>
+        <slider min="0" max="{{b.maximum}}" ng-model="b.user_allocation"></slider>
+      </div>
+      <div class="m-bucket-allocations" ng-if="allocations">
+        <div ng-repeat="alc in allocations track by $index" class="m-bucket-allocations__allocation pallete_{{$index}}" style="width: {{alc.amount == 0 ? 0 : alc.amount * 1000 / (b.maximum * 1000) * 100}}%">
+        </div>
       </div>
       <div btf-markdown="b.description"></div>
     </div>

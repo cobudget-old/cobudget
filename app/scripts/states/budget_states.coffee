@@ -32,7 +32,7 @@ angular.module('states.budget', ['controllers.buckets'])
 
           Bucket.query(budget_id: $state.params.budget_id, (response)->
             for b in response
-              b.allocation = 0
+              b.user_allocation = 0
               setMinMax(b)
               $scope.buckets.push b
           )
