@@ -1,0 +1,4 @@
+module Cobudget
+
+
+end

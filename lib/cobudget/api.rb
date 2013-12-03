@@ -15,6 +15,8 @@ module Cobudget
     contexts_for Buckets
     contexts_for AllocationRights
     contexts_for Allocations
+    contexts_for Users
+    contexts_for Accounts
 
     def self.name
       'cobudget'

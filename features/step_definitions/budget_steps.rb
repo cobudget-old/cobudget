@@ -16,6 +16,12 @@ Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
   #api.create_buckets(budget: budget, bucket_name: bucket_name)
 end
 
+When /^([^ ]+) creates a new user ([^ ]+)$/ do |creator_name, target_name|
+  creator = users[creator_name]
+
+  users[target_name] = api.create_users(admin: creator, name: target_name, email: "#{target_name}@example.com")
+end
+
 When /^([^ ]+) views the buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
@@ -78,6 +84,11 @@ When /^([^ ]*) revokes ([^ ]*)'s allocation rights for (#{CAPTURE_BUDGET})$/ do 
   admin = users[admin_name]
 
   api.revoke_allocation_rights(admin: admin, user: user, budget: budget)
+end
+
+Then /^([^ ]+) should exist as a user$/ do |user_name|
+  #list = api.list_users
+  Cobudget::User.find_by_name(user_name).should_not be_nil
 end
 
 Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|

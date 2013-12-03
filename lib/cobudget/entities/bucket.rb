@@ -6,11 +6,12 @@ module Cobudget
     include MoneyAttribute
     money_attribute :minimum
     money_attribute :maximum
+
     belongs_to :sponsor, class_name: "User"
+    has_many :accounts, as: :owner
 
     belongs_to :budget
     has_many :allocations
-
   end
 
 end
