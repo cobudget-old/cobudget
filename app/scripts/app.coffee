@@ -15,6 +15,7 @@ app = angular.module('cobudget', [
   'resources.budgets'
   'resources.buckets'
   'directives.expander'
+  'directives.slider'
 ])
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', ($httpProvider, $urlRouterProvider, $sceDelegateProvider)->
   $urlRouterProvider.otherwise('/')

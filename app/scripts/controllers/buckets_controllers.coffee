@@ -26,7 +26,8 @@ angular.module('controllers.buckets', [])
 
   $scope.update = (bucket)->
     bucket.user_id = 1
-    bucket.bucket_id = 1
+    console.log $state.params.bucket_id
+    bucket.bucket_id = $state.params.bucket_id
     $http(
       method: 'POST'
       url: "#{API_PREFIX}/update_buckets"
@@ -34,7 +35,7 @@ angular.module('controllers.buckets', [])
     ).success((data, status, headers, config)->
       $scope.bucket = data
       flash('success', 'Bucket updated.', 2000)
-      $state.go('budgets.buckets', id: data.budget_id)
+      $state.go('budgets.buckets', budget_id: data.budget_id)
     )
     .error((data, status, headers, config)->
       console.log "Error", data
@@ -56,4 +57,26 @@ angular.module('controllers.buckets', [])
       .error((data, status, headers, config)->
         console.log "Error", data
       )
+]).controller('BucketItem', ['API_PREFIX', '$http', '$scope', '$state', 'Bucket', 'flash', (API_PREFIX, $http, $scope, $state, Bucket, flash)->
+  #get from user
+  $scope.$watch 'b.allocation', (n, o)->
+    if n != o
+      buckets = $scope.$parent.$parent.buckets
+
+      allocatable = $scope.$parent.$parent.allocatable
+
+      sum_of_other_buckets = 0
+      sum_of_buckets = 0
+      for bk in buckets
+        unless bk.id == $scope.b.id
+          sum_of_other_buckets += bk.allocation
+
+      for bk in buckets
+        sum_of_buckets += bk.allocation
+
+      if n > (allocatable - sum_of_other_buckets)
+        $scope.b.allocation = allocatable - sum_of_other_buckets
+      if sum_of_other_buckets > allocatable
+        $scope.b.allocation = 0
+
 ])

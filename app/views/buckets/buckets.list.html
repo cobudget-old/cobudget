@@ -1,6 +1,6 @@
 <a href="" ui-sref="budgets.propose_bucket" class="m-btn m-btn-wide paint clr4-bold">Propose a bucket</a>
 <section>
-  <article ng-repeat="b in buckets" class="m-bucket-wrapper" >
+  <article ng-controller='BucketItem' ng-repeat="b in buckets" class="m-bucket-wrapper" >
     <nav class="m-nav m-nav-full" ng-show="admin == true">
       <ul>
         <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
@@ -23,8 +23,14 @@
         </div>
       </div>
       <h2>{{b.name}}</h2>
-      <slider floor="10" ceiling="60" ng-model-low="b.money" ng-model-high="b.money"></slider>
-      <slider floor="0" ceiling="100" step="1" precision="2" ng-model="b.money"></slider>
+      <div ng-if="b.maximum > b.minimum" class="o-slider-container">
+        <div class="o-slider-labels">
+          <div class="o-slider-range-low">0</div>
+          <div class="o-slider-selection">Allocation: ${{b.allocation | number: 0}} ({{(b.allocation / allocatable) * 100 | number: 2}}%)</div>
+          <div class="o-slider-range-high">${{b.maximum}}</div>
+        </div>
+        <slider min="0" max="{{b.maximum}}" ng-model="b.allocation"></slider>
+      </div>
       <div btf-markdown="b.description"></div>
     </div>
   </article>

@@ -15,18 +15,28 @@ angular.module('states.budget', ['controllers.buckets'])
         templateUrl: '/views/buckets/buckets.list.html'
         controller: (['$scope', '$rootScope', '$state', "Bucket", ($scope, $rootScope, $state, Bucket)->
           $scope.buckets = []
+          #set up rules for slider
+          $scope.allocatable = 4445
+          $scope.remainder_allocatable = $scope.allocatable
+
           setMinMax = (bucket)->
             if bucket.minimum_cents?
               bucket.minimum = parseFloat(bucket.minimum_cents) / 100
+            else
+              bucket.minimum = 0
             if bucket.maximum_cents?
               bucket.maximum = parseFloat(bucket.maximum_cents) / 100
+            else
+              bucket.maximum = 0
             bucket
+
           Bucket.query(budget_id: $state.params.budget_id, (response)->
             for b in response
-              b.money = 0
+              b.allocation = 0
               setMinMax(b)
               $scope.buckets.push b
           )
+
           $rootScope.channel.bind('bucket_created', (bucket) ->
             setMinMax(bucket.bucket)
             $scope.buckets.unshift bucket.bucket
