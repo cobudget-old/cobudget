@@ -6,7 +6,7 @@ require 'cobudget/entities/budget'
 module Cobudget
   module Accounts
     class Create < Playhouse::Context
-      actor :admin, repository: User
+      actor :admin, repository: User, optional: true
       actor :user, repository: User
       actor :budget, repository: Budget
 

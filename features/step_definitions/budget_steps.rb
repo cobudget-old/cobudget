@@ -2,7 +2,7 @@
 #require 'cobudget/contexts/allocation_balance_enquiry'
 
 Given /^a budget ([^ ]+)$/ do |budget_name|
-  @budget = Cobudget::Budget.create!(name: budget_name)
+  @budget = api.create_budgets(name: budget_name)
   budgets[budget_name] = @budget
 end
 

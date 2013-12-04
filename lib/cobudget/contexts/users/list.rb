@@ -5,7 +5,7 @@ module Cobudget
   module Users
     class List < Playhouse::Context
       def perform
-        User.all#.order('updated_at desc').load
+        User.all
       end
     end
   end

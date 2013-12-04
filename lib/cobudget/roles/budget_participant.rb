@@ -6,12 +6,12 @@ module Cobudget
     include Playhouse::Role
 
     actor_dependency :id
-    actor_dependency :allocation_rights
+    actor_dependency :accounts
 
     SUM_COLUMN = :amount_cents
 
     def allocation_rights_total(budget)
-      Money.new(base_scope(budget).map(&:amount).sum)
+      Money.new(base_scope(budget).map(&:balance).sum)
     end
 
     def has_allocation_rights?(budget)
@@ -25,7 +25,7 @@ module Cobudget
     private
 
     def base_scope(budget)
-      allocation_rights.where(budget: budget)
+      accounts.where(budget: budget)
     end
   end
 end

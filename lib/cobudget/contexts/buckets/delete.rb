@@ -8,7 +8,7 @@ module Cobudget
     class Delete < Playhouse::Context
       class NotAuthorizedToDeleteBucket < Exception; end
 
-      actor :user, repository: User#, role: BucketAuthorizer
+      actor :user, repository: User
       actor :bucket, repository: Bucket
 
       def perform

@@ -1,5 +1,6 @@
 require 'playhouse/context'
 require 'cobudget/entities/budget'
+require 'cobudget/entities/account'
 
 module Cobudget
   module Budgets
@@ -9,6 +10,7 @@ module Cobudget
 
       def perform
         data = Budget.create!(actors)
+        Account.create(budget: data)
         Pusher.trigger('budgets', 'created', {budget: data})
         data
       end
