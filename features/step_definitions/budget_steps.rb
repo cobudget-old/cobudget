@@ -22,6 +22,12 @@ When /^([^ ]+) creates a new user ([^ ]+)$/ do |creator_name, target_name|
   users[target_name] = api.create_users(admin: creator, name: target_name, email: "#{target_name}@example.com")
 end
 
+When /^([^ ]+) creates an account for ([^ ]+) in (#{CAPTURE_BUDGET})$/ do |admin_name, target_name, budget|
+  user = users[target_name]
+  admin = users[admin_name]
+  api.create_accounts(user: user, admin: admin, budget: budget)
+end
+
 When /^([^ ]+) views the buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
@@ -110,6 +116,11 @@ Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
       row.send(key).should == value
     end
   end
+end
+
+Then /^there should be an account for ([^ ]+) in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
+  user = users[user_name]
+  api.show_accounts(user: user, budget: budget).should_not be_nil
 end
 
 Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budget_name, budget_description|
