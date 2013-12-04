@@ -5,8 +5,13 @@ Feature: User Accounts
 
   Background:
     Given a budget Avengers
-    Given a user IronMan
+    Given a user IronMan who can administer the Avengers budget
 
   Scenario: Successfully create a user
     When IronMan creates a new user Loki
     Then Loki should exist as a user
+
+  Scenario: Successfully create a user account
+    Given a user Loki
+    When IronMan creates an account for Loki in the Avengers budget
+    Then there should be an account for Loki in the Avengers budget
