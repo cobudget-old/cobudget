@@ -34,7 +34,7 @@ module Cobudget
           user_account = Account.create!(user: user, budget: budget, name: "#{user.name}'s account for #{budget.name}'")
         end
 
-        Transfer.create(source_account: user_account, destination_account: budget_account, amount: amount)
+        transfer_money(source_account: budget_account, destination_account: user_account, amount: amount)
       end
     end
   end
