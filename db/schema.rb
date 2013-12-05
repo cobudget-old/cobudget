@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201312021427) do
+ActiveRecord::Schema.define(version: 201312042121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,14 +22,6 @@ ActiveRecord::Schema.define(version: 201312021427) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "budget_id"
-  end
-
-  create_table "allocation_rights", force: true do |t|
-    t.integer  "amount_cents", default: 0, null: false
-    t.integer  "user_id",                  null: false
-    t.integer  "budget_id",                null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "allocations", force: true do |t|
@@ -54,6 +46,30 @@ ActiveRecord::Schema.define(version: 201312021427) do
   create_table "budgets", force: true do |t|
     t.string   "name",        null: false
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "entries", force: true do |t|
+    t.integer  "owner_id",                               null: false
+    t.integer  "transaction_id",                         null: false
+    t.integer  "account_id",                             null: false
+    t.decimal  "amount",         precision: 8, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transactions", force: true do |t|
+    t.integer  "owner_id",    null: false
+    t.string   "description"
+    t.integer  "identifier"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transfers", force: true do |t|
+    t.integer  "creator_id"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -10,7 +10,6 @@ module Cobudget
 
       def perform
         data = User.create!(actors)
-        #create_accounts(user: user)
         data
       end
     end

@@ -13,7 +13,6 @@ module Cobudget
       actor :bucket, repository: Bucket
 
       def perform
-        #raise NotAuthorizedToUpdateBucket unless user.can_update_bucket?(bucket)
         bucket
       end
     end

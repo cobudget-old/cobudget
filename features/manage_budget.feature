@@ -8,8 +8,8 @@ Feature: Manage Budget
     Given a user Slimer
 
   Scenario: Successfully create a budget
-    When Janine creates a budget GhostbustersQuarterly with description "Spring 2013"
-    Then there should be a budget GhostbustersQuarterly with the description "Spring 2013"
+    When Janine creates a budget Ghostbusters with description "Spring 2013"
+    Then there should be a budget Ghostbusters with the description "Spring 2013"
 
   Scenario: Successfully modify a budget
     Given a budget GhostbustersQuarterly

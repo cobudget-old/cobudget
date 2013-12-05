@@ -12,7 +12,7 @@ module Cobudget
     class Create < Playhouse::Context
       class NotAuthorizedToCreateBucket < Exception; end
 
-      actor :user, repository: User#, role: BucketAuthorizer
+      actor :user, repository: User
 
       actor :budget, repository: Budget
       actor :name
