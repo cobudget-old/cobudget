@@ -1,0 +1,78 @@
+.noUi-target *
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+  -webkit-touch-callout: none
+  -ms-touch-action: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  cursor: default
+
+.noUi-target
+  padding-bottom: 44px
+  background: #DDD
+
+.noUi-base
+  width: 44px
+  height: $short-bucket-height
+  position: relative
+  //box-shadow: 0 0 0 1px #BFBFBF
+
+.noUi-handle
+  width: 100%
+  height: 44px
+  z-index: 1
+  position: relative
+  background: $clr-blue
+
+.noUi-active
+  background: darken($clr-blue, 10%)
+  //box-shadow: inset 0 0 5px #DDD
+
+.noUi-connect
+  background: Teal
+  -webkit-transition: background 0.6s
+  transition: background 0.6s
+
+.noUi-background
+  background: #DDD
+
+.noUi-origin
+  position: absolute
+  right: 0
+  bottom: 44px
+  border-radius: inherit
+
+.noUi-origin + .noUi-origin
+  background: inherit !important
+
+.noUi-z-index
+  z-index: 10
+
+.noUi-vertical 
+  width: 100%
+  height: $short-bucket-height - 44px
+
+.noUi-vertical .noUi-origin
+  bottom: 44px
+  left: 0
+
+//.noUi-vertical .noUi-handle
+
+[disabled] .noUi-base 
+  background: #DDD
+
+[disabled] .noUi-handle
+  background: #F7F7F7
+  cursor: not-allowed
+
+[disabled] .noUi-connect
+  background: #EEE
+
+.noUi-state-tap .noUi-origin 
+  -webkit-transition: left 0.3s, top 0.3s
+  transition: left 0.3s, top 0.3s
+
+.noUi-state-blocked .noUi-connect
+  background: #7f8c8d

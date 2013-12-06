@@ -62,43 +62,11 @@ angular.module('controllers.buckets', [])
   $scope.allocations = [
     {
       user_name: "Sterny McGrumpface"
-      amount: 2000
+      amount: 100
     },
     {
       user_name: "Dolly Malone"
-      amount: 1000
+      amount: 20
     }]
-
-  #get from user
-  $scope.$watch 'b.user_allocation', (n, o)->
-    if n != o
-      buckets = $scope.$parent.$parent.buckets
-
-      allocatable = $scope.$parent.$parent.allocatable
-
-      sum_of_other_buckets = 0
-      sum_of_buckets = 0
-      for bk in buckets
-        unless bk.id == $scope.b.id
-          sum_of_other_buckets += bk.user_allocation
-
-      for bk in buckets
-        sum_of_buckets += bk.user_allocation
-
-      if n > (allocatable - sum_of_other_buckets)
-        $scope.b.user_allocation = allocatable - sum_of_other_buckets
-      else if sum_of_other_buckets > allocatable
-        $scope.b.user_allocation = 0
-      #potential directive
-      else
-        console.log n
-        new_allocation = {user_name: "Tony Soprano", amount: n}
-        allocated = false
-        for i in [0...$scope.allocations.length]
-          if new_allocation.user_name == $scope.allocations[i].user_name
-            allocated = true
-            $scope.allocations[i] = new_allocation
-        if allocated == false
-          $scope.allocations.push new_allocation
 
 ])

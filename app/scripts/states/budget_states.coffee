@@ -17,7 +17,6 @@ angular.module('states.budget', ['controllers.buckets'])
           $scope.buckets = []
           #set up rules for slider
           $scope.allocatable = 4445
-          $scope.remainder_allocatable = $scope.allocatable
 
           setMinMax = (bucket)->
             if bucket.minimum_cents?

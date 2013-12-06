@@ -17,6 +17,8 @@ angular.module("directives.slider", [])
       start: 1
       handles: 1
       step: 1.0
+      direction: 'rtl'
+      orientation: attrs.orientation
       set: ()->
         change()
 

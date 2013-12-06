@@ -6,36 +6,50 @@
         <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
       </ul>
     </nav>
-    <div class="m-bucket l-padded utl-expander" d-expander>
-      <div class="m-labels list-inline clearfix">
-        <div class="m-labels-label paint clr2">
-          Fred Smith
+    <div class="m-bucket-left">
+      <div class="l-half">
+        <div class="o-half-head">
+          {{b.user_allocation}}%<br/>
+          ${{((b.user_allocation / 100) * allocatable).toFixed(2)}}
         </div>
-        <div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label paint clr1">
-          <strong >
-            <span ng-show="b.minimum != b.maximum">
-              ${{b.minimum}} - ${{b.maximum}}
-            </span>
-            <span ng-show="b.minimum == b.maximum">
-              ${{b.minimum}}
-            </span>
-          </strong>
-        </div>
-      </div>
-      <h2>{{b.name}}</h2>
-      <div ng-if="b.maximum > b.minimum" class="o-slider-container">
-        <div class="o-slider-labels">
-          <div class="o-slider-range-low">0</div>
-          <div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>
-          <div class="o-slider-range-high">${{b.maximum}}</div>
-        </div>
-        <slider min="0" max="{{b.maximum}}" ng-model="b.user_allocation"></slider>
-      </div>
-      <div class="m-bucket-allocations" ng-if="allocations">
-        <div ng-repeat="alc in allocations track by $index" class="m-bucket-allocations__allocation pallete_{{$index}}" style="width: {{alc.amount == 0 ? 0 : alc.amount * 1000 / (b.maximum * 1000) * 100}}%">
+        <div ng-if="b.maximum > b.minimum" class="o-slider-container">
+          <!--<div class="o-slider-labels">-->
+            <!--<div class="o-slider-range-low">0</div>-->
+            <!--<div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>-->
+            <!--<div class="o-slider-range-high">${{b.maximum}}</div>-->
+          <!--</div>-->
+          <!--<slider min="0" max="{{b.maximum}}" orientation="vertical" ng-model="b.user_allocation"></slider>-->
+          <constrained-slider min="0" max="100" affecting="allocations" percentage-of="allocatable" identifier="{{b.id}}" orientation="vertical" ng-model="b.user_allocation"></constrained-slider>
         </div>
       </div>
-      <div btf-markdown="b.description"></div>
+      <div class="l-half">
+        <div class="o-half-head">${{b.maximum}}</div>
+        <div class="m-bucket-allocations_wrapper">
+          <vert-graph max="b.maximum" height="250" items="allocations">
+          </vert-graph>
+        </div>
+      </div>
+    </div>
+    <div class="m-bucket-right">
+      <div class="m-bucket l-padded utl-expander" d-expander>
+        <div class="m-labels list-inline clearfix">
+          <div class="m-labels-label paint clr2">
+            Fred Smith
+          </div>
+          <div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label paint clr1">
+            <strong >
+              <span ng-show="b.minimum != b.maximum">
+                ${{b.minimum}} - ${{b.maximum}}
+              </span>
+              <span ng-show="b.minimum == b.maximum">
+                ${{b.minimum}}
+              </span>
+            </strong>
+          </div>
+        </div>
+        <h2>{{b.name}}</h2>
+        <div btf-markdown="b.description"></div>
+      </div>
     </div>
   </article>
 </section>

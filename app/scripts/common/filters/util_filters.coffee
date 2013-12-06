@@ -8,3 +8,6 @@ angular.module('filters.utils', [])
       i++
     null
 )
+.filter "reverse", ->
+  (items) ->
+    items.slice().reverse()

@@ -1,5 +1,9 @@
+$short-bucket-height: 250px
+
 .m-bucket-wrapper
   margin-top: 1em
+  @extend .clearfix
+
 .m-bucket
   position: relative
   padding-top: 0.2em
@@ -9,20 +13,36 @@
     padding-top: 0.6em
     font-size: 1.2em
     font-weight: bold
-
-//Move pallete
-.pallete_0
-  background: #888
-.pallete_1
-  background: #555
-.pallete_2
-  background: #000
-.m-bucket-allocations
-  @extend .clearfix
-.m-bucket-allocations__allocation
-  width: 0
-  +single-transition(all, 0.4s, ease-out)
-  display: inline-block
+.m-bucket-left
+  background: #ececec
   float: left
-  height: 40px
-  
+  display: inline-block
+  width: 20%
+  height: $short-bucket-height
+  .o-half-head
+    padding-top: 5px
+    height: 40px
+.m-bucket-right
+  width: 80%
+  float: left
+  display: inline-block
+
+.m-bucket-allocations_wrapper
+  height: $short-bucket-height
+  position: relative
+  background: #ececec
+  .m-vert-graph
+    width: 100%
+    position: absolute
+    bottom: 0
+    overflow: hidden
+    max-height: $short-bucket-height
+  .m-vert-graph__item
+    width: 100%
+    color: #222
+    text-align: center
+    small
+      font-weight: bold
+      font-size: 0.8em
+    &:first-child
+      +single-transition(all, 0.4s, ease-in)
