@@ -25,8 +25,8 @@ app = angular.module('cobudget', [
   #$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
-#.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
-.constant("API_PREFIX", "http://localhost:9292/cobudget")
+.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
+#.constant("API_PREFIX", "http://localhost:9292/cobudget")
 .run(["$rootScope", "API_PREFIX", ($rootScope, API_PREFIX) ->
   $rootScope.$debugMode = "on"
   $rootScope.admin = false

@@ -45,7 +45,7 @@ angular.module("directives.vert_graph", [])
         color_el = angular.element element.children()[counter - 1]
         el = angular.element element.children()[i]
 
-        bgColor = makeColor(.3,.5,.3,0,2,4,140,100, i)
+        bgColor = makeColor(.3,.3,.3,0,i*2,4,180,65, i)
         if px < 16
           el.children('small').css
             opacity: 0

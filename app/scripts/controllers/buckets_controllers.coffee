@@ -67,6 +67,14 @@ angular.module('controllers.buckets', [])
     {
       user_name: "Dolly Malone"
       amount: 20
+    },
+    {
+      user_name: "fanny may"
+      amount: 20
+    },
+    {
+      user_name: "way may"
+      amount: 700
     }]
 
 ])
