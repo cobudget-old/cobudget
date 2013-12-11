@@ -58,23 +58,4 @@ angular.module('controllers.buckets', [])
         console.log "Error", data
       )
 ]).controller('BucketItem', ['API_PREFIX', '$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', (API_PREFIX, $rootScope, $http, $scope, $state, Bucket, flash)->
-
-  $scope.allocations = [
-    {
-      user_name: "Sterny McGrumpface"
-      amount: 100
-    },
-    {
-      user_name: "Dolly Malone"
-      amount: 20
-    },
-    {
-      user_name: "fanny may"
-      amount: 20
-    },
-    {
-      user_name: "way may"
-      amount: 700
-    }]
-
 ])

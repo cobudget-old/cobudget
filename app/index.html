@@ -32,7 +32,7 @@
         <nav role="navigation">
           <a href="/" class="navbar-brand">cobudget!</a>
           <ul class="nav navbar-nav">
-            <li><a ui-sref="budgets.buckets({id: 1})">Buckets</a></li>
+            <li><a ui-sref="budgets.buckets({budget_id: 1})">Buckets</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -47,8 +47,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-8" ui-view="main"></div>
-        <div class="col-md-4 paint on-bg" ui-view="sidebar"></div>
+        <div class="col-md-12" ui-view="main"></div>
       </div>
     </div>
 
@@ -89,6 +88,7 @@
         <script src="scripts/common/resources/budgets.js"></script>
         <script src="scripts/common/resources/buckets.js"></script>
         <script src="scripts/controllers/buckets_controllers.js"></script>
+        <script src="scripts/controllers/budgets_controllers.js"></script>
         <script src="scripts/states/budget_states.js"></script>
         <script src="scripts/states/bucket_states.js"></script>
         <!-- endbuild -->

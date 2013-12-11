@@ -1,5 +1,5 @@
 angular.module("directives.slider", [])
-.directive "slider", ($rootScope) ->
+.directive "slider", ['$rootScope', ($rootScope) ->
   restrict: "EA"
   transclude: "false"
   template: "<div class='slider'></div>"
@@ -34,4 +34,4 @@ angular.module("directives.slider", [])
 
     scope.$watch "Model", (value) ->
       element.val parseInt(value, 10)
-
+]

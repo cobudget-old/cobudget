@@ -8,7 +8,6 @@ myModule.factory "ConstrainedSliderCollector", ->
       sum += s.value
     sum
   obj.sumOtherSliders = (sliders, exclude_id)->
-    console.log sliders
     sum = 0
     for s in sliders
       unless s.id == exclude_id

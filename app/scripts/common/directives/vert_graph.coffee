@@ -1,5 +1,5 @@
 angular.module("directives.vert_graph", [])
-.directive "vertGraph", ($rootScope) ->
+.directive "vertGraph", ['$rootScope', ($rootScope) ->
   restrict: "EA"
   transclude: "false"
   template: "
@@ -57,5 +57,4 @@ angular.module("directives.vert_graph", [])
         color_el.css
           backgroundColor: bgColor
     , true
-
-
+]
