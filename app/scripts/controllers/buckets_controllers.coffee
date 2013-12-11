@@ -58,4 +58,8 @@ angular.module('controllers.buckets', [])
         console.log "Error", data
       )
 ]).controller('BucketItem', ['API_PREFIX', '$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', (API_PREFIX, $rootScope, $http, $scope, $state, Bucket, flash)->
+  $scope.$watch 'b.allocations', (n, o)->
+    if n != o
+      $scope.$parent.$parent.$parent.prepareUserAllocations()
+  , true
 ])

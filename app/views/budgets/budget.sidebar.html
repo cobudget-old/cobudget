@@ -1,0 +1,22 @@
+<h2>Your allocations</h2>
+<div style="margin-top: -30px">
+  <nvd3-pie-chart
+    data="user_allocations"
+    id="user-allocations-graph"
+    width="100%"
+    height="350"        
+    x="xUserAllocations()"
+    y="yUserAllocations()"
+    showLabels="true">
+    <svg></svg>
+  </nvd3-pie-chart>
+</div>
+<div style="margin-top: -20px">
+  <p ng-repeat="ua in user_allocations">
+  <strong>{{ua.label}}</strong>
+  : {{(ua.amount / allocatable)*100 | number:2}}%
+  </p>
+</div>
+
+<h2>Bucket updates</h2>
+<p> e.g. latest reports </p>

@@ -14,6 +14,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">
         <!-- endbuild -->
 </head>
   <body ng-app="cobudget">
@@ -63,8 +64,14 @@
     </script>
 
         <!-- build:js scripts/modules.js -->
+        <script src="bower_components/lodash/dist/lodash.js"></script>
+        <script src="bower_components/d3/d3.js"></script>
+        <script src="bower_components/nvd3/nv.d3.js"></script>
+
         <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-lodash/angular-lodash.js"></script>
         <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
         <script src="modded_components/angular-flash-messages/angular-flash.js"></script>
         <script src="modded_components/angular-markdown-directive/markdown.js"></script>
         <script src="bower_components/showdown/compressed/showdown.js"></script>

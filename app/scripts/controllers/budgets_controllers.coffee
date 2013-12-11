@@ -15,7 +15,8 @@ angular.module('controllers.budgets', [])
       bucket.maximum = 0
     bucket
 
-  $scope.allocations = []
+  $scope.user_id = "Tony Soprano"
+  $scope.user_allocations = []
 
   Bucket.query(budget_id: $state.params.budget_id, (response)->
     for b, i in response
@@ -23,22 +24,41 @@ angular.module('controllers.budgets', [])
       b.allocations = [{user_id: "asdf", amount: i+2*380}, {user_id: "fasfs", amount: i+5*100}, {user_id: "fa", amount: i+8*100}]
       setMinMax(b)
       $scope.buckets.push b
-    console.log $scope.buckets
   )
 
-  $scope.update_bucket = (bucket)->
-    for bucket, i in $scope.buckets
-      if bucket.id == $scope.buckets[i].id
-        $scope.buckets[i] = bucket
-        console.log $scope.buckets[i].allocations
-        scope.$apply() unless $rootScope.$$phase
-        return false
+  $scope.prepareUserAllocations = ->
+    allocations = []
+    sum = 0
+    for bucket in $scope.buckets
+      #eventually a prob when allocations to same bucket.
+      for allocation, i in bucket.allocations
+        if allocation.user_id == $scope.user_id
+          allocation.label = "#{bucket.name} ($#{allocation.amount})"
+          sum += allocation.amount
+          if allocation.amount > 0
+            allocations.push allocation
 
-  $scope.$watch 'buckets', (n, o)->
-    console.log n
-    $scope.update_bucket(n)
-  , true
+    unallocated = $scope.allocatable - sum 
+    if unallocated > 0
+      allocations.push {user_id: undefined, label: "unallocated ($#{unallocated})", amount: unallocated }
+    $scope.user_allocations = allocations
 
+  $scope.xUserAllocations = ->
+    (d)->
+      d.label
+
+  $scope.yUserAllocations = ->
+    (d)->
+      d.amount
+    
+  $scope.prepareUserAllocations()
+
+  #$scope.update_bucket = (bucket)->
+    #for bucket, i in $scope.buckets
+      #if bucket.id == $scope.buckets[i].id
+        #$scope.buckets[i] = bucket
+        #scope.$apply() unless $rootScope.$$phase
+        #return false
 
   $rootScope.channel.bind('bucket_created', (bucket) ->
     setMinMax(bucket.bucket)

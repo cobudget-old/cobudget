@@ -13,10 +13,7 @@ angular.module('states.budget', ['controllers.buckets'])
       'bucket-list':
         templateUrl: '/views/buckets/buckets.list.html'
       'sidebar':
-        template: '
-          <h1>sidebar</h1>
-          <p ng-repeat="b in buckets">{{b.allocations}}</p>
-          '
+        templateUrl: '/views/budgets/budget.sidebar.html'
   ) #end state
   .state('budgets.propose_bucket',
     url: '/propose-bucket'

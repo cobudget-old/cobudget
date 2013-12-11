@@ -5,6 +5,8 @@ app = angular.module('cobudget', [
   'ngResource',
   'ngSanitize',
   'ngAnimate',
+  'angular-lodash'
+  'nvd3ChartDirectives'
   'flash'
   'btford.markdown'
   'ui.router'
