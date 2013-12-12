@@ -39,9 +39,8 @@ angular.module('controllers.budgets', [])
             allocations.push allocation
 
     unallocated = $scope.allocatable - sum 
-    if unallocated > 0
-      allocations.push {user_id: undefined, label: "unallocated ($#{unallocated})", amount: unallocated }
-    $scope.user_allocations = allocations
+    allocations.push {user_id: undefined, label: "unallocated ($#{unallocated})", amount: unallocated }
+    $scope.user_allocations = allocations.reverse()
 
   $scope.xUserAllocations = ->
     (d)->
