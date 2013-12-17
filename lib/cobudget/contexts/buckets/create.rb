@@ -30,10 +30,10 @@ module Cobudget
         data = Bucket.create!(attributes)
 
         #This wouldn't work with options in a core level so moved it here to test it.
-        Pusher.key = '6ea7addcc0137ddf6cf0'
-        Pusher.secret = '882cd62d5475bc7edee3'
-        Pusher.app_id = '59272'
-        Pusher.trigger('cobudget', 'bucket_created', {bucket: data})
+        #Pusher.key = '6ea7addcc0137ddf6cf0'
+        #Pusher.secret = '882cd62d5475bc7edee3'
+        #Pusher.app_id = '59272'
+        #Pusher.trigger('cobudget', 'bucket_created', {bucket: data})
         data
       end
     end

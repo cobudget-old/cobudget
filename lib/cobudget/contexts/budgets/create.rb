@@ -11,7 +11,7 @@ module Cobudget
       def perform
         data = Budget.create!(actors)
         Account.create(budget: data, name: "#{data.name} catchall bucket")
-        Pusher.trigger('budgets', 'created', {budget: data})
+        #Pusher.trigger('budgets', 'created', {budget: data})
         data
       end
     end

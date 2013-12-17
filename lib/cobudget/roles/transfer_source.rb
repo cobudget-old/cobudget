@@ -1,5 +1,6 @@
 require 'playhouse/role'
-require 'cobudget/roles/account_holder'
+require 'cobudget/roles/budget_participant'
+require 'cobudget/roles/transaction_collection'
 
 module Cobudget
   module TransferSource
@@ -10,6 +11,9 @@ module Cobudget
     actor_dependency :id
 
     def can_decrease_money?(amount)
+      puts "CAN DECREASE MONEY?"
+      puts "BALANCE=" + balance.to_s
+      puts "AMOUNT=" + amount.to_s
       balance - amount >= 0
     end
 

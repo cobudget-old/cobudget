@@ -4,7 +4,6 @@ require 'cobudget/entities/user'
 require 'cobudget/entities/account'
 require 'cobudget/composers/money_composer'
 require 'cobudget/roles/allocator'
-#require 'cobudget/roles/bucket_authorizer'
 
 module Cobudget
   module Allocations
@@ -14,9 +13,9 @@ module Cobudget
 
       actor :admin, repository: User
 
-      actor :user, repository: User, role: Allocator
-      actor :bucket, repository: Bucket
-      actor :amount, composer: MoneyComposer
+      actor :user, repository: User, role: BudgetParticipant
+      actor :bucket, repository: Bucket, role: TransactionCollection
+      actor :amount
 
       def get_attributes
         actors_except :admin
@@ -25,9 +24,8 @@ module Cobudget
       def perform
         raise NotAuthorizedToAllocate unless user.can_allocate?(bucket)
 
-        user_account = user.get_allocation_rights(bucket.budget)
-
-        transfer = Transfer.create(source_account: user_account, destination_account: bucket, amount: amount, creator: admin)
+        user_account = user.get_allocation_rights(bucket.budget).first
+        transfer = TransferMoney.new(source_account: user_account, destination_account: bucket, amount: amount, creator: admin)
         transfer.call
       end
     end

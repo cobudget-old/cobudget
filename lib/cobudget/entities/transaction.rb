@@ -8,7 +8,7 @@ module Cobudget
     include MoneyAttribute
     money_attribute :amount
 
-    belongs_to :account
+    belongs_to :account, polymorphic: true
     belongs_to :transfer
   end
 end

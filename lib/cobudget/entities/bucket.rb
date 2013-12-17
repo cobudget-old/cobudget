@@ -8,10 +8,9 @@ module Cobudget
     money_attribute :maximum
 
     belongs_to :sponsor, class_name: "User"
-    has_many :accounts, as: :owner
 
     belongs_to :budget
-    has_many :allocations
+    has_many :transactions, as: :account
 
     #self.connection - same as ActiveRecord::Base.connection but can point to a different data provider
   end

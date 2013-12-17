@@ -8,6 +8,7 @@ module Cobudget
 
     actor_dependency :id
     actor_dependency :allocations
+    actor_dependency :whaargarbl
 
     SUM_COLUMN = :amount_cents
 
@@ -42,6 +43,8 @@ module Cobudget
         data.append b.id
       end
       Allocation.where(bucket_id: data, user_id: self.id)
+
+      # get
     end
   end
 end

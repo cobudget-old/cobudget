@@ -5,11 +5,11 @@ require 'cobudget/entities/budget'
 
 module Cobudget
   class UserRemainingBalanceEnquiry < Playhouse::Context
-    actor :user, role: Allocator, repository: User
+    actor :user, role: BudgetParticipant, repository: User
     actor :budget, repository: Budget
 
     def perform
-      user.remaining_allocation_balance(budget)
+      user.balance_in_budget(budget)
     end
   end
 end
