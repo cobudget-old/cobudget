@@ -22,10 +22,11 @@ module Cobudget
     end
 
     def remaining_allocation_balance(budget)
-      rights = BudgetParticipant.cast_actor(self).allocation_rights_total(budget)
-      allocations = total_allocations_for_budget(budget)
+      #rights = BudgetParticipant.cast_actor(self).allocation_rights_total(budget)
+      #allocations = total_allocations_for_budget(budget)
 
-      rights.to_f - allocations.to_f
+      #rights.to_f - allocations.to_f
+      rights = BudgetParticipant.cast_actor(self).allocation_rights_total(budget)
     end
 
     def can_allocate?(bucket)

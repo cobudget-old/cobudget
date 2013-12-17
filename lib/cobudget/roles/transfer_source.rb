@@ -10,7 +10,7 @@ module Cobudget
     actor_dependency :id
 
     def can_decrease_money?(amount)
-      balance - amount > 0
+      balance - amount >= 0
     end
 
     def decrease_money!(amount, transfer, identifier)
