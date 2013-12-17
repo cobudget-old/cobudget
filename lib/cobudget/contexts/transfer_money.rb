@@ -37,14 +37,17 @@ module Cobudget
 
       begin
         ActiveRecord::Base.transaction do
+          #puts "transfer source BALANCE before=" + source_account.balance.inspect
+          #puts "transfer AMOUNT=" + amount.inspect
           transfer = Transfer.create!(transfer_arguments)
           destination_account.increase_money!(amount, transfer, Identifier.generate)
           source_account.decrease_money!(amount, transfer, Identifier.generate)
-          puts amount.inspect
-          puts "Transfer of $#{amount} from #{source_account.name} to #{destination_account.name} successful"
+          #puts "transfer source BALANCE after=" + source_account.balance.inspect
+          #puts "transfer AMOUNT=" + amount.inspect
+          #puts "Transfer of $#{amount} from '#{source_account.name}' to '#{destination_account.name}' successful"
         end
       rescue
-        raise TransferFailed, "Transfer from #{source_account.name} to #{destination_account.name} failed."
+        raise TransferFailed, "Transfer from '#{source_account.name}' to '#{destination_account.name}' failed."
       end
     end
   end

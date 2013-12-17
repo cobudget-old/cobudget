@@ -164,7 +164,7 @@ Then /^total unallocated in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ d
 end
 
 Then /^total allocation rights in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
-  play.budget_total_available_for_allocation_enquiry(budget: budget).should == expected_balance
+  play.budget_total_enquiry(budget: budget).should == expected_balance
 end
 
 Then /^total budget in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|

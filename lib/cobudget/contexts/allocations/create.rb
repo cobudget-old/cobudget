@@ -3,7 +3,6 @@ require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 require 'cobudget/entities/account'
 require 'cobudget/composers/money_composer'
-require 'cobudget/roles/allocator'
 
 module Cobudget
   module Allocations

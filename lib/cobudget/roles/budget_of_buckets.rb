@@ -1,5 +1,5 @@
 require 'playhouse/role'
-require 'cobudget/roles/allocation_collection'
+require 'cobudget/roles/transaction_collection'
 
 module Cobudget
   module BudgetOfBuckets
@@ -10,7 +10,7 @@ module Cobudget
 
     def total_allocated
       buckets.to_a.sum do |bucket|
-        AllocationCollection.cast_actor(bucket).total_allocation_balance
+        TransactionCollection.cast_actor(bucket).balance
       end
     end
 
@@ -22,6 +22,10 @@ module Cobudget
         puts balance.inspect + "!!!!! available for allocation in #{account.name}"
         balance
       end
+    end
+
+    def total_in_budget
+      total_allocated + total_available_for_allocation
     end
   end
 end

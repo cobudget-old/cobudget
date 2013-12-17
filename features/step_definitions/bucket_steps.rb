@@ -64,7 +64,7 @@ When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKE
   options = table.rows_hash.symbolize_keys
   options[:from_bucket] = bucket
   options[:to_bucket] = to_bucket
-  play.create_allocation(options)
+  play.create_allocations(options)
 end
 
 When /^([^ ]*) removes the (#{CAPTURE_MONEY}) allocation in (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
