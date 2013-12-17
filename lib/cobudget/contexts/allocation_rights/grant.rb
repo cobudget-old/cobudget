@@ -36,6 +36,8 @@ module Cobudget
           user_account = user_accounts.first
         end
 
+        TransactionCollection.cast_actor(budget_account)
+
         transfer = TransferMoney.new(source_account: budget_account, destination_account: user_account, amount: amount, creator: admin)
         transfer.call
       end

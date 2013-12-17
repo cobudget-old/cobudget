@@ -7,14 +7,16 @@ module Cobudget
     include Playhouse::Role
 
     actor_dependency :budget
-    actor_dependency :balance, default_role: TransactionCollection
+    actor_dependency :balance
     actor_dependency :id
 
     def can_decrease_money?(amount)
-      puts "CAN DECREASE MONEY?"
-      puts "BALANCE=" + balance.to_s
-      puts "AMOUNT=" + amount.to_s
-      balance - amount >= 0
+      amount_money = Money.new(amount)
+      balance_money = Money.new(amount)
+      puts "BALANCE=" + balance.inspect
+      puts "AMOUNT=" + amount.inspect
+
+      balance_money - amount_money >= 0
     end
 
     def decrease_money!(amount, transfer, identifier)
