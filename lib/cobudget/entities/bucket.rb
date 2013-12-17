@@ -12,6 +12,8 @@ module Cobudget
 
     belongs_to :budget
     has_many :allocations
+
+    #self.connection - same as ActiveRecord::Base.connection but can point to a different data provider
   end
 
 end

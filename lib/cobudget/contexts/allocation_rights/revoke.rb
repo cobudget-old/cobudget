@@ -10,6 +10,7 @@ module Cobudget
   module AllocationRights
     class Revoke < Playhouse::Context
       class NotAuthorizedToRevokeAllocationRight < Exception; end
+      class NoAllocationRightsToRevoke < Exception; end
 
       actor :admin, repository: User
 
@@ -25,10 +26,12 @@ module Cobudget
         budget_account = budget.get_budget_account
 
         raise NotAuthorizedToRevokeAllocationRight unless user.can_manage_budget?(budget)
+        raise NoAllocationRightsToRevoke if user_account.blank?
 
         balance = TransactionCollection.cast_actor(user_account).balance
 
-        Transfer.create(source_account: user_account, destination_account: budget_account, amount: balance)
+        transfer = Transfer.create(source_account: user_account, destination_account: budget_account, amount: balance, creator: admin)
+        transfer.call
       end
     end
   end

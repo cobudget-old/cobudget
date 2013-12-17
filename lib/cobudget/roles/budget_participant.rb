@@ -25,7 +25,11 @@ module Cobudget
     private
 
     def base_scope(budget)
-      accounts.where(budget: budget)
+      the_accounts = accounts.where(budget: budget)
+      the_accounts.each do |account|
+        TransactionCollection.cast_actor(account)
+      end
+      the_accounts
     end
   end
 end

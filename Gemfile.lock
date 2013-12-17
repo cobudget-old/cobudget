@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/enspiral/playhouse-sinatra.git
-  revision: 29c58d0ff51e4ae04e900c75b6f352f728494217
+  revision: 3797e10433d79efbceb6bd81858156f1df182617
   specs:
     playhouse-sinatra (0.1.0)
       playhouse
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git://github.com/enspiral/playhouse.git
-  revision: 38812df389c3afd95a1ddd56ff9983026d3c57b4
+  revision: b4f44873ce4b6f2451c715cfd63f1bd1587353e6
   specs:
     playhouse (0.1.0)
       activerecord

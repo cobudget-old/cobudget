@@ -28,13 +28,14 @@ module Cobudget
         user_account = user.get_allocation_rights(budget)
         budget_account = budget.get_budget_account
 
-        raise NotAuthorizedToRevokeAllocationRight unless user.can_manage_budget?(budget)
+        raise NotAuthorizedToRevokeAllocationRight unless admin.can_manage_budget?(budget)
         raise BudgetNotFound if budget_account.blank?
         if user_account.blank?
           user_account = Account.create!(user: user, budget: budget, name: "#{user.name}'s account for #{budget.name}'")
         end
 
-        transfer_money(source_account: budget_account, destination_account: user_account, amount: amount)
+        transfer = TransferMoney.new(source_account: budget_account, destination_account: user_account, amount: amount, creator: admin)
+        transfer.call
       end
     end
   end
