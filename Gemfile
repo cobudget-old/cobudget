@@ -14,6 +14,7 @@ gem 'money'
 gem 'coveralls'
 gem 'activerecord', '~>4.0.1'
 gem 'pusher'
+gem 'rack-cors', :require => 'rack/cors'
 
 env :development do
   gem 'capistrano', '2.15.5'

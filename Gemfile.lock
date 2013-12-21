@@ -104,6 +104,7 @@ GEM
       multi_json (~> 1.0)
       signature (~> 0.1.6)
     rack (1.5.2)
+    rack-cors (0.2.9)
     rack-protection (1.5.1)
       rack
     rack-test (0.6.2)
@@ -162,5 +163,6 @@ DEPENDENCIES
   playhouse-console!
   playhouse-sinatra!
   pusher
+  rack-cors
   rake
   sqlite3
