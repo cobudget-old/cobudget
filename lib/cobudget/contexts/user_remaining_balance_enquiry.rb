@@ -1,10 +1,11 @@
 require 'playhouse/context'
 require 'cobudget/entities/user'
 require 'cobudget/entities/budget'
+require 'cobudget/roles/budget_participant'
 
 module Cobudget
   class UserRemainingBalanceEnquiry < Playhouse::Context
-    actor :user, role: BudgetParticipant, repository: User
+    actor :user, repository: User, role: BudgetParticipant
     actor :budget, repository: Budget
 
     def perform
