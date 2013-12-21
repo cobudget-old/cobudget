@@ -31,7 +31,7 @@ angular.module("directives.constrained_slider", [])
       start: 1
       handles: 1
       step: 1.0
-      direction: 'rtl'
+      direction: 'ltr'
       orientation: attrs.orientation
       set: ()->
         change()
@@ -51,7 +51,7 @@ angular.module("directives.constrained_slider", [])
           allocated = true
           scope.affecting[i] = new_item
       if allocated == false
-        scope.affecting.unshift new_item
+        scope.affecting.push new_item
       element.val scope.Model
 
     getAffectingTotal = ->
@@ -68,18 +68,19 @@ angular.module("directives.constrained_slider", [])
 
       user_already_assigned = ConstrainedSliderCollector.sumOtherSliders(scope.collected_sliders, scope.slider_id)
 
-      slider_total_already_assigned = getAffectingTotal()
+      #slider_total_already_assigned = getAffectingTotal()
 
-      slider_left_to_be_assigned = affected_max_assignable - slider_total_already_assigned
+      #slider_left_to_be_assigned = affected_max_assignable - slider_total_already_assigned
 
-      if incoming_value > slider_left_to_be_assigned
-        if incoming_value + slider_left_to_be_assigned > slider_left_to_be_assigned
-          new_value = slider_left_to_be_assigned
-        else
-          new_value = incoming_value
-      else 
-        new_value = incoming_value
+      #if incoming_value > slider_left_to_be_assigned
+        #if incoming_value + slider_left_to_be_assigned > slider_left_to_be_assigned
+          #new_value = slider_left_to_be_assigned
+        #else
+          #new_value = incoming_value
+      #else 
+        #new_value = incoming_value
 
+      new_value = incoming_value
       if new_value + user_already_assigned > user_max_assignable
         new_value = user_max_assignable - user_already_assigned
         if incoming_value < new_value

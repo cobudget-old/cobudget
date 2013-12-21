@@ -1,5 +1,3 @@
-$short-bucket-height: 250px
-
 .m-bucket-wrapper
   margin-top: 1em
   @extend .clearfix
@@ -7,42 +5,32 @@ $short-bucket-height: 250px
 .m-bucket
   position: relative
   padding-top: 0.2em
-  background: #ececec
+  background: #fff
   h2
     max-width: 80%
     padding-top: 0.6em
     font-size: 1.2em
     font-weight: bold
-.m-bucket-left
-  background: #ececec
-  float: left
-  display: inline-block
-  width: 20%
-  height: $short-bucket-height
-  .o-half-head
-    padding-top: 5px
-    height: 40px
-.m-bucket-right
-  width: 80%
-  float: left
-  display: inline-block
 
 .m-bucket-allocations_wrapper
-  height: $short-bucket-height
+  height: 44px
   position: relative
-  background: #ececec
-  .m-vert-graph
+  background: #fff
+  .m-horiz-graph
     width: 100%
     position: absolute
     bottom: 0
     overflow: hidden
-    max-height: $short-bucket-height
-  .m-vert-graph__item
-    width: 100%
+    max-height: 44px
+    white-space: nowrap
+  .m-horiz-graph__item
+    width: auto
+    height: 44px
     color: #222
+    display: inline-block
     text-align: center
     small
       font-weight: bold
       font-size: 0.8em
-    &:first-child
+    &:last-child
       +single-transition(all, 0.4s, ease-in)

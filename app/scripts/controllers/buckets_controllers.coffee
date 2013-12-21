@@ -50,16 +50,40 @@ angular.module('controllers.buckets', [])
       url: "#{API_PREFIX}/create_buckets"
       params: bucket
       ).success((data, status, headers, config)->
-        bucket = {}
         $scope.bucket = {}
+        data = setMinMax(data)
+        $scope.buckets.unshift data
         flash('success', 'Bucket created.', 2000)
       )
       .error((data, status, headers, config)->
         console.log "Error", data
       )
+
+
 ]).controller('BucketItem', ['API_PREFIX', '$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', (API_PREFIX, $rootScope, $http, $scope, $state, Bucket, flash)->
   $scope.$watch 'b.allocations', (n, o)->
     if n != o
       $scope.$parent.$parent.$parent.prepareUserAllocations()
   , true
+
+  $scope.delete = (bucket)->
+    bk = {}
+    bk.user_id = "1"
+    bk.bucket_id = bucket.id
+    $http(
+      method: 'GET'
+      url: "#{API_PREFIX}/delete_buckets"
+      params: bk
+      ).success((data, status, headers, config)->
+        $scope.b = {}
+        buckets = $scope.$parent.$parent.$parent.buckets
+        for b, i in buckets
+          if b.id == buckets[i].id
+            buckets.splice(i, 1)
+            return
+        flash('success', 'Bucket created.', 2000)
+      )
+      .error((data, status, headers, config)->
+        console.log "Error", data
+      )
 ])

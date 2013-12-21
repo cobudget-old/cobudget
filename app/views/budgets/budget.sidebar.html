@@ -11,11 +11,13 @@
     <svg></svg>
   </nvd3-pie-chart>
 </div>
-<div style="margin-top: -20px">
-  <p ng-repeat="ua in user_allocations">
-  <strong>{{ua.label}}</strong>
-  : {{(ua.amount / allocatable)*100 | number:2}}%
-  </p>
+<div class="m-allocations m-list" style="margin-top: -20px">
+  <div class="m-list-item" ng-repeat="ua in user_allocations">
+  <div class="m-list-item-half">{{ua.label}}</div>
+  <div class="m-list-item-half">
+    {{(ua.amount / allocatable)*100 | number:2}}%
+  </div>
+  </div>
 </div>
 
 <h2>Bucket updates</h2>

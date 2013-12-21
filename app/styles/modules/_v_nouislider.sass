@@ -13,24 +13,25 @@
   background: #DDD
 
 .noUi-base
-  width: 44px
-  height: $short-bucket-height
+  width: 100%
+  height: 44px
   position: relative
   //box-shadow: 0 0 0 1px #BFBFBF
 
 .noUi-handle
-  width: 106%
+  width: 44px
   height: 44px
   z-index: 1
   position: relative
   cursor: pointer
-  left: -3%
-  +border-radius(4px)
-  +box-shadow(lighten($clr-blue, 10%) 0 0 4px 1px inset, darken($clr-blue,10%) 0px 5px 0px, rgba(0, 0, 0, 0.4) 0 6px 3px)
-  background: $clr-blue url('../../images/css/slider_grip.png') left bottom repeat
+  top: 0
+  left: 0px
+  +border-radius(2px)
+  +box-shadow(lighten($clr-1, 10%) 0 0 2px 1px inset, darken($clr-1,10%) 0px 3px 0px, rgba(0, 0, 0, 0.4) 0 3px 2px)
+  background: $clr-1 url('../../images/css/slider_grip.png') left bottom repeat
 
 .noUi-active
-  background: darken($clr-blue, 10%)
+  background: darken($clr-1, 10%)
 
 .noUi-connect
   background: Teal
@@ -43,7 +44,8 @@
 .noUi-origin
   position: absolute
   right: 0
-  bottom: 44px
+  left: -2px
+  top: -2px
   border-radius: inherit
 
 .noUi-origin + .noUi-origin
@@ -53,11 +55,11 @@
   z-index: 10
 
 .noUi-vertical 
-  width: 100%
-  height: $short-bucket-height
+  width: 38px
+  height: 100%
 
 .noUi-vertical .noUi-origin
-  bottom: 0
+  top: 0
   left: 0
 
 .noUi-vertical .noUi-handle

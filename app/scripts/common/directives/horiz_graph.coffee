@@ -1,10 +1,10 @@
-angular.module("directives.vert_graph", [])
-.directive "vertGraph", ['$rootScope', ($rootScope) ->
+angular.module("directives.horiz_graph", [])
+.directive "horizGraph", ['$rootScope', ($rootScope) ->
   restrict: "EA"
   transclude: "false"
   template: "
-    <div class='m-vert-graph'>
-      <div ng-repeat='item in items track by $index' class='m-vert-graph__item'>
+    <div class='m-horiz-graph'>
+      <div ng-repeat='item in items track by $index' class='m-horiz-graph__item'>
         <small>${{item.amount}}</small>
       </div>
     </div>
@@ -38,7 +38,7 @@ angular.module("directives.vert_graph", [])
       for item, i in n
         value = item.amount * 1000
         percent_of_total = value / (scope.max * 1000) * 100
-        px = parseInt(attrs.height) * (percent_of_total / 100)
+        pc = percent_of_total
 
         counter = scope.items.length - i
 
@@ -46,14 +46,14 @@ angular.module("directives.vert_graph", [])
         el = angular.element element.children()[i]
 
         bgColor = makeColor(.3,.3,.3,0,i*2,4,180,65, i)
-        if px < 16
+        if pc < 8
           el.children('small').css
             opacity: 0
         else
           el.children('small').css
             opacity: 1
         el.css
-          height: px 
+          width: pc + "%" 
         color_el.css
           backgroundColor: bgColor
     , true
