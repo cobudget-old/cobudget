@@ -44,6 +44,6 @@ after "deploy:restart", "deploy:cleanup"
 after "deploy:update_code", "site:symlink"
 
 def rake_task(task)
-  run("cd #{deploy_to}/current; /usr/bin/env rake #{task} ENV=#{rails_env}")
+  run("cd #{deploy_to}/current; /usr/bin/env bundle exec rake #{task} ENV=#{rails_env}")
 end
 
