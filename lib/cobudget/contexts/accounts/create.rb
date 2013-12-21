@@ -15,7 +15,11 @@ module Cobudget
       end
 
       def perform
-        attributes = get_actors.merge(name: "#{user.name}'s account for #{budget.name}'")
+        if user.blank?
+          attributes = get_actors.merge(name: "#{budget.name} catchall bucket")
+        else
+          attributes = get_actors.merge(name: "#{user.name}'s account for #{budget.name}")
+        end
         Account.create!(attributes)
       end
     end

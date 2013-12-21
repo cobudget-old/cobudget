@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201312042121) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 201312172137) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -22,14 +19,6 @@ ActiveRecord::Schema.define(version: 201312042121) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "budget_id"
-  end
-
-  create_table "allocations", force: true do |t|
-    t.integer  "amount_cents", default: 0, null: false
-    t.integer  "user_id",                  null: false
-    t.integer  "bucket_id",                null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "buckets", force: true do |t|
@@ -50,21 +39,15 @@ ActiveRecord::Schema.define(version: 201312042121) do
     t.datetime "updated_at"
   end
 
-  create_table "entries", force: true do |t|
-    t.integer  "owner_id",                               null: false
-    t.integer  "transaction_id",                         null: false
-    t.integer  "account_id",                             null: false
-    t.decimal  "amount",         precision: 8, scale: 2, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "transactions", force: true do |t|
-    t.integer  "owner_id",    null: false
     t.string   "description"
     t.integer  "identifier"
+    t.integer  "account_id"
+    t.integer  "transfer_id"
+    t.integer  "amount_cents"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "account_type"
   end
 
   create_table "transfers", force: true do |t|

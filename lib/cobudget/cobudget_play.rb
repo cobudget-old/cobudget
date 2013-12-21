@@ -4,12 +4,12 @@ require_all File.dirname(__FILE__), 'contexts/**/*.rb'
 
 
 module Cobudget
-  class API < Playhouse::Play
+  class CobudgetPlay < Playhouse::Play
     context UserRemainingBalanceEnquiry
     context BucketBalanceEnquiry
     context BudgetAllocatedBalanceEnquiry
     context BudgetUnallocatedBalanceEnquiry
-    context BudgetTotalAvailableForAllocationEnquiry
+    context BudgetTotalEnquiry
 
     contexts_for Budgets
     contexts_for Buckets

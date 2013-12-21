@@ -1,7 +1,6 @@
 class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
-      t.integer :owner_id, :null => false
       t.string   :description
       t.integer  :identifier
       t.integer :account_id

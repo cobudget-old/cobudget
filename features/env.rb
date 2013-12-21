@@ -4,12 +4,12 @@ require 'cobudget_core'
 
 root_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 theatre = Playhouse::Theatre.new(root: root_dir, environment: 'test')
-theatre.start_staging
+theatre.open
 
 #these should be in a helper file
 
-def api
-  @api ||= Cobudget::API.new
+def play
+  @play ||= Cobudget::CobudgetPlay.new
 end
 
 def budgets

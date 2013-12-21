@@ -10,12 +10,12 @@ require 'cobudget/entities/user'
 When /^([^ ]+) views the buckets in the (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
-  @buckets_viewing = api.list_buckets(budget: budget, user: user)
+  @buckets_viewing = play.list_buckets(budget: budget, user: user)
 end
 
 
 Then /^they should see (#{CAPTURE_BUCKET}) in the bucket list$/ do |bucket|
-  @buckets_viewing = api.list_buckets(budget: @budget, user: @user)
+  @buckets_viewing = play.list_buckets(budget: @budget, user: @user)
   @buckets_viewing.include?bucket
 end
 
@@ -31,7 +31,7 @@ end
 
 
 Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |bucket, amount|
-  api.bucket_balance_enquiry(bucket: bucket).should == Money.new(amount*100)
+  play.bucket_balance_enquiry(bucket: bucket).should == Money.new(amount*100)
 end
 
 When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
@@ -42,7 +42,7 @@ When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_na
   options[:amount] = amount
   options[:admin] = user
   options[:user] = user
-  api.create_allocations(options)
+  play.create_allocations(options)
 end
 
 When /^([^ ]*) tries to allocate (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET}) but fails$/ do |user_name, amount, bucket|
@@ -53,7 +53,7 @@ When /^([^ ]*) tries to allocate (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET}) but f
   options[:amount] = amount
   options[:admin] = user
   options[:user] = user
-  expect{ api.create_allocations(options)}.to raise_error
+  expect{ play.create_allocations(options)}.to raise_error
 end
 
 When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKET})$/ do |user_name, from_bucket, to_bucket|
@@ -64,18 +64,18 @@ When /^([^ ]*) changes the allocation in (#{CAPTURE_BUCKET}) to (#{CAPTURE_BUCKE
   options = table.rows_hash.symbolize_keys
   options[:from_bucket] = bucket
   options[:to_bucket] = to_bucket
-  api.create_allocation(options)
+  play.create_allocations(options)
 end
 
 When /^([^ ]*) removes the (#{CAPTURE_MONEY}) allocation in (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
   user = users[user_name]
 
-  api.remove_allocations(bucket: bucket, amount: amount, admin: user, user: user)
+  play.remove_allocations(bucket: bucket, amount: amount, admin: user, user: user)
 end
 
 Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do |user_name, amount, budget|
   user = users[user_name]
 
-  api.user_remaining_balance_enquiry(budget: budget, user: user).should == amount
+  play.user_remaining_balance_enquiry(budget: budget, user: user).should == amount
 end
 

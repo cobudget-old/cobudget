@@ -1,7 +1,7 @@
 require 'active_record'
 require 'sqlite3'
 require 'active_record/connection_adapters/sqlite3_adapter'
-require 'cobudget/api'
+require 'cobudget/cobudget_play'
 require 'pusher'
 
 module Cobudget
