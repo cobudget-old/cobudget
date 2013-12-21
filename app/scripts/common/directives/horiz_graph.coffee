@@ -4,8 +4,11 @@ angular.module("directives.horiz_graph", [])
   transclude: "false"
   template: "
     <div class='m-horiz-graph'>
-      <div ng-repeat='item in items track by $index' class='m-horiz-graph__item'>
-        <small>${{item.amount}}</small>
+      <div class='m-horiz-graph_max-mark' style='left: {{max_pos}}%; width: {{max_reached_width}}%;'>Over Max</div>
+      <div class='m-horiz-graph_items'>
+        <div ng-repeat='item in items track by $index' class='m-horiz-graph_item'>
+          <small>${{item.amount}}</small>
+        </div>
       </div>
     </div>
   "
@@ -34,16 +37,32 @@ angular.module("directives.horiz_graph", [])
       blu = Math.sin(frequency3 * pos + phase3) * width + center
       RGB2Color red, grn, blu
 
+    getPercentage = (item)->
+      value = item.amount
+      total = _.reduce(scope.items, (result, item)->
+        result += parseInt(item.amount, 10)
+        result
+      , 0)
+      if total > scope.max
+        scope.max_reached = true
+        scope.max_pos = (scope.max / total) * 100 
+        scope.max_reached_width = 100 - ((scope.max / total) * 100)
+        total_for_percent = total
+      else
+        scope.max_reached = false
+        total_for_percent = scope.max
+        scope.max_pos = 0
+      percent_of_total = (value / total_for_percent) * 100
+      pc = percent_of_total
+
     scope.$watch "items", (n, o) ->
       for item, i in n
-        value = item.amount * 1000
-        percent_of_total = value / (scope.max * 1000) * 100
-        pc = percent_of_total
+        pc = getPercentage(item)
 
         counter = scope.items.length - i
 
-        color_el = angular.element element.children()[counter - 1]
-        el = angular.element element.children()[i]
+        color_el = angular.element angular.element(element.children()[1]).children()[counter - 1]
+        el = angular.element angular.element(element.children()[1]).children()[i]
 
         bgColor = makeColor(.3,.3,.3,0,i*2,4,180,65, i)
         if pc < 8
@@ -52,6 +71,10 @@ angular.module("directives.horiz_graph", [])
         else
           el.children('small').css
             opacity: 1
+        if scope.max_reached
+          element.addClass('js-show-max-mark')
+        else
+          element.removeClass('js-show-max-mark')
         el.css
           width: pc + "%" 
         color_el.css

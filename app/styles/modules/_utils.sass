@@ -1,13 +1,13 @@
 .m-list-item
-  border-bottom: solid 1px $clr-medium-gray
+  @extend .clearfix
+  padding: 0.5em 0.5em
+  background: #fff
+  border-bottom: solid 1px darken($clr-lightest-gray, 10%)
 .m-list-item-half
   display: inline-block
+  float: left
   width: 50%
  
-
-
-
-
 .utl-expander
   +single-transition(all, 0.2s, ease-out, 0)
   max-height: 290px

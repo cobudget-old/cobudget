@@ -10,7 +10,14 @@ angular.module('states.budget', ['controllers.buckets'])
   .state('budgets.buckets',
     url: '/buckets'
     views:
-      'bucket-list':
+      'header':
+        template: '
+          <h2>Budget</h2>
+          <btf-markdown>Markdown... of budget
+          *it works*
+          </btf-markdown>
+        '
+      'page':
         templateUrl: '/views/buckets/buckets.list.html'
       'sidebar':
         templateUrl: '/views/budgets/budget.sidebar.html'
@@ -18,7 +25,9 @@ angular.module('states.budget', ['controllers.buckets'])
   .state('budgets.propose_bucket',
     url: '/propose-bucket'
     views:
-      'bucket-create':
+      'header':
+        template: '<h2>Propose a Bucket</h2>'
+      'page':
         templateUrl: '/views/buckets/buckets.create.html'
         controller: 'BucketController'
       'sidebar':

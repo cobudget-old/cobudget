@@ -16,21 +16,40 @@
   height: 44px
   position: relative
   background: #fff
-  .m-horiz-graph
-    width: 100%
-    position: absolute
-    bottom: 0
-    overflow: hidden
-    max-height: 44px
-    white-space: nowrap
-  .m-horiz-graph__item
-    width: auto
-    height: 44px
-    color: #222
-    display: inline-block
-    text-align: center
-    small
-      font-weight: bold
-      font-size: 0.8em
-    &:last-child
-      +single-transition(all, 0.4s, ease-in)
+  margin-bottom: 1em
+
+.m-horiz-graph
+  width: 100%
+  position: absolute
+  bottom: 0
+  overflow: hidden
+  max-height: 44px
+  white-space: nowrap
+.m-horiz-graph_max-mark
+  margin-top: 22px
+  height: 22px
+  background: #000 url('../../images/css/stripe.png') repeat
+  color: $clr-4
+  padding-top: 2px
+  display: none
+  +opacity(0)
+  text-align: center
+  position: absolute
+  left: 0
+  top: 0
+  font-weight: bold
+.m-horiz-graph_item
+  width: auto
+  height: 44px
+  color: #222
+  display: inline-block
+  text-align: center
+  small
+    font-weight: bold
+    font-size: 0.8em
+  +single-transition(all, 0.3s, ease-in)
+.m-horiz-graph.js-show-max-mark
+  .m-horiz-graph_max-mark
+    +single-transition(all, 0.3s, ease-in)
+    display: block
+    +opacity(0.5)

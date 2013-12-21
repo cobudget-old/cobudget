@@ -1,11 +1,7 @@
-<div class="l-padded paint clr3-bold">
-  <h1>Budget</h1>
-  <btf-markdown>Markdown... of budget
-  *it works*
-  </btf-markdown>
-</div>
 <div class="row">
-<div class="col-md-7" ui-view="bucket-create"></div>
-<div class="col-md-7" ui-view="bucket-list"></div>
-<div class="col-md-5 paint on-bg" ui-view="sidebar"></div>
+  <div class="col-md-7">
+    <div ui-view="header"></div>
+    <div ui-view="page"></div>
+  </div>
+  <div class="col-md-5 paint on-bg" ui-view="sidebar"></div>
 </div>
