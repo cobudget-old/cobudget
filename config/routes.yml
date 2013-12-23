@@ -1,0 +1,6 @@
+get:
+  route: '/budgets/:budget_id'
+  command: list_buckets
+post:
+  route: '/budgets/new'
+  command: create_budgets
