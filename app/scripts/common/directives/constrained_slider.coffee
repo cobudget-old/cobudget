@@ -43,7 +43,8 @@ angular.module("directives.constrained_slider", [])
           ConstrainedSliderCollector.sliders[i].value = n
 
       amount = scope.Model
-      new_item = {bucket_id: scope.identifier, user_id: "Tony Soprano", amount: amount, is_new: true }
+      console.log $rootScope.current_user
+      new_item = {bucket_id: parseInt(scope.identifier, 10), user_id: $rootScope.current_user.id, user_color: "#63C3E0", amount: amount, is_new: true }
       item_identifier = new_item.user_id
       allocated = false
       for item, i in scope.affecting
@@ -57,9 +58,8 @@ angular.module("directives.constrained_slider", [])
     getAffectingTotal = ->
       total = 0
       for item, i in scope.affecting
-        unless item.user_id == "Tony Soprano"
+        unless item.user_id == $rootScope.current_user.id
           total += item.amount
-      console.log total
       total
 
     constrainValue = (incoming_value)->

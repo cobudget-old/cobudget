@@ -59,9 +59,10 @@ angular.module("directives.horiz_graph", [])
       for item, i in n
         pc = getPercentage(item)
 
+        console.log item
         counter = scope.items.length - i
 
-        color_el = angular.element angular.element(element.children()[1]).children()[counter - 1]
+        #color_el = angular.element angular.element(element.children()[1]).children()[counter - 1]
         el = angular.element angular.element(element.children()[1]).children()[i]
 
         bgColor = makeColor(.3,.3,.3,0,i*2,4,180,65, i)
@@ -77,7 +78,6 @@ angular.module("directives.horiz_graph", [])
           element.removeClass('js-show-max-mark')
         el.css
           width: pc + "%" 
-        color_el.css
-          backgroundColor: bgColor
+          backgroundColor: item.user_color
     , true
 ]

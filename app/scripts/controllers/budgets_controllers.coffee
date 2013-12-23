@@ -2,7 +2,7 @@ angular.module('controllers.budgets', [])
 .controller('BudgetController',['$scope', '$rootScope', '$state', "Bucket", ($scope, $rootScope, $state, Bucket)->
   $scope.buckets = []
   #set up rules for slider
-  $scope.allocatable = 4445
+  $scope.allocatable = $rootScope.current_user.allocatable
 
   setMinMax = (bucket)->
     if bucket.minimum_cents?
@@ -15,13 +15,16 @@ angular.module('controllers.budgets', [])
       bucket.maximum = 0
     bucket
 
-  $scope.user_id = "Tony Soprano"
+  $scope.user_id = $rootScope.current_user.id
   $scope.user_allocations = []
 
   Bucket.query(budget_id: $state.params.budget_id, (response)->
     for b, i in response
       b.user_allocation = 0
-      b.allocations = [{user_id: "asdf", amount: i+2*380}, {user_id: "fasfs", amount: i+5*100}, {user_id: "fa", amount: i+8*100}]
+      b.allocations = [
+        {bucket_id: b.id, user_id: 1, user_color: "#111", amount: i+2*380}, 
+        {bucket_id: b.id, user_id: 2, user_color: "#222", amount: i+5*100}, 
+        {bucket_id: b.id, user_id: 3, user_color: "#333", amount: i+8*100}]
       setMinMax(b)
       $scope.buckets.push b
   )

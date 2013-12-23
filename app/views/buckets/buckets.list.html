@@ -31,7 +31,7 @@
           <div class="o-slider-range-high">${{b.maximum}}</div>
         </div>
         <!--<slider min="0" max="{{b.maximum}}" orientation="vertical" ng-model="b.user_allocation"></slider>-->
-        <constrained-slider min="0" max="{{allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="allocatable" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation"></constrained-slider>
+        <constrained-slider min="0" max="{{current_user.allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="allocatable" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation"></constrained-slider>
       </div>
       <div class="m-bucket-allocations_wrapper">
         <horiz-graph max="b.maximum" height="50" items="b.allocations">
