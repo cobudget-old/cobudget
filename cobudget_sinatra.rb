@@ -1,5 +1,6 @@
 $LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
 puts $LOAD_PATH
+require 'yaml'
 require 'sinatra/base'
 require 'playhouse/sinatra'
 require 'cobudget/cobudget_play'
@@ -15,9 +16,9 @@ class CobudgetWeb < Sinatra::Base
       #status 200
     #end
   #end
-  
+  routes = YAML.load_file('config/routes.yml')
 
-  add_play Cobudget::CobudgetPlay
+  add_play Cobudget::CobudgetPlay, routes
 
   run! if app_file == $0
 end
