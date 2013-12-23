@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/allansideas/playhouse-sinatra.git
+  revision: 0d87a80099a02d01f787bea108e63e14a5c0071f
+  specs:
+    playhouse-sinatra (0.1.0)
+      playhouse
+      sinatra
+      thin
+
+GIT
   remote: git://github.com/enspiral/playhouse-console.git
   revision: 6a3c8c39626ec0e389ec944da4397f8c79323629
   specs:
@@ -7,15 +16,6 @@ GIT
       playhouse
       rspec
       thor
-
-GIT
-  remote: git://github.com/enspiral/playhouse-sinatra.git
-  revision: 3797e10433d79efbceb6bd81858156f1df182617
-  specs:
-    playhouse-sinatra (0.1.0)
-      playhouse
-      sinatra
-      thin
 
 GIT
   remote: git://github.com/enspiral/playhouse.git

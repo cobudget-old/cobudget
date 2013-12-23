@@ -1,6 +1,142 @@
-get:
-  route: '/budgets/:budget_id'
-  command: list_buckets
-post:
-  route: '/budgets/new'
-  command: create_budgets
+#budgets
+-
+  get:
+    route: 'budgets/:budget_id/buckets'
+    command: list_buckets
+    params: '*budget_id'
+    description: Returns a specific budget
+
+-
+  get:
+    route: 'budgets/:budget_id/allocated'
+    command: budget_allocated_balance_enquiry
+    params: '*budget_id'
+    description: Returns the amount allocated to the given budget
+
+-
+  get:
+    route: 'budgets/:budget_id/unallocated'
+    command: budget_allocated_balance_enquiry
+    params: '*budget_id'
+    description: Returns the unallocated amount for a given budget
+
+-
+  get:
+    route: 'budgets/:budget_id/total'
+    command: budget_total_enquiry
+    params: '*budget_id'
+    description: Returns the total for a given budget
+
+-
+  put:
+    route: 'budgets/:budget_id'
+    command: update_buckets
+    params: '*user_id, *budget_id, name, description'
+
+-
+  post:
+    route: 'budgets/new'
+    command: create_budgets
+    params: '*name, description'
+    description: Creates a budget
+
+#buckets
+-
+  get:
+    route: 'buckets/:bucket_id'
+    command: show_buckets
+    params: '*bucket_id'
+    description: Returns a specific bucket
+
+-
+  get:
+    route: 'buckets/:bucket_id/balance'
+    command: bucket_balance_enquiry
+    params: '*bucket_id'
+    description: Returns the balance for a specific bucket
+
+-
+  put:
+    route: 'bucket/:bucket_id/update'
+    command: update_buckets
+    params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
+    description: Update a bucket
+
+-
+  post:
+    route: 'bucket/:bucket_id/allocations/new'
+    command: create_allocations
+    params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
+    description: Create an allocation for a bucket
+
+-
+  delete:
+    route: 'bucket/:bucket_id/allocations/new'
+    command: remove_allocations
+    params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
+    description: Create an allocation for a bucket
+
+-
+  post:
+    route: 'buckets/new'
+    command: create_buckets
+    params: '*user_id, *budget_id, *name, *description, minimum, maximum, sponsor_id'
+    description: Creates a bucket
+
+-
+  delete:
+    route: 'buckets/:bucket_id'
+    command: delete_buckets
+    params: '*user_id, *bucket_id'
+    description: Deletes a bucket
+
+#users
+-
+  get:
+    route: 'users/:user_id/budget_account/:budget_id'
+    command: show_accounts
+    params: '*user_id, *admin_id, *budget_id'
+    description: Returns user accounts per budget
+-
+  get:
+    route: 'users'
+    command: list_users
+    params: ''
+    description: Returns all users
+-
+  get:
+    route: 'users/:user_id/allocatable_by_budget/:budget_id'
+    command: get_allocation_rights
+    params: '*user_id, *budget_id'
+    description: Returns user allocation rights per budget
+-
+  post:
+    route: 'users/new'
+    command: create_users
+    params: '*name, *email, #bg_color, #fg_color'
+    description: Create a user 
+
+-
+  post:
+    route: 'users/:user_id/grant_allocatable_by_budget/:budget_id'
+    command: grant_allocation_rights
+    params: '*admin_id, *user_id, *budget_id, *amount'
+    description: Creates user allocatable for a budget
+
+
+#-
+  #put:
+    #route: 'users/:id'
+    #command: update_users
+    #params: '*name, *email, #bg_color, #fg_color'
+    #description: Create a user 
+
+#accounts
+-
+  post:
+    route: 'accounts/new'
+    command: create_accounts
+    params: '*user_id, *admin_id, *budget_id'
+    description: Admin creates an account for a given user and a budget 
+    
+  
