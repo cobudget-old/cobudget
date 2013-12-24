@@ -35,7 +35,7 @@
 
 -
   post:
-    route: 'budgets/new'
+    route: 'budgets'
     command: create_budgets
     params: '*name, description'
     description: Creates a budget
@@ -64,21 +64,21 @@
 
 -
   post:
-    route: 'bucket/:bucket_id/allocations/new'
+    route: 'bucket/:bucket_id/allocations'
     command: create_allocations
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
     description: Create an allocation for a bucket
 
 -
   delete:
-    route: 'bucket/:bucket_id/allocations/new'
+    route: 'bucket/:bucket_id/allocations'
     command: remove_allocations
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
-    description: Create an allocation for a bucket
+    description: Delete an allocation for a bucket
 
 -
   post:
-    route: 'buckets/new'
+    route: 'buckets'
     command: create_buckets
     params: '*user_id, *budget_id, *name, *description, minimum, maximum, sponsor_id'
     description: Creates a bucket
@@ -111,7 +111,7 @@
     description: Returns user allocation rights per budget
 -
   post:
-    route: 'users/new'
+    route: 'users'
     command: create_users
     params: '*name, *email, #bg_color, #fg_color'
     description: Create a user 
@@ -134,7 +134,7 @@
 #accounts
 -
   post:
-    route: 'accounts/new'
+    route: 'accounts'
     command: create_accounts
     params: '*user_id, *admin_id, *budget_id'
     description: Admin creates an account for a given user and a budget 
