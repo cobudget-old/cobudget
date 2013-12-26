@@ -4,33 +4,19 @@
     route: 'budgets/:budget_id/buckets'
     command: list_buckets
     params: '*budget_id'
-    description: Returns a specific budget and its buckets
+    description: Returns a specific budget
 
 -
   get:
     route: 'budgets/:budget_id/allocated'
     command: budget_allocated_balance_enquiry
     params: '*budget_id'
-    description: Returns the amount allocated to the given budget by all participants
-
--
-  get:
-    route: 'budgets/:budget_id/list_available_buckets'
-    command: list_available_buckets
-    params: '*budget_id'
-    description: Returns the list of available buckets
-
--
-  get:
-    route: 'budgets/:budget_id/list_all_buckets'
-    command: list_all_buckets
-    params: '*budget_id, *admin_id'
-    description: Returns the list of all buckets (admin only)
+    description: Returns the amount allocated to the given budget
 
 -
   get:
     route: 'budgets/:budget_id/unallocated'
-    command: budget_unallocated_balance_enquiry
+    command: budget_allocated_balance_enquiry
     params: '*budget_id'
     description: Returns the unallocated amount for a given budget
 
@@ -39,18 +25,17 @@
     route: 'budgets/:budget_id/total'
     command: budget_total_enquiry
     params: '*budget_id'
-    description: Returns the total for a given budget (unallocated + allocated)
+    description: Returns the total for a given budget
 
 -
   put:
     route: 'budgets/:budget_id'
-    command: update_budget
+    command: update_buckets
     params: '*user_id, *budget_id, name, description'
-    description: Updates a budget
 
 -
   post:
-    route: 'budgets/new'
+    route: 'budgets'
     command: create_budgets
     params: '*name, description'
     description: Creates a budget
@@ -68,7 +53,7 @@
     route: 'buckets/:bucket_id/balance'
     command: bucket_balance_enquiry
     params: '*bucket_id'
-    description: Returns the balance in a specific bucket
+    description: Returns the balance for a specific bucket
 
 -
   put:
@@ -79,21 +64,21 @@
 
 -
   post:
-    route: 'bucket/:bucket_id/allocations/new'
+    route: 'bucket/:bucket_id/allocations'
     command: create_allocations
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
     description: Create an allocation for a bucket
 
 -
   delete:
-    route: 'bucket/:bucket_id/allocations/new'
+    route: 'bucket/:bucket_id/allocations'
     command: remove_allocations
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
-    description: Remove an allocation for a bucket back into the user's account
+    description: Delete an allocation for a bucket
 
 -
   post:
-    route: 'buckets/new'
+    route: 'buckets'
     command: create_buckets
     params: '*user_id, *budget_id, *name, *description, minimum, maximum, sponsor_id'
     description: Creates a bucket
@@ -120,13 +105,19 @@
     description: Returns all users
 -
   get:
+    route: 'users'
+    command: list_users
+    params: ''
+    description: Returns a user
+-
+  get:
     route: 'users/:user_id/allocatable_by_budget/:budget_id'
     command: get_allocation_rights
     params: '*user_id, *budget_id'
     description: Returns user allocation rights per budget
 -
   post:
-    route: 'users/new'
+    route: 'users'
     command: create_users
     params: '*name, *email, #bg_color, #fg_color'
     description: Create a user 
@@ -137,19 +128,17 @@
     command: grant_allocation_rights
     params: '*admin_id, *user_id, *budget_id, *amount'
     description: Creates user allocatable for a budget
-
-
-#-
-  #put:
-    #route: 'users/:id'
-    #command: update_users
-    #params: '*name, *email, #bg_color, #fg_color'
-    #description: Create a user 
+-
+  put:
+    route: 'users/:user_id'
+    command: update_users
+    params: '*name, *email, bg_color, fg_color'
+    description: Update a user 
 
 #accounts
 -
   post:
-    route: 'accounts/new'
+    route: 'accounts'
     command: create_accounts
     params: '*user_id, *admin_id, *budget_id'
     description: Admin creates an account for a given user and a budget 

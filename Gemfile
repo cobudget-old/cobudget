@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem 'rake'
 gem 'sqlite3'
+gem 'pg_array_parser'
 gem 'pg'
 gem 'playhouse', git: 'git://github.com/enspiral/playhouse.git'
 gem 'playhouse-console', git: 'git://github.com/enspiral/playhouse-console.git'

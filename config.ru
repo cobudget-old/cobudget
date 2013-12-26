@@ -1,9 +1,11 @@
 $LOAD_PATH << '.'
 #config.ru
 require 'rubygems'
+require 'json'
 require 'sinatra'
 require 'rack'
 require 'rack/cors'
+
 use Rack::Cors do |config|
   config.allow do |allow|
     allow.origins '*'

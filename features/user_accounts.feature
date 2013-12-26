@@ -15,3 +15,10 @@ Feature: User Accounts
     Given a user Blinky
     When PacMan creates an account for Blinky in the PillsInTheDark budget
     Then there should be an account for Blinky in the PillsInTheDark budget
+
+  Scenario: Successfully modify a user
+    Given a user NickFury
+    When NickFury updates the NickFury user with:
+      | name        | McFlurry                            |
+      | email       | mcflurry@hahaha.com |
+    Then the NickFury user should have the email "mcflurry@hahaha.com"
