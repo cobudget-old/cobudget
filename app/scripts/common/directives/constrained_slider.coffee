@@ -1,15 +1,8 @@
-# If I put a number in, then check that the number is not
-# 1. over the maximum of the bucket - the allocations already there - your allocations already made to other buckets
-# 2. over the amount the user has to allocate
-#
 angular.module("directives.constrained_slider", [])
 .directive "constrainedSlider", ['$rootScope', 'ConstrainedSliderCollector', ($rootScope, ConstrainedSliderCollector) ->
   restrict: "EA"
   transclude: "false"
   template: "<div class='slider'></div>"
-  #template: "
-    #<slider min='{{min}}' max='{{max}}' orientation='{{orientation}}' ng-model='Model'></slider>
-  #"
   scope:
     Model: "=ngModel"
     allocatable: "=allocatable"
@@ -17,7 +10,7 @@ angular.module("directives.constrained_slider", [])
     orientation: "@orientation"
     percentageOf: "=percentageOf"
     secondMax: "@secondMax"
-    max: "@max"
+    max: "=max"
     min: "@min"
     identifier: "@identifier"
 
@@ -26,13 +19,16 @@ angular.module("directives.constrained_slider", [])
     scope.slider_id = parseInt(scope.identifier)
     ConstrainedSliderCollector.sliders.push {id: scope.slider_id, value: 0}
 
-    element.noUiSlider
-      range: [parseInt(attrs.min, 10), parseInt(attrs.max, 10)]
+    console.log scope.max
+    el = angular.element element.children()[0]
+    el.noUiSlider
+      range: [parseInt(attrs.min, 10), parseInt(scope.max, 10)]
       start: 1
       handles: 1
       step: 1.0
       direction: 'ltr'
       orientation: attrs.orientation
+      behaviour: 'extend-tap'
       set: ()->
         change()
 
@@ -43,7 +39,6 @@ angular.module("directives.constrained_slider", [])
           ConstrainedSliderCollector.sliders[i].value = n
 
       amount = scope.Model
-      console.log $rootScope.current_user
       new_item = {bucket_id: parseInt(scope.identifier, 10), user_id: $rootScope.current_user.id, user_color: "#63C3E0", amount: amount, is_new: true }
       item_identifier = new_item.user_id
       allocated = false
@@ -53,7 +48,7 @@ angular.module("directives.constrained_slider", [])
           scope.affecting[i] = new_item
       if allocated == false
         scope.affecting.push new_item
-      element.val scope.Model
+      el.val scope.Model
 
     getAffectingTotal = ->
       total = 0
@@ -88,10 +83,10 @@ angular.module("directives.constrained_slider", [])
       new_value
 
     change = ->
-      n = parseInt(element.val(), 10)
+      n = parseInt(el.val(), 10)
 
       value = constrainValue(n)
-      element.val value
+      el.val value
       scope.Model = value
       scope.$apply() unless $rootScope.$$phase
 ]

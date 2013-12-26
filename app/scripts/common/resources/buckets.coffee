@@ -1,8 +1,8 @@
-angular.module('resources.buckets', ['ngResource'])
-.factory("Bucket", ["$resource", "API_PREFIX", ($resource, API_PREFIX) ->
-  $resource("#{API_PREFIX}/list_buckets?budget_id=:budget_id",
-    {budget_id: "@budget_id"},
-    update: 
-      method: "PUT"
-  )
+angular.module('resources.buckets', [])
+.service("Bucket", ['Restangular', (Restangular) ->
+  getBucket: (bucket_id)->
+  getBucketAllocations: (bucket_id)->
+    Restangular.one('buckets', budget_id).getList('allocations')
+  createBucketAllocation: (bucket_id, allocation)->
+    Restangular.post('buckets', budget_id)
 ])

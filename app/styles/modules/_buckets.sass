@@ -1,16 +1,30 @@
 .m-bucket-wrapper
-  margin-top: 1em
+  margin-bottom: 1em
   @extend .clearfix
 
 .m-bucket
+  @extend .clearfix
   position: relative
-  padding-top: 0.2em
   background: #fff
-  h2
-    max-width: 80%
-    padding-top: 0.6em
-    font-size: 1.2em
-    font-weight: bold
+  h1
+    color: $clr-medium-gray
+    font-size: 1.4em
+    font-weight: 300
+
+.m-bucket-left
+  width: 2%
+  min-height: 20em
+  max-height: 20em
+  display: block
+  float: left
+
+.m-bucket-right
+  background: #fff
+  padding-top: 0.2em
+  min-height: 20em - 1.8em
+  width: 98%
+  display: block
+  float: left
 
 .m-bucket-allocations_wrapper
   height: 44px
@@ -52,4 +66,4 @@
   .m-horiz-graph_max-mark
     +single-transition(all, 0.3s, ease-in)
     display: block
-    +opacity(0.5)
+    +opacity(0.7)

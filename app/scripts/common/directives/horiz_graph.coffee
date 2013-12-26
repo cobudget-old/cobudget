@@ -59,7 +59,6 @@ angular.module("directives.horiz_graph", [])
       for item, i in n
         pc = getPercentage(item)
 
-        console.log item
         counter = scope.items.length - i
 
         #color_el = angular.element angular.element(element.children()[1]).children()[counter - 1]

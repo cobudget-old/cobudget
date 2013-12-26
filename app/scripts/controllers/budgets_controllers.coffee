@@ -1,5 +1,5 @@
 angular.module('controllers.budgets', [])
-.controller('BudgetController',['$scope', '$rootScope', '$state', "Bucket", ($scope, $rootScope, $state, Bucket)->
+.controller('BudgetController',['$scope', '$rootScope', '$state', "Bucket", "Budget", ($scope, $rootScope, $state, Bucket, Budget)->
   $scope.buckets = []
   #set up rules for slider
   $scope.allocatable = $rootScope.current_user.allocatable
@@ -18,15 +18,17 @@ angular.module('controllers.budgets', [])
   $scope.user_id = $rootScope.current_user.id
   $scope.user_allocations = []
 
-  Bucket.query(budget_id: $state.params.budget_id, (response)->
-    for b, i in response
+  Budget.getBudgetBuckets(1).then((success)->
+    for b, i in success
       b.user_allocation = 0
       b.allocations = [
-        {bucket_id: b.id, user_id: 1, user_color: "#111", amount: i+2*380}, 
-        {bucket_id: b.id, user_id: 2, user_color: "#222", amount: i+5*100}, 
-        {bucket_id: b.id, user_id: 3, user_color: "#333", amount: i+8*100}]
+        {bucket_id: b.id, user_id: 1, user_color: "#00499C", amount: i+2*380}, 
+        {bucket_id: b.id, user_id: 2, user_color: "#407DC2", amount: i+5*100}, 
+        {bucket_id: b.id, user_id: 3, user_color: "#639DE0", amount: i+8*100}]
       setMinMax(b)
       $scope.buckets.push b
+  , (error)->
+    console.log error
   )
 
   $scope.prepareUserAllocations = ->
@@ -45,22 +47,26 @@ angular.module('controllers.budgets', [])
     allocations.push {user_id: undefined, label: "unallocated ($#{unallocated})", amount: unallocated }
     $scope.user_allocations = allocations.reverse()
 
-  $scope.xUserAllocations = ->
-    (d)->
-      d.label
-
-  $scope.yUserAllocations = ->
-    (d)->
-      d.amount
-    
   $scope.prepareUserAllocations()
 
-  #$scope.update_bucket = (bucket)->
-    #for bucket, i in $scope.buckets
-      #if bucket.id == $scope.buckets[i].id
-        #$scope.buckets[i] = bucket
-        #scope.$apply() unless $rootScope.$$phase
-        #return false
+  $scope.chart_options = 
+    segmentShowStroke : true
+    segmentStrokeColor : "#fff"
+    animation : false,
+
+  $scope.prepareChart = ()->
+    ch_vals = []
+    angular.forEach($scope.user_allocations, (allocation)->
+      ch_val = { value: allocation.amount, color:"#F7464A" }
+      ch_vals.push ch_val
+    )
+    $scope.chart = ch_vals
+
+  $scope.prepareChart()
+    
+  $scope.$watch 'user_allocations', (n, o)->
+    if n != o
+      $scope.prepareChart()
 
   $rootScope.channel.bind('bucket_created', (bucket) ->
     setMinMax(bucket.bucket)

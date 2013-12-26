@@ -4,7 +4,8 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400,700' rel='stylesheet' type='text/css'>
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,6 +37,7 @@
           <a href="/" class="navbar-brand">cobudget!</a>
           <ul class="nav navbar-nav">
             <li><a ui-sref="budgets.buckets({budget_id: 1})">Buckets</a></li>
+            <li><a ui-sref="admin.dashboard">Admin Area</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -43,8 +45,6 @@
               <span href="" ng-click="feignUser(0)">1</span>
               <span href="" ng-click="feignUser(1)">2</span>
               <span href="" ng-click="feignUser(2)">3</span>
-            </li>
-            <li>
               <a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a>
             </li>
           </ul>
@@ -79,7 +79,9 @@
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-lodash/angular-lodash.js"></script>
         <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
+        <script src="bower_components/restangular/dist/restangular.js"></script>
+        <script src="bower_components/Chart.js/Chart.js"></script>
+        <script src="bower_components/angles/libs/angles.js"></script>
         <script src="modded_components/angular-flash-messages/angular-flash.js"></script>
         <script src="modded_components/angular-markdown-directive/markdown.js"></script>
         <script src="bower_components/showdown/compressed/showdown.js"></script>
@@ -88,7 +90,7 @@
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
-
+        <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
         <script src="bower_components/nouislider/jquery.nouislider.js"></script>
         <!-- endbuild -->
 
@@ -98,14 +100,17 @@
         <script src="scripts/common/directives/slider.js"></script>
         <script src="scripts/common/directives/horiz_graph.js"></script>
         <script src="scripts/common/directives/constrained_slider.js"></script>
+        <script src="scripts/common/directives/manage_users.js"></script>
         <script src="scripts/common/services/constrained_slider_collector.js"></script>
         <script src="scripts/common/filters/util_filters.js"></script>
         <script src="scripts/common/resources/budgets.js"></script>
         <script src="scripts/common/resources/buckets.js"></script>
+        <script src="scripts/common/resources/users.js"></script>
         <script src="scripts/controllers/buckets_controllers.js"></script>
         <script src="scripts/controllers/budgets_controllers.js"></script>
         <script src="scripts/states/budget_states.js"></script>
         <script src="scripts/states/bucket_states.js"></script>
+        <script src="scripts/states/admin_states.js"></script>
         <!-- endbuild -->
 </body>
 </html>

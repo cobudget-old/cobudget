@@ -15,12 +15,16 @@
     "angular-flash-messages": "~1.1.0 ",
     "sass-bootstrap": "~3.0.2",
     "showdown": "0.3.1",
-    "nouislider": "~4.3.0",
+    "nouislider": "~5.0.0",
     "angularjs-nvd3-directives": "~0.0.4-beta",
     "nvd3": "~1.1.14-beta",
     "d3": "~3.3.11",
     "angular-lodash": "*",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "restangular": "~1.2.2",
+    "angular-bootstrap-colorpicker": "~3.0.2",
+    "angles": "git@github.com:lgsilver/angles.git",
+    "Chart.js": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

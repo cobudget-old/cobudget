@@ -1,5 +1,6 @@
 @import 'compass/css3'
 @import '../bower_components/sass-bootstrap/lib/bootstrap'
+@import 'fonts'
 @import 'layout'
 @import 'settings'
 @import 'typography'
@@ -10,8 +11,11 @@
 @import 'modules/labels'
 @import 'modules/buckets'
 @import 'modules/allocations'
+@import 'modules/admin'
+@import 'modules/user'
 @import 'modules/utils'
 @import 'modules/_v_nouislider'
+@import 'modules/_v_colorpicker'
 @import 'modules/_v_nvd3'
 
 html
@@ -20,8 +24,13 @@ html
 body
   margin: 0
   padding-bottom: 1em
-  background: $clr-bg
+  background: $clr-bg url(../../images/css/bg.png) repeat
+  font-size: 16px
   font-family: 'Lato', Arial, Helvetica, san-serif
+
+a:hover
+  cursor: pointer
+  text-decoration: none
 
 h1, h2, h3, h4, h5
   font-family: 'Lato', Arial, Helvetica, san-serif
@@ -30,9 +39,17 @@ h1, h2, h3, h4, h5
   background: #ececec
   margin-top: 1em
 
+table
+  @extend .table
+  &.unstyled
+    padding: 0
+    td
+      border: none
+      padding: 0
+
 .field  
   @extend .form-group
-  input[type="text"], input[type="number"], input[type="password"], textarea
+  input[type="text"], input[type="email"], input[type="number"], input[type="password"], textarea
     @extend .form-control
 
 .actions 

@@ -13,9 +13,6 @@ angular.module('states.budget', ['controllers.buckets'])
       'header':
         template: '
           <h2>Budget</h2>
-          <btf-markdown>Markdown... of budget
-          *it works*
-          </btf-markdown>
         '
       'page':
         templateUrl: '/views/buckets/buckets.list.html'

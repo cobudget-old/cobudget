@@ -1,24 +1,17 @@
 <h2>Your allocations</h2>
-<div style="margin-top: -30px">
-  <nvd3-pie-chart
-    data="user_allocations"
-    id="user-allocations-graph"
-    width="100%"
-    height="550"        
-    x="xUserAllocations()"
-    y="yUserAllocations()"
-    showLabels="true">
-    <svg></svg>
-  </nvd3-pie-chart>
-</div>
-<div class="m-allocations m-list" style="margin-top: -20px">
-  <div class="m-list-item" ng-repeat="ua in user_allocations">
-  <div class="m-list-item-half">{{ua.label}}</div>
-  <div class="m-list-item-half">
-    {{(ua.amount / allocatable)*100 | number:2}}%
+<div class="l-padded paint white shadow">
+  <div>
+    <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
   </div>
+  <div class="m-allocations m-list" style="margin-top: -20px">
+    <div class="m-list-item" ng-repeat="ua in user_allocations">
+    <div class="m-list-item-half">{{ua.label}}</div>
+    <div class="m-list-item-half">
+      {{(ua.amount / allocatable)*100 | number:2}}%
+    </div>
+    </div>
   </div>
 </div>
-
+<a href="" ui-sref="budgets.propose_bucket" class="m-btn m-btn-wide paint clr4-bold">Propose a bucket</a>
 <h2>Bucket updates</h2>
 <p> e.g. latest reports </p>

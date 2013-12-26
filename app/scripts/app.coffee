@@ -2,12 +2,14 @@
 
 app = angular.module('cobudget', [
   'ngCookies',
-  'ngResource',
+  'ngResource', #may not need if restangular
+  'restangular',
   'ngSanitize',
   'ngAnimate',
   'angular-lodash'
-  'nvd3ChartDirectives'
+  'angles'
   'flash'
+  'colorpicker.module'
   'btford.markdown'
   'ui.router'
   'filters.utils'
@@ -15,21 +17,27 @@ app = angular.module('cobudget', [
   'controllers.budgets'
   'states.budget'
   'states.bucket'
+  'states.admin'
   'resources.budgets'
   'resources.buckets'
+  'resources.users'
   'services.constrained_slider_collector'
   'directives.expander'
   'directives.slider'
   'directives.constrained_slider'
   'directives.horiz_graph'
+  'directives.manage_users'
 ])
-.config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', ($httpProvider, $urlRouterProvider, $sceDelegateProvider)->
+#.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
+.constant("API_PREFIX", "http://localhost:9292/cobudget")
+.config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'API_PREFIX', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, API_PREFIX)->
   $urlRouterProvider.otherwise('/')
+  RestangularProvider.setBaseUrl(API_PREFIX)
+  #RestangularProvider.configuration.getIdFromElem = (elem)->
+    #elem[_.initial(elem.route).join('') + "_id"]
   #$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
-.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
-#.constant("API_PREFIX", "http://localhost:9292/cobudget")
 .run(["$rootScope", "API_PREFIX", ($rootScope, API_PREFIX) ->
   users = [
     {id: 1, name: "Tony Soprano", allocatable: 4000}
