@@ -1,5 +1,4 @@
 require 'playhouse/context'
-require 'cobudget/entities/budget'
 require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 
@@ -13,7 +12,7 @@ module Cobudget
       actor :bucket, repository: Bucket, role: TransactionCollection
 
       def perform
-        #raise NotAuthorizedToCreateBucket unless user.can_delete_bucket?(bucket)
+        #raise NotAuthorizedToDeleteBucket unless user.can_delete_bucket?(bucket)
         raise BucketHasAllocations unless bucket.has_no_allocations?
 
         data = bucket.destroy!
