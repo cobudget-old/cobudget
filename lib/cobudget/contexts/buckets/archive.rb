@@ -1,5 +1,4 @@
 require 'playhouse/context'
-require 'cobudget/entities/budget'
 require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 
