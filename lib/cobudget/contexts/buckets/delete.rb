@@ -1,4 +1,5 @@
 require 'playhouse/context'
+require 'cobudget/roles/transaction_collection'
 require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 
@@ -21,3 +22,4 @@ module Cobudget
     end
   end
 end
+

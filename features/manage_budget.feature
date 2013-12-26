@@ -1,7 +1,7 @@
 Feature: Manage Budget
   In order to allow users to participate in the collaborative budgeting process
   As a budget administrator
-  I want to be able to give users allocation rights in a budget
+  I want to be able to set up a budget and manage it
 
   Background:
     Given a user Janine

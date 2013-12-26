@@ -14,8 +14,13 @@ When /^([^ ]+) views the buckets in the (#{CAPTURE_BUDGET})$/ do |user_name, bud
 end
 
 
+Then /^they should see (#{CAPTURE_BUCKET}) in the available bucket list$/ do |bucket|
+  @buckets_viewing = play.list_available_buckets(budget: @budget, user: @user)
+  @buckets_viewing.include?bucket
+end
+
 Then /^they should see (#{CAPTURE_BUCKET}) in the bucket list$/ do |bucket|
-  @buckets_viewing = play.list_buckets(budget: @budget, user: @user)
+  @buckets_viewing = play.list_all_buckets(budget: @budget, user: @user)
   @buckets_viewing.include?bucket
 end
 
@@ -28,7 +33,6 @@ Transform /^table:name,description,minimum,maximum,sponsor$/ do |table|
 
   table
 end
-
 
 Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |bucket, amount|
   play.bucket_balance_enquiry(bucket: bucket).should == Money.new(amount*100)
@@ -77,5 +81,11 @@ Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CA
   user = users[user_name]
 
   play.user_remaining_balance_enquiry(budget: budget, user: user).should == amount
+end
+
+Then /([^ ]*) archives (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
+  user = users[user_name]
+
+  play.archive_buckets(user: user, bucket: bucket)
 end
 
