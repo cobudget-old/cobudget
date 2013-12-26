@@ -7,12 +7,15 @@ module Cobudget
   module Buckets
     class Delete < Playhouse::Context
       class NotAuthorizedToDeleteBucket < Exception; end
+      class BucketHasAllocations < Exception; end
 
       actor :user, repository: User
-      actor :bucket, repository: Bucket
+      actor :bucket, repository: Bucket, role: TransactionCollection
 
       def perform
-        #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
+        #raise NotAuthorizedToCreateBucket unless user.can_delete_bucket?(bucket)
+        raise BucketHasAllocations unless bucket.has_no_allocations?
+
         data = bucket.destroy!
         #Pusher.trigger('buckets', 'deleted', {bucket: data})
       end
