@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/allansideas/playhouse-sinatra.git
-  revision: 0d87a80099a02d01f787bea108e63e14a5c0071f
+  revision: 7e119e6b3a3908694c8fc52b18e1ca84cc250347
   specs:
     playhouse-sinatra (0.1.0)
       playhouse
@@ -98,6 +98,7 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     pg (0.17.1)
+    pg_array_parser (0.0.9)
     pusher (0.12.0)
       httpclient (~> 2.3.0)
       multi_json (~> 1.0)
@@ -157,6 +158,7 @@ DEPENDENCIES
   database_cleaner
   money
   pg
+  pg_array_parser
   playhouse!
   playhouse-console!
   playhouse-sinatra!

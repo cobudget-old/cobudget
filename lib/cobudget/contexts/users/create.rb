@@ -7,6 +7,8 @@ module Cobudget
     class Create < Playhouse::Context
       actor :name, optional: true
       actor :email
+      actor :bg_color, optional: true
+      actor :fg_color, optional: true
 
       def perform
         data = User.create!(actors)

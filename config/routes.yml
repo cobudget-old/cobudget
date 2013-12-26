@@ -105,6 +105,12 @@
     description: Returns all users
 -
   get:
+    route: 'users'
+    command: list_users
+    params: ''
+    description: Returns a user
+-
+  get:
     route: 'users/:user_id/allocatable_by_budget/:budget_id'
     command: get_allocation_rights
     params: '*user_id, *budget_id'
@@ -122,14 +128,12 @@
     command: grant_allocation_rights
     params: '*admin_id, *user_id, *budget_id, *amount'
     description: Creates user allocatable for a budget
-
-
-#-
-  #put:
-    #route: 'users/:id'
-    #command: update_users
-    #params: '*name, *email, #bg_color, #fg_color'
-    #description: Create a user 
+-
+  put:
+    route: 'users/:user_id'
+    command: update_users
+    params: '*name, *email, bg_color, fg_color'
+    description: Update a user 
 
 #accounts
 -

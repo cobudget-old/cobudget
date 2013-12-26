@@ -36,6 +36,10 @@ CAPTURE_BUDGET = Transform /^the ([^ ]*) budget/ do |budget_identifier|
   @budgets[budget_identifier] || (raise 'Budget not found')
 end
 
+CAPTURE_USER = Transform /^the ([^ ]*) user/ do |user_identifier|
+  @users[user_identifier] || (raise 'User not found')
+end
+
 CAPTURE_WITH_DESCRIPTION = Transform /^( ?with description "([^"]*)")?$/ do |unused, description|
   description
 end
