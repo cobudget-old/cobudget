@@ -15,6 +15,14 @@ module Cobudget
       Money.new(base_scope.sum(SUM_COLUMN))
     end
 
+    def has_no_allocations?
+      transactions.count == 0
+    end
+
+    def is_empty?
+      balance == 0
+    end
+
     private
 
     def base_scope

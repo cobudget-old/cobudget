@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 201312172137) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 201312261759) do
 
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
@@ -25,14 +22,15 @@ ActiveRecord::Schema.define(version: 201312172137) do
   end
 
   create_table "buckets", force: true do |t|
-    t.integer  "budget_id",     null: false
-    t.string   "name",          null: false
+    t.integer  "budget_id",                     null: false
+    t.string   "name",                          null: false
     t.text     "description"
     t.integer  "minimum_cents"
     t.integer  "maximum_cents"
     t.integer  "sponsor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "archived",      default: false, null: false
   end
 
   create_table "budgets", force: true do |t|

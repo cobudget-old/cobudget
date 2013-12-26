@@ -27,5 +27,9 @@ module Cobudget
     def total_in_budget
       total_allocated + total_available_for_allocation
     end
+
+    def available_buckets
+      buckets.where(archived: false)
+    end
   end
 end

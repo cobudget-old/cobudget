@@ -4,17 +4,17 @@ Feature: User Accounts
   I should have an account in that budget for allocations and stuff
 
   Background:
-    Given a budget Avengers
-    Given a user NickFury who can administer the Avengers budget
+    Given a budget PillsInTheDark
+    Given a user PacMan who can administer the PillsInTheDark budget
 
   Scenario: Successfully create a user
-    When NickFury creates a new user Loki
-    Then Loki should exist as a user
+    When PacMan creates a new user Clyde
+    Then Clyde should exist as a user
 
   Scenario: Successfully create a user account
-    Given a user Loki
-    When NickFury creates an account for Loki in the Avengers budget
-    Then there should be an account for Loki in the Avengers budget
+    Given a user Blinky
+    When PacMan creates an account for Blinky in the PillsInTheDark budget
+    Then there should be an account for Blinky in the PillsInTheDark budget
 
   Scenario: Successfully modify a user
     Given a user NickFury

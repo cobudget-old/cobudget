@@ -8,7 +8,6 @@ end
 
 Given /^a user ([^ ]*) who can administer (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   step("a user #{user_name}")
-  #Cobudget::BudgetAdministratorRole.create!(user_id: @user.id, budget_id: budget.id)
 end
 
 Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
@@ -28,10 +27,10 @@ When /^([^ ]+) creates an account for ([^ ]+) in (#{CAPTURE_BUDGET})$/ do |admin
   play.create_accounts(user: user, admin: admin, budget: budget)
 end
 
-When /^([^ ]+) views the buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
+When /^([^ ]+) views the available buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
-  @buckets_viewing = play.list_buckets(budget: budget, user: user)
+  @buckets_viewing = play.list_available_buckets(budget: budget, user: user)
 end
 
 When /^([^ ]+) creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |user_name, budget, table|
@@ -71,6 +70,11 @@ When /^([^ ]*) deletes (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
   play.delete_buckets(bucket: bucket, user: user)
 end
 
+When /^([^ ]*) tries to delete (#{CAPTURE_BUCKET}), it should raise an error$/ do |user_name, bucket|
+  user = users[user_name]
+  expect { play.delete_buckets(bucket: bucket, user: user) }.to raise_error
+end
+
 When /^([^ ]*) grants ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
   user = users[user_name]
   admin = users[admin_name]
@@ -97,10 +101,10 @@ Then /^([^ ]+) should exist as a user$/ do |user_name|
   Cobudget::User.find_by_name(user_name).should_not be_nil
 end
 
-Then /^the bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
+Then /^the available bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
   options = {}
   options[:budget] = budget
-  buckets = play.list_buckets(options).reload
+  buckets = play.list_available_buckets(options).reload
   result = buckets
 
   expected = table.hashes
