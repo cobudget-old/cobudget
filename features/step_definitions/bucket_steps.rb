@@ -83,6 +83,13 @@ Then /^([^ ]*) should have a remaining allocation of (#{CAPTURE_MONEY}) in (#{CA
   play.user_remaining_balance_enquiry(budget: budget, user: user).should == amount
 end
 
+Then /^([^ ]*) should have allocated (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
+  user = users[user_name]
+
+  play.bucket_allocations_from_user_enquiry(bucket: bucket, user: user).should == amount
+end
+
+
 Then /([^ ]*) archives (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
   user = users[user_name]
 

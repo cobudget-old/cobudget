@@ -19,7 +19,6 @@ module Cobudget
       user_accounts = accounts.where("USER_ID IS NOT NULL")
       user_accounts.to_a.sum do |account|
         balance = TransactionCollection.cast_actor(account).balance
-        puts balance.inspect + "!!!!! available for allocation in #{account.name}"
         balance
       end
     end

@@ -10,5 +10,8 @@ module Cobudget
 
     belongs_to :account, polymorphic: true
     belongs_to :transfer
+
+    scope :involving_user_account, ->(user_account) { where account: user_account, account_type: 'Account' }
+    scope :involving_bucket, ->(bucket) { where account: bucket, account_type: 'Bucket' }
   end
 end

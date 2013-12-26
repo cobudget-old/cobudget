@@ -4,19 +4,33 @@
     route: 'budgets/:budget_id/buckets'
     command: list_buckets
     params: '*budget_id'
-    description: Returns a specific budget
+    description: Returns a specific budget and its buckets
 
 -
   get:
     route: 'budgets/:budget_id/allocated'
     command: budget_allocated_balance_enquiry
     params: '*budget_id'
-    description: Returns the amount allocated to the given budget
+    description: Returns the amount allocated to the given budget by all participants
+
+-
+  get:
+    route: 'budgets/:budget_id/list_available_buckets'
+    command: list_available_buckets
+    params: '*budget_id'
+    description: Returns the list of available buckets
+
+-
+  get:
+    route: 'budgets/:budget_id/list_all_buckets'
+    command: list_all_buckets
+    params: '*budget_id, *admin_id'
+    description: Returns the list of all buckets (admin only)
 
 -
   get:
     route: 'budgets/:budget_id/unallocated'
-    command: budget_allocated_balance_enquiry
+    command: budget_unallocated_balance_enquiry
     params: '*budget_id'
     description: Returns the unallocated amount for a given budget
 
@@ -25,13 +39,14 @@
     route: 'budgets/:budget_id/total'
     command: budget_total_enquiry
     params: '*budget_id'
-    description: Returns the total for a given budget
+    description: Returns the total for a given budget (unallocated + allocated)
 
 -
   put:
     route: 'budgets/:budget_id'
-    command: update_buckets
+    command: update_budget
     params: '*user_id, *budget_id, name, description'
+    description: Updates a budget
 
 -
   post:
@@ -53,7 +68,7 @@
     route: 'buckets/:bucket_id/balance'
     command: bucket_balance_enquiry
     params: '*bucket_id'
-    description: Returns the balance for a specific bucket
+    description: Returns the balance in a specific bucket
 
 -
   put:
@@ -74,7 +89,7 @@
     route: 'bucket/:bucket_id/allocations/new'
     command: remove_allocations
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
-    description: Create an allocation for a bucket
+    description: Remove an allocation for a bucket back into the user's account
 
 -
   post:
