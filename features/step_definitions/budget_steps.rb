@@ -71,6 +71,11 @@ When /^([^ ]*) deletes (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
   play.delete_buckets(bucket: bucket, user: user)
 end
 
+When /^([^ ]*) tries to delete (#{CAPTURE_BUCKET}), it should raise an error$/ do |user_name, bucket|
+  user = users[user_name]
+  expect { play.delete_buckets(bucket: bucket, user: user) }.to raise_error
+end
+
 When /^([^ ]*) grants ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
   user = users[user_name]
   admin = users[admin_name]
