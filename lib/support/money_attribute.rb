@@ -1,4 +1,5 @@
 require 'money'
+#require 'money/core_extensions' #this does not get rid of those depracation warnings...
 
 module MoneyAttribute
   def self.included(base)
