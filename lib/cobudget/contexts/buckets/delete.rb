@@ -1,5 +1,5 @@
 require 'playhouse/context'
-require 'cobudget/roles/transaction_collection'
+require 'cobudget/roles/entry_collection'
 require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 
@@ -10,7 +10,7 @@ module Cobudget
       class BucketHasAllocations < Exception; end
 
       actor :user, repository: User
-      actor :bucket, repository: Bucket, role: TransactionCollection
+      actor :bucket, repository: Bucket, role: EntryCollection
 
       def perform
         #raise NotAuthorizedToDeleteBucket unless user.can_delete_bucket?(bucket)

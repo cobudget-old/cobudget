@@ -9,7 +9,7 @@ module Cobudget
 
     def balance
       base_scope.to_a.sum do |account|
-        TransactionCollection.cast_actor(account).balance unless account.user.blank?
+        EntryCollection.cast_actor(account).balance unless account.user.blank?
       end
     end
 

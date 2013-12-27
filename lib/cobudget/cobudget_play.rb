@@ -10,6 +10,7 @@ module Cobudget
     context BudgetAllocatedBalanceEnquiry
     context BudgetUnallocatedBalanceEnquiry
     context BudgetTotalEnquiry
+    context BucketAllocationsFromUserEnquiry
 
     contexts_for Budgets
     contexts_for Buckets

@@ -1,4 +1,5 @@
 require 'money'
+require 'money/core_extensions'
 
 module MoneyAttribute
   def self.included(base)

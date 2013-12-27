@@ -1,14 +1,16 @@
 require 'playhouse/context'
 require 'cobudget/entities/bucket'
+require 'cobudget/entities/user'
 require 'cobudget/roles/budget_participant'
 require 'cobudget/roles/entry_collection'
 
 module Cobudget
-  class BucketBalanceEnquiry < Playhouse::Context
+  class BucketAllocationsFromUserEnquiry < Playhouse::Context
     actor :bucket, role: EntryCollection, repository: Bucket
+    actor :user, repository: User
 
     def perform
-      Money.new(bucket.balance)
+      Money.new(bucket.balance_from_user(user))
     end
   end
 end
