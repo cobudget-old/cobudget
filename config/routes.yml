@@ -2,7 +2,7 @@
 -
   get:
     route: 'budgets/:budget_id/buckets'
-    command: list_buckets
+    command: list_available_buckets
     params: '*budget_id'
     description: Returns a specific budget
 
@@ -134,6 +134,13 @@
     command: update_users
     params: '*name, *email, bg_color, fg_color'
     description: Update a user 
+-
+  patch:
+    route: 'users/:user_id'
+    command: update_users
+    params: '*name, *email, bg_color, fg_color'
+    description: Update a user 
+
 
 #accounts
 -

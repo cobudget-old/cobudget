@@ -10,7 +10,7 @@ use Rack::Cors do |config|
   config.allow do |allow|
     allow.origins '*'
     allow.resource '*',
-        :methods => [:get, :post, :put, :delete, :options],
+        :methods => [:get, :post, :put, :patch, :delete, :options],
         :headers => :any,
         :max_age => 0
   end
