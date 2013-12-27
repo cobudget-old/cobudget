@@ -29,7 +29,7 @@ module Cobudget
         raise NoAllocationRightsToRevoke if user_accounts.blank?
 
         user_account = user_accounts.first
-        balance = TransactionCollection.cast_actor(user_account).balance
+        balance = EntryCollection.cast_actor(user_account).balance
 
         transfer = TransferMoney.new(source_account: user_account, destination_account: budget_account, amount: balance, creator: admin)
         transfer.call

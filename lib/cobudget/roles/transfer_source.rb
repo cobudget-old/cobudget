@@ -1,6 +1,6 @@
 require 'playhouse/role'
 require 'cobudget/roles/budget_participant'
-require 'cobudget/roles/transaction_collection'
+require 'cobudget/roles/entry_collection'
 
 module Cobudget
   module TransferSource
@@ -28,7 +28,7 @@ module Cobudget
     end
 
     def decrease_money!(amount, transfer, identifier)
-      Transaction.create!(amount: -amount, transfer: transfer, account: self, identifier: identifier)
+      Entry.create!(amount: -amount, transfer: transfer, account: self, identifier: identifier)
     end
 
     private

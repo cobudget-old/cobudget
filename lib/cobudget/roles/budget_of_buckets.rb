@@ -1,5 +1,5 @@
 require 'playhouse/role'
-require 'cobudget/roles/transaction_collection'
+require 'cobudget/roles/entry_collection'
 
 module Cobudget
   module BudgetOfBuckets
@@ -10,7 +10,7 @@ module Cobudget
 
     def total_allocated
       buckets.to_a.sum do |bucket|
-        TransactionCollection.cast_actor(bucket).balance
+        EntryCollection.cast_actor(bucket).balance
       end
     end
 
@@ -18,7 +18,7 @@ module Cobudget
       #Total in users accounts that they haven't moved into buckets
       user_accounts = accounts.where("USER_ID IS NOT NULL")
       user_accounts.to_a.sum do |account|
-        balance = TransactionCollection.cast_actor(account).balance
+        balance = EntryCollection.cast_actor(account).balance
         balance
       end
     end

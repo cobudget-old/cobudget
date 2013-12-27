@@ -13,7 +13,7 @@ module Cobudget
       actor :admin, repository: User
 
       actor :user, repository: User, role: BudgetParticipant
-      actor :bucket, repository: Bucket, role: TransactionCollection
+      actor :bucket, repository: Bucket, role: EntryCollection
       actor :amount
 
       def get_attributes

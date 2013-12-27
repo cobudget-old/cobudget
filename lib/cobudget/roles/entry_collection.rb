@@ -3,20 +3,20 @@ require 'cobudget/entities/transfer'
 require 'money'
 
 module Cobudget
-  module TransactionCollection
+  module EntryCollection
     include Playhouse::Role
 
     SUM_COLUMN = :amount_cents
 
     actor_dependency :id
-    actor_dependency :transactions
+    actor_dependency :entries
 
     def balance
       Money.new(base_scope.sum(SUM_COLUMN))
     end
 
     def has_no_allocations?
-      transactions.count == 0
+      entries.count == 0
     end
 
     def is_empty?
@@ -33,8 +33,8 @@ module Cobudget
       user_account = Account.where(user: user).first # this is the user's account. self.id is the bucket
 
       transfers = Transfer.find_by_sql ["SELECT * FROM transfers WHERE
-      transfers.id IN (SELECT transfer_id FROM transactions WHERE account_id = #{user_account.id} AND account_type = 'Account') AND
-      transfers.id IN (SELECT transfer_id FROM transactions WHERE account_id = #{self.id} AND account_type = 'Bucket')"]
+      transfers.id IN (SELECT transfer_id FROM entries WHERE account_id = #{user_account.id} AND account_type = 'Account') AND
+      transfers.id IN (SELECT transfer_id FROM entries WHERE account_id = #{self.id} AND account_type = 'Bucket')"]
 
       #for some reason this returns an empty array []
 
@@ -47,7 +47,7 @@ module Cobudget
     end
 
     def base_scope
-      transactions
+      entries
     end
   end
 end

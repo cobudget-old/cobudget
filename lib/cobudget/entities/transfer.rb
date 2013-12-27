@@ -2,7 +2,7 @@ require 'active_record'
 require 'support/money_attribute'
 require 'cobudget/entities/account'
 require 'cobudget/entities/user'
-require 'cobudget/entities/transaction'
+require 'cobudget/entities/entry'
 
 module Cobudget
   class Transfer < ActiveRecord::Base
@@ -12,6 +12,6 @@ module Cobudget
     belongs_to :source_account, class_name: 'Account'
     belongs_to :destination_account, class_name: 'Account'
     belongs_to :creator, class_name: 'User'
-    has_many   :transactions
+    has_many   :entries
   end
 end

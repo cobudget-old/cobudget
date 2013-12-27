@@ -10,7 +10,7 @@ module Cobudget
     belongs_to :sponsor, class_name: "User"
 
     belongs_to :budget
-    has_many :transactions, as: :account
+    has_many :entries, as: :account
 
     #self.connection - same as ActiveRecord::Base.connection but can point to a different data provider
   end

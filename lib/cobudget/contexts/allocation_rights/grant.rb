@@ -4,7 +4,7 @@ require 'cobudget/entities/user'
 require 'cobudget/composers/money_composer'
 require 'cobudget/roles/budget_participant'
 require 'cobudget/roles/budget_of_accounts'
-require 'cobudget/roles/transaction_collection'
+require 'cobudget/roles/entry_collection'
 
 module Cobudget
   module AllocationRights
@@ -36,7 +36,7 @@ module Cobudget
           user_account = user_accounts.first
         end
 
-        TransactionCollection.cast_actor(budget_account)
+        EntryCollection.cast_actor(budget_account)
 
         transfer = TransferMoney.new(source_account: budget_account, destination_account: user_account, amount: amount, creator: admin)
         transfer.call

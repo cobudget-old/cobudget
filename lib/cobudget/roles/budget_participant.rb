@@ -36,7 +36,7 @@ module Cobudget
     def accounts_in_budget(budget)
       the_accounts = accounts.where(budget: budget).to_a
       the_accounts.each do |account|
-        TransactionCollection.cast_actor(account)
+        EntryCollection.cast_actor(account)
       end
       the_accounts
     end
