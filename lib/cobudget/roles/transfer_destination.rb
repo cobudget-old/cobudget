@@ -7,8 +7,8 @@ module Cobudget
     actor_dependency :id
     actor_dependency :balance, default_role: EntryCollection
 
-    def increase_money!(amount, transfer, identifier)
-      Entry.create!(amount: amount, transfer: transfer, account: self, identifier: identifier)
+    def increase_money!(amount, transaction, identifier)
+      Entry.create!(amount: amount, transaction: transaction, account: self, identifier: identifier)
     end
   end
 end

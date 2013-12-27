@@ -5,7 +5,7 @@ require 'cobudget/entities/user'
 require 'cobudget/entities/entry'
 
 module Cobudget
-  class Transfer < ActiveRecord::Base
+  class Transaction < ActiveRecord::Base
     include MoneyAttribute
     money_attribute :amount
 

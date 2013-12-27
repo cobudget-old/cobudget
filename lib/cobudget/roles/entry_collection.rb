@@ -1,5 +1,5 @@
 require 'playhouse/role'
-require 'cobudget/entities/transfer'
+require 'cobudget/entities/transaction'
 require 'money'
 
 module Cobudget
@@ -32,18 +32,18 @@ module Cobudget
     def from_user_scope(user)
       user_account = Account.where(user: user).first # this is the user's account. self.id is the bucket
 
-      transfers = Transfer.find_by_sql ["SELECT * FROM transfers WHERE
-      transfers.id IN (SELECT transfer_id FROM entries WHERE account_id = #{user_account.id} AND account_type = 'Account') AND
-      transfers.id IN (SELECT transfer_id FROM entries WHERE account_id = #{self.id} AND account_type = 'Bucket')"]
+      transactions = Transaction.find_by_sql ["SELECT * FROM transactions WHERE
+      transactions.id IN (SELECT transaction_id FROM entries WHERE account_id = #{user_account.id} AND account_type = 'Account') AND
+      transactions.id IN (SELECT transaction_id FROM entries WHERE account_id = #{self.id} AND account_type = 'Bucket')"]
 
       #for some reason this returns an empty array []
 
-      transfers.each do |t|
+      transactions.each do |t|
         puts t.account.name
         puts t.amount.to_s
       end
 
-      transfers
+      transactions
     end
 
     def base_scope

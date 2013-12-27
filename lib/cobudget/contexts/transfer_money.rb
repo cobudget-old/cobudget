@@ -1,5 +1,5 @@
 require 'playhouse/context'
-require 'cobudget/entities/transfer'
+require 'cobudget/entities/transaction'
 require 'cobudget/entities/account'
 require 'cobudget/entities/user'
 require 'cobudget/entities/budget'
@@ -37,9 +37,9 @@ module Cobudget
 
       begin
         ActiveRecord::Base.transaction do
-          transfer = Transfer.create!(transfer_arguments)
-          destination_account.increase_money!(amount, transfer, Identifier.generate)
-          source_account.decrease_money!(amount, transfer, Identifier.generate)
+          transaction = Transaction.create!(transfer_arguments)
+          destination_account.increase_money!(amount, transaction, Identifier.generate)
+          source_account.decrease_money!(amount, transaction, Identifier.generate)
         end
       rescue
         raise TransferFailed, "Transfer from '#{source_account.name}' to '#{destination_account.name}' failed."

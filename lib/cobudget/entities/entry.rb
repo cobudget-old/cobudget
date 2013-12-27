@@ -1,6 +1,6 @@
 require 'active_record'
 require 'cobudget/entities/account'
-require 'cobudget/entities/transfer'
+require 'cobudget/entities/transaction'
 require 'support/money_attribute'
 
 module Cobudget
@@ -9,6 +9,6 @@ module Cobudget
     money_attribute :amount
 
     belongs_to :account, polymorphic: true
-    belongs_to :transfer
+    belongs_to :transaction
   end
 end
