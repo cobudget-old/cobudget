@@ -13,7 +13,7 @@ gem 'playhouse-sinatra', git: 'git://github.com/allansideas/playhouse-sinatra.gi
 gem 'capybara'
 gem 'cucumber', '1.3.6'
 gem 'database_cleaner'
-gem 'money'
+gem 'money', :github => "RubyMoney/money"
 gem 'coveralls'
 gem 'activerecord', '~>4.0.1'
 gem 'pusher'

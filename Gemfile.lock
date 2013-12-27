@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/RubyMoney/money.git
+  revision: 118f3d083b2e366edebb447eac1759eb44310fb6
+  specs:
+    money (6.0.0)
+      i18n (~> 0.6.4)
+
+GIT
   remote: git://github.com/allansideas/playhouse-sinatra.git
   revision: 7e119e6b3a3908694c8fc52b18e1ca84cc250347
   specs:
@@ -84,8 +91,6 @@ GEM
     mime-types (2.0)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    money (6.0.0)
-      i18n (~> 0.6.4)
     multi_json (1.7.9)
     multi_test (0.0.2)
     net-scp (1.1.2)
@@ -156,7 +161,7 @@ DEPENDENCIES
   coveralls
   cucumber (= 1.3.6)
   database_cleaner
-  money
+  money!
   pg
   pg_array_parser
   playhouse!
