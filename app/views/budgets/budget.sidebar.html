@@ -1,16 +1,16 @@
 <h2>Your allocations</h2>
+<!--<div ng-repeat="clr in color_array" style="width: 10px; height: 10px; float: left; background-color: {{clr}};"></div>-->
 <div class="l-padded paint white shadow">
-  <div>
-    <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
-  </div>
-  <div class="m-allocations m-list" style="margin-top: -20px">
-    <div class="m-list-item" ng-repeat="ua in user_allocations">
-    <div class="m-list-item-half">{{ua.label}}</div>
-    <div class="m-list-item-half">
-      {{(ua.amount / allocatable)*100 | number:2}}%
-    </div>
-    </div>
-  </div>
+  <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
+  <table class="l-unstyled-table">
+    <tr ng-repeat="ua in user_allocations">
+      <td class="m-allocations-color" style="background-color: {{ua.bucket_color}}">&nbsp;</td>
+      <td class="m-allocations-name">{{ua.label}}</td>
+      <td class="m-allocations-amount">
+        ~{{(ua.amount / allocatable)*100 | number:0}}%
+      </td>
+    </tr>
+  </table>
 </div>
 <a href="" ui-sref="budgets.propose_bucket" class="m-btn m-btn-wide paint clr4-bold">Propose a bucket</a>
 <h2>Bucket updates</h2>

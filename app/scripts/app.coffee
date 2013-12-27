@@ -22,6 +22,7 @@ app = angular.module('cobudget', [
   'resources.buckets'
   'resources.users'
   'services.constrained_slider_collector'
+  'services.color_generator'
   'directives.expander'
   'directives.slider'
   'directives.constrained_slider'

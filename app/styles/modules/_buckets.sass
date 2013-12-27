@@ -6,61 +6,71 @@
   @extend .clearfix
   position: relative
   background: #fff
+  overflow: hidden
   h1
     color: $clr-medium-gray
     font-size: 1.4em
     font-weight: 300
-
+.m-bucket-owner
+  color: lighten($clr-medium-gray, 25%)
+  margin-right: 0.5em
+  font-size: 1em
+  display: inline-block
 .m-bucket-left
   width: 2%
-  min-height: 20em
-  max-height: 20em
+  height: 12em
   display: block
   float: left
 
 .m-bucket-right
   background: #fff
   padding-top: 0.2em
-  min-height: 20em - 1.8em
   width: 98%
   display: block
   float: left
 
 .m-bucket-allocations_wrapper
-  height: 44px
+  height: 1em
   position: relative
   background: #fff
   margin-bottom: 1em
 
 .m-horiz-graph
   width: 100%
-  position: absolute
-  bottom: 0
-  overflow: hidden
-  max-height: 44px
   white-space: nowrap
+
 .m-horiz-graph_max-mark
-  margin-top: 22px
-  height: 22px
-  background: #000 url('../../images/css/stripe.png') repeat
-  color: $clr-4
-  padding-top: 2px
+  height: 2px
+  background: red
   display: none
   +opacity(0)
-  text-align: center
   position: absolute
   left: 0
-  top: 0
-  font-weight: bold
+  top: -1px
+  small
+    font-weight: bold
+    display: block
+    position: absolute
+    top: -1.3em
+    color: red
+    left: 0
+    font-size: 0.68em
 .m-horiz-graph_item
   width: auto
-  height: 44px
+  height: 1em
+  position: relative
+  line-height: 1em
   color: #222
   display: inline-block
   text-align: center
   small
     font-weight: bold
-    font-size: 0.8em
+    display: block
+    position: absolute
+    top: -1.3em
+    color: lighten($clr-medium-gray, 25%)
+    left: 0
+    font-size: 0.7em
   +single-transition(all, 0.3s, ease-in)
 .m-horiz-graph.js-show-max-mark
   .m-horiz-graph_max-mark

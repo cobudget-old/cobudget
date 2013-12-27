@@ -6,13 +6,13 @@
         <li><a class="paint clr2" ng-click="delete(b)">Delete</a></li>
       </ul>
     </nav>
-    <div class="m-bucket">
-      <div class="m-bucket-left" style="background-color: #ccc;">
+    <div class="m-bucket utl-expander" d-expander>
+      <div class="m-bucket-left" style="background-color: {{b.color}};">
         &nbsp;
       </div>
-      <div class="m-bucket-right utl-expander l-padded" d-expander>
+      <div class="m-bucket-right l-padded">
         <div class="m-labels list-inline clearfix">
-          <div class="m-labels-label">
+          <div class="m-bucket-owner">
             Fred Smith
           </div>
           <div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label">
@@ -27,19 +27,20 @@
           </div>
         </div>
         <div ng-if="b.maximum > b.minimum" class="o-slider-container">
-          <div class="o-slider-labels">
-            <div class="o-slider-range-low">0</div>
-            <div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>
-            <div class="o-slider-range-high">${{current_user.allocatable}}</div>
-          </div>
+          <!--<div class="o-slider-labels">-->
+            <!--<div class="o-slider-range-low">0</div>-->
+            <!--<div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>-->
+            <!--<div class="o-slider-range-high">${{current_user.allocatable}}</div>-->
+          <!--</div>-->
           <!--<slider min="0" max="{{b.maximum}}" orientation="vertical" ng-model="b.user_allocation"></slider>-->
-          <constrained-slider min="0" max="current_user.allocatable" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="allocatable" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation"></constrained-slider>
+          <div class="o-slider-selection">${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>
+          <constrained-slider min="0" max="current_user.allocatable" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="allocatable" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>
         </div>
-        <h1>{{b.name}}</h1>
         <div class="m-bucket-allocations_wrapper">
           <horiz-graph max="b.maximum" height="50" items="b.allocations">
           </horiz-graph>
         </div>
+        <h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>
         <div btf-markdown="b.description"></div>
       </div>
     </div>

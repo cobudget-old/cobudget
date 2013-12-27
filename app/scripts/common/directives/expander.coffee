@@ -2,13 +2,15 @@ angular.module("directives.expander", [])
 .directive('dExpander', [() ->
   restrict: 'A'
   link: (scope, element, attr)->
-    expander_button = angular.element("<div class='utl-expander-btn text-center'>more...</div>")
-    expander_button.css
+    expander_button = angular.element(element[0].querySelector('.utl-expander-button'))
+    expander_indicator = angular.element(element[0].querySelector('.utl-expander-indicator'))
     expander_button.on "click", (e)->
+      console.log "click"
       element.toggleClass("j-expanded")
-      if element.hasClass("j-expanded")
-        expander_button.text("less...")
-      else
-        expander_button.text("more...")
-    element.append(expander_button)
+      expander_indicator.toggleClass("j-active")
+      #if element.hasClass("j-expanded")
+        #expander_button.text("less...")
+      #else
+        #expander_button.text("more...")
+        #element.append(expander_button)
 ])

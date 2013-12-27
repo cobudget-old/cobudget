@@ -13,13 +13,13 @@ angular.module("directives.constrained_slider", [])
     max: "=max"
     min: "@min"
     identifier: "@identifier"
+    color: "@color"
 
   link: (scope, element, attrs) ->
 
     scope.slider_id = parseInt(scope.identifier)
     ConstrainedSliderCollector.sliders.push {id: scope.slider_id, value: 0}
 
-    console.log scope.max
     el = angular.element element.children()[0]
     el.noUiSlider
       range: [parseInt(attrs.min, 10), parseInt(scope.max, 10)]
@@ -28,7 +28,6 @@ angular.module("directives.constrained_slider", [])
       step: 1.0
       direction: 'ltr'
       orientation: attrs.orientation
-      behaviour: 'extend-tap'
       set: ()->
         change()
 
@@ -39,7 +38,7 @@ angular.module("directives.constrained_slider", [])
           ConstrainedSliderCollector.sliders[i].value = n
 
       amount = scope.Model
-      new_item = {bucket_id: parseInt(scope.identifier, 10), user_id: $rootScope.current_user.id, user_color: "#63C3E0", amount: amount, is_new: true }
+      new_item = {bucket_id: parseInt(scope.identifier, 10), user_id: $rootScope.current_user.id, user_color: "#63C3E0", amount: amount, is_new: true, bucket_color: scope.color}
       item_identifier = new_item.user_id
       allocated = false
       for item, i in scope.affecting

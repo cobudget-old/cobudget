@@ -2,7 +2,6 @@
   @extend .clearfix
   padding: 0.5em 0.5em
   background: #fff
-  border-bottom: solid 1px darken($clr-lightest-gray, 10%)
 .m-list-item-half
   display: inline-block
   float: left
@@ -10,24 +9,32 @@
  
 .utl-expander
   +single-transition(all, 0.2s, ease-out, 0)
-  max-height: 20em - 1.8em
+  max-height: 12em
   overflow: hidden
   &.j-expanded
     padding-bottom: 1.8em
     max-height: 1500px
 
-.utl-expander-btn
-  height: 1.8em
-  line-height: 1.8em
-  color: $clr-1
-  font-weight: bold
-  width: 100%
-  position: absolute
-  bottom: 0
-  left: 0
-  cursor: pointer
-  border-top: solid 1px transparent
-  +background( linear-gradient(top, rgba(255,255,255, 0.8), #fff))
-  &:hover
-    border-top: solid 1px #ccc
-    //background: #ececec
+.utl-expander-indicator
+  display: inline-block
+  color: lighten($clr-medium-gray, 20%)
+  padding: 0 5px 
+  &.j-active
+    padding: 0 5px 
+    +rotate(90deg)
+    
+//.utl-expander-btn
+  //height: 1.8em
+  //line-height: 1.8em
+  //color: $clr-1
+  //font-weight: bold
+  //width: 100%
+  //position: absolute
+  //bottom: 0
+  //left: 0
+  //cursor: pointer
+  //border-top: solid 1px transparent
+  //+background( linear-gradient(top, rgba(255,255,255, 0.8), #fff))
+  //&:hover
+    //border-top: solid 1px #ccc
+    ////background: #ececec
