@@ -47,8 +47,13 @@ namespace :deploy do
     #run "mv #{release_path}/dist/* #{release_path}/"
   end
 
+  task :symlinks do
+    run "ln -nfs #{shared_path}/fonts #{release_path}/styles/fonts"
+  end
+
   before "deploy:update_code", "deploy:build"
   after "deploy:build", "deploy:compress"
   after "deploy:compress", "deploy:upload"
   after "deploy:update_code", "deploy:uncompress_and_clean_up"
+  after "deploy:uncompress_and_clean_up", "deploy:symlinks"
 end
