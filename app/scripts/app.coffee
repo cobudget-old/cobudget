@@ -49,7 +49,7 @@ app = angular.module('cobudget', [
   ]
   $rootScope.$debugMode = "on"
   $rootScope.admin = false
-  #editableOptions.theme = 'bs3'
+  editableOptions.theme = 'cobudget'
   $rootScope.pusher = new Pusher('6ea7addcc0137ddf6cf0')
   $rootScope.channel = $rootScope.pusher.subscribe('cobudget')
 
