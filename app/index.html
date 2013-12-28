@@ -33,19 +33,22 @@
     <!-- Add your site or application content here -->
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <nav role="navigation">
-          <a href="/" class="navbar-brand">cobudget!</a>
+        <nav id="main-nav" role="navigation">
           <ul class="nav navbar-nav">
             <li><a ui-sref="budgets.buckets({budget_id: 1})">Buckets</a></li>
             <li><a ui-sref="admin.dashboard">Admin Area</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="">{{current_user}}</a>::
               <span href="" ng-click="feignUser(0)">1</span>
               <span href="" ng-click="feignUser(1)">2</span>
               <span href="" ng-click="feignUser(2)">3</span>
               <a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a>
+            </li>
+            <li>
+              <a href="/" class="navbar-brand">
+                <img class="logo" src="/images/css/ph_logo.png" alt="cobudget logo" />
+              </a>
             </li>
           </ul>
         </nav>

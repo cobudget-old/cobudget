@@ -1,17 +1,22 @@
 <h2>Your allocations</h2>
 <!--<div ng-repeat="clr in color_array" style="width: 10px; height: 10px; float: left; background-color: {{clr}};"></div>-->
-<div class="l-padded paint white shadow">
-  <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
-  <table class="l-unstyled-table">
-    <tr ng-repeat="ua in user_allocations">
-      <td class="m-allocations-color" style="background-color: {{ua.bucket_color}}">&nbsp;</td>
-      <td class="m-allocations-name">{{ua.label}}</td>
-      <td class="m-allocations-amount">
-        ~{{(ua.amount / allocatable)*100 | number:0}}%
-      </td>
-    </tr>
-  </table>
+<div class="paint white shadow">
+  <div class="l-padded">
+    <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
+    <table class="l-unstyled-table">
+      <tr ng-repeat="ua in user_allocations">
+        <td class="m-allocations-color" style="background-color: {{ua.bucket_color}}">&nbsp;</td>
+        <td class="m-allocations-name">{{ua.label}}</td>
+        <td class="m-allocations-amount">
+          ~{{(ua.amount / allocatable)*100 | number:0}}%
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="o-action-block paint white">
+    <div class="shadow"></div>
+    <a href="" ui-sref="budgets.propose_bucket"><strong> + PROPOSE A BUCKET</strong></a>
+  </div>
 </div>
-<a href="" ui-sref="budgets.propose_bucket" class="m-btn m-btn-wide paint clr4-bold">Propose a bucket</a>
 <h2>Bucket updates</h2>
 <p> e.g. latest reports </p>
