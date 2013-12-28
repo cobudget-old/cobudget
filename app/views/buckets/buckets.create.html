@@ -3,26 +3,26 @@
   <form novalidate class="simple-form">
     <div class="field">
       <label for="bucket-name">Name: </label>
-      <input id="bucket-name" type="text" ng-model="bucket.name" /><br />
+      <input id="bucket-name" type="text" ng-model="_bucket.name" /><br />
     </div>
     <div class="row">
       <div class="field col-md-6">
         <label for="bucket-min">Minimum amount: </label>
-        <input id="bucket-min" type="number" ng-model="bucket.minimum" /><br />
+        <input id="bucket-min" type="number" ng-model="_bucket.minimum" /><br />
       </div>
       <div class="field col-md-6">
         <label for="bucket-max">Maximum amount: </label>
-        <input id="bucket-max" type="number" ng-model="bucket.maximum" /><br />
+        <input id="bucket-max" type="number" ng-model="_bucket.maximum" /><br />
       </div>
     </div>
     <div class="field">
       <label for="bucket-description">Description: </label>
-      <textarea id="bucket-description" rows="10" ng-model="bucket.description"></textarea>
+      <textarea id="bucket-description" rows="10" ng-model="_bucket.description"></textarea>
     </div>
-    <div class="ani-fade-fast" ng-hide="bucket.description == undefined || bucket.description ==''">
+    <div class="ani-fade-fast" ng-hide="_bucket.description == undefined || bucket.description ==''">
       <strong>Preview:</strong>
       <div class="well">
-        <div btf-markdown="bucket.description"></div>
+        <div btf-markdown="_bucket.description"></div>
       </div>
     </div>
     <div class="actions">

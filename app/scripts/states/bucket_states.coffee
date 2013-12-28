@@ -11,10 +11,14 @@ angular.module('states.bucket', ['controllers.buckets'])
   .state('buckets.edit',
     url: '/edit'
     views:
-      'bucket-edit':
+      'header':
+        template: '
+          <h2>Edit Bucket</h2>
+        '
+      'page':
         templateUrl: '/views/buckets/buckets.edit.html'
         controller: 'BucketController'
-      'sidebar@':
+      'sidebar':
          template: '<h1>sidebar</h1>'
   ) #end state
 ]) #end config

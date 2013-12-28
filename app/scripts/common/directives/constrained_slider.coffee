@@ -31,6 +31,24 @@ angular.module("directives.constrained_slider", [])
       set: ()->
         change()
 
+    constrainValue = (incoming_value)->
+      user_max_assignable = parseInt(scope.max, 10)
+      affected_max_assignable = parseInt(scope.secondMax, 10)
+
+      user_already_assigned = ConstrainedSliderCollector.sumOtherSliders(scope.collected_sliders, scope.slider_id)
+
+      #slider_total_already_assigned = getAffectingTotal()
+
+      #slider_left_to_be_assigned = affected_max_assignable - slider_total_already_assigned
+
+      #if incoming_value > slider_left_to_be_assigned
+        #if incoming_value + slider_left_to_be_assigned > slider_left_to_be_assigned
+          #new_value = slider_left_to_be_assigned
+        #else
+          #new_value = incoming_value
+      #else 
+        #new_value = incoming_value
+
     scope.$watch "Model", (n, o) ->
       scope.collected_sliders = ConstrainedSliderCollector.sliders
       for s, i in scope.collected_sliders
@@ -47,7 +65,9 @@ angular.module("directives.constrained_slider", [])
           scope.affecting[i] = new_item
       if allocated == false
         scope.affecting.push new_item
-      el.val scope.Model
+      val = constrainValue(scope.Model)
+      scope.Model = val
+      el.val val
 
     getAffectingTotal = ->
       total = 0

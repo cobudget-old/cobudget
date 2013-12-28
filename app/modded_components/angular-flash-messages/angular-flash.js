@@ -9,6 +9,7 @@ angular.module('flash', [])
   };
 
   var emit = function() {
+    console.log(messages)
     $rootScope.$emit('flash:message', messages, cleanup);
   };
 

@@ -11,6 +11,7 @@ app = angular.module('cobudget', [
   'flash'
   'colorpicker.module'
   'btford.markdown'
+  'xeditable'
   'ui.router'
   'filters.utils'
   'controllers.buckets'
@@ -39,7 +40,7 @@ app = angular.module('cobudget', [
   #$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
-.run(["$rootScope", "API_PREFIX", ($rootScope, API_PREFIX) ->
+.run(["$rootScope", "API_PREFIX", "editableOptions", ($rootScope, API_PREFIX, editableOptions) ->
   users = [
     {id: 1, name: "Tony Soprano", allocatable: 4000}
     {id: 2, name: "Hermine Granger", allocatable: 2000}
@@ -48,6 +49,7 @@ app = angular.module('cobudget', [
   ]
   $rootScope.$debugMode = "on"
   $rootScope.admin = false
+  #editableOptions.theme = 'bs3'
   $rootScope.pusher = new Pusher('6ea7addcc0137ddf6cf0')
   $rootScope.channel = $rootScope.pusher.subscribe('cobudget')
 
