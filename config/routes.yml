@@ -40,6 +40,13 @@
     params: '*name, description'
     description: Creates a budget
 
+-
+  delete:
+    route: 'budgets/:budget_id/buckets/:bucket_id'
+    command: delete_buckets
+    params: '*user_id, *bucket_id, *budget_id'
+    description: Deletes a bucket from budget
+
 #buckets
 -
   get:
@@ -57,21 +64,21 @@
 
 -
   put:
-    route: 'bucket/:bucket_id/update'
+    route: 'buckets/:bucket_id'
     command: update_buckets
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
     description: Update a bucket
 
 -
   post:
-    route: 'bucket/:bucket_id/allocations'
+    route: 'buckets/:bucket_id/allocations'
     command: create_allocations
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
     description: Create an allocation for a bucket
 
 -
   delete:
-    route: 'bucket/:bucket_id/allocations'
+    route: 'buckets/:bucket_id/allocations'
     command: remove_allocations
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
     description: Delete an allocation for a bucket

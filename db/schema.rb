@@ -63,7 +63,9 @@ ActiveRecord::Schema.define(version: 201312271431) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "email",      null: false
+    t.string   "email",                          null: false
+    t.string   "bg_color",   default: "#FFFFFF"
+    t.string   "fg_color",   default: "#FFFFFF"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
