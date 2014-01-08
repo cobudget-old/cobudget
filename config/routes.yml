@@ -1,6 +1,13 @@
 #budgets
 -
   get:
+    route: 'budgets'
+    command: list_budgets
+    params: 
+    description: Returns a list of all budgets
+
+-
+  get:
     route: 'budgets/:budget_id/buckets'
     command: list_available_buckets
     params: '*budget_id'
