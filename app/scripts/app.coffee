@@ -30,8 +30,8 @@ app = angular.module('cobudget', [
   'directives.horiz_graph'
   'directives.manage_users'
 ])
-.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
-#.constant("API_PREFIX", "http://localhost:9292/cobudget")
+#.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
+.constant("API_PREFIX", "http://localhost:9292/cobudget")
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'API_PREFIX', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, API_PREFIX)->
   $urlRouterProvider.otherwise('/')
   RestangularProvider.setBaseUrl(API_PREFIX)
