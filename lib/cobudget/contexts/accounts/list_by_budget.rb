@@ -2,18 +2,20 @@ require 'playhouse/context'
 require 'cobudget/entities/budget'
 require 'cobudget/entities/account'
 require 'cobudget/entities/user'
+require 'cobudget/roles/budget_participant'
 
 module Cobudget
   module Accounts
     class ListByBudget < Playhouse::Context
       class NotAuthorizedToListAccounts < Exception; end
       actor :budget, repository: Budget
-      actor :admin, repository: User
 
       def perform
         accounts = [] 
         budget.accounts.order('updated_at desc').load.each do |acc|
-          acc = acc.attributes.merge!(:user_email => acc.user.email)
+          current_allocatable = EntryCollection.cast_actor(acc).balance.cents
+          user_email = acc.user ? acc.user.email : nil
+          acc = acc.attributes.merge!(:user_email => user_email, :current_allocatable => current_allocatable)
           accounts << acc
         end
         accounts

@@ -158,10 +158,15 @@
 
 #accounts
 -
+  get:
+    route: 'budgets/:budget_id/accounts'
+    command: list_by_budget_accounts
+    params:  '*budget_id'
+    description: Returns a list of all accounts for a budget
+
+-
   post:
     route: 'accounts'
     command: create_accounts
     params: '*user_id, *admin_id, *budget_id'
     description: Admin creates an account for a given user and a budget 
-    
-  
