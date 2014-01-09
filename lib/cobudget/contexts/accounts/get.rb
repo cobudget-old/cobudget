@@ -1,0 +1,17 @@
+require 'playhouse/context'
+require 'cobudget/entities/budget'
+require 'cobudget/entities/account'
+require 'cobudget/entities/user'
+
+module Cobudget
+  module Accounts
+    class Get < Playhouse::Context
+      actor :budget, repository: Budget
+      actor :user, repository: User
+
+      def perform
+        Account.where(budget_id: budget.id, user_id: user.id).first
+      end
+    end
+  end
+end

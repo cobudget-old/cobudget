@@ -124,7 +124,7 @@ end
 
 Then /^there should be an account for ([^ ]+) in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
-  play.show_accounts(user: user, budget: budget).should_not be_nil
+  play.get_accounts(user: user, budget: budget).should_not be_nil
 end
 
 Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budget_name, budget_description|
