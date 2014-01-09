@@ -16,11 +16,22 @@ angular.module('states.admin', [])
         template: "Header"
       'page-full':
         templateUrl: '/views/admin/dashboard.html'
-        controller: (['$scope', '$state', 'User', ($scope, $state, User)->
+        controller: (['$scope', '$state', 'User', 'Budget', ($scope, $state, User, Budget)->
           $scope.mode = ""
           $scope.search = ""
           $scope.users = {}
+          $scope.budgets = []
+
           $scope._user = {}
+
+          Budget.allBudgets().then (success)->
+            $scope.budgets = success
+
+          User.allUsers().then((success)->
+            $scope.users = success
+          , (error)->
+            console.log error
+          )
 
           $scope.createUser = ()->
             User.createUser($scope._user).then((success)->
@@ -36,11 +47,6 @@ angular.module('states.admin', [])
               $scope.mode = ""
             else $scope.mode = mode
 
-          User.allUsers().then((success)->
-            $scope.users = success
-          , (error)->
-            console.log error
-          )
         ]) #end controller'
   )
   .state('admin.allocation_rights',

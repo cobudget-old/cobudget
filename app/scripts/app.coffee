@@ -22,6 +22,7 @@ app = angular.module('cobudget', [
   'resources.budgets'
   'resources.buckets'
   'resources.users'
+  'resources.accounts'
   'services.constrained_slider_collector'
   'services.color_generator'
   'directives.expander'
@@ -29,8 +30,11 @@ app = angular.module('cobudget', [
   'directives.constrained_slider'
   'directives.horiz_graph'
   'directives.manage_users'
+  'directives.manage_allocation_rights'
+  'directives.manage_budget'
 ])
 #.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
+#:9393 = shotgun, :9292 = rackup
 .constant("API_PREFIX", "http://localhost:9292/cobudget")
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'API_PREFIX', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, API_PREFIX)->
   $urlRouterProvider.otherwise('/')

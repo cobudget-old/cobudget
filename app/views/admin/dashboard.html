@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6">
   <section class="m-admin_dashboard-panel shadow l-padded paint white">
-    <h3>Manage users</h3>
+    <h1>Manage users</h1>
     <nav class="m-nav-small">
       <a href="" class="paint clr2" ng-class="{'state-on': mode === 'user_form'}" ng-click="toggle('user_form')"><span class="icon-plus"></span></a>
     </nav>
@@ -32,5 +32,9 @@
     </table>
   </section>
   </div>
-  <div class="col-md-6">Col</div>
+  <div class="col-md-6">
+    <section class="m-admin_dashboard-panel m-admin_budget shadow l-padded paint white">
+      <article ng-repeat="budget in budgets" manage-budget budget="budget"></article>
+    </section>
+  </div>
 </div>

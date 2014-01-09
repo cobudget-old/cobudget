@@ -1,0 +1,13 @@
+<h1 ng-click="ux.toggle()">
+  <span>{{budget.name}}</span>
+  <span class="utl-expander-indicator {{active_budget == budget.id ? 'j-active' : ''}}">&gt;</span>
+  <span class="pull-right">
+    ${{budget_account.balance / 100}}
+  </span>
+</h1>
+<div ng-show="active_budget === budget.id" >
+  <table>
+    <tr ng-repeat='acc in budget.accounts' manage-allocation-rights account="acc"></tr>
+  </table>
+  <button ng-click="updateAllocationRights()" class="btn">Update all</button>
+</div>
