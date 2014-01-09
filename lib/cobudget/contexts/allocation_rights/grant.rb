@@ -40,6 +40,11 @@ module Cobudget
 
         transfer = TransferMoney.new(source_account: budget_account, destination_account: user_account, amount: amount, creator: admin)
         transfer.call
+        account = transfer.destination_account
+        balance = EntryCollection.cast_actor(account).balance.cents
+        user_email = account.user ? account.user.email : nil
+        account = account.attributes.merge!(:user_email => user_email, :balance => balance)
+        account
       end
     end
   end

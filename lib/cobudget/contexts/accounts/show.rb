@@ -6,12 +6,20 @@ require 'cobudget/entities/user'
 module Cobudget
   module Accounts
     class Show < Playhouse::Context
-      actor :budget, repository: Budget
-      actor :user, repository: User
+      actor :account, repository: Account
 
       def perform
-        Account.where(budget_id: budget.id, user_id: user.id).first
+        balance = EntryCollection.cast_actor(account).balance.cents
+        user_email = account.user ? account.user.email : nil
+        data = account.attributes.merge!(:user_email => user_email, :balance => balance)
+        data
       end
+      #actor :budget, repository: Budget
+      #actor :user, repository: User
+
+      #def perform
+        #Account.where(budget_id: budget.id, user_id: user.id).first
+      #end
     end
   end
 end

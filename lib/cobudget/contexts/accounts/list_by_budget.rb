@@ -13,9 +13,9 @@ module Cobudget
       def perform
         accounts = [] 
         budget.accounts.order('updated_at desc').load.each do |acc|
-          current_allocatable = EntryCollection.cast_actor(acc).balance.cents
+          balance = EntryCollection.cast_actor(acc).balance.cents
           user_email = acc.user ? acc.user.email : nil
-          acc = acc.attributes.merge!(:user_email => user_email, :current_allocatable => current_allocatable)
+          acc = acc.attributes.merge!(:user_email => user_email, :balance => balance)
           accounts << acc
         end
         accounts

@@ -119,9 +119,9 @@
     description: Returns all users
 -
   get:
-    route: 'users'
-    command: list_users
-    params: ''
+    route: 'users/:user_id'
+    command: show_users
+    params: '*user_id'
     description: Returns a user
 -
   get:
@@ -138,7 +138,7 @@
 
 -
   post:
-    route: 'users/:user_id/grant_allocatable_by_budget/:budget_id'
+    route: 'users/:user_id/grant_allocation_rights/:budget_id'
     command: grant_allocation_rights
     params: '*admin_id, *user_id, *budget_id, *amount'
     description: Creates user allocatable for a budget
@@ -163,6 +163,13 @@
     command: list_by_budget_accounts
     params:  '*budget_id'
     description: Returns a list of all accounts for a budget
+
+-
+  get:
+    route: 'accounts/:account_id'
+    command: show_accounts
+    params: '*account_id'
+    description: Get single account by id
 
 -
   post:
