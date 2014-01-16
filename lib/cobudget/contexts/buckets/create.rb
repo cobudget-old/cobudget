@@ -4,7 +4,7 @@ require 'cobudget/entities/bucket'
 require 'cobudget/entities/user'
 require 'cobudget/composers/money_composer'
 require 'playhouse/role'
-require 'pusher'
+require 'cobudget_theatre'
 #require 'cobudget/roles/budget_administrator'
 
 module Cobudget
@@ -28,6 +28,7 @@ module Cobudget
       def perform
         #raise NotAuthorizedToCreateBucket unless user.can_create_bucket?(bucket)
         data = Bucket.create!(attributes)
+        #Theatre.push_to_pusher('bucket_created', 'bucket', data)
 
         #This wouldn't work with options in a core level so moved it here to test it.
         #Pusher.key = '6ea7addcc0137ddf6cf0'

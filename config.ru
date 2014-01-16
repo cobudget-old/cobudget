@@ -16,7 +16,7 @@ use Rack::Cors do |config|
   end
 end
 
-require 'cobudget_sinatra'
+require 'cobudget_web'
 set :root, Pathname(__FILE__).dirname
 set :environment, ENV['RACK_ENV']
 set :run, false
