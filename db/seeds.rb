@@ -6,31 +6,29 @@ require 'cobudget/entities/account'
 module Cobudget
   class SeedLoader
     def self.load_seed
-      user = Cobudget::User.create(name: "First", email: "first@example.com")
-      budget = Cobudget::Budget.create(name: 'Budget')
+      dionysus = Cobudget::User.create(name: 'Dionysus', email: 'dionysus@example.com')
+      athena = Cobudget::User.create(name: 'Athena', email: 'athena@example.com')
+      artemis = Cobudget::User.create(name: 'Artemis', email: 'artemis@example.com')
+      zeus = Cobudget::User.create(name: 'Zeus', email: 'zeus@example.com')
+      hermes = Cobudget::User.create(name: 'Hermes', email: 'hermes@example.com')
+
+      budget = Cobudget::Budget.create(name: 'Pantheon')
       Account.create(budget: budget, name: "#{budget.name} catchall bucket")
-      buckets = ["Sponsor Count Dracula to suck on some blood", "Website build", "Foundation magic bucket"]
-      description = "We are aiming to raise around $5k in total by end of the year to pay Nanz (design) & Maz (dev) to refresh the design and build the site on wordpress. We have already raised $2,177 in previous collab funding rounds this year. Nanz volunteered her time to make the current changes to the squarespace site (details). $5k would give us each $50/hour for 50 hours ($2.5k each). We are charging commercial rates so that we can treat this as regular client work and block out chunks of our time to create a really beautifully designed and engaging website. That being said, we're happy to do it for whatever we can get via buckets as it would be great to have a website we're proud of, so happy to do it at a discounted rate if needs be. 
 
-      Design
-      - Redesign look & feel and overall visual concept of website while keeping general existing content structure in place as appropriate.
-      - Design system for further categorisation of ventures vs service teams
-      - Research on possibilities for interactive elements/ things that could make the site really engaging 
-      - Adapt UI to new look and feel, design flats for all pages
-      - Redesign blog for incorporation into new site 
-      - Make logo assets for teams that don't have one. (Eg: freelancers, enspiral services)
+      bucket1_desc = "I'd really like someone to rescue my daughter from the underworld. Hades isn't returning my calls, and I'm busy on Earth doing, um, important business."
+      bucket1 = Account.create(budget: budget, name: 'Rescue Persephone from Hades', description: bucket1_desc, minimum: 1000, maximum: rand(2000..9000), sponsor: zeus)
 
-      Dev
-      - Build new design into a custom Wordpress theme to make the site easily updatable and adaptable for the future needs. 
-      - Build out the admin section to further enhance the CMS so the site can be updated by non-tech folk.
-      - Responsive styles for new design to make site mobile friendly
-      - Build new blog to match new design
-      - Migrate old blog content across to new site
-      - Cross browser testing & fixes
-      - Deploy"
-      buckets.each do |b|
-        Cobudget::Bucket.create(budget: budget, name: b, description: description, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: nil)
-      end
+      bucket2_desc = "We are aiming to raise around $5k in total by end of the year to pay Aphodite (design) & Ares (dev) to refresh the design and build the site on wordpress."
+      bucket2 = Account.create(budget: budget, name: 'Build Website', description: bucket2_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: nil)
+
+      bucket3_desc = "This would be a great way for us to spend our time rather than annoying the mortals."
+      bucket3 = Account.create(budget: budget, name: 'Foosball table for Acropolis', description: bucket3_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: artemis)
+
+      bucket4_desc = "We've finished the ceramic roof ornaments and Doric column details. In order to keep everything looking good, it needs to be maintained properly."
+      bucket4 = Account.create(budget: budget, name: 'Temple of Aphaia - Upkeep', description: bucket4_desc, minimum: 0, maximum: rand(1..9000), sponsor: nil)
+
+      bucket5_desc = "Everyone around here just needs to relax."
+      bucket5 = Account.create(budget: budget, name: 'Wine for Dionysus', description: bucket5_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: dionysus)
     end
   end
 end
