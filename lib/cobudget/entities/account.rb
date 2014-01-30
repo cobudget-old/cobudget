@@ -5,6 +5,10 @@ module Cobudget
     belongs_to :user
     belongs_to :budget
     has_many :entries, as: :account
+
+    def allocation_rights_cents
+      EntryCollection.cast_actor(self).balance.cents
+    end
   end
 
 end

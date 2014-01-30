@@ -70,25 +70,18 @@
     description: Returns the balance for a specific bucket
 
 -
+  get:
+    route: 'buckets/:bucket_id/allocations'
+    command: list_by_bucket_allocations
+    params: '*bucket_id'
+    description: Returns a list of allocations by bucket
+
+-
   put:
     route: 'buckets/:bucket_id'
     command: update_buckets
     params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
     description: Update a bucket
-
--
-  post:
-    route: 'buckets/:bucket_id/allocations'
-    command: create_allocations
-    params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
-    description: Create an allocation for a bucket
-
--
-  delete:
-    route: 'buckets/:bucket_id/allocations'
-    command: remove_allocations
-    params: '*user_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
-    description: Delete an allocation for a bucket
 
 -
   post:
@@ -177,3 +170,18 @@
     command: create_accounts
     params: '*user_id, *admin_id, *budget_id'
     description: Admin creates an account for a given user and a budget 
+
+#allocations
+-
+  post:
+    route: 'allocations'
+    command: create_allocations
+    params: '*user_id, *bucket_id, *amount'
+    description: Create an allocation for a bucket
+
+-
+  patch:
+    route: 'allocations/:allocation_id'
+    command: update_allocations
+    params: '*allocation_id, *bucket_id, *budget_id, name, description, sponsor_id, minimum, maximum'
+    description: Update an allocation
