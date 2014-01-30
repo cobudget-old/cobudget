@@ -11,7 +11,24 @@
     font-weight: 300
   
 .m-admin_budget
-  h1
-    cursor: pointer
-    margin: 0 0 0.5em 0
 
+.m-admin_budget-header
+  @extend .clearfix
+  h1
+    display: inline-block
+    width: 97%
+    margin: 0
+    cursor: pointer
+    padding: 0.5em
+    float: left
+
+.m-admin_budget-color
+  display: inline-block
+  line-height: 1.1
+  font-size: 1.4em
+  padding: 0.5em 0
+  width: 3%
+  float: left
+
+.m-admin_budget-accounts
+  border-top: solid 1px $clr-lightest-gray

@@ -13,6 +13,7 @@ app = angular.module('cobudget', [
   'btford.markdown'
   'xeditable'
   'ui.router'
+  'ui.bootstrap'
   'filters.utils'
   'controllers.buckets'
   'controllers.budgets'

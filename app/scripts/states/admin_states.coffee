@@ -43,6 +43,7 @@ angular.module('states.admin', [])
             )
 
           $scope.toggle = (mode)->
+            console.log mode
             if $scope.mode == mode
               $scope.mode = ""
             else $scope.mode = mode

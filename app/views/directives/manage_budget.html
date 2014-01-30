@@ -1,13 +1,40 @@
-<h1 ng-click="ux.toggle()">
-  <span>{{budget.name}}</span>
-  <span class="utl-expander-indicator {{active_budget == budget.id ? 'j-active' : ''}}">&gt;</span>
-  <span class="pull-right">
-    ${{budget_account.balance / 100}}
-  </span>
-</h1>
-<div ng-show="active_budget === budget.id" >
+<div class="m-admin_budget-header">
+  <div class="m-admin_budget-color" style="background-color: #eee">&nbsp;</div>
+  <h1 ng-click="ux.toggle()">
+    <span>{{budget.name}}</span>
+    <span class="utl-expander-indicator {{active_budget == budget.id ? 'j-active' : ''}}">&gt;</span>
+    <span class="pull-right">
+      ${{budget_account.balance / 100}}
+    </span>
+  </h1>
+</div>
+<div class="m-admin_budget-accounts l-padded" ng-show="active_budget == budget.id" >
+  <div class="field">
+    <div class="row">
+      <div class="col-md-8">
+        <input class="field" ng-model="search.$" type="text" placeholder="Search accounts..."></input>
+      </div>
+      <div class="col-md-1">
+        or
+      </div>
+      <div class="col-md-3">
+        <button class="btn m-btn-fill-width paint clr2" ng-click="ux.add_user_form =  !ux.add_user_form">Add new</button>
+      </div>
+    </div>
+  </div>
+  <form class="l-bottom-margin" ng-submit="creatAllocationRights()" ng-show="ux.add_user_form" novalidate>
+    <div class="field">
+      <input type="text" ng-model="_n_account.user" placeholder="Start typing email" typeahead="user as user.email for user in users | filter:$viewValue | limitTo:8" typeahead-editable="false " class="form-control" />
+    </div>
+    <div class="field">
+      <input type="number" ng-model="_n_account._allocation_rights" /> 
+    </div>
+    <div class="actions">
+      <button ng-click="createAllocationRights()" class="btn">Create in this budget</button>
+    </div>
+  </form>
   <table>
-    <tr ng-repeat='acc in budget.accounts' manage-allocation-rights account="acc"></tr>
+    <tr ng-repeat='acc in budget.accounts | filter:search:strict' manage-allocation-rights account="acc"></tr>
   </table>
   <button ng-click="updateAllocationRights()" class="btn">Update all</button>
 </div>

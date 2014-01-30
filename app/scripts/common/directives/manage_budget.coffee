@@ -4,12 +4,17 @@ angular.module("directives.manage_budget", [])
   templateUrl: '/views/directives/manage_budget.html'
   scope:
     budget: "=budget"
+    users: "=users"
 
   link: (scope, element, attr)->
     scope.budget_account = {}
     scope.budget.accounts = []
     scope.active_budget = undefined
+    scope._account = {}
+    scope._n_account = {}
+    scope._n_account._allocation_rights = 0
     scope.ux = {}
+    scope.ux.add_user_form = false
 
     scope.ux.toggle = ()->
       if scope.active_budget == scope.budget.id
@@ -24,28 +29,40 @@ angular.module("directives.manage_budget", [])
           if acc.user_id?
             scope.budget.accounts.push acc
           else
-            console.log "IT"
             scope.budget_account = acc
       , (error)->
         console.log error
 
     scope.loadAccounts()
 
+    scope.check = ->
+      console.log scope.$parent.$parent
+
     scope.refreshBudgetAccount = ()->
       Account.getAccount(scope.budget_account.id).then (success)->
         scope.budget_account = success
 
-    scope.updateAllocationRights = ()->
-      #must manually incriment due to promise...
-      i = 0
+    scope.createAllocationRights = ->
+      account = {}
+      account.user_id = scope._n_account.user.id
+      account._allocation_rights = scope._n_account._allocation_rights
+      account.budget_id = scope.active_budget
+
+      Account.grantAllocationRights(account).then (success)->
+        scope.budget.accounts.unshift success
+        scope._n_account = {}
+        scope._n_account._allocation_rights = 0
+
+    scope.updateAllocationRights = ->
       for acc in scope.budget.accounts
         if acc._allocation_rights
           Account.grantAllocationRights(acc).then (success)->
             acc._allocation_rights = 0
-            scope.budget.accounts[i] = success
+            console.log acc.id, success.id
+            for acc, i in scope.budget.accounts
+              if acc.id == success.id
+                scope.budget.accounts[i] = success
             scope.refreshBudgetAccount()
-            i++
-            #scope.loadAccounts()
           , (error)->
             console.log error
 ])

@@ -50,8 +50,13 @@ table
 
 .field  
   @extend .form-group
+
+input[type="text"], input[type="email"], input[type="number"], input[type="password"], textarea
+  @extend .form-control
+
+td
   input[type="text"], input[type="email"], input[type="number"], input[type="password"], textarea
-    @extend .form-control
+    margin-bottom: 0
 
 .actions 
   @extend .form-group
