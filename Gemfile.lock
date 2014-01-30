@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: git://github.com/enspiral/playhouse-sinatra.git
-  revision: fff11a1ebcfded42574067815671a2fc798dc787
+  revision: e39357ef614caba96342195f9af4cd1d7de2c08b
   specs:
     playhouse-sinatra (0.1.0)
       playhouse
@@ -112,7 +112,7 @@ GEM
       signature (~> 0.1.6)
     rack (1.5.2)
     rack-cors (0.2.9)
-    rack-protection (1.5.1)
+    rack-protection (1.5.2)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)

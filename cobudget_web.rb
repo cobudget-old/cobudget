@@ -21,7 +21,7 @@ class CobudgetWeb < Sinatra::Base
   theatre = Cobudget::CobudgetTheatre.new(root: settings.root, environment: settings.environment)
   #root: settings.root, environment: settings.environment
 
-  add_play theatre, Cobudget::CobudgetPlay#, routes
+  add_play theatre, Cobudget::CobudgetPlay, routes
 
   #production.run(theatre: theatre, interface: nil, interface_args: ARGV )
 
