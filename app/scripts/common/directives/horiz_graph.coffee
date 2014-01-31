@@ -9,7 +9,7 @@ angular.module("directives.horiz_graph", [])
       </div>
       <div class='m-horiz-graph_items'>
         <div ng-repeat='item in items track by $index'  class='m-horiz-graph_item'>
-          <small>${{item.amount}}</small>
+          <small ng-show='item.amount > 0'>${{item.amount}}</small>
         </div>
       </div>
     </div>
@@ -38,25 +38,26 @@ angular.module("directives.horiz_graph", [])
       pc = percent_of_total
 
     scope.$watch "items", (n, o) ->
-      for item, i in n
-        pc = getPercentage(item)
+      if n != o
+        for item, i in n
+          pc = getPercentage(item)
 
-        counter = scope.items.length - i
+          counter = scope.items.length - i
 
-        el = angular.element angular.element(element.children()[1]).children()[i]
+          el = angular.element angular.element(element.children()[1]).children()[i]
 
-        if pc < 8
-          el.children('small').css
-            opacity: 0
-        else
-          el.children('small').css
-            opacity: 1
-        if scope.max_reached
-          element.addClass('js-show-max-mark')
-        else
-          element.removeClass('js-show-max-mark')
-        el.css
-          width: pc + "%" 
-          backgroundColor: item.user_color
+          if pc < 8
+            el.children('small').css
+              opacity: 0
+          else
+            el.children('small').css
+              opacity: 1
+          if scope.max_reached
+            element.addClass('js-show-max-mark')
+          else
+            element.removeClass('js-show-max-mark')
+          el.css
+            width: pc + "%" 
+            backgroundColor: item.user_color
     , true
 ]

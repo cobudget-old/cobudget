@@ -1,5 +1,5 @@
 <section>
-  <article ng-repeat="b in buckets" ng-controller="BucketItem" class="" >
+  <article ng-repeat="b in buckets track by $index" ng-controller="BucketItem" class="" >
     <nav class="m-nav m-nav-full" ng-show="admin == true">
       <ul>
         <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
@@ -26,7 +26,7 @@
             </strong>
           </div>
         </div>
-        <div ng-if="b.maximum > b.minimum" class="o-slider-container">
+        <div ng-if="b.maximum > b.minimum && current_user.allocatable > 0" class="o-slider-container">
           <!--<div class="o-slider-labels">-->
             <!--<div class="o-slider-range-low">0</div>-->
             <!--<div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>-->
@@ -35,17 +35,17 @@
           <!--<slider min="0" max="{{b.maximum}}" orientation="vertical" ng-model="b.user_allocation"></slider>-->
           <div class="o-slider-selection">
             <a href="" editable-number="b.user_allocation"> 
-              ${{b.user_allocation | number: 0 }}
+              ${{b.user_allocation / 100 | number: 0 }}
             </a>
             ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)
           </div>
           <constrained-slider min="0" max="current_user.allocatable" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="allocatable" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>
         </div>
-        <div class="m-bucket-allocations_wrapper">
+        <div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">
           <horiz-graph max="b.maximum" height="50" items="b.allocations">
           </horiz-graph>
         </div>
-        <h1>{{b.name}}<div class="utl-expander-indicator">></div></h1>
+        <h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>
         <div btf-markdown="b.description"></div>
       </div>
     </div>

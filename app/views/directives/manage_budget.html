@@ -15,7 +15,7 @@
         <input class="field" ng-model="search.$" type="text" placeholder="Search accounts..."></input>
       </div>
       <div class="col-md-1">
-        or
+        <span class="clr-medium-gray l-input-row-text">or</span>
       </div>
       <div class="col-md-3">
         <button class="btn m-btn-fill-width paint clr2" ng-click="ux.add_user_form =  !ux.add_user_form">Add new</button>
@@ -30,7 +30,7 @@
       <input type="number" ng-model="_n_account._allocation_rights" /> 
     </div>
     <div class="actions">
-      <button ng-click="createAllocationRights()" class="btn">Create in this budget</button>
+      <button ng-click="createAllocationRights()" class="btn pull-right">Create in this budget</button>
     </div>
   </form>
   <table>

@@ -24,6 +24,7 @@ app = angular.module('cobudget', [
   'resources.buckets'
   'resources.users'
   'resources.accounts'
+  'resources.allocations'
   'services.constrained_slider_collector'
   'services.color_generator'
   'directives.expander'
@@ -45,20 +46,29 @@ app = angular.module('cobudget', [
   #$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
-.run(["$rootScope", "API_PREFIX", "editableOptions", ($rootScope, API_PREFIX, editableOptions) ->
-  users = [
-    {id: 1, name: "Tony Soprano", allocatable: 4000}
-    {id: 2, name: "Hermine Granger", allocatable: 2000}
-    {id: 3, name: "Wolverine", allocatable: 1000}
-    {id: 4, name: "Nomads", allocatable: 7000}
-  ]
+.run(["$rootScope", "API_PREFIX", "editableOptions", "User", ($rootScope, API_PREFIX, editableOptions, User) ->
+  #users = [
+    #{id: 1, name: "Tony Soprano", allocatable: 4000}
+    #{id: 2, name: "Hermine Granger", allocatable: 2000}
+    #{id: 3, name: "Wolverine", allocatable: 1000}
+    #{id: 4, name: "Nomads", allocatable: 7000}
+  #]
+
+  users = []
+  User.allUsers().then((success)->
+    users = success
+    #$rootScope.current_user = users[3]
+    #console.log $rootScope.current_user
+  , (error)->
+    console.log error
+  )
+
   $rootScope.$debugMode = "on"
   $rootScope.admin = false
   editableOptions.theme = 'cobudget'
   $rootScope.pusher = new Pusher('6ea7addcc0137ddf6cf0')
   $rootScope.channel = $rootScope.pusher.subscribe('cobudget')
 
-  $rootScope.current_user = users[3]
   $rootScope.feignUser = (index)->
     $rootScope.current_user = users[index]
   $rootScope.toggleAdmin = ()->

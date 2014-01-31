@@ -2,9 +2,19 @@
   <div class="col-md-6">
   <section class="m-admin_dashboard-panel shadow l-padded paint white">
     <h1>Manage users</h1>
-    <nav class="m-nav-small">
-      <a href="" class="paint clr2" ng-class="{'state-on': mode === 'user_form'}" ng-click="toggle('user_form')"><span class="icon-plus"></span></a>
-    </nav>
+    <div class="field">
+      <div class="row">
+        <div class="col-md-8">
+          <input class="field" ng-model="search.$" type="text" placeholder="Search users..."></input>
+        </div>
+        <div class="col-md-1">
+          <span class="clr-medium-gray l-input-row-text">or</span>
+        </div>
+        <div class="col-md-3">
+          <button class="btn m-btn-fill-width paint clr2" ng-click="toggle('user_form')">Add new</button>
+        </div>
+      </div>
+    </div>
     <form class="l-bottom-margin" ng-show="mode === 'user_form'">
       <div class="field">
         <input ng-model="_user.name" type="text" name="name" placeholder="Name"></input>
@@ -24,9 +34,6 @@
         <button class="pull-right" ng-click="createUser()" href="">Save</button>
       </div>
     </form>
-    <div class="field">
-      <input class="field" ng-model="search.$" type="text" placeholder="Search users..."></input>
-    </div>
     <table>
       <tr ng-repeat= 'user in users | filter:search:strict' manage-users user="user"></tr>
     </table>

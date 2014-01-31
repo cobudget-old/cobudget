@@ -13,7 +13,9 @@ angular.module('states.admin', [])
     url: '/dashboard'
     views:
       'header-full':
-        template: "Header"
+        template: "
+          <h2>Admin Dashboard</h2>
+          "
       'page-full':
         templateUrl: '/views/admin/dashboard.html'
         controller: (['$scope', '$state', 'User', 'Budget', ($scope, $state, User, Budget)->

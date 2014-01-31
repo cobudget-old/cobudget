@@ -1,10 +1,9 @@
 angular.module('controllers.budgets', [])
-.controller('BudgetController',['$scope', '$rootScope', '$state', "Bucket", "Budget", "ColorGenerator", ($scope, $rootScope, $state, Bucket, Budget, ColorGenerator)->
+.controller('BudgetController',['$scope', '$rootScope', '$state', "Bucket", "Budget", "ColorGenerator", "currentUser", ($scope, $rootScope, $state, Bucket, Budget, ColorGenerator, currentUser)->
   $scope.buckets = []
-  #set up rules for slider
-  $scope.allocatable = $rootScope.current_user.allocatable
+  $scope.user_allocations = []
 
-  setMinMax = (bucket)->
+  $scope.setMinMax = (bucket)->
     if bucket.minimum_cents?
       bucket.minimum = parseFloat(bucket.minimum_cents) / 100
     else
@@ -15,27 +14,50 @@ angular.module('controllers.budgets', [])
       bucket.maximum = 0
     bucket
 
-  $scope.user_id = $rootScope.current_user.id
-  $scope.user_allocations = []
-  $scope.left = 0
-  #$scope.color_array = ColorGenerator.colorArray()
+  loadBucketFrame = ->
+    buckets = Budget.getBudgetBuckets($state.params.budget_id).then (success)->
+        for b, i in success
+          console.log b.name, "------"
+          b.user_allocation = 0
+          b.color = ColorGenerator.makeColor(0.3,0.3,0.3,0,i * 1.25,4,177,65, i)
+          $scope.user_id = $rootScope.current_user.id
+          b.allocations = []
+          $scope.setMinMax(b)
+          $scope.loadBucketAllocations(b)
+          $scope.buckets.push b
+      , (error)->
+        console.log error
+    buckets
 
-  Budget.getBudgetBuckets(1).then((success)->
-    for b, i in success
-      b.user_allocation = 0
-      b.color = ColorGenerator.makeColor(0.3,0.3,0.3,0,i * 1.25,4,177,65, i)
-      b.allocations = [
-        {bucket_id: b.id, user_id: 1, user_color: "#00499C", amount: i+2*380}, 
-        {bucket_id: b.id, user_id: 2, user_color: "#407DC2", amount: i+5*100}, 
-        {bucket_id: b.id, user_id: 3, user_color: "#639DE0", amount: i+8*100}]
-      setMinMax(b)
-      console.log b
-      $scope.buckets.push b
-  , (error)->
-    console.log error
+  loadAllocatable = ->
+    if $rootScope.current_user.accounts.length == 0
+      console.log "No Accounts"
+      $scope.allocatable = 0
+      $rootScope.current_user.allocatable = 0
+      return false
+    for acc in $rootScope.current_user.accounts
+      if acc.budget_id == parseFloat($state.params.budget_id)
+        if acc.allocation_rights_cents?
+          $scope.allocatable = acc.allocation_rights_cents
+          $rootScope.current_user.allocatable = $scope.allocatable
+
+  $scope.loadBucketAllocations = (bucket)->
+    b = bucket
+    Bucket.getBucketAllocations(b.id).then (success)->
+      if success.length > 0
+        for a in success
+          b.allocations.push a
+          if a.user_id == $rootScope.current_user.id
+            b.user_allocation = a.amount
+        #b.allocations = success
+      console.log $scope.buckets
+
+  loadAllocatable()
+  loadBucketFrame().then((success)->
+    #loadBucketAllocations()
   )
 
-  $scope.prepareUserAllocations = ->
+  $scope.prepareUserAllocations = ()->
     allocations = []
     sum = 0
     for bucket in $scope.buckets
@@ -44,14 +66,13 @@ angular.module('controllers.budgets', [])
         if allocation.user_id == $scope.user_id
           sum += allocation.amount
           allocation.label = "#{bucket.name}"
+          allocation.bucket_color = bucket.color
           if allocation.amount > 0
             allocations.push allocation
 
     unallocated = $scope.allocatable - sum 
     allocations.push {user_id: undefined, label: "Unallocated", amount: unallocated, bucket_color: "#ececec" }
     $scope.user_allocations = allocations.reverse()
-
-  $scope.prepareUserAllocations()
 
   $scope.chart_options = 
     segmentShowStroke : true
@@ -66,7 +87,7 @@ angular.module('controllers.budgets', [])
     )
     $scope.chart = ch_vals
 
-  $scope.prepareChart()
+  #$scope.prepareChart()
     
   $scope.$watch 'user_allocations', (n, o)->
     if n != o

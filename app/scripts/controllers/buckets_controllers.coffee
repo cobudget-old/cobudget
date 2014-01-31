@@ -32,10 +32,9 @@ angular.module('controllers.buckets', [])
       console.log error
 
 
-]).controller('BucketItem', ['API_PREFIX', '$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', (API_PREFIX, $rootScope, $http, $scope, $state, Bucket, flash)->
+]).controller('BucketItem', ['API_PREFIX', '$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', 'Allocation', (API_PREFIX, $rootScope, $http, $scope, $state, Bucket, flash, Allocation)->
   $scope.$watch 'b.allocations', (n, o)->
-    if n != o
-      $scope.$parent.$parent.$parent.prepareUserAllocations()
+    $scope.$parent.$parent.$parent.prepareUserAllocations()
   , true
 
   $scope.delete = ()->
