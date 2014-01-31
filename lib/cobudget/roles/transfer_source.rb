@@ -11,17 +11,18 @@ module Cobudget
     actor_dependency :id
 
     def can_decrease_money?(amount)
+      puts amount
       amount_money = amount
       unless amount.is_a?(Money)
-        amount_money = Money.new(amount*100)
+        amount_money = Money.new(amount.to_f*100)
       end
 
       balance_money = balance
       unless balance.is_a?(Money)
         balance_money = Money.new(balance*100)
       end
-      #puts "Decrease Money Check: BALANCE=" + balance_money.inspect
-      #puts "Decrease Money Check: AMOUNT=" + amount_money.inspect
+      puts "Decrease Money Check: BALANCE=" + balance_money.inspect
+      puts "Decrease Money Check: AMOUNT=" + amount_money.inspect
 
       balance_money - amount_money >= 0
       #balance - amount >= 0

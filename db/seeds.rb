@@ -10,7 +10,7 @@ module Cobudget
       athena = Cobudget::User.create(name: 'Athena', email: 'athena@example.com')
       artemis = Cobudget::User.create(name: 'Artemis', email: 'artemis@example.com')
       zeus = Cobudget::User.create(name: 'Zeus', email: 'zeus@example.com')
-      hermes = Cobudget::User.create(name: 'Hermes', email: 'hermes@example.com')
+      #hermes = Cobudget::User.create(name: 'Hermes', email: 'hermes@example.com')
 
       budget = Cobudget::Budget.create(name: 'Pantheon')
       Account.create(budget: budget, name: "#{budget.name} catchall bucket")
@@ -21,14 +21,14 @@ module Cobudget
       bucket2_desc = "We are aiming to raise around $5k in total by end of the year to pay Aphodite (design) & Ares (dev) to refresh the design and build the site on wordpress."
       bucket2 = Bucket.create(budget: budget, name: 'Build Website', description: bucket2_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: nil)
 
-      bucket3_desc = "This would be a great way for us to spend our time rather than annoying the mortals."
-      bucket3 = Bucket.create(budget: budget, name: 'Foosball table for Acropolis', description: bucket3_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: artemis)
+      #bucket3_desc = "This would be a great way for us to spend our time rather than annoying the mortals."
+      #bucket3 = Bucket.create(budget: budget, name: 'Foosball table for Acropolis', description: bucket3_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: artemis)
 
-      bucket4_desc = "We've finished the ceramic roof ornaments and Doric column details. In order to keep everything looking good, it needs to be maintained properly."
-      bucket4 = Bucket.create(budget: budget, name: 'Temple of Aphaia - Upkeep', description: bucket4_desc, minimum: 0, maximum: rand(1..9000), sponsor: nil)
+      #bucket4_desc = "We've finished the ceramic roof ornaments and Doric column details. In order to keep everything looking good, it needs to be maintained properly."
+      #bucket4 = Bucket.create(budget: budget, name: 'Temple of Aphaia - Upkeep', description: bucket4_desc, minimum: 0, maximum: rand(1..9000), sponsor: nil)
 
-      bucket5_desc = "Everyone around here just needs to relax."
-      bucket5 = Bucket.create(budget: budget, name: 'Wine for Dionysus', description: bucket5_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: dionysus)
+      #bucket5_desc = "Everyone around here just needs to relax."
+      #bucket5 = Bucket.create(budget: budget, name: 'Wine for Dionysus', description: bucket5_desc, minimum: rand(1..9000), maximum: rand(1..9000), sponsor: dionysus)
     end
   end
 end

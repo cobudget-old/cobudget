@@ -14,7 +14,7 @@ module Cobudget
 
       actor :user, repository: User, role: BudgetParticipant
       actor :bucket, repository: Bucket, role: EntryCollection
-      actor :amount
+      actor :amount, composer: MoneyComposer
 
       def get_attributes
         actors_except :admin

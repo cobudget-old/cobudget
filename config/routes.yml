@@ -178,7 +178,13 @@
     command: create_allocations
     params: '*user_id, *bucket_id, *amount'
     description: Create an allocation for a bucket
-
+#tmp
+-
+  get:
+    route: 'allocations'
+    command: create_allocations
+    params: '*user_id, *bucket_id, *amount'
+    description: Create an allocation for a bucket
 -
   patch:
     route: 'allocations/:allocation_id'
