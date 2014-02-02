@@ -17,10 +17,8 @@ When /^([^ ]*) updates (#{CAPTURE_USER}) with:$/ do |user_name, user, table|
   options = table.rows_hash.symbolize_keys
   options.merge!(user: user)
   play.update_users(options)
-  puts users.inspect
 end
 
 Then /^(#{CAPTURE_USER}) should have the email "(.*?)"$/ do |user, email|
   user.email.should == email
 end
-
