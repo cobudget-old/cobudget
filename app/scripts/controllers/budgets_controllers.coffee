@@ -1,7 +1,9 @@
 angular.module('controllers.budgets', [])
-.controller('BudgetController',['$scope', '$rootScope', '$state', "Bucket", "Budget", "ColorGenerator", "currentUser", ($scope, $rootScope, $state, Bucket, Budget, ColorGenerator, currentUser)->
+.controller('BudgetController',['$scope', '$rootScope', '$state', "Bucket", "Budget", "ColorGenerator", "currentUser", 'ConstrainedSliderCollector', ($scope, $rootScope, $state, Bucket, Budget, ColorGenerator, currentUser, ConstrainedSliderCollector)->
   $scope.buckets = []
   $scope.user_allocations = []
+  $scope.loaded_buckets = 0
+  $scope.allocatable_holder = 0
 
   $scope.setMinMax = (bucket)->
     if bucket.minimum_cents?
@@ -24,7 +26,6 @@ angular.module('controllers.budgets', [])
           b.allocations = []
           $scope.setMinMax(b)
           $scope.loadBucketAllocations(b)
-          $scope.buckets.push b
       , (error)->
         console.log error
     buckets
@@ -44,16 +45,25 @@ angular.module('controllers.budgets', [])
   $scope.loadBucketAllocations = (bucket)->
     b = bucket
     Bucket.getBucketAllocations(b.id).then (success)->
+      sum = 0
       if success.length > 0
         for a in success
           b.allocations.push a
           if a.user_id == $rootScope.current_user.id
             b.user_allocation = a.amount
         #b.allocations = success
-      console.log $scope.buckets
+    .then (amount)->
+      console.log $scope.allocatable_holder
+      $scope.allocatable_holder += parseInt(amount, 10)
+      $scope.buckets.push b
+      $scope.loaded_buckets++
+      if $scope.loaded_buckets == $scope.loading_counter
+        $scope.allocatable += $scope.allocatable_holder
+        $rootScope.current_user.allocatable = $scope.allocatable
 
   loadAllocatable()
   loadBucketFrame().then((success)->
+    $scope.loading_counter = success.length
     #loadBucketAllocations()
   )
 

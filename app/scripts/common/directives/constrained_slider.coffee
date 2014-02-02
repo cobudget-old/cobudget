@@ -5,13 +5,12 @@ angular.module("directives.constrained_slider", [])
   template: "<div class='slider'></div>"
   scope:
     Model: "=ngModel"
-    allocatable: "=allocatable"
     affecting: "=affecting"
     orientation: "@orientation"
     percentageOf: "=percentageOf"
     secondMax: "@secondMax"
-    max: "=max"
-    min: "@min"
+    max: "@max"
+    min: "=min"
     identifier: "@identifier"
     color: "@color"
 
@@ -20,6 +19,7 @@ angular.module("directives.constrained_slider", [])
     scope.slider_id = parseInt(scope.identifier)
     ConstrainedSliderCollector.sliders.push {id: scope.slider_id, value: 0}
 
+    console.log "minmax", scope.max
     el = angular.element element.children()[0]
     el.noUiSlider
       range: [parseInt(attrs.min, 10), parseInt(scope.max, 10)]
