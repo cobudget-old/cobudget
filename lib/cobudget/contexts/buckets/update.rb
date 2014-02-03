@@ -17,8 +17,8 @@ module Cobudget
       actor :name, optional: true
       actor :description, optional: true
       actor :sponsor, optional: true, repository: User
-      actor :minimum, composer: MoneyComposer, optional: true
-      actor :maximum, composer: MoneyComposer, optional: true
+      actor :minimum, optional: true
+      actor :maximum, optional: true
 
       def get_actors
         actors_except :bucket, :user
@@ -29,8 +29,9 @@ module Cobudget
         #Pusher.key = '6ea7addcc0137ddf6cf0'
         #Pusher.secret = '882cd62d5475bc7edee3'
         #Pusher.app_id = '59272'
-        data = bucket.update_attributes!(get_actors)
+        bucket.update_attributes!(get_actors)
         #Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket})
+        puts bucket.inspect
         bucket
       end
     end

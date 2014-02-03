@@ -7,7 +7,7 @@ module Cobudget
     has_many :entries, as: :account
 
     def allocation_rights_cents
-      EntryCollection.cast_actor(self).balance.cents
+      EntryCollection.cast_actor(self).balance
     end
   end
 

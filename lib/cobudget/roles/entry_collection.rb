@@ -12,7 +12,8 @@ module Cobudget
     actor_dependency :entries
 
     def balance
-      Money.new(base_scope.sum(SUM_COLUMN))
+      #puts "Balance = #{Money.new(base_scope.sum(SUM_COLUMN))}"
+      Money.new(base_scope.sum(SUM_COLUMN)).cents
     end
 
     def has_no_allocations?
@@ -26,7 +27,8 @@ module Cobudget
     def balance_from_user(user)
       sum = 0
       from_user_scope(user).each do |t|
-        sum += t.entries.where("account_type = 'Cobudget::Bucket'").first.amount.cents
+        #puts t.entries.where("account_type = 'Cobudget::Bucket'").inspect
+        sum += t.entries.where("account_type = 'Cobudget::Bucket'").first.amount_cents
       end
       sum
     end

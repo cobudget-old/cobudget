@@ -17,7 +17,7 @@ module Cobudget
 
       actor :user, repository: User, role: BudgetParticipant
       actor :budget, repository: Budget, role: BudgetOfAccounts
-      actor :amount, composer: MoneyComposer
+      actor :amount
 
       def attributes
         actors_except :admin
@@ -41,7 +41,7 @@ module Cobudget
         transfer = TransferMoney.new(source_account: budget_account, destination_account: user_account, amount: amount, creator: admin)
         transfer.call
         account = transfer.destination_account
-        balance = EntryCollection.cast_actor(account).balance.cents
+        balance = EntryCollection.cast_actor(account).balance
         user_email = account.user ? account.user.email : nil
         account = account.attributes.merge!(:user_email => user_email, :balance => balance)
         account

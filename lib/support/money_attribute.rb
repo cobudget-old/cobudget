@@ -18,6 +18,9 @@ module MoneyAttribute
         if money.nil?
           write_attribute(numeric_field, nil)
         else
+          if money.is_a? String
+            money = money.to_f
+          end
           mny = Money.new(money * 100)
           write_attribute(numeric_field, mny.cents)
         end

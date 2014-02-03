@@ -20,7 +20,7 @@ module Cobudget
     actor :source_account, role: TransferSource, repository: Account
     actor :destination_account, role: TransferDestination, repository: Account
     actor :creator, repository: User
-    actor :amount, composer: MoneyComposer
+    actor :amount
     actor :time, optional: true
     actor :description, optional: true
 
@@ -34,12 +34,12 @@ module Cobudget
     def perform
       raise InsufficientFunds unless source_account.can_decrease_money?(amount) || source_account.user.blank?
       raise InvalidTransferDestination unless source_account.budget == destination_account.budget
-
       begin
         ActiveRecord::Base.transaction do
+          amt = amount.to_f / 100
           transaction = Transaction.create!(transfer_arguments)
-          destination_account.increase_money!(amount, transaction, Identifier.generate)
-          source_account.decrease_money!(amount, transaction, Identifier.generate)
+          destination_account.increase_money!(amt, transaction, Identifier.generate)
+          source_account.decrease_money!(amt, transaction, Identifier.generate)
         end
       rescue
         raise TransferFailed, "Transfer from '#{source_account.name}' to '#{destination_account.name}' failed."

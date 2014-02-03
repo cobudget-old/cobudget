@@ -13,7 +13,7 @@ module Cobudget
       def perform
         accounts = [] 
         budget.accounts.order('updated_at desc').load.each do |acc|
-          balance = EntryCollection.cast_actor(acc).balance.cents
+          balance = EntryCollection.cast_actor(acc).balance
           user_email = acc.user ? acc.user.email : nil
           acc = acc.attributes.merge!(:user_email => user_email, :balance => balance)
           accounts << acc
