@@ -19,7 +19,6 @@ angular.module("directives.manage_users", [])
         console.log error
 
     updateSingleField = (n,o)->
-      console.log n, o
       if n != o
         scope.user.patch()
 

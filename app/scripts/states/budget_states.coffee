@@ -4,18 +4,6 @@ angular.module('states.budget', ['controllers.buckets'])
     url: '/budgets/:budget_id'
     views:
       'main':
-        resolve:
-          currentUser: ['$rootScope', 'User', ($rootScope, User)->
-            $rootScope.current_user
-            users = []
-            User.allUsers().then((success)->
-              users = success
-              $rootScope.current_user = users[2]
-              $rootScope.current_user
-            , (error)->
-              console.log error
-            )
-          ]
         templateUrl: '/views/budgets/budget.show.html'
         controller: 'BudgetController'
   ) #end state

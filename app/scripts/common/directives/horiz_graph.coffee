@@ -9,7 +9,7 @@ angular.module("directives.horiz_graph", [])
       </div>
       <div class='m-horiz-graph_items'>
         <div ng-repeat='item in items track by $index'  class='m-horiz-graph_item'>
-          <small ng-show='item.amount > 0'>${{item.amount}}</small>
+          <small ng-show='item.amount > 0'>${{item.amount / 100}}</small>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@ angular.module("directives.horiz_graph", [])
     getPercentage = (item)->
       value = item.amount
       total = _.reduce(scope.items, (result, item)->
-        result += parseInt(item.amount, 10)
+        result += parseFloat(item.amount)
         result
       , 0)
       if total > scope.max

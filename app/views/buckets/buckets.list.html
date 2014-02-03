@@ -26,7 +26,7 @@
             </strong>
           </div>
         </div>
-        <div ng-if="b.maximum > b.minimum && allocatable >= 0 && loaded_buckets === loading_counter" class="o-slider-container">
+        <div ng-if="b.maximum > b.minimum && allocatable > 0 && loaded_buckets === loading_counter" class="o-slider-container">
           <!--<div class="o-slider-labels">-->
             <!--<div class="o-slider-range-low">0</div>-->
             <!--<div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>-->
@@ -35,16 +35,14 @@
           <!--<slider min="0" max="{{b.maximum}}" orientation="vertical" ng-model="b.user_allocation"></slider>-->
           <div class="o-slider-selection">
             <a href="" editable-number="b.user_allocation"> 
-              ${{b.user_allocation / 100 | number: 0 }}
+              ${{b.user_allocation / 100| number: 2 }}
             </a>
             ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)
           </div>
-          {{current_user.allocatable}}
-          {{allocatable}}
-          <constrained-slider min="0" max="{{allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="allocatable" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>
+          <constrained-slider min="0" max="{{allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="{{allocatable}}" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>
         </div>
         <div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">
-          <horiz-graph max="b.maximum" height="50" items="b.allocations">
+          <horiz-graph max="b.maximum_cents" height="50" items="b.allocations">
           </horiz-graph>
         </div>
         <h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>

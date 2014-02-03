@@ -7,11 +7,11 @@ angular.module('resources.accounts', ['ngResource'])
     Restangular.one('accounts', account_id).get()
   accountsByBudget: (budget)->
     budget.getList('accounts').then (acc_success)->
-        console.log acc_success
         acc_success
       , (error)->
         console.log error
   grantAllocationRights: (account)->
+    console.log account
     params = 
       admin_id: 1
       amount: account._allocation_rights

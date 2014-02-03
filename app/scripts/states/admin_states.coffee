@@ -19,6 +19,7 @@ angular.module('states.admin', [])
       'page-full':
         templateUrl: '/views/admin/dashboard.html'
         controller: (['$scope', '$state', 'User', 'Budget', ($scope, $state, User, Budget)->
+          console.log "Admin", $scope
           $scope.mode = ""
           $scope.search = ""
           $scope.users = {}

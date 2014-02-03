@@ -1,6 +1,7 @@
 angular.module('resources.users', [])
 .service("User", ['Restangular', (Restangular) ->
   users = Restangular.all('users')
+  current_user: {}
   allUsers: ()->
     users.getList()
   getUser: (user_id)->

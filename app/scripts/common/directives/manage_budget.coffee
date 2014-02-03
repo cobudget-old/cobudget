@@ -52,10 +52,12 @@ angular.module("directives.manage_budget", [])
         scope.budget.accounts.unshift success
         scope._n_account = {}
         scope._n_account._allocation_rights = 0
+        scope.refreshBudgetAccount()
 
     scope.updateAllocationRights = ->
       for acc in scope.budget.accounts
         if acc._allocation_rights
+          acc._allocation_rights = acc._allocation_rights
           Account.grantAllocationRights(acc).then (success)->
             acc._allocation_rights = 0
             console.log acc.id, success.id

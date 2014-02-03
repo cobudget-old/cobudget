@@ -22,12 +22,12 @@
       </div>
     </div>
   </div>
-  <form class="l-bottom-margin" ng-submit="creatAllocationRights()" ng-show="ux.add_user_form" novalidate>
+  <form class="l-bottom-margin" ng-submit="creatAllocationRights()" ng-show="ux.add_user_form" formnovalidate>
     <div class="field">
       <input type="text" ng-model="_n_account.user" placeholder="Start typing email" typeahead="user as user.email for user in users | filter:$viewValue | limitTo:8" typeahead-editable="false " class="form-control" />
     </div>
     <div class="field">
-      <input type="number" ng-model="_n_account._allocation_rights" /> 
+      <input type="number" step="any" ng-model="_n_account._allocation_rights" /> 
     </div>
     <div class="actions">
       <button ng-click="createAllocationRights()" class="btn pull-right">Create in this budget</button>

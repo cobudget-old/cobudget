@@ -34,7 +34,7 @@ angular.module('controllers.buckets', [])
 
 ]).controller('BucketItem', ['API_PREFIX', '$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', 'Allocation', (API_PREFIX, $rootScope, $http, $scope, $state, Bucket, flash, Allocation)->
   $scope.$watch 'b.allocations', (n, o)->
-    $scope.$parent.$parent.$parent.prepareUserAllocations()
+    $scope.$parent.$parent.$parent.prepareUserAllocations() 
   , true
 
   $scope.delete = ()->
@@ -47,20 +47,4 @@ angular.module('controllers.buckets', [])
           return
     , (error)->
       console.log error
-    #$http(
-      #method: 'GET'
-      #url: "#{API_PREFIX}/delete_buckets"
-      #params: bk
-      #).success((data, status, headers, config)->
-        #$scope.b = {}
-        #buckets = $scope.$parent.$parent.$parent.buckets
-        #for b, i in buckets
-          #if b.id == buckets[i].id
-            #buckets.splice(i, 1)
-            #return
-        #flash('success', 'Bucket created.', 2000)
-      #)
-      #.error((data, status, headers, config)->
-        #console.log "Error", data
-      #)
 ])
