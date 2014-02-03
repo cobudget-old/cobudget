@@ -7,6 +7,7 @@ module Cobudget
   module Budgets
     class List < Playhouse::Context
       class NotAuthorizedToListAllBudgets < Exception; end
+
       def perform
         Budget.all
       end

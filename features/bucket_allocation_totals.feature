@@ -25,8 +25,7 @@ Feature: Bucket Allocations
     When Liono allocates $20 to the LaserPointers bucket
     When Liono allocates $10 to the LaserPointers bucket
     Then Liono should have a remaining allocation of $10 in the Thundera budget
-    #And Liono should have allocated $30 to the LaserPointers bucket
-    #this always returns 0, not sure why
+    And Liono should have allocated $30 to the LaserPointers bucket
 
   Scenario: Successfully remove an allocation
     When Liono allocates $10 to the Treats bucket
@@ -36,14 +35,23 @@ Feature: Bucket Allocations
 
   Scenario: Add up allocations in a budget
     When Tygra allocates $20 to the Tuna bucket
-    When Liono allocates $15 to the LaserPointers bucket
-    When Liono allocates $25 to the Treats bucket
+    And Liono allocates $15 to the LaserPointers bucket
+    And Liono allocates $25 to the Treats bucket
     Then total used allocations in the Thundera budget should be $60
-    Then total unallocated in the Thundera budget should be $10
-    Then total allocation rights in the Thundera budget should be $70
+    And total unallocated in the Thundera budget should be $10
+    And total allocation rights in the Thundera budget should be $70
+
+  Scenario: Display allocations in a bucket
+    Given Liono has "#00FFDD" as a background colour
+    And Tygra has "#FFEEDD" as a background colour
+    When Tygra allocates $15 to the Tuna bucket
+    And Liono allocates $20 to the Tuna bucket
+    And Liono allocates $5 to the Tuna bucket
+    Then the allocation total list for the Tuna bucket should include $25 allocation by Liono
+    And the allocation total list for the Tuna bucket should include $15 allocation by Tygra
 
   Scenario: Allocate too much into a bucket
-    When Tygra tries to allocate $500 to the Treats bucket but fails
+    When Tygra tries to allocate $50000 to the Treats bucket but fails
     Then the Treats bucket should have a balance of $0
     Then Tygra should have a remaining allocation of $20 in the Thundera budget
 

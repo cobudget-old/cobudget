@@ -6,7 +6,6 @@ require 'cobudget/entities/account'
 module Cobudget
   module Allocations
     class ListByBucket < Playhouse::Context
-      #class NotAuthorizedToListAllocations < Exception; end
       actor :bucket, repository: Bucket, role: EntryCollection
 
       def perform

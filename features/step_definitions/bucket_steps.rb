@@ -92,7 +92,22 @@ end
 
 Then /([^ ]*) archives (#{CAPTURE_BUCKET})$/ do |user_name, bucket|
   user = users[user_name]
-
   play.archive_buckets(user: user, bucket: bucket)
 end
 
+Then /^the allocation total list for (#{CAPTURE_BUCKET}) should include (#{CAPTURE_MONEY}) allocation by ([^ ]*)$/ do |bucket, amount, user_name|
+  user = users[user_name]
+  results = play.list_by_bucket_allocations(bucket: bucket)
+
+  found_result = false
+  results.each do |result|
+    if result["user_id"] == user.id
+      result["user_color"].should == user.bg_color
+      result["amount"].should == amount*100
+      found_result = true
+    end
+  end
+
+  #how else to force it to fail?
+  true.should == false unless found_result
+end

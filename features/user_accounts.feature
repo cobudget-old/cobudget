@@ -17,8 +17,12 @@ Feature: User Accounts
     Then there should be an account for Blinky in the PillsInTheDark budget
 
   Scenario: Successfully modify a user
-    Given a user NickFury
-    When NickFury updates the NickFury user with:
-      | name        | McFlurry                            |
-      | email       | mcflurry@hahaha.com |
-    Then the NickFury user should have the email "mcflurry@hahaha.com"
+    Given a user Inky
+    When Inky updates the Inky user with:
+      | name        | Inky                       |
+      | email       | pac_man_killah@example.com |
+      | bg_color    | #0000FF                    |
+      | fg_color    | #FFFFFF                    |
+    Then the Inky user should have the email "pac_man_killah@example.com"
+    Then the Inky user should have background colour #0000FF
+    Then the Inky user should have foreground colour #FFFFFF
