@@ -7,9 +7,11 @@ Given /^a user ([^ ]*)$/ do |user_name|
   @users[user_name] = @user = Cobudget::User.create(name: user_name, email: "#{user_name}@example.com")
 end
 
-Given /^(#{CAPTURE_USER}) has a background colour of ([^ ]*)$/ do |user, colour|
-  options = {}
+Given /^([^ ]*) has "(.*?)" as a background colour$/ do |user_name, colour|
+  user = users[user_name]
 
+  options = {user: user, bg_color: colour, email: user.email}
+  play.update_users(options)
 end
 
 Then /^the ([^ ]*) user should not exist$/ do |user_name|
