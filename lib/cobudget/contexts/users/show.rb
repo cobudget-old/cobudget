@@ -7,7 +7,12 @@ module Cobudget
       actor :user, repository: User
 
       def perform
-        user
+        user.as_json( include: { 
+                        accounts: {
+                            methods: :allocation_rights_cents
+                        }
+                      }
+                    )
       end
     end
   end

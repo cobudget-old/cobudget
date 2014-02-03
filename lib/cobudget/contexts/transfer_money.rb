@@ -36,7 +36,7 @@ module Cobudget
       raise InvalidTransferDestination unless source_account.budget == destination_account.budget
       begin
         ActiveRecord::Base.transaction do
-          amt = amount.to_f / 100
+          amt = amount.to_f
           transaction = Transaction.create!(transfer_arguments)
           destination_account.increase_money!(amt, transaction, Identifier.generate)
           source_account.decrease_money!(amt, transaction, Identifier.generate)
