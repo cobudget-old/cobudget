@@ -19,6 +19,10 @@ Feature: User Accounts
   Scenario: Successfully modify a user
     Given a user Inky
     When Inky updates the Inky user with:
-      | name        | Inky                            |
+      | name        | Inky                       |
       | email       | pac_man_killah@example.com |
+      | bg_color    | #0000FF                    |
+      | fg_color    | #FFFFFF                    |
     Then the Inky user should have the email "pac_man_killah@example.com"
+    Then the Inky user should have background colour #0000FF
+    Then the Inky user should have foreground colour #FFFFFF
