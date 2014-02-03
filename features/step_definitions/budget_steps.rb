@@ -134,10 +134,16 @@ Then /^there should be a budget ([^ ]*) with the description "(.*?)"$/ do |budge
 end
 
 Then /^the ([^ ]*) budget should not exist$/ do |budget_name|
-  budgets[budget_name].should be_nil
+  Cobudget::Budget.find_by_name(budget_name).should be_nil
 end
 
-Then /^(#{CAPTURE_BUDGET}) should have the description "(.*?)"$/ do |budget, budget_description|
+Then /^the ([^ ]*) budget should exist$/ do |budget_name|
+  Cobudget::Budget.find_by_name(budget_name).should_not be_nil
+end
+
+Then /^the ([^ ]*) budget should have the description "(.*?)"$/ do |budget_name, budget_description|
+  budget = Cobudget::Budget.find_by_name(budget_name)
+  budget.should_not be_nil
   budget.description.should == budget_description
 end
 

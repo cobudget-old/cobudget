@@ -52,3 +52,5 @@ Feature: Bucket Allocations
     When Liono tries to allocate $20 to the CookieTime bucket but fails
     Then Liono should have a remaining allocation of $0 in the MummRasCookieFund budget
     Then Liono should have a remaining allocation of $50 in the Thundera budget
+
+  Scenario: Get all allocations for a bucket
