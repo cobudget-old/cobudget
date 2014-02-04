@@ -31,7 +31,7 @@ module Cobudget
         user_account = user_accounts.first
         balance = EntryCollection.cast_actor(user_account).balance
 
-        transfer = TransferMoney.new(source_account: user_account, destination_account: budget_account, amount: balance, creator: admin)
+        transfer = TransferMoney.new(source_account: user_account, destination_account: budget_account, amount: (balance/100).to_f, creator: admin)
         transfer.call
 
         user_account.delete
