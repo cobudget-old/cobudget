@@ -51,7 +51,7 @@ Feature: Bucket Allocations
     And the allocation total list for the Tuna bucket should include $15 allocation by Tygra
 
   Scenario: Allocate too much into a bucket
-    When Tygra tries to allocate $50000 to the Treats bucket but fails
+    When Tygra tries to allocate $500 to the Treats bucket but fails
     Then the Treats bucket should have a balance of $0
     Then Tygra should have a remaining allocation of $20 in the Thundera budget
 

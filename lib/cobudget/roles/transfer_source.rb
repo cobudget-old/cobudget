@@ -13,7 +13,7 @@ module Cobudget
     def can_decrease_money?(amount)
       amount_money = amount
       unless amount.is_a?(Money)
-        amount_money = Money.new(amount.to_f)
+        amount_money = Money.new(amount*100.to_f)
       end
 
       balance_money = balance
