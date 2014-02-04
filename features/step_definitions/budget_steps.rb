@@ -166,18 +166,18 @@ end
 
 
 Then /^total used allocations in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
-  play.budget_allocated_balance_enquiry(budget: budget).should == expected_balance
+  play.budget_allocated_balance_enquiry(budget: budget).should == expected_balance*100
 end
 
 Then /^total unallocated in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
-  play.budget_unallocated_balance_enquiry(budget: budget).should == expected_balance
+  play.budget_unallocated_balance_enquiry(budget: budget).should == expected_balance*100
 end
 
 Then /^total allocation rights in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
-  play.budget_total_enquiry(budget: budget).should == expected_balance
+  play.budget_total_enquiry(budget: budget).should == expected_balance*100
 end
 
 Then /^total budget in (#{CAPTURE_BUDGET}) should be (#{CAPTURE_MONEY})$/ do |budget, expected_balance|
-  play.budget_balance_enquiry(budget: budget).should == expected_balance
+  play.budget_balance_enquiry(budget: budget).should == expected_balance*100
 end
 
