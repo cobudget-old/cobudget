@@ -1,5 +1,5 @@
 angular.module("directives.manage_budget", [])
-.directive('manageBudget', ['Budget', 'Account', (Budget, Account) ->
+.directive('manageBudget', ['Budget', 'Account', 'User', (Budget, Account, User) ->
   restrict: 'A'
   templateUrl: '/views/directives/manage_budget.html'
   scope:
@@ -7,6 +7,7 @@ angular.module("directives.manage_budget", [])
     users: "=users"
 
   link: (scope, element, attr)->
+    User.refreshCurrentUser()
     scope.budget_account = {}
     scope.budget.accounts = []
     scope.active_budget = undefined
@@ -52,7 +53,7 @@ angular.module("directives.manage_budget", [])
         scope.budget.accounts.unshift success
         scope._n_account = {}
         scope._n_account._allocation_rights = 0
-        scope.refreshBudgetAccount()
+        scope.afterAllocationRights()
 
     scope.updateAllocationRights = ->
       for acc in scope.budget.accounts
@@ -60,11 +61,15 @@ angular.module("directives.manage_budget", [])
           acc._allocation_rights = acc._allocation_rights
           Account.grantAllocationRights(acc).then (success)->
             acc._allocation_rights = 0
-            console.log acc.id, success.id
             for acc, i in scope.budget.accounts
               if acc.id == success.id
                 scope.budget.accounts[i] = success
-            scope.refreshBudgetAccount()
+            scope.afterAllocationRights()
           , (error)->
             console.log error
+
+    scope.afterAllocationRights = ->
+      scope.refreshBudgetAccount()
+      User.refreshCurrentUser()
+
 ])

@@ -1,5 +1,7 @@
 angular.module('controllers.budgets', [])
 .controller('BudgetController',['$scope', '$rootScope', '$state', 'User', "Bucket", "Budget", "ColorGenerator", 'ConstrainedSliderCollector', ($scope, $rootScope, $state, User, Bucket, Budget, ColorGenerator, ConstrainedSliderCollector)->
+  User.refreshCurrentUser()
+  console.log "Budget", User.getCurrentUser(), User.getCurrentUser()
   $scope.buckets = []
   $scope.buckets_holder = []
   $scope.user_allocations = []
@@ -30,18 +32,17 @@ angular.module('controllers.budgets', [])
     buckets
 
   loadAllocatable = ->
-    if User.current_user.accounts.length == 0
+    if User.getCurrentUser().accounts.length == 0
       console.log "No Accounts"
       $scope.allocatable = 0
-      User.current_user.allocatable = 0
+      User.getCurrentUser().allocatable = 0
       return false
-    for acc in User.current_user.accounts
-      console.log User.current_user
+    for acc in User.getCurrentUser().accounts
       if acc.budget_id == parseFloat($state.params.budget_id)
-        console.log "loading", acc.allocation_rights_cents
         if acc.allocation_rights_cents?
           $scope.allocatable = acc.allocation_rights_cents
-          User.current_user.allocatable = $scope.allocatable
+          User.getCurrentUser().allocatable = $scope.allocatable
+          console.log "Loading Allocation Rights", acc.allocation_rights_cents
 
   $scope.loadBucketAllocations = (bucket)->
     b = bucket
@@ -50,7 +51,7 @@ angular.module('controllers.budgets', [])
       if success.length > 0
         for a in success
           b.allocations.push a
-          if a.user_id == User.current_user.id
+          if a.user_id == User.getCurrentUser().id
             b.user_allocation = a.amount
       b.user_allocation
         #b.allocations = success
@@ -60,7 +61,7 @@ angular.module('controllers.budgets', [])
       $scope.loaded_buckets++
       if $scope.loaded_buckets == $scope.loading_counter
         $scope.allocatable += $scope.allocatable_holder
-        User.current_user.allocatable = $scope.allocatable
+        User.getCurrentUser().allocatable = $scope.allocatable
         $scope.buckets = $scope.buckets_holder
 
   loadAllocatable()
@@ -74,7 +75,7 @@ angular.module('controllers.budgets', [])
     for bucket in $scope.buckets
       #eventually a prob when allocations to same bucket.
       for allocation, i in bucket.allocations
-        if allocation.user_id == User.current_user.id
+        if allocation.user_id == User.getCurrentUser().id
           sum += allocation.amount
           allocation.label = "#{bucket.name}"
           allocation.bucket_color = bucket.color

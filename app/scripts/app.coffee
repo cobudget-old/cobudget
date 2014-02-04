@@ -47,24 +47,26 @@ app = angular.module('cobudget', [
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
 .run(["$rootScope", "$state", "API_PREFIX", "editableOptions", "User", ($rootScope, $state, API_PREFIX, editableOptions, User) ->
-  User.getUser(2).then (success)->
-    User.current_user = success
-    if User.current_user?
-      console.log User.current_user
-      $state.go 'budgets.buckets', budget_id: 1
-    else
-      $state.go '/'
+  $rootScope.setUser = (id)->
+    id ||= 3
+    User.getUser(id).then (success)->
+      User.setCurrentUser(success)
+      if User.getCurrentUser()?
+        $state.go 'budgets.buckets', budget_id: 1
+      else
+        $state.go '/'
+  $rootScope.setUser()
+
   $rootScope.$debugMode = "on"
   $rootScope.admin = false
+
   editableOptions.theme = 'cobudget'
+
   $rootScope.pusher = new Pusher('6ea7addcc0137ddf6cf0')
   $rootScope.channel = $rootScope.pusher.subscribe('cobudget')
 
   $rootScope.toggleAdmin = ()->
-    if $rootScope.admin == true
-      $rootScope.admin = false
-    else
-      $rootScope.admin = true
+    if $rootScope.admin = !$rootScope.admin
 
   Pusher.log = (message)-> 
     if window.console && window.console.log
