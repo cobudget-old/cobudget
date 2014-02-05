@@ -6,6 +6,13 @@ require 'cobudget/entities/account'
 module Cobudget
   class SeedLoader
     def self.load_seed
+      connection = ActiveRecord::Base.connection();
+      connection.execute('TRUNCATE TABLE users RESTART IDENTITY;')
+      connection.execute('TRUNCATE TABLE budgets RESTART IDENTITY;')
+      connection.execute('TRUNCATE TABLE buckets RESTART IDENTITY;')
+      connection.execute('TRUNCATE TABLE accounts RESTART IDENTITY;')
+      connection.execute('TRUNCATE TABLE entries RESTART IDENTITY;')
+
       dionysus = Cobudget::User.create(name: 'Dionysus', email: 'dionysus@example.com')
       athena = Cobudget::User.create(name: 'Athena', email: 'athena@example.com')
       artemis = Cobudget::User.create(name: 'Artemis', email: 'artemis@example.com')
