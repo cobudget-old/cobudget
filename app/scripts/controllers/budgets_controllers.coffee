@@ -41,8 +41,6 @@ angular.module('controllers.budgets', [])
       if acc.budget_id == parseFloat($state.params.budget_id)
         if acc.allocation_rights_cents?
           $scope.allocatable = acc.allocation_rights_cents
-          User.getCurrentUser().allocatable = $scope.allocatable
-          console.log "Loading Allocation Rights", acc.allocation_rights_cents
 
   $scope.loadBucketAllocations = (bucket)->
     b = bucket
@@ -61,7 +59,6 @@ angular.module('controllers.budgets', [])
       $scope.loaded_buckets++
       if $scope.loaded_buckets == $scope.loading_counter
         $scope.allocatable += $scope.allocatable_holder
-        User.getCurrentUser().allocatable = $scope.allocatable
         $scope.buckets = $scope.buckets_holder
 
   loadAllocatable()

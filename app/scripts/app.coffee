@@ -66,7 +66,7 @@ app = angular.module('cobudget', [
   $rootScope.channel = $rootScope.pusher.subscribe('cobudget')
 
   $rootScope.toggleAdmin = ()->
-    if $rootScope.admin = !$rootScope.admin
+    $rootScope.admin = !$rootScope.admin
 
   Pusher.log = (message)-> 
     if window.console && window.console.log

@@ -51,7 +51,10 @@ angular.module("directives.constrained_slider", [])
       alc.bucket_id = new_item.bucket_id
       alc.amount = amt / 100
       console.log "Saving", alc
-      Allocation.createAllocation(alc)
+      Allocation.createAllocation(alc).then (success)->
+        console.log "Allocation Created:", alc
+      , (error)->
+        console.log error
 
     scope.$watch "Model", (n, o) ->
       save = false
@@ -96,19 +99,6 @@ angular.module("directives.constrained_slider", [])
       affected_max_assignable = parseFloat(scope.secondMax)
 
       user_already_assigned = ConstrainedSliderCollector.sumOtherSliders(scope.collected_sliders, scope.slider_id)
-
-      #slider_total_already_assigned = getAffectingTotal()
-
-      #slider_left_to_be_assigned = affected_max_assignable - slider_total_already_assigned
-
-      #if incoming_value > slider_left_to_be_assigned
-        #if incoming_value + slider_left_to_be_assigned > slider_left_to_be_assigned
-          #new_value = slider_left_to_be_assigned
-        #else
-          #new_value = incoming_value
-      #else 
-        #new_value = incoming_value
-
       new_value = incoming_value
       if new_value + user_already_assigned > user_max_assignable
         new_value = user_max_assignable - user_already_assigned
