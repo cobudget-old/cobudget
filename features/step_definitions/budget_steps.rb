@@ -79,14 +79,14 @@ When /^([^ ]*) grants ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAP
   user = users[user_name]
   admin = users[admin_name]
 
-  grant_allocation_rights[user_name] = play.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
+  allocation_rights[user_name] = play.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
 end
 
 When /^([^ ]*) modifies ([^ ]*)'s allocation rights to (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
   user = users[user_name]
   admin = users[admin_name]
 
-  grant_allocation_rights[user_name] = play.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
+  allocation_rights[user_name] = play.grant_allocation_rights(admin: admin, user: user, amount: amount, budget: budget)
 end
 
 When /^([^ ]*) revokes ([^ ]*)'s allocation rights for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, budget|
