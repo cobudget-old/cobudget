@@ -6,6 +6,7 @@ app = angular.module('cobudget', [
   'restangular'
   'ngSanitize'
   'ngAnimate'
+  'config'
   'directive.g+signin'
   'angular-lodash'
   'angles'
@@ -37,18 +38,15 @@ app = angular.module('cobudget', [
   'directives.manage_allocation_rights'
   'directives.manage_budget'
 ])
-#.constant("API_PREFIX", "http://api.cobudget.enspiral.info/cobudget")
-#:9393 = shotgun, :9292 = rackup
-.constant("API_PREFIX", "http://localhost:9292/cobudget")
-.config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'API_PREFIX', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, API_PREFIX)->
+.config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'ENV', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, ENV)->
   $urlRouterProvider.otherwise('/')
-  RestangularProvider.setBaseUrl(API_PREFIX)
+  RestangularProvider.setBaseUrl(ENV.apiEndpoint)
   #RestangularProvider.configuration.getIdFromElem = (elem)->
     #elem[_.initial(elem.route).join('') + "_id"]
   #$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
-.run(["$rootScope", "$state", "API_PREFIX", "editableOptions", "User", ($rootScope, $state, API_PREFIX, editableOptions, User) ->
+.run(["$rootScope", "$state", "editableOptions", "User", ($rootScope, $state, editableOptions, User) ->
   #$rootScope.setUser = (id)->
     #id ||= 3
     #User.getUser(id).then (success)->
@@ -71,7 +69,7 @@ app = angular.module('cobudget', [
         User.authUser(params)
           .then (success)->
             console.log success
-            if success.accounts?
+            if success.accounts.length > 0
               User.setCurrentUser(success)
               $state.go 'budgets.buckets', budget_id: success.accounts[0].budget_id
             else

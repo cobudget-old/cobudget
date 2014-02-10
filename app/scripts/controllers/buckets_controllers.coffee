@@ -32,7 +32,7 @@ angular.module('controllers.buckets', [])
       console.log error
 
 
-]).controller('BucketItem', ['API_PREFIX', '$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', 'Allocation', (API_PREFIX, $rootScope, $http, $scope, $state, Bucket, flash, Allocation)->
+]).controller('BucketItem', ['$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', 'Allocation', ($rootScope, $http, $scope, $state, Bucket, flash, Allocation)->
   $scope.$watch 'b.allocations', (n, o)->
     $scope.$parent.$parent.$parent.prepareUserAllocations() 
   , true

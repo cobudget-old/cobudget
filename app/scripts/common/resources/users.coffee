@@ -27,4 +27,8 @@ angular.module('resources.users', [])
   getCurrentUser: ->
     current_user
 
+  refreshCurrentUser: ->
+    @getUser(current_user.id).then (success)->
+      current_user = success
+
 ])

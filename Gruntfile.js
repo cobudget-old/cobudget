@@ -42,6 +42,34 @@ module.exports = function (grunt) {
         ]
       }
     },
+    ngconstant: {
+      options: {
+        space: '  '
+      },
+      // Environment targets
+      development: [{
+        dest: '<%= yeoman.app %>/scripts/config.js',
+        wrap: '"use strict";\n\n <%= __ngModule %>',
+        name: 'config',
+        constants: {
+          ENV: {
+            name: 'development',
+            apiEndpoint: 'http://localhost:9292/cobudget',
+            googClient: '944956761028-bp08s6r3t4ievevuqdnah3da7291hn8g.apps.googleusercontent.com'
+          }
+        }
+      }],
+      production: [{
+        dest: '<%= yeoman.dist %>/scripts/config.js',
+        wrap: '"use strict";\n\n <%= __ngModule %>',
+        name: 'config',
+        constants: {
+          ENV: 'production',
+          apiEndpoint: 'http://api.cobudget.enspiral.info/cobudget',
+          googClient: '944956761028.apps.googleusercontent.com'
+        }
+      }]
+    },
     autoprefixer: {
       options: ['last 1 version'],
       dist: {
@@ -333,6 +361,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -352,6 +381,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'useminPrepare',
     'concurrent:dist',
+    'ngconstant:production',
     'autoprefixer',
     'concat',
     'ngmin',
