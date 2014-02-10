@@ -15,7 +15,6 @@ module Cobudget
           allocation = {}
           allocation['user_id'] = a.user.id
           allocation['user_color'] = a.user.bg_color
-          puts bucket.balance_from_user(a.user).inspect
           allocation['amount'] = bucket.balance_from_user(a.user)
           allocations << allocation
         end

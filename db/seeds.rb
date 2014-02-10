@@ -13,6 +13,7 @@ module Cobudget
       connection.execute('TRUNCATE TABLE buckets RESTART IDENTITY;')
       connection.execute('TRUNCATE TABLE accounts RESTART IDENTITY;')
       connection.execute('TRUNCATE TABLE entries RESTART IDENTITY;')
+      connection.execute('TRUNCATE TABLE transactions RESTART IDENTITY;')
 
       dionysus = Cobudget::User.create(name: 'Dionysus', email: 'dionysus@example.com')
       athena = Cobudget::User.create(name: 'Athena', email: 'athena@example.com')
@@ -41,11 +42,8 @@ module Cobudget
 
       #grant allocation rights for each user only once or it gets confusing. I'm not going to metaprogram this. :)
       athena_account = grant_allocation_rights(athena, 100)
-      sleep 1
       dionysus_account = grant_allocation_rights(dionysus, 200)
-      sleep 1
       zeus_account = grant_allocation_rights(zeus, 300)
-      sleep 1
       artemis_account = grant_allocation_rights(artemis, 49)
 
       allocate_money(athena_account, 50, persephone_bucket)
@@ -64,7 +62,7 @@ module Cobudget
     #private
 
     def self.grant_allocation_rights(user, amount)
-      account = Cobudget::Account.create(budget: @budget, name: "#{user.name}'s account in #{@budget}")
+      account = Cobudget::Account.create(budget: @budget, user: user, name: "#{user.name}'s account in #{@budget}")
       transfer_money(@catchall, account, amount.to_f)
       account
     end

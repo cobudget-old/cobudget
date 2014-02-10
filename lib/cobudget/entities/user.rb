@@ -17,5 +17,15 @@ module Cobudget
     def can_manage_budget?(budget)
       true
     end
+
+    def as_json(options={})
+      super(
+        include: { 
+          accounts: {
+            methods: :allocation_rights_cents
+          }
+        }
+      )
+    end
   end
 end
