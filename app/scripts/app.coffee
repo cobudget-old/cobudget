@@ -1,11 +1,12 @@
 'use strict'
 
 app = angular.module('cobudget', [
-  'ngCookies',
-  'ngResource', #may not need if restangular
-  'restangular',
-  'ngSanitize',
-  'ngAnimate',
+  'ngCookies'
+  'ngResource' #may not need if restangular
+  'restangular'
+  'ngSanitize'
+  'ngAnimate'
+  'directive.g+signin'
   'angular-lodash'
   'angles'
   'flash'
@@ -17,6 +18,7 @@ app = angular.module('cobudget', [
   'filters.utils'
   'controllers.buckets'
   'controllers.budgets'
+  'states.public'
   'states.budget'
   'states.bucket'
   'states.admin'
@@ -47,15 +49,39 @@ app = angular.module('cobudget', [
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
 .run(["$rootScope", "$state", "API_PREFIX", "editableOptions", "User", ($rootScope, $state, API_PREFIX, editableOptions, User) ->
-  $rootScope.setUser = (id)->
-    id ||= 3
-    User.getUser(id).then (success)->
-      User.setCurrentUser(success)
-      if User.getCurrentUser()?
-        $state.go 'budgets.buckets', budget_id: 1
-      else
-        $state.go '/'
-  $rootScope.setUser()
+  #$rootScope.setUser = (id)->
+    #id ||= 3
+    #User.getUser(id).then (success)->
+      #User.setCurrentUser(success)
+      #if User.getCurrentUser()?
+        #$state.go 'budgets.buckets', budget_id: 1
+      #else
+        #$state.go '/'
+  ##$rootScope.setUser()
+  $rootScope.$on 'event:google-plus-signin-success', (event,authResult)->
+    console.log authResult
+    gapi.client.load 'plus','v1', ()->
+      request = gapi.client.plus.people.get({'userId': 'me'})
+      request.execute (resp)->
+        params = {}
+        emails = resp.emails.filter (v)->
+          v.type == 'account'
+        params.email = emails[0].value
+        params.name = resp.displayName
+        User.authUser(params)
+          .then (success)->
+            console.log success
+            if success.accounts?
+              User.setCurrentUser(success)
+              $state.go 'budgets.buckets', budget_id: success.accounts[0].budget_id
+            else
+              #flash message
+              console.log "No accounts"
+           , (error)->
+             #ERROR
+    $rootScope.$on 'event:google-plus-signin-failure', (event,authResult)->
+      console.log authResult
+
 
   $rootScope.$debugMode = "on"
   $rootScope.admin = false

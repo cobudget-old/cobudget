@@ -4,6 +4,14 @@ angular.module('states.budget', ['controllers.buckets'])
     url: '/budgets/:budget_id'
     views:
       'main':
+        resolve:
+          currentUser: ["User", (User)->
+            if _.isEmpty(User.getCurrentUser())
+              false
+            else
+              User.getUser(User.getCurrentUser().id).then (success)->
+                User.setCurrentUser(success)
+          ]
         templateUrl: '/views/budgets/budget.show.html'
         controller: 'BudgetController'
   ) #end state

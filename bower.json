@@ -25,7 +25,8 @@
     "angular-bootstrap-colorpicker": "~3.0.2",
     "angles": "git@github.com:lgsilver/angles.git",
     "Chart.js": "*",
-    "angular-xeditable": "~0.1.7"
+    "angular-xeditable": "~0.1.7",
+    "angular-directive.g-signin": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
