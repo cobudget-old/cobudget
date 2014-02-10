@@ -2,6 +2,7 @@ require 'cobudget/entities/user'
 require 'cobudget/entities/budget'
 require 'cobudget/entities/bucket'
 require 'cobudget/entities/account'
+require 'cobudget/entities/transaction'
 
 module Cobudget
   class SeedLoader
@@ -60,23 +61,22 @@ module Cobudget
       allocate_money(artemis_account, 10, foosball_bucket)
     end
 
-    private
+    #private
 
-    def grant_allocation_rights(user, amount)
+    def self.grant_allocation_rights(user, amount)
       account = Cobudget::Account.create(budget: @budget, name: "#{user.name}'s account in #{@budget}")
       transfer_money(@catchall, account, amount.to_f)
       account
     end
 
-    def allocate_money(account, amount, bucket)
+    def self.allocate_money(account, amount, bucket)
       transfer_money(account, bucket, amount)
     end
 
-    def transfer_money(from_account, to_account, amount)
+    def self.transfer_money(from_account, to_account, amount)
       transaction = Cobudget::Transaction.create(creator_id: @admin, description: "<description>")
-      Cobudget::Entry.create!(amount: amount, transaction: transaction, account: to_account, identifier: DateTime.now.strftime('%Y%m%d%H%M%S%L%N'))
-      sleep 1
-      Cobudget::Entry.create!(amount: -amount, transaction: transaction, account: from_account, identifier: DateTime.now.strftime('%Y%m%d%H%M%S%L%N'))
+      Cobudget::Entry.create!(amount: amount, transaction: transaction, account: to_account, identifier: rand(10000))
+      Cobudget::Entry.create!(amount: -amount, transaction: transaction, account: from_account, identifier: rand(10000))
     end
   end
 end
