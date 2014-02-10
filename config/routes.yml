@@ -111,6 +111,12 @@
     params: ''
     description: Returns all users
 -
+  post:
+    route: 'users/authenticate'
+    command: authenticate_users
+    params: '*email'
+    description: Creates or finds a user by email
+-
   get:
     route: 'users/:user_id'
     command: show_users
