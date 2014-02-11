@@ -16,7 +16,6 @@ angular.module('controllers.buckets', [])
     $scope.bucket.bucket_id = $state.params.bucket_id
     $scope.bucket.put().then (success)->
       $scope.bucket = success
-      console.log "EDITED:", success
       flash('success', 'Bucket Updated.', 2000)
       $state.go('budgets.buckets', {budget_id: success.budget_id})
     , (error)->

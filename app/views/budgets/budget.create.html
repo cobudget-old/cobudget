@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-8">
+    <h2>Create budget</h2>
+    <div class="paint white shadow l-padded l-panel">
+      <form novalidate class="simple-form">
+        <div class="field">
+          <label for="budget-name">Name: </label>
+          <input id="budget-name" type="text" ng-model="_budget.name" /><br />
+        </div>
+        <div class="field">
+          <label for="budget-description">Description: </label>
+          <textarea id="budget-description" rows="10" ng-model="_budget.description"></textarea>
+        </div>
+        <div class="ani-fade-fast" ng-hide="_budget.description == undefined || budget.description ==''">
+          <strong>Preview:</strong>
+          <div class="well">
+            <div btf-markdown="_budget.description"></div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="pull-right" ng-click="createBudget()">Create budget</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h2>Instructions</h2>
+  </div>
+</div>

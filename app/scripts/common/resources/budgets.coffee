@@ -7,4 +7,6 @@ angular.module('resources.budgets', ['ngResource'])
     budgets.getList()
   getBudgetBuckets: (budget_id)->
     Restangular.one('budgets', budget_id).getList('buckets')
+  createBudget: (budget_data)->
+    budgets.post('budgets', budget_data)
 ])

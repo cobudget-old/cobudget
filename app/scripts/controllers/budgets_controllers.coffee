@@ -14,6 +14,9 @@ angular.module('controllers.budgets', [])
     $scope.budget = success
   , (error)->
     console.log error
+
+
+
   $scope.setMinMax = (bucket)->
     if bucket.minimum_cents?
       bucket.minimum = parseFloat(bucket.minimum_cents) / 100
@@ -131,12 +134,10 @@ angular.module('controllers.budgets', [])
   )
 
   $rootScope.channel.bind('allocation_updated', (response) ->
-    console.log "current_user", User.getCurrentUser()
     response.amount = parseFloat(response.amount)
     for bucket, idx in $scope.buckets
       #ignore for self
       if response.user_id == User.getCurrentUser().id
-        console.log "Break"
         break
       #get the bucket
       if response.bucket_id == bucket.id

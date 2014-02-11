@@ -46,5 +46,21 @@ angular.module('states.budget', ['controllers.buckets'])
       'sidebar':
         template: '<h2>Instructions</h2>'
   ) #end state
+  .state('new_budget',
+    url: '/new_budget'
+    views:
+      'main':
+        templateUrl: '/views/budgets/budget.create.html'
+        controller: ['$scope', '$state', 'Budget', 'flash', ($scope, $state, Budget, flash)->
+          $scope._budget = {}
+          $scope.createBudget = ()->
+            Budget.createBudget($scope._budget).then (success)->
+              flash('success', 'Budget Created.', 2000)
+              $scope._budget = {}
+              $state.go('admin.dashboard')
+            , (error)->
+              console.log error
+        ]
+  ) #end state
 ]) #end config
 

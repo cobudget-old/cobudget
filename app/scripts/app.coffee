@@ -72,12 +72,13 @@ app = angular.module('cobudget', [
               console.log success
               if success.accounts.length > 0
                 User.setCurrentUser(success)
+                $rootScope.current_user = User.getCurrentUser()
                 $state.go 'budgets.buckets', budget_id: success.accounts[0].budget_id
               else
                 #flash message
                 console.log "No accounts"
              , (error)->
-               #ERROR
+               console.log "User Auth Error", error
       $rootScope.$on 'event:google-plus-signin-failure', (event,authResult)->
         console.log "G+ sign in error", authResult
 
