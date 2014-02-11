@@ -62,7 +62,7 @@ module Cobudget
     #private
 
     def self.grant_allocation_rights(user, amount)
-      account = Cobudget::Account.create(budget: @budget, user: user, name: "#{user.name}'s account in #{@budget}")
+      account = Cobudget::Account.create(budget: @budget, user: user, name: "#{user.name}'s account for #{@budget.name}")
       transfer_money(@catchall, account, amount.to_f)
       account
     end

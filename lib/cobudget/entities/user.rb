@@ -19,8 +19,21 @@ module Cobudget
       true
     end
 
+    def budgets
+      budget_ids = accounts.map(&:budget_id)
+      #accounts.each do |acc|
+        #budget_ids << acc.budget_id
+      #end
+      budgets = []
+      budget_ids.each do |id|
+        budgets << Budget.find(id)
+      end
+      budgets.as_json
+    end
+
     def as_json(options={})
       super(
+        methods: :budgets,
         include: { 
           accounts: {
             methods: :allocation_rights_cents
