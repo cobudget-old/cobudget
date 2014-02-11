@@ -10,19 +10,9 @@ module Cobudget
       def perform
         user = User.find_by_email(email)
         if user
-          user.as_json( include: { 
-                        accounts: {
-                            methods: :allocation_rights_cents
-                        }
-                      }
-                    )
+          user.as_json
         else
-          User.create(actors).as_json( include: { 
-                        accounts: {
-                            methods: :allocation_rights_cents
-                        }
-                      }
-                    )
+          User.create(actors).as_json
         end
       end 
     end 

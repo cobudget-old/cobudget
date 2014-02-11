@@ -18,12 +18,7 @@ module Cobudget
       def perform
         data = user.update_attributes!(attributes)
         #Pusher.trigger('budgets', 'updated', {budget: data})
-        user.as_json( include: { 
-                        accounts: {
-                            methods: :allocation_rights_cents
-                        }
-                      }
-                    )
+        user.as_json
       end
     end
   end

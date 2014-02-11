@@ -5,12 +5,7 @@ module Cobudget
   module Users
     class List < Playhouse::Context
       def perform
-        User.all.as_json(include: { 
-                           accounts: {
-                             methods: :allocation_rights_cents
-                           }
-                         }
-                        )
+        User.all.as_json
       end
     end
   end
