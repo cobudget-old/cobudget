@@ -124,19 +124,36 @@ angular.module('controllers.budgets', [])
     if n != o
       $scope.prepareChart()
 
-  $rootScope.channel.bind('bucket_created', (bucket) ->
-    setMinMax(bucket.bucket)
-    $scope.buckets.unshift bucket.bucket
+  $rootScope.channel.bind('bucket_created', (response) ->
+    Bucket.setMinMax(response.bucket)
+    $scope.buckets.unshift response.bucket
     $scope.$apply()
   )
 
-  $rootScope.channel.bind('bucket_updated', (bucket) ->
+  $rootScope.channel.bind('allocation_updated', (response) ->
+    console.log "current_user", User.getCurrentUser()
+    response.amount = parseFloat(response.amount)
+    for bucket, idx in $scope.buckets
+      #ignore for self
+      if response.user_id == User.getCurrentUser().id
+        console.log "Break"
+        break
+      #get the bucket
+      if response.bucket_id == bucket.id
+        for allocation, i in bucket.allocations
+          #match to user
+          if allocation.user_id == response.user_id
+            $scope.buckets[idx].allocations[i].amount += response.amount * 100
+
+    $scope.$apply()
+  )
+
+  $rootScope.channel.bind('bucket_updated', (response) ->
     for old_bucket, i in $scope.buckets
-      console.log "POSITION", i
-      if old_bucket.id == bucket.bucket.id
-        bucket.bucket.allocations = $scope.buckets[i].allocations
-        bucket.bucket.user_allocation = $scope.buckets[i].user_allocation
-        $scope.buckets[i] = bucket.bucket
+      if old_bucket.id == response.bucket.id
+        response.bucket.allocations = $scope.buckets[i].allocations
+        response.bucket.user_allocation = $scope.buckets[i].user_allocation
+        $scope.buckets[i] = response.bucket
         $scope.refreshBucket($scope.buckets[i], i)
         break
     $scope.$apply()

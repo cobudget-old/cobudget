@@ -7,8 +7,12 @@ angular.module('states.budget', ['controllers.buckets'])
         resolve:
           currentUser: ["User", "ENV", (User, ENV)->
             if ENV.skipSignIn
-              User.getUser(1).then (success)->
-                User.setCurrentUser(success)
+              if _.isEmpty(User.getCurrentUser())
+                User.getUser(1).then (success)->
+                  User.setCurrentUser(success)
+              else
+                User.getUser(User.getCurrentUser().id).then (success)->
+                  User.setCurrentUser(success)
             else
               if _.isEmpty(User.getCurrentUser())
                 false

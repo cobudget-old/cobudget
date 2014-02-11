@@ -48,12 +48,15 @@ app = angular.module('cobudget', [
 ])
 .run(["$rootScope", "$state", "editableOptions", "User", "ENV", ($rootScope, $state, editableOptions, User, ENV) ->
   if ENV.skipSignIn
-    User.getUser(1).then (success)->
-      User.setCurrentUser(success)
-      if User.getCurrentUser()?
-        $state.go 'budgets.buckets', budget_id: User.getCurrentUser().accounts[0].budget_id
-      else
-        $state.go '/'
+    $rootScope.setUser = (id)->
+      User.getUser(id).then (success)->
+        User.setCurrentUser(success)
+        if User.getCurrentUser()?
+          $rootScope.current_user = User.getCurrentUser()
+          $state.go 'budgets.buckets', budget_id: User.getCurrentUser().accounts[0].budget_id
+        else
+          $state.go '/'
+    $rootScope.setUser(1)
   else
     $rootScope.$on 'event:google-plus-signin-success', (event,authResult)->
       gapi.client.load 'plus','v1', ()->

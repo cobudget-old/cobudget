@@ -42,6 +42,11 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a></li>
             <li>
+            <div colorpicker="hex" ng-model="current_user.bg_color" style="background-color: {{current_user.bg_color}}" class="m-user-color m-user-color-bg"></div>
+            <a>{{current_user.email}}</a>
+            </li>
+            <li><a ng-click="setUser(2)">User2</a></li>
+            <li>
               <a href="/" class="navbar-brand">
                 <img class="logo" src="/images/css/ph_logo.png" alt="cobudget logo" />
               </a>
