@@ -46,7 +46,6 @@ module.exports = function (grunt) {
       options: {
         space: '  '
       },
-      // Environment targets
       development: [{
         dest: '<%= yeoman.app %>/scripts/config.js',
         wrap: '"use strict";\n\n <%= __ngModule %>',
@@ -60,13 +59,15 @@ module.exports = function (grunt) {
         }
       }],
       production: [{
-        dest: '<%= yeoman.dist %>/scripts/config.js',
+        dest: '<%= yeoman.app %>/scripts/config.js',
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          ENV: 'production',
-          apiEndpoint: 'http://api.cobudget.enspiral.info/cobudget',
-          googClient: '944956761028.apps.googleusercontent.com'
+          ENV:  {
+            name: 'production',
+            apiEndpoint: 'http://api.cobudget.enspiral.info/cobudget',
+            googClient: '944956761028.apps.googleusercontent.com'
+          }
         }
       }]
     },
@@ -379,9 +380,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production',
     'useminPrepare',
     'concurrent:dist',
-    'ngconstant:production',
     'autoprefixer',
     'concat',
     'ngmin',

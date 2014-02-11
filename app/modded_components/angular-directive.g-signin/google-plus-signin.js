@@ -15,7 +15,7 @@ angular.module('directive.g+signin', []).
     template: '<span class="g-signin"></span>',
     replace: true,
     link: function (scope, element, attrs) {
-      console.log(ENV.googClient)
+      console.log(ENV);
       //attrs.clientid += (ending.test(attrs.clientid) ? '' : '.apps.googleusercontent.com');
       //attrs.$set('data-clientid', attrs.clientid);
       attrs.$set('data-clientid', ENV.googClient);

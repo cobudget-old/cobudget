@@ -1,7 +1,7 @@
 'use strict'
 
 app = angular.module('cobudget', [
-  'ngCookies'
+  #'ngCookies'
   'ngResource' #may not need if restangular
   'restangular'
   'ngSanitize'

@@ -30,7 +30,7 @@ namespace :deploy do
   end
 
   task :compress do
-    system "tar -zcvf deploy_package.tar.gz dist"
+    system "tar -zcf deploy_package.tar.gz dist"
   end
 
   task :upload do
@@ -43,7 +43,7 @@ namespace :deploy do
   end
 
   task :uncompress_and_clean_up do
-    run "cd #{release_path} && tar -zxvf deploy_package.tar.gz --strip-components=1"
+    run "cd #{release_path} && tar -zxf deploy_package.tar.gz --strip-components=1"
     #run "mv #{release_path}/dist/* #{release_path}/"
   end
 
