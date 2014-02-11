@@ -14,7 +14,7 @@ module Cobudget
       def perform
         #raise NotAuthorizedToListAllBuckets if admin.can_list_all_buckets?
 
-        budget.buckets.order('updated_at desc').load
+        budget.buckets.order('updated_at desc').load.as_json
       end
     end
   end

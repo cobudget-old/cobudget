@@ -13,6 +13,19 @@ module Cobudget
     has_many :entries, as: :account
 
     #self.connection - same as ActiveRecord::Base.connection but can point to a different data provider
+    def sponsor_name_or_email
+      if sponsor
+        sponsor.name.blank? ? sponsor.email : sponsor.name
+      else
+        "N/A"
+      end
+    end
+
+    def as_json(options={})
+      super(
+        methods: :sponsor_name_or_email 
+      )
+    end
   end
 
 end

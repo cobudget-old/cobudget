@@ -30,9 +30,8 @@ module Cobudget
         #Pusher.secret = '882cd62d5475bc7edee3'
         #Pusher.app_id = '59272'
         bucket.update_attributes!(get_actors)
-        #Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket})
-        puts bucket.inspect
-        bucket
+        Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket.as_json})
+        bucket.as_json
       end
     end
   end

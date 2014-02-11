@@ -25,6 +25,7 @@ module Cobudget
 
         user_account = user.get_allocation_rights(bucket.budget).first
         transfer = TransferMoney.new(source_account: user_account, destination_account: bucket, amount: amount, creator: admin)
+        Pusher.trigger('cobudget', 'allocation_updated', {user_id: user.id, bucket_id: bucket.id, amount: amount})
         transfer.call
       end
     end

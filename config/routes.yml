@@ -33,7 +33,11 @@
     command: budget_total_enquiry
     params: '*budget_id'
     description: Returns the total for a given budget
-
+-
+  get:
+    route: 'budgets/:budget_id'
+    command: show_budgets
+    params: '*budget_id'
 -
   put:
     route: 'budgets/:budget_id'

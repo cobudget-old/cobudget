@@ -20,7 +20,7 @@ module Cobudget
       def perform
         data = budget.update_attributes!(attributes)
         #Pusher.trigger('budgets', 'updated', {budget: data})
-        data
+        data.as_json
       end
     end
   end

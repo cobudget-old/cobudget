@@ -9,7 +9,7 @@ module Cobudget
       actor :budget, repository: Budget, role: BudgetOfBuckets
 
       def perform
-        budget.available_buckets.order('updated_at desc').load
+        budget.available_buckets.order('updated_at desc').load.as_json
       end
     end
   end

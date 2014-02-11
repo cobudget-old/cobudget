@@ -13,7 +13,7 @@ module Cobudget
       actor :bucket, repository: Bucket
 
       def perform
-        bucket
+        bucket.as_json
       end
     end
   end
