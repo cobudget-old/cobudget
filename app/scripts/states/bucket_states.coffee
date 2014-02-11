@@ -19,7 +19,7 @@ angular.module('states.bucket', ['controllers.buckets'])
         templateUrl: '/views/buckets/buckets.edit.html'
         controller: 'BucketController'
       'sidebar':
-         template: '<h1>sidebar</h1>'
+         template: '<h2>sidebar</h2>'
   ) #end state
 ]) #end config
 

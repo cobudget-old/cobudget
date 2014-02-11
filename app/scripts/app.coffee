@@ -46,39 +46,37 @@ app = angular.module('cobudget', [
   #$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
   #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
-.run(["$rootScope", "$state", "editableOptions", "User", ($rootScope, $state, editableOptions, User) ->
-  #$rootScope.setUser = (id)->
-    #id ||= 3
-    #User.getUser(id).then (success)->
-      #User.setCurrentUser(success)
-      #if User.getCurrentUser()?
-        #$state.go 'budgets.buckets', budget_id: 1
-      #else
-        #$state.go '/'
-  ##$rootScope.setUser()
-  $rootScope.$on 'event:google-plus-signin-success', (event,authResult)->
-    console.log authResult
-    gapi.client.load 'plus','v1', ()->
-      request = gapi.client.plus.people.get({'userId': 'me'})
-      request.execute (resp)->
-        params = {}
-        emails = resp.emails.filter (v)->
-          v.type == 'account'
-        params.email = emails[0].value
-        params.name = resp.displayName
-        User.authUser(params)
-          .then (success)->
-            console.log success
-            if success.accounts.length > 0
-              User.setCurrentUser(success)
-              $state.go 'budgets.buckets', budget_id: success.accounts[0].budget_id
-            else
-              #flash message
-              console.log "No accounts"
-           , (error)->
-             #ERROR
-    $rootScope.$on 'event:google-plus-signin-failure', (event,authResult)->
-      console.log authResult
+.run(["$rootScope", "$state", "editableOptions", "User", "ENV", ($rootScope, $state, editableOptions, User, ENV) ->
+  if ENV.skipSignIn
+    User.getUser(1).then (success)->
+      User.setCurrentUser(success)
+      if User.getCurrentUser()?
+        $state.go 'budgets.buckets', budget_id: User.getCurrentUser().accounts[0].budget_id
+      else
+        $state.go '/'
+  else
+    $rootScope.$on 'event:google-plus-signin-success', (event,authResult)->
+      gapi.client.load 'plus','v1', ()->
+        request = gapi.client.plus.people.get({'userId': 'me'})
+        request.execute (resp)->
+          params = {}
+          emails = resp.emails.filter (v)->
+            v.type == 'account'
+          params.email = emails[0].value
+          params.name = resp.displayName
+          User.authUser(params)
+            .then (success)->
+              console.log success
+              if success.accounts.length > 0
+                User.setCurrentUser(success)
+                $state.go 'budgets.buckets', budget_id: success.accounts[0].budget_id
+              else
+                #flash message
+                console.log "No accounts"
+             , (error)->
+               #ERROR
+      $rootScope.$on 'event:google-plus-signin-failure', (event,authResult)->
+        console.log "G+ sign in error", authResult
 
 
   $rootScope.$debugMode = "on"

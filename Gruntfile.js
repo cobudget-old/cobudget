@@ -54,7 +54,8 @@ module.exports = function (grunt) {
           ENV: {
             name: 'development',
             apiEndpoint: 'http://localhost:9292/cobudget',
-            googClient: '944956761028-bp08s6r3t4ievevuqdnah3da7291hn8g.apps.googleusercontent.com'
+            googClient: '944956761028-bp08s6r3t4ievevuqdnah3da7291hn8g.apps.googleusercontent.com',
+            skipSignIn: true
           }
         }
       }],

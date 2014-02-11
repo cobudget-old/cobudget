@@ -1,5 +1,5 @@
 angular.module('controllers.buckets', [])
-.controller('BucketController', ['$rootScope', '$scope', '$state', 'Bucket', 'flash', ($rootScope, $scope, $state, Bucket, flash)->
+.controller('BucketController', ['$rootScope', '$scope', '$state', 'Bucket', 'flash', 'User', ($rootScope, $scope, $state, Bucket, flash, User)->
   $scope.budget_id = $state.params.budget_id
 
   $scope._bucket = {}
@@ -16,18 +16,20 @@ angular.module('controllers.buckets', [])
     $scope.bucket.bucket_id = $state.params.bucket_id
     $scope.bucket.put().then (success)->
       $scope.bucket = success
+      console.log "EDITED:", success
       flash('success', 'Bucket Updated.', 2000)
       $state.go('budgets.buckets', {budget_id: success.budget_id})
-      console.log success
     , (error)->
       console.log error
 
   $scope.create = ()->
     $scope._bucket.budget_id = $state.params.budget_id
-    $scope._bucket.user_id = "1"
+    $scope._bucket.user_id = User.getCurrentUser().id
+    $scope._bucket.sponsor_id = User.getCurrentUser().id
     Bucket.createBucket($scope._bucket).then (success)->
       $scope._bucket = {}
       flash('success', 'Bucket created.', 2000)
+      $state.go('budgets.buckets', {budget_id: success.budget_id})
     , (error)->
       console.log error
 

@@ -12,7 +12,7 @@ angular.module('flash', [])
     $rootScope.$emit('flash:message', messages, cleanup);
   };
 
-  $rootScope.$on('$locationChangeSuccess', emit);
+  //$rootScope.$on('$locationChangeSuccess', emit);
 
   var asMessage = function(level, text) {
     if (!text) {

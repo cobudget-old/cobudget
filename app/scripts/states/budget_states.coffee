@@ -5,12 +5,16 @@ angular.module('states.budget', ['controllers.buckets'])
     views:
       'main':
         resolve:
-          currentUser: ["User", (User)->
-            if _.isEmpty(User.getCurrentUser())
-              false
-            else
-              User.getUser(User.getCurrentUser().id).then (success)->
+          currentUser: ["User", "ENV", (User, ENV)->
+            if ENV.skipSignIn
+              User.getUser(1).then (success)->
                 User.setCurrentUser(success)
+            else
+              if _.isEmpty(User.getCurrentUser())
+                false
+              else
+                User.getUser(User.getCurrentUser().id).then (success)->
+                  User.setCurrentUser(success)
           ]
         templateUrl: '/views/budgets/budget.show.html'
         controller: 'BudgetController'
@@ -20,7 +24,7 @@ angular.module('states.budget', ['controllers.buckets'])
     views:
       'header':
         template: '
-          <h2>Budget</h2>
+          <h2>{{budget.name}}</h2>
         '
       'page':
         templateUrl: '/views/buckets/buckets.list.html'
@@ -31,12 +35,12 @@ angular.module('states.budget', ['controllers.buckets'])
     url: '/propose-bucket'
     views:
       'header':
-        template: '<h2>Propose a Bucket</h2>'
+        template: '<h2><a <a ui-sref="budgets.buckets({budget_id: budget.id})">{{budget.name}} </a> <span class="clr-medium-gray">> Propose a Bucket</span></h2>'
       'page':
         templateUrl: '/views/buckets/buckets.create.html'
         controller: 'BucketController'
       'sidebar':
-        template: '<h1>Instructions</h1>'
+        template: '<h2>Instructions</h2>'
   ) #end state
 ]) #end config
 

@@ -3,12 +3,17 @@ angular.module('controllers.budgets', [])
   if _.isEmpty(User.getCurrentUser())
     $state.go("home")
   console.log "Budget", User.getCurrentUser(), User.getCurrentUser()
+  $scope.budget = {}
   $scope.buckets = []
   $scope.buckets_holder = []
   $scope.user_allocations = []
   $scope.loaded_buckets = 0
   $scope.allocatable_holder = 0
 
+  Budget.getBudget($state.params.budget_id).then (success)->
+    $scope.budget = success
+  , (error)->
+    console.log error
   $scope.setMinMax = (bucket)->
     if bucket.minimum_cents?
       bucket.minimum = parseFloat(bucket.minimum_cents) / 100
@@ -67,6 +72,24 @@ angular.module('controllers.budgets', [])
     $scope.loading_counter = success.length
   )
 
+  $scope.refreshBucket = (bucket, position)->
+    bucket.color = ColorGenerator.makeColor(0.3,0.3,0.3,0,position * 1.25,4,177,65, position)
+    $scope.setMinMax(bucket)
+    $scope.refreshBucketAllocations(bucket)
+
+  $scope.refreshBucketAllocations = (bucket)->
+    Bucket.getBucketAllocations(bucket.id).then (success)->
+      if success.length > 0
+        for na in success
+          for oa, i in bucket.allocations
+            #if the amount has changed update allocation
+            if oa.user_id == na.user_id
+              if oa.amount != na.amount
+                bucket.allocations[i].amount = na.amount
+                #if the changed allocation is from the user update the user_allocation
+                if bucket.allocations[i].user_id == User.getCurrentUser().id
+                  bucket.user_allocation = na.amount
+
   $scope.prepareUserAllocations = ()->
     allocations = []
     sum = 0
@@ -108,11 +131,14 @@ angular.module('controllers.budgets', [])
   )
 
   $rootScope.channel.bind('bucket_updated', (bucket) ->
-    for i in [0...$scope.buckets.length]
-      bk = $scope.buckets[i]
-      if bk.id == bucket.bucket.id
+    for old_bucket, i in $scope.buckets
+      console.log "POSITION", i
+      if old_bucket.id == bucket.bucket.id
+        bucket.bucket.allocations = $scope.buckets[i].allocations
+        bucket.bucket.user_allocation = $scope.buckets[i].user_allocation
         $scope.buckets[i] = bucket.bucket
-        setMinMax($scope.buckets[i])
+        $scope.refreshBucket($scope.buckets[i], i)
+        break
     $scope.$apply()
   )
 ])
