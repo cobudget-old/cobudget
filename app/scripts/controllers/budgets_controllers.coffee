@@ -1,5 +1,5 @@
 angular.module('controllers.budgets', [])
-.controller('BudgetController',['$scope', '$rootScope', '$state', 'User', "Bucket", "Budget", "ColorGenerator", 'ConstrainedSliderCollector', ($scope, $rootScope, $state, User, Bucket, Budget, ColorGenerator, ConstrainedSliderCollector)->
+.controller('BudgetController',['$scope', '$rootScope', '$state', '$filter', 'User', "Bucket", "Budget", "ColorGenerator", 'ConstrainedSliderCollector', ($scope, $rootScope, $state, $filter, User, Bucket, Budget, ColorGenerator, ConstrainedSliderCollector)->
   if _.isEmpty(User.getCurrentUser())
     $state.go("home")
   console.log "Budget", User.getCurrentUser(), User.getCurrentUser()
@@ -14,7 +14,6 @@ angular.module('controllers.budgets', [])
     $scope.budget = success
   , (error)->
     console.log error
-
 
 
   $scope.setMinMax = (bucket)->
@@ -68,7 +67,8 @@ angular.module('controllers.budgets', [])
       $scope.loaded_buckets++
       if $scope.loaded_buckets == $scope.loading_counter
         $scope.allocatable += $scope.allocatable_holder
-        $scope.buckets = $scope.buckets_holder
+        ordered = $filter('orderBy')($scope.buckets_holder, 'id')
+        $scope.buckets = ordered
 
   loadAllocatable()
   loadBucketFrames().then((success)->
@@ -95,9 +95,9 @@ angular.module('controllers.budgets', [])
 
   $scope.prepareUserAllocations = ()->
     allocations = []
+    $scope.sum_of_user_allocations = 0
     sum = 0
     for bucket in $scope.buckets
-      #eventually a prob when allocations to same bucket.
       for allocation, i in bucket.allocations
         if allocation.user_id == User.getCurrentUser().id
           sum += allocation.amount
@@ -106,6 +106,7 @@ angular.module('controllers.budgets', [])
           if allocation.amount > 0
             allocations.push allocation
 
+    $scope.sum_of_user_allocations = sum
     unallocated = $scope.allocatable - sum 
     allocations.push {user_id: undefined, label: "Unallocated", amount: unallocated, bucket_color: "#ececec" }
     $scope.user_allocations = allocations.reverse()

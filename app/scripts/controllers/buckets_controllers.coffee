@@ -34,8 +34,23 @@ angular.module('controllers.buckets', [])
 
 
 ]).controller('BucketItem', ['$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', 'Allocation', ($rootScope, $http, $scope, $state, Bucket, flash, Allocation)->
+  $scope.b.user_allocation_dollars = 0
+
+  $scope.selectText = ()->
+      document.querySelector('#myinput').select();
+    , 0
+
+  $scope.resetField = ()->
+    $scope.b.user_allocation_dollars = 0
+
+  $scope.saveAllocation = (data)->
+    if !isNaN(parseFloat(data)) && isFinite(data)
+      $('#slider_'+$scope.b.id).find('.slider').val(parseFloat(data * 100), true)
+      true
+
   $scope.$watch 'b.allocations', (n, o)->
-    $scope.$parent.$parent.$parent.prepareUserAllocations() 
+    if n != o
+      $scope.$parent.$parent.$parent.prepareUserAllocations() 
   , true
 
   $scope.delete = ()->

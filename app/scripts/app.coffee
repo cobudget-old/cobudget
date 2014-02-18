@@ -41,10 +41,6 @@ app = angular.module('cobudget', [
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'ENV', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, ENV)->
   $urlRouterProvider.otherwise('/')
   RestangularProvider.setBaseUrl(ENV.apiEndpoint)
-  #RestangularProvider.configuration.getIdFromElem = (elem)->
-    #elem[_.initial(elem.route).join('') + "_id"]
-  #$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
-  #$sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9000/**', 'http://localhost:9292/**', 'http://127.0.0.1:9292/**', 'http://cobudget.enspiral.info/**'])
 ])
 .run(["$rootScope", "$state", "editableOptions", "User", "ENV", ($rootScope, $state, editableOptions, User, ENV) ->
   if ENV.skipSignIn
@@ -87,6 +83,7 @@ app = angular.module('cobudget', [
   $rootScope.admin = false
 
   editableOptions.theme = 'cobudget'
+  editableOptions.activate = 'select'
 
   $rootScope.pusher = new Pusher('6ea7addcc0137ddf6cf0')
   $rootScope.channel = $rootScope.pusher.subscribe('cobudget')

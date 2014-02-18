@@ -2,7 +2,8 @@
 <!--<div ng-repeat="clr in color_array" style="width: 10px; height: 10px; float: left; background-color: {{clr}};"></div>-->
 <div class="paint white shadow">
   <div class="l-padded">
-    {{allocatable / 100 | number: 2}}
+    allocated: {{sum_of_user_allocations / 100 | number: 2}}
+    allocatable: {{allocatable / 100 | number: 2}}
     <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
     <table class="l-unstyled-table">
       <tr ng-repeat="ua in user_allocations track by $index">

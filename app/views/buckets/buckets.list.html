@@ -12,6 +12,19 @@
       </div>
       <div class="m-bucket-right l-padded">
         <div class="m-labels list-inline clearfix">
+          <div class="o-slider-selection pull-left">
+            <a href="" onaftersave="resetField()" onbeforesave="saveAllocation($data)" editable-number="b.user_allocation_dollars" e-placeholder="Amount in dollars" e-step="any"> 
+              ${{b.user_allocation / 100| number: 2 }}
+            </a>
+            ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)
+          </div>
+          <div ng-if="b.user_allocation > 0" class="o-slider-selection pull-left">
+            <a href="" ng-click="b.user_allocation = 0"> 
+              <small>
+              &nbsp; reset
+              </small>
+            </a>
+          </div>
           <div class="m-bucket-owner">
             {{b.sponsor_name_or_email}}
           </div>
@@ -27,19 +40,7 @@
           </div>
         </div>
         <div ng-if="b.maximum > b.minimum && allocatable > 0 && loaded_buckets === loading_counter" class="o-slider-container">
-          <!--<div class="o-slider-labels">-->
-            <!--<div class="o-slider-range-low">0</div>-->
-            <!--<div class="o-slider-selection">Allocation: ${{b.user_allocation | number: 0}} ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)</div>-->
-            <!--<div class="o-slider-range-high">${{current_user.allocatable}}</div>-->
-          <!--</div>-->
-          <!--<slider min="0" max="{{b.maximum}}" orientation="vertical" ng-model="b.user_allocation"></slider>-->
-          <div class="o-slider-selection">
-            <a href="" editable-number="b.user_allocation"> 
-              ${{b.user_allocation / 100| number: 2 }}
-            </a>
-            ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)
-          </div>
-          <constrained-slider min="0" max="{{allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="{{allocatable}}" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>
+          <constrained-slider id="slider_{{b.id}}" min="0" max="{{allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="{{allocatable}}" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>
         </div>
         <div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">
           <horiz-graph max="b.maximum_cents" height="50" items="b.allocations">

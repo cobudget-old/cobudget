@@ -35,10 +35,14 @@ angular.module("directives.constrained_slider", [])
         change()
 
     scope.allocationAmount = (o, n)->
+      o_constrained = constrainValue(o)
       if o > 0
         amt = o - n
         if o > n
-          amt = (o - n) * -1 
+          if o > o_constrained
+            amt = o_constrained
+          else
+            amt = (o - n) * -1 
         else
           amt = (n - o)
       else
@@ -49,12 +53,12 @@ angular.module("directives.constrained_slider", [])
       alc.admin_id = 1
       alc.user_id = new_item.user_id
       alc.bucket_id = new_item.bucket_id
-      alc.amount = amt / 100
-      console.log "Saving", alc
-      Allocation.createAllocation(alc).then (success)->
-        console.log "Allocation Created:", alc
-      , (error)->
-        console.log error
+      alc.amount = (amt / 100).toFixed(2)
+      if alc.amount != 0
+        Allocation.createAllocation(alc).then (success)->
+          console.log "Allocation Created:", alc
+        , (error)->
+          console.log error
 
     scope.$watch "Model", (n, o) ->
       save = false
@@ -71,21 +75,24 @@ angular.module("directives.constrained_slider", [])
         if item_identifier == scope.affecting[i].user_id
           allocated = true
           scope.affecting[i] = new_item
+      val = constrainValue(scope.Model)
+      #this is causing the trouble
+      scope.Model = val
+      el.val val
       #hammy as making sure it doesn't save the initial load of data
       if parseFloat(o) > 0 and parseFloat(n) == 0
         save = true
-      else if parseFloat(el.val()) == 0.00 
+      else if parseFloat(val) == 0.00 
         save = false
-      else if parseFloat(el.val()) == parseFloat(o)
+      else if parseFloat(val) == parseFloat(o)
         save = false
-      else if parseFloat(el.val()) > 0 
+      else if parseFloat(val) > 0 
         if parseFloat(n) > 0
           save = true
-      val = constrainValue(scope.Model)
-      scope.Model = val
-      el.val val
       if save == true
         scope.saveAllocation(scope.allocationAmount(o, val), new_item)
+      else
+        console.log "save false: setting", val
 
     getAffectingTotal = ->
       total = 0
