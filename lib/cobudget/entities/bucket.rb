@@ -1,4 +1,5 @@
 require 'active_record'
+require 'state_machine'
 require 'support/money_attribute'
 
 module Cobudget
@@ -11,6 +12,18 @@ module Cobudget
 
     belongs_to :budget
     has_many :entries, as: :account
+
+    state_machine initial: :open do
+      event :set_funded do
+        transition :open => :funded
+        puts "SET FUNDED"
+      end
+
+      event :set_closed do
+        transition :open => :closed
+        puts "SET CLOSED"
+      end
+    end
 
     #self.connection - same as ActiveRecord::Base.connection but can point to a different data provider
     def sponsor_name_or_email

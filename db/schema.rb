@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 201312271431) do
     t.integer  "budget_id",                     null: false
     t.string   "name",                          null: false
     t.text     "description"
+    t.text     "state"
+    t.datetime "funded_at"
+    t.datetime "closed_at"
     t.integer  "minimum_cents"
     t.integer  "maximum_cents"
     t.integer  "sponsor_id"

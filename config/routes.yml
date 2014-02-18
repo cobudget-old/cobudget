@@ -10,8 +10,8 @@
   get:
     route: 'budgets/:budget_id/buckets'
     command: list_available_buckets
-    params: '*budget_id'
-    description: Returns a specific budget
+    params: '*budget_id, *state'
+    description: Returns budget buckets of defined state
 
 -
   get:
@@ -93,6 +93,13 @@
     command: create_buckets
     params: '*user_id, *budget_id, *name, *description, minimum, maximum, sponsor_id'
     description: Creates a bucket
+
+-
+  post:
+    route: 'buckets/:bucket_id/set-state'
+    command: set_state_buckets
+    params: '*bucket_id, state'
+    description: Sets the state of a bucket.
 
 -
   delete:

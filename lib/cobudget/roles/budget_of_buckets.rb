@@ -30,5 +30,17 @@ module Cobudget
     def available_buckets
       buckets.where(archived: false)
     end
+
+    def open_buckets
+      available_buckets.where(state: "open")
+    end
+
+    def funded_buckets
+      available_buckets.where(state: "funded")
+    end
+
+    def closed_buckets
+      available_buckets.where(state: "closed")
+    end
   end
 end

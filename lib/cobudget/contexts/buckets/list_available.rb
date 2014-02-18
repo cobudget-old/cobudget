@@ -7,9 +7,21 @@ module Cobudget
   module Buckets
     class ListAvailable < Playhouse::Context
       actor :budget, repository: Budget, role: BudgetOfBuckets
+      actor :state
 
       def perform
-        budget.available_buckets.order('updated_at desc').load.as_json
+        if state == "open"
+          puts "OPEN"
+          budget.open_buckets.order('updated_at desc').load.as_json
+        elsif state == "funded"
+          puts "FUNDED"
+          budget.funded_buckets.order('updated_at desc').load.as_json
+        elsif state == "closed"
+          puts "CLOSED"
+          budget.closed_buckets.order('updated_at desc').load.as_json
+        else
+          budget.available_buckets.order('updated_at desc').load.as_json
+        end
       end
     end
   end
