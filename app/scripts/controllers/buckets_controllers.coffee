@@ -36,10 +36,6 @@ angular.module('controllers.buckets', [])
 ]).controller('BucketItem', ['$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', 'Allocation', ($rootScope, $http, $scope, $state, Bucket, flash, Allocation)->
   $scope.b.user_allocation_dollars = 0
 
-  $scope.selectText = ()->
-      document.querySelector('#myinput').select();
-    , 0
-
   $scope.resetField = ()->
     $scope.b.user_allocation_dollars = 0
 
