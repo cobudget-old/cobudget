@@ -24,4 +24,7 @@ angular.module('resources.buckets', [])
 
   createBucketAllocation: (bucket_id, allocation)->
     Restangular.post('buckets', budget_id)
+
+  setBucketState: (bucket_id, state)->
+    Restangular.one('buckets', bucket_id).customPOST({bucket_id: bucket_id, state: state}, 'set-state')
 ])

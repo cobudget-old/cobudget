@@ -30,7 +30,8 @@ angular.module('controllers.buckets', [])
       flash('success', 'Bucket created.', 2000)
       $state.go('budgets.buckets', {budget_id: success.budget_id})
     , (error)->
-      console.log error
+      if error.status == 500
+        flash('error', 'Error saving bucket', 2000)
 
 
 ]).controller('BucketItem', ['$rootScope', '$http', '$scope', '$state', 'Bucket', 'flash', 'Allocation', ($rootScope, $http, $scope, $state, Bucket, flash, Allocation)->
@@ -48,6 +49,15 @@ angular.module('controllers.buckets', [])
     if n != o
       $scope.$parent.$parent.$parent.prepareUserAllocations() 
   , true
+
+  $scope.setBucketState = (state)->
+    Bucket.setBucketState($scope.b.id, state).then (success)->
+      console.log success
+      flash('success', 'Bucket state updated', 2000)
+      $state.go('budgets.buckets', {budget_id: success.budget_id, state: "open"})
+    , (error)->
+      if error.status == 500
+        flash('error', 'Couldn\'t update state', 2000)
 
   $scope.delete = ()->
     buckets = $scope.$parent.$parent.$parent.buckets

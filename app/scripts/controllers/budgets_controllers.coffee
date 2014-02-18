@@ -2,13 +2,9 @@ angular.module('controllers.budgets', [])
 .controller('BudgetController',['$scope', '$rootScope', '$state', '$filter', 'User', "Bucket", "Budget", "ColorGenerator", 'ConstrainedSliderCollector', ($scope, $rootScope, $state, $filter, User, Bucket, Budget, ColorGenerator, ConstrainedSliderCollector)->
   if _.isEmpty(User.getCurrentUser())
     $state.go("home")
-  console.log "Budget", User.getCurrentUser(), User.getCurrentUser()
+  console.log "Budget", User.getCurrentUser()
+
   $scope.budget = {}
-  $scope.buckets = []
-  $scope.buckets_holder = []
-  $scope.user_allocations = []
-  $scope.loaded_buckets = 0
-  $scope.allocatable_holder = 0
 
   Budget.getBudget($state.params.budget_id).then (success)->
     $scope.budget = success
@@ -28,7 +24,8 @@ angular.module('controllers.budgets', [])
     bucket
 
   loadBucketFrames = ->
-    buckets = Budget.getBudgetBuckets($state.params.budget_id).then (success)->
+    buckets = Budget.getBudgetBuckets($state.params.budget_id, $state.params.state).then (success)->
+        console.log success
         for b, i in success
           b.user_allocation = 0
           b.color = ColorGenerator.makeColor(0.3,0.3,0.3,0,i * 1.25,4,177,65, i)
@@ -60,7 +57,6 @@ angular.module('controllers.budgets', [])
           if a.user_id == User.getCurrentUser().id
             b.user_allocation = a.amount
       b.user_allocation
-        #b.allocations = success
     .then (amount)->
       $scope.buckets_holder.push b
       $scope.allocatable_holder += parseInt(amount, 10)
@@ -70,10 +66,17 @@ angular.module('controllers.budgets', [])
         ordered = $filter('orderBy')($scope.buckets_holder, 'id')
         $scope.buckets = ordered
 
-  loadAllocatable()
-  loadBucketFrames().then((success)->
-    $scope.loading_counter = success.length
-  )
+  $scope.load = ->
+    $scope.buckets = []
+    $scope.buckets_holder = []
+    $scope.user_allocations = []
+    $scope.allocatable_holder = 0
+    $scope.loaded_buckets = 0
+    loadAllocatable()
+    loadBucketFrames().then((success)->
+      if success?
+        $scope.loading_counter = success.length
+    )
 
   $scope.refreshBucket = (bucket, position)->
     bucket.color = ColorGenerator.makeColor(0.3,0.3,0.3,0,position * 1.25,4,177,65, position)

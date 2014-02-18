@@ -30,6 +30,9 @@ angular.module('states.budget', ['controllers.buckets'])
         templateUrl: '/views/budgets/budgets.header.html'
       'page':
         templateUrl: '/views/buckets/buckets.list.html'
+        controller: ['$scope', ($scope)->
+          $scope.$parent.load()
+        ]
       'sidebar':
         templateUrl: '/views/budgets/budget.sidebar.html'
   ) #end state
