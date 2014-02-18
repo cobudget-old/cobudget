@@ -2,8 +2,10 @@
 <!--<div ng-repeat="clr in color_array" style="width: 10px; height: 10px; float: left; background-color: {{clr}};"></div>-->
 <div class="paint white shadow">
   <div class="l-padded">
-    allocated: {{sum_of_user_allocations / 100 | number: 2}}
-    allocatable: {{allocatable / 100 | number: 2}}
+    <div class="row l-bottom-margin">
+      <span class="col-md-6 clr-medium-gray">Allocated: <strong>${{sum_of_user_allocations / 100 | number: 2}}</strong></span>
+      <span class="col-md-6 clr-medium-gray">Allocatable: <strong>${{allocatable / 100 | number: 2}}</strong></span>
+    </div>
     <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
     <table class="l-unstyled-table">
       <tr ng-repeat="ua in user_allocations track by $index">

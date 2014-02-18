@@ -24,12 +24,10 @@ angular.module('states.budget', ['controllers.buckets'])
         controller: 'BudgetController'
   ) #end state
   .state('budgets.buckets',
-    url: '/buckets'
+    url: '/buckets/:state'
     views:
       'header':
-        template: '
-          <h2>{{budget.name}}</h2>
-        '
+        templateUrl: '/views/budgets/budgets.header.html'
       'page':
         templateUrl: '/views/buckets/buckets.list.html'
       'sidebar':
