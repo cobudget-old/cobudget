@@ -32,6 +32,8 @@ module Cobudget
     end
 
     def perform
+      puts "CALLED"
+      puts amount.inspect
       raise InsufficientFunds unless source_account.can_decrease_money?(amount) || source_account.user.blank?
       raise InvalidTransferDestination unless source_account.budget == destination_account.budget
       begin
