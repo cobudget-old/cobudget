@@ -9,6 +9,15 @@ module Cobudget
     def allocation_rights_cents
       EntryCollection.cast_actor(self).balance
     end
-  end
 
+    def user_email
+      user.email
+    end
+
+    def as_json(options={})
+      super(
+        methods: [:allocation_rights_cents, :user_email]
+      )
+    end
+  end
 end

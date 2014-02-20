@@ -9,10 +9,7 @@ module Cobudget
       actor :account, repository: Account
 
       def perform
-        balance = EntryCollection.cast_actor(account).balance
-        user_email = account.user ? account.user.email : nil
-        data = account.attributes.merge!(:user_email => user_email, :balance => balance)
-        data
+        account.as_json
       end
       #actor :budget, repository: Budget
       #actor :user, repository: User
