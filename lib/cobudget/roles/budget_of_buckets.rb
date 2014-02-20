@@ -39,8 +39,8 @@ module Cobudget
       available_buckets.where(state: "funded")
     end
 
-    def closed_buckets
-      available_buckets.where(state: "closed")
+    def cancelled_buckets
+      available_buckets.where(state: "cancelled")
     end
   end
 end

@@ -15,8 +15,8 @@ module Cobudget
           bucket.set_funded!
           bucket.as_json
         end
-        if state == "closed"
-          bucket.set_closed!
+        if state == "cancelled"
+          bucket.set_cancelled!
           bucket.as_json
         end
         #Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket.as_json})

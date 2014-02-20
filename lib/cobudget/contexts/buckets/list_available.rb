@@ -16,9 +16,9 @@ module Cobudget
         elsif state == "funded"
           puts "FUNDED"
           budget.funded_buckets.order('updated_at desc').load.as_json
-        elsif state == "closed"
-          puts "CLOSED"
-          budget.closed_buckets.order('updated_at desc').load.as_json
+        elsif state == "cancelled"
+          puts "CANCELLED"
+          budget.cancelled_buckets.order('updated_at desc').load.as_json
         else
           budget.available_buckets.order('updated_at desc').load.as_json
         end

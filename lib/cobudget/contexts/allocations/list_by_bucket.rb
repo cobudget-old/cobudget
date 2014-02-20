@@ -15,6 +15,7 @@ module Cobudget
           allocation = {}
           allocation['user_id'] = a.user.id
           allocation['user_color'] = a.user.bg_color
+          allocation['user_name_or_email'] = a.user.name ? a.user.name : a.user.email
           allocation['amount'] = bucket.balance_from_user(a.user)
           allocations << allocation
         end

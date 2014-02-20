@@ -19,9 +19,9 @@ module Cobudget
         puts "SET FUNDED"
       end
 
-      event :set_closed do
-        transition :open => :closed
-        puts "SET CLOSED"
+      event :set_cancelled do
+        transition :open => :cancelled
+        puts "SET CANCELLED"
       end
     end
 
