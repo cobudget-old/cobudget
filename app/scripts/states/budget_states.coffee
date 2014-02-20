@@ -32,7 +32,8 @@ angular.module('states.budget', ['controllers.buckets'])
         templateUrl: '/views/buckets/buckets.list.html'
       'sidebar':
         templateUrl: '/views/budgets/budget.sidebar.html'
-        controller: ['$rootScope', '$scope', '$state', 'User', 'Budget', ($rootScope, $scope, $state, User, Budget)->
+        controller: ['$rootScope', '$scope', '$state', 'User', 'Budget', 'Bucket', ($rootScope, $scope, $state, User, Budget, Bucket)->
+          $scope.state = $state.params.state
           $scope.chart_options = 
             segmentShowStroke : true
             segmentStrokeColor : "#fff"
@@ -46,15 +47,43 @@ angular.module('states.budget', ['controllers.buckets'])
             )
             $scope.chart = ch_vals
 
-          $scope.$on 'user-allocations-updated', (event, user_allocations)->
-            $scope.user_allocations = user_allocations
+          prepareGroupChart = ->
+            group_allocations = []
+            $scope.total_group_spend = 0
+            for bucket in $scope.buckets
+              allocation = {}
+              allocation.amount = Bucket.sumBucketAllocations(bucket)
+              $scope.total_group_spend += allocation.amount
+              allocation.label = bucket.name
+              allocation.bucket_color = bucket.color
+              group_allocations.push allocation
+            $scope.group_allocations = group_allocations
+            #format for graph
+            gch_vals = []
+            for allocation in group_allocations
+              console.log allocation
+              ch_val =
+                value: allocation.amount
+                color: allocation.bucket_color
+              gch_vals.push ch_val
+            $scope.group_chart = gch_vals
+
+
+
+          $scope.$on 'user-allocations-updated', (event, data)->
+            $scope.buckets = data.buckets
+            console.log data.user_allocations
+            $scope.user_allocations = data.user_allocations
             User.getAccountForBudget($state.params.budget_id)[0].then (account)->
               $scope.account_balance = account.allocation_rights_cents
-              $scope.allocated = Budget.getUserAllocated(user_allocations)
+              $scope.allocated = Budget.getUserAllocated($scope.user_allocations)
               $scope.allocatable = Budget.getUserAllocatable($scope.account_balance, $scope.allocated)
               prepareChart()
+              prepareGroupChart()
             , (error)->
               console.log error
+
+
         ]
   ) #end state
   .state('budgets.propose_bucket',

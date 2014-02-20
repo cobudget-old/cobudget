@@ -26,6 +26,7 @@ angular.module("directives.constrained_slider", [])
       orientation: 'horizontal'
       set: ()->
         change()
+        return
 
     scope.allocationAmount = (o, n)->
       o_constrained = constrainValue(o)
@@ -56,7 +57,7 @@ angular.module("directives.constrained_slider", [])
 
     saveValue = (new_value)->
       amount = new_value
-      new_item = {bucket_id: parseFloat(scope.identifier), user_id: User.getCurrentUser().id, user_color: User.getCurrentUser().bg_color, new_item: true, amount: amount, bucket_color: scope.color}
+      new_item = {bucket_id: parseFloat(scope.identifier), user_id: User.getCurrentUser().id, user_name_or_email: User.getUserNameOrEmail(), user_color: User.getCurrentUser().bg_color, new_item: true, amount: amount, bucket_color: scope.color}
       item_identifier = new_item.user_id
       allocated = false
       for item, i in scope.affecting

@@ -2,14 +2,19 @@
   <article ng-repeat="b in buckets" ng-controller="BucketItem" class="" >
     <nav class="m-nav m-nav-full" ng-show="admin == true">
       <ul>
-        <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
+        <li><a class="paint clr3 m-bucket-admin-button" ui-sref="buckets.edit({bucket_id: b.id})"><strong>Edit</strong></a></li>
         <div ng-show="b.state === 'open'">
-          <li><a class="paint clr3" ng-click="setBucketState('funded')">Set Funded</a></li>
+          <li><a class="paint clr4 m-bucket-admin-button" >
+            <strong>Set to: &nbsp;</strong>
+            <span ng-click="setBucketState('funded')">Funded</span>
+            &nbsp;|&nbsp;
+            <span ng-click="setBucketState('cancelled')">Cancelled</span>
+          </a></li>
           <li><a ng-show="!b.allocations.length > 0" class="paint clr2" ng-click="delete()">Delete</a></li>
         </div>
       </ul>
     </nav>
-    <div class="m-bucket utl-expander m-bucket-wrapper shadow" d-expander>
+    <div class="m-bucket utl-expander m-bucket-wrapper shadow state-{{b.state}}" d-expander>
       <div class="m-bucket-left" style="background-color: {{b.color}};">
         &nbsp;
       </div>
@@ -35,7 +40,13 @@
             </strong>
           </div>
         </div>
-        <div ng-if="b.maximum_cents > b.minimum_cents && allocatable > 0" class="o-slider-container">
+        <div class="m-bucket-message" ng-if="b.state === 'funded'">
+          <p class="paint lightest-gray">Funded on [date] {{b.funded_at}}, with total allocations at: ${{getTotalBucketAllocations(b) / 100 | number: 2}} </p>
+        </div>
+        <div class="m-bucket-message" ng-if="b.state === 'cancelled'">
+          <p class="paint lightest-gray">Cancelled on [date], all allocations refunded.</p>
+        </div>
+        <div ng-if="b.maximum_cents > b.minimum_cents && allocatable > 0 && b.state != 'funded' && b.state != 'cancelled'" class="o-slider-container">
           <constrained-slider id="slider_{{b.id}}" min="0" allocated="allocated" allocatable="allocatable" bucket-allocation="b.user_allocation" affecting="b.allocations" identifier="{{b.id}}" color="{{b.color}}"></constrained-slider>
         </div>
         <div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">
@@ -44,6 +55,18 @@
         </div>
         <h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>
         <div btf-markdown="b.description"></div>
+        <div>
+          <h2>User allocations</h2>
+          <table class="l-unstyled-table">
+            <tr ng-repeat="a in b.allocations" ng-show="a.amount > 0" >
+              <td class="m-allocations-color" style="background-color: {{a.user_color}}">&nbsp;</td>
+              <td class="m-allocations-name">{{a.user_name_or_email}}</td>
+              <td class="m-allocations-amount">
+                ${{a.amount / 100 | number:2}}
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </article>

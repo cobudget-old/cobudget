@@ -11,9 +11,17 @@
     color: $clr-medium-gray
     font-size: 1.4em
     font-weight: 300
+  h2
+    color: $clr-medium-gray
+    font-size: 1.2em
+    font-weight: 300
+    padding-bottom: 0.3em
+    border-bottom: solid 1px $clr-lightest-gray
   .m-labels
     margin-top: 0.3em
     margin-bottom: 2.3em
+  .l-unstyled-table
+    margin-bottom: 0
 
 .m-bucket-owner
   color: lighten($clr-medium-gray, 25%)
@@ -84,3 +92,22 @@
     +single-transition(all, 0.3s, ease-in)
     display: block
     +opacity(0.7)
+
+.m-bucket.state-funded, .m-bucket.state-cancelled
+  .m-labels
+    margin-bottom: 1.3em
+  .m-bucket-message
+    margin-bottom: 1.3em
+    p
+      padding: 0.4em
+      text-align: center
+
+.m-bucket-admin-button
+  span
+    &:hover
+      text-decoration: underline
+  &:hover
+    border-top: solid 0.2em #000
+    padding-top: 0.65em 
+    padding-bottom: 0.75em 
+    

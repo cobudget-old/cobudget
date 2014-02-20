@@ -74,13 +74,17 @@ angular.module("directives.buckets_collection", [])
     .then(setUserAllocations) #takes bucktes
     .then(setCollectionAllocationGlobals) #takes user allocations
     .then ()->
-      console.log "POST LOAD TRIGGER"
-      $rootScope.$broadcast("user-allocations-updated", scope.user_allocations)
+      scope.buckets ||= []
+      $rootScope.$broadcast("user-allocations-updated", {user_allocations: scope.user_allocations, buckets: scope.buckets})
       #force horiz graph to load
       $timeout ()->
         angular.forEach scope.buckets, (bucket)->
           $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations:bucket.allocations, bucket_id: bucket.id })
 
+    #scope mehods
+    scope.getTotalBucketAllocations = (bucket)->
+      Bucket.sumBucketAllocations(bucket)
+      
     #events
     scope.$on 'current-user-bucket-allocation-update', (event, data)->
       #This is probably computationally expensive and could be done better with passing 
@@ -88,7 +92,7 @@ angular.module("directives.buckets_collection", [])
       #SOMETHING WRONG HERE IT'S adding to shit
       user_allocations = setUserAllocations(scope.buckets)
       setCollectionAllocationGlobals(user_allocations).then ()->
-        $rootScope.$broadcast("user-allocations-updated", user_allocations)
+        $rootScope.$broadcast("user-allocations-updated",{user_allocations: user_allocations, buckets: scope.buckets })
         for bucket in scope.buckets
           if bucket.id == data.bucket_id
             $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations: bucket.allocations, bucket_id: bucket.id })
@@ -99,20 +103,21 @@ angular.module("directives.buckets_collection", [])
 
     #pushers
     $rootScope.channel.bind('allocation_updated', (response) ->
-      response.amount = parseFloat(response.amount)
-      for bucket, idx in scope.buckets
-        #ignore for self
-        if response.user_id == User.getCurrentUser().id
-          break
-        #get the bucket
-        if response.bucket_id == bucket.id
-          for allocation, i in bucket.allocations
-            #match to user
-            if allocation.user_id == response.user_id
-              scope.buckets[idx].allocations[i].amount += response.amount * 100
-        #maybe use this for user and others.
-              $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations:scope.buckets[idx].allocations, bucket_id: scope.buckets[idx].id })
-      scope.$apply()
+      if scope.buckets?
+        response.amount = parseFloat(response.amount)
+        for bucket, idx in scope.buckets
+          #ignore for self
+          if response.user_id == User.getCurrentUser().id
+            break
+          #get the bucket
+          if response.bucket_id == bucket.id
+            for allocation, i in bucket.allocations
+              #match to user
+              if allocation.user_id == response.user_id
+                scope.buckets[idx].allocations[i].amount += response.amount * 100
+          #maybe use this for user and others.
+                $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations:scope.buckets[idx].allocations, bucket_id: scope.buckets[idx].id })
+        scope.$apply()
     )
 
 ]

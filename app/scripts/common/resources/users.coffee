@@ -31,6 +31,12 @@ angular.module('resources.users', [])
     @getUser(current_user.id).then (success)->
       current_user = success
 
+  getUserNameOrEmail: ->
+    if current_user.name?
+      current_user.name
+    else
+      current_user.email
+
   getAccountBalanceInBudget: (budget_id)->
     if current_user.accounts.length == 0
       console.log "No Accounts"

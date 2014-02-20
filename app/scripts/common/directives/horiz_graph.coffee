@@ -15,7 +15,7 @@ angular.module("directives.horiz_graph", [])
     </div>
   "
   scope:
-    items: "@items"
+    items: "=items"
     max: "=max"
     bucket_id: "@bucketId"
   replace: true

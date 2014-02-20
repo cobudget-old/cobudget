@@ -6,6 +6,8 @@ angular.module('controllers.budgets', [])
   console.log "Budget", User.getCurrentUser()
 
   $scope.state = $state.params.state
+  $scope.getState = ->
+    $state.params.state
   $scope.budget_id = $state.params.budget_id
   $scope.budget = {}
 

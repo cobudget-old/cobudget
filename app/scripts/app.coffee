@@ -49,6 +49,7 @@ app = angular.module('cobudget', [
       User.getUser(id).then (success)->
         User.setCurrentUser(success)
         if User.getCurrentUser()?
+          console.log "CHANGING USER"
           $rootScope.current_user = User.getCurrentUser()
           $state.go 'budgets.buckets', budget_id: User.getCurrentUser().accounts[0].budget_id, state: 'open'
         else
