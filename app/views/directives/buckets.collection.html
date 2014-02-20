@@ -1,0 +1,50 @@
+<section>
+  <article ng-repeat="b in buckets" ng-controller="BucketItem" class="" >
+    <nav class="m-nav m-nav-full" ng-show="admin == true">
+      <ul>
+        <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
+        <div ng-show="b.state === 'open'">
+          <li><a class="paint clr3" ng-click="setBucketState('funded')">Set Funded</a></li>
+          <li><a ng-show="!b.allocations.length > 0" class="paint clr2" ng-click="delete()">Delete</a></li>
+        </div>
+      </ul>
+    </nav>
+    <div class="m-bucket utl-expander m-bucket-wrapper shadow" d-expander>
+      <div class="m-bucket-left" style="background-color: {{b.color}};">
+        &nbsp;
+      </div>
+      <div class="m-bucket-right l-padded">
+        <div class="m-labels list-inline clearfix">
+          <div class="o-slider-selection pull-left">
+            <a href="" onaftersave="resetField()" onbeforesave="saveAllocation($data)" editable-number="b.user_allocation_dollars" e-placeholder="Amount in dollars" e-step="any"> 
+              ${{b.user_allocation / 100 | number: 2 }}
+            </a>
+            ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)
+          </div>
+          <div class="m-bucket-owner">
+            {{b.sponsor_name_or_email}}
+          </div>
+          <div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label">
+            <strong>
+              <span ng-show="b.minimum_cents!= b.maximum / 100">
+                ${{b.minimum_cents / 100 }} - ${{b.maximum_cents / 100}}
+              </span>
+              <span ng-show="b.minimum_cents == b.maximum_cents">
+                ${{b.minimum_cents / 100}}
+              </span>
+            </strong>
+          </div>
+        </div>
+        <div ng-if="b.maximum_cents > b.minimum_cents && allocatable > 0" class="o-slider-container">
+          <constrained-slider id="slider_{{b.id}}" min="0" allocated="allocated" allocatable="allocatable" bucket-allocation="b.user_allocation" account-balance="account_balance" second-max="{{b.maximum}}" affecting="b.allocations" identifier="{{b.id}}" color="{{b.color}}"></constrained-slider>
+        </div>
+        <div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">
+          <horiz-graph bucket-id="{{b.id}}" max="b.maximum_cents" height="50" items="b.allocations">
+          </horiz-graph>
+        </div>
+        <h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>
+        <div btf-markdown="b.description"></div>
+      </div>
+    </div>
+  </article>
+</section>

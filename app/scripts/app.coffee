@@ -37,6 +37,7 @@ app = angular.module('cobudget', [
   'directives.manage_users'
   'directives.manage_allocation_rights'
   'directives.manage_budget'
+  'directives.buckets_collection'
 ])
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'ENV', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, ENV)->
   $urlRouterProvider.otherwise('/')

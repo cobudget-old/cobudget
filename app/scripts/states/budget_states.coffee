@@ -30,11 +30,34 @@ angular.module('states.budget', ['controllers.buckets'])
         templateUrl: '/views/budgets/budgets.header.html'
       'page':
         templateUrl: '/views/buckets/buckets.list.html'
-        controller: ['$scope', ($scope)->
-          $scope.$parent.load()
-        ]
       'sidebar':
         templateUrl: '/views/budgets/budget.sidebar.html'
+        controller: ['$rootScope', '$scope', '$state', 'User', 'Budget', ($rootScope, $scope, $state, User, Budget)->
+          $scope.chart_options = 
+            segmentShowStroke : true
+            segmentStrokeColor : "#fff"
+            animation : false,
+
+          prepareChart = ()->
+            ch_vals = []
+            angular.forEach($scope.user_allocations, (allocation)->
+              ch_val = { value: allocation.amount, color: allocation.bucket_color }
+              ch_vals.push ch_val
+            )
+            $scope.chart = ch_vals
+
+          $rootScope.$on 'user-allocations-updated', (event, user_allocations)->
+            $scope.user_allocations = user_allocations
+            console.log user_allocations
+            User.getAccountForBudget($state.params.budget_id)[0].then (account)->
+              $scope.account_balance = account.allocation_rights_cents
+              console.log $scope.account_balance / 100
+              $scope.allocated = Budget.getUserAllocated(user_allocations)
+              $scope.allocatable = Budget.getUserAllocatable($scope.account_balance, $scope.allocated)
+              prepareChart()
+            , (error)->
+              console.log error
+        ]
   ) #end state
   .state('budgets.propose_bucket',
     url: '/propose-bucket'

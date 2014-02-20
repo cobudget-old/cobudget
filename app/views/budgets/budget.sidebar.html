@@ -3,12 +3,12 @@
 <div class="paint white shadow">
   <div class="l-padded">
     <div class="row l-bottom-margin">
-      <span class="col-md-6 clr-medium-gray">Allocated: <strong>${{sum_of_user_allocations / 100 | number: 2}}</strong></span>
+      <span class="col-md-6 clr-medium-gray">Allocated: <strong>${{allocated / 100 | number: 2}}</strong></span>
       <span class="col-md-6 clr-medium-gray">Allocatable: <strong>${{allocatable / 100 | number: 2}}</strong></span>
     </div>
     <canvas piechart options="chart_options" data="chart" width="330" height="300"></canvas>
     <table class="l-unstyled-table">
-      <tr ng-repeat="ua in user_allocations track by $index">
+      <tr ng-repeat="ua in user_allocations">
         <td class="m-allocations-color" style="background-color: {{ua.bucket_color}}">&nbsp;</td>
         <td class="m-allocations-name">{{ua.label}}</td>
         <td class="m-allocations-amount">

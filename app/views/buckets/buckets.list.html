@@ -1,57 +1,58 @@
-<section>
-  <article ng-repeat="b in buckets track by $index" ng-controller="BucketItem" class="" >
-    <nav class="m-nav m-nav-full" ng-show="admin == true">
-      <ul>
-        <li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>
-        <div ng-show="b.state === 'open'">
-          <li><a class="paint clr3" ng-click="setBucketState('funded')">Set Funded</a></li>
-          <li><a ng-show="!b.allocations.length > 0" class="paint clr2" ng-click="delete()">Delete</a></li>
-        </div>
-      </ul>
-    </nav>
-    <div class="m-bucket utl-expander m-bucket-wrapper shadow" d-expander>
-      <div class="m-bucket-left" style="background-color: {{b.color}};">
-        &nbsp;
-      </div>
-      <div class="m-bucket-right l-padded">
-        <div class="m-labels list-inline clearfix">
-          <div class="o-slider-selection pull-left">
-            <a href="" onaftersave="resetField()" onbeforesave="saveAllocation($data)" editable-number="b.user_allocation_dollars" e-placeholder="Amount in dollars" e-step="any"> 
-              ${{b.user_allocation / 100| number: 2 }}
-            </a>
-            ({{(b.user_allocation / allocatable) * 100 | number: 2}}%)
-          </div>
-          <div ng-if="b.user_allocation > 0" class="o-slider-selection pull-left">
-            <a href="" ng-click="b.user_allocation = 0"> 
-              <small>
-              &nbsp; reset
-              </small>
-            </a>
-          </div>
-          <div class="m-bucket-owner">
-            {{b.sponsor_name_or_email}}
-          </div>
-          <div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label">
-            <strong>
-              <span ng-show="b.minimum != b.maximum">
-                ${{b.minimum}} - ${{b.maximum}}
-              </span>
-              <span ng-show="b.minimum == b.maximum">
-                ${{b.minimum}}
-              </span>
-            </strong>
-          </div>
-        </div>
-        <div ng-if="b.maximum > b.minimum && allocatable > 0 && loaded_buckets === loading_counter" class="o-slider-container">
-          <constrained-slider id="slider_{{b.id}}" min="0" max="{{allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="{{allocatable}}" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>
-        </div>
-        <div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">
-          <horiz-graph max="b.maximum_cents" height="50" items="b.allocations">
-          </horiz-graph>
-        </div>
-        <h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>
-        <div btf-markdown="b.description"></div>
-      </div>
-    </div>
-  </article>
-</section>
+<buckets-collection budget-id="{{budget_id}}" state="{{state}}" account-balance="{{account_balance}}"></buckets-collection>
+<!--<section>-->
+  <!--<article ng-repeat="b in buckets track by $index" ng-controller="BucketItem" class="" >-->
+    <!--<nav class="m-nav m-nav-full" ng-show="admin == true">-->
+      <!--<ul>-->
+        <!--<li><a class="paint clr3" ui-sref="buckets.edit({bucket_id: b.id})">Edit</a></li>-->
+        <!--<div ng-show="b.state === 'open'">-->
+          <!--<li><a class="paint clr3" ng-click="setBucketState('funded')">Set Funded</a></li>-->
+          <!--<li><a ng-show="!b.allocations.length > 0" class="paint clr2" ng-click="delete()">Delete</a></li>-->
+        <!--</div>-->
+      <!--</ul>-->
+    <!--</nav>-->
+    <!--<div class="m-bucket utl-expander m-bucket-wrapper shadow" d-expander>-->
+      <!--<div class="m-bucket-left" style="background-color: {{b.color}};">-->
+        <!--&nbsp;-->
+      <!--</div>-->
+      <!--<div class="m-bucket-right l-padded">-->
+        <!--<div class="m-labels list-inline clearfix">-->
+          <!--<div class="o-slider-selection pull-left">-->
+            <!--<a href="" onaftersave="resetField()" onbeforesave="saveAllocation($data)" editable-number="b.user_allocation_dollars" e-placeholder="Amount in dollars" e-step="any"> -->
+              <!--${{b.user_allocation / 100| number: 2 }}-->
+            <!--</a>-->
+            <!--({{(b.user_allocation / allocatable) * 100 | number: 2}}%)-->
+          <!--</div>-->
+          <!--<div ng-if="b.user_allocation > 0" class="o-slider-selection pull-left">-->
+            <!--<a href="" ng-click="b.user_allocation = 0"> -->
+              <!--<small>-->
+              <!--&nbsp; reset-->
+              <!--</small>-->
+            <!--</a>-->
+          <!--</div>-->
+          <!--<div class="m-bucket-owner">-->
+            <!--{{b.sponsor_name_or_email}}-->
+          <!--</div>-->
+          <!--<div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label">-->
+            <!--<strong>-->
+              <!--<span ng-show="b.minimum != b.maximum">-->
+                <!--${{b.minimum}} - ${{b.maximum}}-->
+              <!--</span>-->
+              <!--<span ng-show="b.minimum == b.maximum">-->
+                <!--${{b.minimum}}-->
+              <!--</span>-->
+            <!--</strong>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div ng-if="b.maximum > b.minimum && allocatable > 0 && loaded_buckets === loading_counter" class="o-slider-container">-->
+          <!--<constrained-slider id="slider_{{b.id}}" min="0" max="{{allocatable}}" second-max="{{b.maximum}}" affecting="b.allocations" percentage-of="{{allocatable}}" identifier="{{b.id}}" orientation="horizontal" ng-model="b.user_allocation" color="{{b.color}}"></constrained-slider>-->
+        <!--</div>-->
+        <!--<div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">-->
+          <!--<horiz-graph max="b.maximum_cents" height="50" items="b.allocations">-->
+          <!--</horiz-graph>-->
+        <!--</div>-->
+        <!--<h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>-->
+        <!--<div btf-markdown="b.description"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</article>-->
+<!--</section>-->

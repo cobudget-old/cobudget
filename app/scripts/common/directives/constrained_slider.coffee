@@ -4,33 +4,27 @@ angular.module("directives.constrained_slider", [])
   transclude: "false"
   template: "<div class='slider'></div>"
   scope:
-    Model: "=ngModel"
+    #used like a buffer, is the user_allocation, not updated till after save
+    bucket_allocation: "=bucketAllocation"
+    account_balance: "=accountBalance"
     affecting: "=affecting"
-    orientation: "@orientation"
-    percentageOf: "@percentageOf"
-    secondMax: "@secondMax"
-    max: "@max"
+    allocatable: "=allocatable"
+    allocated: "=allocated"
     min: "=min"
     identifier: "@identifier"
     color: "@color"
 
   link: (scope, element, attrs) ->
-    scope.slider_id = parseInt(scope.identifier, 10)
-    hit = false
-    for slider, i in ConstrainedSliderCollector.sliders
-      if slider.id == scope.slider_id 
-        hit = true
-    unless hit == true
-      ConstrainedSliderCollector.sliders.push {id: scope.slider_id, value: 0}
+    scope.slider_id = parseFloat(scope.identifier)
 
     el = angular.element element.children()[0]
     el.noUiSlider
-      range: [parseInt(attrs.min, 10), parseInt(scope.max, 10)]
-      start: 0
+      range: [parseInt(attrs.min, 10), scope.allocatable]
+      start: scope.bucket_allocation
       handles: 1
       step: 1.0
       direction: 'ltr'
-      orientation: attrs.orientation
+      orientation: 'horizontal'
       set: ()->
         change()
 
@@ -57,67 +51,45 @@ angular.module("directives.constrained_slider", [])
       if alc.amount != 0
         Allocation.createAllocation(alc).then (success)->
           console.log "Allocation Created:", alc
+          $rootScope.$broadcast('current-user-bucket-allocation-update', {bucket_id: parseFloat(scope.identifier)})
         , (error)->
           console.log error
 
-    scope.$watch "Model", (n, o) ->
-      save = false
-      scope.collected_sliders = ConstrainedSliderCollector.sliders
-      for s, i in scope.collected_sliders
-        if s.id == scope.slider_id
-          scope.collected_sliders[i].value = n
-
-      amount = scope.Model
-      new_item = {bucket_id: parseInt(scope.identifier, 10), user_id: User.getCurrentUser().id, user_color: User.getCurrentUser().bg_color, new_item: true, amount: amount, bucket_color: scope.color}
+    saveValue = (new_value)->
+      amount = new_value
+      new_item = {bucket_id: parseFloat(scope.identifier), user_id: User.getCurrentUser().id, user_color: User.getCurrentUser().bg_color, new_item: true, amount: amount, bucket_color: scope.color}
       item_identifier = new_item.user_id
       allocated = false
       for item, i in scope.affecting
         if item_identifier == scope.affecting[i].user_id
           allocated = true
           scope.affecting[i] = new_item
-      val = constrainValue(scope.Model)
-      #this is causing the trouble
-      scope.Model = val
-      el.val val
-      #hammy as making sure it doesn't save the initial load of data
-      if parseFloat(o) > 0 and parseFloat(n) == 0
-        save = true
-      else if parseFloat(val) == 0.00 
-        save = false
-      else if parseFloat(val) == parseFloat(o)
-        save = false
-      else if parseFloat(val) > 0 
-        if parseFloat(n) > 0
-          save = true
-      if save == true
-        scope.saveAllocation(scope.allocationAmount(o, val), new_item)
-      else
-        console.log "save false: setting", val
 
-    getAffectingTotal = ->
-      total = 0
-      for item, i in scope.affecting
-        unless item.user_id == User.getCurrentUser().id
-          total += item.amount
-      total
-
+      old_val = el.val()
+      scope.saveAllocation(scope.allocationAmount(scope.bucket_allocation, new_value), new_item)
+       
     constrainValue = (incoming_value)->
-      user_max_assignable = parseFloat(scope.max)
-      affected_max_assignable = parseFloat(scope.secondMax)
+      allocated = scope.allocated
+      allocated_excluding_this_bucket = allocated - scope.bucket_allocation
+      allocatable = scope.allocatable
 
-      user_already_assigned = ConstrainedSliderCollector.sumOtherSliders(scope.collected_sliders, scope.slider_id)
       new_value = incoming_value
-      if new_value + user_already_assigned > user_max_assignable
-        new_value = user_max_assignable - user_already_assigned
+      if new_value + allocated_excluding_this_bucket > allocatable
+        new_value = allocatable - allocated_excluding_this_bucket
         if incoming_value < new_value
           new_value = incoming_value
       new_value
 
     change = ->
+
       n = parseFloat(el.val())
 
       value = constrainValue(n)
+      saveValue(value)
+
+      #these should probably go in the save block so it only updates view if saved
       el.val value
-      scope.Model = value
+      scope.bucket_allocation = value
+
       scope.$apply() unless $rootScope.$$phase
 ]

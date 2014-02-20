@@ -31,4 +31,18 @@ angular.module('resources.users', [])
     @getUser(current_user.id).then (success)->
       current_user = success
 
+  getAccountBalanceInBudget: (budget_id)->
+    if current_user.accounts.length == 0
+      console.log "No Accounts"
+      return 0
+    for acc in current_user.accounts
+      if acc.budget_id == parseFloat(budget_id)
+        if acc.allocation_rights_cents?
+          return acc.allocation_rights_cents
+
+  getAccountForBudget: (budget_id)->
+    for acc in current_user.accounts
+      if acc.budget_id == parseFloat(budget_id)
+        Restangular.one('accounts', acc.id).get()
+
 ])

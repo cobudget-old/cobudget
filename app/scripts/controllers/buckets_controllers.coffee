@@ -42,13 +42,13 @@ angular.module('controllers.buckets', [])
 
   $scope.saveAllocation = (data)->
     if !isNaN(parseFloat(data)) && isFinite(data)
-      $('#slider_'+$scope.b.id).find('.slider').val(parseFloat(data * 100), true)
+      $('#slider_'+$scope.b.id).find('.slider').val parseFloat(data * 100), true
       true
 
-  $scope.$watch 'b.allocations', (n, o)->
-    if n != o
-      $scope.$parent.$parent.$parent.prepareUserAllocations() 
-  , true
+  #$scope.$watch 'b.allocations', (n, o)->
+    #if n != o
+      #$scope.$parent.$parent.$parent.prepareUserAllocations() 
+  #, true
 
   $scope.setBucketState = (state)->
     Bucket.setBucketState($scope.b.id, state).then (success)->
