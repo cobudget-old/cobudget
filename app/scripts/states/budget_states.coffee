@@ -46,12 +46,10 @@ angular.module('states.budget', ['controllers.buckets'])
             )
             $scope.chart = ch_vals
 
-          $rootScope.$on 'user-allocations-updated', (event, user_allocations)->
+          $scope.$on 'user-allocations-updated', (event, user_allocations)->
             $scope.user_allocations = user_allocations
-            console.log user_allocations
             User.getAccountForBudget($state.params.budget_id)[0].then (account)->
               $scope.account_balance = account.allocation_rights_cents
-              console.log $scope.account_balance / 100
               $scope.allocated = Budget.getUserAllocated(user_allocations)
               $scope.allocatable = Budget.getUserAllocatable($scope.account_balance, $scope.allocated)
               prepareChart()

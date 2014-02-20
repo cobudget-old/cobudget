@@ -6,7 +6,6 @@ angular.module("directives.constrained_slider", [])
   scope:
     #used like a buffer, is the user_allocation, not updated till after save
     bucket_allocation: "=bucketAllocation"
-    account_balance: "=accountBalance"
     affecting: "=affecting"
     allocatable: "=allocatable"
     allocated: "=allocated"
@@ -48,7 +47,7 @@ angular.module("directives.constrained_slider", [])
       alc.user_id = new_item.user_id
       alc.bucket_id = new_item.bucket_id
       alc.amount = (amt / 100).toFixed(2)
-      if alc.amount != 0
+      if alc.amount != parseFloat(0).toFixed(2)
         Allocation.createAllocation(alc).then (success)->
           console.log "Allocation Created:", alc
           $rootScope.$broadcast('current-user-bucket-allocation-update', {bucket_id: parseFloat(scope.identifier)})

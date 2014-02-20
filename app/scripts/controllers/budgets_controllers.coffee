@@ -1,5 +1,6 @@
 angular.module('controllers.budgets', [])
 .controller('BudgetController',['$scope', '$rootScope', '$state', '$filter', 'User', "Bucket", "Budget", "ColorGenerator", 'ConstrainedSliderCollector', ($scope, $rootScope, $state, $filter, User, Bucket, Budget, ColorGenerator, ConstrainedSliderCollector)->
+  console.log "BUDGET CONTROLLER"
   if _.isEmpty(User.getCurrentUser())
     $state.go("home")
   console.log "Budget", User.getCurrentUser()

@@ -91,6 +91,7 @@ app = angular.module('cobudget', [
 
   $rootScope.toggleAdmin = ()->
     $rootScope.admin = !$rootScope.admin
+    $rootScope.$broadcast('admin-mode-toggle', $rootScope.admin)
 
   Pusher.log = (message)-> 
     if window.console && window.console.log

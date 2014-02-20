@@ -5,7 +5,6 @@ angular.module("directives.buckets_collection", [])
   templateUrl: "/views/directives/buckets.collection.html"
   scope:
     budget_id: "@budgetId"
-    state: "@state"
     account_balance: "@accountBalance"
 
   link: (scope, element, attrs) ->
@@ -19,7 +18,7 @@ angular.module("directives.buckets_collection", [])
 
     #load the buckets methods
     loadBucketsWithoutAllocations = ->
-      Budget.getBudgetBuckets(scope.budget_id, scope.state).then (buckets)->
+      Budget.getBudgetBuckets(scope.budget_id, $state.params.state).then (buckets)->
         return buckets
       , (error)->
         console.log error
@@ -75,15 +74,15 @@ angular.module("directives.buckets_collection", [])
     .then(setUserAllocations) #takes bucktes
     .then(setCollectionAllocationGlobals) #takes user allocations
     .then ()->
+      console.log "POST LOAD TRIGGER"
       $rootScope.$broadcast("user-allocations-updated", scope.user_allocations)
-      $rootScope.$broadcast("budget-bucket-data-loaded")
       #force horiz graph to load
       $timeout ()->
         angular.forEach scope.buckets, (bucket)->
           $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations:bucket.allocations, bucket_id: bucket.id })
 
-    $rootScope.$on 'current-user-bucket-allocation-update', (event, data)->
-      console.log "HIT:", event
+    #events
+    scope.$on 'current-user-bucket-allocation-update', (event, data)->
       #This is probably computationally expensive and could be done better with passing 
       #bucket id and allocation amount in and updating vals from there, but for now...
       #SOMETHING WRONG HERE IT'S adding to shit
@@ -95,8 +94,11 @@ angular.module("directives.buckets_collection", [])
             $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations: bucket.allocations, bucket_id: bucket.id })
             break
 
+    scope.$on 'admin-mode-toggle', (evt, data)->
+      scope.admin = data
+
+    #pushers
     $rootScope.channel.bind('allocation_updated', (response) ->
-      console.log response
       response.amount = parseFloat(response.amount)
       for bucket, idx in scope.buckets
         #ignore for self

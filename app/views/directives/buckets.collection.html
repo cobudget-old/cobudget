@@ -36,7 +36,7 @@
           </div>
         </div>
         <div ng-if="b.maximum_cents > b.minimum_cents && allocatable > 0" class="o-slider-container">
-          <constrained-slider id="slider_{{b.id}}" min="0" allocated="allocated" allocatable="allocatable" bucket-allocation="b.user_allocation" account-balance="account_balance" second-max="{{b.maximum}}" affecting="b.allocations" identifier="{{b.id}}" color="{{b.color}}"></constrained-slider>
+          <constrained-slider id="slider_{{b.id}}" min="0" allocated="allocated" allocatable="allocatable" bucket-allocation="b.user_allocation" affecting="b.allocations" identifier="{{b.id}}" color="{{b.color}}"></constrained-slider>
         </div>
         <div ng-if="b.allocations.length > 0" class="m-bucket-allocations_wrapper">
           <horiz-graph bucket-id="{{b.id}}" max="b.maximum_cents" height="50" items="b.allocations">
