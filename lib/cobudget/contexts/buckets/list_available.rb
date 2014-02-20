@@ -20,7 +20,8 @@ module Cobudget
           puts "CANCELLED"
           budget.cancelled_buckets.order('updated_at desc').load.as_json
         else
-          budget.available_buckets.order('updated_at desc').load.as_json
+          []
+          #budget.available_buckets.order('updated_at desc').load.as_json
         end
       end
     end

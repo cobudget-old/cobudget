@@ -5,6 +5,6 @@ class CreateBuckets < ActiveRecord::Migration
     t.text    :description
     t.text    :state
     t.datetime  :funded_at
-    t.datetime  :closed_at
+    t.datetime  :cancelled_at
   end
 end
