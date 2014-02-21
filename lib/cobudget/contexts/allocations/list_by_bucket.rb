@@ -16,9 +16,10 @@ module Cobudget
           allocation['user_id'] = a.user.id
           allocation['user_color'] = a.user.bg_color
           allocation['user_name_or_email'] = a.user.name ? a.user.name : a.user.email
-          allocation['amount'] = bucket.balance_from_user(a.user)
+          allocation['amount'] = bucket.balance_from_user(a.user, bucket.budget.id)
           allocations << allocation
         end
+        puts allocations.inspect
         allocations.as_json
         ##Ideal
         #bucket.allocations.as_json(include: :user)

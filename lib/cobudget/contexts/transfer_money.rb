@@ -34,9 +34,9 @@ module Cobudget
     def perform
       raise InsufficientFunds unless source_account.can_decrease_money?(amount) || source_account.user.blank?
       raise InvalidTransferDestination unless source_account.budget == destination_account.budget
-      puts "in transfer"
-      puts amount
-      puts amount.to_f
+      puts source_account.inspect
+      puts destination_account.inspect
+      puts amount.inspect
       begin
         ActiveRecord::Base.transaction do
           amt = amount.to_f

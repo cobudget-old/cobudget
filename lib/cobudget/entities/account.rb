@@ -11,7 +11,11 @@ module Cobudget
     end
 
     def user_email
-      user.email
+      if user
+        user.email
+      else
+        "N/A"
+      end
     end
 
     def as_json(options={})

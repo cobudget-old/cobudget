@@ -16,12 +16,18 @@ module Cobudget
     state_machine initial: :open do
       event :set_funded do
         transition :open => :funded
-        puts "SET FUNDED"
       end
 
       event :set_cancelled do
         transition :open => :cancelled
-        puts "SET CANCELLED"
+      end
+
+      before_transition :open => :funded do |bucket|
+        bucket.funded_at = Time.now
+      end
+
+      before_transition :open => :cancelled do |bucket|
+        bucket.cancelled_at = Time.now
       end
     end
 

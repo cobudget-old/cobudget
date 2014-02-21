@@ -24,10 +24,10 @@ module Cobudget
       balance == 0
     end
 
-    def balance_from_user(user)
+    def balance_from_user(user, budget_id)
       sum = 0
-      from_user_scope(user).each do |t|
-        #puts t.entries.where("account_type = 'Cobudget::Bucket'").inspect
+      from_user_scope(user, budget_id).each do |t|
+        puts t.entries.where("account_type = 'Cobudget::Bucket'").inspect
         sum += t.entries.where("account_type = 'Cobudget::Bucket'").first.amount_cents
       end
       sum
@@ -35,8 +35,8 @@ module Cobudget
 
     private
 
-    def from_user_scope(user)
-      user_account = Account.where(user: user).first # this is the user's account. self.id is the bucket
+    def from_user_scope(user, budget_id)
+      user_account = Account.where(user: user, budget_id: budget_id).first # this is the user's account. self.id is the bucket
 
       Transaction.find_by_sql ["SELECT * FROM transactions WHERE
       transactions.id IN (SELECT transaction_id FROM entries WHERE entries.account_id = ? AND entries.account_type = 'Cobudget::Account') AND

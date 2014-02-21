@@ -2,7 +2,7 @@ require 'active_record'
 
 module Cobudget
   class User < ActiveRecord::Base
-    before_create :generate_bg
+    before_create :generate_bg, :set_last_sign_in
     has_many :allocation_rights
     has_many :allocations
     has_many :accounts
@@ -44,6 +44,10 @@ module Cobudget
 
     def generate_bg
       self.bg_color = "#" + ("%06x" % (rand * 0xffffff))
+    end
+
+    def set_last_sign_in
+      self.last_sign_in_at = Time.now
     end
   end
 end

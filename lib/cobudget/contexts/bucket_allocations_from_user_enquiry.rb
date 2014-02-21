@@ -10,7 +10,7 @@ module Cobudget
     actor :user, repository: User
 
     def perform
-      Money.new(bucket.balance_from_user(user))
+      Money.new(bucket.balance_from_user(user, bucket.budget.id))
     end
   end
 end

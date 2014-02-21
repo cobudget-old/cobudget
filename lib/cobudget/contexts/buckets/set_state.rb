@@ -29,7 +29,7 @@ module Cobudget
           #if isnt the budget account
           if a.user_id
             #balance give cents, transfer expects dollars
-            amount = bucket.balance_from_user(a.user) / 100.00
+            amount = bucket.balance_from_user(a.user, a.budget_id) / 100.00
             if amount > 0
               transfer = TransferMoney.new(source_account: bucket, destination_account: a, amount: amount, creator: admin)
               transfer.call
