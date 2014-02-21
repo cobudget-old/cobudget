@@ -10,8 +10,7 @@ module Cobudget
       def perform
         user = User.find_by_email(email)
         if user
-          user.last_sign_in_at = Time.now
-          user.save!
+          user['last_sign_in_at'] = Time.now
           user.as_json
         else
           User.create(actors).as_json
