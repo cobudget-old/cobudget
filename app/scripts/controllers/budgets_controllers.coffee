@@ -44,6 +44,7 @@ angular.module('controllers.budgets', [])
   )
 
   $rootScope.channel.bind('bucket_updated', (response) ->
+    console.log "PUSHER::BUCKET UPDATED"
     for old_bucket, i in $scope.buckets
       if old_bucket.id == response.bucket.id
         response.bucket.allocations = $scope.buckets[i].allocations

@@ -23,6 +23,7 @@ app = angular.module('cobudget', [
   'states.budget'
   'states.bucket'
   'states.admin'
+  'states.user'
   'resources.budgets'
   'resources.buckets'
   'resources.users'
@@ -30,6 +31,7 @@ app = angular.module('cobudget', [
   'resources.allocations'
   'services.constrained_slider_collector'
   'services.color_generator'
+  'services.time'
   'directives.expander'
   'directives.slider'
   'directives.constrained_slider'
@@ -38,6 +40,7 @@ app = angular.module('cobudget', [
   'directives.manage_allocation_rights'
   'directives.manage_budget'
   'directives.buckets_collection'
+  'directives.happened_after_marker'
 ])
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'ENV', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, ENV)->
   $urlRouterProvider.otherwise('/')
@@ -51,7 +54,7 @@ app = angular.module('cobudget', [
         if User.getCurrentUser()?
           console.log "CHANGING USER"
           $rootScope.current_user = User.getCurrentUser()
-          $state.go 'budgets.buckets', budget_id: User.getCurrentUser().accounts[0].budget_id, state: 'open'
+          $state.go 'user-dashboard'
         else
           $state.go '/'
     $rootScope.setUser(1)
@@ -71,7 +74,7 @@ app = angular.module('cobudget', [
               if success.accounts.length > 0
                 User.setCurrentUser(success)
                 $rootScope.current_user = User.getCurrentUser()
-                $state.go 'budgets.buckets', budget_id: success.accounts[0].budget_id
+                $state.go 'user-dashboard'
               else
                 #flash message
                 console.log "No accounts"

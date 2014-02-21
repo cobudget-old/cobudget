@@ -8,9 +8,10 @@ angular.module('resources.budgets', ['ngResource'])
   allBudgets: ()->
     budgets.getList()
 
-  getBudgetBuckets: (budget_id, state)->
+  getBudgetBuckets: (budget_id, state, limit)->
     state ||= "open"
-    Restangular.one('budgets', budget_id).customGET('buckets', {state: state})
+    limit ||= ""
+    Restangular.one('budgets', budget_id).customGET('buckets', {state: state, limit: limit})
 
   createBudget: (budget_data)->
     budgets.post('budgets', budget_data)

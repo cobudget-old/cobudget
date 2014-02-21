@@ -23,6 +23,8 @@ angular.module('resources.users', [])
 
   setCurrentUser: (user_data)->
     current_user = user_data
+    detected_zone = Temporal.detect().timezone.name
+    current_user.timezone = detected_zone
 
   getCurrentUser: ->
     current_user
@@ -47,8 +49,10 @@ angular.module('resources.users', [])
           return acc.allocation_rights_cents
 
   getAccountForBudget: (budget_id)->
+    account = {}
     for acc in current_user.accounts
       if acc.budget_id == parseFloat(budget_id)
-        Restangular.one('accounts', acc.id).get()
+        account = Restangular.one('accounts', acc.id).get()
+    account
 
 ])

@@ -34,13 +34,13 @@
     <!-- Add your site or application content here -->
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <nav id="main-nav" role="navigation">
+        <nav id="main-nav" class="row" role="navigation">
           <ul class="nav navbar-nav">
-            <li><a ui-sref="budgets.buckets({budget_id: 1})">Buckets</a></li>
+            <li><a ui-sref="user-dashboard">Dashboard</a></li>
             <li><a ui-sref="admin.dashboard">Admin Area</a></li>
+            <li><a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a></li>
             <li>
             <div colorpicker="hex" ng-model="current_user.bg_color" style="background-color: {{current_user.bg_color}}" class="m-user-color m-user-color-bg"></div>
             <a>{{current_user.email}}</a>
@@ -101,6 +101,10 @@
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
         <script src="bower_components/nouislider/jquery.nouislider.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+        <script src="bower_components/moment-timezone/moment-timezone.js"></script>
+        <script src="modded_components/moment-timezone-data.js"></script>
+        <script src="modded_components/temporal.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -114,8 +118,10 @@
         <script src="scripts/common/directives/manage_allocation_rights.js"></script>
         <script src="scripts/common/directives/manage_budget.js"></script>
         <script src="scripts/common/directives/buckets_collection.js"></script>
+        <script src="scripts/common/directives/happened_after_marker.js"></script>
         <script src="scripts/common/services/constrained_slider_collector.js"></script>
         <script src="scripts/common/services/color_generator.js"></script>
+        <script src="scripts/common/services/time.js"></script>
         <script src="scripts/common/filters/util_filters.js"></script>
         <script src="scripts/common/resources/budgets.js"></script>
         <script src="scripts/common/resources/buckets.js"></script>
@@ -128,6 +134,7 @@
         <script src="scripts/states/budget_states.js"></script>
         <script src="scripts/states/bucket_states.js"></script>
         <script src="scripts/states/admin_states.js"></script>
+        <script src="scripts/states/user_states.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -1,7 +1,7 @@
 angular.module("directives.buckets_collection", [])
-.directive "bucketsCollection", ['$q', '$rootScope', '$state', '$timeout', 'Budget', 'User', 'Allocation', 'Bucket', 'ColorGenerator', ($q, $rootScope, $state, $timeout, Budget, User, Allocation, Bucket, ColorGenerator) ->
+.directive "bucketsCollection", ['$q', '$rootScope', '$state', '$timeout', 'Budget', 'User', 'Allocation', 'Bucket', 'ColorGenerator', 'Time', ($q, $rootScope, $state, $timeout, Budget, User, Allocation, Bucket, ColorGenerator, Time) ->
   restrict: "EA"
-  transclude: "false"
+  #transclude: "false"
   templateUrl: "/views/directives/buckets.collection.html"
   scope:
     budget_id: "@budgetId"
@@ -15,6 +15,14 @@ angular.module("directives.buckets_collection", [])
       for a in bucket.allocations
         if a.user_id == User.getCurrentUser().id
           return a.amount
+
+    formatBucketTimes = (bucket)->
+      bucket.created_at_ago = Time.ago(bucket.created_at)
+      if bucket.funded_at?
+        bucket.funded_at_full = Time.full(bucket.funded_at)
+      if bucket.cancelled_at?
+        bucket.cancelled_at_full = Time.full(bucket.cancelled_at)
+      bucket
 
     #load the buckets methods
     loadBucketsWithoutAllocations = ->
@@ -30,11 +38,13 @@ angular.module("directives.buckets_collection", [])
         promises.push Bucket.getBucketAllocations(bucket.id)
       #this respects the order we passed in so we are safe to foreach the buckets again
       $q.all(promises).then (allocations_array)->
+        console.log "ALC ARRAY", allocations_array
         buckets_with_allocations = []
         for allocations, i in allocations_array
           buckets[i].color = ColorGenerator.makeColor(0.3,0.3,0.3,0,i * 1.25,4,177,65, i)
           buckets[i].allocations = allocations
           buckets[i].user_allocation = getBucketUserAllocation(buckets[i])
+          buckets[i] = formatBucketTimes(buckets[i])
           buckets_with_allocations.push buckets[i]
           if i == buckets.length - 1
             scope.buckets = buckets_with_allocations
@@ -57,13 +67,12 @@ angular.module("directives.buckets_collection", [])
       scope.user_allocations
 
     setCollectionAllocationGlobals = (user_allocations)->
-      User.getAccountForBudget($state.params.budget_id)[0].then (account)->
+      User.getAccountForBudget($state.params.budget_id).then (account)->
         scope.account_balance = account.allocation_rights_cents
         scope.allocated = Budget.getUserAllocated(user_allocations)
         scope.allocatable = Budget.getUserAllocatable(scope.account_balance, scope.allocated)
         scope.unallocated = scope.allocatable - scope.allocated 
         addUnallocatedToUserAllocations()
-        console.log scope.user_allocations
         return account
       , (error)->
         console.log error

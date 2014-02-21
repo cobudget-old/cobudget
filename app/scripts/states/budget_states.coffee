@@ -4,22 +4,6 @@ angular.module('states.budget', ['controllers.buckets'])
     url: '/budgets/:budget_id'
     views:
       'main':
-        resolve:
-          currentUser: ["User", "ENV", (User, ENV)->
-            if ENV.skipSignIn
-              if _.isEmpty(User.getCurrentUser())
-                User.getUser(1).then (success)->
-                  User.setCurrentUser(success)
-              else
-                User.getUser(User.getCurrentUser().id).then (success)->
-                  User.setCurrentUser(success)
-            else
-              if _.isEmpty(User.getCurrentUser())
-                false
-              else
-                User.getUser(User.getCurrentUser().id).then (success)->
-                  User.setCurrentUser(success)
-          ]
         templateUrl: '/views/budgets/budget.show.html'
         controller: 'BudgetController'
   ) #end state
@@ -61,7 +45,6 @@ angular.module('states.budget', ['controllers.buckets'])
             #format for graph
             gch_vals = []
             for allocation in group_allocations
-              console.log allocation
               ch_val =
                 value: allocation.amount
                 color: allocation.bucket_color
@@ -72,9 +55,8 @@ angular.module('states.budget', ['controllers.buckets'])
 
           $scope.$on 'user-allocations-updated', (event, data)->
             $scope.buckets = data.buckets
-            console.log data.user_allocations
             $scope.user_allocations = data.user_allocations
-            User.getAccountForBudget($state.params.budget_id)[0].then (account)->
+            User.getAccountForBudget($state.params.budget_id).then (account)->
               $scope.account_balance = account.allocation_rights_cents
               $scope.allocated = Budget.getUserAllocated($scope.user_allocations)
               $scope.allocatable = Budget.getUserAllocatable($scope.account_balance, $scope.allocated)

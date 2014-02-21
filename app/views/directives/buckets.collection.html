@@ -41,10 +41,10 @@
           </div>
         </div>
         <div class="m-bucket-message" ng-if="b.state === 'funded'">
-          <p class="paint lightest-gray">Funded on [date] {{b.funded_at}}, with total allocations at: ${{getTotalBucketAllocations(b) / 100 | number: 2}} </p>
+          <p class="paint lightest-gray">Funded on {{b.funded_at_full}}, with total allocations at: ${{getTotalBucketAllocations(b) / 100 | number: 2}} </p>
         </div>
         <div class="m-bucket-message" ng-if="b.state === 'cancelled'">
-          <p class="paint lightest-gray">Cancelled on [date], all allocations refunded.</p>
+          <p class="paint lightest-gray">Cancelled on {{b.cancelled_at_full}}, all allocations refunded.</p>
         </div>
         <div ng-if="b.maximum_cents > b.minimum_cents && allocatable > 0 && b.state != 'funded' && b.state != 'cancelled'" class="o-slider-container">
           <constrained-slider id="slider_{{b.id}}" min="0" allocated="allocated" allocatable="allocatable" bucket-allocation="b.user_allocation" affecting="b.allocations" identifier="{{b.id}}" color="{{b.color}}"></constrained-slider>
@@ -53,7 +53,9 @@
           <horiz-graph bucket-id="{{b.id}}" max="b.maximum_cents" height="50" items="b.allocations">
           </horiz-graph>
         </div>
+        
         <h1 class="utl-expander-button">{{b.name}}<div class="utl-expander-indicator">></div></h1>
+        <p class="clr-medium-gray"><small> Proposed {{b.created_at_ago}}</small></p>
         <div btf-markdown="b.description"></div>
         <div>
           <h2>User allocations</h2>
