@@ -12,7 +12,6 @@ module Cobudget
 
       def perform
         if state == "open"
-          puts "OPEN"
           if !limit.blank?
             budget.open_buckets.order('created_at desc').limit(limit).load.as_json
           else

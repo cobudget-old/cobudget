@@ -7,8 +7,14 @@ module Cobudget
     has_many :allocations
     has_many :accounts
 
+    ADMIN_EMAILS = ['allansideas@gmail.com']
+
     def can_manage_accounts?
-      true
+      if ADMIN_EMAILS.include? email 
+        true
+      else
+        false
+      end
     end
 
     def can_manage_buckets?

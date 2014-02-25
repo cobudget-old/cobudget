@@ -16,6 +16,11 @@ use Rack::Cors do |config|
   end
 end
 
+use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :expire_after => 2592000, # In seconds
+                           :secret => 'change_me'
+
 require 'cobudget_web'
 set :root, Pathname(__FILE__).dirname
 set :environment, ENV['RACK_ENV']

@@ -19,7 +19,6 @@ module Cobudget
           allocation['amount'] = bucket.balance_from_user(a.user, bucket.budget.id)
           allocations << allocation
         end
-        puts allocations.inspect
         allocations.as_json
         ##Ideal
         #bucket.allocations.as_json(include: :user)

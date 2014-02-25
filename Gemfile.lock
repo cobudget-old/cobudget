@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: git://github.com/enspiral/playhouse-sinatra.git
-  revision: e39357ef614caba96342195f9af4cd1d7de2c08b
+  revision: 031e84af2020bb95ca999e39c8837ac72c7f125a
   specs:
     playhouse-sinatra (0.1.0)
       playhouse
@@ -26,9 +26,9 @@ GIT
 
 GIT
   remote: git://github.com/enspiral/playhouse.git
-  revision: b4f44873ce4b6f2451c715cfd63f1bd1587353e6
+  revision: 7ae31044f666afa39f6dcabd775c49018215ef54
   specs:
-    playhouse (0.1.0)
+    playhouse (0.1.1)
       activerecord
       activesupport
       rake
@@ -38,22 +38,22 @@ GEM
   specs:
     active_model_serializers (0.8.1)
       activemodel (>= 3.0)
-    activemodel (4.0.2)
-      activesupport (= 4.0.2)
+    activemodel (4.0.3)
+      activesupport (= 4.0.3)
       builder (~> 3.1.0)
-    activerecord (4.0.2)
-      activemodel (= 4.0.2)
+    activerecord (4.0.3)
+      activemodel (= 4.0.3)
       activerecord-deprecated_finders (~> 1.0.2)
-      activesupport (= 4.0.2)
+      activesupport (= 4.0.3)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
-    activesupport (4.0.2)
+    activesupport (4.0.3)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    arel (4.0.1)
+    arel (4.0.2)
     atomic (1.1.14)
     builder (3.1.4)
     capistrano (2.15.5)
