@@ -7,7 +7,6 @@ app = angular.module('cobudget', [
   'ngSanitize'
   'ngAnimate'
   'config'
-  'directive.g+signin'
   'angular-lodash'
   'angles'
   'flash'
@@ -32,6 +31,7 @@ app = angular.module('cobudget', [
   'services.constrained_slider_collector'
   'services.color_generator'
   'services.time'
+  'services.gapi'
   'directives.expander'
   'directives.slider'
   'directives.constrained_slider'
@@ -45,8 +45,10 @@ app = angular.module('cobudget', [
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'ENV', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, ENV)->
   $urlRouterProvider.otherwise('/')
   RestangularProvider.setBaseUrl(ENV.apiEndpoint)
+  RestangularProvider.setDefaultHttpFields
+    withCredentials: true
 ])
-.run(["$rootScope", "$state", "editableOptions", "User", "ENV", ($rootScope, $state, editableOptions, User, ENV) ->
+.run(["$rootScope", "$state", "$timeout", "editableOptions", "User", "ENV", ($rootScope, $state, $timeout, editableOptions, User, ENV) ->
   if ENV.skipSignIn
     $rootScope.setUser = (id)->
       User.getUser(id).then (success)->
@@ -56,33 +58,11 @@ app = angular.module('cobudget', [
           $rootScope.current_user = User.getCurrentUser()
           $state.go 'user-dashboard'
         else
-          $state.go '/'
+          $state.go 'home'
     $rootScope.setUser(1)
   else
-    $rootScope.$on 'event:google-plus-signin-success', (event,authResult)->
-      gapi.client.load 'plus','v1', ()->
-        request = gapi.client.plus.people.get({'userId': 'me'})
-        request.execute (resp)->
-          params = {}
-          emails = resp.emails.filter (v)->
-            v.type == 'account'
-          params.email = emails[0].value
-          params.name = resp.displayName
-          User.authUser(params)
-            .then (success)->
-              console.log success
-              if success.accounts.length > 0
-                User.setCurrentUser(success)
-                $rootScope.current_user = User.getCurrentUser()
-                $state.go 'user-dashboard'
-              else
-                #flash message
-                console.log "No accounts"
-             , (error)->
-               console.log "User Auth Error", error
-      $rootScope.$on 'event:google-plus-signin-failure', (event,authResult)->
-        console.log "G+ sign in error", authResult
-
+    if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
+      $state.go 'home'
 
   $rootScope.$debugMode = "on"
   $rootScope.admin = false
@@ -96,6 +76,15 @@ app = angular.module('cobudget', [
   $rootScope.toggleAdmin = ()->
     $rootScope.admin = !$rootScope.admin
     $rootScope.$broadcast('admin-mode-toggle', $rootScope.admin)
+
+  $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams)->
+    if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
+      event.preventDefault()
+      $timeout ()->
+        event.currentScope.$apply ()->
+          $state.go("home")
+       , 100
+
 
   Pusher.log = (message)-> 
     if window.console && window.console.log

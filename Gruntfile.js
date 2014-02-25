@@ -53,9 +53,10 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'http://localhost:9292/cobudget',
+            apiEndpoint: 'http://127.0.0.1:9292/cobudget',
             googClient: '944956761028-bp08s6r3t4ievevuqdnah3da7291hn8g.apps.googleusercontent.com',
-            skipSignIn: true
+            googApiKey: 'AIzaSyDxnnV2xQ-IxmYhCO9C5I3juymeh5axaiY'
+            //skipSignIn: true
           }
         }
       }],
@@ -67,7 +68,8 @@ module.exports = function (grunt) {
           ENV:  {
             name: 'production',
             apiEndpoint: 'http://api.cobudget.enspiral.info/cobudget',
-            googClient: '944956761028.apps.googleusercontent.com'
+            googClient: '944956761028.apps.googleusercontent.com',
+            googApiKey: 'AIzaSyCFASAUgPOmFVCyq-gHLD9WmbFK3VsrS6w'
           }
         }
       }]

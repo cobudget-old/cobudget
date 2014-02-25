@@ -26,6 +26,9 @@ angular.module('resources.users', [])
     detected_zone = Temporal.detect().timezone.name
     current_user.timezone = detected_zone
 
+  setSession: (user_id)->
+    Restangular.all('users').customPOST(current_user: user_id, 'set_user')
+
   getCurrentUser: ->
     current_user
 

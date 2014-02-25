@@ -4,28 +4,8 @@ angular.module('states.user', [])
     url: '/dashboard'
     views:
       'main':
-        resolve:
-          currentUser: ["User", "ENV", (User, ENV)->
-            if ENV.skipSignIn
-              if _.isEmpty(User.getCurrentUser())
-                User.getUser(1).then (success)->
-                  User.setCurrentUser(success)
-                  console.log User.getCurrentUser()
-              else
-                User.getUser(User.getCurrentUser().id).then (success)->
-                  User.setCurrentUser(success)
-                  console.log User.getCurrentUser()
-            else
-              if _.isEmpty(User.getCurrentUser())
-                false
-              else
-                User.getUser(User.getCurrentUser().id).then (success)->
-                  User.setCurrentUser(success)
-                  console.log User.getCurrentUser()
-          ]
         templateUrl: '/views/user/dashboard.html'
         controller: (['$q', '$scope', '$state', 'User', 'Budget', 'Time', ($q, $scope, $state, User, Budget, Time)->
-
           #util, and dupe, where should it go tho
           formatBucketTimes = (bucket)->
             bucket.created_at_ago = Time.ago(bucket.created_at)
@@ -92,6 +72,7 @@ angular.module('states.user', [])
           .then(loadBudgetsRecentlyFunded) #takes budgets array
           .then(loadBudgetsRecentlyCancelled) #takes budgets array
           .then ()->
+            console.log $scope.budgets
             console.log 'loaded'
 
         ]) #end controller
