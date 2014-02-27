@@ -8,8 +8,14 @@ module Cobudget
       actor :bucket, repository: Bucket
 
       def perform
-        data = bucket.comments
-        data.as_json
+        puts bucket.comments.map{|c| "#{c.depth}, #{c.body}"}
+        comments = []
+        bucket.comments.each do |c|
+          if c.depth == 0
+            comments << c
+          end
+        end
+        comments.as_json
       end
     end
   end
