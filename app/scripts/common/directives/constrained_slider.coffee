@@ -1,5 +1,5 @@
 angular.module("directives.constrained_slider", [])
-.directive "constrainedSlider", ['$rootScope', 'ConstrainedSliderCollector', 'User', 'Allocation', ($rootScope, ConstrainedSliderCollector, User, Allocation) ->
+.directive "constrainedSlider", ['$rootScope', 'flash', 'ConstrainedSliderCollector', 'User', 'Allocation', ($rootScope, flash, ConstrainedSliderCollector, User, Allocation) ->
   restrict: "EA"
   transclude: "false"
   template: "<div class='slider'></div>"
@@ -51,6 +51,7 @@ angular.module("directives.constrained_slider", [])
       if alc.amount != parseFloat(0).toFixed(2)
         Allocation.createAllocation(alc).then (success)->
           console.log "Allocation Created:", alc
+          $rootScope.processing = false
           $rootScope.$broadcast('current-user-bucket-allocation-update', {bucket_id: parseFloat(scope.identifier)})
         , (error)->
           console.log error
@@ -81,15 +82,21 @@ angular.module("directives.constrained_slider", [])
       new_value
 
     change = ->
+      if $rootScope.processing
+        flash('error', "Still processing your last allocation, try again now... #{$rootScope.processing}", 2000)
+        el.val scope.bucket_allocation
+        $rootScope.processing = false
+        return false
+      else
+        $rootScope.processing = true
+        n = parseFloat(el.val())
 
-      n = parseFloat(el.val())
+        value = constrainValue(n)
+        saveValue(value)
 
-      value = constrainValue(n)
-      saveValue(value)
+        #these should probably go in the save block so it only updates view if saved
+        el.val value
+        scope.bucket_allocation = value
 
-      #these should probably go in the save block so it only updates view if saved
-      el.val value
-      scope.bucket_allocation = value
-
-      scope.$apply() unless $rootScope.$$phase
+        scope.$apply() unless $rootScope.$$phase
 ]
