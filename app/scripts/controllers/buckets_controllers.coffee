@@ -68,7 +68,7 @@ angular.module('controllers.buckets', [])
 
   $scope.$on "bucket-allocations-updated", (event, data)->
     sum = 0
-    for alc in data.bucket_allocations
+    for alc in $scope.b.allocations
       sum += alc.amount
     $scope.total_allocated_cents = sum
 

@@ -66,7 +66,6 @@ angular.module("directives.comments", [])
         scope.ux.reply_form_for = undefined
       else
         scope.ux.reply_form_for = comment.id
-      console.log scope.ux.reply_form_for
 
     $rootScope.channel.bind('comment_created', (response) ->
       if response.comment.user.id == User.getCurrentUser().id
@@ -74,10 +73,7 @@ angular.module("directives.comments", [])
       if response.bucket_id == scope.container.id
         if response.parent_id != null
           for comment in scope.comments
-            console.log comment.id, response.parent_id
-            console.log "has parent"
             if response.parent_id == comment.id
-              console.log "HIT"
               scope.$apply ()->
                 comment.children.push scope.formatCommentTimes(response.comment)
                 scope.calculateCommentCount()
