@@ -96,9 +96,6 @@ angular.module("directives.buckets_collection", [])
       
     #events
     scope.$on 'current-user-bucket-allocation-update', (event, data)->
-      #This is probably computationally expensive and could be done better with passing 
-      #bucket id and allocation amount in and updating vals from there, but for now...
-      #SOMETHING WRONG HERE IT'S adding to shit
       user_allocations = setUserAllocations(scope.buckets)
       setCollectionAllocationGlobals(user_allocations).then ()->
         $rootScope.$broadcast("user-allocations-updated",{user_allocations: user_allocations, buckets: scope.buckets })

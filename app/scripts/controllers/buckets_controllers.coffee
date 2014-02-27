@@ -65,4 +65,11 @@ angular.module('controllers.buckets', [])
           return
     , (error)->
       console.log error
+
+  $scope.$on "bucket-allocations-updated", (event, data)->
+    sum = 0
+    for alc in data.bucket_allocations
+      sum += alc.amount
+    $scope.total_allocated_cents = sum
+
 ])

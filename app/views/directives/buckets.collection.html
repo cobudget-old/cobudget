@@ -32,7 +32,7 @@
           <div ng-show="b.minimum_cents != null || b.maximum_cents != null" class="m-labels-label">
             <strong>
               <span ng-show="b.minimum_cents!= b.maximum / 100">
-                ${{b.minimum_cents / 100 }} - ${{b.maximum_cents / 100}}
+                ${{b.minimum_cents / 100 }} - <em class="clr3">${{total_allocated_cents / 100}}</em>  - ${{b.maximum_cents / 100}}
               </span>
               <span ng-show="b.minimum_cents == b.maximum_cents">
                 ${{b.minimum_cents / 100}}
