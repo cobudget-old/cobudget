@@ -12,6 +12,7 @@ module Cobudget
 
     belongs_to :budget
     has_many :entries, as: :account
+    has_many :comments
 
     state_machine initial: :open do
       event :set_funded do

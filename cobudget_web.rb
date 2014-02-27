@@ -14,6 +14,8 @@ class CobudgetWeb < Sinatra::Base
 
   register Playhouse::Sinatra
   set :root,  File.expand_path(File.join(File.dirname(__FILE__)))
+  #disable :protection
+  set :protection, :except => [:http_origin]
   routes = YAML.load_file('config/routes.yml')
 
   production = Cobudget::Production.new

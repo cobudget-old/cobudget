@@ -11,14 +11,15 @@ module Cobudget
       actor :budget, repository: Budget
 
       def perform
-        accounts = [] 
-        budget.accounts.order('updated_at desc').load.each do |acc|
-          balance = EntryCollection.cast_actor(acc).balance
-          user_email = acc.user ? acc.user.email : nil
-          acc = acc.attributes.merge!(:user_email => user_email, :balance => balance)
-          accounts << acc
-        end
-        accounts
+        #accounts = [] 
+        budget.accounts.order('updated_at desc').load.as_json
+        #.each do |acc|
+          #balance = EntryCollection.cast_actor(acc).balance
+          #user_email = acc.user ? acc.user.email : nil
+          #acc = acc.attributes.merge!(:user_email => user_email, :balance => balance)
+          #accounts << acc
+        #end
+        #accounts
       end
     end
   end

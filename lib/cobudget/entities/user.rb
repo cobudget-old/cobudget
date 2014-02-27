@@ -6,8 +6,13 @@ module Cobudget
     has_many :allocation_rights
     has_many :allocations
     has_many :accounts
+    has_many :comments
 
     ADMIN_EMAILS = ['allansideas@gmail.com']
+
+    def name_or_email 
+      name ? name : email
+    end
 
     def can_manage_accounts?
       if ADMIN_EMAILS.include? email 
@@ -39,7 +44,7 @@ module Cobudget
 
     def as_json(options={})
       super(
-        methods: :budgets,
+        methods: [:budgets, :name_or_email],
         include: { 
           accounts: {
             methods: :allocation_rights_cents

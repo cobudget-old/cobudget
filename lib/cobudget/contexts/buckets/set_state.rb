@@ -15,13 +15,14 @@ module Cobudget
         if state == "funded"
           bucket.set_funded!
           bucket.as_json
+          Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket.as_json})
         end
         if state == "cancelled"
           refund
           bucket.set_cancelled!
           bucket.as_json
+          Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket.as_json})
         end
-        #Pusher.trigger('cobudget', 'bucket_updated', {bucket: bucket.as_json})
       end
 
       def refund

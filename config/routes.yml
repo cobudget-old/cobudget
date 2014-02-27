@@ -108,6 +108,27 @@
     params: '*user_id, *bucket_id'
     description: Deletes a bucket
 
+#bucket comments
+-
+  get:
+    route: 'buckets/:bucket_id/comments'
+    command: list_by_bucket_comments
+    params: '*bucket_id'
+    description: gets comments for a bucket
+
+-
+  post:
+    route: 'buckets/:bucket_id/comments'
+    command: create_comments
+    params: '*bucket_id, #current_user, body, comment(parent)'
+    description: creates a comment for a bucket
+
+-
+  delete:
+    route: 'buckets/:bucket_id/comments/:comment_id'
+    command: delete_comments
+    params: '*bucket_id, comment_id'
+    description: deletes a comment for a bucket
 #users
 -
   get:

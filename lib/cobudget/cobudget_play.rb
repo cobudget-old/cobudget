@@ -12,6 +12,7 @@ module Cobudget
     context BudgetTotalEnquiry
     context BucketAllocationsFromUserEnquiry
 
+    contexts_for Comments
     contexts_for Budgets
     contexts_for Buckets
     contexts_for AllocationRights

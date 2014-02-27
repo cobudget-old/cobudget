@@ -14,6 +14,7 @@ module Cobudget
       connection.execute('TRUNCATE TABLE accounts RESTART IDENTITY;')
       connection.execute('TRUNCATE TABLE entries RESTART IDENTITY;')
       connection.execute('TRUNCATE TABLE transactions RESTART IDENTITY;')
+      connection.execute('TRUNCATE TABLE comments RESTART IDENTITY;')
 
       dionysus = Cobudget::User.create(name: 'Dionysus', email: 'dionysus@example.com')
       athena = Cobudget::User.create(name: 'Athena', email: 'athena@example.com')

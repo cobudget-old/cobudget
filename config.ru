@@ -16,7 +16,7 @@ use Rack::Cors do |config|
   end
 end
 
-use Rack::Session::Cookie, :key => 'rack.session',
+use Rack::Session::Cookie, :key => 'cobudget',
                            :path => '/',
                            :expire_after => 2592000, # In seconds
                            :secret => 'change_me'

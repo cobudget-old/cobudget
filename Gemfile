@@ -9,10 +9,10 @@ gem 'playhouse', git: 'git://github.com/enspiral/playhouse.git'
 gem 'playhouse-console', git: 'git://github.com/enspiral/playhouse-console.git'
 #gem 'economatic', git: 'git://github.com/enspiral/economatic.git'
 
-#gem 'playhouse-sinatra', path: '/home/nafcore/code/github/playhouse-sinatra'
-#gem 'playhouse-sinatra', git: 'git://github.com/allansideas/playhouse-sinatra.git'
+#gem 'playhouse-sinatra', path: '/home/nafcore/code/github/enspiral-playhouse-sinatra'
 gem 'playhouse-sinatra', git: 'git://github.com/enspiral/playhouse-sinatra.git'
 
+gem 'ancestry'
 gem 'capybara'
 gem 'cucumber', '1.3.6'
 gem 'database_cleaner'

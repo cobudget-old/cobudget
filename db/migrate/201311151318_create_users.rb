@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email, :null => false
       t.string :bg_color, :default => "#FFFFFF"
       t.string :fg_color, :default => "#FFFFFF"
+      t.string :role
       t.datetime :last_sign_in_at
 
       t.timestamps

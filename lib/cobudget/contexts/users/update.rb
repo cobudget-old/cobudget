@@ -10,6 +10,7 @@ module Cobudget
       actor :email
       actor :bg_color, optional: true
       actor :fg_color, optional: true
+      actor :role, optional: true
 
       def attributes
         actors_except :user
