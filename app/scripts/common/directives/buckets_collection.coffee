@@ -126,10 +126,12 @@ angular.module("directives.buckets_collection", [])
         scope.$apply()
     )
 
-    $rootScope.channel.bind('bucket_created', (response) ->
-      $scope.buckets.unshift response.bucket
-      $scope.$apply()
-    )
+    #todo add other fields to the bucket
+    #$rootScope.channel.bind('bucket_created', (response) ->
+      #scope.$apply ()->
+        #scope.buckets.unshift response.bucket
+      #$rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations:scope.buckets[i].allocations, bucket_id: scope.buckets[i].id })
+    #)
 
     $rootScope.channel.bind('bucket_updated', (response) ->
       console.log "PUSHER::BUCKET UPDATED"

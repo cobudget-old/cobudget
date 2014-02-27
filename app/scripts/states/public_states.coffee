@@ -10,6 +10,7 @@ angular.module('states.public', [])
             User.authUser(data)
               .then (success)->
                 User.setSession(success.id).then (data)->
+                  $rootScope.show_login = false
                   if success.accounts.length > 0
                     User.setCurrentUser(success)
                     $rootScope.current_user = User.getCurrentUser()
@@ -29,7 +30,7 @@ angular.module('states.public', [])
               , (error)->
                 console.log "User Auth Error", error
 
-          $scope.login = ->
+          $scope.$on 'login', ->
             console.log "login click"
             GAPI.login().then (data)->
               loginUser(data)
@@ -39,7 +40,6 @@ angular.module('states.public', [])
           window.setTimeout ()->
             GAPI.checkAuth().then (data)->
               loginUser(data)
-              $rootScope.show_login = false
             , (error)->
               $rootScope.show_login = true
           , 1000

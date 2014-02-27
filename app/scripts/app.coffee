@@ -58,6 +58,8 @@ app = angular.module('cobudget', [
   $rootScope.$debugMode = "on"
   $rootScope.admin = false
 
+  $rootScope.login = ->
+    $rootScope.$broadcast('login')
   editableOptions.theme = 'cobudget'
   editableOptions.activate = 'select'
 
