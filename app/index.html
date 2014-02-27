@@ -35,9 +35,12 @@
     <!-- Add your site or application content here -->
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <nav id="main-nav" class="row" role="navigation">
-          <ul class="nav navbar-nav" ng-if="current_user">
-            <li><a ui-sref="user-dashboard">Dashboard</a></li>
+        <nav id="main-nav" class="row" role="navigation" ng-cloak>
+          <ul class="nav navbar-nav">
+            <li>
+              <a class="o-login-button" ng-show="show_login" ng-click="login()">Login with google</a>
+            </li>
+            <li ng-if="current_user"><a ui-sref="user-dashboard">Dashboard</a></li>
             <li ng-if="current_user.role == 'admin'"><a ui-sref="admin.dashboard">Admin Area</a></li>
             <li ng-if="current_user.role == 'admin'"><a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a></li>
           </ul>

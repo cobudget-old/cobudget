@@ -39,9 +39,9 @@ angular.module('states.public', [])
           window.setTimeout ()->
             GAPI.checkAuth().then (data)->
               loginUser(data)
-              $scope.show_login = false
+              $rootScope.show_login = false
             , (error)->
-              $scope.show_login = true
+              $rootScope.show_login = true
           , 1000
 
           if !_.isEmpty User.getCurrentUser()

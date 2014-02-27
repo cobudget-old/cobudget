@@ -68,6 +68,7 @@
 
 .o-bucket-dollar-info-wrap
   width: 150px
+
 table.o-bucket-dollar-info
   display: inline-block
   width: 100%
@@ -88,3 +89,15 @@ table.o-bucket-dollar-info
     &.o-dollar-current
       width: 80px
       color: $clr-3
+
+.o-home-message
+  @extend .alert-notice
+
+.o-login-button
+  @extend .btn
+  @extend .btn-primary
+  margin-left: 1em
+.navbar-inverse .navbar-nav > li > a.o-login-button:hover,
+.navbar-inverse .navbar-nav > li > a.o-login-button:focus
+  @extend .btn-primary
+  text-decoration: underline

@@ -83,7 +83,7 @@ angular.module("directives.constrained_slider", [])
 
     change = ->
       if $rootScope.processing
-        flash('error', "Still processing your last allocation, try again now... #{$rootScope.processing}", 2000)
+        flash('error', "Still processing your last allocation, try again now...", 2000)
         el.val scope.bucket_allocation
         $rootScope.processing = false
         return false
