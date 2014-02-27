@@ -1,4 +1,5 @@
 <div class="m-comments-comments-wrapper">
+  <p ng-if="comments.length == 0">Be the first to have your say...</p>
   <div ng-repeat="comment in comments">
     <div class="m-comments-comment" ng-class="commentClasses(comment)" style="border-left: solid 2px {{comment.user.bg_color}}">
       <div class="m-comments-comment_info">

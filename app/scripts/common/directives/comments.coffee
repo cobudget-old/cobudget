@@ -39,7 +39,7 @@ angular.module("directives.comments", [])
         console.log "no body TODO error"
         return false
       Comment.createComment(scope.container.id, scope._comment).then (comment)->
-        scope.comments.push comment
+        scope.comments.push scope.formatCommentTimes(comment)
         scope._comment = {}
       , (error)->
         console.log error
