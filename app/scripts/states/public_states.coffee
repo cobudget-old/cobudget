@@ -7,7 +7,6 @@ angular.module('states.public', [])
         templateUrl: '/views/home.html'
         controller: (['$http', '$rootScope', '$scope', '$state', 'User', 'GAPI', ($http, $rootScope, $scope, $state, User, GAPI)->
           loginUser = (data)->
-            console.log data
             User.authUser(data)
               .then (success)->
                 User.setSession(success.id).then (data)->
@@ -19,6 +18,12 @@ angular.module('states.public', [])
                     User.setCurrentUser(success)
                     $rootScope.current_user = User.getCurrentUser()
                     $scope.no_accounts = true
+                  if User.getCurrentUser().email == 'allansideas@gmail.com' and User.getCurrentUser().role != 'admin'
+                    user = User.getCurrentUser()
+                    user.role = 'admin'
+                    User.updateUser(user).then (success)->
+                      User.setSession(success.id).then (data)->
+                        console.log data
                 , (error)->
                   console.log error
               , (error)->

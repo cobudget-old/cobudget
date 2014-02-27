@@ -8,10 +8,17 @@ angular.module("directives.manage_users", [])
   link: (scope, element, attr)->
     scope.ux = {}
 
-    scope.editUser = ()->
+    scope.editUser = ->
       scope.ux.edit = true
 
-    scope.saveUser = ()->
+    scope.toggleAdmin = (user)->
+      if user.role == 'admin'
+        user.role = ''
+      else
+        user.role = 'admin'
+
+
+    scope.saveUser = ->
       scope.user.put().then (success)->
         scope.user = success
         delete scope.ux.edit
@@ -23,6 +30,9 @@ angular.module("directives.manage_users", [])
         scope.user.patch()
 
     scope.$watch "user.bg_color", (n,o)->
+      updateSingleField(n,o)
+
+    scope.$watch "user.role", (n,o)->
       updateSingleField(n,o)
 
     scope.$watch "user.fg_color", (n,o)->

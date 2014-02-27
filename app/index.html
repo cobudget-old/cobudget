@@ -36,17 +36,17 @@
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
         <nav id="main-nav" class="row" role="navigation">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav" ng-if="current_user">
             <li><a ui-sref="user-dashboard">Dashboard</a></li>
-            <li><a ui-sref="admin.dashboard">Admin Area</a></li>
-            <li><a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a></li>
+            <li ng-if="current_user.role == 'admin'"><a ui-sref="admin.dashboard">Admin Area</a></li>
+            <li ng-if="current_user.role == 'admin'"><a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li>
-            <div colorpicker="hex" ng-model="current_user.bg_color" style="background-color: {{current_user.bg_color}}" class="m-user-color m-user-color-bg"></div>
-            <a>{{current_user.email}}</a>
-            </li>
-            <li><a ng-click="setUser(2)">User2</a></li>
+            <!--<li>-->
+            <!--<div colorpicker="hex" ng-model="current_user.bg_color" style="background-color: {{current_user.bg_color}}" class="m-user-color m-user-color-bg"></div>-->
+            <!--<a>{{current_user.email}}</a>-->
+            <!--</li>-->
+            <!--<li><a ng-click="setUser(2)">User2</a></li>-->
             <li>
               <a href="/" class="navbar-brand">
                 <img class="logo" src="/images/css/ph_logo.png" alt="cobudget logo" />
@@ -119,6 +119,8 @@
         <script src="scripts/common/directives/manage_budget.js"></script>
         <script src="scripts/common/directives/buckets_collection.js"></script>
         <script src="scripts/common/directives/happened_after_marker.js"></script>
+        <script src="scripts/common/directives/comments.js"></script>
+        <script src="scripts/common/directives/tab_switcher.js"></script>
         <script src="scripts/common/services/constrained_slider_collector.js"></script>
         <script src="scripts/common/services/color_generator.js"></script>
         <script src="scripts/common/services/time.js"></script>
@@ -129,6 +131,7 @@
         <script src="scripts/common/resources/users.js"></script>
         <script src="scripts/common/resources/account.js"></script>
         <script src="scripts/common/resources/allocations.js"></script>
+        <script src="scripts/common/resources/comments.js"></script>
         <script src="scripts/controllers/buckets_controllers.js"></script>
         <script src="scripts/controllers/budgets_controllers.js"></script>
         <script src="scripts/states/public_states.js"></script>

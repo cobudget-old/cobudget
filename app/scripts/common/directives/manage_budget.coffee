@@ -41,6 +41,7 @@ angular.module("directives.manage_budget", [])
 
     scope.refreshBudgetAccount = ()->
       Account.getAccount(scope.budget_account.id).then (success)->
+        console.log "Budget Account:", success
         scope.budget_account = success
 
     scope.createAllocationRights = ->
@@ -60,7 +61,6 @@ angular.module("directives.manage_budget", [])
         if acc._allocation_rights
           acc._allocation_rights = acc._allocation_rights
           Account.grantAllocationRights(acc).then (success)->
-            acc._allocation_rights = 0
             for acc, i in scope.budget.accounts
               if acc.id == success.id
                 scope.budget.accounts[i] = success

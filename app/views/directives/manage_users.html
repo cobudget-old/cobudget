@@ -18,9 +18,10 @@
     <input ng-model="user.email" type="email" name="email" ng-enter="saveUser()" placeholder="Email"></input>
   </div>
 </td>
-<td width="15%" class="text-right icon-actions clearfix">
+<td width="20%" class="text-right icon-actions clearfix">
   <a ng-show="ux.edit" ng-click="ux.edit = false" class="icon-cancel-circle clr4"></a>
   <a ng-show="ux.edit" ng-click="saveUser()" class="icon-checkmark-circle clr3"></a>
+  <a show="!ux.edit" ng-click="toggleAdmin(user)" class="icon-user4 {{user.role == 'admin' ? 'clr3' : 'clr-medium-gray'}}"></a>
   <a ng-show="!ux.edit" class="icon-remove clr4"></a>
   <a ng-show="!ux.edit" ng-click="ux.edit = true" class="icon-pencil clr1"></a>
 </td>

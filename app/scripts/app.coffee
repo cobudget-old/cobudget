@@ -28,6 +28,7 @@ app = angular.module('cobudget', [
   'resources.users'
   'resources.accounts'
   'resources.allocations'
+  'resources.comments'
   'services.constrained_slider_collector'
   'services.color_generator'
   'services.time'
@@ -41,6 +42,8 @@ app = angular.module('cobudget', [
   'directives.manage_budget'
   'directives.buckets_collection'
   'directives.happened_after_marker'
+  'directives.comments'
+  'directives.tab_switcher'
 ])
 .config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'ENV', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, ENV)->
   $urlRouterProvider.otherwise('/')
@@ -49,20 +52,8 @@ app = angular.module('cobudget', [
     withCredentials: true
 ])
 .run(["$rootScope", "$state", "$timeout", "editableOptions", "User", "ENV", ($rootScope, $state, $timeout, editableOptions, User, ENV) ->
-  if ENV.skipSignIn
-    $rootScope.setUser = (id)->
-      User.getUser(id).then (success)->
-        User.setCurrentUser(success)
-        if User.getCurrentUser()?
-          console.log "CHANGING USER"
-          $rootScope.current_user = User.getCurrentUser()
-          $state.go 'user-dashboard'
-        else
-          $state.go 'home'
-    $rootScope.setUser(1)
-  else
-    if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
-      $state.go 'home'
+  if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
+    $state.go 'home'
 
   $rootScope.$debugMode = "on"
   $rootScope.admin = false

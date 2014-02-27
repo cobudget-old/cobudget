@@ -14,7 +14,7 @@
   cursor: pointer
   &.j-expanded
     padding-bottom: 1.8em
-    max-height: 2000px
+    max-height: 10000px
 
 .utl-expander-indicator
   display: inline-block
@@ -25,6 +25,18 @@
     padding: 0 5px 
     +rotate(90deg)
     
+.tab-nav
+  margin-bottom: 1em
+  border-bottom: solid 1px $clr-lightest-gray
+  .tab-nav-item
+    padding: 0.5em 1em
+    display: inline-block
+    &.tab-nav-active
+      background: $clr-lightest-gray
+.tab
+  display: none
+.tab.tab-active
+  display: block
 //.utl-expander-btn
   //height: 1.8em
   //line-height: 1.8em

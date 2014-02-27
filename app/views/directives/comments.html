@@ -1,0 +1,42 @@
+<div class="m-comments-comments-wrapper">
+  <div ng-repeat="comment in comments">
+    <div class="m-comments-comment" ng-class="commentClasses(comment)" style="border-left: solid 2px {{comment.user.bg_color}}">
+      <div class="m-comments-comment_info">
+        <span class="m-comments-comment_info-user">{{comment.user.name_or_email}}</span>
+        <span class="pull-right">{{comment.created_at_ago}}</span>
+      </div>
+      <div class="m-comments-comment_body">
+        {{comment.body}}
+      </div>
+      <!--Children-->
+      <div class="m-comments-comment m-comments-comment-child" style="border-left: solid 2px {{child.user.bg_color}}" ng-if="comment.children.length > 0"  ng-class="commentClasses(child)" ng-repeat="child in comment.children">
+        <div class="m-comments-comment_info">
+          <span class="m-comments-comment_info-user">{{child.user.name_or_email}}</span>
+          <span class="pull-right">{{child.created_at_ago}}</span>
+        </div>
+        <div class="m-comments-comment_body">
+          {{child.body}}
+        </div>
+      </div>
+      <div class="clearfix" style="border-bottom: solid 2px {{comment.user.bg_color}}">
+        <div class="pull-right m-comments-comment_reply-button"><a href='' ng-click='toggleReplyFormFor(comment)'>Reply</a></div>
+      </div>
+    </div>
+    <form ng-if="ux.reply_form_for === comment.id" class="simple-form m-comments-comment-box_reply" novalidate>
+      <p class="clr-medium-gray" ng-show="comment.children.length > 3">Replying to: <em>{{comment.body.substring(0, 100)}}...</em></p>
+      <textarea ng-model="_reply.body"></textarea>
+      <div class="actions">
+        <a href='' ng-click="ux.reply_form_for = undefined">Cancel</a>
+        <button class="pull-right" ng-click="createReply(comment)">Reply to {{comment.user.name_or_email}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="m-comments-comment-box">
+  <form class="simple-form" novalidate>
+    <textarea ng-model="_comment.body"></textarea>
+    <div class="actions">
+      <button class="pull-right" ng-click="create()">Create Comment</button>
+    </div>
+  </form>
+</div>

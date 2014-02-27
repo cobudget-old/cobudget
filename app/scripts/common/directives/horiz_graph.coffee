@@ -58,7 +58,7 @@ angular.module("directives.horiz_graph", [])
           width: pc + "%" 
           backgroundColor: item.user_color
 
-    $rootScope.$on "bucket-allocations-updated", (event, data)->
+    scope.$on "bucket-allocations-updated", (event, data)->
       if parseFloat(scope.bucket_id) == data.bucket_id
         scope.updateGraph(data.bucket_allocations)
 ]

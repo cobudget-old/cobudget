@@ -1,5 +1,6 @@
 angular.module('controllers.buckets', [])
 .controller('BucketController', ['$rootScope', '$scope', '$state', 'Bucket', 'flash', 'User', ($rootScope, $scope, $state, Bucket, flash, User)->
+  $scope.comment_count = 0
   $scope.budget_id = $state.params.budget_id
 
   $scope._bucket = {}

@@ -18,8 +18,11 @@ angular.module('states.admin', [])
           "
       'page-full':
         templateUrl: '/views/admin/dashboard.html'
-        controller: (['$scope', '$state', 'User', 'Budget', ($scope, $state, User, Budget)->
+        controller: (['$rootScope', '$scope', '$state', 'User', 'Budget', ($rootScope, $scope, $state, User, Budget)->
           console.log "Admin", $scope
+
+          unless $rootScope.current_user.role == 'admin' or $rootScope.current_user.role == 'budget admin'
+            $state.go 'user-dashboard'
           $scope.mode = ""
           $scope.search = ""
           $scope.users = {}

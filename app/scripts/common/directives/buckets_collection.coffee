@@ -129,4 +129,23 @@ angular.module("directives.buckets_collection", [])
         scope.$apply()
     )
 
+    $rootScope.channel.bind('bucket_created', (response) ->
+      $scope.buckets.unshift response.bucket
+      $scope.$apply()
+    )
+
+    $rootScope.channel.bind('bucket_updated', (response) ->
+      console.log "PUSHER::BUCKET UPDATED"
+      console.log response
+      angular.forEach scope.buckets, (old_bucket, i)->
+        if old_bucket.id == response.bucket.id
+          response.bucket.allocations = old_bucket.allocations
+          response.bucket.user_allocation = old_bucket.user_allocation
+          response.bucket.color = old_bucket.color
+          scope.$apply( ()->
+            scope.buckets[i] = formatBucketTimes(response.bucket)
+          )
+          $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations:scope.buckets[i].allocations, bucket_id: scope.buckets[i].id })
+    )
+
 ]
