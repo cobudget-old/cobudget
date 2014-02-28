@@ -1,9 +1,9 @@
 node_modules
-dist
+/dist
 deploy_package.tar.gz
 .tmp
 .sass-cache
-app/bower_components
+app/bower_components/
 .DS_STORE
 .idea
 app/scripts/config.js
