@@ -2,7 +2,7 @@
   "name": "try",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.2.3",
+    "angular": "~1.2.13",
     "angular-resource": "~1.2.3",
     "angular-cookies": "~1.2.3",
     "angular-sanitize": "~1.2.3",
@@ -23,7 +23,7 @@
     "lodash": "~2.4.1",
     "restangular": "~1.2.2",
     "angular-bootstrap-colorpicker": "~3.0.2",
-    "angles": "git@github.com:lgsilver/angles.git",
+    "angles": "*",
     "Chart.js": "*",
     "angular-xeditable": "~0.1.7",
     "moment": "~2.5.1",
