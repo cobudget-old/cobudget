@@ -18,6 +18,13 @@ class CobudgetWeb < Sinatra::Base
   set :protection, :except => [:http_origin]
   routes = YAML.load_file('config/routes.yml')
 
+  configure do
+    enable :logging
+    file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
+    file.sync = true
+    use Rack::CommonLogger, file
+  end
+
   production = Cobudget::Production.new
   production.routes = routes
   theatre = Cobudget::CobudgetTheatre.new(root: settings.root, environment: settings.environment)

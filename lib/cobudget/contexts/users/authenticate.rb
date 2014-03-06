@@ -9,6 +9,10 @@ module Cobudget
 
       def perform
         user = User.find_by_email(email)
+        puts "***********USER*************"
+        puts User.last.inspect
+        puts User.last.email == email
+        puts user.inspect
         if user
           user.last_sign_in_at = Time.now
           user.save

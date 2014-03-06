@@ -201,7 +201,12 @@
     command: show_accounts
     params: '*account_id'
     description: Get single account by id
-
+-
+  post:
+    route: 'accounts/:account_id/transfer'
+    command: transfer_funds_accounts
+    params: '*account_id(from account), to_account_id, amount_dollars'
+    description: Transfer funds from one account to another.
 -
   post:
     route: 'accounts'

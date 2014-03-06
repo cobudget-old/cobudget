@@ -14,7 +14,7 @@ module Cobudget
       if user
         user.email
       else
-        "N/A"
+        name
       end
     end
 
