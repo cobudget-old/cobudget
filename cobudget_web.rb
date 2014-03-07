@@ -1,5 +1,6 @@
 $LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
 require 'yaml'
+require 'logger'
 require 'sinatra/base'
 require 'playhouse/sinatra'
 require 'cobudget/cobudget_play'
@@ -18,29 +19,12 @@ class CobudgetWeb < Sinatra::Base
   set :protection, :except => [:http_origin]
   routes = YAML.load_file('config/routes.yml')
 
+
   configure do
-    enable :logging
-    @log_file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
-    @log_file.sync = true
+    $logger = Logger.new("#{settings.root}/log/#{settings.environment}.log", 'monthly')
+    $logger.info 'testing'
+    use Rack::CommonLogger, $logger
   end
-
-  configure :development do
-    use Rack::CommonLogger, @log_file
-  end
-
-  configure :staging do
-    set :logging, Logger::DEBUG
-    STDOUT.reopen(@log_file)
-    STDERR.reopen(@log_file)
-
-    STDOUT.sync = true
-    STDERR.sync = true
-  end
-
-  before do
-    $logger = logger
-  end
-
 
   production = Cobudget::Production.new
   production.routes = routes
