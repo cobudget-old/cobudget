@@ -2,6 +2,7 @@ require 'playhouse/context'
 require 'cobudget/entities/user'
 require 'cobudget/entities/account'
 require 'cobudget/composers/money_composer'
+require 'cobudget/roles/entry_collection'
 
 module Cobudget
   module Accounts
@@ -13,8 +14,8 @@ module Cobudget
 
       def perform
         user = User.find(current_user)
-        puts account.inspect
-        puts to_account.inspect
+        $logger.debug account.inspect
+        $logger.debug to_account.inspect
         transfer = TransferMoney.new(source_account: account, destination_account: to_account, amount: amount_dollars, creator: user)
         transfer.call
       end

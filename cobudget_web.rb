@@ -20,10 +20,27 @@ class CobudgetWeb < Sinatra::Base
 
   configure do
     enable :logging
-    file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
-    file.sync = true
-    use Rack::CommonLogger, file
+    @log_file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
+    @log_file.sync = true
   end
+
+  configure :development do
+    use Rack::CommonLogger, @log_file
+  end
+
+  configure :staging do
+    set :logging, Logger::DEBUG
+    STDOUT.reopen(@log_file)
+    STDERR.reopen(@log_file)
+
+    STDOUT.sync = true
+    STDERR.sync = true
+  end
+
+  before do
+    $logger = logger
+  end
+
 
   production = Cobudget::Production.new
   production.routes = routes

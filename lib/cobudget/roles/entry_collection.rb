@@ -12,7 +12,7 @@ module Cobudget
     actor_dependency :entries
 
     def balance
-      #puts "Balance = #{Money.new(base_scope.sum(SUM_COLUMN))}"
+      #$logger.debug "Balance = #{Money.new(base_scope.sum(SUM_COLUMN))}"
       Money.new(base_scope.sum(SUM_COLUMN)).cents
     end
 
@@ -27,7 +27,7 @@ module Cobudget
     def balance_from_user(user, budget_id)
       sum = 0
       from_user_scope(user, budget_id).each do |t|
-        puts t.entries.where("account_type = 'Cobudget::Bucket'").inspect
+        $logger.debug t.entries.where("account_type = 'Cobudget::Bucket'").inspect
         sum += t.entries.where("account_type = 'Cobudget::Bucket'").first.amount_cents
       end
       sum

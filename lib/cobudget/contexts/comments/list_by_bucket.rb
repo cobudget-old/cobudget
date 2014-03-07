@@ -8,7 +8,7 @@ module Cobudget
       actor :bucket, repository: Bucket
 
       def perform
-        puts bucket.comments.map{|c| "#{c.depth}, #{c.body}"}
+        $logger.debug bucket.comments.map{|c| "#{c.depth}, #{c.body}"}
         comments = []
         bucket.comments.each do |c|
           if c.depth == 0
