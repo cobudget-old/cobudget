@@ -9,10 +9,6 @@ module Cobudget
 
       def perform
         user = User.find_by_email(email)
-        $logger.debug "***********USER*************"
-        $logger.debug User.last.inspect
-        $logger.debug User.last.email == email
-        $logger.debug user.inspect
         if user
           user.last_sign_in_at = Time.now
           user.save
