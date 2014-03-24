@@ -16,12 +16,40 @@ angular.module('states.budget', ['controllers.buckets'])
         templateUrl: '/views/buckets/buckets.list.html'
       'sidebar':
         templateUrl: '/views/budgets/budget.sidebar.html'
-        controller: ['$rootScope', '$scope', '$state', 'User', 'Budget', 'Bucket', ($rootScope, $scope, $state, User, Budget, Bucket)->
+        controller: ['$rootScope', '$scope', '$state', 'User', 'Budget', 'Bucket', 'Account', ($rootScope, $scope, $state, User, Budget, Bucket, Account)->
           $scope.state = $state.params.state
           $scope.chart_options = 
             segmentShowStroke : true
             segmentStrokeColor : "#fff"
             animation : false,
+
+          $scope._transfer = {}
+
+          $scope.ux = {}
+          $scope.ux.show_transfer = false
+
+          loadAccounts = ()->
+            Budget.getBudget($state.params.budget_id).then (budget)->
+              Account.accountsByBudget(budget).then (accounts)->
+                $scope.accounts = accounts
+              , (error)->
+                console.log error
+          loadAccounts()
+
+          #TODO make the allocatable update here and in buckets collection. (try parent controller)
+          #remove current user from accounts
+          #
+          $scope.transferAllocationRights = ->
+            User.getAccountForBudget($state.params.budget_id).then (account)->
+              account
+            , (error)->
+              console.log error
+            .then (account)->
+              console.log "called"
+              Account.transferFunds(account.id, $scope._transfer.to_account.id, $scope._transfer.amount_dollars).then (transfer)->
+                $scope._transfer = {}
+                $scope.allocated = Budget.getUserAllocated($scope.user_allocations)
+                $scope.allocatable = Budget.getUserAllocatable($scope.account_balance, $scope.allocated)
 
           prepareChart = ()->
             ch_vals = []
@@ -50,7 +78,6 @@ angular.module('states.budget', ['controllers.buckets'])
                 color: allocation.bucket_color
               gch_vals.push ch_val
             $scope.group_chart = gch_vals
-
 
 
           $scope.$on 'user-allocations-updated', (event, data)->

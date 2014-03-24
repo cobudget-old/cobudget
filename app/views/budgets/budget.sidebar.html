@@ -2,7 +2,24 @@
 <h2>Your allocations</h2>
 <!--<div ng-repeat="clr in color_array" style="width: 10px; height: 10px; float: left; background-color: {{clr}};"></div>-->
 <div class="paint white shadow">
+  <div class="o-action-block">
+    <a href="" ng-click="ux.show_transfer = !ux.show_defer"><strong> + TRANSFER YOUR ALLOCATION</strong></a>
+  </div>
   <div class="l-padded">
+    <div ng-if="ux.show_transfer" class="m-allocations-transfer">
+      <p>Feature in progress</p>
+      <form class="l-bottom-margin" ng-submit="transferAllocationRights()" formnovalidate>
+        <div class="field">
+          <input type="text" ng-model="_transfer.to_account" placeholder="Start typing email" typeahead="account as account.user_email for account in accounts | filter:$viewValue | limitTo:8" typeahead-editable="false " class="form-control" />
+        </div>
+        <div class="field">
+          <input type="number" step="any" ng-model="_transfer.amount_dollars" /> 
+        </div>
+        <!--<div class="actions">-->
+          <!--<button class="btn pull-right">Transfer</button>-->
+        <!--</div>-->
+      </form>
+    </div>
     <div class="row l-bottom-margin">
       <span class="col-md-6 clr-medium-gray">Allocated: <strong>${{allocated / 100 | number: 2}}</strong></span>
       <span ng-if="state != 'funded'">

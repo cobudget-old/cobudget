@@ -31,7 +31,6 @@ angular.module("directives.comments", [])
         for child in comment.children
           child = scope.formatCommentTimes(child)
       scope.comments = comments
-      console.log scope.comments
       scope.calculateCommentCount()
     , (error)->
       console.log error
@@ -73,7 +72,6 @@ angular.module("directives.comments", [])
       if response.comment.user.id == User.getCurrentUser().id
         return false
       if response.bucket_id == scope.container.id
-        console.log response.parent_id
         if response.parent_id != null
           for comment in scope.comments
             if response.parent_id == comment.id
@@ -82,7 +80,6 @@ angular.module("directives.comments", [])
                 scope.calculateCommentCount()
               break
         else
-          console.log "WHT HERE"
           scope.$apply ()->
             scope.comments.push scope.formatCommentTimes(response.comment)
             scope.calculateCommentCount()

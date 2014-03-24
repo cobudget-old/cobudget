@@ -47,6 +47,18 @@ angular.module('states.admin', [])
             , (error)->
               console.log error
             )
+            
+          #do something to check about allocations and where they all go.
+          $scope.deleteUser = (user)->
+            User.deleteUser(user).then((success)->
+              for user, i in $scope.users
+                if user.id == success.id
+                  $scope.users.splice(i, 1)
+              $scope.users.unshift(success)
+            , (error)->
+              console.log error
+            )
+
 
           $scope.toggle = (mode)->
             console.log mode

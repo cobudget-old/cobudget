@@ -52,8 +52,14 @@ app = angular.module('cobudget', [
     withCredentials: true
 ])
 .run(["$rootScope", "$state", "$timeout", "editableOptions", "User", "ENV", ($rootScope, $state, $timeout, editableOptions, User, ENV) ->
+  #NON DEMO
+  #if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
+    #$state.go 'home'
+
+  #DEMO
   if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
-    $state.go 'home'
+    unless $state.is('demo')
+      $state.go 'demo'
 
   $rootScope.$debugMode = "on"
   $rootScope.admin = false
@@ -71,12 +77,15 @@ app = angular.module('cobudget', [
     $rootScope.$broadcast('admin-mode-toggle', $rootScope.admin)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams)->
-    if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
-      event.preventDefault()
-      $timeout ()->
-        event.currentScope.$apply ()->
-          $state.go("home")
-       , 100
+    console.log $state.current.name
+    unless $state.is('demo')
+      unless toState == 'demo'
+        if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
+          event.preventDefault()
+          $timeout ()->
+            event.currentScope.$apply ()->
+              $state.go("home")
+           , 100
 
 
   Pusher.log = (message)-> 
