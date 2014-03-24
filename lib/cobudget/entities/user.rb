@@ -8,7 +8,7 @@ module Cobudget
     has_many :accounts
     has_many :comments
 
-    ADMIN_EMAILS = ['allansideas@gmail.com']
+    ADMIN_EMAILS = ['allansideas@gmail.com', 'admin@demo.cobudget']
 
     def name_or_email 
       name ? name : email

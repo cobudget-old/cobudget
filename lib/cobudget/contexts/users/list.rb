@@ -8,6 +8,7 @@ module Cobudget
       def perform
         id = current_user
         admin = User.find(id)
+        puts admin
         raise NotAuthorizedToListUsers unless admin.can_manage_accounts?
         User.all.as_json
       end
