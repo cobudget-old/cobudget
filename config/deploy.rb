@@ -20,6 +20,18 @@ task :staging do
   role :app, domain
   role :db,  domain, :primary => true
 end
+task :production do
+  set :user,      "cobudget"
+  set :domain,    "cobudget.enspiral.com"
+  set :branch,    "production"
+  set :rails_env, "production"
+  set :deploy_to, "/home/#{user}/api/"
+  set :bundle_without, [:development, :test]
+
+  role :web, domain
+  role :app, domain
+  role :db,  domain, :primary => true
+end
 
 namespace :site do
   task :symlink do
