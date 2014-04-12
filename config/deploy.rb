@@ -17,11 +17,20 @@ set :default_stage, "staging"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
-set :deploy_to, "/home/www/#{application}/client/"
 task :staging do
-  role :web, "www@cobudget.enspiral.info"
-  role :app, "www@cobudget.enspiral.info"
+	set :domain, "cobudget.enspiral.info"
+	set :user, "www"
+  role :web, "#{user}@#{domain}"
+  role :app, "#{user}@#{domain}"
   set :deploy_to, "/home/www/#{application}/client/"
+end
+task :production do
+	set :domain, "cobudget.enspiral.com"
+	set :user, "cobudget"
+  role :web, "#{user}@#{domain}"
+  role :app, "#{user}@#{domain}"
+  set :deploy_to, "/home/#{application}/client/"
+  set :branch, "production"
 end
 
 namespace :deploy do
@@ -34,7 +43,7 @@ namespace :deploy do
   end
 
   task :upload do
-    system("scp -r deploy_package.tar.gz www@cobudget.enspiral.info:#{deploy_to}/deploy_package.tar.gz")
+    system("scp -r deploy_package.tar.gz #{user}@#{domain}:#{deploy_to}/deploy_package.tar.gz")
   end
 
   task :update_code do
