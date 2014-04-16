@@ -2,5 +2,5 @@ config/database.yml
 *sqlite
 .idea
 *.swp
-/log
+/log/*log
 
