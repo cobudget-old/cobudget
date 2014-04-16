@@ -30,7 +30,7 @@ end
 When /^([^ ]+) views the available buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   user = users[user_name]
 
-  @buckets_viewing = play.list_available_buckets(budget: budget, user: user)
+  @buckets_viewing = play.list_available_buckets(budget: budget, user: user, state: 'open')
 end
 
 When /^([^ ]+) creates a bucket in (#{CAPTURE_BUDGET}) with:$/ do |user_name, budget, table|
@@ -101,10 +101,11 @@ Then /^([^ ]+) should exist as a user$/ do |user_name|
   Cobudget::User.find_by_name(user_name).should_not be_nil
 end
 
-Then /^the available bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget, table|
+Then /^the (.*) bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |state, budget, table|
   options = {}
   options[:budget] = budget
-  buckets = play.list_available_buckets(options).reload
+  options[:state] = state
+  buckets = play.list_available_buckets(options)
   result = buckets
 
   expected = table.hashes
@@ -117,7 +118,7 @@ Then /^the available bucket list for (#{CAPTURE_BUDGET}) should be:$/ do |budget
         value = Money.new(value.to_f*100) if ['minimum', 'maximum'].include?(key)
         value = users[value] if key == 'sponsor'
       end
-      row.send(key).should == value
+      row[key].should == value
     end
   end
 end
