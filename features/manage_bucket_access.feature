@@ -11,7 +11,7 @@ Feature: Bucket Access
     Given a bucket HammerOil in the Avengers budget
 
   Scenario: Archive a bucket
-    Given the available bucket list for the Avengers budget should be:
+    Given the open bucket list for the Avengers budget should be:
 
     | name                   | description                                      | minimum | maximum | sponsor |
     | HammerOil              | Special bucket                                   |         |         |         |
@@ -20,7 +20,7 @@ Feature: Bucket Access
 
     And NickFury archives the HammerOil bucket
 
-    Given the available bucket list for the Avengers budget should be:
+    Given the open bucket list for the Avengers budget should be:
 
       | name                   | description                                      | minimum | maximum | sponsor |
       | Gadgets                | Special bucket                                   |         |         |         |

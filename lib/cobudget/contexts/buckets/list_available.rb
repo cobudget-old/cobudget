@@ -8,7 +8,7 @@ module Cobudget
     class ListAvailable < Playhouse::Context
       actor :budget, repository: Budget, role: BudgetOfBuckets
       actor :state
-      actor :limit
+      actor :limit, optional: true
 
       def perform
         if state == "open"

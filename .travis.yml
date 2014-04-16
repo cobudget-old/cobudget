@@ -13,6 +13,9 @@ addons:
 notifications:
   hipchat:
     rooms:
-      - 3d318fc3e1f401238a50171784b534@Craftworks General
+      - af3b6d58c1edc4cac0ff861d2c374c@Craftworks General
+      - af3b6d58c1edc4cac0ff861d2c374c@cobudget!
     template: '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
     format: html
+cache:
+  bundler: true

@@ -15,7 +15,7 @@ end
 
 
 Then /^they should see (#{CAPTURE_BUCKET}) in the available bucket list$/ do |bucket|
-  @buckets_viewing = play.list_available_buckets(budget: @budget, user: @user)
+  @buckets_viewing = play.list_available_buckets(budget: @budget, user: @user, state: 'open')
   @buckets_viewing.include?bucket
 end
 
