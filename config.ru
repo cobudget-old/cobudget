@@ -5,6 +5,7 @@ require 'json'
 require 'sinatra'
 require 'rack'
 require 'rack/cors'
+require 'config/airbrake'
 
 use Rack::Cors do |config|
   config.allow do |allow|
