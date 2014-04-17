@@ -24,6 +24,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers'
 gem 'shotgun'
 gem 'state_machine'
+gem 'airbrake'
 
 env :development do
   gem 'capistrano', '2.15.5'

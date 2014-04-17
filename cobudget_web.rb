@@ -8,6 +8,9 @@ require 'cobudget/production'
 require 'cobudget_theatre'
 
 class CobudgetWeb < Sinatra::Base
+  use Airbrake::Rack
+  enable :raise_errors
+
   #production = Cobudget::Production.new
   #theatre = Cobudget::CobudgetTheatre.new(root: settings.root, environment: settings.environment)
 
