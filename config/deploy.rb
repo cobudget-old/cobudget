@@ -25,7 +25,7 @@ task :staging do
   role :web, "#{user}@#{domain}"
   role :app, "#{user}@#{domain}"
   set :deploy_to, "/home/www/#{application}/client/"
-  set :branch, "staging"
+  set :env, "staging"
 end
 task :production do
 	set :domain, "cobudget.enspiral.com"
@@ -33,12 +33,12 @@ task :production do
   role :web, "#{user}@#{domain}"
   role :app, "#{user}@#{domain}"
   set :deploy_to, "/home/#{application}/client/"
-  set :branch, "production"
+  set :env, "production"
 end
 
 namespace :deploy do
   task :build do
-    system "grunt #{branch} --force"
+    system "grunt #{env} --force"
   end
 
   task :compress do
