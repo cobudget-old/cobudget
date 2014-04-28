@@ -23,6 +23,7 @@ task :staging do
   role :web, "#{user}@#{domain}"
   role :app, "#{user}@#{domain}"
   set :deploy_to, "/home/www/#{application}/client/"
+  set :branch, "staging"
 end
 task :production do
 	set :domain, "cobudget.enspiral.com"
@@ -35,7 +36,7 @@ end
 
 namespace :deploy do
   task :build do
-    system "grunt --force"
+    system "grunt #{branch} --force"
   end
 
   task :compress do
@@ -53,7 +54,6 @@ namespace :deploy do
 
   task :uncompress_and_clean_up do
     run "cd #{release_path} && tar -zxf deploy_package.tar.gz --strip-components=1"
-    #run "mv #{release_path}/dist/* #{release_path}/"
   end
 
   task :symlinks do

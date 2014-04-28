@@ -1,7 +1,7 @@
 angular.module("services.gapi", [])
-.service "GAPI", [ "$http", "$rootScope", "$q", "ENV", ($http, $rootScope, $q, ENV)->
-  clientId = ENV.googClient
-  apiKey = ENV.googApiKey
+.service "GAPI", [ "$http", "$rootScope", "$q", "config", ($http, $rootScope, $q, config)->
+  clientId = config.googClient
+  apiKey = config.googApiKey
   scopes = "https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"
   #domain = "localhost:9000"
   deferred = $q.defer()

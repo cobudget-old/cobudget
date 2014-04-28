@@ -42,38 +42,6 @@ module.exports = function (grunt) {
         ]
       }
     },
-    ngconstant: {
-      options: {
-        space: '  '
-      },
-      development: [{
-        dest: '<%= yeoman.app %>/scripts/config.js',
-        wrap: '"use strict";\n\n <%= __ngModule %>',
-        name: 'config',
-        constants: {
-          ENV: {
-            name: 'development',
-            apiEndpoint: 'http://127.0.0.1:9292/cobudget',
-            googClient: '944956761028-bp08s6r3t4ievevuqdnah3da7291hn8g.apps.googleusercontent.com',
-            googApiKey: 'AIzaSyDxnnV2xQ-IxmYhCO9C5I3juymeh5axaiY'
-            //skipSignIn: true
-          }
-        }
-      }],
-      production: [{
-        dest: '<%= yeoman.app %>/scripts/config.js',
-        wrap: '"use strict";\n\n <%= __ngModule %>',
-        name: 'config',
-        constants: {
-          ENV:  {
-            name: 'production',
-            apiEndpoint: 'http://api.cobudget.enspiral.info/cobudget',
-            googClient: '944956761028.apps.googleusercontent.com',
-            googApiKey: 'AIzaSyCFASAUgPOmFVCyq-gHLD9WmbFK3VsrS6w'
-          }
-        }
-      }]
-    },
     autoprefixer: {
       options: ['last 1 version'],
       dist: {
@@ -355,8 +323,52 @@ module.exports = function (grunt) {
           ]
         }
       }
+    },
+    //TODO Get rid of the duplication with the files arrray
+    replace: {
+      development: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/development.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/'
+        }]
+      },
+      staging: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/staging.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/'
+        }]
+      },
+      production: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/production.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.js'],
+          dest: '<%= yeoman.app %>/scripts/'
+        }]
+      }
     }
   });
+
+  grunt.loadNpmTasks('grunt-replace');
 
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
@@ -365,7 +377,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'ngconstant:development',
+      'replace:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -383,7 +395,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'ngconstant:production',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -401,5 +412,15 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('staging', [
+    'replace:staging',
+    'default'
+  ]);
+
+  grunt.registerTask('production', [
+    'replace:production',
+    'default'
   ]);
 };
