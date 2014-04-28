@@ -1,6 +1,9 @@
 class Pusher
-  initialize: () ->
-    subscribe: (channel) ->
-        bind: (event) ->
-          ''
+  constructor: ->
 
+  subscribe:  ->
+    new ChannelMock
+
+class ChannelMock
+  bind: ->
+    ''

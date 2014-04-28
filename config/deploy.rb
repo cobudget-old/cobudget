@@ -17,6 +17,8 @@ set :default_stage, "staging"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
+#TODO make this friendlier for people setting up their own server
+
 task :staging do
 	set :domain, "cobudget.enspiral.info"
 	set :user, "www"

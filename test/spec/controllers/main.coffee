@@ -3,7 +3,7 @@
 describe 'Controller: MainCtrl', () ->
 
   # load the controller's module
-  beforeEach module 'tryApp'
+  beforeEach module 'cobudget'
 
   MainCtrl = {}
   scope = {}
@@ -11,9 +11,9 @@ describe 'Controller: MainCtrl', () ->
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    MainCtrl = $controller 'MainCtrl', {
+    MainCtrl = $controller 'BucketController', {
       $scope: scope
     }
 
-  it 'should attach a list of awesomeThings to the scope', () ->
-    expect(scope.awesomeThings.length).toBe 3
+  it 'have tests', () ->
+    expect(1).toBe 1
