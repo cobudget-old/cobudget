@@ -19,8 +19,8 @@ module.exports = function (grunt) {
     },
     watch: {
       compass: {
-          files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-          tasks: ['compass:server']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        tasks: ['compass:server']
       },
       coffee: {
         files: ['<%= yeoman.app %>/scripts/**/**/*.coffee'],
@@ -335,7 +335,20 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['./config/config.js'],
+          src: ['./config/config.coffee'],
+          dest: '<%= yeoman.app %>/scripts/'
+        }]
+      },
+      test: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/test.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/config.coffee'],
           dest: '<%= yeoman.app %>/scripts/'
         }]
       },
@@ -348,7 +361,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['./config/config.js'],
+          src: ['./config/config.coffee'],
           dest: '<%= yeoman.app %>/scripts/'
         }]
       },
@@ -361,7 +374,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           flatten: true,
-          src: ['./config/config.js'],
+          src: ['./config/config.coffee'],
           dest: '<%= yeoman.app %>/scripts/'
         }]
       }
@@ -390,7 +403,9 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'replace:test',
+    'karma',
+    'replace:development'
   ]);
 
   grunt.registerTask('build', [
@@ -416,11 +431,11 @@ module.exports = function (grunt) {
 
   grunt.registerTask('staging', [
     'replace:staging',
-    'default'
+    'build'
   ]);
 
   grunt.registerTask('production', [
     'replace:production',
-    'default'
+    'build'
   ]);
 };
