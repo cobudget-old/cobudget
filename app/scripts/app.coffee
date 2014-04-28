@@ -45,13 +45,13 @@ app = angular.module('cobudget', [
   'directives.comments'
   'directives.tab_switcher'
 ])
-.config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'ENV', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, ENV)->
+.config(["$httpProvider", '$urlRouterProvider', '$sceDelegateProvider', 'RestangularProvider', 'config', ($httpProvider, $urlRouterProvider, $sceDelegateProvider, RestangularProvider, config)->
   $urlRouterProvider.otherwise('/')
-  RestangularProvider.setBaseUrl(ENV.apiEndpoint)
+  RestangularProvider.setBaseUrl(config.apiEndpoint)
   RestangularProvider.setDefaultHttpFields
     withCredentials: true
 ])
-.run(["$rootScope", "$state", "$timeout", "editableOptions", "User", "ENV", ($rootScope, $state, $timeout, editableOptions, User, ENV) ->
+.run(["$rootScope", "$state", "$timeout", "editableOptions", "User", "config", ($rootScope, $state, $timeout, editableOptions, User, config) ->
   #NON DEMO
   #if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
     #$state.go 'home'

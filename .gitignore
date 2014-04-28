@@ -6,4 +6,7 @@ deploy_package.tar.gz
 app/bower_components/
 .DS_STORE
 .idea
-app/scripts/config.js
+app/scripts/config.coffee
+config/environments/development.json
+config/environments/staging.json
+config/environments/production.json

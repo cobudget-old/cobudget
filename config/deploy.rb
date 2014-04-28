@@ -17,12 +17,15 @@ set :default_stage, "staging"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
+#TODO make this friendlier for people setting up their own server
+
 task :staging do
 	set :domain, "cobudget.enspiral.info"
 	set :user, "www"
   role :web, "#{user}@#{domain}"
   role :app, "#{user}@#{domain}"
   set :deploy_to, "/home/www/#{application}/client/"
+  set :env, "staging"
 end
 task :production do
 	set :domain, "cobudget.enspiral.com"
@@ -30,12 +33,12 @@ task :production do
   role :web, "#{user}@#{domain}"
   role :app, "#{user}@#{domain}"
   set :deploy_to, "/home/#{application}/client/"
-  set :branch, "production"
+  set :env, "production"
 end
 
 namespace :deploy do
   task :build do
-    system "grunt --force"
+    system "grunt #{env} --force"
   end
 
   task :compress do
@@ -53,7 +56,6 @@ namespace :deploy do
 
   task :uncompress_and_clean_up do
     run "cd #{release_path} && tar -zxf deploy_package.tar.gz --strip-components=1"
-    #run "mv #{release_path}/dist/* #{release_path}/"
   end
 
   task :symlinks do
