@@ -52,16 +52,11 @@ app = angular.module('cobudget', [
     withCredentials: true
 ])
 .run(["$rootScope", "$state", "$timeout", "editableOptions", "User", "config", ($rootScope, $state, $timeout, editableOptions, User, config) ->
-  #NON DEMO
-  #if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
-    #$state.go 'home'
+  if config.environment == 'staging'
+    $state.go 'demo'
+  else if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
+    $state.go 'home'
 
-  #DEMO
-  if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
-    unless $state.is('demo')
-      $state.go 'demo'
-
-  $rootScope.$debugMode = "on"
   $rootScope.admin = false
 
   $rootScope.login = ->
@@ -85,9 +80,4 @@ app = angular.module('cobudget', [
             event.currentScope.$apply ()->
               $state.go("home")
            , 100
-
-
-  Pusher.log = (message)-> 
-    if window.console && window.console.log
-      #window.console.log(message)
 ])
