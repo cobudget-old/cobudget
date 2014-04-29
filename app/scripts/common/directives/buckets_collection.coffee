@@ -101,9 +101,6 @@ angular.module("directives.buckets_collection", [])
             $rootScope.$broadcast("bucket-allocations-updated", { bucket_allocations: bucket.allocations, bucket_id: bucket.id })
             break
 
-    scope.$on 'admin-mode-toggle', (evt, data)->
-      scope.admin = data
-
     #pushers
     $rootScope.channel.bind('allocation_updated', (response) ->
       if scope.buckets?
