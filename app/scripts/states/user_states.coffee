@@ -71,9 +71,6 @@ angular.module('states.user', [])
           .then(loadBudgetsRecentlyOpened) #takes budgets array
           .then(loadBudgetsRecentlyFunded) #takes budgets array
           .then(loadBudgetsRecentlyCancelled) #takes budgets array
-          .then ()->
-            console.log $scope.budgets
-            console.log 'loaded'
 
         ]) #end controller
   ) #end state

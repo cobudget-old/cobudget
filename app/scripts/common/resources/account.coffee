@@ -11,7 +11,6 @@ angular.module('resources.accounts', ['ngResource'])
       , (error)->
         console.log error
   grantAllocationRights: (account)->
-    console.log account
     #TODO Admin stuff
     params = 
       admin_id: 1

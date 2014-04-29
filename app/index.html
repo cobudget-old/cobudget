@@ -42,7 +42,6 @@
             </li>
             <li ng-if="current_user"><a ui-sref="user-dashboard">Dashboard</a></li>
             <li ng-if="current_user.role == 'admin'"><a ui-sref="admin.dashboard">Admin Area</a></li>
-            <li ng-if="current_user.role == 'admin'"><a href="" ng-click="toggleAdmin()">Admin Mode {{admin}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <!--<li>-->

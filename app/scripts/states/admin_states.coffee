@@ -19,8 +19,6 @@ angular.module('states.admin', [])
       'page-full':
         templateUrl: '/views/admin/dashboard.html'
         controller: (['$rootScope', '$scope', '$state', 'User', 'Budget', ($rootScope, $scope, $state, User, Budget)->
-          console.log "Admin", $scope
-
           unless $rootScope.current_user.role == 'admin' or $rootScope.current_user.role == 'budget admin'
             $state.go 'user-dashboard'
           $scope.mode = ""
@@ -61,7 +59,6 @@ angular.module('states.admin', [])
 
 
           $scope.toggle = (mode)->
-            console.log mode
             if $scope.mode == mode
               $scope.mode = ""
             else $scope.mode = mode

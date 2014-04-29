@@ -31,7 +31,6 @@ angular.module('states.public', [])
                 console.log "User Auth Error", error
 
           $scope.$on 'login', ->
-            console.log "login click"
             GAPI.login().then (data)->
               loginUser(data)
             , (error)->
@@ -39,7 +38,6 @@ angular.module('states.public', [])
 
           window.setTimeout ()->
             GAPI.checkAuth().then (data)->
-              console.log data
               loginUser(data)
             , (error)->
               $rootScope.show_login = true
@@ -59,7 +57,6 @@ angular.module('states.public', [])
         </p>
         "
         controller: (['$http', '$rootScope', '$scope', '$state', 'User', 'GAPI', ($http, $rootScope, $scope, $state, User, GAPI)->
-          console.log "DEMO"
           #old stuff from when this was called test.
           #$http.post('http://127.0.0.1:9292/set', {user: "test"}, withCredentials: true).success (data)->
             #console.log data
@@ -71,7 +68,6 @@ angular.module('states.public', [])
             {email: 'Sandra_sample@demo.cobudget', name: 'Sandra Sample'}
           ]
           $scope.activateDemo = (user)->
-            console.log "hi"
             User.authUser({email: user.email, name: user.name})
               .then (success)->
                 User.setSession(success.id).then (data)->
