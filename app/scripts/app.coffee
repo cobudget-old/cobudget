@@ -72,12 +72,11 @@ app = angular.module('cobudget', [
     $rootScope.$broadcast('admin-mode-toggle', $rootScope.admin)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams)->
-    unless $state.is('demo')
-      unless toState == 'demo'
-        if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
-          event.preventDefault()
-          $timeout ()->
-            event.currentScope.$apply ()->
-              $state.go("home")
-           , 100
+    unless $state.is('demo') && toState == 'demo'
+      if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
+        event.preventDefault()
+        $timeout ()->
+          event.currentScope.$apply ()->
+            $state.go("home")
+         , 100
 ])
