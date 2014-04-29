@@ -50,7 +50,6 @@ angular.module("directives.constrained_slider", [])
       alc.amount = (amt / 100).toFixed(2)
       if alc.amount != parseFloat(0).toFixed(2)
         Allocation.createAllocation(alc).then (success)->
-          console.log "Allocation Created:", alc
           $rootScope.processing = false
           $rootScope.$broadcast('current-user-bucket-allocation-update', {bucket_id: parseFloat(scope.identifier)})
         , (error)->

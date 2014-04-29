@@ -8,8 +8,6 @@ angular.module("directives.buckets_collection", [])
     account_balance: "@accountBalance"
 
   link: (scope, element, attrs) ->
-    console.log "BUCKETS COlLECTION", scope, $state.params
-
     #utils
     getBucketUserAllocation = (bucket)->
       for a in bucket.allocations
@@ -38,7 +36,6 @@ angular.module("directives.buckets_collection", [])
         promises.push Bucket.getBucketAllocations(bucket.id)
       #this respects the order we passed in so we are safe to foreach the buckets again
       $q.all(promises).then (allocations_array)->
-        console.log "ALC ARRAY", allocations_array
         buckets_with_allocations = []
         for allocations, i in allocations_array
           buckets[i].color = ColorGenerator.makeColor(0.3,0.3,0.3,0,i * 1.25,4,177,65, i)
@@ -134,8 +131,6 @@ angular.module("directives.buckets_collection", [])
     #)
 
     $rootScope.channel.bind('bucket_updated', (response) ->
-      console.log "PUSHER::BUCKET UPDATED"
-      console.log response
       angular.forEach scope.buckets, (old_bucket, i)->
         if old_bucket.id == response.bucket.id
           response.bucket.allocations = old_bucket.allocations

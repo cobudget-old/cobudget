@@ -48,7 +48,6 @@ angular.module('controllers.buckets', [])
 
   $scope.setBucketState = (state)->
     Bucket.setBucketState($scope.b.id, state).then (success)->
-      console.log success
       flash('success', 'Bucket state updated', 2000)
       $state.go('budgets.buckets', {budget_id: $scope.b.budget_id, state: "open"})
     , (error)->

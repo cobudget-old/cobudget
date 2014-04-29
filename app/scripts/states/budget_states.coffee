@@ -45,7 +45,6 @@ angular.module('states.budget', ['controllers.buckets'])
             , (error)->
               console.log error
             .then (account)->
-              console.log "called"
               Account.transferFunds(account.id, $scope._transfer.to_account.id, $scope._transfer.amount_dollars).then (transfer)->
                 $scope._transfer = {}
                 $scope.allocated = Budget.getUserAllocated($scope.user_allocations)

@@ -5,7 +5,6 @@ angular.module("directives.expander", [])
     expander_button = angular.element(element[0].querySelector('.utl-expander-button'))
     expander_indicator = angular.element(element[0].querySelector('.utl-expander-indicator'))
     expander_button.on "click", (e)->
-      console.log "click"
       element.toggleClass("j-expanded")
       expander_indicator.toggleClass("j-active")
       #if element.hasClass("j-expanded")

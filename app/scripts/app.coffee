@@ -77,7 +77,6 @@ app = angular.module('cobudget', [
     $rootScope.$broadcast('admin-mode-toggle', $rootScope.admin)
 
   $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams)->
-    console.log $state.current.name
     unless $state.is('demo')
       unless toState == 'demo'
         if _.isEmpty(User.getCurrentUser()) or !User.getCurrentUser()?
@@ -90,5 +89,5 @@ app = angular.module('cobudget', [
 
   Pusher.log = (message)-> 
     if window.console && window.console.log
-      window.console.log(message)
+      #window.console.log(message)
 ])
