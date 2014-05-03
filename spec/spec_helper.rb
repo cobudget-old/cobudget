@@ -1,5 +1,4 @@
 require 'playhouse/theatre'
-require 'cobudget_core'
 require 'database_cleaner'
 
 root_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
