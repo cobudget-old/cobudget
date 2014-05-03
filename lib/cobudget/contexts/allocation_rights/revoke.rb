@@ -25,7 +25,7 @@ module Cobudget
         user_accounts = user.get_allocation_rights(budget)
         budget_account = budget.get_budget_account
 
-        raise NotAuthorizedToRevokeAllocationRight unless user.can_manage_budget?(budget)
+        raise NotAuthorizedToRevokeAllocationRight unless admin.can_manage_budget?(budget)
         raise NoAllocationRightsToRevoke if user_accounts.blank?
 
         user_account = user_accounts.first

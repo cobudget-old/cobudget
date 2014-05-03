@@ -1,3 +1,15 @@
+def admin_user
+  return users['admin'] if users['admin']
+
+  step('a user admin')
+  make_admin 'admin'
+  users['admin']
+end
+
+def make_admin user_name
+  users[user_name].update_attribute(:role, 'admin')
+end
+
 def users
   @users ||= {}
 end

@@ -8,6 +8,7 @@ end
 
 Given /^a user ([^ ]*) who can administer (#{CAPTURE_BUDGET})$/ do |user_name, budget|
   step("a user #{user_name}")
+  make_admin user_name
 end
 
 Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
@@ -162,7 +163,7 @@ end
 
 Given /^a user ([^ ]*) who has allocation rights of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do  |user_name, amount, budget|
   step("a user #{user_name}")
-  play.grant_allocation_rights(budget: budget, amount: amount, user: @user, admin: @user)
+  play.grant_allocation_rights(budget: budget, amount: amount, user: @user, admin: admin_user)
 end
 
 
