@@ -11,6 +11,13 @@ $logger = Logger.new(File.join(File.dirname(__FILE__), "../log/features.log"), '
 
 #these should be in a helper file
 
+#stub pusher client
+class Pusher::Client
+  def trigger(channels, event_name, data, params = {})
+    true
+  end
+end
+
 def play
   @play ||= Cobudget::CobudgetPlay.new
 end
