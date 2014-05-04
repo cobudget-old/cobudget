@@ -26,3 +26,10 @@ def roles *params
   Playhouse::Loader.require_files self, 'roles', params
 end
 
+def role role_name
+  roles role_name
+end
+
+def entity entity_name
+  entities entity_name
+end
