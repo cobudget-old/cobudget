@@ -34,6 +34,7 @@ GIT
       rake
 
 GEM
+  remote: http://rubygems.org/
   specs:
     active_model_serializers (0.8.1)
       activemodel (>= 3.0)
