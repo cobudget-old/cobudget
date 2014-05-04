@@ -1,12 +1,15 @@
 require 'playhouse/context'
-require 'cobudget/roles/budget_of_buckets'
+require 'playhouse/loader'
 
 module Cobudget
+  entity :budget
+  role :budget_of_buckets
+
   class BudgetAllocatedBalanceEnquiry < Playhouse::Context
     actor :budget, repository: Budget, role: BudgetOfBuckets
 
     def perform
-      budget.total_allocated
+      Money.new budget.total_allocated
     end
   end
 end
