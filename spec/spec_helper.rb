@@ -1,5 +1,9 @@
 require 'playhouse/theatre'
+require 'factory_girl'
 require 'database_cleaner'
+
+require 'factories/bucket'
+require 'factories/budget'
 
 root_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 theatre = Playhouse::Theatre.new(root: root_dir, environment: 'test')

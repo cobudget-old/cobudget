@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+#source "http://rubygems.org"
 
 gem 'rake'
 gem 'sqlite3'
@@ -25,6 +25,7 @@ gem 'active_model_serializers'
 gem 'shotgun'
 gem 'state_machine'
 gem 'airbrake'
+gem 'factory_girl', '4.3.0'
 
 env :development do
   gem 'capistrano', '2.15.5'
