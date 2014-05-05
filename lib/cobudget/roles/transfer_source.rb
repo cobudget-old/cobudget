@@ -5,9 +5,9 @@ require 'cobudget/roles/entry_collection'
 module Cobudget
   module TransferSource
     include Playhouse::Role
+    include Cobudget::EntryCollection
 
     actor_dependency :budget
-    actor_dependency :balance
     actor_dependency :id
 
     def can_decrease_money?(amount)

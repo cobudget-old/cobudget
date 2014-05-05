@@ -1,15 +1,12 @@
 require 'playhouse/context'
-require 'cobudget/entities/transaction'
-require 'cobudget/entities/account'
-require 'cobudget/entities/user'
-require 'cobudget/entities/budget'
-require 'cobudget/entities/bucket'
-require 'cobudget/roles/transfer_source'
-require 'cobudget/roles/transfer_destination'
-require 'cobudget/composers/money_composer'
+require 'playhouse/loader'
 require 'support/identifier'
 
 module Cobudget
+  entities :transaction, :account, :user, :budget, :bucket
+  roles :transfer_source, :transfer_destination
+  composer :money_composer
+
   class TransferMoney < Playhouse::Context
     class CannotTransferMoney < Exception; end
     class NotAuthorizedToTransferMoney < CannotTransferMoney; end
