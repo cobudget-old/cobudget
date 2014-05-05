@@ -26,10 +26,19 @@ def roles *params
   Playhouse::Loader.require_files self, 'roles', params
 end
 
+def composers *params
+  Playhouse::Loader::check_module self
+  Playhouse::Loader.require_files self, 'composers', params
+end
+
 def role role_name
   roles role_name
 end
 
 def entity entity_name
   entities entity_name
+end
+
+def composer composer_name
+  composers composer_name
 end
