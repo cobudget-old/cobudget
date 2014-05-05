@@ -25,7 +25,9 @@ gem 'active_model_serializers'
 gem 'shotgun'
 gem 'state_machine'
 gem 'airbrake'
+
 gem 'factory_girl', '4.3.0'
+gem 'faker', '1.3.0'
 
 env :development do
   gem 'capistrano', '2.15.5'

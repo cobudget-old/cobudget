@@ -1,9 +1,11 @@
 require 'playhouse/theatre'
-require 'factory_girl'
 require 'database_cleaner'
+require 'factory_girl'
 
-require 'factories/bucket'
-require 'factories/budget'
+require 'faker'
+I18n.enforce_available_locales = false #suppress faker deprecation warnings
+
+Dir["spec/factories/**/*.rb"].each { |f| require f.gsub('spec/','') }
 
 root_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 theatre = Playhouse::Theatre.new(root: root_dir, environment: 'test')
