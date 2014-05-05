@@ -43,9 +43,37 @@ module Cobudget
       end
     end
 
-    it 'returns a money object with the bucket balance' do
-      subject
-      expect(true).to eq(true)
+    context 'there is an error processing the transaction' do
+      before(:each) do
+        subject.source_account.stub(:decrease_money!).and_raise(Exception)
+      end
+      it 'rolls back the database' do
+        subject.stub(:raise)
+        expect {
+          subject.call
+        }.not_to(change {Transaction.count})
+      end
+      it 'raises a TransferFailed Exception' do
+        expect {
+          subject.call
+        }.to(raise_error(TransferMoney::TransferFailed))
+      end
+    end
+
+    context 'a successful transfer' do
+      it 'creates a transaction object' do
+        expect {
+          subject.call
+        }.to change {Transaction.count}.by(1)
+      end
+      it 'calls decrease money on source account' do
+        source_account.should_receive(:decrease_money!)
+        subject.call
+      end
+      it 'calls increase money on destination account' do
+        destination_account.should_receive(:increase_money!)
+        subject.call
+      end
     end
   end
 end
