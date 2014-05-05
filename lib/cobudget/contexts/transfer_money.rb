@@ -9,7 +9,6 @@ module Cobudget
 
   class TransferMoney < Playhouse::Context
     class CannotTransferMoney < Exception; end
-    class NotAuthorizedToTransferMoney < CannotTransferMoney; end
     class InsufficientFunds < CannotTransferMoney; end
     class InvalidTransferDestination < CannotTransferMoney; end
     class TransferFailed < Exception; end
