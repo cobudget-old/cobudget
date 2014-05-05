@@ -5,7 +5,7 @@ module Cobudget
   describe TransferMoney do
     let(:creator) {FactoryGirl.create(:user)}
     let(:source_account) {FactoryGirl.create(:account)}
-    let(:destination_account) {FactoryGirl.create(:account)}
+    let(:destination_account) {FactoryGirl.create(:account, budget: source_account.budget)}
 
     subject do
       TransferMoney.new(
@@ -31,6 +31,15 @@ module Cobudget
         expect {
           subject.call
         }.not_to raise_error
+      end
+    end
+
+    context 'source and destination accounts are in different budgets' do
+      it 'raises an invalid transfer destination error' do
+        subject.source_account.stub(:budget).and_return Budget.new
+        expect {
+          subject.call
+        }.to raise_error(TransferMoney::InvalidTransferDestination)
       end
     end
 

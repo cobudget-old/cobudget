@@ -7,9 +7,12 @@ I18n.enforce_available_locales = false #suppress faker deprecation warnings
 
 Dir["spec/factories/**/*.rb"].each { |f| require f.gsub('spec/','') }
 
+
 root_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 theatre = Playhouse::Theatre.new(root: root_dir, environment: 'test')
 theatre.open
+
+$logger = Logger.new("#{root_dir}/log/test.log", 'monthly')
 
 RSpec.configure do |config|
   config.before(:suite) do
