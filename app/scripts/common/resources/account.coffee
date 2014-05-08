@@ -13,7 +13,6 @@ angular.module('resources.accounts', ['ngResource'])
   grantAllocationRights: (account)->
     #TODO Admin stuff
     params = 
-      admin_id: 1
       amount: account._allocation_rights
     Restangular.one('users', account.user_id).get().then (success)->
       success.post("grant_allocation_rights/#{account.budget_id}", params)
