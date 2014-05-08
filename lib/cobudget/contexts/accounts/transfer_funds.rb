@@ -14,8 +14,6 @@ module Cobudget
 
       def perform
         user = User.find(current_user)
-        $logger.debug account.inspect
-        $logger.debug to_account.inspect
         transfer = TransferMoney.new(source_account: account, destination_account: to_account, amount: amount_dollars, creator: user)
         transfer.call
       end
