@@ -13,20 +13,21 @@ module Cobudget
       class BudgetNotFound < Exception; end
       class UserNotParticipating < Exception; end
 
-      actor :admin, repository: User
+      actor :current_user
 
       actor :user, repository: User, role: BudgetParticipant
       actor :budget, repository: Budget, role: BudgetOfAccounts
       actor :amount
 
       def attributes
-        actors_except :admin
+        actors_except :current_user
       end
 
       def perform
         user_accounts = user.get_allocation_rights(budget)
         budget_account = budget.get_budget_account
 
+        admin = User.find(current_user)
         raise NotAuthorizedToGrantAllocationRight unless admin.can_manage_budget?(budget)
         raise BudgetNotFound if budget_account.blank?
 
