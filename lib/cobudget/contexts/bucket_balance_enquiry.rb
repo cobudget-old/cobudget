@@ -1,9 +1,10 @@
 require 'playhouse/context'
-require 'cobudget/entities/bucket'
-require 'cobudget/roles/budget_participant'
-require 'cobudget/roles/entry_collection'
+require 'playhouse/loader'
 
 module Cobudget
+  entities :bucket
+  roles :entry_collection
+
   class BucketBalanceEnquiry < Playhouse::Context
     actor :bucket, role: EntryCollection, repository: Bucket
 

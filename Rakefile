@@ -8,6 +8,8 @@ require 'cucumber/rake/task'
 require 'bundler/setup'
 require 'active_record'
 
+require 'rspec/core/rake_task'
+
 @root = File.dirname(__FILE__)
 require 'tasks/active_record_tasks'
 
@@ -24,6 +26,10 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty -t ~@wip"
 end
 
+desc "Run specs"
+RSpec::Core::RakeTask.new do |t|
+end
+
 desc "Run tests for all parts of this repository"
-task :ci => [:features] do
+task :ci => [:spec, :features] do
 end

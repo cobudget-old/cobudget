@@ -1,18 +1,14 @@
 require 'playhouse/context'
-require 'cobudget/entities/transaction'
-require 'cobudget/entities/account'
-require 'cobudget/entities/user'
-require 'cobudget/entities/budget'
-require 'cobudget/entities/bucket'
-require 'cobudget/roles/transfer_source'
-require 'cobudget/roles/transfer_destination'
-require 'cobudget/composers/money_composer'
+require 'playhouse/loader'
 require 'support/identifier'
 
 module Cobudget
+  entities :transaction, :account, :user, :budget, :bucket
+  roles :transfer_source, :transfer_destination
+  composer :money_composer
+
   class TransferMoney < Playhouse::Context
     class CannotTransferMoney < Exception; end
-    class NotAuthorizedToTransferMoney < CannotTransferMoney; end
     class InsufficientFunds < CannotTransferMoney; end
     class InvalidTransferDestination < CannotTransferMoney; end
     class TransferFailed < Exception; end
@@ -41,7 +37,7 @@ module Cobudget
           destination_account.increase_money!(amt, transaction, Identifier.generate)
           source_account.decrease_money!(amt, transaction, Identifier.generate)
         end
-      rescue
+      rescue Exception
         raise TransferFailed, "Transfer from '#{source_account.name}' to '#{destination_account.name}' failed."
       end
     end
