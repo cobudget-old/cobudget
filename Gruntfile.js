@@ -378,6 +378,23 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.app %>/scripts/'
         }]
       }
+    },
+    protractor: {
+      options: {
+        configFile: "config/protractor.js", 
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
+        args: {
+          // Arguments passed to the command
+        }
+      },
+      e2e: {
+        options: {
+          configFile: "./config/protractor.js",
+          keepAlive: true,
+          args: {}
+        }
+      }
     }
   });
 
@@ -399,14 +416,18 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'replace:test',
-    'karma',
-    'replace:development'
+    'protractor:e2e'
   ]);
+
+//  grunt.registerTask('test', [
+//    'clean:server',
+//    'concurrent:test',
+//    'autoprefixer',
+//    'connect:test',
+//    'replace:test',
+//    'protractor:e2e',
+//    'replace:development'
+//  ]);
 
   grunt.registerTask('build', [
     'clean:dist',
