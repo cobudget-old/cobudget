@@ -10,3 +10,4 @@ app/scripts/config.coffee
 config/environments/development.json
 config/environments/staging.json
 config/environments/production.json
+phantomjsdriver.log
