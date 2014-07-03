@@ -416,6 +416,8 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'clean:server',
+    'concurrent:test',
     'protractor:e2e'
   ]);
 
