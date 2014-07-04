@@ -134,7 +134,7 @@
   get:
     route: 'users/:user_id/budget_account/:budget_id'
     command: show_accounts
-    params: '*user_id, *admin_id, *budget_id'
+    params: '*user_id, *budget_id'
     description: Returns user accounts per budget
 -
   get:
@@ -171,7 +171,7 @@
   post:
     route: 'users/:user_id/grant_allocation_rights/:budget_id'
     command: grant_allocation_rights
-    params: '*admin_id, *user_id, *budget_id, *amount'
+    params: '*user_id, *budget_id, *amount'
     description: Creates user allocatable for a budget
 -
   put:
@@ -211,7 +211,7 @@
   post:
     route: 'accounts'
     command: create_accounts
-    params: '*user_id, *admin_id, *budget_id'
+    params: '*user_id, *budget_id'
     description: Admin creates an account for a given user and a budget 
 
 #allocations

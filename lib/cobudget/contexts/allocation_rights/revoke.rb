@@ -12,16 +12,17 @@ module Cobudget
       class NotAuthorizedToRevokeAllocationRight < Exception; end
       class NoAllocationRightsToRevoke < Exception; end
 
-      actor :admin, repository: User
+      actor :current_user, repository: User
 
       actor :user, repository: User, role: BudgetParticipant
       actor :budget, repository: Budget, role: BudgetOfAccounts
 
       def attributes
-        actors_except :admin
+        actors_except :current_user
       end
 
       def perform
+        admin = User.find current_user
         user_accounts = user.get_allocation_rights(budget)
         budget_account = budget.get_budget_account
 

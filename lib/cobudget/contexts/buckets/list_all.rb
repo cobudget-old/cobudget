@@ -9,7 +9,7 @@ module Cobudget
       class NotAuthorizedToListAllBuckets < Exception; end
 
       actor :budget, repository: Budget
-      actor :admin, repository: User
+      actor :current_user, repository: User
 
       def perform
         #raise NotAuthorizedToListAllBuckets if admin.can_list_all_buckets?

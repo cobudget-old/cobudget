@@ -6,12 +6,12 @@ require 'cobudget/entities/budget'
 module Cobudget
   module Accounts
     class Create < Playhouse::Context
-      actor :admin, repository: User, optional: true
+      actor :current_user, repository: User, optional: true
       actor :user, repository: User
       actor :budget, repository: Budget
 
       def get_actors
-        actors_except(:admin)
+        actors_except(:current_user)
       end
 
       def perform

@@ -24,6 +24,7 @@ module Cobudget
       end
 
       def perform
+        admin =  User.find(current_user)
         user_accounts = user.get_allocation_rights(budget)
         budget_account = budget.get_budget_account
 
