@@ -7,11 +7,11 @@ module Cobudget
     class SetState < Playhouse::Context
       class NotAuthorizedToUpdateBucket < Exception; end
       actor :bucket, repository: Bucket, role: EntryCollection
-      actor :admin, repository: User
+      actor :current_user, repository: User
       actor :state
 
       def perform
-        raise NotAuthorizedToChange unless admin.can_manage_budget?(bucket.budget)
+        raise NotAuthorizedToChange unless current_user.can_manage_budget?(bucket.budget)
         if state == "funded"
           bucket.set_funded!
           bucket.as_json
@@ -32,7 +32,7 @@ module Cobudget
             #balance give cents, transfer expects dollars
             amount = bucket.balance_from_user(a.user, a.budget_id) / 100.00
             if amount > 0
-              transfer = TransferMoney.new(source_account: bucket, destination_account: a, amount: amount, creator: admin)
+              transfer = TransferMoney.new(source_account: bucket, destination_account: a, amount: amount, creator: current_user)
               transfer.call
             end
           end

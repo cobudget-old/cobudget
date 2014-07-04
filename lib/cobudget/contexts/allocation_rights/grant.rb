@@ -13,21 +13,21 @@ module Cobudget
       class BudgetNotFound < Exception; end
       class UserNotParticipating < Exception; end
 
-      actor :admin, repository: User
+      actor :current_user, repository: User
 
       actor :user, repository: User, role: BudgetParticipant
       actor :budget, repository: Budget, role: BudgetOfAccounts
       actor :amount
 
       def attributes
-        actors_except :admin
+        actors_except :current_user
       end
 
       def perform
         user_accounts = user.get_allocation_rights(budget)
         budget_account = budget.get_budget_account
 
-        raise NotAuthorizedToGrantAllocationRight unless admin.can_manage_budget?(budget)
+        raise NotAuthorizedToGrantAllocationRight unless current_user.can_manage_budget?(budget)
         raise BudgetNotFound if budget_account.blank?
 
         if user_accounts.blank?
@@ -38,7 +38,7 @@ module Cobudget
 
         EntryCollection.cast_actor(budget_account)
 
-        transfer = TransferMoney.new(source_account: budget_account, destination_account: user_account, amount: amount, creator: admin)
+        transfer = TransferMoney.new(source_account: budget_account, destination_account: user_account, amount: amount, creator: current_user)
         transfer.call
         account = transfer.destination_account
         account.as_json

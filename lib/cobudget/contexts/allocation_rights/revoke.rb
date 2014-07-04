@@ -12,26 +12,26 @@ module Cobudget
       class NotAuthorizedToRevokeAllocationRight < Exception; end
       class NoAllocationRightsToRevoke < Exception; end
 
-      actor :admin, repository: User
+      actor :current_user, repository: User
 
       actor :user, repository: User, role: BudgetParticipant
       actor :budget, repository: Budget, role: BudgetOfAccounts
 
       def attributes
-        actors_except :admin
+        actors_except :current_user
       end
 
       def perform
         user_accounts = user.get_allocation_rights(budget)
         budget_account = budget.get_budget_account
 
-        raise NotAuthorizedToRevokeAllocationRight unless admin.can_manage_budget?(budget)
+        raise NotAuthorizedToRevokeAllocationRight unless current_user.can_manage_budget?(budget)
         raise NoAllocationRightsToRevoke if user_accounts.blank?
 
         user_account = user_accounts.first
         balance = EntryCollection.cast_actor(user_account).balance
 
-        transfer = TransferMoney.new(source_account: user_account, destination_account: budget_account, amount: (balance/100).to_f, creator: admin)
+        transfer = TransferMoney.new(source_account: user_account, destination_account: budget_account, amount: (balance/100).to_f, creator: current_user)
         transfer.call
 
         user_account.delete

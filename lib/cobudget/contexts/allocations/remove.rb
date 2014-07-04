@@ -8,7 +8,7 @@ module Cobudget
     class Remove < Playhouse::Context
       class NotAuthorizedToRemoveAllocation < Exception; end
 
-      actor :admin, repository: User
+      actor :current_user, repository: User
 
       actor :user, repository: User, role: BudgetParticipant
       actor :bucket, repository: Bucket
@@ -18,7 +18,7 @@ module Cobudget
         raise NotAuthorizedToAllocate unless user.can_allocate?(bucket)
 
         user_account = user.get_allocation_rights(bucket.budget).first
-        transfer = TransferMoney.new(source_account: bucket, destination_account: user_account, amount: amount, creator: admin)
+        transfer = TransferMoney.new(source_account: bucket, destination_account: user_account, amount: amount, creator: current_user)
         transfer.call
       end
     end
