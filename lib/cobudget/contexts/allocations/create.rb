@@ -21,10 +21,11 @@ module Cobudget
       end
 
       def perform
+        creator = User.find(current_user)
         raise NotAuthorizedToAllocate unless user.can_allocate?(bucket)
 
         user_account = user.get_allocation_rights(bucket.budget).first
-        transfer = TransferMoney.new(source_account: user_account, destination_account: bucket, amount: amount, creator: current_user)
+        transfer = TransferMoney.new(source_account: user_account, destination_account: bucket, amount: amount, creator: creator)
         Pusher.trigger('cobudget', 'allocation_updated', {user_id: user.id, bucket_id: bucket.id, amount: amount})
         transfer.call
       end

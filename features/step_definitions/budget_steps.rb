@@ -19,13 +19,13 @@ end
 When /^([^ ]+) creates a new user ([^ ]+)$/ do |creator_name, target_name|
   creator = users[creator_name]
 
-  users[target_name] = play.create_users(current_user: creator, name: target_name, email: "#{target_name}@example.com")
+  users[target_name] = play.create_users(current_user: creator.id, name: target_name, email: "#{target_name}@example.com")
 end
 
 When /^([^ ]+) creates an account for ([^ ]+) in (#{CAPTURE_BUDGET})$/ do |admin_name, target_name, budget|
   user = users[target_name]
   admin = users[admin_name]
-  play.create_accounts(user: user, current_user: admin, budget: budget)
+  play.create_accounts(user: user, current_user: admin.id, budget: budget)
 end
 
 When /^([^ ]+) views the available buckets in (#{CAPTURE_BUDGET})$/ do |user_name, budget|
@@ -80,21 +80,21 @@ When /^([^ ]*) grants ([^ ]*) allocation rights of (#{CAPTURE_MONEY}) for (#{CAP
   user = users[user_name]
   admin = users[admin_name]
 
-  allocation_rights[user_name] = play.grant_allocation_rights(current_user: admin, user: user, amount: amount, budget: budget)
+  allocation_rights[user_name] = play.grant_allocation_rights(current_user: admin.id, user: user, amount: amount, budget: budget)
 end
 
 When /^([^ ]*) modifies ([^ ]*)'s allocation rights to (#{CAPTURE_MONEY}) for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, amount, budget|
   user = users[user_name]
   admin = users[admin_name]
 
-  allocation_rights[user_name] = play.grant_allocation_rights(current_user: admin, user: user, amount: amount, budget: budget)
+  allocation_rights[user_name] = play.grant_allocation_rights(current_user: admin.id, user: user, amount: amount, budget: budget)
 end
 
 When /^([^ ]*) revokes ([^ ]*)'s allocation rights for (#{CAPTURE_BUDGET})$/ do |admin_name, user_name, budget|
   user = users[user_name]
   admin = users[admin_name]
 
-  play.revoke_allocation_rights(current_user: admin, user: user, budget: budget)
+  play.revoke_allocation_rights(current_user: admin.id, user: user, budget: budget)
 end
 
 Then /^([^ ]+) should exist as a user$/ do |user_name|
@@ -163,7 +163,7 @@ end
 
 Given /^a user ([^ ]*) who has allocation rights of (#{CAPTURE_MONEY}) in (#{CAPTURE_BUDGET})$/ do  |user_name, amount, budget|
   step("a user #{user_name}")
-  play.grant_allocation_rights(budget: budget, amount: amount, user: @user, current_user: admin_user)
+  play.grant_allocation_rights(budget: budget, amount: amount, user: @user, current_user: admin_user.id)
 end
 
 
