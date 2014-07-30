@@ -24,3 +24,10 @@ grunt server
 compass
 capistrano -v2.15.5
 railsless-deploy
+
+*Testing*
+
+```
+webdriver-manager start
+grunt test
+```
