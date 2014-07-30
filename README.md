@@ -1,8 +1,8 @@
-##Cobudget front end
+##Cobudget user interface
 
-[We are following this angular style guide](https://github.com/toddmotto/angularjs-styleguide)
+[Trello Board](https://trello.com/b/LsbPRkRl/cobudget-dev) | [Style Guide](https://github.com/toddmotto/angularjs-styleguide)
 
-Testing stack is Chai, Mocha, Sinon and integration tests using protractor are in `features`
+Testing stack is chai, mocha, sinon and integration tests using protractor are in `features`
 
 The initial angular prototype is in `prototype` we will be pulling out and reusing as much of that code into master as we go.
 
