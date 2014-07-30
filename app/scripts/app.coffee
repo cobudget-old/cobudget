@@ -1,0 +1,2 @@
+angular
+  .module('cobudget', ['ngRoute'])
