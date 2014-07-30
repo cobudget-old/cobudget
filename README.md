@@ -31,5 +31,5 @@ railsless-deploy
 
 ```
 webdriver-manager start
-grunt test
+npm test (grunt test isn't playing friendly with protractor)
 ```

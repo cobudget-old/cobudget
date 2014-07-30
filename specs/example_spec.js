@@ -1,8 +1,12 @@
+chai= require('chai')
+chaiAsPromised=require('chai-as-promised')
+chai.use(chaiAsPromised)
+expect=chai.expect
+
 describe('home', function() {
   it('works', function() {
-    // Load the AngularJS homepage.
+    // Load the homepage
     browser.get('/')
-    greeting = element(by.model('greeting'));
-    expect(greeting.getText()).toEqual('Hello');
+    expect(browser.getTitle()).to.eventually.equal('Cobudget');
   });
 });

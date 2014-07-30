@@ -7,6 +7,14 @@ exports.config = {
     '../specs/*_spec.js'
   ],
 
+  framework: 'mocha',
+
+  // ----- Options to be passed to mocha -----
+  //
+  // See the full list at http://visionmedia.github.io/mocha/
+  mochaOpts: {
+  },
+
   capabilities: {
     'browserName': 'phantomjs',
     'chromeOptions': {'args': ['--disable-extensions']}
@@ -14,13 +22,5 @@ exports.config = {
 
   // A base URL for your application under test. Calls to protractor.get()
   // with relative paths will be prepended with this.
-  baseUrl: 'http://localhost:9000',
-
-  jasmineNodeOpts: {
-    onComplete: null,
-    isVerbose: false,
-    showColors: true,
-    includeStackTrace: true,
-    defaultTimeoutInterval: 10000
-  }
+  baseUrl: 'http://localhost:9000'
 };
