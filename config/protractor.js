@@ -4,7 +4,7 @@ exports.config = {
 
   // Spec patterns are relative to the location of this config.
   specs: [
-    '../specs/*_spec.js'
+    '../features/*_spec.coffee'
   ],
 
   framework: 'mocha',
@@ -13,6 +13,7 @@ exports.config = {
   //
   // See the full list at http://visionmedia.github.io/mocha/
   mochaOpts: {
+    reporter: 'dot'
   },
 
   capabilities: {

@@ -2,6 +2,10 @@
 
 [We are following this angular style guide](https://github.com/toddmotto/angularjs-styleguide)
 
+Testing stack is Chai, Mocha, Sinon
+
+Integration tests using protractor are in features
+
 #### Configuration
 
 We are using env-config and grunt-replace to manage configuration - checkout [this article](http://newtriks.com/2013/11/29/environment-specific-configuration-in-angularjs-using-grunt/) for an overview
