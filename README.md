@@ -1,5 +1,7 @@
 ##Cobudget front end
 
+[We are following this angular style guide](https://github.com/toddmotto/angularjs-styleguide)
+
 #### Configuration
 
 We are using env-config and grunt-replace to manage configuration - checkout [this article](http://newtriks.com/2013/11/29/environment-specific-configuration-in-angularjs-using-grunt/) for an overview
@@ -14,7 +16,7 @@ Install node and npm: https://github.com/joyent/node/wiki/Installation
 Install yeoman: yeoman.io
 
 sudo npm install
-bower install
+bower install (select angular version 1.2.21)
 
 *Start the server:*
 
