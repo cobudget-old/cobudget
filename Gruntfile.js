@@ -7,6 +7,14 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+var replace_files = [{
+  expand: true,
+  flatten: true,
+  src: ['./config/config.coffee'],
+  dest: '<%= yeoman.app %>/scripts/'
+}]
+
+
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
@@ -332,12 +340,7 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/development.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files
       },
       test: {
         options: {
@@ -345,12 +348,15 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/test.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files 
+      },
+      travis: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/travis.json')
+          }]
+        },
+        files: replace_files 
       },
       staging: {
         options: {
@@ -358,12 +364,7 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/staging.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files
       },
       production: {
         options: {
@@ -371,18 +372,13 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/production.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files
       }
     },
     protractor: {
       options: {
         configFile: "config/protractor.js", 
-        keepAlive: true, // If false, the grunt process stops when the test fails.
+        keepAlive: false, // If false, the grunt process stops when the test fails.
         noColor: false, // If true, protractor will not use colors in its output.
         args: {
           // Arguments passed to the command
@@ -394,6 +390,15 @@ module.exports = function (grunt) {
           keepAlive: true,
           args: {}
         }
+      },
+      saucelabs: {
+          options: {
+              configFile: "./config/protractor-saucelabs.js",
+              args: {
+                  sauceUser: process.env.SAUCE_USERNAME,
+                  sauceKey: process.env.SAUCE_ACCESS_KEY
+              }
+          }
       }
     }
   });
@@ -415,10 +420,15 @@ module.exports = function (grunt) {
     ]);
   });
 
-  //not playing friendly with protractor - 0ms timeout
-  //grunt.registerTask('test', [
-  //  'protractor:e2e'
-  //]);
+  grunt.registerTask('sauce', [
+    'connect:test',
+    'protractor:saucelabs'
+  ]);
+
+  grunt.registerTask('test', [
+    'connect:test',
+    'protractor:e2e'
+  ]);
 
 //  grunt.registerTask('test', [
 //    'clean:server',
