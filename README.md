@@ -2,9 +2,11 @@
 
 [We are following this angular style guide](https://github.com/toddmotto/angularjs-styleguide)
 
-Testing stack is Chai, Mocha, Sinon
+Testing stack is Chai, Mocha, Sinon and integration tests using protractor are in `features`
 
-Integration tests using protractor are in features
+The initial angular prototype is in `prototype` we will be pulling out and reusing as much of that code into master as we go.
+
+###Don't push to master - feature branches and pull requests please.
 
 #### Configuration
 
@@ -17,23 +19,28 @@ Likewise you will need to setup production.json and staging.json for deploying t
 *To run locally:*
 
 Install node and npm: https://github.com/joyent/node/wiki/Installation 
-Install yeoman: yeoman.io
 
+```
 sudo npm install
 bower install (select angular version 1.2.21)
+```
 
 *Start the server:*
 
+```
 grunt server
-
-*install Gems*
-compass
-capistrano -v2.15.5
-railsless-deploy
+```
 
 *Testing*
 
 ```
 webdriver-manager start
 npm test (grunt test isn't playing friendly with protractor)
+```
+
+*Deploying*
+
+```
+bundle
+cap production deploy
 ```
