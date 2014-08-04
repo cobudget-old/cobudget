@@ -1,0 +1,172 @@
+@import utilities
+
+//RIGHT PANEL
+.right.panel
+  &.container
+
+    .cover_photo
+      width: 100%
+      min-height: 155px
+      padding: 0 0 0 0
+      background-image: url('https://loomio-uploads.s3.amazonaws.com/groups/cover_photos/000/000/002/desktop/croppedenspiralites.jpg?1406163668')
+      z-index: 2
+
+
+    .cover_photo_gradient
+      width: 100%
+      min-height: 155px
+      padding: 0 0 0 0
+      position: absolute
+      z-index: 3
+      top: 0px
+
+      background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%)
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)))
+      background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%)
+      background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%)
+      background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%)
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%)
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 )
+
+    .content
+      padding-left: 40px
+      padding-right: 40px
+      padding-bottom: 15px
+      position: absolute
+      top: 40px
+      max-width: 100%
+      z-index: 3
+
+      .banner
+        min-height: 150px
+
+        .banner_image
+          width: 150px
+          height: 150px
+          float: left
+          background-image: url('https://loomio-uploads.s3.amazonaws.com/groups/logos/000/000/002/medium/enspirallogo120.jpg?1406163329')
+          background-image: no-repeat
+          -webkit-background-size: cover
+          -moz-background-size: cover
+          -o-background-size: cover
+          background-size: cover
+
+        
+
+        /*This is hacky, but workarounds I found were more hacky... Should probly just be replaced with $banner-image-size + $banner-content-gutter */
+        h1
+          margin-left: 180px
+          margin-bottom: 10px
+          color: white
+          font-weight: 300
+
+        h2
+          margin-left: 180px
+          font-size: 12px
+          color: white
+          font-weight: 300
+
+        .buttons.container
+          padding-left: 180px
+          max-width: 100%
+
+          .active.button
+            color: #49b0b7
+
+          .button
+            float: left
+            margin-left: 5px
+            margin-right: 10px
+            margin-top: 25px
+            // width: 180px
+            color: #9d9e9f
+
+            i
+              width: 35px
+              height: 35px
+              float: left
+
+            p
+              font-size: 10px   
+
+
+
+    .overview.container
+      padding-left: 40px
+      padding-right: 40px
+      margin-top: 25px
+      height: 100%
+      min-height: 800px
+      background: white
+      border-style: solid
+      border-color: #eeeeed
+      border-width: 2px
+
+      .title
+        width: 100%
+        height: 70px
+        color: #49b0b7
+
+        i
+          float: left
+          padding-top: 30px
+          padding-right: 10px
+
+        h1
+          font-weight: 300
+          font-size: 25px
+          line-height: 50px
+          margin-bottom: 0px
+
+
+      #budget_overview_title_icon
+        // width: 50px
+        height: 50px
+        float: left    
+
+      #title_underline
+        width: 100%
+
+      .totals.triplet
+
+        .totals.section
+          float: left
+          // width: 240px
+
+          span
+            float: left
+          text-align: center
+
+          .section-detail
+
+            h5
+              margin-bottom: 0px
+              font-size: 70%
+
+            span
+              font-size: 24px
+              font-weight: 300
+              color: #49b0b7 
+
+        vr
+          height: 30px
+
+      .budget-progress.triplet
+
+        .budget-progress.section
+          float: left
+          // width: 240px
+          text-align: center
+
+          p
+            font-size: 24px
+            font-weight: 300
+            color: #49b0b7 
+            margin-top: 0px
+
+          h3
+            margin-bottom: 0px
+            font-size: 70%
+
+
+

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>cobudget-static</title>
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/bucket_list.css">
+    <link rel="stylesheet" type="text/css" href="css/right_panel.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+  </head>
+
+  <body>
+    <div class="nav bar container">
+    </div>
+
+
+    <section class="buckets panel container">
+      <header class="allocate">
+        You have 7 days to allocate $0
+      </header>
+
+      <div class="bucket">
+        <div class="allocation_amount allocated">
+          <label>Allocated</label>
+          <input type="number" value="200">
+        </div>
+        <h2>Community Garden Project</h2>
+      </div>
+      <div class="bucket">
+        <div class="allocation_amount allocated">
+          <label>Allocated</label>
+          <input type="number" value="200">
+        </div>
+        <h2>Website for Awesome App with a really long title</h2>
+      </div>
+      <div class="bucket selected">
+        <div class="allocation_amount allocate">
+          <label>Allocate</label>
+          <input type="number" value="">
+        </div>
+        <h2>Upgrading to LED bulbs</h2>
+      </div>
+      <div class="bucket">
+        <div class="allocation_amount allocate">
+          <label>Allocate</label>
+          <input type="number" value="">
+        </div>
+        <h2>Support Josh's move</h2>
+      </div>
+      <div class="bucket">
+        <div class="allocation_amount allocated">
+          <label>Allocated</label>
+          <input type="number" value="200">
+        </div>
+        <h2>Fix potholes on Vic St.</h2>
+      </div>
+    </section>
+    
+
+    <div class="right panel container">
+      
+      <img class="cover_photo" src="" />
+
+      <div class="content">
+
+          <div class="banner"> 
+              <img class="banner_image" src="" />
+              
+              <h1>Enspiral Services</h1>
+              <h2>Enspiral's monthly collective budgeting round. Collaborative consumption engage insurmountable challenges peace sustainable future solve problems #notacult.</h2>
+
+              <div class="buttons container"> 
+                <div class="button active">
+                  <span class="fa fa-bar-chart-o fa-2x"></span>
+                  <p>BUDGET OVERVIEW</p>
+                </div>
+
+                <div class="button">
+                  <span class="fa fa-users fa-2x"></span>
+                  <p>CONTRIBUTOR OVERVIEW</p>
+                </div>
+
+                <div class="button">
+                  <span class="fa fa-user fa-2x"></span>
+                  <p>MY ALLOCATION OVERVIEW</p>
+                </div>
+            </div>
+
+          </div> <!-- END BANNER -->
+
+          <div class="overview container">
+            
+            <div class="title">
+              <span class="fa fa-bar-chart-o fa-2x"></span>
+              <h1>BUDGET OVERVIEW</h1>
+            <div>
+
+            <hr / id="title_underline">
+
+            <div class="totals triplet">
+              <div class="totals section people">
+                <span class="fa fa-users fa-3x"></span>
+                <div class="section-detail">
+                  <h5>CONTRIBUTORS</h5>
+                  <span> 25 People </span>
+                </div>
+              </div>
+
+              <div class="vertical_line"></div>
+
+              <div class="totals section amount">
+                <span class="fa fa-database fa-3x"></span>
+                <div class="section-detail">
+                  <h5>TOTAL AMOUNT</h5>
+                  <span> $20,000 </span>
+                </div>
+              </div>
+
+              <div class="vertical_line"></div>
+
+              <div class="totals section buckets">
+                <span class="fa fa-bitbucket fa-3x"></span>
+                <div class="section-detail">
+                  <h5>NUMBER OF BUCKETS</h5>
+                  <span> 12 buckets </span>
+                </div>
+              </div>
+            </div>
+
+            <hr / id="title_underline">
+
+            <div class="progress triplet">
+              <div class="progress section allocators">
+                <p>60%</p>
+                <span class="fa fa-users fa-5x"></span>
+                <h3>ALLOCATORS</h3>
+                <p>15 people</p>
+              </div>
+
+              <div class="progress section allocated">
+                <p>38%</p>
+                <span class="fa fa-database fa-5x"></span>
+                <h3>ALLOCATED</h3>
+                <p>$7600</p>
+              </div>
+
+              <div class="progress section beyond_halfway">
+                <p>40%</p>
+                <span class="fa fa-bitbucket fa-5x"></span>
+                <h3>BEYOND HALFWAY</h3>
+                <p>5 buckets</p>
+              </div>
+            </div>
+
+            <hr / id="title_underline">
+
+            <div class="notes">
+              <p>Bucket with the most allocators is Community Garden Project.</p>
+
+              <p>Bucket that is almost funded is Support Josh's move.</p>
+
+              <p>80% of contributions have come from 4 allocators.</p>
+            </div>
+
+          </div> <!-- END OVERVIEW CONTAINER -->
+      </div> <!-- END CONTENT SECTION -->
+    </div> <!-- END RIGHT PANEL CONTAINER -->
+  </body>
+
+</html>
