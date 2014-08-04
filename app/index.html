@@ -126,89 +126,9 @@
 
           </div> <!-- END BANNER -->
 
-          <div class="col-lg-12 overview container">
-
-            <div class="row">
-              <div class="col-lg-12 title">
-                <i class="fa fa-bar-chart-o fa-2x"></i>
-                <h1 class="col-lg-11">BUDGET OVERVIEW</h1>
-              </div>
-            <div>
-
-            <hr / id="title_underline">
-
-            <div class="row totals triplet">
-              <div class="col-lg-4 totals section people">
-                <span class="fa fa-users fa-3x"></span>
-                <div class="section-detail">
-                  <h5>CONTRIBUTORS</h5>
-                  <span> 25 People </span>
-                </div>
-              </div>
-
-              <div class="vertical_line"></div>
-
-              <div class="col-lg-4 totals section amount">
-                <span class="fa fa-database fa-3x"></span>
-                <div class="section-detail">
-                  <h5>TOTAL AMOUNT</h5>
-                  <span> $20,000 </span>
-                </div>
-              </div>
-
-              <div class="vertical_line"></div>
-
-              <div class="col-lg-4 totals section buckets">
-                <span class="fa fa-bitbucket fa-3x"></span>
-                <div class="section-detail">
-                  <h5>NUMBER OF BUCKETS</h5>
-                  <span> 12 buckets </span>
-                </div>
-              </div>
-            </div>
-
-            <hr / id="title_underline">
-
-            <div class="row budget-progress triplet">
-              <div class="col-lg-4 budget-progress section allocators">
-                <p>60%</p>
-                <span class="fa fa-users fa-2x"></span>
-                <h3>ALLOCATORS</h3>
-                <p>15 people</p>
-              </div>
-
-              <div class="col-lg-4 budget-progress section allocated">
-                <p>38%</p>
-                <span class="fa fa-database fa-2x"></span>
-                <h3>ALLOCATED</h3>
-                <p>$7600</p>
-              </div>
-
-              <div class=" col-lg-4 budget-progress section beyond_halfway">
-                <p>40%</p>
-                <span class="fa fa-bitbucket fa-2x"></span>
-                <h3>BEYOND HALFWAY</h3>
-                <p>5 buckets</p>
-              </div>
-            </div>
-
-            <hr / id="title_underline">
-
-            <div class="notes">
-              <p>Bucket with the most allocators is Community Garden Project.</p>
-
-              <p>Bucket that is almost funded is Support Josh's move.</p>
-
-              <p>80% of contributions have come from 4 allocators.</p>
-            </div>
-
-          </div> <!-- END OVERVIEW CONTAINER -->
-
+          <ng-view />
         </div> <!-- END CONTENT -->
-
-
       </div> <!-- END RIGHT PANEL CONTAINER -->
-
     </div> <!-- END MAIN ROW  -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -237,6 +157,8 @@
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/controllers/budget_controller.js"></script>
+        <script src="scripts/config/routes.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/config.js" ></script>
         <!-- endbuild -->
