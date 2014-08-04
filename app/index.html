@@ -13,12 +13,20 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="static-css/layout.css">
+    <link rel="stylesheet" type="text/css" href="static-css/bucket_list.css">
+    <link rel="stylesheet" type="text/css" href="static-css/right_panel.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
     <!--<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
   <body ng-app="cobudget">
+
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -29,6 +37,14 @@
     <![endif]-->
 
     <!-- <>Add your site or application content here -->
+
+    <div class="row">
+      <div class="col-md-12 nav bar container">
+        NAV BAR COMPONENT
+      </div>
+    </div>
+
+    <!-- old navbar code from allan -->
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
         <nav id="main-nav" class="row" role="navigation" ng-cloak>
@@ -39,13 +55,81 @@
         </nav>
       </div>
     </header>
+    <!-- end allan's navbar -->
 
     <flash:messages class="slide-down" ng-show="messages"></flash:messages>
 
-    <h1>Cobudget</h1>
+    <div class="row">
+      <div class="col-md-4 buckets panel container">
 
-    <div class="container">
-    </div>
+        <header class="allocate">
+          You have 7 days to allocate $300
+
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span class="sr-only">60% Complete</span>
+            </div>
+          </div>
+
+        </header>
+
+        <div class="bucket">
+          <div class="allocation_amount allocated">
+            <label>Allocated</label>
+            <input type="number" value="200">
+          </div>
+
+          <h2>Community Garden Project</h2>
+
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span class="sr-only">60% Complete</span>
+            </div>
+          </div>
+
+        </div>
+      </div> <!-- END BUCKETS PANEL CONTAINER  -->
+
+
+      <div class="col-md-8 right panel container">
+
+        <img class="cover_photo" src="" />
+        <div class="cover_photo_gradient"></div>
+
+        <div class="content">
+
+          <div class="banner">
+
+              <img class="banner_image" src="" />
+
+              <h1>Enspiral Services</h1>
+              <h2>Enspiral's monthly collective budgeting round. Collaborative consumption engage insurmountable challenges peace sustainable future solve problems #notacult.</h2>
+
+              <div class="row">
+                <div class= "buttons container">
+                  <div class="col-md-3 active button">
+                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                    <p>BUDGET </p>
+                  </div>
+
+                  <div class="col-md-3 button">
+                    <i class="fa fa-users fa-2x"></i>
+                    <p>CONTRIBUTORS </p>
+                  </div>
+
+                  <div class="col-md-3 button">
+                    <i class="fa fa-user fa-2x"></i>
+                    <p>MY ALLOCATION </p>
+                  </div>
+                </div>
+            </div>
+
+          </div> <!-- END BANNER -->
+
+          <ng-view />
+        </div> <!-- END CONTENT -->
+      </div> <!-- END RIGHT PANEL CONTAINER -->
+    </div> <!-- END MAIN ROW  -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <!--
@@ -73,6 +157,8 @@
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/controllers/budget_controller.js"></script>
+        <script src="scripts/config/routes.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/config.js" ></script>
         <!-- endbuild -->

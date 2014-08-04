@@ -1,0 +1,121 @@
+.right.panel.container .cover_photo {
+  width: 100%;
+  min-height: 155px;
+  padding: 0 0 0 0;
+  background-image: url("https://loomio-uploads.s3.amazonaws.com/groups/cover_photos/000/000/002/desktop/croppedenspiralites.jpg?1406163668");
+  z-index: 2; }
+.right.panel.container .cover_photo_gradient {
+  width: 100%;
+  min-height: 155px;
+  padding: 0 0 0 0;
+  position: absolute;
+  z-index: 3;
+  top: 0px;
+  background: -moz-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(100%, rgba(0, 0, 0, 0.65)));
+  background: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+  background: -o-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+  background: -ms-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.65) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); }
+.right.panel.container .content {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 15px;
+  position: absolute;
+  top: 40px;
+  max-width: 100%;
+  z-index: 3; }
+  .right.panel.container .content .banner {
+    min-height: 150px;
+    /*This is hacky, but workarounds I found were more hacky... Should probly just be replaced with $banner-image-size + $banner-content-gutter */ }
+    .right.panel.container .content .banner .banner_image {
+      width: 150px;
+      height: 150px;
+      float: left;
+      background-image: url("https://loomio-uploads.s3.amazonaws.com/groups/logos/000/000/002/medium/enspirallogo120.jpg?1406163329");
+      background-image: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; }
+    .right.panel.container .content .banner h1 {
+      margin-left: 180px;
+      margin-bottom: 10px;
+      color: white;
+      font-weight: 300; }
+    .right.panel.container .content .banner h2 {
+      margin-left: 180px;
+      font-size: 12px;
+      color: white;
+      font-weight: 300; }
+    .right.panel.container .content .banner .buttons.container {
+      padding-left: 180px;
+      max-width: 100%; }
+      .right.panel.container .content .banner .buttons.container .active.button {
+        color: #49b0b7; }
+      .right.panel.container .content .banner .buttons.container .button {
+        float: left;
+        margin-left: 5px;
+        margin-right: 10px;
+        margin-top: 25px;
+        color: #9d9e9f; }
+        .right.panel.container .content .banner .buttons.container .button i {
+          width: 35px;
+          height: 35px;
+          float: left; }
+        .right.panel.container .content .banner .buttons.container .button p {
+          font-size: 10px; }
+.right.panel.container .overview.container {
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 25px;
+  height: 100%;
+  min-height: 800px;
+  background: white;
+  border-style: solid;
+  border-color: #eeeeed;
+  border-width: 2px; }
+  .right.panel.container .overview.container .title {
+    width: 100%;
+    height: 70px;
+    color: #49b0b7; }
+    .right.panel.container .overview.container .title i {
+      float: left;
+      padding-top: 30px;
+      padding-right: 10px; }
+    .right.panel.container .overview.container .title h1 {
+      font-weight: 300;
+      font-size: 25px;
+      line-height: 50px;
+      margin-bottom: 0px; }
+  .right.panel.container .overview.container #budget_overview_title_icon {
+    height: 50px;
+    float: left; }
+  .right.panel.container .overview.container #title_underline {
+    width: 100%; }
+  .right.panel.container .overview.container .totals.triplet .totals.section {
+    float: left;
+    text-align: center; }
+    .right.panel.container .overview.container .totals.triplet .totals.section span {
+      float: left; }
+    .right.panel.container .overview.container .totals.triplet .totals.section .section-detail h5 {
+      margin-bottom: 0px;
+      font-size: 70%; }
+    .right.panel.container .overview.container .totals.triplet .totals.section .section-detail span {
+      font-size: 24px;
+      font-weight: 300;
+      color: #49b0b7; }
+  .right.panel.container .overview.container .totals.triplet vr {
+    height: 30px; }
+  .right.panel.container .overview.container .budget-progress.triplet .budget-progress.section {
+    float: left;
+    text-align: center; }
+    .right.panel.container .overview.container .budget-progress.triplet .budget-progress.section p {
+      font-size: 24px;
+      font-weight: 300;
+      color: #49b0b7;
+      margin-top: 0px; }
+    .right.panel.container .overview.container .budget-progress.triplet .budget-progress.section h3 {
+      margin-bottom: 0px;
+      font-size: 70%; }

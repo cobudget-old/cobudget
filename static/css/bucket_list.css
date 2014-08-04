@@ -1,0 +1,63 @@
+.buckets.panel {
+  background-color: #334248;
+  color: #a0c8cc;
+  font-family: "Open Sans"; }
+  .buckets.panel header {
+    padding: 30px 30px;
+    min-height: 155px;
+    color: white;
+    font-size: 23px;
+    font-weight: 300;
+    text-align: center; }
+    .buckets.panel header.allocated, .buckets.panel header.allocated input {
+      background-color: #84c442; }
+    .buckets.panel header.allocate, .buckets.panel header.allocate input {
+      background-color: #f37658; }
+    .buckets.panel header .progress {
+      margin-top: 50px;
+      margin-bottom: 0px;
+      background-color: #e35e3b; }
+    .buckets.panel header .progress-bar {
+      background-color: #f0927b; }
+  .buckets.panel .bucket {
+    height: 100px;
+    padding: 16px 30px 20px 30px;
+    border-bottom: 1px solid #264149;
+    border-top: 1px solid #2c434c;
+    min-height: 4em;
+    font-weight: 400; }
+    .buckets.panel .bucket .progress {
+      margin-top: 12px;
+      margin-bottom: 0px;
+      background-color: #243439; }
+    .buckets.panel .bucket .progress-bar {
+      background-color: #46afb6; }
+    .buckets.panel .bucket.selected {
+      background-color: #14303a; }
+    .buckets.panel .bucket h2 {
+      margin: 0;
+      font-size: 90%;
+      font-weight: normal;
+      line-height: 26px; }
+    .buckets.panel .bucket .allocation_amount {
+      float: right;
+      height: 26px; }
+      .buckets.panel .bucket .allocation_amount.allocated, .buckets.panel .bucket .allocation_amount.allocated input {
+        color: #84c442; }
+      .buckets.panel .bucket .allocation_amount.allocate, .buckets.panel .bucket .allocation_amount.allocate input {
+        color: #f37658; }
+      .buckets.panel .bucket .allocation_amount label {
+        text-transform: uppercase;
+        font-size: 65%;
+        margin-right: 0.4em;
+        margin-left: 0.5em; }
+    .buckets.panel .bucket input[type="number"] {
+      background-color: #243439;
+      border-width: 0;
+      height: 24px;
+      text-align: right;
+      font-size: 100%;
+      width: 5em;
+      -webkit-border-radius: 0.3em;
+      -moz-border-radius: 0.3em;
+      border-radius: 0.3em; }

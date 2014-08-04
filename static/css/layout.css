@@ -1,0 +1,28 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 1000px;
+  margin: 0 0 0 0;
+  font-family: "Open Sans", sans-serif; }
+  html *, body * {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important; }
+  @media only screen and (min-width: 1224px) {
+    html .nav.bar.container, body .nav.bar.container {
+      width: 100%;
+      height: 45px;
+      background: white;
+      position: fixed;
+      z-index: 1; }
+    html .buckets.panel, body .buckets.panel {
+      margin-top: 45px;
+      overflow: scroll;
+      overflow: hidden; }
+      html .buckets.panel.container, body .buckets.panel.container {
+        float: left; }
+    html .right.panel.container, body .right.panel.container {
+      height: 100%;
+      min-height: 800px;
+      margin-top: 45px;
+      background: #f6f8f6; } }
