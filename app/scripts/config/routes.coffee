@@ -1,4 +1,3 @@
-window.Cobudget = {}
 window.Cobudget.Router = ($routeProvider) ->
   $routeProvider
     .when '/',
