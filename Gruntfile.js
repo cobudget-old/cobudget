@@ -400,10 +400,16 @@ module.exports = function (grunt) {
               }
           }
       }
+    },
+    shell: { 
+      mocha: {
+        command: 'mocha specs'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
@@ -422,12 +428,14 @@ module.exports = function (grunt) {
 
   grunt.registerTask('sauce', [
     'connect:test',
-    'protractor:saucelabs'
+    'protractor:saucelabs',
+    'shell:mocha'
   ]);
 
   grunt.registerTask('test', [
     'connect:test',
-    'protractor:e2e'
+    'protractor:e2e',
+    'shell:mocha'
   ]);
 
 //  grunt.registerTask('test', [
