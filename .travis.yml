@@ -4,7 +4,7 @@ node_js:
 rvm:
   - 2.0.0
 before_install: 
-- npm install -g protractor grunt-cli bower
+- npm install -g protractor grunt-cli bower mocha
 - bundle install
 - bower install
 before_script:
