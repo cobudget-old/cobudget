@@ -15,5 +15,8 @@ describe 'Namespace', ->
   it 'creates a directives namespace', ->
     expect(window.Cobudget.Directives).to.be.an('object')
 
+  it 'creates a services namespace', ->
+    expect(window.Cobudget.Services).to.be.an('object')
+
   it 'creates a resources namespace', ->
     expect(window.Cobudget.Resources).to.be.an('object')

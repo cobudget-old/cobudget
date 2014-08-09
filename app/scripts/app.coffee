@@ -8,3 +8,4 @@ angular
   .directive('budgetBanner', window.Cobudget.Directives.BudgetBanner)
   .directive('navBar', window.Cobudget.Directives.NavBar)
   .service('Budget', window.Cobudget.Resources.Budget) 
+  .service('BudgetLoader', window.Cobudget.Services.BudgetLoader) 

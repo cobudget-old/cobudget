@@ -4,4 +4,5 @@ window.Cobudget = {
   Controllers : {}
   Directives : {}
   Resources : {}
+  Services : {}
 }
