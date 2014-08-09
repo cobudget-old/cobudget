@@ -14,7 +14,7 @@ exports.config = {
   //
   // See the full list at http://visionmedia.github.io/mocha/
   mochaOpts: {
-    reporter: 'spec',
+    reporter: 'dot',
     enableTimeouts: false
   },
 
