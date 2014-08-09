@@ -1,5 +1,4 @@
 expect = require('../support/expect')
-sinon = require('sinon-chai')
 
 describe 'Namespace', ->
   before ->
