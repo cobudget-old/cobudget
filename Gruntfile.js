@@ -403,7 +403,7 @@ module.exports = function (grunt) {
     },
     shell: { 
       mocha: {
-        command: 'mocha specs'
+               command: 'mocha --compilers coffee:coffee-script/register -R min --recursive specs'
       }
     }
   });
