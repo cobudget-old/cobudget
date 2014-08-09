@@ -5,8 +5,11 @@ NavBarController = ($scope, $rootScope, Budget) ->
   if $rootScope.currentBudget
     $scope.currentBudgetId = $rootScope.currentBudget.id
 
-  $scope.$watch 'currentBudgetId', (id) ->
-    budget = _.first $scope.budgets, {id: id}
+  $scope.setBudget = (id) ->
+    budget = _.first(_.where($scope.budgets, {'id': id}))
+    $rootScope.currentBudget = budget if budget
+
+  $scope.$watch 'currentBudgetId', $scope.setBudget
 
 window.Cobudget.Directives.NavBar = ->
   {
