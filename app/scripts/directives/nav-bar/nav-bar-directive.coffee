@@ -1,4 +1,4 @@
-NavBarController = ($scope, $rootScope, Budget) ->
+controller = ($scope, $rootScope, Budget) ->
   $scope.budgets = Budget.myBudgets()
 
   $scope.currentBudgetId = ''
@@ -15,5 +15,5 @@ window.Cobudget.Directives.NavBar = ->
   {
     restrict: 'EA'
     templateUrl: '/scripts/directives/nav-bar/nav-bar.html'
-    controller: NavBarController
+    controller: controller
   }
