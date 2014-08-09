@@ -1,2 +1,2 @@
-window.Cobudget.BudgetOverviewController = ($scope) ->
+window.Cobudget.Controllers.BudgetOverview = ($scope) ->
   $scope.message = 'hi'

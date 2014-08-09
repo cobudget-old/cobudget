@@ -1,8 +1,10 @@
 angular
-  .module('cobudget', ['config', 'ngRoute', 'restangular'])
-  .config(window.Cobudget.Router)
-  .directive('bucketList', window.Cobudget.BucketList)
-  .directive('bucketSummary', window.Cobudget.BucketSummary)
-  .directive('budgetBanner', window.Cobudget.BudgetBanner)
-  .directive('navBar', window.Cobudget.NavBar)
-  
+  .module('cobudget', ['ngRoute', 'restangular'])
+  .constant('config', window.Cobudget.Config.Constants)
+  .config(window.Cobudget.Config.Router)
+  .config(window.Cobudget.Config.Restangular)
+  .directive('bucketList', window.Cobudget.Directives.BucketList)
+  .directive('bucketSummary', window.Cobudget.Directives.BucketSummary)
+  .directive('budgetBanner', window.Cobudget.Directives.BudgetBanner)
+  .directive('navBar', window.Cobudget.Directives.NavBar)
+  .service('budget', window.Cobudget.Resources.Budget) 

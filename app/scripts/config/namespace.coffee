@@ -1,2 +1,7 @@
 #namespace for loading objects
-window.Cobudget = {}
+window.Cobudget = {
+  Config : {}
+  Controllers : {}
+  Directives : {}
+  Resources : {}
+}

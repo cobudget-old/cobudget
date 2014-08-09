@@ -1,0 +1,2 @@
+window.Cobudget.Config.Restangular = ->
+  {}

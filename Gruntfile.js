@@ -10,8 +10,8 @@
 var replace_files = [{
   expand: true,
   flatten: true,
-  src: ['./config/config.coffee'],
-  dest: '<%= yeoman.app %>/scripts/'
+  src: ['./config/constants.coffee'],
+  dest: '<%= yeoman.app %>/scripts/config/'
 }]
 
 
