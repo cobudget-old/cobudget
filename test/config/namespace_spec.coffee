@@ -1,10 +1,7 @@
+require '../support/setup'
 expect = require('../support/expect')
 
 describe 'Namespace', ->
-  before ->
-    global.window = {}
-    expect(window.Cobudget).to.eq(undefined)
-    require '../../app/scripts/config/namespace'
 
   it 'creates a cobudget namespace', ->
     expect(window.Cobudget).to.be.an('object')

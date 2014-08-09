@@ -1,11 +1,14 @@
 window.Cobudget.Resources.Budget = (Restangular) ->
-  budgets = Restangular.all('budgets')
 
   getBudget: (budget_id)->
     Restangular.one('budgets', budget_id).get()
 
   allBudgets: ()->
-    budgets.getList()
+    Restangular.all('budgets').getList()
+
+  myBudgets: ->
+    #TODO restrict to only getting budgets visible by this user
+    @allBudgets().$object
 
 #  getBudgetBuckets: (budget_id, state, limit)->
 #    state ||= "open"
