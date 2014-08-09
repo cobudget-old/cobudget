@@ -13,6 +13,7 @@ Cobudget is software for helping people make collaborative decisions together. T
 ## Resources
 
 * [Cobudget Writeup](http://www.mixprize.org/story/collaborative-funding-dissolve-authority-empower-everyone-and-crowdsource-smarter-transparent) - a good overview about how cobudget works
+* [Cobudget Mockups](https://projects.invisionapp.com/share/BQ140D9Y6#/screens/30814373?maintainScrollPosition=false) - high fidelity designs we are adapting our angular prototype to.
 * [Cobudget Loomio](https://www.loomio.org/g/6xdXIjpb/enspiral-cobudget) - currently private
 * [OpenApp Loomio](https://www.loomio.org/g/exAKrBUp/openapp) - we're building cobudget as part of the open app ecosystem
 * [OpenApp Github](https://github.com/open-app/core) - starting point for navigating open app ecosystem
