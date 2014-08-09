@@ -403,7 +403,10 @@ module.exports = function (grunt) {
     },
     shell: { 
       mocha: {
-        command: 'mocha --compilers coffee:coffee-script/register -R min --recursive test'
+        command: 'mocha --compilers coffee:coffee-script/register -R min --recursive test',
+        options: {
+          failOnError: true
+        }
       }
     }
   });
