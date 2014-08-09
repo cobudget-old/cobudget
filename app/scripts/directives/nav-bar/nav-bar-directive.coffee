@@ -1,15 +1,17 @@
 controller = ($scope, $rootScope, Budget) ->
-  $scope.budgets = Budget.myBudgets()
-
   $scope.currentBudgetId = ''
   if $rootScope.currentBudget
     $scope.currentBudgetId = $rootScope.currentBudget.id
 
-  $scope.setBudget = (id) ->
-    budget = _.first(_.where($scope.budgets, {'id': id}))
-    $rootScope.currentBudget = budget if budget
+  Budget.allBudgets().then (budgets) ->
+    $scope.budgets = budgets
 
-  $scope.$watch 'currentBudgetId', $scope.setBudget
+    $scope.setBudget = (id) ->
+      budget = _.first(_.where($scope.budgets, {'id': id}))
+      $rootScope.currentBudget = budget if budget
+
+    $scope.$watch 'currentBudgetId', (id) ->
+      $scope.setBudget(id)
 
 window.Cobudget.Directives.NavBar = ->
   {

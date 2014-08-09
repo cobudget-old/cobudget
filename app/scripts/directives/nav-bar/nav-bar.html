@@ -1,11 +1,8 @@
 <div class="row">
   <div class="col-md-12 nav bar container">
     NAV BAR COMPONENT
-    <select ng-model='currentBudgetId'>
+    <select ng-model='currentBudgetId' ng-options='b.id as b.name for b in budgets'>
       <option value=''> Select Budget</option>
-      <option ng-repeat='budget in budgets' value='{{budget.id}}'>
-        {{budget.name}}
-      </option>
     </select>
   </div>
 </div>

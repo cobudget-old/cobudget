@@ -13,11 +13,14 @@ $scope = {
 $rootScope = {}
 Budget = {
   myBudgets: sinon.stub()
+  allBudgets: ->
+    then: (callback) ->
+      callback(Budget.myBudgets())
 }
 
 describe 'NavBar Directive Controller', ->
   describe '$scope.budgets', ->
-    it 'is loaded from Budget.myBudgets()', ->
+    it 'is loaded from allBudgets callback', ->
       Budget.myBudgets.returns 'my-budgets'
       controller($scope, $rootScope, Budget)
       expect($scope.budgets).to.eq('my-budgets')
