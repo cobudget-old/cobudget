@@ -1,5 +1,5 @@
 angular
-  .module('cobudget', ['ngRoute'])
+  .module('cobudget', ['config', 'ngRoute', 'restangular'])
   .config(window.Cobudget.Router)
   .directive('bucketList', window.Cobudget.BucketList)
   .directive('bucketSummary', window.Cobudget.BucketSummary)
