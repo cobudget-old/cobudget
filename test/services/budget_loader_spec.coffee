@@ -17,16 +17,17 @@ Budget = {
 }
 
 describe 'BudgetLoader', ->
+  beforeEach ->
+    budget_loader.rootScope.currentBudget = undefined
+    budget_loader.scope.currentBudgetId = undefined
 
   describe 'loadFromRootScope', ->
   	it 'defaults $scope.currentBudgetId to ""', ->
-  		budget_loader.rootScope.currentBudget = undefined
   		budget_loader.loadFromRootScope()
   		expect(budget_loader.scope.currentBudgetId).to.eq('')
 
   	it 'sets the scope of the currentBudgetId', ->
 			budget_loader.rootScope.currentBudget = {id: 5}
-			budget_loader.scope.currentBudgetId = undefined
 			budget_loader.loadFromRootScope()
 			expect(budget_loader.scope.currentBudgetId).to.eq(5)
 
