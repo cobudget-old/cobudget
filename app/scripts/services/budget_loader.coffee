@@ -9,7 +9,7 @@ window.Cobudget.Services.BudgetLoader = ()->
       @scope.currentBudgetId = @rootScope.currentBudget.id
 
   defaultToFirstBudget:  ->
-    if @scope.currentBudgetId == '' && @scope.budgets.length > 0
+    if !@scope.currentBudgetId && @scope.budgets.length > 0
       @rootScope.currentBudget = _.first(@scope.budgets)
       @scope.currentBudgetId = @rootScope.currentBudget.id
 
