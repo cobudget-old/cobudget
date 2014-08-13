@@ -31,5 +31,13 @@ describe 'BudgetLoader', ->
 			budget_loader.loadFromRootScope()
 			expect(budget_loader.scope.currentBudgetId).to.eq(5)
 
+  describe 'defaultToFirstBudget', ->
+    it 'does nothing if scope.budgets empty'
+    it 'sets rootScope.currentBudget to the first budget'
+    it 'sets scope.currentbudgetId to the budget id'
+
+  describe 'setBudget', ->
+    it 'sets rootScope.currentBudget to the first budget with matching id'
+
 
 
