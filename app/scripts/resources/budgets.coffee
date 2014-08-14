@@ -10,11 +10,11 @@ window.Cobudget.Resources.Budget = (Restangular) ->
     #TODO restrict to only getting budgets visible by this user
     @allBudgets().$object
 
-#  getBudgetBuckets: (budget_id, state, limit)->
-#    state ||= "open"
-#    limit ||= ""
-#    Restangular.one('budgets', budget_id).customGET('buckets', {state: state, limit: limit})
-#
+  getBudgetBuckets: (budget_id, state, limit)->
+    state ||= "open"
+    limit ||= ""
+    Restangular.one('budgets', budget_id).customGET('buckets', {state: state, limit: limit})
+
 #  createBudget: (budget_data)->
 #    budgets.post('budgets', budget_data)
 #
