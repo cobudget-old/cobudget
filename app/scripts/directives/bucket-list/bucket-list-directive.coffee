@@ -4,6 +4,9 @@ controller = ($rootScope, $scope, Budget) ->
     Budget.getBudgetBuckets(budget.id).then (buckets) ->
       $scope.buckets = buckets
 
+  $scope.selectBucket, (bucketId) ->
+  	# TODO test and implement select function
+
 window.Cobudget.Directives.BucketList = ->
   {
     restrict: 'EA'

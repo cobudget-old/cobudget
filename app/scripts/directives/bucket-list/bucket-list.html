@@ -1,14 +1,17 @@
-<div class="bucket" ng-if='currentBudget'>
-  <div class="allocation_amount allocated">
-    <label>Allocated</label>
-    <input type="number" value="200">
-  </div>
+<div class="bucket-list" ng-repeat="bucket in buckets">   
+  <div class="bucket" ng-if='currentBudget'>
+    <div class="allocation_amount allocated">
+      <label>Allocated</label>
+      <input type="number" value="200">
+    </div>
 
-  <h2>Community Garden Project</h2>
+    <h2 ng-click = "selectBucket('bucket.id')">{{budget.name}}</h2>
 
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-      <span class="sr-only">60% Complete</span>
+
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+        <span class="sr-only">60% Complete</span>
+      </div>
     </div>
   </div>
 </div>
