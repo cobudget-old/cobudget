@@ -1,5 +1,5 @@
 `// @ngInject`
-controller = ($scope, $rootScope, Budget, BudgetLoader) ->
+@controller = ($scope, $rootScope, Budget, BudgetLoader) ->
   BudgetLoader.init($scope, $rootScope)
   BudgetLoader.loadFromRootScope()
 
@@ -14,5 +14,5 @@ window.Cobudget.Directives.NavBar = ->
   {
     restrict: 'EA'
     templateUrl: '/scripts/directives/nav-bar/nav-bar.html'
-    controller: controller
+    controller: @controller
   }
