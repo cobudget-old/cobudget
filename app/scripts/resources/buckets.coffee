@@ -10,8 +10,7 @@ window.Cobudget.Resources.Bucket = (Restangular) ->
   #      bucket.maximum = parseFloat(bucket.maximum_cents) / 100
   #    else
   #      bucket.maximum = 0
-  
- 
+
   #get details of bucket, maybe rename
   get: (bucket_id)->
     Restangular.one('buckets', bucket_id).get()
