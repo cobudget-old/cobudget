@@ -1,11 +1,11 @@
-controller = ($rootScope, $scope, Budget) ->
+controller = ($rootScope, $scope, Budget, Bucket) ->
   $rootScope.$watch 'currentBudget', (budget) ->
     return unless budget
     Budget.getBudgetBuckets(budget.id).then (buckets) ->
       $scope.buckets = buckets
 
-  $scope.selectBucket, (bucketId) ->
-  	# TODO test and implement select function
+  $scope.selectBucket (bucketId) ->
+  	Bucket.getBucket(bucketId)
 
 window.Cobudget.Directives.BucketList = ->
   {

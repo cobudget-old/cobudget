@@ -18,7 +18,7 @@ Budget =
 describe "bucket list directive", ->
   describe 'load buckets', ->
     beforeEach ->
-      controller($rootScope, $scope, Budget)
+      controller($rootScope, $scope, Budget, Bucket)
 
     it 'does nothing if rootScope.currentBudget is empty', ->
       $rootScope.watch_callback(null)
@@ -28,10 +28,9 @@ describe "bucket list directive", ->
       Budget.getBudgetBuckets.returns promise.with [{id: 1, name: 'bucket'}, {id: 2, name: 'bucket 2'}]
       $rootScope.watch_callback {id: 3}
       expect(Budget.getBudgetBuckets).to.have.been.calledWith(3)
-      console.log($scope.buckets)
       expect($scope.buckets).to.deep.eq([{id: 1, name: 'bucket'}, {id: 2, name: 'bucket 2'}])
 
-      
+     
 
     
 

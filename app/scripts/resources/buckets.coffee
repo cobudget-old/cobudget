@@ -12,8 +12,8 @@ window.Cobudget.Resources.Bucket = (Restangular) ->
   #      bucket.maximum = 0
   #    bucket
   #
-  #  getBucket: (bucket_id)->
-  #    Restangular.one('buckets', bucket_id).get()
+   getBucket: (bucket_id)->
+     Restangular.one('buckets', bucket_id).get()
   #
   #  createBucket: (bucket_data)->
   #    buckets.post('buckets', bucket_data)
