@@ -29,5 +29,5 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano (= 2.15.5)
-  compass
-  railsless-deploy
+  compass (= 0.12.7)
+  railsless-deploy (= 1.1.3)
