@@ -18,7 +18,7 @@ Budget =
 describe "bucket list directive", ->
   describe 'load buckets', ->
     beforeEach ->
-      controller($rootScope, $scope, Budget, Bucket)
+      controller($rootScope, $scope, Budget)
 
     it 'does nothing if rootScope.currentBudget is empty', ->
       $rootScope.watch_callback(null)
