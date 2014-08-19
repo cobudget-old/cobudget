@@ -18,8 +18,8 @@ window.Cobudget.Resources.Bucket = (Restangular) ->
   #  createBucket: (bucket_data)->
   #    buckets.post('buckets', bucket_data)
   #
-  #  getBucketAllocations: (bucket_id)->
-  #    Restangular.one('buckets', bucket_id).getList('allocations')
+  getBucketAllocations: (bucket_id)->
+    Restangular.one('buckets', bucket_id).getList('allocations')
   #
   #  createBucketAllocation: (bucket_id, allocation)->
   #    Restangular.post('buckets', budget_id)
@@ -28,9 +28,9 @@ window.Cobudget.Resources.Bucket = (Restangular) ->
   #    #TODO Admin stuff
   #    Restangular.one('buckets', bucket_id).customPOST({bucket_id: bucket_id, state: state, admin_id: 1}, 'set-state')
   #
-  #  sumBucketAllocations: (bucket)->
-  #      sum = 0
-  #      for allocation in bucket.allocations
-  #        sum += allocation.amount
-  #      sum
+  sumBucketAllocations: (bucket)->
+    sum = 0
+    for allocation in bucket.allocations
+      sum += allocation.amount
+    sum
 
