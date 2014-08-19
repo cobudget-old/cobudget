@@ -1,3 +1,4 @@
+`// @ngInject`
 window.Cobudget.Directives.BucketSummary = ->
   {
     restrict: 'EA'

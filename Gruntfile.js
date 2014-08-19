@@ -313,6 +313,17 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
+    ngAnnotate: {
+        options: { },
+        app: {
+          files: [{
+            expand: true,
+            cwd: '.tmp/scripts',
+            src: '**/*.js',
+            dest: '.tmp/scripts'
+          }]
+        }
+    },
     ngmin: {
       dist: {
         files: [{
@@ -411,6 +422,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-shell');
 
@@ -456,8 +468,8 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'ngAnnotate:app',
     'concat',
-    'ngmin',
     'copy:dist',
     'cdnify',
     'cssmin',

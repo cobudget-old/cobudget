@@ -1,3 +1,4 @@
+`// @ngInject`
 window.Cobudget.Directives.BudgetBanner = ->
   {
     restrict: 'EA'

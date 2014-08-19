@@ -1,3 +1,4 @@
+`// @ngInject`
 window.Cobudget.Services.BudgetLoader = ()->
   init: ($scope, $rootScope) ->
     @scope = $scope

@@ -1,3 +1,4 @@
+`// @ngInject`
 window.Cobudget.Config.Router = ($routeProvider) ->
   $routeProvider
     .when '/budget/:id',

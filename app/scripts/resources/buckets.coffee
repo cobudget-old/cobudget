@@ -1,3 +1,4 @@
+`// @ngInject`
 window.Cobudget.Resources.Bucket = (Restangular) ->
   #  buckets = Restangular.all('buckets')
   #

@@ -1,3 +1,4 @@
+`// @ngInject`
 controller = ($scope, $rootScope, Budget, BudgetLoader) ->
   BudgetLoader.init($scope, $rootScope)
   BudgetLoader.loadFromRootScope()

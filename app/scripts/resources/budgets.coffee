@@ -1,3 +1,4 @@
+`// @ngInject`
 window.Cobudget.Resources.Budget = (Restangular) ->
 
 #  getBudget: (budget_id)->

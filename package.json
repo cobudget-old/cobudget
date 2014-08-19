@@ -27,6 +27,7 @@
     "grunt-contrib-watch": "~0.5.2",
     "grunt-google-cdn": "~0.2.0",
     "grunt-karma": "~0.8.3",
+    "grunt-ng-annotate": "^0.3.2",
     "grunt-ngmin": "~0.0.2",
     "grunt-protractor-runner": "~1.0.0",
     "grunt-replace": "~0.7.7",
