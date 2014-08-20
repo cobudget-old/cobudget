@@ -1,2 +1,3 @@
-window.Cobudget.Controllers.BudgetOverview = ($scope) ->
-  $scope.message = 'hi'
+window.Cobudget.Controllers.BudgetContributors = ($scope, $rootScope, BudgetLoader) ->
+  BudgetLoader.init($scope, $rootScope)
+  BudgetLoader.loadFromURL()

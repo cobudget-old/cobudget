@@ -3,8 +3,9 @@ controller = ($location, $scope, $rootScope, Budget, BudgetLoader) ->
   BudgetLoader.loadFromRootScope()
 
   $scope.$watch 'currentBudgetId', (id) ->
-    $location.path '/budgets/' + id
-    BudgetLoader.setBudget(id)
+    if id > 0
+      $location.path '/budgets/' + id
+      BudgetLoader.setBudget(id)
 
   Budget.allBudgets().then (budgets) ->
     $scope.budgets = budgets

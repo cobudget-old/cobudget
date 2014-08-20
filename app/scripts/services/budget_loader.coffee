@@ -1,7 +1,15 @@
-window.Cobudget.Services.BudgetLoader = ()->
+window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
+
   init: ($scope, $rootScope) ->
     @scope = $scope
     @rootScope = $rootScope
+
+  loadFromURL: ->
+    self = @
+    if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.id
+      if $routeParams.id
+        Budget.get($routeParams.id).then (budget) ->
+          self.saveBudget budget
 
   loadFromRootScope: ->
     @scope.currentBudgetId = ''
@@ -15,4 +23,7 @@ window.Cobudget.Services.BudgetLoader = ()->
 
   setBudget: (id) ->
     budget = _.first(_.where(@scope.budgets, {'id': id}))
-    @rootScope.currentBudget = budget if budget
+    @saveBudget(budget) if budget
+
+  saveBudget: (budget) ->
+    @rootScope.currentBudget = budget

@@ -8,7 +8,7 @@ window.Cobudget.Config.Router = ($routeProvider) ->
       controller: window.Cobudget.Controllers.BudgetContributors
     .when '/budgets/:id/my-allocation',
       templateUrl: '/views/budget-allocations.html'
-      controller: window.Cobudget.Controllers.BudgetAllocation
+      controller: window.Cobudget.Controllers.BudgetAllocations
     .when '/buckets/:id',
       templateUrl: '/views/bucket-show.html'
       controller: window.Cobudget.Controllers.BucketShow
