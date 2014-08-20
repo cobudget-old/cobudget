@@ -25,10 +25,10 @@ describe "bucket list directive", ->
       expect(Budget.getBudgetBuckets).to.not.have.been.called
 
     it 'loads buckets if currentBudget exists', ->
-      Budget.getBudgetBuckets.returns promise.with [{id: 1, name: 'bucket'}, {id: 2, name: 'bucket 2'}]
+      Budget.getBudgetBuckets.returns promise.with [{id: 1, my_allocation_total: 100, name: 'bucket', percentage_funded: 20}, {id: 2, my_allocation_total: 100, name: 'bucket 2', percentage_funded: 20}]
       $rootScope.watch_callback {id: 3}
       expect(Budget.getBudgetBuckets).to.have.been.calledWith(3)
-      expect($scope.buckets).to.deep.eq([{id: 1, name: 'bucket'}, {id: 2, name: 'bucket 2'}])
+      expect($scope.buckets).to.deep.eq([{id: 1, my_allocation_total: 100, name: 'bucket', percentage_funded: 20}, {id: 2, my_allocation_total: 100, name: 'bucket 2', percentage_funded: 20}])
 
      
 
