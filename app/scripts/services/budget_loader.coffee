@@ -1,29 +1,25 @@
 window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
 
-  init: ($scope, $rootScope) ->
-    @scope = $scope
+  init: ($rootScope) ->
     @rootScope = $rootScope
 
   loadFromURL: ->
     self = @
-    if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.id
-      if $routeParams.id
-        Budget.get($routeParams.id).then (budget) ->
-          self.saveBudget budget
+    if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.budget_id
+      if $routeParams.budget_id
+        Budget.get($routeParams.budget_id).then (budget) ->
+          self.setBudget budget
 
-  loadFromRootScope: ->
-    @scope.currentBudgetId = ''
-    if @rootScope.currentBudget
-      @scope.currentBudgetId = @rootScope.currentBudget.id
+  #turn back on at some stage
+  #defaultToFirstBudget:  ->
+  #  if !@scope.currentBudgetId && @scope.budgets.length > 0
+  #    @rootScope.currentBudget = _.first(@scope.budgets)
+  #    @scope.currentBudgetId = @rootScope.currentBudget.id
 
-  defaultToFirstBudget:  ->
-    if !@scope.currentBudgetId && @scope.budgets.length > 0
-      @rootScope.currentBudget = _.first(@scope.budgets)
-      @scope.currentBudgetId = @rootScope.currentBudget.id
 
-  setBudget: (id) ->
-    budget = _.first(_.where(@scope.budgets, {'id': id}))
+  setBudgetFromArray: (id, budgets) ->
+    budget = _.first(_.where(budgets, {'id': id}))
     @saveBudget(budget) if budget
 
-  saveBudget: (budget) ->
+  setBudget: (budget) ->
     @rootScope.currentBudget = budget

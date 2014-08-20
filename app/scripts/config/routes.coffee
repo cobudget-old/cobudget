@@ -1,15 +1,15 @@
 window.Cobudget.Config.Router = ($routeProvider) ->
   $routeProvider
-    .when '/budgets/:id',
+    .when '/budgets/:budget_id',
       templateUrl: '/views/budget-overview.html'
       controller: window.Cobudget.Controllers.BudgetOverview
-    .when '/budgets/:id/contributors',
+    .when '/budgets/:budget_id/contributors',
       templateUrl: '/views/budget-contributors.html'
       controller: window.Cobudget.Controllers.BudgetContributors
-    .when '/budgets/:id/my-allocation',
+    .when '/budgets/:budget_id/my-allocation',
       templateUrl: '/views/budget-allocations.html'
       controller: window.Cobudget.Controllers.BudgetAllocations
-    .when '/buckets/:id',
+    .when '/buckets/:budget_id',
       templateUrl: '/views/bucket-show.html'
       controller: window.Cobudget.Controllers.BucketShow
     .otherwise(redirectTo: '/budgets/1')

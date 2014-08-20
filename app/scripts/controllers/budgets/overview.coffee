@@ -1,3 +1,3 @@
 window.Cobudget.Controllers.BudgetOverview = ($scope, $rootScope, BudgetLoader) ->
-  BudgetLoader.init($scope, $rootScope)
+  BudgetLoader.init($rootScope)
   BudgetLoader.loadFromURL()
