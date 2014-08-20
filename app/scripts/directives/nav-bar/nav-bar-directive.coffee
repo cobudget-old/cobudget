@@ -1,10 +1,9 @@
-controller = ($scope, $rootScope, Budget, BudgetLoader) ->
+controller = ($location, $scope, $rootScope, Budget, BudgetLoader) ->
   BudgetLoader.init($scope, $rootScope)
   BudgetLoader.loadFromRootScope()
 
   $scope.$watch 'currentBudgetId', (id) ->
-    $location.path()
-    $location.path '/budget/+id'
+    $location.path '/budgets/' + id
     BudgetLoader.setBudget(id)
 
   Budget.allBudgets().then (budgets) ->

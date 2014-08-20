@@ -12,4 +12,4 @@ window.Cobudget.Config.Router = ($routeProvider) ->
     .when '/buckets/:id',
       templateUrl: '/views/bucket-show.html'
       controller: window.Cobudget.Controllers.BucketShow
-    .otherwise(redirectTo: '/budget/1')
+    .otherwise(redirectTo: '/budgets/1')

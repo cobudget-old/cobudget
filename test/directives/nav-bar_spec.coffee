@@ -21,6 +21,12 @@ Budget = {
 }
 BudgetLoader = window.Cobudget.Services.BudgetLoader()
 
+$location = 
+  path: sinon.stub()
+
+load_controller = ->
+  controller($location, $scope, $rootScope, Budget, BudgetLoader)
+
 describe 'NavBar Directive Controller', ->
   beforeEach ->
     $rootScope.currentBudget = undefined
@@ -30,39 +36,39 @@ describe 'NavBar Directive Controller', ->
   describe '$scope.budgets', ->
     it 'is loaded from allBudgets callback', ->
       Budget.myBudgets.returns 'my-budgets'
-      controller($scope, $rootScope, Budget, BudgetLoader)
+      load_controller()
       expect($scope.budgets).to.eq('my-budgets')
 
   describe '$scope.currentBudgetId', ->
     it 'defaults to first budget', ->
       Budget.myBudgets.returns([{id: 4}, {id: 3}])
-      controller($scope, $rootScope, Budget, BudgetLoader)
+      load_controller()
       expect($rootScope.currentBudget.id).to.eq(4)
       expect($scope.currentBudgetId).to.eq(4)
   
     it 'is set from rootScope.currentBudget', -> 
       $rootScope.currentBudget = { id: 7 }
-      controller($scope, $rootScope, Budget, BudgetLoader)
+      load_controller()
       expect($scope.currentBudgetId).to.eq(7)
 
   describe 'setBudget', ->
     it 'sets $rootScope.currentBudget if id matches', ->
       budget = {id: 7}
       Budget.myBudgets.returns([{id: 2}, budget, {id: 1}])
-      controller($scope, $rootScope, Budget, BudgetLoader)
+      load_controller()
       BudgetLoader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(budget)
 
     it 'does nothing if scope array is empty', ->
       Budget.myBudgets.returns([])
-      controller($scope, $rootScope, Budget, BudgetLoader)
+      load_controller()
       $rootScope.currentBudget = null
       BudgetLoader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(null)
       
     it 'does nothing if no budget with id exists', ->
       Budget.myBudgets.returns([{id: 4}, {id: 3}])
-      controller($scope, $rootScope, Budget, BudgetLoader)
+      load_controller()
       $rootScope.currentBudget = null
       BudgetLoader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(null)
