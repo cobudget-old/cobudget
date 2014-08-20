@@ -1,3 +1,4 @@
 `// @ngInject`
-window.Cobudget.Controllers.BudgetOverview = ($scope) ->
-  $scope.message = 'hi'
+window.Cobudget.Controllers.BudgetOverview = ($scope, $rootScope, BudgetLoader) ->
+  BudgetLoader.init($rootScope)
+  BudgetLoader.loadFromURL()
