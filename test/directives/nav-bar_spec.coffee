@@ -19,6 +19,8 @@ Budget = {
     then: (callback) ->
       callback(Budget.myBudgets())
 }
+Budget.myBudgets.returns([{id: 4}, {id: 3}])
+
 BudgetLoader = window.Cobudget.Services.BudgetLoader()
 
 $location = 
@@ -73,3 +75,11 @@ describe 'NavBar Directive Controller', ->
       BudgetLoader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(null)
 
+  describe '$scope.watch', ->
+    it 'changes the url', ->
+      $scope.$watch = (string, callback) ->
+        callback(1)
+      load_controller()
+      expect($location.path).to.have.been.calledWith('/budgets/1')
+        
+    
