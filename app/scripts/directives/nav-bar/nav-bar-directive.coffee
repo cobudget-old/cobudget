@@ -1,5 +1,6 @@
+controller = nil
 `// @ngInject`
-@controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
+controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
   BudgetLoader.init($rootScope)
 
   $scope.$watch 'currentBudgetId', (id) ->
@@ -15,8 +16,6 @@
       $scope.currentBudgetId = $rootScope.currentBudget.id
     else
       $scope.currentBudgetId = budgets[0].id
-
-controller = @controller
 
 window.Cobudget.Directives.NavBar = ->
   {

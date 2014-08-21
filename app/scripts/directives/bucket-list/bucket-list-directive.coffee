@@ -1,5 +1,6 @@
+controller=nil
 `// @ngInject`
-@controller = ($rootScope, $scope, Budget) ->
+controller = ($rootScope, $scope, Budget) ->
   $rootScope.$watch 'currentBudget', (budget) ->
     return unless budget
     Budget.getBudgetBuckets(budget.id).then (buckets) ->
@@ -8,8 +9,6 @@
         bucket.my_allocation_total = 100
 
       $scope.buckets = buckets
-
-controller = @controller
 
 window.Cobudget.Directives.BucketList = ->
   {
