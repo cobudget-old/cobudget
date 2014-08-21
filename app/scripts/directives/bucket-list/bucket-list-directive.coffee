@@ -1,4 +1,4 @@
-controller=nil
+controller=null
 `// @ngInject`
 controller = ($rootScope, $scope, Budget) ->
   $rootScope.$watch 'currentBudget', (budget) ->

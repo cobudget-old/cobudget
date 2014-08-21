@@ -1,4 +1,4 @@
-controller = nil
+controller = null
 `// @ngInject`
 controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
   BudgetLoader.init($rootScope)
