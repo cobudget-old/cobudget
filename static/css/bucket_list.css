@@ -1,3 +1,12 @@
+@media screen and (max-width: 1000px) {
+  .buckets.panel.container {
+    height: 100%;
+    overflow: auto;
+    background-color: #334248;
+    color: #a0c8cc;
+    font-family: "Open Sans";
+    width: 55%;
+    margin-left: 0px; } }
 .buckets.panel.container {
   height: 100%;
   overflow: auto;
