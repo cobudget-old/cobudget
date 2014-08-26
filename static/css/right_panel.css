@@ -22,8 +22,8 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); }
   .right.panel.container .content {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 15px;
     position: absolute;
     top: 40px;
@@ -70,19 +70,21 @@
           .right.panel.container .content .banner .buttons.container .button p {
             font-size: 10px; }
   .right.panel.container .overview.container {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
     margin-top: 25px;
     height: 100%;
     min-height: 800px;
     background: white;
     border-style: solid;
     border-color: #eeeeed;
-    border-width: 2px; }
+    border-width: 2px;
+    max-width: 99%; }
     .right.panel.container .overview.container .title {
       width: 100%;
       height: 70px;
-      color: #49b0b7; }
+      color: #49b0b7;
+      max-width: 99%; }
       .right.panel.container .overview.container .title i {
         float: left;
         padding-top: 30px;
@@ -90,8 +92,9 @@
       .right.panel.container .overview.container .title h1 {
         font-weight: 300;
         font-size: 25px;
-        line-height: 50px;
-        margin-bottom: 0px; }
+        line-height: 85px;
+        margin-bottom: 0px;
+        margin-left: 60px; }
     .right.panel.container .overview.container #budget_overview_title_icon {
       height: 50px;
       float: left; }
@@ -99,7 +102,8 @@
       width: 100%; }
     .right.panel.container .overview.container .totals.triplet .totals.section {
       float: left;
-      margin-top: px;
+      margin-top: 10px;
+      margin-left: 15px;
       text-align: center; }
       .right.panel.container .overview.container .totals.triplet .totals.section .section-detail h5 {
         margin-bottom: 0px;
@@ -112,7 +116,8 @@
       height: 30px; }
     .right.panel.container .overview.container .budget-progress.triplet .budget-progress.section {
       float: left;
-      text-align: center; }
+      text-align: center;
+      margin-left: 22px; }
       .right.panel.container .overview.container .budget-progress.triplet .budget-progress.section p {
         font-size: 24px;
         font-weight: 300;

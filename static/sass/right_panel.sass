@@ -1,5 +1,6 @@
 @import utilities
 
+
 //RIGHT PANEL
 .right.panel
   &.container
@@ -31,8 +32,8 @@
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 )
 
     .content
-      padding-left: 40px
-      padding-right: 40px
+      padding-left: 20px
+      padding-right: 20px
       padding-bottom: 15px
       position: absolute
       top: 40px
@@ -94,8 +95,8 @@
 
 
     .overview.container
-      padding-left: 40px
-      padding-right: 40px
+      padding-left: 30px
+      padding-right: 30px
       margin-top: 25px
       height: 100%
       min-height: 800px
@@ -103,11 +104,18 @@
       border-style: solid
       border-color: #eeeeed
       border-width: 2px
+      max-width: 99%
+      
+
+
 
       .title
         width: 100%
         height: 70px
         color: #49b0b7
+
+        @media screen and (min-width: 1200px) 
+        max-width: 99%
 
         i
           float: left
@@ -117,8 +125,9 @@
         h1
           font-weight: 300
           font-size: 25px
-          line-height: 50px
+          line-height: 85px
           margin-bottom: 0px
+          margin-left: 60px
 
 
       #budget_overview_title_icon
@@ -134,7 +143,8 @@
         .totals.section
           float: left
           // width: 240px
-          margin-top: px
+          margin-top: 10px
+          margin-left: 15px
 
           span
           text-align: center
@@ -159,6 +169,7 @@
           float: left
           // width: 240px
           text-align: center
+          margin-left: 22px
 
           p
             font-size: 24px
