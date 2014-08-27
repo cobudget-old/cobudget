@@ -40,6 +40,8 @@ html, body {
       min-height: 800px;
       margin-top: 45px;
       background: #f6f8f6; }
+    html * .right.panel .bucket.page.continaer, body * .right.panel .bucket.page.continaer {
+      width: 100%; }
 
 .content-row {
   height: 100%; }

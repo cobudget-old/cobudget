@@ -12,12 +12,12 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
     <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="static-css/layout.css">
     <link rel="stylesheet" type="text/css" href="static-css/bucket_list.css">
     <link rel="stylesheet" type="text/css" href="static-css/right_panel.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
     <!--<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">-->
@@ -38,6 +38,17 @@
 
     <!-- <>Add your site or application content here -->
     <div nav-bar></div>
+
+    <div class="row tab-bar">
+      <span class="col-md-2 buckets tab">
+        BUCKETS
+      </span>
+
+      <span class="col-md-2 contributors tab">
+        CONTRIBUTORS
+      </span>
+    </div>
+
     <flash:messages class="slide-down" ng-show="messages"></flash:messages>
 
     <div class="row content-row">
