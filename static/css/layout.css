@@ -18,13 +18,47 @@ html, body {
       line-height: 45px; }
       html * .nav.bar.container .brand, body * .nav.bar.container .brand {
         height: 100%;
-        font-size: 25px;
-        color: #49b0b7;
-        padding-left: 20px; }
+        font-size: 20px;
+        color: white;
+        padding-left: 20px;
+        background: #54c1c2; }
         html * .nav.bar.container .brand span, body * .nav.bar.container .brand span {
           display: inline-block;
           vertical-align: middle;
           line-height: normal; }
+        html * .nav.bar.container .brand p, body * .nav.bar.container .brand p {
+          height: 100%;
+          display: inline-block;
+          vertical-align: middle;
+          line-height: center;
+          margin-top: 0px;
+          margin-top: 0px;
+          font-weight: 300; }
+        html * .nav.bar.container .brand i, body * .nav.bar.container .brand i {
+          height: 100%;
+          line-height: 46px; }
+      html * .nav.bar.container .selector, body * .nav.bar.container .selector {
+        text-align: center; }
+        html * .nav.bar.container .selector select, body * .nav.bar.container .selector select {
+          background: transparent;
+          font-size: 16px;
+          color: white;
+          line-height: 1;
+          border: 0;
+          border-radius: 0;
+          height: 34px;
+          padding-left: 30px;
+          -webkit-appearance: none; }
+        html * .nav.bar.container .selector i, body * .nav.bar.container .selector i {
+          color: white; }
+      html * .nav.bar.container .input-name input, body * .nav.bar.container .input-name input {
+        height: 25px;
+        vertical-align: middle;
+        line-height: 25px; }
+      html * .nav.bar.container .input-name i, body * .nav.bar.container .input-name i {
+        color: white;
+        margin-left: 10px;
+        vertical-align: middle; }
       html * .nav.bar.container .navbar-right, body * .nav.bar.container .navbar-right {
         height: 100%;
         list-style: none;
