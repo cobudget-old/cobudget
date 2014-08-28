@@ -33,6 +33,28 @@ html, body {
           display: inline-block;
           vertical-align: middle;
           line-height: normal; }
+    html * .tab-bar, body * .tab-bar {
+      width: 100%;
+      position: relative;
+      top: 45px;
+      height: 51px;
+      line-height: 51px;
+      border-bottom: thin solid #f2f2f2; }
+      html * .tab-bar div, body * .tab-bar div {
+        border-right: 1px solid #f2f2f2;
+        cursor: pointer;
+        height: 51px; }
+      html * .tab-bar .content, body * .tab-bar .content {
+        text-align: center;
+        text-transform: uppercase;
+        color: #4d4d4d; }
+      html * .tab-bar p, body * .tab-bar p {
+        display: inline;
+        padding-bottom: 11px; }
+      html * .tab-bar .active, body * .tab-bar .active {
+        border-bottom: #55c0c1;
+        border-bottom-width: thick;
+        border-bottom-style: solid; }
     html * .buckets.panel, body * .buckets.panel {
       margin-top: 45px; }
     html * .right.panel.container, body * .right.panel.container {

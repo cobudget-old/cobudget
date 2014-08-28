@@ -21,6 +21,7 @@ window.Cobudget.Resources.Bucket = (Restangular) ->
   #
   getBucketAllocations: (bucket_id)->
     Restangular.one('buckets', bucket_id).getList('allocations')
+    
   #
   #  createBucketAllocation: (bucket_id, allocation)->
   #    Restangular.post('buckets', budget_id)
