@@ -2,7 +2,7 @@
   .buckets.panel.container {
     height: 100%;
     overflow: auto;
-    background-color: #334248;
+    background-color: white;
     color: #a0c8cc;
     font-family: "Open Sans";
     width: 55%;
@@ -10,37 +10,37 @@
 .buckets.panel.container {
   height: 100%;
   overflow: auto;
-  background-color: #334248;
+  background-color: white;
   color: #a0c8cc;
-  font-family: "Open Sans"; }
+  font-family: "Open Sans";
+  border-right: 1px solid #e8e8e8; }
   .buckets.panel.container header {
     padding: 30px 30px;
     min-height: 155px;
-    color: white;
+    color: coral;
+    background-color: white;
     font-size: 23px;
     font-weight: 300;
-    text-align: center; }
+    text-align: left;
+    border-bottom: 1px solid #e8e8e8; }
     .buckets.panel.container header.allocated, .buckets.panel.container header.allocated input {
       background-color: #84c442; }
-    .buckets.panel.container header.allocate, .buckets.panel.container header.allocate input {
-      background-color: #f37658; }
     .buckets.panel.container header .progress {
       margin-top: 50px;
       margin-bottom: 0px;
-      background-color: #e35e3b; }
+      background-color: #e1e2e2; }
     .buckets.panel.container header .progress-bar {
-      background-color: #f0927b; }
+      background-color: #f18e4c; }
   .buckets.panel.container .bucket {
     height: 100px;
     padding: 16px 30px 20px 30px;
-    border-bottom: 1px solid #264149;
-    border-top: 1px solid #2c434c;
+    border-bottom: 1px solid #e8e8e8;
     min-height: 4em;
     font-weight: 400; }
     .buckets.panel.container .bucket .progress {
       margin-top: 12px;
       margin-bottom: 0px;
-      background-color: #243439; }
+      background-color: #e1e2e2; }
     .buckets.panel.container .bucket .progress-bar {
       background-color: #46afb6; }
     .buckets.panel.container .bucket.selected {
@@ -50,21 +50,26 @@
       font-size: 90%;
       font-weight: normal;
       line-height: 26px; }
+    .buckets.panel.container .bucket a {
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 16px;
+      color: #4b6e87; }
     .buckets.panel.container .bucket .allocation_amount {
       float: right;
       height: 26px; }
-      .buckets.panel.container .bucket .allocation_amount.allocated, .buckets.panel.container .bucket .allocation_amount.allocated input {
-        color: #84c442; }
-      .buckets.panel.container .bucket .allocation_amount.allocate, .buckets.panel.container .bucket .allocation_amount.allocate input {
-        color: #f37658; }
       .buckets.panel.container .bucket .allocation_amount label {
         text-transform: uppercase;
         font-size: 65%;
         margin-right: 0.4em;
         margin-left: 0.5em; }
     .buckets.panel.container .bucket input[type="number"] {
-      background-color: #243439;
-      border-width: 0;
+      background-color: white;
+      border-width: thin;
+      border-style: solid;
+      border-color: coral;
+      border-radius: 4px !important;
+      color: coral !important;
       height: 24px;
       text-align: right;
       font-size: 100%;

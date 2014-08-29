@@ -1,7 +1,7 @@
 <div class="bucket-list" ng-repeat="bucket in buckets">
-  <div class="bucket" ng-if='currentBudget'>
+  <div class="bucket" ng-if='currentBudget' ng-click="go('#/buckets/{{bucket.id}}')">
     <div class="allocation_amount allocated">
-      <label>Allocated</label>
+      <!--<label>Allocated</label>-->
       <input type="number" ng-model='bucket.my_allocation_total'>
     </div>
 

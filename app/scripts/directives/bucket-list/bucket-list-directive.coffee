@@ -12,6 +12,7 @@ controller = ($rootScope, $scope, Budget) ->
 
       $scope.buckets = buckets
 
+
 window.Cobudget.Directives.BucketList = ->
   {
     restrict: 'EA'

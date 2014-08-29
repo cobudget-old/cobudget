@@ -1,15 +1,15 @@
 @import utilities
 
-$dark-base: #334248
+$dark-base: white
 $dark-base-selected: #14303A
-$dark-base-cutout: #243439
+$dark-base-cutout: #e1e2e2
 $progress-bar-color: #46afb6
 $header-progress-bar-color: #e35e3b
 
 $text-on-dark-base: #A0C8CC
 
 $funded: #84C442
-$unfunded: #F37658
+
 
 $bucket-gutter: 30px
 
@@ -32,29 +32,33 @@ $bucket-gutter: 30px
   background-color: $dark-base
   color: $text-on-dark-base
   font-family: "Open Sans"
+  border-right: 1px solid #e8e8e8
+
 
   header
     @include allocatable(background-color)
     padding: $bucket-gutter $bucket-gutter
     min-height: 155px
-    color: white
+    color: coral
+    background-color: white
     font-size: 23px
     font-weight: 300
-    text-align: center
+    text-align: left
+    border-bottom: 1px solid #e8e8e8
 
     .progress
       margin-top: 50px
       margin-bottom: 0px
-      background-color: $header-progress-bar-color
+      background-color: #e1e2e2
 
     .progress-bar
-      background-color: #f0927b
+      background-color: #f18e4c
 
   .bucket
     height: 100px
     padding: 16px $bucket-gutter 20px $bucket-gutter
-    border-bottom: 1px solid #264149
-    border-top: 1px solid #2C434C
+    border-bottom: 1px solid #e8e8e8
+    //border-top: 1px solid #e8e8e8
     min-height: 4em
     font-weight: 400
 
@@ -75,8 +79,14 @@ $bucket-gutter: 30px
       font-weight: normal
       line-height: 26px
 
+    a
+      text-decoration: none
+      font-weight: 400
+      font-size: 16px
+      color: #4b6e87
+
     .allocation_amount
-      @include allocatable(color)
+      //@include allocatable(color)
       float: right
       height: 26px
 
@@ -87,8 +97,12 @@ $bucket-gutter: 30px
         margin-left: 0.5em
 
     input[type="number"]
-      background-color: $dark-base-cutout
-      border-width: 0
+      background-color: white
+      border-width: thin
+      border-style: solid
+      border-color: coral
+      border-radius: 4px !important
+      color: coral !important
       height: 24px
       text-align: right
       font-size: 100%
