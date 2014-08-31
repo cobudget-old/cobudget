@@ -7,7 +7,7 @@ controller = ($rootScope, $scope, Budget) ->
 
     Budget.getBudgetBuckets(budget.id).then (buckets) ->
       _.each buckets, (bucket) ->
-        console.log(bucket)
+        #console.log(bucket)
         bucket.amount_funded = bucket.amount_filled
 
         if bucket.amount_filled == 0 && !bucket.maximum_cents
