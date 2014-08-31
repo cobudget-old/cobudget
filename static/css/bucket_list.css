@@ -1,12 +1,3 @@
-@media screen and (max-width: 1000px) {
-  .buckets.panel.container {
-    height: 100%;
-    overflow: auto;
-    background-color: white;
-    color: #a0c8cc;
-    font-family: "Open Sans";
-    width: 55%;
-    margin-left: 0px; } }
 .buckets.panel.container {
   height: 100%;
   overflow: auto;
@@ -27,11 +18,14 @@
     .buckets.panel.container header.allocated, .buckets.panel.container header.allocated input {
       background-color: #84c442; }
     .buckets.panel.container header .progress {
-      margin-top: 50px;
+      margin-top: 30px;
       margin-bottom: 0px;
       background-color: #e1e2e2; }
     .buckets.panel.container header .progress-bar {
       background-color: #f18e4c; }
+    .buckets.panel.container header .budget-close {
+      text-align: left;
+      font-size: 16px; }
   .buckets.panel.container .bucket {
     height: 100px;
     padding: 16px 30px 20px 30px;

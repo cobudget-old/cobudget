@@ -1,4 +1,4 @@
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 900px) {
   .right.panel.container {
     height: 100%;
     overflow: auto; }
@@ -94,7 +94,7 @@
           font-size: 25px;
           line-height: 53px;
           margin-bottom: 0px;
-          margin-left: 60px; }
+          margin-left: 50px; }
       .right.panel.container .overview-container #budget_overview_title_icon {
         height: 50px;
         float: left; }

@@ -13,18 +13,8 @@ $funded: #84C442
 
 $bucket-gutter: 30px
 
-@media screen and (max-width: 1000px) 
-  .buckets.panel.container
-    height: 100%
-    overflow: auto
-    background-color: $dark-base
-    color: $text-on-dark-base
-    font-family: "Open Sans"
-    width: 55%
-    margin-left: 0px
 
-
-@media screen and (min-width: 1000px)
+@media screen and (min-width: 900px)
 
 .buckets.panel.container
   height: 100%
@@ -48,12 +38,16 @@ $bucket-gutter: 30px
     border-bottom: 1px solid #e8e8e8
 
     .progress
-      margin-top: 50px
+      margin-top: 30px
       margin-bottom: 0px
       background-color: #e1e2e2
 
     .progress-bar
       background-color: #f18e4c
+
+    .budget-close
+      text-align: left
+      font-size: 16px
 
   .bucket
     height: 100px
