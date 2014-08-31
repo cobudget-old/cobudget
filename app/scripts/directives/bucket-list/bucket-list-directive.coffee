@@ -9,7 +9,7 @@ controller = ($rootScope, $scope, Budget) ->
       _.each buckets, (bucket) ->
         console.log(bucket)
 
-#        bucket.percentage_funded = 80
+#        bucket.percentage_filled
 #        bucket.my_allocation_total = 100
 
       $scope.buckets = buckets
