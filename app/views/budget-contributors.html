@@ -1,6 +1,11 @@
-{{currentBudgetId}}
-<div class="contributor-list" ng-repeat="contributor in contributors">
-  <div class="contributor" ng-if='currentBudget'>
-  	{{contributor.name}}
-  </div>
+<!--{{currentBudgetId}}-->
+<div>
+	<h3>List of this budget's contributors!</h3>
+	<div class="contributor-list" ng-repeat="contributor in contributors">
+	  <div class="contributor" ng-if='currentBudget'>
+	  	${{contributor.allocation_rights_cents / 100}}
+	  	--------------
+	  	{{contributor.name}}
+	  </div>
+	</div>
 </div>

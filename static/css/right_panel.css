@@ -22,17 +22,18 @@
       background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); }
-    .right.panel.container .content {
+    .right.panel.container .details {
       padding-left: 20px;
       padding-right: 20px;
       padding-bottom: 15px;
+      margin-top: 25px;
       top: 10px;
       max-width: 100%;
       z-index: 3; }
-      .right.panel.container .content .banner {
+      .right.panel.container .details .banner {
         min-height: 150px;
         /*This is hacky, but workarounds I found were more hacky... Should probly just be replaced with $banner-image-size + $banner-content-gutter */ }
-        .right.panel.container .content .banner .banner_image {
+        .right.panel.container .details .banner .banner_image {
           width: 150px;
           height: 150px;
           float: left;
@@ -42,32 +43,32 @@
           -moz-background-size: cover;
           -o-background-size: cover;
           background-size: cover; }
-        .right.panel.container .content .banner h1 {
+        .right.panel.container .details .banner h1 {
           margin-left: 180px;
           margin-bottom: 10px;
           color: white;
           font-weight: 300; }
-        .right.panel.container .content .banner h2 {
+        .right.panel.container .details .banner h2 {
           margin-left: 180px;
           font-size: 12px;
           color: white;
           font-weight: 300; }
-        .right.panel.container .content .banner .buttons.container {
+        .right.panel.container .details .banner .buttons.container {
           padding-left: 180px;
           max-width: 100%; }
-          .right.panel.container .content .banner .buttons.container .active.button {
+          .right.panel.container .details .banner .buttons.container .active.button {
             color: #49b0b7; }
-          .right.panel.container .content .banner .buttons.container .button {
+          .right.panel.container .details .banner .buttons.container .button {
             float: left;
             margin-left: 5px;
             margin-right: 10px;
             margin-top: 25px;
             color: #9d9e9f; }
-            .right.panel.container .content .banner .buttons.container .button i {
+            .right.panel.container .details .banner .buttons.container .button i {
               width: 35px;
               height: 35px;
               float: left; }
-            .right.panel.container .content .banner .buttons.container .button p {
+            .right.panel.container .details .banner .buttons.container .button p {
               font-size: 10px; }
     .right.panel.container .overview-container {
       padding-left: 30px;
