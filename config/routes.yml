@@ -78,7 +78,7 @@
     route: 'buckets/:bucket_id/percentage_filled'
     command: bucket_percentage_enquiry
     params: '*bucket_id'
-    description: Returns the percentage filled for a specific bucket
+    description: Returns the percentage filled for a specific bucket!
 
 -
   get:
