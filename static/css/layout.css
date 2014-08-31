@@ -70,12 +70,11 @@ html, body {
     html * .tab-bar, body * .tab-bar {
       width: 100%;
       position: relative;
-      top: 45px;
-      left: 50%;
       height: 51px;
       line-height: 51px;
-      border-bottom: thin solid #f2f2f2; }
-      html * .tab-bar div, body * .tab-bar div {
+      border-bottom: thin solid #f2f2f2;
+      background-color: white; }
+      html * .tab-bar .tab, body * .tab-bar .tab {
         border-right: 1px solid #f2f2f2;
         cursor: pointer;
         height: 51px; }
