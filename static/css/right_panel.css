@@ -99,7 +99,8 @@
         height: 50px;
         float: left; }
       .right.panel.container .overview-container #title_underline {
-        width: 100%; }
+        width: 100%;
+        margin-top: 20px; }
       .right.panel.container .overview-container .totals.triplet .totals.section {
         float: left;
         margin-top: 10px;
@@ -109,7 +110,7 @@
           margin-bottom: 0px;
           font-size: 70%; }
         .right.panel.container .overview-container .totals.triplet .totals.section .section-detail span {
-          font-size: 24px;
+          font-size: 19px;
           font-weight: 300;
           color: #49b0b7; }
       .right.panel.container .overview-container .totals.triplet vr {
