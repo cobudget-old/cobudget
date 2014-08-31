@@ -22,7 +22,7 @@ Feature: Bucket Allocations
     When Tygra allocates $20 to the SqueakyMice bucket
     Then the SqueakyMice bucket should have a filled percentage of 0.1
     When Liono allocates $41 to the SqueakyMice bucket
-    Then the SqueakyMice bucket should have a filled percentage of 0.305
+    Then the SqueakyMice bucket should have a filled percentage of 0.31
 
   Scenario: Successfully allocate money across multiple buckets
     When Liono allocates $10 to the Treats bucket

@@ -41,9 +41,18 @@ module Cobudget
       end
     end
 
+    def percentage_filled
+      return (self.amount_filled.to_f / self.maximum_cents.to_f).round(2) if self.maximum_cents
+      100
+    end
+
+    def amount_filled
+      Money.new(entries.sum(:amount_cents)).cents
+    end
+
     def as_json(options={})
       super(
-        methods: :sponsor_name_or_email 
+        methods: [:sponsor_name_or_email, :amount_filled, :percentage_filled]
       )
     end
   end
