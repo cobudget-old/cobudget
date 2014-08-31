@@ -16,6 +16,10 @@ Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET})$/ do |bucket_name, budget|
   #api.create_buckets(budget: budget, bucket_name: bucket_name)
 end
 
+Given /^a bucket ([^ ]*) in (#{CAPTURE_BUDGET}) with a maximum of (#{CAPTURE_MONEY})$/ do |bucket_name, budget, max|
+  buckets[bucket_name] = Cobudget::Bucket.create!(name: bucket_name, description: 'Special bucket', budget_id: budget.id, maximum: max)
+end
+
 When /^([^ ]+) creates a new user ([^ ]+)$/ do |creator_name, target_name|
   creator = users[creator_name]
 

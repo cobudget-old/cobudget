@@ -38,6 +38,10 @@ Then /^(#{CAPTURE_BUCKET}) should have a balance of (#{CAPTURE_MONEY})$/ do |buc
   play.bucket_balance_enquiry(bucket: bucket).should == Money.new(amount*100)
 end
 
+Then /^(#{CAPTURE_BUCKET}) should have a filled percentage of (#{CAPTURE_NUMBER})$/ do |bucket, amount|
+  play.bucket_percentage_enquiry(bucket: bucket).should == amount
+end
+
 When /^([^ ]*) allocates (#{CAPTURE_MONEY}) to (#{CAPTURE_BUCKET})$/ do |user_name, amount, bucket|
   user = users[user_name]
 

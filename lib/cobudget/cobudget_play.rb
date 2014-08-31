@@ -11,6 +11,7 @@ module Cobudget
     context BudgetUnallocatedBalanceEnquiry
     context BudgetTotalEnquiry
     context BucketAllocationsFromUserEnquiry
+    context BucketPercentageEnquiry
 
     contexts_for Comments
     contexts_for Budgets

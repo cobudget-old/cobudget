@@ -14,6 +14,15 @@ Feature: Bucket Allocations
   Scenario: Successfully allocate money into a bucket
     When Liono allocates $50 to the Tuna bucket
     Then Liono should have a remaining allocation of $0 in the Thundera budget
+    And the Tuna bucket should have a filled percentage of 100
+
+  Scenario: Allocate money into a bucket and see resulting percentage
+    Given a bucket SqueakyMice in the Thundera budget with a maximum of $200
+    Then the SqueakyMice bucket should have a filled percentage of 0.0
+    When Tygra allocates $20 to the SqueakyMice bucket
+    Then the SqueakyMice bucket should have a filled percentage of 0.1
+    When Liono allocates $41 to the SqueakyMice bucket
+    Then the SqueakyMice bucket should have a filled percentage of 0.305
 
   Scenario: Successfully allocate money across multiple buckets
     When Liono allocates $10 to the Treats bucket

@@ -38,6 +38,10 @@ CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
   amount.gsub(',', '').to_f
 end
 
+CAPTURE_NUMBER = Transform /^(\-?[\d\.\,]+)$/ do |amount|
+  amount.gsub(',', '').to_f
+end
+
 CAPTURE_BUCKET = Transform /^the ([^ ]*) bucket/ do |bucket_identifier|
   buckets[bucket_identifier] || (raise 'Bucket not found')
 end

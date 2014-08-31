@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 201402270900) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "accounts", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -55,7 +52,7 @@ ActiveRecord::Schema.define(version: 201402270900) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry"
 
   create_table "entries", force: true do |t|
     t.string   "description"
