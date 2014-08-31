@@ -1,6 +1,8 @@
 <header class="allocate" ng-if='currentBudget'>
   {{ budget_time_message }}
 
+  <span>{{ budget_close_message }}</span>
+
   <div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="{{ hours_since_start }}" aria-valuemin="0" aria-valuemax="{{ total_hours }}" style="{{ percent_complete_style }}">
       <span class="sr-only">60% Complete</span>
