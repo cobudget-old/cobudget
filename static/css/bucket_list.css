@@ -13,7 +13,8 @@
   background-color: white;
   color: #a0c8cc;
   font-family: "Open Sans";
-  border-right: 1px solid #e8e8e8; }
+  border-right: 1px solid #e8e8e8;
+  margin-top: 0px; }
   .buckets.panel.container header {
     padding: 30px 30px;
     min-height: 155px;

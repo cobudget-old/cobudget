@@ -71,6 +71,7 @@ html, body {
       width: 100%;
       position: relative;
       top: 45px;
+      left: 50%;
       height: 51px;
       line-height: 51px;
       border-bottom: thin solid #f2f2f2; }
