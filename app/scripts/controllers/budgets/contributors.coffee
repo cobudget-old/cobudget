@@ -11,6 +11,10 @@ window.Cobudget.Controllers.BudgetContributors = ($scope, $rootScope, $route, Bu
     Budget.getBudgetContributors(budget.id).then (contributors) ->
       _.each contributors, (contributor) ->
         #console.log(contributor)
+        long_name = contributor.name
+        if _.contains(long_name,"'")
+          short_name = long_name.substring(0, long_name.indexOf("'"))
+          contributor.name = short_name
 
       $scope.contributors = contributors
 

@@ -78,10 +78,11 @@ html, body {
         border-right: 1px solid #f2f2f2;
         cursor: pointer;
         height: 51px; }
-      html * .tab-bar .content, body * .tab-bar .content {
-        text-align: center;
-        text-transform: uppercase;
-        color: #4d4d4d; }
+        html * .tab-bar .tab .content, body * .tab-bar .tab .content {
+          text-align: center;
+          text-transform: uppercase;
+          color: #4d4d4d;
+          padding: 0px 0px 0px 0px !important; }
       html * .tab-bar p, body * .tab-bar p {
         display: inline;
         padding-bottom: 11px; }
