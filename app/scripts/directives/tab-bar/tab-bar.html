@@ -1,15 +1,19 @@
-<div class="row tab-bar">
+<div class="row tab-bar" ng-init="selectedTab = 'overview'">
 
       
       <div class="col-md-4 buckets tab">
         <div class="content">
-          <p class="active"><a href='#/budgets/{{currentBudgetId}}'>OVERVIEW</a></p>
+          <p ng-class="{'active':selectedTab === 'overview'}" ng-click="selectedTab = 'overview'">
+            <a href='#/budgets/{{currentBudgetId}}'>OVERVIEW</a>
+          </p>
         </div>
       </div>
 
       <div class="col-md-4 contributors tab">
         <div class="content">
-          <p><a href='#/budgets/{{currentBudgetId}}/contributors'>CONTRIBUTORS</a></p>
+          <p ng-class="{'active':selectedTab === 'contributors'}" ng-click="selectedTab = 'contributors'">
+            <a href='#/budgets/{{currentBudgetId}}/contributors'>CONTRIBUTORS</a>
+          </p>
         </div>
       </div>
 
