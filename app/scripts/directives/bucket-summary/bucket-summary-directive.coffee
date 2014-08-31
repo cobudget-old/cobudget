@@ -27,6 +27,7 @@ controller = ($rootScope, $scope, Budget) ->
 
     percent_complete = Math.round($scope.hours_left / $scope.total_hours)
     percent_complete = 0 if current_time < start_time
+    percent_complete = 100 if current_time > end_time
 
     $scope.percent_complete_style = "width: #{percent_complete}%"
 
