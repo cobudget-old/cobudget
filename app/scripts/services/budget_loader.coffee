@@ -20,7 +20,9 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
 
   setBudgetFromArray: (id, budgets) ->
     budget = _.first(_.where(budgets, {'id': id}))
-    @saveBudget(budget) if budget
+    @setBudget(budget) if budget
+
 
   setBudget: (budget) ->
     @rootScope.currentBudget = budget
+

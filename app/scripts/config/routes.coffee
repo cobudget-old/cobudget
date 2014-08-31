@@ -10,7 +10,7 @@ window.Cobudget.Config.Router = ($routeProvider) ->
     .when '/budgets/:budget_id/my-allocation',
       templateUrl: '/views/budget-allocations.html'
       controller: window.Cobudget.Controllers.BudgetAllocations
-    .when '/buckets/:budget_id',
+    .when '/buckets/:bucket_id',
       templateUrl: '/views/bucket-show.html'
       controller: window.Cobudget.Controllers.BucketShow
     .otherwise(redirectTo: '/budgets/1')

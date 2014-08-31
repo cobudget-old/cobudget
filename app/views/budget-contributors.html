@@ -1,1 +1,6 @@
-contributors
+{{currentBudgetId}}
+<div class="contributor-list" ng-repeat="contributor in contributors">
+  <div class="contributor" ng-if='currentBudget'>
+  	{{contributor.name}}
+  </div>
+</div>

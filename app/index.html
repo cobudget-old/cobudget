@@ -39,20 +39,7 @@
     <!-- <>Add your site or application content here -->
     <div nav-bar></div>
 
-    <div class="row tab-bar">
-      
-      <div class="col-md-2 buckets tab">
-        <div class="content">
-          <p class="active">BUCKETS</p>
-        </div>
-      </div>
-
-      <div class="col-md-2 contributors tab">
-        <div class="content">
-          <p>CONTRIBUTORS</p>
-        </div>
-      </div>
-    </div>
+    <div tab-bar></div>
 
     <flash:messages class="slide-down" ng-show="messages"></flash:messages>
 
@@ -107,6 +94,7 @@
         <script src="scripts/directives/bucket-list/bucket-list-directive.js"></script>
         <script src="scripts/directives/bucket-summary/bucket-summary-directive.js"></script>
         <script src="scripts/directives/nav-bar/nav-bar-directive.js"></script>
+        <script src="scripts/directives/tab-bar/tab-bar-directive.js"></script>
 
         <script src="scripts/resources/budgets.js"></script>
         <script src="scripts/resources/buckets.js"></script>

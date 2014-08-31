@@ -18,7 +18,7 @@ html, body {
       line-height: 45px; }
       html * .nav.bar.container .brand, body * .nav.bar.container .brand {
         height: 100%;
-        font-size: 20px;
+        font-size: 16px;
         color: white;
         padding-left: 20px;
         background: #54c1c2; }
