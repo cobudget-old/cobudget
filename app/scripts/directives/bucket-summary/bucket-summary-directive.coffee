@@ -35,8 +35,6 @@ controller = ($rootScope, $scope, Budget) ->
       $scope.budget_close_message = "Round closes at 9am, 5 September 2014"
     else
       $scope.budget_close_message = "Round closed at 9am, 5 September 2014"
-    end
-
 
 window.Cobudget.Directives.BucketSummary = ->
   {
