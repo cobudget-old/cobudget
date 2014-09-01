@@ -12,7 +12,7 @@
       <!--Got a hacky fix for progress bars here... PB cant be 0, must be empty -->
       <div id="bucket-{{bucket.id}}" 
         class="progress-bar" role="progressbar" 
-        aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded : ''}}"
+        aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded*100 : ''}}"
         aria-valuemin="0" 
         aria-valuemax="100" 
         style="width: {{ bucket.percentage_funded * 100}}%;">

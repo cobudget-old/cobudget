@@ -18,7 +18,7 @@ controller = ($rootScope, $scope, Budget) ->
         if bucket.maximum_cents
           bucket.maximum_dollars = (bucket.maximum_cents/100).toFixed(2)
         else
-          bucket.maximum_dollars = bucket.amount_filled
+          bucket.maximum_dollars = (bucket.amount_filled / 100)
 
 
         # get the width of the progress-bar element, multiply by the percentage filled!
