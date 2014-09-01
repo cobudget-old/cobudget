@@ -1,11 +1,42 @@
 <!--{{currentBudgetId}}-->
 <div>
 	<h3>List of this budget's contributors!</h3>
-	<div class="contributor-list" ng-repeat="contributor in contributors">
-	  <div class="contributor" ng-if='currentBudget'>
-	  	${{contributor.allocation_rights_cents / 100}}
-	  	--------------
-	  	{{contributor.name}}
-	  </div>
-	</div>
+	<!--<div class="contributor-list" ng-repeat="contributor in contributors">-->
+	  <!--<div class="contributor" ng-if='currentBudget'>-->
+	  	<!--${{contributor.allocation_rights_cents / 100}}-->
+	  	<!------------------>
+	  	<!--{{contributor.name}}-->
+	  <!--</div>-->
+	<!--</div>-->
+
+    <div class="contributor-list">
+      <table>
+        <tr><th width="33%">Contributor</th><th width="33%">To allocate</th><th width="33%">Contribution</th></tr>
+        <tr><td>Alanna Krause<td>$32.92</td><td>$65.63</td></tr>
+        <tr><td>Charlie Ablett</td><td>$893.21</td><td>$1780.93</td></tr>
+        <tr><td>Craftworks Devops</td><td>$79.78</td><td>$159.06</td></tr>
+        <tr><td>Craig Ambrose</td><td>$461.88</td><td>$920.93</td></tr>
+          <tr><td>Darcy Thomas</td><td>$227.10</td><td>$452.81</td></tr>
+          <tr><td>Jesse Doud</td><td>$101.13</td><td>$201.64</td></tr>
+          <tr><td>John Irving</td><td>$202.80</td><td>$404.35</td></tr>
+          <tr><td>Joshua Vial</td><td>$438.85</td><td>$875.00</td></tr>
+          <tr><td>Kiesia Carmine</td><td>$408.50</td><td>$814.49</td></tr>
+          <tr><td>Malcolm Shearer</td><td>$49.37</td><td>$98.44</td></tr>
+          <tr><td>Maz Hermon</td><td>$20.27</td><td>$40.42</td></tr>
+          <tr><td>Michael Williams</td><td>$289.79</td><td>$577.79</td></tr>
+          <tr><td>Minh Ha</td><td>$515.51</td><td>$1,027.85</td></tr>
+          <tr><td>Nanz Nair</td><td>$64.94</td><td>$129.48</td></tr>
+          <tr><td>Patrick Corrieri</td><td>$34.56</td><td>$68.91</td></tr>
+          <tr><td>Sam Parkin</td><td>839.96</td><td>$1,674.75</td></tr>
+          <tr><td>Samson Ootoowak</td><td>$227.10</td><td>$452.81</td></tr>
+          <tr><td>Simon Tegg</td><td>$6.47</td><td>$12.91</td></tr>
+          <tr><td>Stephanie Noirpoudre</td><td>$319.96</td><td>$637.95</td></tr>
+          <tr><td>Craftworks</td><td>$175.54</td><td>$350.00</td></tr>
+          <tr><td>Lean Hosting</td><td>$690.61</td><td>$20.89</td></tr>
+          <tr><td>Noshi Creative</td><td>$196.12</td><td>$391.03</td></tr>
+          <tr><td>Tracey Ambrose</td><td>$6.95</td><td>$13.86</td></tr>
+          <tr><td>William Demchick</td><td>$79.87</td><td>$159.25</td></tr>
+          <tr><td>Yasmine El Orfi</td><td>574.1</td><td>$1,144.68</td></tr>
+        </table>
+    </div>
 </div>
