@@ -15,7 +15,7 @@
         aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded : ''}}"
         aria-valuemin="0" 
         aria-valuemax="100" 
-        style="width: {{bucket.percentage_funded}}%;">
+        style="width: {{ bucket.percentage_funded * 100}}%;">
         <span class="sr-only">60% Complete</span>
       </div>
     </div>
