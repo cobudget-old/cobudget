@@ -90,8 +90,6 @@ html, body {
         border-bottom: #55c0c1;
         border-bottom-width: thick;
         border-bottom-style: solid; }
-    html * .buckets.panel, body * .buckets.panel {
-      margin-top: 45px; }
     html * .right.panel.container, body * .right.panel.container {
       height: 100%;
       min-height: 800px;
