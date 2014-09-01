@@ -46,37 +46,23 @@
             </div>
 
             <div class="row contributors">
+              
               <h4 class="col-sm-12 title">
                 CONTRIBUTORS
               </h4>
 
-              <div class="col-md-12 contributor list">
-
+              <div class="col-md-12 contributor list" ng-repeat="allocation in allocations">
                 <div class="col-md-12 item">
-                  <p class="col-md-3 funding-amount">$1255</p>
+                  <p class="col-md-3 funding-amount">${{allocation.amount}}</p>
                   <img class="col-md-1" src="" />
-                  <p class="col-md-8 name">Derek Razo</p>
+                  <p class="col-md-8 name">{{allocation.user_name_or_email}}</p>
                 </div>
-
-                <div class="col-md-12 item">
-                  <p class="col-md-3 funding-amount">$1255</p>
-                  <img class="col-md-1" src="" />
-                  <p class="col-md-8 name">Derek Razo</p>
-                </div>
-
-                <div class="col-md-12 item">
-                  <p class="col-md-3 funding-amount">$1255</p>
-                  <img class="col-md-1" src="" />
-                  <p class="col-md-8 name">Derek Razo</p>
-                </div>
-
-                <div class="col-md-12 item">
-                  <p class="col-md-3 funding-amount">$1255</p>
-                  <img class="col-md-1" src="" />
-                  <p class="col-md-8 name">Derek Razo</p>
-                </div>
-
               </div>
+
+              <div ng-show="{{!allocations.length}}">
+                Looks like no one has contributed to this bucket yet!
+              </div>
+
             </div>
 
         </div><!--END ROW BUCKET DETAIL-->
