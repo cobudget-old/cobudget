@@ -1,13 +1,6 @@
 <!--{{currentBudgetId}}-->
 <div>
 	<h3>List of this budget's contributors!</h3>
-	<!--<div class="contributor-list" ng-repeat="contributor in contributors">-->
-	  <!--<div class="contributor" ng-if='currentBudget'>-->
-	  	<!--${{contributor.allocation_rights_cents / 100}}-->
-	  	<!------------------>
-	  	<!--{{contributor.name}}-->
-	  <!--</div>-->
-	<!--</div>-->
 
     <div class="contributor-list">
       <table>
@@ -38,5 +31,14 @@
           <tr><td>William Demchick</td><td>$79.87</td><td>$159.25</td></tr>
           <tr><td>Yasmine El Orfi</td><td>574.1</td><td>$1,144.68</td></tr>
         </table>
+    </div>
+
+    <h4>What the contributors have now...</h4>
+    <div class="contributor-list" ng-repeat="contributor in contributors">
+    <div class="contributor" ng-if='currentBudget'>
+    ${{contributor.allocation_rights_cents / 100}}
+    --------------
+    {{contributor.name}}
+    </div>
     </div>
 </div>
