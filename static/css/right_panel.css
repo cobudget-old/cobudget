@@ -1,7 +1,8 @@
 @media screen and (min-width: 900px) {
   .right.panel.container {
     height: 100%;
-    overflow: auto; }
+    overflow: auto;
+    padding-bottom: 55px; }
     .right.panel.container .cover_photo {
       width: 100%;
       min-height: 155px;
