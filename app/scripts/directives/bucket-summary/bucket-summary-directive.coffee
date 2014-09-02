@@ -26,11 +26,7 @@ controller = ($rootScope, $scope, Budget) ->
       days_left = $scope.hours_left / 24
       $scope.budget_time_message = "There are #{Math.floor(days_left)} days left in the round!"
 
-    console.log("hours left = #{$scope.hours_left}")
-    console.log("total hours=#{$scope.total_hours}")
-
     percent_complete = (1 - ($scope.hours_left / $scope.total_hours)) * 100
-    console.log("% complete = #{percent_complete}")
 
     percent_complete = 0 if current_time < start_time
     percent_complete = 100 if current_time > end_time
