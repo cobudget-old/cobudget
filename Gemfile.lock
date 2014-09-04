@@ -33,6 +33,7 @@ GEM
       json
     arel (5.0.1.20140414130214)
     builder (3.2.2)
+    cancan (1.6.10)
     erubis (2.7.0)
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
@@ -102,6 +103,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.9.0)
   apipie-rails
+  cancan
   foreigner
   inherited_resources
   pg

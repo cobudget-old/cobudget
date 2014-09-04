@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::ImplicitRender
+  include CanCan::ControllerAdditions
+
+  def current_user
+    Person.first
+  end
 
   def self.inherit_resources
     InheritedResources::Base.inherit_resources(self)
