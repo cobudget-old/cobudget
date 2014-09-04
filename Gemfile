@@ -11,3 +11,8 @@ gem 'spring', :group => :development
 
 gem 'pg'
 gem 'foreigner'
+
+# api
+
+gem 'apipie-rails'
+gem 'active_model_serializers', '~> 0.9.0'
