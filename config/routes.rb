@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   apipie
 
-  resources :buckets
+  resources :rounds, only: [] do
+    resources :projects, only: :index
+  end
+
+  root to: redirect('/apipie')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

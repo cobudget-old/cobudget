@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20140902080400) do
   end
 
   create_table "rounds", force: true do |t|
+    t.integer "budget_id"
   end
 
   add_foreign_key "allocation_rights", "allocators", name: "allocation_rights_allocator_id_fk"
@@ -86,5 +87,7 @@ ActiveRecord::Schema.define(version: 20140902080400) do
   add_foreign_key "round_projects", "buckets", name: "round_projects_bucket_id_fk"
   add_foreign_key "round_projects", "projects", name: "round_projects_project_id_fk"
   add_foreign_key "round_projects", "rounds", name: "round_projects_round_id_fk"
+
+  add_foreign_key "rounds", "budgets", name: "rounds_budget_id_fk"
 
 end

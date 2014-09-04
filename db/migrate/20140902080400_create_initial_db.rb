@@ -21,6 +21,7 @@ class CreateInitialDb < ActiveRecord::Migration
     end
 
     create_table :rounds do |t|
+      t.integer :budget_id
     end
 
     create_table :projects do |t|
@@ -51,6 +52,7 @@ class CreateInitialDb < ActiveRecord::Migration
       t.integer :amount_cents
     end
 
+    add_foreign_key :rounds, :budgets
     add_foreign_key :reserve_buckets, :buckets
     add_foreign_key :reserve_buckets, :budgets
     add_foreign_key :reserve_buckets, :allocators
