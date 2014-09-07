@@ -1,3 +1,4 @@
+
 Apipie.configure do |config|
   config.app_name                = "CobudgetApi"
   config.api_base_url            = ""
