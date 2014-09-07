@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :buckets, only: [] do
     resources :allocators, only: [] do
-      resource :allocation, only: [:show, :index], controller: :bucket_allocations
+      resource :allocation, only: [:show, :update], controller: :bucket_allocations
     end
   end
 
