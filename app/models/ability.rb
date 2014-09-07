@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    can :read, Budget
     can :read, Round
     can :read, Project
 

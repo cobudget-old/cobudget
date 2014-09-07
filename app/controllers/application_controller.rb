@@ -2,6 +2,7 @@ class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::ImplicitRender
   include CanCan::ControllerAdditions
+  include ActionController::Serialization
 
   def current_user
     Person.first

@@ -17,55 +17,72 @@ ActiveRecord::Schema.define(version: 20140902080400) do
   enable_extension "plpgsql"
 
   create_table "allocation_rights", force: true do |t|
-    t.integer "allocator_id"
-    t.integer "round_id"
-    t.integer "amount_cents"
+    t.integer  "allocator_id"
+    t.integer  "round_id"
+    t.integer  "amount_cents"
+    t.datetime "created_at"
   end
 
   create_table "allocations", force: true do |t|
-    t.integer "allocator_id"
-    t.integer "bucket_id"
-    t.integer "amount_cents"
+    t.integer  "allocator_id"
+    t.integer  "bucket_id"
+    t.integer  "amount_cents"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "allocators", force: true do |t|
-    t.integer "person_id"
-    t.integer "budget_id"
+    t.integer  "person_id"
+    t.integer  "budget_id"
+    t.datetime "created_at"
   end
 
   create_table "buckets", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "budgets", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "people", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", force: true do |t|
-    t.integer "budget_id"
-    t.integer "sponsor_id"
-    t.string  "name"
-    t.text    "description"
-    t.integer "min_cents"
-    t.integer "target_cents"
-    t.integer "max_cents"
+    t.integer  "budget_id"
+    t.integer  "sponsor_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "min_cents"
+    t.integer  "target_cents"
+    t.integer  "max_cents"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "reserve_buckets", force: true do |t|
-    t.integer "bucket_id"
-    t.integer "budget_id"
-    t.integer "allocator_id"
+    t.integer  "bucket_id"
+    t.integer  "budget_id"
+    t.integer  "allocator_id"
+    t.datetime "created_at"
   end
 
   create_table "round_projects", force: true do |t|
-    t.integer "project_id"
-    t.integer "round_id"
-    t.integer "bucket_id"
+    t.integer  "project_id"
+    t.integer  "round_id"
+    t.integer  "bucket_id"
+    t.datetime "created_at"
   end
 
   create_table "rounds", force: true do |t|
-    t.integer "budget_id"
+    t.integer  "budget_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_foreign_key "allocation_rights", "allocators", name: "allocation_rights_allocator_id_fk"
