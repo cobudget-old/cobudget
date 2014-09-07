@@ -12,6 +12,7 @@ class Ability
 
     if current_user
       can :read, Allocator, person_id: current_user.id
+      can :read, Allocation, allocator: {person_id: current_user.id}
     end
 
     # Define abilities for the passed in user here. For example:

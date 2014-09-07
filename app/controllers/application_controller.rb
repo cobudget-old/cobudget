@@ -4,6 +4,8 @@ class ApplicationController < ActionController::API
   include CanCan::ControllerAdditions
   include ActionController::Serialization
 
+  respond_to :json
+
   def current_user
     Person.first
   end

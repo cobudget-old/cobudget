@@ -2,6 +2,7 @@ class Allocator < ActiveRecord::Base
   belongs_to :person
   belongs_to :budget
   has_many :allocation_rights
+  has_many :allocations
 
   delegate :name, to: :person, allow: nil
 

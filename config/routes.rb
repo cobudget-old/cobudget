@@ -7,6 +7,12 @@ Rails.application.routes.draw do
 
   resources :rounds, only: :show
 
+  resources :buckets, only: [] do
+    resources :allocators, only: [] do
+      resource :allocation, only: [:show, :index], controller: :bucket_allocations
+    end
+  end
+
   root to: redirect('/docs')
 
   # The priority is based upon order of creation: first created -> highest priority.
