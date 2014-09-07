@@ -25,3 +25,7 @@ gem 'money-rails'
 # auth
 
 gem "cancan"
+
+group :development do
+  gem "capistrano"
+end
