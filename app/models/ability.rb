@@ -1,10 +1,18 @@
 class Ability
   include CanCan::Ability
 
+  def current_user
+    Person.first
+  end
+
   def initialize(user)
     can :read, Budget
     can :read, Round
     can :read, Project
+
+    if current_user
+      can :read, Allocator, person_id: current_user.id
+    end
 
     # Define abilities for the passed in user here. For example:
     #

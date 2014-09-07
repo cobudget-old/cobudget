@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   apipie
 
-  resources :budgets, only: :index
+  resources :budgets, only: :index do
+    resources :allocators, only: :index
+  end
+
   resources :rounds, only: :show
 
   root to: redirect('/docs')
