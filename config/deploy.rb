@@ -11,7 +11,7 @@ set :scm, :git
 task :staging do
   set :user,      "www"
   set :domain,    "craftworks.enspiral.info"
-  set :branch,    "staging"
+  set :branch,    "master"
   set :rails_env, "staging"
   set :deploy_to, "/home/#{user}/#{application.gsub('-','/')}/"
   set :bundle_without, [:development, :test]
