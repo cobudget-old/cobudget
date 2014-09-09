@@ -70,6 +70,7 @@ html, body {
     html * .tab-bar, body * .tab-bar {
       width: 100%;
       position: relative;
+      top: 45px;
       height: 51px;
       line-height: 51px;
       border-bottom: thin solid #f2f2f2;
@@ -93,10 +94,10 @@ html, body {
     html * .right.panel.container, body * .right.panel.container {
       height: 100%;
       min-height: 800px;
-      margin-top: 45px;
       background: #f6f8f6; }
     html * .right.panel .bucket.page.continaer, body * .right.panel .bucket.page.continaer {
       width: 100%; }
 
 .content-row {
-  height: 100%; }
+  height: 100%;
+  margin-top: 45px; }
