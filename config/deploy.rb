@@ -1,7 +1,7 @@
 set :application, "cobudget"
 
 set :repository, "deploy_package.tar.gz"
-set :scm, :none 
+set :scm, :none
 
 set :use_sudo,    false
 
@@ -59,7 +59,7 @@ namespace :deploy do
   end
 
   task :symlinks do
-    run "ln -nfs #{shared_path}/fonts #{release_path}/styles/fonts"
+    #run "ln -nfs #{shared_path}/fonts #{release_path}/styles/fonts"
   end
 
   before "deploy:update_code", "deploy:build"

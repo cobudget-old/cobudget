@@ -7,6 +7,14 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+var replace_files = [{
+  expand: true,
+  flatten: true,
+  src: ['./config/constants.coffee'],
+  dest: '<%= yeoman.app %>/scripts/config/'
+}]
+
+
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
@@ -237,7 +245,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
+          src: ['*.html', 'views/*.html', 'scripts/**/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -257,6 +265,8 @@ module.exports = function (grunt) {
             'modded_components/**/*',
             'images/{,*/}*.{gif,webp}',
             'fonts/*',
+            'lib/**/*',
+            'static-css/**/*',
             'views/**/*'
           ]
         }, {
@@ -305,6 +315,17 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
+    ngAnnotate: {
+        options: { },
+        app: {
+          files: [{
+            expand: true,
+            cwd: '.tmp/scripts',
+            src: '**/*.js',
+            dest: '.tmp/scripts'
+          }]
+        }
+    },
     ngmin: {
       dist: {
         files: [{
@@ -332,12 +353,7 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/development.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files
       },
       test: {
         options: {
@@ -345,12 +361,15 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/test.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files 
+      },
+      travis: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/travis.json')
+          }]
+        },
+        files: replace_files 
       },
       staging: {
         options: {
@@ -358,12 +377,7 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/staging.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files
       },
       production: {
         options: {
@@ -371,18 +385,13 @@ module.exports = function (grunt) {
             json: grunt.file.readJSON('./config/environments/production.json')
           }]
         },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
+        files: replace_files
       }
     },
     protractor: {
       options: {
         configFile: "config/protractor.js", 
-        keepAlive: true, // If false, the grunt process stops when the test fails.
+        keepAlive: false, // If false, the grunt process stops when the test fails.
         noColor: false, // If true, protractor will not use colors in its output.
         args: {
           // Arguments passed to the command
@@ -394,11 +403,30 @@ module.exports = function (grunt) {
           keepAlive: true,
           args: {}
         }
+      },
+      saucelabs: {
+          options: {
+              configFile: "./config/protractor-saucelabs.js",
+              args: {
+                  sauceUser: process.env.SAUCE_USERNAME,
+                  sauceKey: process.env.SAUCE_ACCESS_KEY
+              }
+          }
+      }
+    },
+    shell: { 
+      mocha: {
+        command: 'mocha --compilers coffee:coffee-script/register -R min --recursive test',
+        options: {
+          failOnError: true
+        }
       }
     }
   });
 
+  grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
@@ -415,10 +443,17 @@ module.exports = function (grunt) {
     ]);
   });
 
-  //not playing friendly with protractor - 0ms timeout
-  //grunt.registerTask('test', [
-  //  'protractor:e2e'
-  //]);
+  grunt.registerTask('sauce', [
+    'connect:test',
+    'protractor:saucelabs',
+    'shell:mocha'
+  ]);
+
+  grunt.registerTask('test', [
+    'connect:test',
+    'protractor:e2e',
+    'shell:mocha'
+  ]);
 
 //  grunt.registerTask('test', [
 //    'clean:server',
@@ -435,8 +470,8 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'ngAnnotate:app',
     'concat',
-    'ngmin',
     'copy:dist',
     'cdnify',
     'cssmin',

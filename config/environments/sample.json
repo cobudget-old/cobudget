@@ -1,7 +1,4 @@
-//add the configuration for your development, staging and production sites
 {
   "environment": "sample",
-  "apiEndpoint": "http://127.0.0.1:9292/cobudget",
-  "googClient": "google client",
-  "googApiKey": "google api key"
+  "apiEndpoint": "http://127.0.0.1:9292/cobudget"
 }

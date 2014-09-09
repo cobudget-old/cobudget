@@ -1,3 +1,4 @@
+require('coffee-script');
 exports.config = {
   // The address of a running selenium server.
   seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -13,15 +14,16 @@ exports.config = {
   //
   // See the full list at http://visionmedia.github.io/mocha/
   mochaOpts: {
-    reporter: 'dot'
+    reporter: 'dot',
+    enableTimeouts: false
   },
 
   capabilities: {
-    'browserName': 'phantomjs',
+    'browserName': 'chrome',
     'chromeOptions': {'args': ['--disable-extensions']}
   },
 
   // A base URL for your application under test. Calls to protractor.get()
   // with relative paths will be prepended with this.
-  baseUrl: 'http://localhost:9000'
+  baseUrl: 'http://localhost:9001'
 };
