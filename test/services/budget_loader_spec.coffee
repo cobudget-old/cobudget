@@ -43,21 +43,21 @@ describe 'BudgetLoader', ->
 
 
   describe 'setBudget', ->
-    xit 'sets $rootScope.currentBudget if id matches', ->
+    it 'sets $rootScope.currentBudget if id matches', ->
       budget = {id: 7}
       Budget.myBudgets.returns([{id: 2}, budget, {id: 1}])
       load_controller()
       BudgetLoader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(budget)
 
-    xit 'does nothing if scope array is empty', ->
+    it 'does nothing if scope array is empty', ->
       Budget.myBudgets.returns([])
       load_controller()
       $rootScope.currentBudget = null
       BudgetLoader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(null)
       
-    xit 'does nothing if no budget with id exists', ->
+    it 'does nothing if no budget with id exists', ->
       Budget.myBudgets.returns([{id: 4}, {id: 3}])
       load_controller()
       $rootScope.currentBudget = null

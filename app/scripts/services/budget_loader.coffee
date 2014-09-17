@@ -4,7 +4,18 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
   init: ($rootScope) ->
     @rootScope = $rootScope
 
-  loadFromURL: ->
+  load: ->
+    Budget.allBudgets().then (budgets) ->
+        $scope.budgets = budgets
+        #console.log(budgets)
+        if $routeParams.budget_id
+          $scope.currentBudgetId = parseInt($routeParams.budget_id) 
+        else if $rootScope.currentBudget
+          $scope.currentBudgetId = $rootScope.currentBudget.id
+        else
+          $scope.currentBudgetId = budgets[0].id
+
+  setCurrent: ->
     self = @
     if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.budget_id
       if $routeParams.budget_id
