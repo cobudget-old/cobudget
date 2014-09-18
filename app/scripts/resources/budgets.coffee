@@ -4,7 +4,7 @@ window.Cobudget.Resources.Budget = (Restangular) ->
   get: (budget_id)->
     Restangular.one('budgets', budget_id).get()
 
-  allBudgets: ()->
+  all: () ->
     Restangular.all('budgets').getList()
 
   myBudgets: ->

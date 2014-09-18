@@ -17,7 +17,7 @@ describe 'Budget Resource', ->
       expect(Budget.myBudgets()).to.eq('stub-object')
       Budget.allBudgets.restore()
 
-  describe 'allBudgets', ->
+  describe 'all', ->
     it 'calls all budgets', ->
-      Budget.allBudgets()
+      Budget.all()
       expect(Restangular.all).to.have.been.calledWith('budgets')
