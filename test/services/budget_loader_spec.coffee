@@ -1,15 +1,24 @@
 expect = require('../support/expect')
 sinon = require('sinon')
+Restangular = require('../support/restangular-stub')
 
 require '../support/setup'
 require '../../app/scripts/services/budget_loader'
+require '../../app/scripts/resources/budgets'
 
 $rootScope = {}
 
-budget_loader = new window.Cobudget.Services.BudgetLoader()
-budget_loader.init($rootScope)
-
 describe 'BudgetLoader', ->
+  before ->
+    global.Budget = {
+      allObject: sinon.stub()
+      all: ->
+        then: (callback) ->
+          callback(Budget.allObject())
+    }
+    global.budget_loader = new window.Cobudget.Services.BudgetLoader({ id: 1 }, Budget)
+    global.budget_loader.init($rootScope)
+
   beforeEach ->
     $rootScope.currentBudget = undefined
 
@@ -43,28 +52,21 @@ describe 'BudgetLoader', ->
 
 
   describe 'setBudget', ->
-    it 'sets $rootScope.currentBudget if id matches', ->
+    it 'sets rootScope.currentBudget to the first budget with matching id', ->
       budget = {id: 7}
-      Budget.myBudgets.returns([{id: 2}, budget, {id: 1}])
-      load_controller()
-      BudgetLoader.setBudget(7)
+      Budget.allObject.returns([{id: 2}, budget, {id: 1}])
+      budget_loader.loadAll()
+      budget_loader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(budget)
 
     it 'does nothing if scope array is empty', ->
-      Budget.myBudgets.returns([])
-      load_controller()
-      $rootScope.currentBudget = null
-      BudgetLoader.setBudget(7)
-      expect($rootScope.currentBudget).to.eq(null)
+      Budget.allObject.returns([])
+      budget_loader.loadAll()
+      budget_loader.setBudget(7)
+      expect($rootScope.currentBudget).to.eq(undefined)
       
     it 'does nothing if no budget with id exists', ->
-      Budget.myBudgets.returns([{id: 4}, {id: 3}])
-      load_controller()
-      $rootScope.currentBudget = null
-      BudgetLoader.setBudget(7)
-      expect($rootScope.currentBudget).to.eq(null)
-  describe 'setBudget', ->
-    it 'sets rootScope.currentBudget to the first budget with matching id'
-
-
-
+      Budget.allObject.returns([{id: 4}, {id: 3}])
+      budget_loader.loadAll()
+      budget_loader.setBudget(7)
+      expect($rootScope.currentBudget).to.eq(undefined)

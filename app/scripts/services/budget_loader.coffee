@@ -4,9 +4,12 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
   init: ($rootScope) ->
     @rootScope = $rootScope
 
-  load: ->
-    Budget.allBudgets().then (budgets) ->
-        $scope.budgets = budgets
+  loadAll: ->
+    self = @
+    Budget.all().then (budgets) ->
+        self.rootScope.budgets = budgets
+
+  ###
         #console.log(budgets)
         if $routeParams.budget_id
           $scope.currentBudgetId = parseInt($routeParams.budget_id) 
@@ -14,6 +17,7 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
           $scope.currentBudgetId = $rootScope.currentBudget.id
         else
           $scope.currentBudgetId = budgets[0].id
+  ###
 
   setCurrent: ->
     self = @
@@ -29,11 +33,8 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
   #    @scope.currentBudgetId = @rootScope.currentBudget.id
 
 
-  setBudgetFromArray: (id, budgets) ->
-    budget = _.first(_.where(budgets, {'id': id}))
-    @setBudget(budget) if budget
+  getBudgetById: (budgets, id) ->
+    return _.first(_.where(budgets, {'id': id}))
 
-
-  setBudget: (budget) ->
-    @rootScope.currentBudget = budget
-
+  setBudget: (budgetId) ->
+    @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, budgetId)
