@@ -30,34 +30,6 @@ describe 'BudgetLoader', ->
       Budget.allObject.returns(budgets)
       budget_loader.loadAll()
       expect($rootScope.budgets).to.deep.eq(budgets)
-  #describe 'defaultToFirstBudget', ->
-  #  beforeEach ->
-  #    $scope.budgets = [{id: 1},{id:7}, {id:3}]
-
-  #  it 'does nothing if scope.budgets empty', ->
-  #    $scope.budgets = []
-  #    budget_loader.defaultToFirstBudget()
-  #    expect($rootScope.currentBudget).to.eq(undefined)
-
-  #  describe 'when scope.currentBudgetId is unset', ->
-  #    beforeEach ->
-  #      $scope.currentBudgetId = ''
-  #      budget_loader.defaultToFirstBudget()
-
-  #    it 'sets rootScope.currentBudget to the first budget', ->
-  #      expect($rootScope.currentBudget).to.eq($scope.budgets[0])
-
-  #    it 'sets scope.currentBudgetId to the budget id', ->
-  #      expect($scope.currentBudgetId).to.eq(1)
-
-  #  describe 'when scope.currentBudgetId is set', ->
-  #    beforeEach ->
-  #      $scope.currentBudgetId = 7
-  #      budget_loader.defaultToFirstBudget()
-
-  #    it 'does not change the current budgetId', ->
-  #      expect($scope.currentBudgetId).to.eq(7)
-
 
   describe 'setBudget', ->
     it 'sets rootScope.currentBudget to the first budget with matching id', ->
@@ -75,3 +47,17 @@ describe 'BudgetLoader', ->
       budget_loader.budgets = [{id: 4}, {id: 3}]
       budget_loader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(undefined)
+
+  describe 'defaultToFirstBudget', ->
+
+    it 'sets rootScope.currentBudget to the first budget', ->
+      budgets = [{id: 1},{id:7}, {id:3}]
+      $rootScope.budgets = budgets
+      budget_loader.defaultToFirstBudget()
+      expect($rootScope.currentBudget).to.deep.eq(budgets[0])
+
+     it 'does nothing if scope.budgets empty', ->
+       $rootScope.budgets = []
+       budget_loader.defaultToFirstBudget()
+       expect($rootScope.currentBudget).to.eq(undefined)
+

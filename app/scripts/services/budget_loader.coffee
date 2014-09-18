@@ -26,15 +26,14 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
         Budget.get($routeParams.budget_id).then (budget) ->
           self.setBudget budget
 
-  #turn back on at some stage
-  #defaultToFirstBudget:  ->
-  #  if !@scope.currentBudgetId && @scope.budgets.length > 0
-  #    @rootScope.currentBudget = _.first(@scope.budgets)
-  #    @scope.currentBudgetId = @rootScope.currentBudget.id
-
-
   getBudgetById: (budgets, id) ->
     return _.first(_.where(budgets, {'id': id}))
 
+  getFirstBudget: (budgets) ->
+    return _.first(budgets)
+
   setBudget: (budgetId) ->
     @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, budgetId)
+
+  defaultToFirstBudget: (budget) ->
+    @rootScope.currentBudget = @getFirstBudget(@rootScope.budgets)
