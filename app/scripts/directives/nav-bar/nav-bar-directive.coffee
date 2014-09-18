@@ -3,21 +3,17 @@ controller = null
 controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
   BudgetLoader.init($rootScope)
 
-  $scope.$watch 'currentBudgetId', (id) ->
-    if id > 0
-      $location.path '/budgets/' + id
-      BudgetLoader.setBudgetFromArray(id, $scope.budgets)
+  # TODO much of this should be in a routing service
+  # pulling in any route functionality from BudgetLoader
 
-  Budget.allBudgets().then (budgets) ->
+  $scope.$watch 'currentBudgetId', (currentBudgetId) ->
+    if currentBudgetId > 0
+      $location.path '/budgets/' + currentBudgetId
+      BudgetLoader.setBudgetByRoute()
+
+  $rootScope.$watch 'budgets', (budgets) ->
     $scope.budgets = budgets
     #console.log(budgets)
-    if $routeParams.budget_id
-      $scope.currentBudgetId = parseInt($routeParams.budget_id) 
-    else if $rootScope.currentBudget
-      $scope.currentBudgetId = $rootScope.currentBudget.id
-    else
-      $scope.currentBudgetId = budgets[0].id
-    
 
 window.Cobudget.Directives.NavBar = ->
   {
