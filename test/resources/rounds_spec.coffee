@@ -11,6 +11,6 @@ describe 'Round Resource', ->
 	  global.Round = window.Cobudget.Resources.Round(Restangular)
 
 	describe 'get', ->
-		it 'returns a round based on the id', ->
-			global.Round.get(1)
+		it 'calls one rounds with id', ->
+			Round.get(1)
 			expect(Restangular.one).to.have.been.calledWith('rounds', 1)
