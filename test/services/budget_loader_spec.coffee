@@ -62,19 +62,16 @@ describe 'BudgetLoader', ->
   describe 'setBudget', ->
     it 'sets rootScope.currentBudget to the first budget with matching id', ->
       budget = {id: 7}
-      Budget.allObject.returns([{id: 2}, budget, {id: 1}])
-      budget_loader.loadAll()
+      $rootScope.budgets = [{id: 2}, budget, {id: 1}]
       budget_loader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(budget)
 
     it 'does nothing if scope array is empty', ->
-      Budget.allObject.returns([])
-      budget_loader.loadAll()
+      budget_loader.budgets = []
       budget_loader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(undefined)
       
     it 'does nothing if no budget with id exists', ->
-      Budget.allObject.returns([{id: 4}, {id: 3}])
-      budget_loader.loadAll()
+      budget_loader.budgets = [{id: 4}, {id: 3}]
       budget_loader.setBudget(7)
       expect($rootScope.currentBudget).to.eq(undefined)
