@@ -10,6 +10,7 @@ describe 'BudgetLoader', ->
 
   budget_loader = undefined
   $rootScope = undefined
+  $routeParams = undefined
 
   before ->
     global.Budget = {
@@ -21,7 +22,8 @@ describe 'BudgetLoader', ->
 
   beforeEach ->
     $rootScope = {}
-    budget_loader = new window.Cobudget.Services.BudgetLoader({ id: 1 }, Budget)
+    $routeParams = {}
+    budget_loader = new window.Cobudget.Services.BudgetLoader($routeParams, Budget)
     budget_loader.init($rootScope)
 
   describe 'loadAll', ->
@@ -60,4 +62,18 @@ describe 'BudgetLoader', ->
        $rootScope.budgets = []
        budget_loader.defaultToFirstBudget()
        expect($rootScope.currentBudget).to.eq(undefined)
+
+  describe 'setBudgetByRoute', ->
+    it 'sets rootScope.currentBudget to budget id in route', ->
+      budget = {id:7}
+      $rootScope.budgets = [{id: 1}, budget, {id: 3}]
+      $routeParams.budgetId = 7
+      budget_loader.setBudgetByRoute()
+      expect($rootScope.currentBudget).to.eq(budget)
+
+    it 'sets rootScope.currentBudget to first budget if no budget id in route', ->
+      budget = { id: 8 }
+      $rootScope.budgets = [budget, {id: 2}, {id: 4}]
+      budget_loader.setBudgetByRoute()
+      expect($rootScope.currentBudget).to.eq(budget)
 

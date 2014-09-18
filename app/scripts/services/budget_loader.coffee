@@ -35,5 +35,11 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
   setBudget: (budgetId) ->
     @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, budgetId)
 
-  defaultToFirstBudget: (budget) ->
+  defaultToFirstBudget: () ->
     @rootScope.currentBudget = @getFirstBudget(@rootScope.budgets)
+
+  setBudgetByRoute: () ->
+    if $routeParams.budgetId
+      @setBudget($routeParams.budgetId)
+    else
+      @defaultToFirstBudget()
