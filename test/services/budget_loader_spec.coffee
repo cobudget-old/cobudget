@@ -24,6 +24,12 @@ describe 'BudgetLoader', ->
     budget_loader = new window.Cobudget.Services.BudgetLoader({ id: 1 }, Budget)
     budget_loader.init($rootScope)
 
+  describe 'loadAll', ->
+    it 'sets rootScope.budgets based on output of Budget.all', ->
+      budgets = [{id: 1},{id:7}, {id:3}]
+      Budget.allObject.returns(budgets)
+      budget_loader.loadAll()
+      expect($rootScope.budgets).to.deep.eq(budgets)
   #describe 'defaultToFirstBudget', ->
   #  beforeEach ->
   #    $scope.budgets = [{id: 1},{id:7}, {id:3}]
