@@ -6,9 +6,11 @@ require '../support/setup'
 require '../../app/scripts/services/budget_loader'
 require '../../app/scripts/resources/budgets'
 
-$rootScope = {}
-
 describe 'BudgetLoader', ->
+
+  budget_loader = undefined
+  $rootScope = undefined
+
   before ->
     global.Budget = {
       allObject: sinon.stub()
@@ -16,11 +18,11 @@ describe 'BudgetLoader', ->
         then: (callback) ->
           callback(Budget.allObject())
     }
-    global.budget_loader = new window.Cobudget.Services.BudgetLoader({ id: 1 }, Budget)
-    global.budget_loader.init($rootScope)
 
   beforeEach ->
-    $rootScope.currentBudget = undefined
+    $rootScope = {}
+    budget_loader = new window.Cobudget.Services.BudgetLoader({ id: 1 }, Budget)
+    budget_loader.init($rootScope)
 
   #describe 'defaultToFirstBudget', ->
   #  beforeEach ->
