@@ -77,3 +77,36 @@ describe 'BudgetLoader', ->
       budget_loader.setBudgetByRoute()
       expect($rootScope.currentBudget).to.eq(budget)
 
+
+  describe 'initBudget', ->
+    describe 'when rootScope.currentBudget is unset', ->
+
+      it 'sets rootScope.currentBudget to budget id in route', ->
+        budget = {id:7}
+        $rootScope.budgets = [{id: 1}, budget, {id: 3}]
+        $routeParams.budgetId = 7
+        budget_loader.initBudget()
+        expect($rootScope.currentBudget).to.eq(budget)
+
+      it 'sets rootScope.currentBudget to first budget if no budget id in route', ->
+        budget = { id: 8 }
+        $rootScope.budgets = [budget, {id: 2}, {id: 4}]
+        budget_loader.initBudget()
+        expect($rootScope.currentBudget).to.eq($rootScope.budgets[0])
+
+    describe 'when scope.currentBudgetId is set', ->
+      beforeEach ->
+        $rootScope.currentBudget = { id: 3}
+
+      it 'does not set rootScope.currentBudget to budget id in route', ->
+        currentBudget = $rootScope.currentBudget
+        $rootScope.budgets = [{id: 1}, { id: 7 }, {id: 3}]
+        $routeParams.budgetId = 7
+        budget_loader.initBudget()
+        expect($rootScope.currentBudget).to.eq(currentBudget)
+
+      it 'does not set rootScope.currentBudget to first budget if no budget id in route', ->
+        currentBudget = $rootScope.currentBudget
+        $rootScope.budgets = [{id: 2}, { id: 5 }, {id: 3}]
+        budget_loader.initBudget()
+        expect($rootScope.currentBudget).to.eq(currentBudget)
