@@ -40,7 +40,7 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
 
   setBudgetByRoute: () ->
     if $routeParams.budgetId
-      @setBudget($routeParams.budgetId)
+      @setBudget(parseInt($routeParams.budgetId))
     else
       @defaultToFirstBudget()
 
