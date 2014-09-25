@@ -7,7 +7,7 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
   loadAll: ->
     self = @
     Budget.all().then (budgets) ->
-        self.rootScope.budgets = budgets
+      self.rootScope.budgets = budgets
 
   ###
         #console.log(budgets)
