@@ -7,6 +7,7 @@ window.Cobudget.Resources.Budget = (Restangular) ->
   all: () ->
     Restangular.all('budgets').getList()
 
+###
   myBudgets: ->
     #TODO restrict to only getting budgets visible by this user
     @allBudgets().$object
@@ -15,7 +16,7 @@ window.Cobudget.Resources.Budget = (Restangular) ->
     state ||= "open"
     limit ||= ""
     Restangular.one('budgets', budget_id).customGET('buckets', {state: state, limit: limit})
-  
+
   getBudgetContributors: (budget_id, state, limit) ->
     #console.log(budget_id)
     #state ||= "open"
@@ -25,6 +26,7 @@ window.Cobudget.Resources.Budget = (Restangular) ->
     Restangular.oneUrl('contributors', 'http://api.cobudget.enspiral.info/cobudget/list_by_budget_accounts?budget_id='+budget_id).get()
 
     #contributors = {name: "charlie ablett", allocation_rights_cents: 178093}
+###
 
 #  createBudget: (budget_data)->
 #    budgets.post('budgets', budget_data)
