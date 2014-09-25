@@ -12,7 +12,7 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
   ###
         #console.log(budgets)
         if $routeParams.budget_id
-          $scope.currentBudgetId = parseInt($routeParams.budget_id) 
+          $scope.currentBudgetId = parseInt($routeParams.budget_id)
         else if $rootScope.currentBudget
           $scope.currentBudgetId = $rootScope.currentBudget.id
         else
