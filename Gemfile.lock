@@ -80,6 +80,7 @@ GEM
     pg (0.17.1)
     polyglot (0.3.5)
     rack (1.5.2)
+    rack-cors (0.2.9)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.5)
@@ -135,6 +136,7 @@ DEPENDENCIES
   inherited_resources
   money-rails
   pg
+  rack-cors
   rails (= 4.1.5)
   rails-api
   spring
