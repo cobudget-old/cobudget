@@ -13,6 +13,8 @@ controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
 
   $rootScope.$watch 'budgets', (budgets) ->
     $scope.budgets = budgets
+
+  BudgetLoader.loadAll()
     #console.log(budgets)
 
 window.Cobudget.Directives.NavBar = ->
