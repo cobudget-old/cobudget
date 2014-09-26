@@ -11,8 +11,7 @@ controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
       $location.path '/budgets/' + currentBudgetId
       BudgetLoader.setBudgetByRoute()
 
-  $rootScope.$watch 'budgets', (budgets) ->
-    $scope.budgets = budgets
+  $scope.budgets = $rootScope.budgets
 
   BudgetLoader.loadAll()
     #console.log(budgets)
