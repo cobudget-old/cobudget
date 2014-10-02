@@ -1,7 +1,7 @@
 `// @ngInject`
-window.Cobudget.Controllers.BudgetContributors = ($scope, $rootScope, $route, RoundLoader, Budget) ->
-  RoundLoader.init($rootScope)
-  RoundLoader.loadFromURL()
+window.Cobudget.Controllers.BudgetContributors = ($scope, $rootScope, $route, BudgetLoader, Budget) ->
+  BudgetLoader.init($rootScope)
+  BudgetLoader.loadFromURL()
   
   $rootScope.$watch 'currentBudget', (budget) ->
     return unless budget

@@ -1,10 +1,10 @@
-#TODO split relevant tests out into services/round_loader
+#TODO split relevant tests out into services/budget_loader
 expect = require('../support/expect')
 sinon = require('sinon')
 
 require '../support/setup'
 require '../../app/scripts/directives/nav-bar/nav-bar-directive'
-require '../../app/scripts/services/round_loader'
+require '../../app/scripts/services/budget_loader'
 
 controller = window.Cobudget.Directives.NavBar().controller
 
@@ -21,7 +21,7 @@ Budget = {
 }
 Budget.myBudgets.returns([{id: 4}, {id: 3}])
 
-RoundLoader = window.Cobudget.Services.RoundLoader()
+BudgetLoader = window.Cobudget.Services.BudgetLoader()
 
 $location =
   path: sinon.stub()
@@ -30,7 +30,7 @@ $routeParams =
   id: 1
 
 load_controller = ->
-  controller($location, $scope, $rootScope, $routeParams, Budget, RoundLoader)
+  controller($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
 
 describe 'NavBar Directive Controller', ->
   beforeEach ->

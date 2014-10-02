@@ -1,5 +1,5 @@
 `// @ngInject`
-window.Cobudget.Services.RoundLoader = ($routeParams, Budget)->
+window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
 
   init: ($rootScope) ->
     @rootScope = $rootScope

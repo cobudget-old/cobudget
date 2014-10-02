@@ -1,7 +1,7 @@
 controller = null
 `// @ngInject`
-controller = ($location, $scope, $rootScope, $routeParams, Budget, RoundLoader) ->
-  RoundLoader.init($rootScope)
+controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
+  BudgetLoader.init($rootScope)
   
   $scope.$watch 'currentBudgetId', (id) ->
     $scope.currentBudgetId = id
