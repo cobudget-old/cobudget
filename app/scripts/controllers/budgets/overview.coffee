@@ -1,4 +1,4 @@
 `// @ngInject`
-window.Cobudget.Controllers.BudgetOverview = ($scope, $rootScope, BudgetLoader) ->
-  BudgetLoader.init($rootScope)
-  BudgetLoader.loadAll()
+window.Cobudget.Controllers.BudgetOverview = ($scope, $rootScope, RoundLoader) ->
+  RoundLoader.init($rootScope)
+  RoundLoader.loadAll()

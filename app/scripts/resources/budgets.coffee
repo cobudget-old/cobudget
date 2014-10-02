@@ -1,11 +1,14 @@
 `// @ngInject`
-window.Cobudget.Resources.Budget = (Restangular) ->
 
+window.Cobudget.Resources.Budget = (Restangular) ->
   get: (budget_id)->
     Restangular.one('budgets', budget_id).get()
 
   all: () ->
-    Restangular.all('budgets').getList()
+
+    result = Restangular.all('budgets').getList()
+    console.log result
+    result
 
 ###
   myBudgets: ->

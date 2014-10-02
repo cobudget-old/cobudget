@@ -1,4 +1,4 @@
 `// @ngInject`
-window.Cobudget.Controllers.BudgetAllocations = ($scope, $rootScope, BudgetLoader) ->
-  BudgetLoader.init($rootScope)
-  BudgetLoader.loadFromURL()
+window.Cobudget.Controllers.BudgetAllocations = ($scope, $rootScope, RoundLoader) ->
+  RoundLoader.init($rootScope)
+  RoundLoader.loadFromURL()

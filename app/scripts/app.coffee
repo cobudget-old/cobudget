@@ -10,4 +10,5 @@ angular
   .directive('tabBar', window.Cobudget.Directives.TabBar)
   .service('Budget', window.Cobudget.Resources.Budget)
   .service('Bucket', window.Cobudget.Resources.Bucket)
-  .service('BudgetLoader', window.Cobudget.Services.BudgetLoader)
+  .service('RoundLoader', window.Cobudget.Services.RoundLoader)
+

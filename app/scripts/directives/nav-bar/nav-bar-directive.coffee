@@ -1,19 +1,19 @@
 controller = null
 `// @ngInject`
-controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
-  BudgetLoader.init($rootScope)
+controller = ($location, $scope, $rootScope, $routeParams, Budget, RoundLoader) ->
+  RoundLoader.init($rootScope)
 
   # TODO much of this should be in a routing service
-  # pulling in any route functionality from BudgetLoader
+  # pulling in any route functionality from RoundLoader
 
   $scope.$watch 'currentBudgetId', (currentBudgetId) ->
     if currentBudgetId > 0
       $location.path '/budgets/' + currentBudgetId
-      BudgetLoader.setBudgetByRoute()
+      RoundLoader.setBudgetByRoute()
 
   $scope.budgets = $rootScope.budgets
 
-  BudgetLoader.loadAll()
+  RoundLoader.loadAll()
     #console.log(budgets)
 
 window.Cobudget.Directives.NavBar = ->
