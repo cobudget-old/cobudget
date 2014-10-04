@@ -7,6 +7,7 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
   loadAll: ->
     self = @
     Budget.all().then (budgets) ->
+      console.log(budgets)
       self.rootScope.budgets = budgets
 
   ###

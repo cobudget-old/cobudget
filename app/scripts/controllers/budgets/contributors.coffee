@@ -4,6 +4,7 @@ window.Cobudget.Controllers.BudgetContributors = ($scope, $rootScope, $route, Bu
   BudgetLoader.loadFromURL()
   
   $rootScope.$watch 'currentBudget', (budget) ->
+    console.log(budget)
     return unless budget
     console.log(budget)
 
