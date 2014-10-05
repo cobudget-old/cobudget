@@ -15,4 +15,10 @@ class ApplicationController < ActionController::API
     initialize_resources_class_accessors!
     create_resources_url_helpers!
   end
+
+  private
+
+  def default_serializer_options
+    {root: false}
+  end
 end

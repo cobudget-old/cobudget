@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   apipie
 
-  resources :budgets, only: :index do
+  resources :budgets, only: [:index, :show] do
     resources :allocators, only: :index
   end
 
-  resources :rounds, only: :show
+  resources :rounds, only: [:show, :index]
 
   resources :buckets, only: [] do
     resources :allocators, only: [] do
