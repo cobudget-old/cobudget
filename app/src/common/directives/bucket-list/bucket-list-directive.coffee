@@ -10,7 +10,7 @@ controller = ($rootScope, $scope, Budget) ->
       #console.log("round proj", round.round_projects[0])
       buckets = []
       for proj in round.round_projects
-        console.log("proj", proj.project)
+        #console.log("proj", proj.project)
         buckets.push(proj.project)
 
 
