@@ -57,7 +57,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.tmp/app',
           src: '**/*.css',
-          dest: '.tmp/'
+          dest: '.tmp/app'
         }]
       }
     },
