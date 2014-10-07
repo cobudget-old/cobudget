@@ -42,6 +42,6 @@ controller = ($rootScope, $scope, Budget) ->
 window.Cobudget.Directives.BucketSummary = ->
   {
     restrict: 'EA'
-    templateUrl: '/scripts/directives/bucket-summary/bucket-summary.html'
+    templateUrl: '/app/common/directives/bucket-summary/bucket-summary.html'
     controller: controller
   }

@@ -13,6 +13,6 @@ controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
 window.Cobudget.Directives.TabBar = ->
   {
     restrict: 'EA'
-    templateUrl: '/scripts/directives/tab-bar/tab-bar.html'
+    templateUrl: '/app/common/directives/tab-bar/tab-bar.html'
     controller: controller
   }

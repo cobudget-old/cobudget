@@ -2,5 +2,5 @@
 window.Cobudget.Directives.BudgetBanner = ->
   {
     restrict: 'EA'
-    templateUrl: '/scripts/directives/budget-banner/budget-banner.html'
+    templateUrl: '/app/common/directives/budget-banner/budget-banner.html'
   }

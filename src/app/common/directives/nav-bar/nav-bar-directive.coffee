@@ -19,6 +19,6 @@ controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
 window.Cobudget.Directives.NavBar = ->
   {
     restrict: 'EA'
-    templateUrl: '/scripts/directives/nav-bar/nav-bar.html'
+    templateUrl: '/app/common/directives/nav-bar/nav-bar.html'
     controller: controller
   }
