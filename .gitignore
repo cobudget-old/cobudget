@@ -6,8 +6,7 @@ deploy_package.tar.gz
 .sass-cache
 .DS_STORE
 .idea
-app/scripts/config.coffee
-app/scripts/config/constants.coffee
+src/app/config/constants.coffee
 config/environments/development.json
 config/environments/staging.json
 config/environments/production.json
