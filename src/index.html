@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
     <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="styles/sass/layout.css">
-    <link rel="stylesheet" type="text/css" href="static-css/bucket_list.css">
-    <link rel="stylesheet" type="text/css" href="static-css/right_panel.css">
+    <link rel="stylesheet" type="text/css" href="app/layout/layout.css">
+    <link rel="stylesheet" type="text/css" href="app/buckets-page/bucket-list/bucket-list.css">
+    <link rel="stylesheet" type="text/css" href="app/buckets-page/bucket-list/bucket-details.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
     <!--<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">-->
@@ -73,32 +73,32 @@
         <script src="bower_components/lodash/dist/lodash.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-lodash/angular-lodash.js"></script>
-        <script src="modded_components/angular-flash-messages/angular-flash.js"></script>
+        <script src="app/common/modded_components/angular-flash-messages/angular-flash.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/restangular/dist/restangular.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/config/namespace.js"></script>
-        <script src="scripts/config/constants.js" ></script>
-        <script src="scripts/config/restangular.js" ></script>
-        <script src="scripts/services/budget_loader.js"></script>
+        <script src="app/config/namespace.js"></script>
+        <script src="app/config/constants.js" ></script>
+        <script src="app/config/restangular.js" ></script>
+        <script src="app/common/services/budget_loader.js"></script>
 
-        <script src="scripts/controllers/buckets/show.js"></script>
-        <script src="scripts/controllers/budgets/contributors.js"></script>
-        <script src="scripts/controllers/budgets/allocations.js"></script>
-        <script src="scripts/controllers/budgets/overview.js"></script>
+        <script src="app/controllers/buckets/show.js"></script>
+        <script src="app/controllers/budgets/contributors.js"></script>
+        <script src="app/controllers/budgets/allocations.js"></script>
+        <script src="app/controllers/budgets/overview.js"></script>
 
-        <script src="scripts/directives/budget-banner/budget-banner-directive.js"></script>
-        <script src="scripts/directives/bucket-list/bucket-list-directive.js"></script>
-        <script src="scripts/directives/bucket-summary/bucket-summary-directive.js"></script>
-        <script src="scripts/directives/nav-bar/nav-bar-directive.js"></script>
-        <script src="scripts/directives/tab-bar/tab-bar-directive.js"></script>
+        <script src="app/common/directives/budget-banner/budget-banner-directive.js"></script>
+        <script src="app/common/directives/bucket-list/bucket-list-directive.js"></script>
+        <script src="app/common/directives/bucket-summary/bucket-summary-directive.js"></script>
+        <script src="app/common/directives/nav-bar/nav-bar-directive.js"></script>
+        <script src="app/common/directives/tab-bar/tab-bar-directive.js"></script>
 
-        <script src="scripts/resources/budgets.js"></script>
-        <script src="scripts/resources/buckets.js"></script>
+        <script src="app/common/resources/budgets.js"></script>
+        <script src="app/common/resources/buckets.js"></script>
 
-        <script src="scripts/config/routes.js"></script>
+        <script src="app/config/routes.js"></script>
         <script src="app/app.js"></script>
         <!-- endbuild -->
 </body>
