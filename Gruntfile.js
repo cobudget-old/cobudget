@@ -11,7 +11,7 @@ var replace_files = [{
   expand: true,
   flatten: true,
   src: ['./config/constants.coffee'],
-  dest: '<%= yeoman.app %>/config/'
+  dest: '<%= yeoman.app %>/app/config/'
 }]
 
 
