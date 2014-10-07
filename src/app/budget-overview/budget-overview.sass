@@ -1,0 +1,134 @@
+@import "../utils/utils"
+
+@media screen and (min-width: 900px) 
+  //RIGHT PANEL
+  .page
+      
+    .display
+
+      /*This is hacky, but workarounds I found were more hacky... Should probly just be replaced with $banner-image-size + $banner-content-gutter */
+      h1
+        margin-left: 180px
+        margin-bottom: 10px
+        color: #55c1c2
+        font-weight: 300
+
+      h2
+        margin-left: 180px
+        font-size: 12px
+        color: white
+        font-weight: 300
+
+      .buttons.container
+        padding-left: 180px
+        max-width: 100%
+
+        .active.button
+          color: #49b0b7
+
+        .button
+          float: left
+          margin-left: 5px
+          margin-right: 10px
+          margin-top: 25px
+          // width: 180px
+          color: #9d9e9f
+
+          i
+            width: 35px
+            height: 35px
+            float: left
+
+          p
+            font-size: 10px
+
+
+
+  .overview-container
+    padding-left: 30px
+    padding-right: 30px
+    margin-top: 25px
+    height: 100%
+    //min-height: 800px
+    background: white
+    border-style: solid
+    border-color: #eeeeed
+    border-width: 2px
+    max-width: 99%
+    
+    .content
+      position: relative
+
+
+    .title
+      width: 100%
+      height: 70px
+      color: #49b0b7
+
+      i
+        float: left
+        padding-top: 30px
+        padding-right: 10px
+
+      h1
+        font-weight: 300
+        font-size: 25px
+        line-height: 53px
+        margin-bottom: 0px
+        margin-left: 50px
+
+
+    #budget_overview_title_icon
+      // width: 50px
+      height: 50px
+      float: left
+
+    #title_underline
+      width: 100%
+      margin-top: 20px
+
+    .totals.triplet
+
+      .totals.section
+        float: left
+        // width: 240px
+        margin-top: 10px
+        margin-left: 0px
+
+        span
+        text-align: center
+
+        .section-detail
+
+          h5
+            margin-bottom: 0px
+            font-size: 70%
+
+          span
+            font-size: 19px
+            font-weight: 300
+            color: #49b0b7
+
+      vr
+        height: 30px
+
+    .budget-progress.triplet
+
+      .budget-progress.section
+        float: left
+        // width: 240px
+        text-align: center
+        margin-left: 0px
+
+        p
+          font-size: 24px
+          font-weight: 300
+          color: #49b0b7
+          margin-top: 0px
+
+        h3
+          margin-bottom: 0px
+          font-size: 70%
+
+
+

@@ -122,13 +122,24 @@ html, body
         border-bottom-width: thick
         border-bottom-style: solid
 
-    //RIGHT PANEL
-    .right.panel
+    //TAB-SELECTED PAGE LAYOUT
+    .page
       &.container
         height: 100%
         min-height: 800px
         //margin-top: $nav-bar-height
         background: #f6f8f6
+        overflow: auto
+        padding-bottom: 55px
+
+      .display
+        padding-left: 20px
+        padding-right: 20px
+        padding-bottom: 15px
+        margin: auto
+        top: 10px
+        max-width: 90%
+        z-index: 3
 
       .bucket.page.continaer
         width: 100%

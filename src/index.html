@@ -18,6 +18,8 @@
     <link rel="stylesheet" type="text/css" href="app/layout/layout.css">
     <link rel="stylesheet" type="text/css" href="app/buckets-page/bucket-details/bucket-details.css">
     <link rel="stylesheet" type="text/css" href="app/buckets-page/bucket-list/bucket-list.css">
+    <link rel="stylesheet" type="text/css" href="app/budget-overview/budget-overview.css">
+    <link rel="stylesheet" type="text/css" href="app/buckets-page/buckets-page.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
     <!--<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">-->
@@ -43,13 +45,8 @@
     <flash:messages class="slide-down" ng-show="messages"></flash:messages>
 
     <div class="row content-row">
-      <div class="col-md-6 buckets panel container">
-        <div bucket-summary></div>
-        <div bucket-list></div>
-      </div>
-
-      <div class="col-md-6 right panel container">
-        <div class="details">
+      <div class="col-md-12 page container">
+        <div class="display">
           <!--<div budget-banner></div>-->
           <ng-view />
         </div>
