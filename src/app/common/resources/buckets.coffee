@@ -14,13 +14,13 @@ window.Cobudget.Resources.Bucket = (Restangular) ->
 
   #get details of bucket, maybe rename
   get: (bucket_id)->
-    Restangular.one('buckets', bucket_id).get()
+    Restangular.one('bucket', bucket_id).get()
   #
   #  createBucket: (bucket_data)->
   #    buckets.post('buckets', bucket_data)
   #
   getBucketAllocations: (bucket_id)->
-    Restangular.one('buckets', bucket_id).getList('allocations')
+    Restangular.one('bucket', bucket_id).getList('allocations')
     
   #
   #  createBucketAllocation: (bucket_id, allocation)->

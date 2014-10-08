@@ -16,3 +16,6 @@ window.Cobudget.Config.Restangular = (RestangularProvider, config) ->
       if what is "round"
         #console.log("round after interceptor", response.data.round)
         return response.data.round
+      if what is "bucket"
+        #console.log("round after interceptor", response.data.round)
+        return response.data.bucket
