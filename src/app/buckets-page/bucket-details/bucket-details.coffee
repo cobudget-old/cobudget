@@ -1,6 +1,6 @@
 `// @ngInject`
 window.Cobudget.Controllers.BucketShow = ($scope, $route, Bucket) ->
-  #console.log($route.current.params)
+  console.log("routeparams", $route.current.params)
   if $route.current.params.bucket_id
     $scope.bucket = Bucket.get($route.current.params.bucket_id).$object
     #$scope.allocations = Bucket.getBucketAllocations($route.current.params.bucket_id).$object

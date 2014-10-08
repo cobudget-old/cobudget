@@ -14,6 +14,6 @@ window.Cobudget.Config.Router = ($routeProvider) ->
       templateUrl: '/app/buckets-page/buckets-page.html'
       controller: window.Cobudget.Controllers.BucketPage
     .when '/buckets/:bucketId',
-      templateUrl: '/app/buckets-page/bucket-details/bucket-details.html'
+      templateUrl: '/app/buckets-page/buckets-page.html'
       controller: window.Cobudget.Controllers.BucketShow
     .otherwise(redirectTo: '/budgets/1')
