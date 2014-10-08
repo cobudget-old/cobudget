@@ -4,7 +4,7 @@ window.Cobudget.Controllers.BucketShow = ($scope, $route, Bucket) ->
   if $route.current.params.bucketId
     $scope.bucket = Bucket.get($route.current.params.bucketId).$object
     #$scope.allocations = Bucket.getBucketAllocations($route.current.params.bucket_id).$object
-    console.log($scope.bucket)
+    #console.log($scope.bucket)
 
 ///
  	Bucket.getBucketAllocations($route.current.params.bucket_id).then (allocations) ->

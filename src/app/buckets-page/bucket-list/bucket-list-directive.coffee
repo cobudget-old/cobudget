@@ -5,7 +5,7 @@ controller = ($rootScope, $scope, Budget) ->
   $rootScope.$watch 'currentBudget', (budget) ->
     return unless budget
 
-    console.log(budget.current_round_id)
+    console.log("current budget id", budget.current_round_id)
     Budget.getCurrentRound(budget.current_round_id).then (round) ->
       #console.log("round proj", round.round_projects[0])
       buckets = []
