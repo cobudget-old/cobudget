@@ -1,0 +1,72 @@
+
+
+<!--Showing a bucket
+{{bucket}}
+{{bucket.sponsor_id}}
+{{bucket.sponsor_name_or_email}}
+{{bucket.description}}
+-->
+
+<div class="col-md-6 bucket page" ng-if='currentBudget'>
+		<div class="row bucket-detail">
+            <div class="row">
+              <div class="col-lg-12 header">
+              	<img src="" />
+                <h1 class="row">
+                	{{bucket.name}}
+                </h1>
+                <h2 class="row">
+                	created by <a>{{bucket.sponsor_name_or_email}}</a>
+                </h2>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 funding">
+                <div class="col-md-1">
+                	${{ bucket.amount_filled / 100 }} funded
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-1">
+                	${{bucket.maximum_cents / 100 }} target
+                </div>
+              </div>
+            </div>
+
+            <div class="row description">
+              <h4 class="row title">
+              	DESCRIPTION
+              </h4>
+
+              <div class="row description details">
+              	{{bucket.description}}
+              </div>
+            </div>
+
+            <div class="row contributors">
+
+              <h4 class="col-sm-12 title">
+                CONTRIBUTORS
+              </h4>
+
+              <div class="col-md-12 contributor list" ng-repeat="allocation in allocations">
+                <div class="col-md-12 item">
+                  <p class="col-md-3 funding-amount">${{allocation.amount / 100}}</p>
+                  <!-- <img class="col-md-1" src="" /> -->
+                  <p class="col-md-8 name">{{allocation.user_name_or_email}}</p>
+                </div>
+              </div>
+
+              <div ng-show="allocations.length == 0 && bucket.amount_filled == 0">
+                Looks like no one has contributed to this bucket yet!
+              </div>
+
+            </div>
+
+        </div><!--END ROW BUCKET DETAIL-->
+
+
+
+</div> <!-- END OVERVIEW CONTAINER -->

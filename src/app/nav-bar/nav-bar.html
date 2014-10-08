@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12 nav bar container">
+  
+    <div class="col-md-2 brand">
+      <i class="col-md-3 fa fa fa-bars fa-1x"></i>
+      <p class="col-md-6">COBUDGET</p>
+    </div>  
+
+    <div class= "col-md-3 selector">
+      <select ng-model='currentBudgetId' ng-options='b.id as b.name for b in budgets'>
+        <option value=''>Select Budget</option>
+      </select> 
+    </div>
+
+    <div class= "col-md-1 input-name pull-right">
+      <!--<input placeholder="Enter your name!"></input>-->
+      <i class="fa fa-user fa-2x"></i>
+    </div>
+
+  </div>
+</div>
