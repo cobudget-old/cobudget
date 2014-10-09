@@ -1,0 +1,35 @@
+@import "../utils/utils"
+
+@media screen and (min-width: 900px) 
+
+.tab-bar
+  width: 100%
+  position: relative
+  top: 45px
+  //left: 50%
+  height: 51px
+  line-height: 51px
+  border-bottom: thin solid #f2f2f2
+  background-color: white
+
+  .tab
+    //text-align: center
+    border-right: 1px solid #f2f2f2
+    cursor: pointer
+    height: 51px
+
+    .content
+      text-align: center
+      text-transform: uppercase
+      color: #4D4D4D
+      //this is silly but hey, its css
+      padding: 0px 0px 0px 0px !important
+
+  p
+    display: inline
+    padding-bottom: 11px
+
+  .active
+    border-bottom: #55c0c1
+    border-bottom-width: thick
+    border-bottom-style: solid
