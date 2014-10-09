@@ -1,5 +1,13 @@
 angular
-  .module('cobudget', ['ngRoute', 'restangular'])
+  .module('cobudget', [
+    'ngRoute', 
+    'restangular', 
+    'budget-overview',
+    'buckets-page', 
+    'bucket-details', 
+    'budget-contributors',
+    'my-contributions'])
+
   .constant('config', window.Cobudget.Config.Constants)
   .config(window.Cobudget.Config.Router)
   .config(window.Cobudget.Config.Restangular)

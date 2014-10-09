@@ -1,5 +1,4 @@
-`// @ngInject`
-window.Cobudget.Controllers.BucketShow = ($scope, $route, Bucket) ->
+angular.module('bucket-details', []).controller 'BucketDetailsCtrl', ($scope, $route, Bucket) ->
   #console.log("routeparams", $route.current.params)
   if $route.current.params.bucketId
     $scope.bucket = Bucket.get($route.current.params.bucketId).$object
