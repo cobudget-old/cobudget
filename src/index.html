@@ -55,7 +55,7 @@
       <div class="col-md-12 page container">
         <div class="display">
           <!--<div budget-banner></div>-->
-          <ng-view />
+          <div ui-view></div>
         </div>
       </div>
     </div>
@@ -80,6 +80,7 @@
         <script src="app/common/modded_components/angular-flash-messages/angular-flash.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/restangular/dist/restangular.js"></script>
+        <script src="bower_components/ui-router/release/angular-ui-router.min.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -104,12 +105,13 @@
         <script src="app/budget-overview/budget-overview.js"></script>
         <script src="app/my-contributions/my-contributions.js"></script>
         <script src="app/nav-bar/nav-bar-directive.js"></script>
+        <!--<script src="app/nav-bar/nav-bar.js"></script>-->
         <script src="app/tab-bar/tab-bar-directive.js"></script>
 
         <script src="app/common/resources/budgets.js"></script>
         <script src="app/common/resources/buckets.js"></script>
 
-        <script src="app/config/routes.js"></script>
+        <!--<script src="app/config/routes.js"></script>-->
         <script src="app/app.js"></script>
         <!-- endbuild -->
 </body>

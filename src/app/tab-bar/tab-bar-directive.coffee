@@ -5,7 +5,8 @@ controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
   
   $scope.$watch 'currentBudgetId', (id) ->
     $scope.currentBudgetId = id
-    $scope.selectedTab = 'overview'
+  
+  $scope.selectedTab = 'overview'
 
 
 
