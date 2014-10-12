@@ -10,6 +10,7 @@ Cobudget.Resources.Budget = (Restangular) ->
   getCurrentRound: (current_round_id) ->
     Restangular.one('round', current_round_id).get()
 
+
 ###
   myBudgets: ->
     #TODO restrict to only getting budgets visible by this user

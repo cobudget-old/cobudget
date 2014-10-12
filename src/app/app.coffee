@@ -30,9 +30,9 @@ angular
         url: '/budgets/:budgetId/buckets'
         templateUrl: '/app/buckets-page/buckets-page.html'
         controller: ''
-      $stateProvider.state 'bucketDetails',
-        url: '/buckets/:bucketId'
-        templateUrl: '/app/buckets-page/buckets-page.html'
+      $stateProvider.state 'bucketsPage.bucketDetails',
+        url: '/:bucketId'
+        templateUrl: '/app/buckets-page/bucket-details/bucket-details.html'
         controller: 'BucketDetailsCtrl'
       $stateProvider.state 'budgetContributors',
         url: '/budgets/:budgetId/contributors'
