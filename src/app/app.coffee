@@ -4,16 +4,13 @@ angular
     'restangular', 
     'ui.router',
     'budget-overview',
-    'buckets-page', 
-    'bucket-details', 
+    'bucket-list', 
     'budget-contributors',
     'my-contributions',
     'budget-loader'])
 
   .constant('config', window.Cobudget.Config.Constants)
   .config(window.Cobudget.Config.Restangular)
-  .directive('bucketList', window.Cobudget.Directives.BucketList)
-  .directive('bucketSummary', window.Cobudget.Directives.BucketSummary)
   .directive('budgetBanner', window.Cobudget.Directives.BudgetBanner)
   .directive('navBar', window.Cobudget.Directives.NavBar)
   .directive('tabBar', window.Cobudget.Directives.TabBar)
@@ -21,19 +18,22 @@ angular
   .service('Bucket', window.Cobudget.Resources.Bucket)
 
   .config(
-    ($stateProvider) ->
+    ($stateProvider, $urlRouterProvider) ->
+      ///$urlRouterProvider.otherwise("/budgets/1")///
+
       $stateProvider.state 'budgetOverview',
         url: '/budgets/:budgetId'
         templateUrl: '/app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
-      $stateProvider.state 'bucketsPage',
+      $stateProvider.state 'bucketList',
         url: '/budgets/:budgetId/buckets'
-        templateUrl: '/app/buckets-page/buckets-page.html'
-        controller: ''
-      $stateProvider.state 'bucketsPage.bucketDetails',
+        templateUrl: '/app/bucket-list/bucket-list.html'
+        controller: 'BucketListCtrl'
+      $stateProvider.state 'bucketList.details',
         url: '/:bucketId'
-        templateUrl: '/app/buckets-page/bucket-details/bucket-details.html'
-        controller: 'BucketDetailsCtrl'
+        templateUrl: '/app/bucket-list/bucket-list.details.html'
+        controller: ($scope, $stateParams) ->
+          $scope.bucket = { id:"1", name: "fake1" }
       $stateProvider.state 'budgetContributors',
         url: '/budgets/:budgetId/contributors'
         templateUrl: '/app/budget-contributors/budget-contributors.html'
@@ -49,4 +49,6 @@ angular
 ///
 .service('BudgetLoader', window.Cobudget.Services.BudgetLoader)
 .config(window.Cobudget.Config.Router)
+.directive('bucketList', window.Cobudget.Directives.BucketList)
+.directive('bucketSummary', window.Cobudget.Directives.BucketSummary)
 ///

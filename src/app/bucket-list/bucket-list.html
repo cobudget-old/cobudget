@@ -1,0 +1,46 @@
+<div class="row content-row">
+  <div class="col-md-6 buckets panel container">
+
+    <header class="allocate" ng-if='currentBudget'>
+		  {{ budget_time_message }}
+
+		  <div class="budget-close">{{ budget_close_message }}</div>
+		  <div class="progress">
+		    <div class="progress-bar" role="progressbar" aria-valuenow="{{ hours_since_start }}" aria-valuemin="0" aria-valuemax="{{ total_hours }}" style="{{ percent_complete_style }}">
+		      <span class="sr-only">60% Complete</span>
+		    </div>
+		  </div>
+
+		</header>
+
+		<div class="bucket-list" ng-repeat="bucket in buckets">
+		  <div class="bucket" ng-if='currentBudget'>
+		    <!--<div class="allocation_amount allocated">-->
+		      <!--&lt;!&ndash;<label>Allocated</label>&ndash;&gt;-->
+		      <!--<input type="number" ng-model='bucket.my_allocation_total'>-->
+		    <!--</div>-->
+
+		    <h2><a href='#/budgets/{{budgetId}}/buckets/{{bucket.id}}'>{{bucket.name}}</a></h2>
+
+
+		    <div class="progress">
+		      <!--Got a hacky fix for progress bars here... PB cant be 0, must be empty -->
+		      <div id="bucket-{{bucket.id}}" 
+		        class="progress-bar" role="progressbar" 
+		        aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded*100 : ''}}"
+		        aria-valuemin="0" 
+		        aria-valuemax="100" 
+		        style="width: {{ bucket.percentage_funded * 100}}%;">
+		        <span class="sr-only">60% Complete</span>
+		      </div>
+		    </div>
+
+		    <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * bucket.percentage_filled }}px">${{ bucket.amount_filled / 100 }}</span>
+		    <span ng-if="bucket.maximum_dollars > 0" style="float: right">${{ bucket.maximum_dollars }}</span>
+		  </div>
+		</div>
+
+  </div>
+
+  <div ui-view></div>
+</div>
