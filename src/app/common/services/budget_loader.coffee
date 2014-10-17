@@ -7,9 +7,9 @@ angular.module('budget-loader', [])
 
       loadAll: ->
         self = @
-        Organization.all().then (budgets) ->
-          console.log(budgets)
-          self.rootScope.budgets = budgets
+        Organization.all().then (organizations) ->
+          console.log(organizations)
+          self.rootScope.budgets = organizations
 
       ###
             #console.log(budgets)

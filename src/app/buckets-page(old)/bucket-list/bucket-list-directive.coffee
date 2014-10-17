@@ -2,11 +2,11 @@
 controller=null
 `// @ngInject`
 controller = ($rootScope, $scope, Organization) ->
-  $rootScope.$watch 'currentBudget', (budget) ->
-    return unless budget
+  $rootScope.$watch 'currentBudget', (organization) ->
+    return unless organization
 
-    console.log("current budget id", budget.current_round_id)
-    Organization.getCurrentRound(budget.current_round_id).then (round) ->
+    console.log("current organization id", organization.current_round_id)
+    Round.get(organization.current_round_id).then (round) ->
       #console.log("round proj", round.round_projects[0])
       buckets = []
       for proj in round.round_projects
@@ -14,7 +14,7 @@ controller = ($rootScope, $scope, Organization) ->
         buckets.push(proj.project)
 
 
-    # Organization.getBudgetBuckets(budget.id).then (buckets) ->
+    # Organization.getBudgetBuckets(organization.id).then (buckets) ->
     #   _.each buckets, (bucket) ->
     #     #console.log(bucket)
     #     bucket.amount_funded = bucket.amount_filled

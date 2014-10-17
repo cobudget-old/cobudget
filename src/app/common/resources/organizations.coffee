@@ -1,16 +1,12 @@
 `// @ngInject`
 
-angular.module('cobudget').service('Organization', (Restangular) ->
+angular.module('cobudget').service 'Organization', (Restangular) ->
 
   get: (budget_id)->
     Restangular.one('organizations', budget_id).get()
 
   all: () ->
     Restangular.all('organizations').getList()
-
-  getCurrentRound: (current_round_id) ->
-    Restangular.one('round', current_round_id).get()
-)
 
 ###
   myBudgets: ->
