@@ -1,5 +1,5 @@
 angular.module('budget-loader', [])
-  .factory 'BudgetLoader' , ($routeParams, Budget)->
+  .factory 'BudgetLoader' , ($routeParams, Organization)->
   
     new class BudgetLoader
       init: ($rootScope) ->
@@ -7,7 +7,7 @@ angular.module('budget-loader', [])
 
       loadAll: ->
         self = @
-        Budget.all().then (budgets) ->
+        Organization.all().then (budgets) ->
           console.log(budgets)
           self.rootScope.budgets = budgets
 
@@ -25,7 +25,7 @@ angular.module('budget-loader', [])
         self = @
         if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.budget_id
           if $routeParams.budget_id
-            Budget.get($routeParams.budget_id).then (budget) ->
+            Organization.get($routeParams.budget_id).then (budget) ->
               self.setBudget budget
 
       getBudgetById: (budgets, id) ->
@@ -53,14 +53,14 @@ angular.module('budget-loader', [])
 
 
 ///
-window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
+window.Cobudget.Services.BudgetLoader = ($routeParams, Organization)->
 
   init: ($rootScope) ->
     @rootScope = $rootScope
 
   loadAll: ->
     self = @
-    Budget.all().then (budgets) ->
+    Organization.all().then (budgets) ->
       console.log(budgets)
       self.rootScope.budgets = budgets
 
@@ -78,7 +78,7 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Budget)->
     self = @
     if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.budget_id
       if $routeParams.budget_id
-        Budget.get($routeParams.budget_id).then (budget) ->
+        Organization.get($routeParams.budget_id).then (budget) ->
           self.setBudget budget
 
   getBudgetById: (budgets, id) ->

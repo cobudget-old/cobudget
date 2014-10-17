@@ -1,15 +1,18 @@
 `// @ngInject`
-Cobudget.Resources.Budget = (Restangular) ->
+
+angular.module('cobudget').service('Organization', (Restangular) ->
 
   get: (budget_id)->
-    Restangular.one('budgets', budget_id).get()
+    Restangular.one('organizations', budget_id).get()
 
   all: () ->
-    Restangular.one('budgets').get()
+#    Restangular.all('organizations').getList()
+    # This should really be using .all().getList() but it's not working for some reason
+    Restangular.one('organizations').get()
 
   getCurrentRound: (current_round_id) ->
     Restangular.one('round', current_round_id).get()
-
+)
 
 ###
   myBudgets: ->

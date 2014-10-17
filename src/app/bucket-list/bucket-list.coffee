@@ -6,4 +6,3 @@ angular.module('bucket-list', [])
 			{id: "2", name: "fake2", description: "Something serious"}
 		]
 		$scope.budgetId = $stateParams.budgetId
-		console.log($stateParams)

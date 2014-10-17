@@ -1,6 +1,6 @@
 controller=null
 `// @ngInject`
-controller = ($rootScope, $scope, Budget) ->
+controller = ($rootScope, $scope, Organization) ->
   $rootScope.$watch 'currentBudget', (budget) ->
     return unless budget
     # new Date(year, month, day, hours, minutes, seconds, milliseconds);

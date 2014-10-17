@@ -15,23 +15,22 @@ angular
   .directive('budgetBanner', window.Cobudget.Directives.BudgetBanner)
   .directive('navBar', window.Cobudget.Directives.NavBar)
   .directive('tabBar', window.Cobudget.Directives.TabBar)
-  .service('Budget', window.Cobudget.Resources.Budget)
   .service('Bucket', window.Cobudget.Resources.Bucket)
 
   .config(
     ($stateProvider, $urlRouterProvider) ->
-      ///$urlRouterProvider.otherwise("/budgets/1")///
+      ///$urlRouterProvider.otherwise("/organizations/1")///
 
       $stateProvider.state 'budgetOverview',
-        url: '/budgets/:budgetId'
+        url: '/organizations/:budgetId'
         templateUrl: '/app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
       $stateProvider.state 'budgetCashFlow',
-        url: '/budgets/:budgetId/budgetCashFlow'
+        url: '/organizations/:budgetId/budgetCashFlow'
         templateUrl: '/app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
       $stateProvider.state 'bucketList',
-        url: '/budgets/:budgetId/buckets'
+        url: '/organizations/:budgetId/buckets'
         templateUrl: '/app/bucket-list/bucket-list.html'
         controller: 'BucketListCtrl'
       $stateProvider.state 'bucketList.details',
@@ -39,20 +38,11 @@ angular
         templateUrl: '/app/bucket-list/bucket-list.details.html'
         controller: 'BucketListDetailsCtrl'
       $stateProvider.state 'budgetContributors',
-        url: '/budgets/:budgetId/contributors'
+        url: '/organizations/:budgetId/contributors'
         templateUrl: '/app/budget-contributors/budget-contributors.html'
         controller: 'BudgetContributorsCtrl'
       $stateProvider.state 'myContributions',
-        url: '/budgets/:budgetId/my-contributions'
+        url: '/organizations/:budgetId/my-contributions'
         templateUrl: '/app/my-contributions/my-contributions.html'
         controller: 'MyContributionsCtrl'
   )
-
-
-
-///
-.service('BudgetLoader', window.Cobudget.Services.BudgetLoader)
-.config(window.Cobudget.Config.Router)
-.directive('bucketList', window.Cobudget.Directives.BucketList)
-.directive('bucketSummary', window.Cobudget.Directives.BucketSummary)
-///

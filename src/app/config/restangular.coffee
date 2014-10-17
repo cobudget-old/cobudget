@@ -9,10 +9,11 @@ window.Cobudget.Config.Restangular = (RestangularProvider, config) ->
   
   RestangularProvider.setResponseInterceptor (data, operation, what, url, response, deferred) -> 
     console.log("what", what)
+    console.log(response.data)
     if operation is "get"
-      if what is "budgets"
+      if what is "organizations"
         #console.log(response.data[0].budgets[0].current_round_id)
-        return response.data[0].budgets
+        return response.data
       if what is "round"
         #console.log("round after interceptor", response.data.round)
         return response.data.round
