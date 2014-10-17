@@ -7,7 +7,8 @@ angular
     'bucket-list', 
     'budget-contributors',
     'my-contributions',
-    'budget-loader'])
+    'budget-loader',
+    ])
 
   .constant('config', window.Cobudget.Config.Constants)
   .config(window.Cobudget.Config.Restangular)
@@ -23,6 +24,10 @@ angular
 
       $stateProvider.state 'budgetOverview',
         url: '/budgets/:budgetId'
+        templateUrl: '/app/budget-overview/budget-overview.html'
+        controller: 'BudgetOverviewCtrl'
+      $stateProvider.state 'budgetCashFlow',
+        url: '/budgets/:budgetId/budgetCashFlow'
         templateUrl: '/app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
       $stateProvider.state 'bucketList',
