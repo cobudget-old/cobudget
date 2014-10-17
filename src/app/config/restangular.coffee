@@ -1,22 +1,7 @@
 `// @ngInject`
-window.Cobudget.Config.Restangular = (RestangularProvider, config) ->
+angular.module('cobudget').config (RestangularProvider, config) ->
   RestangularProvider.setBaseUrl(config.apiEndpoint)
   RestangularProvider.setDefaultHttpFields
     withCredentials: true
   RestangularProvider.setDefaultHeaders
     Accept: "application/json"
-
-  
-  RestangularProvider.setResponseInterceptor (data, operation, what, url, response, deferred) -> 
-    console.log("what", what)
-    console.log(response.data)
-    if operation is "get"
-      if what is "organizations"
-        #console.log(response.data[0].budgets[0].current_round_id)
-        return response.data
-      if what is "round"
-        #console.log("round after interceptor", response.data.round)
-        return response.data.round
-      if what is "bucket"
-        console.log("bucket after interceptor", response.data.round)
-        return response.data.bucket

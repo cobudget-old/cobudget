@@ -11,7 +11,6 @@ angular
     ])
 
   .constant('config', window.Cobudget.Config.Constants)
-  .config(window.Cobudget.Config.Restangular)
   .directive('budgetBanner', window.Cobudget.Directives.BudgetBanner)
   .directive('navBar', window.Cobudget.Directives.NavBar)
   .directive('tabBar', window.Cobudget.Directives.TabBar)
