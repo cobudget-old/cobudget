@@ -37,8 +37,7 @@ angular
       $stateProvider.state 'bucketList.details',
         url: '/:bucketId'
         templateUrl: '/app/bucket-list/bucket-list.details.html'
-        controller: ($scope, $stateParams) ->
-          $scope.bucket = { id:"1", name: "fake1" }
+        controller: 'BucketListDetailsCtrl'
       $stateProvider.state 'budgetContributors',
         url: '/budgets/:budgetId/contributors'
         templateUrl: '/app/budget-contributors/budget-contributors.html'
