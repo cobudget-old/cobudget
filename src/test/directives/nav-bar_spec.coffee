@@ -13,13 +13,13 @@ $scope = {
     null
 }
 $rootScope = {}
-Budget = {
+Organization = {
   myBudgets: sinon.stub()
   allBudgets: ->
     then: (callback) ->
-      callback(Budget.myBudgets())
+      callback(Organization.myBudgets())
 }
-Budget.myBudgets.returns([{id: 4}, {id: 3}])
+Organization.myBudgets.returns([{id: 4}, {id: 3}])
 
 BudgetLoader = window.Cobudget.Services.BudgetLoader()
 
@@ -30,7 +30,7 @@ $routeParams =
   id: 1
 
 load_controller = ->
-  controller($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
+  controller($location, $scope, $rootScope, $routeParams, Organization, BudgetLoader)
 
 describe 'NavBar Directive Controller', ->
   beforeEach ->
@@ -40,7 +40,7 @@ describe 'NavBar Directive Controller', ->
 
   describe '$scope.budgets', ->
     it 'is loaded from allBudgets callback', ->
-      Budget.myBudgets.returns 'my-budgets'
+      Organization.myBudgets.returns 'my-budgets'
       load_controller()
       expect($scope.budgets).to.eq('my-budgets')
 
@@ -50,7 +50,7 @@ describe 'NavBar Directive Controller', ->
         $routeParams.budget_id = undefined
 
       it 'defaults to first budget', ->
-        Budget.myBudgets.returns([{id: 4}, {id: 3}])
+        Organization.myBudgets.returns([{id: 4}, {id: 3}])
         load_controller()
         expect($scope.currentBudgetId).to.eq(4)
     
@@ -64,6 +64,6 @@ describe 'NavBar Directive Controller', ->
       $scope.$watch = (string, callback) ->
         callback(1)
       load_controller()
-      expect($location.path).to.have.been.calledWith('/budgets/1')
+      expect($location.path).to.have.been.calledWith('/organizations/1')
         
     

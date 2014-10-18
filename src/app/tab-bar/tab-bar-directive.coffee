@@ -1,11 +1,12 @@
 controller = null
 `// @ngInject`
-controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
+controller = ($location, $scope, $rootScope, $routeParams, Organization, BudgetLoader) ->
   BudgetLoader.init($rootScope)
   
   $scope.$watch 'currentBudgetId', (id) ->
     $scope.currentBudgetId = id
-    $scope.selectedTab = 'overview'
+  
+  $scope.selectedTab = 'overview'
 
 
 

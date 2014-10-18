@@ -1,4 +1,4 @@
 {
-  "environment": "sample",
-  "apiEndpoint": "http://127.0.0.1:9292/cobudget"
+  "environment": "development",
+  "apiEndpoint": "http://localhost:3000"
 }

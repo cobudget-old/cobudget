@@ -1,6 +1,6 @@
 controller = null
 `// @ngInject`
-controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader) ->
+controller = ($location, $scope, $rootScope, $routeParams, Organization, BudgetLoader) ->
   BudgetLoader.init($rootScope)
 
   # TODO much of this should be in a routing service
@@ -8,7 +8,7 @@ controller = ($location, $scope, $rootScope, $routeParams, Budget, BudgetLoader)
 
   $scope.$watch 'currentBudgetId', (currentBudgetId) ->
     if currentBudgetId > 0
-      $location.path '/budgets/' + currentBudgetId
+      $location.path '/organizations/' + currentBudgetId
       BudgetLoader.setBudgetByRoute()
 
   $scope.budgets = $rootScope.budgets

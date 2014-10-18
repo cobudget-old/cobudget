@@ -153,6 +153,7 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>/app',
           src: '**/*.coffee',
           dest: '.tmp/app',
+          extDot: 'last',
           ext: '.js'
         }]
       },
@@ -161,6 +162,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>/app',
           src: '**/test/*.coffee',
+          extDot: 'last',
           dest: '.tmp/test',
           ext: '.js'
         }]

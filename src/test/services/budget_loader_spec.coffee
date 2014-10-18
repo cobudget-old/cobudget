@@ -13,23 +13,23 @@ describe 'BudgetLoader', ->
   $routeParams = undefined
 
   before ->
-    global.Budget = {
+    global.Organization = {
       allObject: sinon.stub()
       all: ->
         then: (callback) ->
-          callback(Budget.allObject())
+          callback(Organization.allObject())
     }
 
   beforeEach ->
     $rootScope = {}
     $routeParams = {}
-    budget_loader = new window.Cobudget.Services.BudgetLoader($routeParams, Budget)
+    budget_loader = new window.Cobudget.Services.BudgetLoader($routeParams, Organization)
     budget_loader.init($rootScope)
 
   describe 'loadAll', ->
-    it 'sets rootScope.budgets based on output of Budget.all', ->
+    it 'sets rootScope.budgets based on output of Organization.all', ->
       budgets = [{id: 1},{id:7}, {id:3}]
-      Budget.allObject.returns(budgets)
+      Organization.allObject.returns(budgets)
       budget_loader.loadAll()
       expect($rootScope.budgets).to.deep.eq(budgets)
 
@@ -58,10 +58,10 @@ describe 'BudgetLoader', ->
       budget_loader.defaultToFirstBudget()
       expect($rootScope.currentBudget).to.deep.eq(budgets[0])
 
-     it 'does nothing if scope.budgets empty', ->
-       $rootScope.budgets = []
-       budget_loader.defaultToFirstBudget()
-       expect($rootScope.currentBudget).to.eq(undefined)
+    it 'does nothing if scope.budgets empty', ->
+      $rootScope.budgets = []
+      budget_loader.defaultToFirstBudget()
+      expect($rootScope.currentBudget).to.eq(undefined)
 
   describe 'setBudgetByRoute', ->
     it 'sets rootScope.currentBudget to budget id in route', ->
