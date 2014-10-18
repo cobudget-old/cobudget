@@ -28,16 +28,16 @@
           <!--Got a hacky fix for progress bars here... PB cant be 0, must be empty -->
           <div id="bucket-{{bucket.id}}"
                class="progress-bar" role="progressbar"
-               aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded*100 : ''}}"
+               aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded : ''}}"
                aria-valuemin="0"
                aria-valuemax="100"
-               style="width: {{ bucket.percentage_funded * 100}}%;">
+               style="width: {{ bucket.percentage_funded}}%;">
             <span class="sr-only">60% Complete</span>
           </div>
         </div>
 
-        <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * bucket.percentage_filled }}px">${{ bucket.amount_filled / 100 }}</span>
-        <span ng-if="bucket.maximum_dollars > 0" style="float: right">${{ bucket.maximum_dollars }}</span>
+        <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * bucket.percentage_funded }}px">${{ bucket.allocation_total_cents / 100 }}</span>
+        <span ng-if="bucket.max_cents > 0" style="float: right">${{ bucket.max_cents / 100 }}</span>
       </div>
     </div>
 

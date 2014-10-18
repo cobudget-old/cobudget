@@ -8,6 +8,8 @@ angular
     'budget-contributors',
     'my-contributions',
     'budget-loader',
+    'round-loader',
+    'bucket-loader'
     ])
 
   .constant('config', window.Cobudget.Config.Constants)
