@@ -1,6 +1,6 @@
 angular.module('bucket-list')
-	.controller 'BucketListDetailsCtrl', ($scope, $stateParams) ->
-		$scope.bucket =
-			{name: "fake1", description: "Something with profanity"}
+  .controller 'BucketListDetailsCtrl', ($scope, $stateParams, Bucket) ->
+    #$scope.bucket = {id: "1", name:"Fund"}
 
-		console.log($stateParams)
+    Bucket.get($stateParams.bucketId).then (bucket) ->
+      $scope.bucket = bucket
