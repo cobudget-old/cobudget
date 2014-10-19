@@ -1,15 +1,36 @@
 <div class="row content-row">
   <div class="col-md-6 buckets panel container">
 
-    <header class="allocate" ng-if='currentBudget'>
-      {{ budget_time_message }}
+    <header class="" ng-if='currentBudget'>
+      <div class="row section titles">
+        <span class="col-md-4 yourFunds">YOUR FUNDS</span>
+        <span class="col-md-4 groupFunds">GROUP FUNDS</span>
+        <span class="col-md-4 timeLeft">TIME LEFT</span>
+      </div>
 
-      <div class="budget-close">{{ budget_close_message }}</div>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="{{ hours_since_start }}" aria-valuemin="0"
-             aria-valuemax="{{ total_hours }}" style="{{ percent_complete_style }}">
-          <span class="sr-only">60% Complete</span>
+      <div class="row section details">
+        
+        <div class="col-md-4 yourDetails">
+          <span class="large">
+            $315
+            <span class="small">/$450</span>
+          </span>
         </div>
+        
+        <div class="col-md-4 groupDetails">
+          <span class="large">
+            ${{round.total_allocated}}
+            <span class="small">/${{round.total_allocable}}</span>
+          </span>
+        </div>
+
+        <div class="col-md-4 timeDetails">
+          <span class="large">
+            {{round.time_left_days}}
+            <span class="small">DAYS</span>
+          </span>
+        </div>  
+
       </div>
 
     </header>
