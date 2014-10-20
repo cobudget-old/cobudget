@@ -13,23 +13,23 @@ describe 'BudgetLoader', ->
   $routeParams = undefined
 
   before ->
-    global.Organization = {
+    global.Group = {
       allObject: sinon.stub()
       all: ->
         then: (callback) ->
-          callback(Organization.allObject())
+          callback(Group.allObject())
     }
 
   beforeEach ->
     $rootScope = {}
     $routeParams = {}
-    budget_loader = new window.Cobudget.Services.BudgetLoader($routeParams, Organization)
+    budget_loader = new window.Cobudget.Services.BudgetLoader($routeParams, Group)
     budget_loader.init($rootScope)
 
   describe 'loadAll', ->
-    it 'sets rootScope.budgets based on output of Organization.all', ->
+    it 'sets rootScope.budgets based on output of Group.all', ->
       budgets = [{id: 1},{id:7}, {id:3}]
-      Organization.allObject.returns(budgets)
+      Group.allObject.returns(budgets)
       budget_loader.loadAll()
       expect($rootScope.budgets).to.deep.eq(budgets)
 

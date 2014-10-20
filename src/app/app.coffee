@@ -19,18 +19,18 @@ angular
 
   .config(
     ($stateProvider, $urlRouterProvider) ->
-      ///$urlRouterProvider.otherwise("/organizations/1")///
+      ///$urlRouterProvider.otherwise("/groups/1")///
 
       $stateProvider.state 'budgetOverview',
-        url: '/organizations/:budgetId'
+        url: '/groups/:budgetId'
         templateUrl: '/app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
       $stateProvider.state 'budgetCashFlow',
-        url: '/organizations/:budgetId/budgetCashFlow'
+        url: '/groups/:budgetId/budgetCashFlow'
         templateUrl: '/app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
       $stateProvider.state 'bucketList',
-        url: '/organizations/:budgetId/buckets'
+        url: '/groups/:budgetId/buckets'
         templateUrl: '/app/bucket-list/bucket-list.html'
         controller: 'BucketListCtrl'
       $stateProvider.state 'bucketList.details',
@@ -38,11 +38,11 @@ angular
         templateUrl: '/app/bucket-list/bucket-list.details.html'
         controller: 'BucketListDetailsCtrl'
       $stateProvider.state 'budgetContributors',
-        url: '/organizations/:budgetId/contributors'
+        url: '/groups/:budgetId/contributors'
         templateUrl: '/app/budget-contributors/budget-contributors.html'
         controller: 'BudgetContributorsCtrl'
       $stateProvider.state 'myContributions',
-        url: '/organizations/:budgetId/my-contributions'
+        url: '/groups/:budgetId/my-contributions'
         templateUrl: '/app/my-contributions/my-contributions.html'
         controller: 'MyContributionsCtrl'
   )

@@ -1,6 +1,6 @@
 controller = null
 `// @ngInject`
-controller = ($location, $scope, $rootScope, $routeParams, Organization, BudgetLoader) ->
+controller = ($location, $scope, $rootScope, $routeParams, Group, BudgetLoader) ->
   BudgetLoader.init($rootScope)
   
   $scope.$watch 'currentBudgetId', (id) ->
