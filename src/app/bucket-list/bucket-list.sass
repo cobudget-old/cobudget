@@ -9,7 +9,6 @@
   color: $text-on-dark-base
   font-family: "Open Sans"
   border-right: 1px solid #e8e8e8
-  padding-top: 45px
 
   //LIST
   .bucket
@@ -70,23 +69,68 @@
 //SUMMARY
 header
   @include allocatable(background-color)
-  padding: $bucket-gutter $bucket-gutter
-  min-height: 155px
-  color: coral
+  height: 110px
   background-color: white
-  font-size: 23px
+  font-size: 13px
   font-weight: 300
   text-align: left
   border-bottom: 1px solid #e8e8e8
+  padding: 32px $bucket-gutter
 
-  .progress
-    margin-top: 30px
-    margin-bottom: 0px
-    background-color: #e1e2e2
+  .titles
+    color: #717269
+    font-weight: 500
 
-  .progress-bar
-    background-color: #f18e4c
+    .groupFunds
+      padding-left: 0px
+      width: 36% !important
 
-  .budget-close
-    text-align: left
-    font-size: 16px
+    .timeLeft
+      width: 30% !important
+      padding-left: 10px
+
+  .large
+    font-size: 20px
+    font-weight: 400
+
+  .small
+    font-size: 12px
+
+  .section.details
+    font-weight: 700px
+    padding-top: 6px
+
+    .yourDetails
+      color: coral
+
+    .groupDetails
+      color: #4dbdbe
+      padding-left: 0px
+      width: 36% !important
+
+    .timeDetails
+      color: #717269
+      width: 30% !important
+      padding-left: 10px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
