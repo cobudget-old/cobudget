@@ -16,7 +16,6 @@ angular
   .directive('budgetBanner', window.Cobudget.Directives.BudgetBanner)
   .directive('navBar', window.Cobudget.Directives.NavBar)
   .directive('tabBar', window.Cobudget.Directives.TabBar)
-  .service('Bucket', window.Cobudget.Resources.Bucket)
 
   .config(
     ($stateProvider, $urlRouterProvider) ->
