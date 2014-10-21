@@ -31,3 +31,7 @@ group :development do
   gem 'capistrano', '2.15.5'
   gem "capistrano-rails", '~> 1.0.0'
 end
+
+group :development, :test do
+  gem 'faker'
+end

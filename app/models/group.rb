@@ -1,8 +1,15 @@
 class Group < ActiveRecord::Base
   has_many :rounds, dependent: :destroy
-  has_one  :current_round, class_name: 'Round', order: "id DESC"
+  has_one  :latest_round, class_name: 'Round', order: "id DESC"
 
-  def current_round_id
-    current_round.id if current_round
+  after_create :create_initial_round
+
+  def latest_round_id
+    latest_round.id if latest_round
+  end
+
+private
+  def create_initial_round
+    rounds.create!(name: "Initial funding round")
   end
 end

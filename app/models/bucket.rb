@@ -1,5 +1,5 @@
 class Bucket < ActiveRecord::Base
-  has_many :contributions
+  has_many :contributions, ->{ order("amount_cents DESC") }
   belongs_to :round
   belongs_to :user
 
