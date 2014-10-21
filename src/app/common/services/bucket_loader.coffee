@@ -1,5 +1,5 @@
 angular.module('bucket-loader', [])
-  .factory 'BucketLoader' , (Restangular, $routeParams, $stateParams, Round, Organization)->
+  .factory 'BucketLoader' , (Restangular, $routeParams, $stateParams, Round, Group)->
   
     new class BucketLoader
       getBucket: (bucket_id) ->

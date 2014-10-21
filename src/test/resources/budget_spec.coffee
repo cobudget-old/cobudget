@@ -6,20 +6,20 @@ Restangular = require('../support/restangular-stub')
 require '../support/setup'
 require '../../app/scripts/resources/budgets'
 
-describe 'Organization Resource', ->
+describe 'Group Resource', ->
   before ->
-    global.Organization = window.Cobudget.Resources.Organization(Restangular)
+    global.Group = window.Cobudget.Resources.Group(Restangular)
 
   ###
   describe 'myBudgets', ->
     it 'returns allBudgets.$object', ->
-      sinon.stub(Organization, 'allBudgets').returns
+      sinon.stub(Group, 'allBudgets').returns
         $object: 'stub-object'
-      expect(Organization.myBudgets()).to.eq('stub-object')
-      Organization.allBudgets.restore()
+      expect(Group.myBudgets()).to.eq('stub-object')
+      Group.allBudgets.restore()
   ###
 
   describe 'all', ->
     it 'calls all budgets', ->
-      Organization.all()
+      Group.all()
       expect(Restangular.all).to.have.been.calledWith('budgets')

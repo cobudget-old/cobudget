@@ -5,7 +5,7 @@ TO USE, LINK IN INDEX.html and angular module
 
 
 
-angular.module('nav-bar', []).controller 'NavBarCtrl', ($timeout, $location, $scope, $rootScope, $routeParams, Organization, BudgetLoader) ->
+angular.module('nav-bar', []).controller 'NavBarCtrl', ($timeout, $location, $scope, $rootScope, $routeParams, Group, BudgetLoader) ->
 	
   BudgetLoader.init($rootScope)
 
@@ -14,7 +14,7 @@ angular.module('nav-bar', []).controller 'NavBarCtrl', ($timeout, $location, $sc
 
   $scope.$watch 'currentBudgetId', (currentBudgetId) ->
     if currentBudgetId > 0
-      $location.path '/organizations/' + currentBudgetId
+      $location.path '/groups/' + currentBudgetId
       BudgetLoader.setBudgetByRoute()
 
   $scope.budgets = $rootScope.budgets

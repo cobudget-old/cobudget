@@ -1,12 +1,12 @@
 `// @ngInject`
 
-angular.module('cobudget').service 'Organization', (Restangular) ->
+angular.module('cobudget').service 'Group', (Restangular) ->
 
-  get: (org_id)->
-    Restangular.one('organizations', org_id).get()
+  get: (group_id)->
+    Restangular.one('groups', group_id).get()
 
   all: () ->
-    Restangular.all('organizations').getList()
+    Restangular.all('groups').getList()
 
 
 ###

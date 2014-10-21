@@ -1,1 +1,0 @@
-angular.module('buckets-page', ['bucket-details'])

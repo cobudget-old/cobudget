@@ -1,5 +1,5 @@
 angular.module('budget-loader', [])
-  .factory 'BudgetLoader' , ($routeParams, Organization)->
+  .factory 'BudgetLoader' , ($routeParams, Group)->
   
     new class BudgetLoader
       init: ($rootScope) ->
@@ -7,9 +7,8 @@ angular.module('budget-loader', [])
 
       loadAll: ->
         self = @
-        Organization.all().then (organizations) ->
-          console.log(organizations)
-          self.rootScope.budgets = organizations
+        Group.all().then (groups) ->
+          self.rootScope.budgets = groups
 
       ###
             #console.log(budgets)
@@ -25,7 +24,7 @@ angular.module('budget-loader', [])
         self = @
         if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.budget_id
           if $routeParams.budget_id
-            Organization.get($routeParams.budget_id).then (budget) ->
+            Group.get($routeParams.budget_id).then (budget) ->
               self.setBudget budget
 
       getBudgetById: (budgets, id) ->
@@ -34,15 +33,15 @@ angular.module('budget-loader', [])
       getFirstBudget: (budgets) ->
         return _.first(budgets)
 
-      setBudget: (budgetId) ->
-        @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, budgetId)
+      setBudget: (groupId) ->
+        @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, groupId)
 
       defaultToFirstBudget: () ->
         @rootScope.currentBudget = @getFirstBudget(@rootScope.budgets)
 
       setBudgetByRoute: () ->
-        if $routeParams.budgetId
-          @setBudget(parseInt($routeParams.budgetId))
+        if $routeParams.groupId
+          @setBudget(parseInt($routeParams.groupId))
         else
           @defaultToFirstBudget()
 
@@ -53,14 +52,14 @@ angular.module('budget-loader', [])
 
 
 ///
-window.Cobudget.Services.BudgetLoader = ($routeParams, Organization)->
+window.Cobudget.Services.BudgetLoader = ($routeParams, Group)->
 
   init: ($rootScope) ->
     @rootScope = $rootScope
 
   loadAll: ->
     self = @
-    Organization.all().then (budgets) ->
+    Group.all().then (budgets) ->
       console.log(budgets)
       self.rootScope.budgets = budgets
 
@@ -78,7 +77,7 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Organization)->
     self = @
     if !@rootScope.currentBudget || @rootScope.currentBudget.id != $routeParams.budget_id
       if $routeParams.budget_id
-        Organization.get($routeParams.budget_id).then (budget) ->
+        Group.get($routeParams.budget_id).then (budget) ->
           self.setBudget budget
 
   getBudgetById: (budgets, id) ->
@@ -87,15 +86,15 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Organization)->
   getFirstBudget: (budgets) ->
     return _.first(budgets)
 
-  setBudget: (budgetId) ->
-    @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, budgetId)
+  setBudget: (groupId) ->
+    @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, groupId)
 
   defaultToFirstBudget: () ->
     @rootScope.currentBudget = @getFirstBudget(@rootScope.budgets)
 
   setBudgetByRoute: () ->
-    if $routeParams.budgetId
-      @setBudget(parseInt($routeParams.budgetId))
+    if $routeParams.groupId
+      @setBudget(parseInt($routeParams.groupId))
     else
       @defaultToFirstBudget()
 
