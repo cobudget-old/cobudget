@@ -34,15 +34,15 @@ angular.module('budget-loader', [])
       getFirstBudget: (budgets) ->
         return _.first(budgets)
 
-      setBudget: (budgetId) ->
-        @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, budgetId)
+      setBudget: (groupId) ->
+        @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, groupId)
 
       defaultToFirstBudget: () ->
         @rootScope.currentBudget = @getFirstBudget(@rootScope.budgets)
 
       setBudgetByRoute: () ->
-        if $routeParams.budgetId
-          @setBudget(parseInt($routeParams.budgetId))
+        if $routeParams.groupId
+          @setBudget(parseInt($routeParams.groupId))
         else
           @defaultToFirstBudget()
 
@@ -87,15 +87,15 @@ window.Cobudget.Services.BudgetLoader = ($routeParams, Group)->
   getFirstBudget: (budgets) ->
     return _.first(budgets)
 
-  setBudget: (budgetId) ->
-    @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, budgetId)
+  setBudget: (groupId) ->
+    @rootScope.currentBudget = @getBudgetById(@rootScope.budgets, groupId)
 
   defaultToFirstBudget: () ->
     @rootScope.currentBudget = @getFirstBudget(@rootScope.budgets)
 
   setBudgetByRoute: () ->
-    if $routeParams.budgetId
-      @setBudget(parseInt($routeParams.budgetId))
+    if $routeParams.groupId
+      @setBudget(parseInt($routeParams.groupId))
     else
       @defaultToFirstBudget()
 

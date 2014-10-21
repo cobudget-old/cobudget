@@ -67,7 +67,7 @@ describe 'BudgetLoader', ->
     it 'sets rootScope.currentBudget to budget id in route', ->
       budget = {id:7}
       $rootScope.budgets = [{id: 1}, budget, {id: 3}]
-      $routeParams.budgetId = 7
+      $routeParams.groupId = 7
       budget_loader.setBudgetByRoute()
       expect($rootScope.currentBudget).to.eq(budget)
 
@@ -84,7 +84,7 @@ describe 'BudgetLoader', ->
       it 'sets rootScope.currentBudget to budget id in route', ->
         budget = {id:7}
         $rootScope.budgets = [{id: 1}, budget, {id: 3}]
-        $routeParams.budgetId = 7
+        $routeParams.groupId = 7
         budget_loader.initBudget()
         expect($rootScope.currentBudget).to.eq(budget)
 
@@ -101,7 +101,7 @@ describe 'BudgetLoader', ->
       it 'does not set rootScope.currentBudget to budget id in route', ->
         currentBudget = $rootScope.currentBudget
         $rootScope.budgets = [{id: 1}, { id: 7 }, {id: 3}]
-        $routeParams.budgetId = 7
+        $routeParams.groupId = 7
         budget_loader.initBudget()
         expect($rootScope.currentBudget).to.eq(currentBudget)
 

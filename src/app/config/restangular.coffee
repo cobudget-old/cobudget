@@ -7,9 +7,4 @@ angular.module('cobudget').config (RestangularProvider, config) ->
     Accept: "application/json"
 
   RestangularProvider.setResponseInterceptor (data, operation, what, url, response, deferred) ->
-    if operation is "get"
-      console.log('get', what)
-      return response.data[what]
-    if operation is "getList"
-      console.log('getList', what)
-      return response.data[what]
+    return response.data[what]

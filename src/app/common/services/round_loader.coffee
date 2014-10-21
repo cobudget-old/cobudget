@@ -2,8 +2,8 @@ angular.module('round-loader', [])
   .factory 'RoundLoader' , (Restangular, $routeParams, $stateParams, Round, Group)->
   
     new class RoundLoader
-      getCurrentRoundId: (budget_id) ->
-        Group.get(budget_id).then (response) ->
+      getCurrentRoundId: (group_id) ->
+        Group.get(group_id).then (response) ->
           return response.current_round_id
 
       getBuckets: (round_id) ->

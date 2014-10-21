@@ -1,8 +1,9 @@
 angular.module('bucket-list', [])
   .controller 'BucketListCtrl', ($scope, $stateParams, RoundLoader, Round) ->
 
-    $scope.budgetId = $stateParams.budgetId
-    RoundLoader.getCurrentRoundId($stateParams.budgetId).then (round_id) ->
+    $scope.groupId = $stateParams.groupId
+    console.log('scope', $scope)
+    RoundLoader.getCurrentRoundId($stateParams.groupId).then (round_id) ->
       RoundLoader.getBuckets(round_id).then (buckets) ->
         $scope.buckets = buckets
         
