@@ -1,6 +1,5 @@
 class GroupsController < ApplicationController
   respond_to :json
-  action :index, :show
 
   api :GET, '/groups', 'List groups'
   def index

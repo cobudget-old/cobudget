@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020034021) do
+ActiveRecord::Schema.define(version: 20141021015120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,18 +73,14 @@ ActiveRecord::Schema.define(version: 20141020034021) do
     t.datetime "created_at"
   end
 
-  create_table "round_projects", force: true do |t|
-    t.integer  "project_id"
-    t.integer  "round_id"
-    t.integer  "bucket_id"
-    t.datetime "created_at"
-  end
-
   create_table "rounds", force: true do |t|
-    t.integer  "budget_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id",   null: false
+    t.string   "name",       null: false
   end
+
+  add_index "rounds", ["group_id"], name: "index_rounds_on_group_id", using: :btree
 
   add_foreign_key "allocation_rights", "allocators", name: "allocation_rights_allocator_id_fk"
   add_foreign_key "allocation_rights", "rounds", name: "allocation_rights_round_id_fk"
@@ -101,11 +97,5 @@ ActiveRecord::Schema.define(version: 20141020034021) do
   add_foreign_key "reserve_buckets", "allocators", name: "reserve_buckets_allocator_id_fk"
   add_foreign_key "reserve_buckets", "buckets", name: "reserve_buckets_bucket_id_fk"
   add_foreign_key "reserve_buckets", "groups", name: "reserve_buckets_budget_id_fk", column: "budget_id"
-
-  add_foreign_key "round_projects", "buckets", name: "round_projects_bucket_id_fk"
-  add_foreign_key "round_projects", "projects", name: "round_projects_project_id_fk"
-  add_foreign_key "round_projects", "rounds", name: "round_projects_round_id_fk"
-
-  add_foreign_key "rounds", "groups", name: "rounds_budget_id_fk", column: "budget_id"
 
 end

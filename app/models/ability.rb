@@ -6,8 +6,6 @@ class Ability
   end
 
   def initialize(user)
-    can :read, Budget
-    can :read, Round
     can :read, Project
 
     if current_user

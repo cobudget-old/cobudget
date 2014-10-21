@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:index, :show], defaults: { format: :json }
 
-  resources :rounds, only: [:show, :index]
+  resources :rounds, only: [:show], defaults: { format: :json }
 
   resources :buckets, only: [] do
     resources :allocators, only: [] do
