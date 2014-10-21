@@ -81,4 +81,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.reload_controllers = true
+
+  # TODO: Configure mail options
+  # config.action_mailer.default_url_options = { host: 'localhost:3000' }
 end

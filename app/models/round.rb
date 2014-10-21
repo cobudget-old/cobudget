@@ -1,7 +1,8 @@
 class Round < ActiveRecord::Base
-  belongs_to :budget
-  has_many :round_projects, dependent: :destroy
-  has_many :projects, through: :round_projects
+  belongs_to :group
+  has_many :buckets
+  has_many :allocations
 
-  default_scope { order("created_at ASC") }
+  validates :name, presence: true
+  validates :group, presence: true
 end

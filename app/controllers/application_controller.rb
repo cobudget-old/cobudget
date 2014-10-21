@@ -1,24 +1,18 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
   include ActionController::ImplicitRender
-  include CanCan::ControllerAdditions
   include ActionController::Serialization
+  include ::ActionController::Cookies
+
+  include TokenAuthentication
+
+  # protect_from_forgery with: :exception
 
   respond_to :json
-
-  def current_user
-    Person.first
-  end
 
   def self.inherit_resources
     InheritedResources::Base.inherit_resources(self)
     initialize_resources_class_accessors!
     create_resources_url_helpers!
-  end
-
-  private
-
-  def default_serializer_options
-    {root: false}
   end
 end
