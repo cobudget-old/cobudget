@@ -8,7 +8,6 @@ angular.module('budget-loader', [])
       loadAll: ->
         self = @
         Group.all().then (groups) ->
-          console.log(groups)
           self.rootScope.budgets = groups
 
       ###

@@ -2,8 +2,8 @@
 
 angular.module('cobudget').service 'Group', (Restangular) ->
 
-  get: (org_id)->
-    Restangular.one('groups', org_id).get()
+  get: (group_id)->
+    Restangular.one('groups', group_id).get()
 
   all: () ->
     Restangular.all('groups').getList()

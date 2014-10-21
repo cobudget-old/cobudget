@@ -57,7 +57,7 @@
           </div>
         </div>
 
-        <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * bucket.percentage_funded }}px">${{ bucket.allocation_total_cents / 100 }}</span>
+        <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * bucket.percentage_funded }}px">${{ bucket.contribution_total_cents / 100 }}</span>
         <span ng-if="bucket.max_cents > 0" style="float: right">${{ bucket.max_cents / 100 }}</span>
       </div>
     </div>

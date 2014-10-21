@@ -16,7 +16,7 @@
                   {{bucket.name}}
                 </h1>
                 <h2 class="row">
-                  created by <a>{{bucket.sponsor_name_or_email}}</a>
+                  created by <a>{{bucket.user.name}}</a>
                 </h2>
               </div>
             </div>
@@ -24,13 +24,13 @@
             <div class="row">
               <div class="col-md-12 funding">
                 <div class="col-md-1">
-                  ${{ bucket.allocation_total_cents / 100 }} funded
+                  ${{ bucket.contribution_total_cents / 100 }} funded
                 </div>
                 <div class="col-md-1">
 
                 </div>
                 <div class="col-md-1">
-                  ${{bucket.max_cents / 100 }} target
+                  ${{bucket.target_cents / 100 }} target
                 </div>
               </div>
             </div>
@@ -51,15 +51,15 @@
                 CONTRIBUTORS
               </h4>
 
-              <div class="col-md-12 contributor list" ng-repeat="allocation in allocations">
+              <div class="col-md-12 contributor list" ng-repeat="contribution in bucket.contributions">
                 <div class="col-md-12 item">
-                  <p class="col-md-3 funding-amount">${{allocation.amount / 100}}</p>
+                  <p class="col-md-3 funding-amount">${{contribution.amount_cents / 100}}</p>
                   <!-- <img class="col-md-1" src="" /> -->
-                  <p class="col-md-8 name">{{allocation.user_name_or_email}}</p>
+                  <p class="col-md-8 name">{{contribution.user.name}}</p>
                 </div>
               </div>
 
-              <div ng-show="allocations.length == 0 && bucket.amount_filled == 0">
+              <div ng-show="bucket.contributions.length == 0">
                 Looks like no one has contributed to this bucket yet!
               </div>
 

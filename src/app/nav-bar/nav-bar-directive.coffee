@@ -11,8 +11,6 @@ controller = ($location, $scope, $rootScope, $routeParams, Group, BudgetLoader) 
       $location.path '/groups/' + currentBudgetId
       BudgetLoader.setBudgetByRoute()
 
-  $scope.budgets = $rootScope.budgets
-
   BudgetLoader.loadAll()
     #console.log(budgets)
 
