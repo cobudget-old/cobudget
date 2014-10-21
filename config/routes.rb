@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   apipie
 
   resources :groups, only: [:index, :show], defaults: { format: :json }

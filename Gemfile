@@ -25,6 +25,7 @@ gem 'money-rails'
 
 # auth
 
+gem "devise"
 gem "cancan"
 
 group :development do
