@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902080400) do
+ActiveRecord::Schema.define(version: 20141020034021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140902080400) do
     t.datetime "updated_at"
   end
 
-  create_table "budgets", force: true do |t|
+  create_table "groups", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -92,20 +92,20 @@ ActiveRecord::Schema.define(version: 20140902080400) do
   add_foreign_key "allocations", "allocators", name: "allocations_allocator_id_fk"
   add_foreign_key "allocations", "buckets", name: "allocations_bucket_id_fk"
 
-  add_foreign_key "allocators", "budgets", name: "allocators_budget_id_fk"
+  add_foreign_key "allocators", "groups", name: "allocators_budget_id_fk", column: "budget_id"
   add_foreign_key "allocators", "people", name: "allocators_person_id_fk"
 
-  add_foreign_key "projects", "budgets", name: "projects_budget_id_fk"
+  add_foreign_key "projects", "groups", name: "projects_budget_id_fk", column: "budget_id"
   add_foreign_key "projects", "people", name: "projects_sponsor_id_fk", column: "sponsor_id"
 
   add_foreign_key "reserve_buckets", "allocators", name: "reserve_buckets_allocator_id_fk"
   add_foreign_key "reserve_buckets", "buckets", name: "reserve_buckets_bucket_id_fk"
-  add_foreign_key "reserve_buckets", "budgets", name: "reserve_buckets_budget_id_fk"
+  add_foreign_key "reserve_buckets", "groups", name: "reserve_buckets_budget_id_fk", column: "budget_id"
 
   add_foreign_key "round_projects", "buckets", name: "round_projects_bucket_id_fk"
   add_foreign_key "round_projects", "projects", name: "round_projects_project_id_fk"
   add_foreign_key "round_projects", "rounds", name: "round_projects_round_id_fk"
 
-  add_foreign_key "rounds", "budgets", name: "rounds_budget_id_fk"
+  add_foreign_key "rounds", "groups", name: "rounds_budget_id_fk", column: "budget_id"
 
 end

@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   apipie
 
-  resources :budgets, only: [:index, :show] do
-    resources :allocators, only: :index
-  end
+  resources :groups, only: [:index, :show], defaults: { format: :json }
 
   resources :rounds, only: [:show, :index]
 
