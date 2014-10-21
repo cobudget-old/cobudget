@@ -5,6 +5,8 @@ class ApplicationController < ActionController::API
   include ActionController::Serialization
   include ::ActionController::Cookies
 
+  include TokenAuthentication
+
   respond_to :json
 
   def current_user
