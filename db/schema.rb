@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021015120) do
+ActiveRecord::Schema.define(version: 20141021021304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,11 @@ ActiveRecord::Schema.define(version: 20141021015120) do
   create_table "buckets", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "round_id"
+    t.string   "name",       null: false
   end
+
+  add_index "buckets", ["round_id"], name: "index_buckets_on_round_id", using: :btree
 
   create_table "groups", force: true do |t|
     t.string   "name"
