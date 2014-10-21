@@ -1,3 +1,3 @@
 class Person < ActiveRecord::Base
-  has_many :allocators
+  has_many :allocations
 end
