@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
   include ActionController::ImplicitRender
   include CanCan::ControllerAdditions
   include ActionController::Serialization
+  include ::ActionController::Cookies
 
   respond_to :json
 
