@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   include TokenAuthenticable
+
+  has_many :allocations
+
+  validates :name, presence: true
 end

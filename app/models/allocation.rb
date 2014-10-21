@@ -1,7 +1,7 @@
 class Allocation < ActiveRecord::Base
   belongs_to :round
-  belongs_to :person
+  belongs_to :user
 
   validates :round_id, presence: true
-  validates :person_id, presence: true, uniqueness: {scope: :round}
+  validates :user_id, presence: true, uniqueness: {scope: :round}
 end

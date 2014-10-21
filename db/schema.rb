@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021090804) do
+ActiveRecord::Schema.define(version: 20141021112832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,12 @@ ActiveRecord::Schema.define(version: 20141021090804) do
     t.integer  "amount_cents"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "person_id"
+    t.integer  "user_id"
     t.integer  "round_id"
   end
 
-  add_index "allocations", ["person_id"], name: "index_allocations_on_person_id", using: :btree
   add_index "allocations", ["round_id"], name: "index_allocations_on_round_id", using: :btree
+  add_index "allocations", ["user_id"], name: "index_allocations_on_user_id", using: :btree
 
   create_table "buckets", force: true do |t|
     t.datetime "created_at"
@@ -34,9 +34,11 @@ ActiveRecord::Schema.define(version: 20141021090804) do
     t.string   "name",         null: false
     t.integer  "target_cents"
     t.text     "description"
+    t.integer  "user_id"
   end
 
   add_index "buckets", ["round_id"], name: "index_buckets_on_round_id", using: :btree
+  add_index "buckets", ["user_id"], name: "index_buckets_on_user_id", using: :btree
 
   create_table "contributions", force: true do |t|
     t.integer  "user_id"
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 20141021090804) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "authentication_token"
+    t.string   "name"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

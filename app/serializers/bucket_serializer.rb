@@ -4,7 +4,9 @@ class BucketSerializer < ActiveModel::Serializer
              :contribution_total_cents,
              :target_cents,
              :percentage_funded,
-             :description
+             :description,
+             :contributions
 
   has_many :contributions
+  has_one :user
 end
