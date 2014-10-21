@@ -7,6 +7,8 @@ class ApplicationController < ActionController::API
 
   include TokenAuthentication
 
+  # protect_from_forgery with: :exception
+
   respond_to :json
 
   def current_user
