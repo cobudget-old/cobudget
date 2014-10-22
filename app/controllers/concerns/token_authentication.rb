@@ -9,7 +9,7 @@ module TokenAuthentication
 
   included do
     private :authenticate_user_from_token!
-    # This is our new function that comes before Devise's one
+    # # This is our new function that comes before Devise's one
     # before_filter :authenticate_user_from_token!
     # # This is Devise's authentication
     # before_filter :authenticate_user!
@@ -27,6 +27,11 @@ module TokenAuthentication
       params[:user_email] = user_email
     end
 
+    # Ask user to login if auth_token or email unspecified
+    unless params[:user_token] && params[:user_email]
+      return render json: { error: 'You must login to do this' }, status: 401
+    end
+
     user_email = params[:user_email].presence
     user = user_email && User.find_by(email: user_email)
 
@@ -39,6 +44,8 @@ module TokenAuthentication
       # for every request. If you want the token to work as a
       # sign in token, you can simply remove store: false.
       sign_in user, store: false
+    else
+      return render json: { error: 'You are not authorized to do this.' }, status: 403
     end
   end
 

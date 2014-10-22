@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   apipie
+  resources :auth, only: [], defaults: { format: :json } do
+    collection do
+      post :sign_in
+    end
+  end
 
   resources :groups, only: [:index, :show], defaults: { format: :json }
 
