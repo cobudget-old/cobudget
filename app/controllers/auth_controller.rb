@@ -1,4 +1,6 @@
 class AuthController < ApplicationController
+  skip_before_filter :authenticate_user_from_token!, only: [:sign_in]
+
   def sign_in
     user = User.find_by(email: params[:email])
     if user

@@ -1,8 +1,6 @@
 class GroupsController < ApplicationController
   respond_to :json
 
-  before_filter :authenticate_user_from_token!
-
   api :GET, '/groups', 'List groups'
   def index
     @groups = Group.all

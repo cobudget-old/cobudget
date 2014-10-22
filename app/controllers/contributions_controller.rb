@@ -1,7 +1,10 @@
 class ContributionsController < ApplicationController
   api :POST, '/contributions', 'Create new contribution'
   def create
-    respond_with Contribution.create(contribution_params)
+    contribution = Contribution.new(contribution_params)
+    contribution.user = current_user
+    contribution.save
+    respond_with contribution
   end
 
   api :PUT, '/contributions/:contribution_id', 'Update contribution'
@@ -12,6 +15,6 @@ class ContributionsController < ApplicationController
 
   private
     def contribution_params
-      params.permit(:bucket_id, :user_id, :amount_cents)
+      params.require(:contribution).permit(:bucket_id, :amount_cents)
     end
 end
