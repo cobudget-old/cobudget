@@ -13,3 +13,4 @@ angular.module('cobudget').config (RestangularProvider, config) ->
       return response.data[what.substring(0, what.length-1)]
     if operation is "getList"
       return response.data[what]
+

@@ -14,7 +14,12 @@
 
     <div class= "col-md-1 input-name pull-right">
       <!--<input placeholder="Enter your name!"></input>-->
-      <i class="fa fa-user fa-2x"></i>
+      <span ng-show="currentUser">
+        <a href="#" style='color: white' ng-click="logout()">Log out</a><i class="fa fa-user fa-2x"></i>
+      </span>
+      <span ng-hide="currentUser">
+        <a style='color: white; font-weight: bold' href ng-click="showLogin()">Log in</a><i class="fa fa-user fa-2x"></i>
+      </span>
     </div>
 
   </div>

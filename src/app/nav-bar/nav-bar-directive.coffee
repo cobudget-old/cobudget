@@ -1,6 +1,6 @@
 controller = null
 `// @ngInject`
-controller = ($location, $scope, $rootScope, $routeParams, Group, BudgetLoader) ->
+controller = ($location, $scope, $rootScope, $state, $routeParams, Group, BudgetLoader, AuthService) ->
   BudgetLoader.init($rootScope)
 
   # TODO much of this should be in a routing service
@@ -8,11 +8,15 @@ controller = ($location, $scope, $rootScope, $routeParams, Group, BudgetLoader) 
 
   $scope.$watch 'currentBudgetId', (currentBudgetId) ->
     if currentBudgetId > 0
-      $location.path '/groups/' + currentBudgetId
-      BudgetLoader.setBudgetByRoute()
+      $state.go('bucketList', {groupId: currentBudgetId})
 
   BudgetLoader.loadAll()
-    #console.log(budgets)
+
+  $scope.showLogin = () ->
+    AuthService.loginModalCtrl.open()
+
+  $scope.logout = () ->
+    AuthService.logout()
 
 window.Cobudget.Directives.NavBar = ->
   {
