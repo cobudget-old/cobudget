@@ -1,6 +1,5 @@
 angular.module('bucket-list', [])
-  .controller 'BucketListCtrl', ($scope, $stateParams, RoundLoader, Round) ->
-
+  .controller 'BucketListCtrl', ($scope, $stateParams, RoundLoader, Round, BudgetLoader) ->
     $scope.groupId = $stateParams.groupId
     RoundLoader.getLatestRoundId($stateParams.groupId).then (round_id) ->
       RoundLoader.getBuckets(round_id).then (buckets) ->
@@ -27,4 +26,5 @@ angular.module('bucket-list', [])
           $scope.round.time_left_days = 3
           $scope.round.time_left_hours = 72
 
+    BudgetLoader.setBudgetByRoute()
 

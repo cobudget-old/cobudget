@@ -127,7 +127,7 @@ exports.config = {
   // and can be accessed from your test. It is an arbitrary object and can
   // contain anything you may need in your test.
   // This can be changed via the command line as:
-  //   --params.login.user 'Joe'
+  //   --params.auth.user 'Joe'
   params: {
     login: {
       user: 'Jane',

@@ -10,6 +10,9 @@ angular.module('budget-loader', [])
         Group.all().then (groups) ->
           self.rootScope.budgets = groups
 
+      unloadAll: ->
+        @rootScope.budgets = null
+
       ###
             #console.log(budgets)
             if $routeParams.budget_id

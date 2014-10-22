@@ -3,6 +3,8 @@ angular
     'ngRoute', 
     'restangular', 
     'ui.router',
+    'ui.bootstrap',
+    'auth',
     'budget-overview',
     'bucket-list', 
     'budget-contributors',
@@ -19,8 +21,11 @@ angular
 
   .config(
     ($stateProvider, $urlRouterProvider) ->
-      ///$urlRouterProvider.otherwise("/groups/1")///
+      $urlRouterProvider.otherwise("/")
 
+      $stateProvider.state 'home',
+        url: '/'
+        template: '<div>Welcome home, Cosmos.</div>'
       $stateProvider.state 'budgetOverview',
         url: '/groups/:groupId'
         templateUrl: '/app/budget-overview/budget-overview.html'
