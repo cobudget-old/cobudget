@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   # include ::ActionController::Cookies
 
   include TokenAuthentication
-  before_filter :authenticate_user_from_token!
+  before_filter :authenticate_from_token!
 
   # protect_from_forgery with: :exception
 

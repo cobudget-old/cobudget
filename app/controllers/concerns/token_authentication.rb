@@ -8,9 +8,9 @@ module TokenAuthentication
   # before editing this file, the discussion is very interesting.
 
   included do
-    private :authenticate_user_from_token!
+    private :authenticate_from_token!
     # # This is our new function that comes before Devise's one
-    # before_filter :authenticate_user_from_token!
+    # before_filter :authenticate_from_token!
     # # This is Devise's authentication
     # before_filter :authenticate_user!
   end
@@ -18,7 +18,7 @@ module TokenAuthentication
   # For this example, we are simply using token authentication
   # via parameters. However, anyone could use Rails's token
   # authentication features to get the token from a header.
-  def authenticate_user_from_token!
+  def authenticate_from_token!
     # Set the authentication params if not already present
     if user_token = params[:user_token].blank? && request.headers["X-User-Token"]
       params[:user_token] = user_token

@@ -19,8 +19,8 @@ end
 
 ### USERS
 
-User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
-users = []
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
+users = [admin]
 8.times do
   user = User.create!(name: Faker::Name.name,
                email: Faker::Internet.email,

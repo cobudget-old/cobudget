@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:index, :show], defaults: { format: :json }
 
-  resources :rounds, only: [:show], defaults: { format: :json }
+  resources :rounds, only: [:show], defaults: { format: :json } do
+    resources :allocations, only: [:index]
+    resources :contributors, only: [:show]
+  end
 
   resources :buckets, only: [:show], defaults: { format: :json }
 
