@@ -3,8 +3,8 @@
 angular.module('cobudget').service 'Contribution', (Restangular) ->
 
   #get details of contribution
-  get: (id) ->
-    Restangular.one('contributions', id).get()
+  get: (contribution_id) ->
+    Restangular.one('contributions', contribution_id).get()
 
   create: (contribution) ->
     Restangular.all('contributions').post(contribution)
