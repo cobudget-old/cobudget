@@ -58,11 +58,11 @@
 
           <div class="progress-bar progress-bar-warning" 
               role="progressbar"
-              aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded : ''}}"
+              aria-valuenow="{{bucket.my_contribution_percentage > 0 ? bucket.my_contribution_percentage : ''}}"
               aria-valuemin="0"
               aria-valuemax="100"
               style="width: {{ bucket.my_contribution_percentage }}%;">
-            <span class="sr-only">20% Complete (warning)</span>
+            <span class="sr-only">{{ bucket.my_contribution_percentage }}% Complete</span>
           </div>
 
         </div>
