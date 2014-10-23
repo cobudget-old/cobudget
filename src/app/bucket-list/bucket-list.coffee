@@ -1,12 +1,17 @@
 angular.module('bucket-list', [])
-  .controller 'BucketListCtrl', ($scope, $stateParams, RoundLoader, Round, BudgetLoader, Contribution, AuthService) ->
+  .controller 'BucketListCtrl', ($scope, $stateParams, RoundLoader, Round, BudgetLoader, Contribution, AuthService, Restangular) ->
 
     ///Lots of this should be abstracted into a service///
+
+    $scope.loadContributorDetails = () ->
+      RoundLoader.getContributorDetails($scope.round.id, $scope.currentUser.id).then (details) ->
+        $scope.myRoundDetails = details
 
     $scope.groupId = $stateParams.groupId
     RoundLoader.getLatestRoundId($stateParams.groupId).then (round_id) ->
       Round.get(round_id).then (round) ->
         $scope.round =  round
+        $scope.loadContributorDetails()
 
         _.each $scope.round.buckets, (bucket, index) ->
           # get current user's contribution
@@ -34,6 +39,7 @@ angular.module('bucket-list', [])
           # remove 'amount_dollars' computed property
           delete unsaved.amount_dollars
           Contribution.save(unsaved)
+          $scope.loadContributorDetails()
 
         #Find total cents contributed to round for bucket list sum
         total_cents_contributed = 0
