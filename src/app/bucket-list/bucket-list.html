@@ -39,7 +39,7 @@
       <div class="bucket" ng-if='currentBudget'>
         <div class="allocation_amount allocated">
         <!--<label>Allocate</label>-->
-        <input type="number" ng-model='bucket.my_contribution.amount_cents' placeholder="0" ng-blur='saveContribution(bucket.my_contribution)'>
+        <input type="number" ng-model='bucket.my_contribution.amount_dollars' placeholder="0" ng-blur='saveContribution(bucket.my_contribution)'>
         </div>
 
         <h2><a href='#/groups/{{groupId}}/buckets/{{bucket.id}}'>{{bucket.name}}</a></h2>
@@ -53,8 +53,18 @@
                aria-valuemin="0"
                aria-valuemax="100"
                style="width: {{ bucket.percentage_funded}}%;">
-            <span class="sr-only">{{ bucket.percentage_funded}}% Complete</span>
+            <span class="sr-only">{{ bucket.percentage_funded }}% Complete</span>
           </div>
+
+          <div class="progress-bar progress-bar-warning" 
+              role="progressbar"
+              aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.percentage_funded : ''}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style="width: {{ bucket.my_contribution_percentage }}%;">
+            <span class="sr-only">20% Complete (warning)</span>
+          </div>
+
         </div>
 
         <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * bucket.percentage_funded }}px">${{ bucket.contribution_total_cents / 100 }}</span>
