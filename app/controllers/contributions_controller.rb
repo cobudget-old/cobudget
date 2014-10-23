@@ -9,7 +9,12 @@ class ContributionsController < ApplicationController
 
   api :PUT, '/contributions/:contribution_id', 'Update contribution'
   def update
-  	@contribution = Contribution.find(params[:id])
+    # Dumb hack due to restangular issues
+    if params[:contribution].is_a?(String)
+      params[:contribution] = JSON.parse(params[:contribution])
+    end
+
+    @contribution = Contribution.find(params[:id])
     respond_with @contribution.update_attributes(contribution_params)
   end
 
