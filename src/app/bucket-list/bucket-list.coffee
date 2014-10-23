@@ -66,7 +66,9 @@ angular.module('bucket-list', [])
           unsaved = _.clone(contribution)
           # remove 'amount_dollars' computed property
           delete unsaved.amount_dollars
-          Contribution.save(unsaved).then ->
+          Contribution.save(unsaved).then (saved) ->
+            if saved
+              contribution.id = saved.id
             $scope.loadContributorDetails()
 
         #Find total cents contributed to round for bucket list sum
