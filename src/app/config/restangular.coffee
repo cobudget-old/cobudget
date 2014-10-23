@@ -7,7 +7,7 @@ angular.module('cobudget').config (RestangularProvider, config) ->
     Accept: "application/json"
 
   RestangularProvider.setResponseInterceptor (data, operation, what, url, response, deferred) ->
-    if operation is "get"
+    if operation is "get" or operation is "post"
       # Trim the 's' off so we can reference the singular root note name
       # This is a total hack and won't work for resources like "people"
       return response.data[what.substring(0, what.length-1)]
