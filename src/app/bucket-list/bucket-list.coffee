@@ -40,6 +40,8 @@ angular.module('bucket-list', [])
 
           # compute 'amount_dollars' derived property
           bucket.my_contribution.amount_dollars = bucket.my_contribution.amount_cents / 100.0
+
+          bucket.my_contribution.bucket_id = bucket.id
           
           # compute 'contribution_total_cents'
           bucket.contribution_total_cents = _.reduce(_.pluck(bucket.group_contribution, "amount_cents"), ((sum, num) ->
@@ -64,8 +66,8 @@ angular.module('bucket-list', [])
           unsaved = _.clone(contribution)
           # remove 'amount_dollars' computed property
           delete unsaved.amount_dollars
-          Contribution.save(unsaved)
-          $scope.loadContributorDetails()
+          Contribution.save(unsaved).then ->
+            $scope.loadContributorDetails()
 
         #Find total cents contributed to round for bucket list sum
         total_cents_contributed = 0
