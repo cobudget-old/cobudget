@@ -15,16 +15,39 @@ angular.module('bucket-list', [])
 
         _.each $scope.round.buckets, (bucket, index) ->
           # get current user's contribution
-          bucket.my_contribution = _.find(bucket.contributions, (contribution) ->
-            # if a contribution from this user already exists
+          my_contribution_index = _.findIndex bucket.contributions, (contribution) ->
             contribution.user.id == AuthService.getCurrentUser().id
-          ) or { #create an empty contribution
-            user_id: AuthService.getCurrentUser().id
-            bucket_id : bucket.id
-            amount_cents: 0
-          }
+
+          # if a contribution from this user already exists
+          if my_contribution_index != -1
+            # get existing contribution
+            bucket.my_contribution = bucket.contributions[my_contribution_index]
+            # remove my_contribution from contributions and save as group_contribution
+            bucket.group_contribution = _.clone(bucket.contributions)
+            bucket.group_contribution.splice(my_contribution_index, 1)
+            console.log(bucket.contributions, my_contribution_index, _.clone(bucket.contributions).splice(my_contribution_index, 1))
+          else
+            # create an empty contribution
+            bucket.my_contribution = {
+              user_id: AuthService.getCurrentUser().id
+              bucket_id : bucket.id
+              amount_cents: 0
+            }
+            # my_contribution index will be at end of existing contributions
+            my_contribution_index = bucket.contributions.length
+            # we don't have a contribution, so all contributions are group_contribution
+            bucket.group_contribution = bucket.contributions
+
           # compute 'amount_dollars' derived property
           bucket.my_contribution.amount_dollars = bucket.my_contribution.amount_cents / 100.0
+          
+          # compute 'contribution_total_cents'
+          bucket.contribution_total_cents = _.reduce(_.pluck(bucket.group_contribution, "amount_cents"), ((sum, num) ->
+            sum + num), 0)
+          # compute 'percentage_funded'
+          bucket.percentage_funded = (bucket.contribution_total_cents / bucket.target_cents) * 100
+
+          
           
           $scope.$watch "round.buckets["+index+"].my_contribution.amount_dollars", (amount_dollars) ->
             my_contribution = $scope.round.buckets[index].my_contribution
@@ -32,6 +55,9 @@ angular.module('bucket-list', [])
             my_contribution.amount_cents = my_contribution.amount_dollars * 100.0
             # compute my_contribution amount versus total percentage
             bucket.my_contribution_percentage = (my_contribution.amount_cents / bucket.target_cents) * 100
+            # update current users' contribution within list of contributions
+            bucket.contributions[my_contribution_index] = my_contribution
+            console.log(bucket)
             
 
         $scope.saveContribution = (contribution) ->
