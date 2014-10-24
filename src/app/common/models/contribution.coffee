@@ -7,6 +7,13 @@ angular.module('cobudget').factory 'ContributionModel',  (UserModel) ->
       @bucketId = data.bucket_id or data.bucket and data.bucket.id
       @user = new UserModel(data.user)
 
+      Object.defineProperty(@, "amountDollars", {
+        get: ->
+          @amountCents / 100.0
+        set: (amountDollars) ->
+          @amountCents = amountDollars * 100
+      })
+
     serialize: ->
       return {
         id: @id,
@@ -14,3 +21,10 @@ angular.module('cobudget').factory 'ContributionModel',  (UserModel) ->
         bucket_id: @bucketId
         user: @user.serialize()
       }
+
+    save: (ContributionService) ->
+      unsaved = @serialize()
+      self = @
+      ContributionService.save(unsaved).then (saved) ->
+        if saved
+          self.id = saved.id

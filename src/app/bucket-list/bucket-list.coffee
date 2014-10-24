@@ -10,10 +10,7 @@ angular.module('bucket-list', [])
         $scope.myRoundDetails = details
 
     $scope.saveContribution = (contribution) ->
-      unsaved = contribution.serialize()
-      ContributionService.save(unsaved).then (saved) ->
-        if saved
-          contribution.id = saved.id
+      contribution.save(ContributionService).then ->
         $scope.loadContributorDetails()
 
     $scope.groupId = $stateParams.groupId
@@ -22,24 +19,15 @@ angular.module('bucket-list', [])
       $scope.round = round
       $scope.loadContributorDetails()
 
-      _.each $scope.round.buckets, (bucket, index) ->
+      _.each round.buckets, (bucket, index) ->
         # get current user's contribution
-        myContribution = BucketService.getMyBucketContribution(bucket, $scope.currentUserId)
-
-        Object.defineProperty(myContribution, "amountDollars", {
-          get: ->
-            this.amountCents / 100.0
-          set: (amountDollars) ->
-            this.amountCents = amountDollars * 100
-        })
-
-        bucket.myContribution = myContribution
-        bucket.groupContributionPercentage = bucket.percentageFunded - BucketService.getMyBucketContributionPercentage(bucket, myContribution)
-        bucket.groupContributionCents = bucket.contributionTotalCents - myContribution.amountCents
+        myContribution = bucket.getMyContribution($scope.currentUserId)
+        bucket.getMyContributionPercentage()
+        bucket.getGroupContribution()
 
         $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars) ->
           # compute myContribution amount versus total percentage
-          bucket.myContributionPercentage = BucketService.getMyBucketContributionPercentage(bucket, myContribution)
+          bucket.getMyContributionPercentage(myContribution)
 
       #Find total cents contributed to round for bucket list sum
       totalCentsContributed = 0
