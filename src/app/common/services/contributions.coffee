@@ -1,10 +1,12 @@
 `// @ngInject`
 
-angular.module('cobudget').service 'Contribution', (Restangular) ->
+angular.module('cobudget').service 'ContributionService', (Restangular, ContributionModel) ->
 
   #get details of contribution
   get: (contribution_id) ->
     Restangular.one('contributions', contribution_id).get()
+    .then (contribution) ->
+      new ContributionModel(contribution.plain())
 
   create: (contribution) ->
     Restangular.all('contributions').post(contribution)

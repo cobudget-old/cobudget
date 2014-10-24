@@ -1,4 +1,4 @@
 angular.module('budget-contributors', [])
-	.controller 'BudgetContributorsCtrl', ($scope, $route) ->
+	.controller 'BudgetContributorsCtrl', ($scope) ->
 		console.log('WHHH')
 		$scope.contributor = "Derek saas"

@@ -1,12 +1,17 @@
 `// @ngInject`
 
-angular.module('cobudget').service 'Group', (Restangular) ->
+angular.module('cobudget').service 'GroupService', (Restangular, GroupModel) ->
 
   get: (group_id)->
     Restangular.one('groups', group_id).get()
+    .then (group) ->
+      new GroupModel(group.plain())
 
   all: () ->
     Restangular.all('groups').getList()
+    .then (groups) ->
+      _.map groups, (group) ->
+        new GroupModel(group.plain())
 
 
 ###

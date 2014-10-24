@@ -1,6 +1,6 @@
 controller = null
 `// @ngInject`
-controller = ($location, $scope, $rootScope, $state, $routeParams, Group, BudgetLoader, AuthService) ->
+controller = ($location, $scope, $rootScope, $state, $routeParams, GroupService, BudgetLoader, AuthService) ->
   BudgetLoader.init($rootScope)
 
   # TODO much of this should be in a routing service

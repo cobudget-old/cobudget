@@ -13,20 +13,20 @@
         <div class="col-md-4 yourDetails">
           <span class="large">
             ${{myRoundDetails.fundsLeftCents / 100 }}
-            <span class="small">/${{myRoundDetails.allocation_amount_cents / 100}}</span>
+            <span class="small">/${{myRoundDetails.allocationAmountCents / 100}}</span>
           </span>
         </div>
         
         <div class="col-md-4 groupDetails">
           <span class="large">
-            ${{round.total_allocated}}
-            <span class="small">/${{round.total_allocable}}</span>
+            ${{round.totalAllocated}}
+            <span class="small">/${{round.totalAllocable}}</span>
           </span>
         </div>
 
         <div class="col-md-4 timeDetails">
           <span class="large">
-            {{round.time_left_days}}
+            {{round.timeLeftDays}}
             <span class="small">DAYS</span>
           </span>
         </div>  
@@ -39,7 +39,7 @@
       <div class="bucket" ng-if='currentBudget'>
         <div class="allocation_amount allocated">
         <!--<label>Allocate</label>-->
-        <input type="number" ng-model='bucket.my_contribution.amount_dollars' placeholder="0" ng-blur='saveContribution(bucket.my_contribution)'>
+        <input type="number" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)'>
         </div>
 
         <h2><a href='#/groups/{{groupId}}/buckets/{{bucket.id}}'>{{bucket.name}}</a></h2>
@@ -49,26 +49,26 @@
           <!--Got a hacky fix for progress bars here... PB cant be 0, must be empty -->
           <div id="bucket-{{bucket.id}}"
                class="progress-bar" role="progressbar"
-               aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.group_contribution_percentage : ''}}"
+               aria-valuenow="{{bucket.percentageFunded > 0 ? bucket.groupContributionPercentage : ''}}"
                aria-valuemin="1"
                aria-valuemax="100"
-               style="width: {{ bucket.group_contribution_percentage }}% ;">
-            <span class="sr-only">{{ bucket.group_contribution_percentage }}% Complete</span>
+               style="width: {{ bucket.groupContributionPercentage }}% ;">
+            <span class="sr-only">{{ bucket.groupContributionPercentage }}% Complete</span>
           </div>
 
           <div class="progress-bar progress-bar-warning" 
               role="progressbar"
-              aria-valuenow="{{bucket.my_contribution_percentage > 0 ? bucket.my_contribution_percentage : ''}}"
+              aria-valuenow="{{bucket.myContributionPercentage > 0 ? bucket.myContributionPercentage : ''}}"
               aria-valuemin="0"
               aria-valuemax="100"
-              style="width: {{ bucket.my_contribution_percentage }}%;">
-            <span class="sr-only">{{ bucket.my_contribution_percentage }}% Complete</span>
+              style="width: {{ bucket.myContributionPercentage }}%;">
+            <span class="sr-only">{{ bucket.myContributionPercentage }}% Complete</span>
           </div>
 
         </div>
 
-        <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * (bucket.percentage_funded - bucket.my_contribution_percentage) }}px">${{ bucket.group_contribution_cents / 100 }}</span>
-        <span ng-if="bucket.target_cents > 0" style="float: right">${{ bucket.target_cents / 100 }}</span>
+        <span style="float: left; margin-left: {{ angular.element('#bucket-#{bucket.id}').width() * (bucket.percentageFunded - bucket.myContributionPercentage) }}px">${{ bucket.groupContributionCents / 100 }}</span>
+        <span ng-if="bucket.targetCents > 0" style="float: right">${{ bucket.targetCents / 100 }}</span>
       </div>
     </div>
 

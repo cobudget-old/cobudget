@@ -1,6 +1,6 @@
 angular.module('bucket-list')
-  .controller 'BucketListDetailsCtrl', ($scope, $stateParams, Bucket) ->
+  .controller 'BucketListDetailsCtrl', ($scope, $stateParams, BucketService) ->
     #$scope.bucket = {id: "1", name:"Fund"}
 
-    Bucket.get($stateParams.bucketId).then (bucket) ->
+    BucketService.get($stateParams.bucketId).then (bucket) ->
       $scope.bucket = bucket
