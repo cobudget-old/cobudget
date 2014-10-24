@@ -1,23 +1,13 @@
 angular.module('bucket-list', [])
-  .controller 'BucketListCtrl', ($scope, $stateParams, RoundLoader, Round, BudgetLoader, Contribution, AuthService, Restangular) ->
+  .controller 'BucketListCtrl', ($scope, $stateParams, RoundLoader, Round, BudgetLoader, Contribution, AuthService, Restangular, Bucket) ->
 
     ///Lots of this should be abstracted into a service///
+
+    $scope.current_user_id = AuthService.getCurrentUser().id
 
     $scope.loadContributorDetails = () ->
       RoundLoader.getContributorDetails($scope.round.id, $scope.currentUser.id).then (details) ->
         $scope.myRoundDetails = details
-
-    $scope.getMyBucketContribution = (bucket) ->
-      (_.find bucket.contributions, (contribution) ->
-        contribution.user.id == AuthService.getCurrentUser().id
-      ) or {
-        user_id: AuthService.getCurrentUser().id
-        bucket_id : bucket.id
-        amount_cents: 0
-      }
-
-    $scope.getMyBucketContributionPercentage = (bucket, my_contribution) ->
-      (my_contribution.amount_cents / bucket.target_cents) * 100
 
     $scope.saveContribution = (contribution) ->
       unsaved = _.clone(contribution)
@@ -29,14 +19,15 @@ angular.module('bucket-list', [])
         $scope.loadContributorDetails()
 
     $scope.groupId = $stateParams.groupId
+
     RoundLoader.getLatestRoundId($stateParams.groupId).then (round_id) ->
       Round.get(round_id).then (round) ->
-        $scope.round =  round
+        $scope.round = round
         $scope.loadContributorDetails()
 
         _.each $scope.round.buckets, (bucket, index) ->
           # get current user's contribution
-          my_contribution = $scope.getMyBucketContribution(bucket)
+          my_contribution = Bucket.getMyBucketContribution(bucket, $scope.current_user_id)
 
           Object.defineProperty(my_contribution, "amount_dollars", {
             get: ->
@@ -46,12 +37,12 @@ angular.module('bucket-list', [])
           })
 
           bucket.my_contribution = my_contribution
-          bucket.group_contribution_percentage = bucket.percentage_funded - $scope.getMyBucketContributionPercentage(bucket, my_contribution)
+          bucket.group_contribution_percentage = bucket.percentage_funded - Bucket.getMyBucketContributionPercentage(bucket, my_contribution)
           bucket.group_contribution_cents = bucket.contribution_total_cents - my_contribution.amount_cents
 
           $scope.$watch "round.buckets["+index+"].my_contribution.amount_dollars", (amount_dollars) ->
             # compute my_contribution amount versus total percentage
-            bucket.my_contribution_percentage = $scope.getMyBucketContributionPercentage(bucket, my_contribution)
+            bucket.my_contribution_percentage = Bucket.getMyBucketContributionPercentage(bucket, my_contribution)
 
         #Find total cents contributed to round for bucket list sum
         total_cents_contributed = 0

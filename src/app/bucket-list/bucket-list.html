@@ -49,10 +49,10 @@
           <!--Got a hacky fix for progress bars here... PB cant be 0, must be empty -->
           <div id="bucket-{{bucket.id}}"
                class="progress-bar" role="progressbar"
-               aria-valuenow="{{bucket.percentage_funded > 0 ? (bucket.group_contribution_percentage) : ''}}"
-               aria-valuemin="0"
+               aria-valuenow="{{bucket.percentage_funded > 0 ? bucket.group_contribution_percentage : ''}}"
+               aria-valuemin="1"
                aria-valuemax="100"
-               style="width: {{ bucket.group_contribution_percentage}}%;">
+               style="width: {{ bucket.group_contribution_percentage }}% ;">
             <span class="sr-only">{{ bucket.group_contribution_percentage }}% Complete</span>
           </div>
 
