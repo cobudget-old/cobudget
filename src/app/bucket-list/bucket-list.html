@@ -11,9 +11,9 @@
       <div class="row section details">
         
         <div class="col-md-4 yourDetails">
-          <span class="large">
-            ${{myRoundDetails.fundsLeftCents / 100 }}
-            <span class="small">/${{myRoundDetails.allocationAmountCents / 100}}</span>
+          <span contribution-status="status" class="large">
+            ${{round.myAllocationsLeftCents / 100 }}
+            <span class="small">/${{round.myAllocationsAmountCents / 100}}</span>
           </span>
         </div>
         
@@ -39,7 +39,7 @@
       <div class="bucket" ng-if='currentBudget'>
         <div class="allocation_amount allocated">
         <!--<label>Allocate</label>-->
-        <input type="number" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)'>
+        <input contribution-status="status" type="number" min="0" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)' >
         </div>
 
         <h2><a href='#/groups/{{groupId}}/buckets/{{bucket.id}}'>{{bucket.name}}</a></h2>
@@ -56,7 +56,8 @@
             <span class="sr-only">{{ bucket.groupContributionPercentage }}% Complete</span>
           </div>
 
-          <div class="progress-bar progress-bar-warning" 
+          <div contribution-status="status"
+              class="progress-bar progress-bar-warning" 
               role="progressbar"
               aria-valuenow="{{bucket.myContributionPercentage > 0 ? bucket.myContributionPercentage : ''}}"
               aria-valuemin="0"

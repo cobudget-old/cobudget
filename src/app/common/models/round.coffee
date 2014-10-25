@@ -9,3 +9,22 @@ angular.module('cobudget').factory 'RoundModel',  (AllocationModel, BucketModel)
         new AllocationModel(allocation)
       @buckets = _.map data.buckets, (bucket) ->
         new BucketModel(bucket)
+
+    getMyContributions: ->
+      @myContributions = _.map @buckets, (bucket) ->
+        bucket.myContribution
+
+    getMyAllocationsLeftCents: (myAllocationsCents) ->
+      myContributionsCents = _.reduce _.pluck(@myContributions, "amountCents"), (sum, num) ->
+        sum + num
+      console.log(myAllocationsCents, myContributionsCents)
+      @myAllocationsLeftCents = myAllocationsCents - myContributionsCents
+
+
+    getStatus: ->
+      if (@myAllocationsLeftCents >= 0)
+        console.log('yay!')
+        null
+      else
+        console.log('awe...')
+        'warning'

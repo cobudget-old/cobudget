@@ -23,6 +23,10 @@
       margin-top: 12px
       margin-bottom: 0px
       background-color: $dark-base-cutout
+      
+      .warning
+        background-color: red
+
 
     &.selected
       background-color: $dark-base-selected
@@ -63,6 +67,10 @@
       width: 5em
       @include rounded(0.3em)
 
+      &.warning
+        color: red !important
+        border-color: red
+
 //SUMMARY
 header
   @include allocatable(background-color)
@@ -99,6 +107,9 @@ header
 
     .yourDetails
       color: coral
+
+      .warning
+        color: red
 
     .groupDetails
       color: #4dbdbe

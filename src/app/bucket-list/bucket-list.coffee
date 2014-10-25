@@ -8,12 +8,16 @@ angular.module('bucket-list', [])
     $scope.loadContributorDetails = () ->
       RoundService.getContributorDetails($scope.round.id, $scope.currentUser.id).then (details) ->
         $scope.myRoundDetails = details
-
+        $scope.round.myAllocationsLeftCents = details.fundsLeftCents
+        $scope.round.myAllocationsAmountCents = details.allocationAmountCents
+        $scope.status = $scope.round.getStatus()
+    
     $scope.saveContribution = (contribution) ->
       contribution.save(ContributionService).then ->
         $scope.loadContributorDetails()
 
     $scope.groupId = $stateParams.groupId
+    $scope.status = null
 
     RoundService.getLatestRound($stateParams.groupId).then (round) ->
       $scope.round = round
@@ -26,8 +30,13 @@ angular.module('bucket-list', [])
         bucket.getGroupContribution()
 
         $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars) ->
-          # compute myContribution amount versus total percentage
-          bucket.getMyContributionPercentage(myContribution)
+          round.getMyAllocationsLeftCents(round.myAllocationsAmountCents)
+          $scope.status = round.getStatus()
+
+          if amountDollars >= 0
+            bucket.getMyContributionPercentage()
+
+      round.getMyContributions()
 
       #Find total cents contributed to round for bucket list sum
       totalCentsContributed = 0
