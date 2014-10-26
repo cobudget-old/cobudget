@@ -36,3 +36,5 @@ end
 group :development, :test do
   gem 'faker'
 end
+
+gem 'rails_12factor', group: :production
