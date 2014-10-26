@@ -9,9 +9,7 @@ angular
     'bucket-list', 
     'budget-contributors',
     'my-contributions',
-    'budget-loader',
-    'round-loader',
-    'bucket-loader'
+    'budget-loader'
     ])
 
   .constant('config', window.Cobudget.Config.Constants)
