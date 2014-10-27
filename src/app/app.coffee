@@ -36,6 +36,9 @@ angular
         url: '/groups/:groupId/buckets'
         templateUrl: '/app/bucket-list/bucket-list.html'
         controller: 'BucketListCtrl'
+        resolve:
+          latestRound: (RoundService, $stateParams) ->
+            RoundService.getLatestRound($stateParams.groupId)
       $stateProvider.state 'bucketList.details',
         url: '/:bucketId'
         templateUrl: '/app/bucket-list/bucket-list.details.html'
