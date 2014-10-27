@@ -23,8 +23,6 @@ angular.module('cobudget').factory 'RoundModel',  (AllocationModel, BucketModel)
 
     getStatus: ->
       if (@myAllocationsLeftCents >= 0)
-        console.log('yay!')
         null
       else
-        console.log('awe...')
         'warning'
