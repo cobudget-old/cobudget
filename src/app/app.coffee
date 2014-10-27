@@ -1,12 +1,12 @@
 angular
   .module('cobudget', [
-    'ngRoute', 
-    'restangular', 
+    'ngRoute',
+    'restangular',
     'ui.router',
     'ui.bootstrap',
     'auth',
     'budget-overview',
-    'bucket-list', 
+    'bucket-list',
     'budget-contributors',
     'my-contributions',
     'budget-loader'
