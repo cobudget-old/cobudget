@@ -32,7 +32,12 @@ angular.module('bucket-list', [])
       bucket.getMyContributionPercentage()
       bucket.getGroupContribution()
 
-      $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars) ->
+      $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars, oldAmountDollars) ->
+
+        # if amountDollars is Not a Number (NaN)
+        if amountDollars != 0 and not amountDollars
+          # don't accept number
+          bucket.myContribution.amountDollars = oldAmountDollars
 
         round.getMyAllocationsLeftCents(round.myAllocationsAmountCents)
 
