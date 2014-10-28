@@ -7,10 +7,15 @@ angular.module('cobudget')
 
       scope.$watch attrs.contributionStatus, (contributionStatus) ->
         if (contributionStatus == 'warning')
+          element.removeClass('complete')
           element.addClass('warning')
-        else
+        else if (contributionStatus == 'complete')
           element.removeClass('warning')
-    
+          element.addClass('complete')
+        else
+          element.removeClass('complete')
+          element.removeClass('warning')
+
     return {
         restrict: 'EA',
         link: statusFn

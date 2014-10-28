@@ -2,6 +2,8 @@
 
 @media screen and (min-width: 900px)
 
+$green: #0d7
+
 .buckets.panel.container
   height: 100%
   overflow: auto
@@ -23,10 +25,11 @@
       margin-top: 12px
       margin-bottom: 0px
       background-color: $dark-base-cutout
-      
+
       .warning
         background-color: red
-
+      .complete
+        background-color: $green
 
     &.selected
       background-color: $dark-base-selected
@@ -70,6 +73,9 @@
       &.warning
         color: red !important
         border-color: red
+      &.complete
+        color: $green !important
+        border-color: $green
 
 //SUMMARY
 header
@@ -110,6 +116,8 @@ header
 
       .warning
         color: red
+      .complete
+        color: $green
 
     .groupDetails
       color: #4dbdbe
