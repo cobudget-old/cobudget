@@ -32,3 +32,9 @@ angular.module('cobudget').factory 'BucketModel',  (ContributionModel, AuthServi
     getGroupContribution: () ->
       @groupContributionPercentage = @percentageFunded - @myContributionPercentage
       @groupContributionCents = @contributionTotalCents - @myContribution.amountCents
+
+    getContributionsByUser: () ->
+      contributions = {}
+      _.each @contributions, (contribution) ->
+        contributions[contribution.user.id] = contribution
+      contributions

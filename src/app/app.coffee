@@ -47,6 +47,9 @@ angular
         url: '/groups/:groupId/contributors'
         templateUrl: '/app/budget-contributors/budget-contributors.html'
         controller: 'BudgetContributorsCtrl'
+        resolve:
+          latestRound: (RoundService, $stateParams) ->
+            RoundService.getLatestRound($stateParams.groupId)
       $stateProvider.state 'myContributions',
         url: '/groups/:groupId/my-contributions'
         templateUrl: '/app/my-contributions/my-contributions.html'
