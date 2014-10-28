@@ -13,6 +13,10 @@ angular.module('bucket-list', [])
         $scope.status = $scope.round.getStatus()
 
     $scope.saveContribution = (contribution) ->
+      # if we're gonna have a bad time
+      if $scope.status == 'warning'
+        # gtfo
+        return
       contribution.save(ContributionService).then ->
         $scope.loadContributorDetails()
 
