@@ -38,6 +38,8 @@ angular.module('bucket-list', [])
 
         if amountDollars >= 0
           bucket.getMyContributionPercentage()
+          # ensure progress bar does not overfill
+          bucket.myContributionPercentage = Math.min(bucket.myContributionPercentage, 100 - bucket.groupContributionPercentage)
 
     round.getMyContributions()
 
