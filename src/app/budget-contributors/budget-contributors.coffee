@@ -1,4 +1,3 @@
 angular.module('budget-contributors', [])
-	.controller 'BudgetContributorsCtrl', ($scope) ->
-		console.log('WHHH')
-		$scope.contributor = "Derek saas"
+	.controller 'BudgetContributorsCtrl', ($scope, latestRound) ->
+    $scope.contributors = latestRound.getContributors()
