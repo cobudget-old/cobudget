@@ -33,7 +33,12 @@ angular.module('bucket-list', [])
       bucket.getGroupContribution()
 
       $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars) ->
+
         round.getMyAllocationsLeftCents(round.myAllocationsAmountCents)
+
+        if round.myAllocationsLeftCents < 0
+          bucket.myContribution.amountCents += round.myAllocationsLeftCents
+
         $scope.status = round.getStatus()
 
         if amountDollars >= 0
