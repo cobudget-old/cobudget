@@ -1,12 +1,12 @@
 angular
   .module('cobudget', [
-    'ngRoute', 
-    'restangular', 
+    'ngRoute',
+    'restangular',
     'ui.router',
     'ui.bootstrap',
     'auth',
     'budget-overview',
-    'bucket-list', 
+    'bucket-list',
     'budget-contributors',
     'my-contributions',
     'budget-loader'
@@ -36,6 +36,9 @@ angular
         url: '/groups/:groupId/buckets'
         templateUrl: '/app/bucket-list/bucket-list.html'
         controller: 'BucketListCtrl'
+        resolve:
+          latestRound: (RoundService, $stateParams) ->
+            RoundService.getLatestRound($stateParams.groupId)
       $stateProvider.state 'bucketList.details',
         url: '/:bucketId'
         templateUrl: '/app/bucket-list/bucket-list.details.html'

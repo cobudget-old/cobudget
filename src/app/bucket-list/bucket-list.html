@@ -1,7 +1,7 @@
 <div class="row content-row">
   <div class="col-md-6 buckets panel container">
 
-    <header class="" ng-if='currentBudget'>
+    <header class="">
       <div class="row section titles">
         <span class="col-md-4 yourFunds">YOUR FUNDS</span>
         <span class="col-md-4 groupFunds">GROUP FUNDS</span>
@@ -9,14 +9,14 @@
       </div>
 
       <div class="row section details">
-        
+
         <div class="col-md-4 yourDetails">
           <span contribution-status="status" class="large">
             ${{round.myAllocationsLeftCents / 100 }}
             <span class="small">/${{round.myAllocationsAmountCents / 100}}</span>
           </span>
         </div>
-        
+
         <div class="col-md-4 groupDetails">
           <span class="large">
             ${{round.totalAllocated}}
@@ -29,14 +29,14 @@
             {{round.timeLeftDays}}
             <span class="small">DAYS</span>
           </span>
-        </div>  
+        </div>
 
       </div>
 
     </header>
 
     <div class="bucket-list" ng-repeat="bucket in round.buckets">
-      <div class="bucket" ng-if='currentBudget'>
+      <div class="bucket">
         <div class="allocation_amount allocated">
         <!--<label>Allocate</label>-->
         <input contribution-status="status" type="number" min="0" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)' >
@@ -57,7 +57,7 @@
           </div>
 
           <div contribution-status="status"
-              class="progress-bar progress-bar-warning" 
+              class="progress-bar progress-bar-warning"
               role="progressbar"
               aria-valuenow="{{bucket.myContributionPercentage > 0 ? bucket.myContributionPercentage : ''}}"
               aria-valuemin="0"

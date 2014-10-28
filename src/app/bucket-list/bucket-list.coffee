@@ -1,5 +1,5 @@
 angular.module('bucket-list', [])
-  .controller 'BucketListCtrl', ($scope, $stateParams, RoundService, BudgetLoader, ContributionService, AuthService, BucketService) ->
+  .controller 'BucketListCtrl', ($scope, $stateParams, RoundService, ContributionService, AuthService, BucketService, latestRound) ->
 
     ///Lots of this should be abstracted into a service///
 
@@ -11,7 +11,7 @@ angular.module('bucket-list', [])
         $scope.round.myAllocationsLeftCents = details.fundsLeftCents
         $scope.round.myAllocationsAmountCents = details.allocationAmountCents
         $scope.status = $scope.round.getStatus()
-    
+
     $scope.saveContribution = (contribution) ->
       contribution.save(ContributionService).then ->
         $scope.loadContributorDetails()
@@ -19,40 +19,39 @@ angular.module('bucket-list', [])
     $scope.groupId = $stateParams.groupId
     $scope.status = null
 
-    RoundService.getLatestRound($stateParams.groupId).then (round) ->
-      $scope.round = round
-      $scope.loadContributorDetails()
+    round = latestRound
+    $scope.round = round
+    $scope.loadContributorDetails()
 
-      _.each round.buckets, (bucket, index) ->
-        # get current user's contribution
-        myContribution = bucket.getMyContribution($scope.currentUserId)
-        bucket.getMyContributionPercentage()
-        bucket.getGroupContribution()
+    console.log($scope.round.buckets)
 
-        $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars) ->
-          round.getMyAllocationsLeftCents(round.myAllocationsAmountCents)
-          $scope.status = round.getStatus()
+    _.each round.buckets, (bucket, index) ->
+      # get current user's contribution
+      myContribution = bucket.getMyContribution($scope.currentUserId)
+      bucket.getMyContributionPercentage()
+      bucket.getGroupContribution()
 
-          if amountDollars >= 0
-            bucket.getMyContributionPercentage()
+      $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars) ->
+        round.getMyAllocationsLeftCents(round.myAllocationsAmountCents)
+        $scope.status = round.getStatus()
 
-      round.getMyContributions()
+        if amountDollars >= 0
+          bucket.getMyContributionPercentage()
 
-      #Find total cents contributed to round for bucket list sum
-      totalCentsContributed = 0
-      for bucket in $scope.round.buckets
-        totalCentsContributed += bucket.contributionTotalCents
+    round.getMyContributions()
 
-      #Find total round funds for bucket list sum
-      roundFundsTotalCents = 0
-      for allocation in $scope.round.allocations
-        roundFundsTotalCents += allocation.amountCents
+    #Find total cents contributed to round for bucket list sum
+    totalCentsContributed = 0
+    for bucket in $scope.round.buckets
+      totalCentsContributed += bucket.contributionTotalCents
 
-      $scope.round.totalAllocable = roundFundsTotalCents / 100
-      console.log('round funds total', roundFundsTotalCents)
-      $scope.round.totalAllocated = totalCentsContributed / 100
-      $scope.round.timeLeftDays = 3
-      $scope.round.timeLeftHours = 72
+    #Find total round funds for bucket list sum
+    roundFundsTotalCents = 0
+    for allocation in $scope.round.allocations
+      roundFundsTotalCents += allocation.amountCents
 
-    BudgetLoader.setBudgetByRoute()
-
+    $scope.round.totalAllocable = roundFundsTotalCents / 100
+    console.log('round funds total', roundFundsTotalCents)
+    $scope.round.totalAllocated = totalCentsContributed / 100
+    $scope.round.timeLeftDays = 3
+    $scope.round.timeLeftHours = 72
