@@ -28,6 +28,7 @@ angular.module('bucket-list', [])
     _.each round.buckets, (bucket, index) ->
       # get current user's contribution
       myContribution = bucket.getMyContribution($scope.currentUserId)
+      bucket.getPercentageFunded()
       bucket.getMyContributionPercentage()
       bucket.getGroupContribution()
 
@@ -37,6 +38,8 @@ angular.module('bucket-list', [])
 
         if amountDollars >= 0
           bucket.getMyContributionPercentage()
+          # ensure progress bar does not overfill
+          bucket.myContributionPercentage = Math.min(bucket.myContributionPercentage, 100 - bucket.groupContributionPercentage)
 
     round.getMyContributions()
 
