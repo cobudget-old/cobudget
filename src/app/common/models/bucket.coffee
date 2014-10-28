@@ -23,6 +23,9 @@ angular.module('cobudget').factory 'BucketModel',  (ContributionModel, AuthServi
         amount_cents: 0
       })
 
+    getPercentageFunded: () ->
+      @percentageFunded = (@contributionTotalCents / @targetCents) * 100
+
     getMyContributionPercentage: () ->
       @myContributionPercentage = (@myContribution.amountCents / @targetCents) * 100
 

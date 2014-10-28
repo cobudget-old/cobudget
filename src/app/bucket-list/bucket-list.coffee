@@ -28,6 +28,7 @@ angular.module('bucket-list', [])
     _.each round.buckets, (bucket, index) ->
       # get current user's contribution
       myContribution = bucket.getMyContribution($scope.currentUserId)
+      bucket.getPercentageFunded()
       bucket.getMyContributionPercentage()
       bucket.getGroupContribution()
 
