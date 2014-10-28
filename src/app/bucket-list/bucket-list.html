@@ -40,7 +40,8 @@
         <div class="bucket" ng-if='currentBudget'>
           <div class="allocation_amount allocated">
           <!--<label>Allocate</label>-->
-          <input contribution-status="status" type="number" min="0" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)' >
+          <input contribution-status="status" type="number" min="0" max="{{ status !== 'complete' ? (round.myAllocationAmountCents ? (round.myAllocationsAmountCents / 100) : '') : bucket.myContribution.amountDollars }}" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)' >
+          <!--<input contribution-status="status" type="number" min="0" max="{{ status !== 'complete' ? (round.myAllocationsAmountCents / 100) : bucket.myContribution.amountDollars }}" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)' >-->
           </div>
 
           <h2>{{bucket.name}}</h2>

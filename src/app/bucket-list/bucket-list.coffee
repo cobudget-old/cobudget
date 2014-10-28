@@ -13,6 +13,10 @@ angular.module('bucket-list', [])
         $scope.status = $scope.round.getStatus()
 
     $scope.saveContribution = (contribution) ->
+      # if we're gonna have a bad time
+      if $scope.status == 'warning'
+        # gtfo
+        return
       contribution.save(ContributionService).then ->
         $scope.loadContributorDetails()
 
@@ -32,8 +36,18 @@ angular.module('bucket-list', [])
       bucket.getMyContributionPercentage()
       bucket.getGroupContribution()
 
-      $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars) ->
+      $scope.$watch "round.buckets["+index+"].myContribution.amountDollars", (amountDollars, oldAmountDollars) ->
+
+        # if amountDollars is Not a Number (NaN)
+        if amountDollars != 0 and not amountDollars
+          # don't accept number
+          bucket.myContribution.amountDollars = oldAmountDollars
+
         round.getMyAllocationsLeftCents(round.myAllocationsAmountCents)
+
+        if round.myAllocationsLeftCents < 0
+          bucket.myContribution.amountCents += round.myAllocationsLeftCents
+
         $scope.status = round.getStatus()
 
         if amountDollars >= 0
