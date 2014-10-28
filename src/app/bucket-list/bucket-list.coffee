@@ -1,5 +1,5 @@
 angular.module('bucket-list', [])
-  .controller 'BucketListCtrl', ($scope, $stateParams, RoundService, ContributionService, AuthService, BucketService, latestRound) ->
+  .controller 'BucketListCtrl', ($scope, $stateParams, RoundService, ContributionService, AuthService, BucketService, BudgetLoader, latestRound) ->
 
     ///Lots of this should be abstracted into a service///
 
@@ -58,3 +58,5 @@ angular.module('bucket-list', [])
     $scope.round.totalAllocated = totalCentsContributed / 100
     $scope.round.timeLeftDays = 3
     $scope.round.timeLeftHours = 72
+
+    BudgetLoader.setBudgetByRoute()

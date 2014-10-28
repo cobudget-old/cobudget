@@ -36,7 +36,7 @@
     </header>
 
     <div class="bucket-list" ng-repeat="bucket in round.buckets">
-      <div class="bucket">
+      <div class="bucket" ng-if='currentBudget'>
         <div class="allocation_amount allocated">
         <!--<label>Allocate</label>-->
         <input contribution-status="status" type="number" min="0" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)' >
