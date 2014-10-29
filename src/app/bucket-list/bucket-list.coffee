@@ -1,5 +1,5 @@
 angular.module('bucket-list', [])
-  .controller 'BucketListCtrl', ($scope, $stateParams, RoundService, ContributionService, AuthService, BucketService, BudgetLoader, latestRound) ->
+  .controller 'BucketListCtrl', ($scope, $stateParams, RoundService, ContributionService, AuthService, BucketService, latestRound) ->
 
     ///Lots of this should be abstracted into a service///
 
@@ -26,8 +26,6 @@ angular.module('bucket-list', [])
     round = latestRound
     $scope.round = round
     $scope.loadContributorDetails()
-
-    console.log($scope.round.buckets)
 
     _.each round.buckets, (bucket, index) ->
       # get current user's contribution
@@ -68,9 +66,6 @@ angular.module('bucket-list', [])
       roundFundsTotalCents += allocation.amountCents
 
     $scope.round.totalAllocable = roundFundsTotalCents / 100
-    console.log('round funds total', roundFundsTotalCents)
     $scope.round.totalAllocated = totalCentsContributed / 100
     $scope.round.timeLeftDays = 3
     $scope.round.timeLeftHours = 72
-
-    BudgetLoader.setBudgetByRoute()

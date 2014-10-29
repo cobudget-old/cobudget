@@ -13,7 +13,6 @@ angular.module('cobudget').service 'GroupService', (Restangular, GroupModel) ->
       _.map groups, (group) ->
         new GroupModel(group.plain())
 
-
 ###
   myBudgets: ->
     #TODO restrict to only getting budgets visible by this user
@@ -44,7 +43,7 @@ angular.module('cobudget').service 'GroupService', (Restangular, GroupModel) ->
 #      unless allocation.user_id == undefined
 #        sum += allocation.amount
 #    return sum
-#  
+#
 #  #amount in balance (entries summed for budget) + amount allocated in current collection of buckets
 #  getUserAllocatable: (account_balance, allocated_amount)->
 #    parseFloat(account_balance) + allocated_amount

@@ -1,35 +1,45 @@
-<div class="row tab-bar" ng-init="selectedTab = 'overview'">
+<div class="row tab-bar">
 
-      <div class="col-md-3 overview tab">
-        <div class="content">
-          <p ng-class="{'active':selectedTab === 'overview'}" ng-click="selectedTab = 'overview'">
-            <a href='#/groups/{{currentBudgetId}}'>OVERVIEW</a>
-          </p>
-        </div>
-      </div>
+  <div class="col-md-3 overview tab">
+    <div class="content">
+      <p ui-sref-active="active">
+        <a href ui-sref='.overview'>OVERVIEW</a>
+      </p>
+    </div>
+  </div>
 
-      <div class="col-md-3 buckets tab">
-        <div class="content">
-          <p ng-class="{'active':selectedTab === 'buckets'}" ng-click="selectedTab = 'buckets'">
-            <a href='#/groups/{{currentBudgetId}}/buckets'>BUCKETS</a>
-          </p>
-        </div>
-      </div>
+  <div class="col-md-3 buckets tab">
+    <div class="content">
+      <p ui-sref-active="active">
+        <a href ui-sref='.buckets'>BUCKETS</a>
+      </p>
+    </div>
+  </div>
 
-      <div class="col-md-3 contributors tab">
-        <div class="content">
-          <p ng-class="{'active':selectedTab === 'contributors'}" ng-click="selectedTab = 'contributors'">
-            <a href='#/groups/{{currentBudgetId}}/contributors'>CONTRIBUTORS</a>
-          </p>
-        </div>
-      </div>
+  <div class="col-md-3 contributors tab">
+    <div class="content">
+      <p ui-sref-active="active">
+        <a href ui-sref='.contributors'>CONTRIBUTORS</a>
+      </p>
+    </div>
+  </div>
 
-      <div class="col-md-3 my-contributions tab">
-        <div class="content">
-          <p ng-class="{'active':selectedTab === 'my-contributions'}" ng-click="selectedTab = 'my-contributions'">
-            <a href='#/groups/{{currentBudgetId}}/my-contributions'>MY CONTRIBUTIONS</a>
-          </p>
-        </div>
-      </div>
+  <div class="col-md-3 my-contributions tab">
+    <div class="content">
+      <p ui-sref-active="active">
+        <a href ui-sref='.myContributions'>MY CONTRIBUTIONS</a>
+      </p>
+    </div>
+  </div>
 
+</div>
+
+
+<div class="row content-row">
+  <div class="col-md-12 page container">
+    <div class="display">
+      <!--<div budget-banner></div>-->
+      <div ui-view></div>
+    </div>
+  </div>
 </div>
