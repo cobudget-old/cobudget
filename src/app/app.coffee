@@ -27,11 +27,12 @@ angular
           groups: (GroupService) ->
             GroupService.all()
       $stateProvider.state 'nav.budget',
+        abstract: true
         url: '/groups/:groupId'
         templateUrl: '/app/tab-bar/tab-bar.html'
         controller: 'BudgetTabBarCtrl'
       $stateProvider.state 'nav.budget.overview',
-        url: '/overview'
+        url: ''
         templateUrl: '/app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
       $stateProvider.state 'nav.budget.buckets',
