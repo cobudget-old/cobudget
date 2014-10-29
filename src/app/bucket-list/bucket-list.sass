@@ -5,6 +5,7 @@
 $dark: #717269
 $green: #0d7
 $group: #4dbdbe
+$groupAlt: #4b6e87
 $my: coral
 
 .buckets.panel.container
@@ -47,7 +48,7 @@ $my: coral
       text-decoration: none
       font-weight: 400
       font-size: 16px
-      color: #4b6e87
+      color: $groupAlt
 
     .allocation_amount
       //@include allocatable(color)
@@ -90,6 +91,10 @@ $my: coral
         color: $green
       &.warning
         color: red
+    .targetCents
+      color: $group
+    .fundedAmount
+      color: $groupAlt
 
 .bucketPlaceholder
   position: relative
