@@ -72,7 +72,7 @@
 
           <span class="groupContributionCents " style="float: left;">${{ bucket.groupContributionCents / 100 }}</span>
           <span class="groupPlusMy" style="float: left;">+</span>
-          <span class="myContributionCents" style="float: left;">${{ bucket.myContribution.amountCents / 100 }}</span>
+          <span contribution-status="status" class="myContributionCents" style="float: left;">${{ bucket.myContribution.amountCents / 100 }}</span>
           <span ng-if="bucket.targetCents > 0" style="float: right">${{ bucket.targetCents / 100 }}</span>
         </div>
       </div>
