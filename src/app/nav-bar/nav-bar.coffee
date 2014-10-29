@@ -1,11 +1,15 @@
 angular.module('nav-bar', [])
-	.controller 'NavBarCtrl', ($scope, $state, AuthService, groups) ->
+	.controller 'NavBarCtrl', ($rootScope, $scope, $state, AuthService, groups) ->
 
     $scope.groups = groups
 
-    $scope.$watch 'currentGroupId', (currentGroupId) ->
-      if currentGroupId > 0
-        $state.go('nav.budget', groupId: currentGroupId)
+    $rootScope.$watch 'groupId', (groupId) ->
+      $scope.selectedGroup = _.find $scope.groups, (group) ->
+        group.id.toString() == groupId.toString()
+
+    $scope.$watch 'selectedGroup', (group) ->
+      if group
+        $state.go('nav.budget', groupId: group.id)
 
     $scope.showLogin = () ->
       AuthService.loginModalCtrl.open()

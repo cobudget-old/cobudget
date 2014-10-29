@@ -1,3 +1,3 @@
 angular.module('budget-tab-bar', [])
-	.controller 'BudgetTabBarCtrl', ($scope, $stateParams) ->
-    $scope.groupId = $stateParams.groupId
+	.controller 'BudgetTabBarCtrl', ($rootScope, $scope, $stateParams) ->
+    $rootScope.groupId = $stateParams.groupId

@@ -11,7 +11,6 @@ angular
     'bucket-list',
     'budget-contributors',
     'my-contributions',
-    'budget-loader'
     ])
 
   .constant('config', window.Cobudget.Config.Constants)

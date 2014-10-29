@@ -17,7 +17,6 @@ angular.module('cobudget').factory 'RoundModel',  (AllocationModel, BucketModel)
     getMyAllocationsLeftCents: (myAllocationsCents) ->
       myContributionsCents = _.reduce _.pluck(@myContributions, "amountCents"), (sum, num) ->
         sum + num
-      console.log(myAllocationsCents, myContributionsCents)
       @myAllocationsLeftCents = myAllocationsCents - myContributionsCents
 
 
