@@ -53,8 +53,10 @@ angular
         resolve:
           latestRound: (RoundService, $stateParams) ->
             RoundService.getLatestRound($stateParams.groupId)
+      ///
       $stateProvider.state 'nav.budget.myContributions',
         url: '/my-contributions'
         templateUrl: '/app/my-contributions/my-contributions.html'
         controller: 'MyContributionsCtrl'
+      ///
   )
