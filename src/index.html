@@ -48,23 +48,11 @@
 <![endif]-->
 
 <!-- <>Add your site or application content here -->
-<div nav-bar></div>
-<div tab-bar></div>
 
-<flash:messages class="slide-down" ng-show="messages"></flash:messages>
-
-<div class="row content-row">
-  <div class="col-md-12 page container">
-    <div class="display">
-      <!--<div budget-banner></div>-->
-      <div ui-view></div>
-    </div>
-  </div>
+<div ui-view>
 </div>
 
 <div login-modal ng-if="!isLoginPage"></div>
-
-
 
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -90,7 +78,7 @@
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/restangular/dist/restangular.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -106,8 +94,8 @@
 <script src="app/budget-contributors/budget-contributors.js"></script>
 <script src="app/budget-overview/budget-overview.js"></script>
 <script src="app/my-contributions/my-contributions.js"></script>
-<script src="app/nav-bar/nav-bar-directive.js"></script>
-<script src="app/tab-bar/tab-bar-directive.js"></script>
+<script src="app/nav-bar/nav-bar.js"></script>
+<script src="app/tab-bar/tab-bar.js"></script>
 <script src="app/auth/auth.js"></script>
 <script src="app/auth/auth_constants.js"></script>
 <script src="app/auth/auth_service.js"></script>
