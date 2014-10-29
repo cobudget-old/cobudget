@@ -37,7 +37,7 @@
 
     <div class="bucket-list" ng-repeat="bucket in round.buckets">
       <a href='#/groups/{{groupId}}/buckets/{{bucket.id}}'>
-        <div class="bucket" ng-if='currentBudget'>
+        <div class="bucket">
           <div class="allocation_amount allocated">
           <!--<label>Allocate</label>-->
           <input contribution-status="status" type="number" min="0" max="{{ status !== 'complete' ? (round.myAllocationAmountCents ? (round.myAllocationsAmountCents / 100) : '') : bucket.myContribution.amountDollars }}" ng-model='bucket.myContribution.amountDollars' placeholder="0" ng-blur='saveContribution(bucket.myContribution)' >
