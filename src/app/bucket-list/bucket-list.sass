@@ -86,6 +86,11 @@ $my: coral
       color: $dark
     .myContributionCents
       color: $my
+      &.complete
+        color: $green
+      &.warning
+        color: red
+
 //SUMMARY
 header
   @include allocatable(background-color)
@@ -137,25 +142,4 @@ header
       color: #717269
       width: 30% !important
       padding-left: 10px
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
