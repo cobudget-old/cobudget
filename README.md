@@ -3,6 +3,8 @@
 
 ##Cobudget user interface
 
+Cobudget is a web app helping people collaborate on budgets. Check out some mock[ screens](https://projects.invisionapp.com/share/BQ140D9Y6#/screens/30814364?maintainScrollPosition=false).
+
 [Trello Board](https://trello.com/b/LsbPRkRl/cobudget-dev) | [Style Guide](https://github.com/toddmotto/angularjs-styleguide)
 
 Testing stack is chai, mocha, sinon and integration tests using protractor are in `features`
