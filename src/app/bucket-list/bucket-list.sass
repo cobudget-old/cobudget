@@ -15,11 +15,13 @@ $my: coral
   color: $text-on-dark-base
   font-family: "Open Sans"
   border-right: 1px solid #e8e8e8
+  box-shadow: 0px 0px 20px #BDBDBD
+
 
   //LIST
   .bucket
     height: 100px
-    padding: 16px $bucket-gutter 20px $bucket-gutter
+    padding: 16px $bucket-gutter 90px $bucket-gutter
     border-bottom: 1px solid #e8e8e8
     //border-top: 1px solid #e8e8e8
     min-height: 4em
@@ -43,12 +45,12 @@ $my: coral
       font-size: 90%
       font-weight: normal
       line-height: 26px
+      color: #3A434C
 
     a
       text-decoration: none
       font-weight: 400
       font-size: 16px
-      color: $groupAlt
 
     .allocation_amount
       //@include allocatable(color)
@@ -96,6 +98,14 @@ $my: coral
     .fundedAmount
       color: $groupAlt
 
+  .bucket:hover
+    color: blue
+    text-decoration-underline: none
+
+    h2
+      color: blue
+      text-decoration-underline: none
+
 .bucketPlaceholder
   position: relative
   text-align: center
@@ -135,6 +145,7 @@ header
     font-weight: 700px
     padding-top: 6px
 
+
     .yourDetails
       color: $my
 
@@ -152,4 +163,70 @@ header
       color: #717269
       width: 30% !important
       padding-left: 10px
+
+//
+//
+// BUCKET DETAILS PAGE
+//
+//
+
+.bucket-detail
+  padding-left: 33px
+  padding-right: 33px
+
+  .section
+    background-color: white
+    margin-top: 10px
+    padding-left: 20px
+    padding-top: 7px
+    border: 1px solid #dadada
+    padding-bottom: 10px
+
+  .header
+
+    h1
+      margin-top: 0px
+      margin-bottom: 5px
+
+    .created_by
+      margin-top: 5px
+      margin-bottom: 0px
+      font-size: 12px
+
+
+  .description
+
+    h4
+      margin-top: 5px
+      margin-bottom: 0px
+
+  .contributors
+
+    h4
+      margin-top: 5px
+      margin-bottom: 0px
+
+    .item
+      .funding-amount
+        margin-top: 5px
+        margin-bottom: 5px
+      .name
+        margin-top: 5px
+        margin-bottom: 5px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

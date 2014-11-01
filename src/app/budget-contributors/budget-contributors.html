@@ -1,24 +1,36 @@
 <!--{{currentBudgetId}}-->
-<div>
-	<h3>List of this budget's contributors!</h3>
+<div class="contributors-page">
 
-    <div class="contributor-list">
-      <table>
-        <tr><th width="33%">Contributor</th><th width="33%">To allocate</th><th width="33%">Contribution</th></tr>
-        <tr ng-repeat="contributor in contributors">
-          <td>{{ contributor.name }}</td>
-          <td>{{ contributor.allocation }}</td>
-          <td>{{ contributor.contribution ? contributor.contribution : 0 }}</td>
-        </tr>
-      </table>
+  <div class="row contributor-list">
+
+    <div class="row section titles">
+      <p class="col-md-3">Contributor</p>
+      <p class="col-md-3 center">Total Allocation</p>
+      <p class="col-md-3 center">Contributed so Far</p>
+      <p class="col-md-3 center">Left to Contribute</p>
     </div>
 
-    <h4>What the contributors have now...</h4>
-    <div class="contributor-list" ng-repeat="contributor in contributors">
-    <div class="contributor" ng-if='currentBudget'>
-    ${{contributor.allocation_rights_cents / 100}}
-    --------------
-    {{contributor.name}}
+    <div ng-repeat="contributor in contributors" class="row section contributor-details">
+      <p class="col-md-3">{{ contributor.name }}</p>
+      <p class="col-md-3 center">$ {{ contributor.allocation }}</p>
+      <p class="col-md-3 center">$ {{ contributor.contribution ? contributor.contribution : 0 }}</p>
+      <p class="col-md-3 center">$ {{ contributor.allocation - contributor.contribution}}</p>
     </div>
-    </div>
+
+  </div>
+
+  <!--MAYBE PUT TOTALS HERE LATER-->
+
 </div>
+    <!--
+      <h4>What the contributors have now...</h4>
+      <div class="contributor-list" ng-repeat="contributor in contributors">
+      <div class="contributor" ng-if='currentBudget'>
+      ${{contributor.allocation_rights_cents / 100}}
+      --------------
+      {{contributor.name}}
+      </div>
+      </div>
+    -->
+
+
