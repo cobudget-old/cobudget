@@ -53,7 +53,7 @@
         </h4>
 
         <div class="col-md-12 contributor list" ng-repeat="contribution in bucket.contributions">
-          <div class="col-md-12 item">
+          <div ng-show="contribution.amountCents / 100 > 0" class="col-md-12 item">
             <p class="col-md-2 funding-amount">${{contribution.amountCents / 100}}</p>
             <!-- <img class="col-md-1" src="" /> -->
             <p class="col-md-8 name">{{contribution.user.name}}</p>
