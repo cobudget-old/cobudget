@@ -3,21 +3,23 @@
 
   <div class="row contributor-list">
 
-    <div class="row titles">
+    <div class="row section titles">
       <p class="col-md-3">Contributor</p>
-      <p class="col-md-3">Total Allocation</p>
-      <p class="col-md-3">Contributed so Far</p>
-      <p class="col-md-3">Left to Contribute</p>
+      <p class="col-md-3 center">Total Allocation</p>
+      <p class="col-md-3 center">Contributed so Far</p>
+      <p class="col-md-3 center">Left to Contribute</p>
     </div>
 
-    <div ng-repeat="contributor in contributors" class="row contributor-details">
+    <div ng-repeat="contributor in contributors" class="row section contributor-details">
       <p class="col-md-3">{{ contributor.name }}</p>
-      <p class="col-md-3">{{ contributor.allocation }}</p>
-      <p class="col-md-3">{{ contributor.contribution ? contributor.contribution : 0 }}</p>
-      <p class="col-md-3">{{ contributor.contribution ? contributor.contribution : 0 }}</p>
+      <p class="col-md-3 center">$ {{ contributor.allocation }}</p>
+      <p class="col-md-3 center">$ {{ contributor.contribution ? contributor.contribution : 0 }}</p>
+      <p class="col-md-3 center">$ {{ contributor.allocation - contributor.contribution}}</p>
     </div>
 
   </div>
+
+  <!--MAYBE PUT TOTALS HERE LATER-->
 
 </div>
     <!--
