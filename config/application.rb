@@ -23,7 +23,7 @@ module CobudgetApi
     # Required to be false for session_store
     # config.api_only = false
 
-    config.middleware.insert_before "ActionDispatch::Static", "Rack::Cors", :logger => (-> { Rails.logger }) do
+    config.middleware.insert_before "Warden::Manager", "Rack::Cors", :logger => (-> { Rails.logger }) do
       allow do
         origins '*'
         resource '*',
