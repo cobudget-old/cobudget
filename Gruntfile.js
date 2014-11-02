@@ -403,7 +403,13 @@ module.exports = function (grunt) {
           failOnError: true
         }
       }
-    }
+    },
+    'gh-pages': {
+      options: {
+        base: '<%= yeoman.dist %>',
+      },
+      src: ['**'],
+    },
   });
 
   grunt.loadNpmTasks('grunt-ng-annotate');
@@ -458,19 +464,26 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
+  grunt.registerTask('deploy', [
+    'gh-pages',
+  ]);
+
   grunt.registerTask('default', [
     'jshint',
     'test',
-    'build'
+    'build',
+    'deploy',
   ]);
 
   grunt.registerTask('staging', [
     'replace:staging',
-    'build'
+    'build',
+    'deploy',
   ]);
 
   grunt.registerTask('production', [
     'replace:production',
-    'build'
+    'build',
+    'deploy',
   ]);
 };
