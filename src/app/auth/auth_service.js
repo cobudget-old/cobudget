@@ -1,9 +1,9 @@
-angular.module('auth').factory('AuthService', function ($rootScope, $http, $cookieStore, AUTH_EVENTS) {
+angular.module('auth').factory('AuthService', function ($rootScope, $http, $cookieStore, AUTH_EVENTS, config) {
   var authService = {};
 
   authService.login = function (credentials) {
     return $http
-      .post('http://localhost:3000/auth/sign_in.json', credentials)
+      .post(config.apiEndpoint + '/auth/sign_in.json', credentials)
       .then(function (res) {
         $cookieStore.put('user', res.data.user);
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
