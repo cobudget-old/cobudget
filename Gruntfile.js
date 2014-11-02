@@ -294,7 +294,7 @@ module.exports = function (grunt) {
     },
     cdnify: {
       dist: {
-        html: ['<%= yeoman.dist %>/**/*.html']
+        html: ['<%= yeoman.dist %>/*.html']
       }
     },
     ngAnnotate: {
@@ -454,14 +454,14 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-  //  'useminPrepare',
+    'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'copy:bower',
     'copy:dist',
-  //  'cdnify',
-  //  'rev',
-  //  'usemin'
+    'cdnify',
+    'rev',
+    'usemin'
   ]);
 
   grunt.registerTask('deploy', [
