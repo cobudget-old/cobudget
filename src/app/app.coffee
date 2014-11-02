@@ -21,7 +21,7 @@ angular
       $urlRouterProvider.otherwise("/")
       $stateProvider.state 'nav',
         url: ''
-        templateUrl: '/app/nav-bar/nav-bar.html'
+        templateUrl: 'app/nav-bar/nav-bar.html'
         controller: 'NavBarCtrl'
         resolve:
           groups: (GroupService) ->
@@ -29,26 +29,26 @@ angular
       $stateProvider.state 'nav.budget',
         abstract: true
         url: '/groups/:groupId'
-        templateUrl: '/app/tab-bar/tab-bar.html'
+        templateUrl: 'app/tab-bar/tab-bar.html'
         controller: 'BudgetTabBarCtrl'
       $stateProvider.state 'nav.budget.overview',
         url: ''
-        templateUrl: '/app/budget-overview/budget-overview.html'
+        templateUrl: 'app/budget-overview/budget-overview.html'
         controller: 'BudgetOverviewCtrl'
       $stateProvider.state 'nav.budget.buckets',
         url: '/buckets'
-        templateUrl: '/app/bucket-list/bucket-list.html'
+        templateUrl: 'app/bucket-list/bucket-list.html'
         controller: 'BucketListCtrl'
         resolve:
           latestRound: (RoundService, $stateParams) ->
             RoundService.getLatestRound($stateParams.groupId)
       $stateProvider.state 'nav.budget.buckets.details',
         url: '/:bucketId'
-        templateUrl: '/app/bucket-list/bucket-list.details.html'
+        templateUrl: 'app/bucket-list/bucket-list.details.html'
         controller: 'BucketListDetailsCtrl'
       $stateProvider.state 'nav.budget.contributors',
         url: '/contributors'
-        templateUrl: '/app/budget-contributors/budget-contributors.html'
+        templateUrl: 'app/budget-contributors/budget-contributors.html'
         controller: 'BudgetContributorsCtrl'
         resolve:
           latestRound: (RoundService, $stateParams) ->
@@ -56,7 +56,7 @@ angular
       ///
       $stateProvider.state 'nav.budget.myContributions',
         url: '/my-contributions'
-        templateUrl: '/app/my-contributions/my-contributions.html'
+        templateUrl: 'app/my-contributions/my-contributions.html'
         controller: 'MyContributionsCtrl'
       ///
   )
