@@ -22,7 +22,7 @@ angular.module('cobudget').controller('ApplicationController',
 
     $scope.$on(AUTH_EVENTS.loginSuccess, function () {
       $scope.updateCurrentUser();
-      $state.go('nav.budget', {groupId: 1});
+      $state.go('nav.budget.overview', {groupId: 1});
     });
 
     $scope.$on(AUTH_EVENTS.logoutSuccess, function () {
