@@ -1,2 +1,3 @@
 angular.module('budget-overview', [])
-	.controller 'BudgetOverviewCtrl', ($scope) ->
+	.controller 'BudgetOverviewCtrl', ($scope, $stateParams) ->
+    $scope.groupId = $stateParams.groupId

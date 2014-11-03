@@ -9,41 +9,80 @@
 
   <hr id="title_underline" />
 
-  <div class="col-md-8 left">
-    <h3>Where the money is going</h3>
-    <img class="pie-chart" src="img/pie2.png">
+  <div ng-if="groupId == 1">
+    <div class="col-md-8 left">
+      <h3>Where the money is going (Total: $16,196.48)</h3>
+      <img class="pie-chart" src="img/service-pie.png">
+    </div>
+
+    <div class="col-md-4 right">
+      <h3>Pre-funded Buckets</h3>
+      <p>
+          <strong>Foundation</strong>: 
+          Services contributes 25% of collective revenue each month (<strong>$4049.12</strong>)
+      </p>
+      <p>
+          <strong>SaaS</strong>: 
+          Software and services we have signed up to pay for (<strong>$200.00</strong>)
+      </p>
+      <p>
+          <strong>Operations</strong>: 
+          Tracey's salary (<strong>$1800.00</strong>)
+      </p>
+      <p>
+          <strong>Accounting</strong>: 
+          Dale and Antz's time (<strong>$541.67</strong>)
+      </p>
+      <p>
+          <strong>Insurance</strong>: 
+          Monthly bill for liability insurance covering everyone at Services (<strong>$695</strong>)
+      </p>
+      <p>
+          <strong>Run Collab Funding</strong>: 
+          Charlie and Phill's time to run the Collaborative Funding process each month (<strong>$200.00</strong>)
+      </p>
+      <p>
+          <strong>Buckets</strong>: 
+          Money we collaboratively allocate to projects proposed by the network. (<strong>$8910.69</strong>)
+      </p>
+    </div>
   </div>
 
-  <div class="col-md-4 right">
-    <h3>Pre-funded Buckets</h3>
-    <p>
-        <strong>Foundation</strong>: 
-        Services contributes 25% of collective revenue each month (<strong>$3457.99</strong>)
-    </p>
-    <p>
-        <strong>SaaS</strong>: 
-        Software and services we have signed up to pay for (<strong>$200.00</strong>)
-    </p>
-    <p>
-        <strong>Operations</strong>: 
-        Tracey's salary (<strong>$1800.00</strong>)
-    </p>
-    <p>
-        <strong>Accounting</strong>: 
-        Dale and Antz's time (<strong>$541.67</strong>)
-    </p>
-    <p>
-        <strong>Insurance</strong>: 
-        Monthly bill for liability insurance covering everyone at Services (<strong>$541.67</strong>)
-    </p>
-    <p>
-        <strong>Accounting</strong>: 
-        Dale and Antz's time (<strong>$541.67</strong>)
-    </p>
-    <p>
-        <strong>Collab Funding</strong>: 
-        Charlie and Phill's time to run the Collaborative Funding process each month (<strong>$200.00</strong>)
-    </p>
+  <div ng-if="groupId == 2">
+
+    <div class="col-md-8 left">
+      <h3>Where the money is going (Total: $7621)</h3>
+      <img class="pie-chart" src="img/foundation-pie.png">
+    </div>
+
+    <div class="col-md-4 right">
+      <h3>Pre-funded Buckets</h3>
+      <p>
+          <strong>Operations</strong>: 
+          Foundation Staff pay (Silvia & Phill & Jess) 
+          (<strong>$2160</strong>)
+      </p>
+      <p>
+          <strong>Banking / Accounting</strong>: 
+          paying for xero, bank fees, and accounting services 
+          (<strong>$350</strong>)
+      </p>
+      <p>
+          <strong>Software/Hosting</strong>: 
+          SaaS tools, HostScout, server hosting of Enspiral.com
+          (<strong>$250</strong>)
+      </p>
+      <p>
+          <strong>Provisional Taxes</strong>: 
+          Setting aside funds each month for upcoming provisional tax payments of $2530.50 due each 6 month period on 28 October 2014 and 7 May 2015. 
+          (<strong>$420</strong>)
+      </p>
+      <p>
+          <strong>Buckets</strong>: 
+          Money we collaboratively allocate to projects proposed by the network. (<strong>$4441.44</strong>)
+      </p>
+    </div>
+
   </div>
 
 
