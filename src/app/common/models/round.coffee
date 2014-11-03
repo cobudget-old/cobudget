@@ -49,6 +49,9 @@ angular.module('cobudget').factory 'RoundModel',  (AllocationModel, BucketModel)
 
           person = contributors[userId]
 
+          if not person
+            return
+
           if not person.contributionCents
             person.contributionCents = contribution.amountCents
           else
