@@ -18,6 +18,12 @@
     "type": "git",
     "url": "git://github.com/open-app/cobudget-ui.git"
   },
+  "browserify": {
+    "transform": [
+      "coffeeify",
+      "envify"
+    ]
+  },
   "napa": {
     "angular-bootstrap": "angular-ui/bootstrap#gh-pages",
     "angular-lodash": "cabrel/angular-lodash"
