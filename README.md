@@ -3,7 +3,7 @@
 
 ##Cobudget user interface
 
-Cobudget is a web app helping people collaborate on budgets. Check out some mock[ screens](https://projects.invisionapp.com/share/BQ140D9Y6#/screens/30814364?maintainScrollPosition=false).
+Cobudget is a web app helping people collaborate on budgets. For more about the project as a whole, check out the [top-level repo](https://github.com/open-app/cobudget). This repo is the user interface component.
 
 [Trello Board](https://trello.com/b/LsbPRkRl/cobudget-dev) | [Style Guide](https://github.com/toddmotto/angularjs-styleguide)
 
