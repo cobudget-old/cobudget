@@ -71,7 +71,7 @@ scripts = (isWatch) ->
     bundle = (bundler) ->
       bundler.bundle()
         .on('error', util.log.bind(util, "browserify error"))
-        .pipe(plumber())
+        .pipe(plumber({ errorHandler }))
         .pipe(mold.transformSourcesRelativeTo('./src'))
         .pipe(source('index.js'))
         .pipe(buffer())
