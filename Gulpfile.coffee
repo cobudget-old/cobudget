@@ -1,4 +1,5 @@
 gulp = require('gulp')
+watch = require('gulp-watch')
 source = require('vinyl-source-stream')
 buffer = require('vinyl-buffer')
 util = require('gulp-util')
@@ -24,28 +25,35 @@ sass = require('gulp-sass')
 autoprefix = require('gulp-autoprefixer')
 rename = require('gulp-rename')
 
-styles = ->
-  gulp.src('./src/*.sass')
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(sass(
-      includePaths: [
-        __dirname + "/node_modules/bootstrap-sass/assets/stylesheets/"
-        __dirname + "/node_modules/font-awesome/scss/"
-      ]
-    ))
-    .pipe(rename(extname: ".sass"))
-    .pipe(autoprefix(
-      browsers: ['> 1%', 'last 2 versions']
-    ))
-    .pipe(rename(extname: ".css"))
-    .pipe(sourcemaps.write('../maps'))
-    .pipe(gulp.dest('build/styles'))
-    .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
+sassPaths =  [
+  __dirname + "/node_modules/bootstrap-sass/assets/stylesheets/"
+  __dirname + "/node_modules/font-awesome/scss/"
+]
 
-gulp.task 'styles-build', styles
-gulp.task 'styles-watch', ->
-  gulp.watch('src/**/*.sass', ['styles-build'])
+styles = (isWatch) ->
+
+  srcPath = "src/*.sass"
+  watchPath = "src/**/*.sass"
+
+  ->
+    gulp.src(srcPath)
+      .pipe(if isWatch then watch(watchPath) else util.noop())
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+      .pipe(sass(
+        includePaths: sassPaths
+      ))
+      .pipe(rename(extname: ".sass"))
+      .pipe(autoprefix(
+        browsers: ['> 1%', 'last 2 versions']
+      ))
+      .pipe(rename(extname: ".css"))
+      .pipe(sourcemaps.write('../maps'))
+      .pipe(gulp.dest('build/styles'))
+      .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
+
+gulp.task 'styles-build', styles(false)
+gulp.task 'styles-watch', styles(true)
 
 #
 # scripts
