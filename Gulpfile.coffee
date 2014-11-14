@@ -105,7 +105,7 @@ html = (isWatch) ->
   glob = 'src/index.html'
   ->
     gulp.src(glob)
-      .pipe(if isWatch then require('gulp-watch')(glob) else util.noop())
+      .pipe(if isWatch then watch(glob) else util.noop())
       .pipe(gulp.dest('build'))
       .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
