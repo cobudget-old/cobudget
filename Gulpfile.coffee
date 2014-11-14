@@ -18,6 +18,11 @@ env = process.env
 nodeEnv = env.NODE_ENV
 
 lr = undefined
+errorHandler = (err) ->
+  util.beep()
+  util.log(util.colors.red(err))
+  # https://github.com/floatdrop/gulp-plumber/issues/8
+  this.emit('end')
 
 #
 # styles
@@ -31,30 +36,25 @@ sassPaths =  [
   __dirname + "/node_modules/font-awesome/scss/"
 ]
 
-styles = (isWatch) ->
+styles = ->
+  gulp.src('./src/*.sass')
+    .pipe(plumber({ errorHandler }))
+    .pipe(sourcemaps.init())
+    .pipe(sass(
+      includePaths: sassPaths
+    ))
+    .pipe(rename(extname: ".sass"))
+    .pipe(autoprefix(
+      browsers: ['> 1%', 'last 2 versions']
+    ))
+    .pipe(rename(extname: ".css"))
+    .pipe(sourcemaps.write('../maps'))
+    .pipe(gulp.dest('build/styles'))
+    .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
-  srcPath = "src/*.sass"
-  watchPath = "src/**/*.sass"
-
-  ->
-    gulp.src(srcPath)
-      .pipe(if isWatch then watch(watchPath) else util.noop())
-      .pipe(plumber())
-      .pipe(sourcemaps.init())
-      .pipe(sass(
-        includePaths: sassPaths
-      ))
-      .pipe(rename(extname: ".sass"))
-      .pipe(autoprefix(
-        browsers: ['> 1%', 'last 2 versions']
-      ))
-      .pipe(rename(extname: ".css"))
-      .pipe(sourcemaps.write('../maps'))
-      .pipe(gulp.dest('build/styles'))
-      .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
-
-gulp.task 'styles-build', styles(false)
-gulp.task 'styles-watch', styles(true)
+gulp.task 'styles-build', styles
+gulp.task 'styles-watch', ['styles-build'], ->
+  gulp.watch('src/**/*.sass', ['styles-build'])
 
 #
 # scripts
