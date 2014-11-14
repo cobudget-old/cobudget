@@ -31,6 +31,7 @@ styles = ->
     .pipe(sass(
       includePaths: [
         __dirname + "/node_modules/bootstrap-sass/assets/stylesheets/"
+        __dirname + "/node_modules/font-awesome/scss/"
       ]
     ))
     .pipe(rename(extname: ".sass"))
