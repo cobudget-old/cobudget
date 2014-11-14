@@ -6,6 +6,7 @@ util = require('gulp-util')
 plumber = require('gulp-plumber')
 sourcemaps = require('gulp-sourcemaps')
 extend = require('xtend')
+_ = require('lodash')
 
 refresh = require('gulp-livereload')
 lrServer = require('tiny-lr')()
@@ -112,13 +113,21 @@ html = (isWatch) ->
 gulp.task 'html-build', html(false)
 gulp.task 'html-watch', html(true)
 
+assetPaths = {
+  "src/assets/**/*": "build"
+  "node_modules/es5-shim/es5-shim*": "build/lib/es5-shim"
+  "node_modules/json3/lib/json3*": "build/lib/json3"
+  "node_modules/font-awesome/fonts/*": "build/fonts/font-awesome"
+  "node_modules/bootstrap-sass/assets/fonts/bootstrap/*": "build/fonts/bootstrap"
+}
+
 assets = (isWatch) ->
-  glob = ['src/assets/**/*', 'node_modules/es5-shim', 'node_modules/json3']
   ->
-    gulp.src(glob)
-      .pipe(if isWatch then require('gulp-watch')(glob) else util.noop())
-      .pipe(gulp.dest('build'))
-      .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
+    _.each assetPaths, (to, from) ->
+      gulp.src(from)
+        .pipe(if isWatch then watch(from) else util.noop())
+        .pipe(gulp.dest(to))
+        .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
 gulp.task 'assets-build', assets(false)
 gulp.task 'assets-watch', assets(true)
