@@ -28,14 +28,23 @@ errorHandler = (err) ->
 sass = require('gulp-sass')
 autoprefix = require('gulp-autoprefixer')
 rename = require('gulp-rename')
+filter = require('gulp-filter')
 
 sassPaths =  [
-  __dirname + "/node_modules/bootstrap-sass/assets/stylesheets/"
-  __dirname + "/node_modules/font-awesome/scss/"
+  "node_modules/bootstrap-sass/assets/stylesheets/"
+  "node_modules/font-awesome/scss/"
 ]
 
 styles = ->
-  gulp.src('./src/*.sass')
+
+  entryFilter = filter (file) ->
+    /src\/[^\/]+\.(sass|scss)$/.test(file.path)
+
+  srcPaths = ['src/**/']
+    .concat(sassPaths)
+    .map (path) -> path + "*.{sass,scss}"
+
+  gulp.src(srcPaths)
     .pipe(plumber(
       errorHandler: (err) ->
         errorHandler(err)
@@ -43,15 +52,16 @@ styles = ->
         this.emit('end')
     ))
     .pipe(sourcemaps.init())
+    .pipe(entryFilter)
     .pipe(sass(
       includePaths: sassPaths
     ))
-    .pipe(rename(extname: ".sass"))
+    .pipe(sourcemaps.write(includeContent: false))
+    .pipe(sourcemaps.init(loadMaps: true))
     .pipe(autoprefix(
       browsers: ['> 1%', 'last 2 versions']
     ))
-    .pipe(rename(extname: ".css"))
-    .pipe(sourcemaps.write('../maps'))
+    .pipe(sourcemaps.write('../maps', sourceRoot: '../styles/'))
     .pipe(gulp.dest('build/styles'))
     .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
