@@ -21,8 +21,6 @@ lr = undefined
 errorHandler = (err) ->
   util.beep()
   util.log(util.colors.red(err))
-  # https://github.com/floatdrop/gulp-plumber/issues/8
-  this.emit('end')
 
 #
 # styles
@@ -38,7 +36,12 @@ sassPaths =  [
 
 styles = ->
   gulp.src('./src/*.sass')
-    .pipe(plumber({ errorHandler }))
+    .pipe(plumber(
+      errorHandler: (err) ->
+        errorHandler(err)
+        # https://github.com/floatdrop/gulp-plumber/issues/8
+        this.emit('end')
+    ))
     .pipe(sourcemaps.init())
     .pipe(sass(
       includePaths: sassPaths
