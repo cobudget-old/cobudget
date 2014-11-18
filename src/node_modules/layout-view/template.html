@@ -6,19 +6,49 @@
       <p class="col-md-6">COBUDGET</p>
     </div>
 
+    <!-- Single button -->
+    <div class="col-md-1 selector" dropdown is-open="status.isopen">
+      <div type="button" class="dropdown-toggle" ng-disabled="disabled">
+        <i class="fa fa-users"></i>
+          <span>Groups</span> 
+        <!--<span class="caret"></span>-->
+      </div>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="g in groups">
+          <a href='#/groups/{{g.id}}'>
+            {{g.name}}
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li><a href="#">Create Group</a></li>
+      </ul>
+    </div>
+
+    
+    <!--
     <div class= "col-md-3 selector">
+      <i class="fa fa-users"></i>
       <select ng-model='selectedGroup' ng-options='g.name for g in groups'>
         <option value=''>Select Group</option>
       </select>
     </div>
+    -->
 
     <div class= "col-md-1 input-name pull-right">
       <!--<input placeholder="Enter your name!"></input>-->
       <span ng-show="currentUser">
-        <a href="#" style='color: white' ng-click="logout()">Log out</a><i class="fa fa-user fa-2x"></i>
+        <a href="#" style='color: white' ng-click="logout()">   Log out
+        </a>
+        
+        <i class="fa fa-user fa-2x"></i>
       </span>
       <span ng-hide="currentUser">
-        <a style='color: white; font-weight: bold' href ng-click="showLogin()">Log in</a><i class="fa fa-user fa-2x"></i>
+        <a 
+          style='color: white; font-weight: bold' 
+          href ng-click="showLogin()">
+          Log in
+        </a>
+          <i class="fa fa-user fa-2x"></i>
       </span>
     </div>
 
