@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021112832) do
+ActiveRecord::Schema.define(version: 20141119233350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20141021112832) do
     t.datetime "updated_at"
     t.integer  "group_id",   null: false
     t.string   "name",       null: false
+    t.datetime "starts_at"
+    t.datetime "ends_at"
   end
 
   add_index "rounds", ["group_id"], name: "index_rounds_on_group_id", using: :btree

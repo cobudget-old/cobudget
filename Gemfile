@@ -30,12 +30,14 @@ gem "devise"
 group :development do
   gem 'capistrano', '2.15.5'
   gem "capistrano-rails", '~> 1.0.0'
-  gem 'pry-rails'
 end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'faker'
+  gem 'pry-rails'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 gem 'rails_12factor', group: :production
