@@ -7,12 +7,14 @@
   "scripts": {
     "install": "napa",
     "start": "gulp build && node .",
-    "develop": "gulp develop",
     "test-spec": "mocha -r src/coffee.js -R spec src/node_modules/**/spec/*.coffee",
     "test-e2e": "TODO",
     "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
-    "dev": "(export NODE_ENV=development; npm run develop)",
-    "prod": "(export NODE_ENV=production; npm run start)"
+    "build": "gulp build",
+    "develop": "gulp develop",
+    "buildbranch": "gulp buildbranch",
+    "stage": "gulp buildbranch && git push origin gh-pages",
+    "deploy": "gulp buildbranch && git push deploy gh-pages:master"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,7 @@
     "debug": "^2.1.0",
     "es5-shim": "^4.0.3",
     "font-awesome": "^4.2.0",
+    "gulp-build-branch": "^0.1.4",
     "jquery": "^2.1.1",
     "json3": "^3.3.2",
     "lodash": "^2.4.1",

@@ -137,14 +137,13 @@ assetPaths = {
 assets = (isWatch) ->
   ->
     _.each assetPaths, (to, from) ->
-      gulp.src(from)
+      gulp.src(from, dot: true)
         .pipe(if isWatch then watch(from) else util.noop())
         .pipe(gulp.dest(to))
         .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
 gulp.task 'assets-build', assets(false)
 gulp.task 'assets-watch', assets(true)
-
 
 
 #
@@ -172,11 +171,22 @@ livereload = (cb) ->
 
 gulp.task('livereload', livereload)
 
+#
+# gh-pages
+#
+gulp.task 'branch', ->
+  branch = require('gulp-build-branch')
+  branch(
+    folder: 'build'
+  )
+
 # prod tasks
 gulp.task('build', ['scripts-build', 'styles-build', 'html-build', 'assets-build'])
+gulp.task('default', ['server'])
+gulp.task('start', ['build', 'server'])
+gulp.task('buildbranch', ['build', 'branch'])
 
 # dev tasks
 gulp.task('watch', ['scripts-watch', 'styles-watch', 'html-watch', 'assets-watch'])
 gulp.task('develop', ['livereload', 'watch', 'server'])
 
-gulp.task('default', ['server'])
