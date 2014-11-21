@@ -4,6 +4,11 @@ class FixedCostsController < ApplicationController
     respond_with FixedCost.create(fixed_cost_params)
   end
 
+  api :GET, '/rounds/:round_id/fixed_costs/', 'Show fixed_costs for a particular round'
+  def index
+    respond_with Round.find(params[:round_id]).fixed_costs
+  end
+
   api :PUT, '/fixed_costs/:fixed_cost_id', 'Update fixed_cost'
   def update
     # Dumb hack due to restangular issues
