@@ -1,7 +1,4 @@
 class RoundsController < ApplicationController
-
-  respond_to :json
-
   api :GET, '/rounds/:round_id', 'Full details of round'
   def show
     respond_with round
@@ -10,7 +7,7 @@ class RoundsController < ApplicationController
   api :POST, '/rounds/', 'Create a round'
   def create
     # TODO: make sure only group admins can create new rounds
-    respond_with Round.create!(round_params)
+    respond_with Round.create(round_params)
   end
 
 private
