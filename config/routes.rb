@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # NOTE (JL): Added show resource here cause otherwise respond_with doesn't work
   # on the create action (not sure why??)
   resources :allocations, only: [:create, :show, :update], defaults: { format: :json }
+  resources :fixed_costs, only: [:create, :show, :update], defaults: { format: :json }
 
   resources :buckets, only: [:show], defaults: { format: :json }
 
