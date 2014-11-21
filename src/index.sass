@@ -1,7 +1,4 @@
-// file for build all the sass together
-// and any config relating to the build
-
-// app config (like bootstrap variables) are in app module
+// file for build all the sass together // and any config relating to the build // app config (like bootstrap variables) are in app module
 @import "node_modules/app/index";
 
 $icon-font-path: "../fonts/bootstrap/"
@@ -10,11 +7,16 @@ $icon-font-path: "../fonts/bootstrap/"
 $fa-font-path: "../fonts/font-awesome";
 @import "font-awesome";
 
-
+@import "node_modules/layout/index";
 @import "node_modules/utils/index";
 @import "node_modules/nav-bar/index";
 @import "node_modules/tab-bar/index";
 //@import "node_modules/auth/index";
-@import "node_modules/bucket-list/index";
-@import "node_modules/contributors-page/index";
-@import "node_modules/budget-overview/index";
+@import "node_modules/group/index";
+//@import "node_modules/group-banner/index";
+@import "node_modules/group-rounds/index";
+@import "node_modules/round/index";
+@import "node_modules/round-banner/index";
+@import "node_modules/round-buckets/index";
+@import "node_modules/round-overview/index";
+@import "node_modules/round-contributors/index";
