@@ -18,7 +18,8 @@ describe "FixedCosts" do
         fixed_cost: {
           round_id: round.id,
           name: "Rent",
-          amount_cents: 80000
+          amount_cents: 80000,
+          description: "Too much!"
         }
       }.to_json
 
@@ -28,6 +29,7 @@ describe "FixedCosts" do
       expect(response.status).to eq 201 # created
       expect(fixed_cost.name).to eq "Rent"
       expect(fixed_cost.amount_cents).to eq 80000
+      expect(fixed_cost.description).to eq "Too much!"
     end
   end
 

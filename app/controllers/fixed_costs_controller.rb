@@ -22,6 +22,6 @@ class FixedCostsController < ApplicationController
 
   private
     def fixed_cost_params
-      params.require(:fixed_cost).permit(:round_id, :name, :amount_cents)
+      params.require(:fixed_cost).permit(:round_id, :name, :amount_cents, :description)
     end
 end
