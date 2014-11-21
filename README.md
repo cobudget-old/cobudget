@@ -21,31 +21,38 @@ cd cobudget-ui
 npm install
 ```
 
-### Configure
-
-To get up and running copy `config/environments/sample.json` to `config/environments/development.json` remove the comments, and add your custom settings.  At the moment you will also need to copy to `config/environments/staging.json`, and `config/environments/development.json`.
-
-Likewise you will need to setup production.json and staging.json for deploying to work.
-
 ### Run
 
-*Start the server:*
+*Watch and start livereload server:*
+
+```
+npm run develop
+```
+
+*Build and start static server:*
 
 ```
 npm start
 ```
 
-*Testing*
-
-TODO: how to install webdriver-manager
+*Test*
 
 ```
-webdriver-manager start
 npm test
 ```
 
-*Deploying*
+*Stage (push to gh-pages)*
 
 ```
-npm run deploy
+NODE_ENV=production npm run stage
 ```
+
+*Deploy (push to dokku)*
+
+```
+NODE_ENV=production npm run deploy
+```
+
+### Configure
+
+To configure `production` and other environments, copy `config/development.coffee` to `config/production.coffee` and change properties as appropriate. If you need to access other environment variables, use `process.env.VAR_NAME`, as the config is simply coffeescript.
