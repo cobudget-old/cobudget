@@ -1,0 +1,24 @@
+// file for build all the sass together // and any config relating to the build // app config (like bootstrap variables) are in app module
+@import "node_modules/app/index";
+
+$icon-font-path: "../fonts/bootstrap/"
+@import "bootstrap";
+
+$fa-font-path: "../fonts/font-awesome";
+@import "font-awesome";
+
+@import "node_modules/layout/layout";
+@import "node_modules/utils/utils";
+
+@import "node_modules/nav-bar/nav-bar";
+@import "node_modules/tab-bar/tab-bar";
+@import "node_modules/banner/banner";
+
+//@import "node_modules/auth/auth";
+@import "node_modules/group-page/group-page";
+@import "node_modules/group-rounds/group-rounds";
+@import "node_modules/group-members/group-members";
+@import "node_modules/round-page/round-page";
+@import "node_modules/round-buckets/round-buckets";
+@import "node_modules/round-overview/round-overview";
+@import "node_modules/round-contributors/round-contributors";

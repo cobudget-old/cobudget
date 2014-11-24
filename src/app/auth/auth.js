@@ -1,1 +1,0 @@
-angular.module('auth', ['ngCookies']);
