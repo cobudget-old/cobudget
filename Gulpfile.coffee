@@ -133,6 +133,7 @@ assetPaths = {
   "node_modules/json3/lib/json3*": "build/lib/json3"
   "node_modules/font-awesome/fonts/*": "build/fonts/font-awesome"
   "node_modules/bootstrap-sass/assets/fonts/bootstrap/*": "build/fonts/bootstrap"
+  "node_modules/angular-xeditable/dist/css/xeditable.css": "build/styles"
 }
 
 assets = (isWatch) ->
