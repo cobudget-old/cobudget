@@ -28,12 +28,21 @@ users = [admin]
   users << user
 end
 
+### ROUNDS
+
+rounds = []
+groups.each do |group|
+  4.times do
+    rounds << Round.create!(group: group,
+                      name: Faker::Lorem.sentence(1, false, 4))
+  end
+end
 
 ### BUCKETS
 
-groups.each do |group|
+rounds.each do |round|
   7.times do
-    Bucket.create!(round: group.latest_round,
+    Bucket.create!(round: round,
                    name: Faker::Lorem.sentence(1, false, 4),
                    user: users.sample,
                    description: Faker::Lorem.paragraph(3, false, 14),
@@ -44,10 +53,10 @@ end
 
 #### ALLOCATIONS
 
-groups.each do |group|
+rounds.each do |round|
   users.each do |user|
     Allocation.create(user: user,
-                      round: group.latest_round,
+                      round: round,
                       amount_cents: Random.rand(0..1000) * 100)
   end
 end
