@@ -1,4 +1,4 @@
 class MembershipSerializer < ActiveModel::Serializer
-  attributes :id, :group_id, :user_id
-  belongs_to :user
+  attributes :id, :group_id
+  has_one :user
 end

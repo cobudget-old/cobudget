@@ -38,6 +38,14 @@ groups.each do |group|
   end
 end
 
+### MEMBERSHIPS
+
+groups.each do |group|
+  users.each do |user|
+    FactoryGirl.create(:membership, group: group, user: user)
+  end
+end
+
 ### BUCKETS
 
 rounds.each do |round|

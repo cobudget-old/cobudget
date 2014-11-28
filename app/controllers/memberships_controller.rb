@@ -23,7 +23,7 @@ class MembershipsController < ApplicationController
 
   api :GET, '/groups/:group_id/memberships/', 'Get memberships for a particular group'
   def index
-    respond_with Group.find(params[:group_id]).memberships
+    respond_with Group.find(params[:group_id]).memberships.includes('user').order('users.name ASC'), each_serializer: MembershipSerializer
   end
 
 private
