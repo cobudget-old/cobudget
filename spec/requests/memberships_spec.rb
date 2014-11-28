@@ -21,8 +21,11 @@ describe "Memberships" do
       expect(response.status).to eq 200 # success
 
       body = JSON.parse(response.body)
-      expect(body["memberships"][0]["group_id"]).to eq group.id
-      expect(body["memberships"][1]["group_id"]).to eq group.id
+      usernames = []
+      usernames << body["memberships"][0]["user"]["name"]
+      usernames << body["memberships"][1]["user"]["name"]
+      expect(usernames).to include membership1.user.name
+      expect(usernames).to include membership2.user.name
     end
   end
 
