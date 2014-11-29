@@ -8,3 +8,4 @@
 phantomjsdriver.log
 *.log
 *.swp
+/config
