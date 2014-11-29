@@ -1,3 +1,3 @@
 class RoundShortSerializer < ActiveModel::Serializer
-  attributes :id, :name, :created_at
+  attributes :id, :name, :starts_at, :ends_at
 end
