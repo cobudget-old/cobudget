@@ -31,10 +31,13 @@ end
 ### ROUNDS
 
 rounds = []
+time_now = Time.now
 groups.each do |group|
   4.times do
     rounds << Round.create!(group: group,
-                      name: Faker::Lorem.sentence(1, false, 4))
+                      name: Faker::Lorem.sentence(1, false, 4),
+                      starts_at: time_now,
+                      ends_at: time_now + 3.days)
   end
 end
 
