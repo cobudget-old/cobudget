@@ -1,4 +1,3 @@
 class AllocationSerializer < ActiveModel::Serializer
-  attributes :amount_cents, :round_id
-  has_one :user
+  attributes :amount_cents, :round_id, :user_id
 end
