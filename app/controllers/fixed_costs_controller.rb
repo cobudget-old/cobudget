@@ -20,6 +20,11 @@ class FixedCostsController < ApplicationController
     respond_with @fixed_cost.update_attributes(fixed_cost_params)
   end
 
+  api :DELETE, '/fixed_costs/:fixed_cost_id', 'Delete fixed_cost'
+  def destroy
+    respond_with FixedCost.find(params[:id]).destroy
+  end
+
   private
     def fixed_cost_params
       params.require(:fixed_cost).permit(:round_id, :name, :amount_cents, :description)
