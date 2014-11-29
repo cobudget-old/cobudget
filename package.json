@@ -12,9 +12,8 @@
     "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
     "build": "gulp build",
     "develop": "gulp develop",
-    "buildbranch": "gulp buildbranch",
-    "stage": "gulp buildbranch && git push origin gh-pages",
-    "deploy": "gulp buildbranch && git push deploy gh-pages:master"
+    "stage": "gulp branch && git push origin gh-pages -f",
+    "deploy": "gulp branch && git push deploy gh-pages:master -f"
   },
   "repository": {
     "type": "git",

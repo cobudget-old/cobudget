@@ -176,7 +176,7 @@ gulp.task('livereload', livereload)
 #
 # gh-pages
 #
-gulp.task 'branch', ->
+gulp.task 'branch', ['build'], ->
   branch = require('gulp-build-branch')
   branch(
     folder: 'build'
@@ -186,7 +186,6 @@ gulp.task 'branch', ->
 gulp.task('build', ['scripts-build', 'styles-build', 'html-build', 'assets-build'])
 gulp.task('default', ['server'])
 gulp.task('start', ['build', 'server'])
-gulp.task('buildbranch', ['build', 'branch'])
 
 # dev tasks
 gulp.task('watch', ['scripts-watch', 'styles-watch', 'html-watch', 'assets-watch'])
