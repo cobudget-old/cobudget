@@ -4,4 +4,5 @@ class Allocation < ActiveRecord::Base
 
   validates :round_id, presence: true
   validates :user_id, presence: true, uniqueness: {scope: :round}
+  validates :amount_cents, presence: true
 end

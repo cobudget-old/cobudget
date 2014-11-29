@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :rounds, only: [:show, :create], defaults: { format: :json } do
     resources :allocations, only: [:index]
     resources :fixed_costs, only: [:index]
-    resources :contributors, only: [:show]
+    resources :contributors, only: [:show, :index]
   end
 
   # NOTE (JL): Added unsed show route here cause otherwise respond_with doesn't work
