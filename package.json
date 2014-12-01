@@ -51,6 +51,7 @@
   "devDependencies": {
     "brfs": "^1.2.0",
     "browserify": "^5.13.1",
+    "browserify-ngannotate": "^0.4.0",
     "brstar": "^0.1.0",
     "bundle-collapser": "^1.1.0",
     "chai": "^1.10.0",

@@ -90,7 +90,7 @@ scripts = (isWatch) ->
         .pipe(source('index.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init(loadMaps: true))
-        #.pipe(if nodeEnv == 'production' then require('gulp-uglify')() else util.noop())
+        .pipe(if nodeEnv == 'production' then require('gulp-uglify')() else util.noop())
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))
         .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
