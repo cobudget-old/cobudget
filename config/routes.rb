@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   apipie
   resources :auth, only: [], defaults: { format: :json } do
     collection do
-      post :sign_in
+      post :log_in
     end
   end
-  resources :users, only: :index, defaults: { format: :json }
+  resources :users, only: :index, defaults: { format: :json } do
+    member do
+      post :change_password
+    end
+  end
 
   resources :groups, only: [:index, :show], defaults: { format: :json } do
     resources :memberships, only: [:index]

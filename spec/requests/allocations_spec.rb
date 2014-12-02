@@ -9,7 +9,7 @@ describe "Allocations" do
   let(:request_headers) { {
     "Accept" => "application/json",
     "Content-Type" => "application/json",
-    "X-User-Token" => admin.authentication_token,
+    "X-User-Token" => admin.access_token,
     "X-User-Email" => admin.email,
   } }
 
