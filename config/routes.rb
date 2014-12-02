@@ -7,7 +7,11 @@ Rails.application.routes.draw do
       post :log_in
     end
   end
-  resources :users, only: :index, defaults: { format: :json }
+  resources :users, only: :index, defaults: { format: :json } do
+    member do
+      post :change_password
+    end
+  end
 
   resources :groups, only: [:index, :show], defaults: { format: :json } do
     resources :memberships, only: [:index]
