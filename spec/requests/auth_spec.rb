@@ -21,7 +21,7 @@ describe "Auth" do
 
       body = JSON.parse(response.body)
       expect(response.status).to eq 200
-      expect(body['user']['authentication_token']).to eq user.authentication_token
+      expect(body['user']['access_token']).to eq user.access_token
     end
 
     it "returns error if invalid email and password given" do

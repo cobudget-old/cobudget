@@ -8,21 +8,21 @@ module TokenAuthenticable
   # before editing this file, the discussion is very interesting.
 
   included do
-    private :generate_authentication_token
+    private :generate_access_token
 
-    before_save :ensure_authentication_token
+    before_save :ensure_access_token
   end
 
-  def ensure_authentication_token
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
+  def ensure_access_token
+    if access_token.blank?
+      self.access_token = generate_access_token
     end
   end
 
-  def generate_authentication_token
+  def generate_access_token
     loop do
       token = Devise.friendly_token
-      break token unless User.where(authentication_token: token).first
+      break token unless User.where(access_token: token).first
     end
   end
 

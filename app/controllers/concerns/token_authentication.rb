@@ -38,7 +38,7 @@ module TokenAuthentication
     # Notice how we use Devise.secure_compare to compare the token
     # in the database with the token given in the params, mitigating
     # timing attacks.
-    if user && Devise.secure_compare(user.authentication_token, params[:user_token])
+    if user && Devise.secure_compare(user.access_token, params[:user_token])
       # Notice we are passing store false, so the user is not
       # actually stored in the session and a token is needed
       # for every request. If you want the token to work as a

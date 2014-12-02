@@ -7,7 +7,7 @@ describe "Memberships" do
   let(:request_headers) { {
     "Accept" => "application/json",
     "Content-Type" => "application/json",
-    "X-User-Token" => user.authentication_token,
+    "X-User-Token" => user.access_token,
     "X-User-Email" => user.email,
   } }
 
