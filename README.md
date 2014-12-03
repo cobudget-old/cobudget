@@ -50,6 +50,10 @@ NODE_ENV=production npm run stage
 *Deploy (push to dokku)*
 
 ```
+git remote add deploy dokku@next.cobudget.co:app
+```
+
+```
 NODE_ENV=production npm run deploy
 ```
 
