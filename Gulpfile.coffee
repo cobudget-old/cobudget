@@ -17,6 +17,9 @@ process.env.NODE_ENV or= 'development'
 env = process.env
 nodeEnv = env.NODE_ENV
 
+isDeploy = (env) ->
+  env == "production" or env == "staging"
+
 lr = undefined
 errorHandler = (err) ->
   util.beep()
@@ -90,7 +93,7 @@ scripts = (isWatch) ->
         .pipe(source('index.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init(loadMaps: true))
-        .pipe(if nodeEnv == 'production' then require('gulp-uglify')() else util.noop())
+        .pipe(if isDeploy(nodeEnv) then require('gulp-uglify')() else util.noop())
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))
         .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
