@@ -27,7 +27,6 @@
   },
   "napa": {
     "angular-bootstrap": "angular-ui/bootstrap#gh-pages",
-    "angular-lodash": "cabrel/angular-lodash",
     "angular-xeditable": "vitalets/angular-xeditable#0.1.8"
   },
   "dependencies": {
