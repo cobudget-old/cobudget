@@ -1,6 +1,6 @@
 {
   "name": "cobudget-ui",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "user interface for Cobudget!",
   "main": "./server.js",
   "browser": "./src/index.coffee",
