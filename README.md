@@ -22,25 +22,25 @@ cd cobudget-ui
 npm install
 ```
 
+### Configure
+
+To configure `production` and other environments, copy `config/development.coffee` to `config/production.coffee` and change properties as appropriate. If you need to access other environment variables, use `process.env.VAR_NAME`, as the config is simply coffeescript.
+
 ### Run
 
-*Watch and start livereload server:*
+*Build on watch and start livereload server:*
 
 ```
 npm run develop
 ```
 
-*Build and start static server:*
+*Build once and start static server:*
 
 ```
 npm start
 ```
 
-*Test*
-
-```
-npm test
-```
+### Deploy
 
 *Stage (push to gh-pages)*
 
@@ -58,6 +58,24 @@ git remote add deploy dokku@next.cobudget.co:app
 NODE_ENV=production npm run deploy
 ```
 
-### Configure
+### Test
 
-To configure `production` and other environments, copy `config/development.coffee` to `config/production.coffee` and change properties as appropriate. If you need to access other environment variables, use `process.env.VAR_NAME`, as the config is simply coffeescript.
+To setup e2e (integration) tests, in another terminal run `npm run webdriver-update` to install Selenium and `npm run webdriver-start` to start the Selenium serer. The UI server must be running (`npm run develop` or `npm start`)while performing e2e tests.
+
+*Run all tests*
+
+```
+npm test
+```
+
+*Run only spec tests*
+
+```
+npm run test-spec
+```
+
+*Run only e2e tests*
+
+```
+npm run test-e2e
+```
