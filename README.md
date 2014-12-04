@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/open-app/cobudget-api.png?label=ready&title=Ready)](https://waffle.io/open-app/cobudget-api)
 # Cobudget! backend interface
 
 [![Code Climate](https://codeclimate.com/github/enspiral/cobudget-api.png)](https://codeclimate.com/github/enspiral/cobudget-api)
