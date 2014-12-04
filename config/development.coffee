@@ -1,3 +1,3 @@
 module.exports = {
-  "apiEndpoint": "https://cobudget-api.herokuapp.com"
+  "apiEndpoint": "http://localhost:3000"
 }
