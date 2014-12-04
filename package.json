@@ -7,8 +7,8 @@
   "scripts": {
     "install": "napa",
     "start": "gulp build && node .",
-    "test-spec": "mocha -r src/coffee.js -R spec src/node_modules/**/spec/*.coffee",
-    "test-e2e": "TODO",
+    "test-spec": "testling",
+    "test-e2e": "echo TODO",
     "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
     "build": "gulp build",
     "develop": "gulp develop",
@@ -23,6 +23,20 @@
     "transform": [
       "coffeeify",
       "envify"
+    ]
+  },
+  "testling": {
+    "files": "src/node_modules/**/spec/**/*.coffee",
+    "harness": "mocha",
+    "browsers": [
+      "ie/9..latest",
+      "firefox/17..nightly",
+      "chrome/23..canary",
+      "opera/15..next",
+      "safari/6..latest",
+      "iphone/6",
+      "ipad/6",
+      "android-browser/4.2"
     ]
   },
   "napa": {
@@ -77,11 +91,12 @@
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
     "gulp-watch": "^1.2.0",
-    "mocha": "^1.21.5",
+    "mocha": "^2.0.1",
     "mold-source-map": "^0.3.0",
     "napa": "^1.0.2",
     "sinon": "^1.10.3",
     "sinon-chai": "^2.5.0",
+    "testling": "^1.7.1",
     "tiny-lr": "^0.1.4",
     "txtify2": "^2.0.0",
     "vinyl-buffer": "^1.0.0",
