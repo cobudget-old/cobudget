@@ -8,7 +8,7 @@ Cobudget is software for helping people make collaborative decisions together. T
 ## Apps
 
 * [Cobudget UI](https://github.com/open-app/cobudget-ui) - Angular front end
-* [Cobudget API](http://github.com/enspiral/cobudget-api) - Sinatra / Playhouse back end, will be open sourced soon
+* [Cobudget API](http://github.com/open-app/cobudget-api) - Rails back end
 
 ## Resources
 
