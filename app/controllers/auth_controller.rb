@@ -5,11 +5,13 @@ class AuthController < ApplicationController
   def log_in
     user = User.find_by(email: params[:user][:email])
     if user && user.valid_password?(params[:user][:password])
-      render json: { user: { id: user.id,
+      user_hash = { user: { id: user.id,
                              name: user.name,
                              email: user.email,
-                             access_token: user.access_token
+                             access_token: user.access_token,
+                             force_password_reset: user.force_password_reset
                              } }
+      render json: user_hash
     else
       render json: { error: 'Invalid email or password' }, status: 401
     end

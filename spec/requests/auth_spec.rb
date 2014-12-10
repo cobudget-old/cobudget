@@ -22,6 +22,23 @@ describe "Auth" do
       body = JSON.parse(response.body)
       expect(response.status).to eq 200
       expect(body['user']['access_token']).to eq user.access_token
+      expect(body['user']['force_password_reset']).to eq nil
+    end
+
+    it "returns force_password_reset attribute if applicable" do
+      user.update(force_password_reset: true)
+      user_params = {
+        user: {
+          email: user.email,
+          password: user.password,
+        }
+      }.to_json
+
+      post "/auth/log_in", user_params, request_headers
+
+      body = JSON.parse(response.body)
+      expect(response.status).to eq 200
+      expect(body['user']['force_password_reset']).to eq true
     end
 
     it "returns error if invalid email and password given" do
