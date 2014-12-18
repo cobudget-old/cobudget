@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     # TODO: only allow user to change their own password
     user = User.find(params[:id])
     if user && user.valid_password?(params[:user][:old_password])
-      if user.update(password: params[:user][:new_password])
+      if user.update(password: params[:user][:new_password], force_password_reset: false)
         head :ok
       else
         render json: { errors: user.errors }, status: 400

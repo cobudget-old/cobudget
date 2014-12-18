@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Users" do
   let(:round) { FactoryGirl.create(:round) }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, force_password_reset: true) }
 
   let(:request_headers) { {
     "Accept" => "application/json",
@@ -12,16 +12,26 @@ describe "Users" do
   } }
 
   describe "POST /users/:user_id/change_password" do
-    it "changes user's password if old password is correct" do
-      password_params = { user:
-        { old_password: user.password,
-          new_password: 'realgood'}
-      }.to_json
+    context "if old password is correct it" do
+      let(:password_params) {
+        { user:
+          { old_password: user.password,
+            new_password: 'realgood'}
+        }.to_json
+      }
 
-      post "/users/#{user.id}/change_password", password_params, request_headers
+      before do
+        post "/users/#{user.id}/change_password", password_params, request_headers
+      end
 
-      expect(response.status).to eq 200
-      expect(user.reload.valid_password?('realgood')).to eq true
+      it "changes user's password " do
+        expect(response.status).to eq 200
+        expect(user.reload.valid_password?('realgood')).to eq true
+      end
+
+      it "turns off force_password_reset if enabled" do
+        expect(user.reload.force_password_reset).to eq false
+      end
     end
 
     it "doesn't change user's password if new password is too short" do
@@ -37,6 +47,7 @@ describe "Users" do
       expect(response.status).to eq 400
       expect(body['errors']['password'][0]).to match("too short")
       expect(user.reload.valid_password?('a')).to eq false
+      expect(user.reload.force_password_reset).to eq true
     end
 
     it "doesn't change user's password if old password is incorrect" do
@@ -48,6 +59,7 @@ describe "Users" do
       post "/users/#{user.id}/change_password", password_params, request_headers
 
       expect(user.reload.valid_password?('realgood')).to eq false
+      expect(user.reload.force_password_reset).to eq true
       expect(response.status).to eq 400
     end
   end
