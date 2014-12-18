@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         render json: { errors: user.errors }, status: 400
       end
     else
-      head 400
+      render json: { errors: { old_password: ["is incorrect"] } }, status: 400
     end
   end
 end
