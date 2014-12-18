@@ -11,12 +11,12 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user && user.valid_password?(params[:user][:old_password])
       if user.update(password: params[:user][:new_password], force_password_reset: false)
-        head :ok
+        head :no_content
       else
         render json: { errors: user.errors }, status: 400
       end
     else
-      head 400
+      render json: { errors: { old_password: ["is incorrect"] } }, status: 400
     end
   end
 end
