@@ -25,7 +25,7 @@ describe "Users" do
       end
 
       it "changes user's password " do
-        expect(response.status).to eq 200
+        expect(response.status).to eq 204
         expect(user.reload.valid_password?('realgood')).to eq true
       end
 
