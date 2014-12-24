@@ -26,6 +26,7 @@ describe "Memberships" do
       usernames << body["memberships"][1]["user"]["name"]
       expect(usernames).to include membership1.user.name
       expect(usernames).to include membership2.user.name
+      expect(body["memberships"][0]["is_admin"]).to eq(false)
     end
   end
 
