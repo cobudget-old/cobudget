@@ -1,4 +1,4 @@
-# Cobudget! backend interface
+# Cobudget backend interface
 
 [![Code Climate](https://codeclimate.com/github/enspiral/cobudget-api.png)](https://codeclimate.com/github/open-app/cobudget-api)
 [![Build Status](https://travis-ci.org/enspiral/cobudget-api.png)](https://travis-ci.org/open-app/cobudget-api)
