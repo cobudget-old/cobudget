@@ -1,52 +1,76 @@
 require 'rails_helper'
 
 describe "Allocations" do
-  let(:admin) { FactoryGirl.create(:user) }
   let(:user) { FactoryGirl.create(:user) }
   let(:round) { FactoryGirl.create(:round) }
-  let(:allocation) { FactoryGirl.create(:allocation) }
-
-  let(:request_headers) { {
-    "Accept" => "application/json",
-    "Content-Type" => "application/json",
-    "X-User-Token" => admin.access_token,
-    "X-User-Email" => admin.email,
-  } }
+  let(:make_user_group_member) { FactoryGirl.create(:membership, group: round.group, user: user) }
+  let(:make_user_group_admin) { FactoryGirl.create(:membership,
+                           group: round.group, user: user, is_admin: true) }
 
   describe "POST /allocations" do
-    it "creates an allocation" do
-      allocation_params = {
-        allocation: {
-          round_id: round.id,
-          user_id: user.id,
-          amount_cents: 2500
-        }
-      }.to_json
+    let(:allocation_params) { {
+      allocation: {
+        round_id: round.id,
+        user_id: user.id,
+        amount_cents: 2500
+      }
+    }.to_json }
 
-      post "/allocations", allocation_params, request_headers
+    context 'admin' do
+      before { make_user_group_admin }
 
-      alloc = Allocation.first
+      it "creates an allocation" do
+        post "/allocations", allocation_params, request_headers
+        alloc = Allocation.first
+        expect(response.status).to eq created
+        expect(alloc.amount_cents).to eq 2500
+        expect(alloc.user).to eq user
+      end
+    end
 
-      expect(response.status).to eq 201 # created
-      expect(alloc.amount_cents).to eq 2500
-      expect(alloc.user).to eq user
+    context 'user' do
+      before { make_user_group_member }
+
+      it "cannot create allocations" do
+        post "/allocations", allocation_params, request_headers
+        alloc = Allocation.first
+        expect(response.status).to eq forbidden
+        expect(alloc).to eq nil
+      end
     end
   end
 
   describe "PUT /allocations/:allocation_id" do
-    it "updates an allocation" do
-      allocation_params = {
-        allocation: {
-          amount_cents: 1500
-        }
-      }.to_json
-      expect(allocation.amount_cents).not_to eq 1500
+    let(:evil_round) { FactoryGirl.create(:round) }
+    let(:allocation_params) { {
+      allocation: {
+        amount_cents: 1500,
+        round_id: evil_round.id
+      }
+    }.to_json }
+    let(:allocation) { FactoryGirl.create(:allocation, amount_cents: 200, round: round) }
 
-      put "/allocations/#{allocation.id}", allocation_params, request_headers
+    context 'admin' do
+      before { make_user_group_admin }
 
-      allocation.reload
-      expect(response.status).to eq 204 # updated
-      expect(allocation.amount_cents).to eq 1500
+      it "updates an allocation" do
+        put "/allocations/#{allocation.id}", allocation_params, request_headers
+        allocation.reload
+        expect(response.status).to eq updated
+        expect(allocation.amount_cents).to eq 1500
+        expect(allocation.round_id).not_to eq evil_round.id
+      end
+    end
+
+    context 'user' do
+      before { make_user_group_member }
+
+      it "cannot update an allocation" do
+        put "/allocations/#{allocation.id}", allocation_params, request_headers
+        allocation.reload
+        expect(response.status).to eq forbidden
+        expect(allocation.amount_cents).not_to eq 1500
+      end
     end
   end
 end

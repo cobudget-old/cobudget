@@ -8,13 +8,27 @@ class ApplicationController < ActionController::API
   include TokenAuthentication
   before_filter :authenticate_from_token!
 
-  # protect_from_forgery with: :exception
+  include Pundit
 
+  # protect_from_forgery with: :exception
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   respond_to :json
 
   def self.inherit_resources
     InheritedResources::Base.inherit_resources(self)
     initialize_resources_class_accessors!
     create_resources_url_helpers!
+  end
+
+private
+  def user_not_authorized
+    render json: { errors: { user: ["not authorized to do this"] } }, status: 403
+  end
+
+  def create_resource(parameters)
+    resource = controller_name.classify.constantize.new(parameters)
+    authorize resource
+    resource.save
+    resource
   end
 end

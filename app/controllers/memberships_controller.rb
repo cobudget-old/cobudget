@@ -1,24 +1,19 @@
 class MembershipsController < ApplicationController
   api :POST, '/memberships/', 'Create membership'
   def create
-    # TODO: only allow group admins to create allocations
-    respond_with Membership.create(membership_params)
+    respond_with create_resource(membership_params_create)
   end
 
   api :PUT, '/memberships/:membership_id', 'Update membership'
   def update
-    # Dumb hack due to restangular issues
-    if params[:membership].is_a?(String)
-      params[:membership] = JSON.parse(params[:membership])
-    end
-
-    @membership = Membership.find(params[:id])
-    respond_with @membership.update_attributes(membership_params)
+    authorize membership
+    respond_with membership.update_attributes(membership_params_update)
   end
 
   api :DELETE, '/memberships/:membership_id', 'Delete membership'
   def destroy
-    respond_with Membership.find(params[:id]).destroy
+    authorize membership
+    respond_with membership.destroy
   end
 
   api :GET, '/groups/:group_id/memberships/', 'Get memberships for a particular group'
@@ -27,7 +22,15 @@ class MembershipsController < ApplicationController
   end
 
 private
-  def membership_params
+  def membership
+    @membership ||= Membership.find(params[:id])
+  end
+
+  def membership_params_create
     params.require(:membership).permit(:user_id, :group_id, :is_admin)
+  end
+
+  def membership_params_update
+    params.require(:membership).permit(:is_admin)
   end
 end

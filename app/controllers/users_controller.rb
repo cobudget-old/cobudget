@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
   api :POST, '/users/:user_id/change_password', "Change the user's password"
   def change_password
-    # TODO: only allow user to change their own password
     user = User.find(params[:id])
+    authorize user
     if user && user.valid_password?(params[:user][:old_password])
       if user.update(password: params[:user][:new_password], force_password_reset: false)
         head :no_content

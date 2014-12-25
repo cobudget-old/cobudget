@@ -6,8 +6,7 @@ class RoundsController < ApplicationController
 
   api :POST, '/rounds/', 'Create a round'
   def create
-    # TODO: make sure only group admins can create new rounds
-    respond_with Round.create(round_params)
+    respond_with create_resource(round_params_create)
   end
 
 private
@@ -15,7 +14,7 @@ private
     @round ||= Round.find(params[:id])
   end
 
-  def round_params
+  def round_params_create
     params.require(:round).permit(:name, :group_id, :starts_at, :ends_at)
   end
 end
