@@ -37,7 +37,19 @@ groups.each do |group|
     rounds << Round.create!(group: group,
                       name: Faker::Lorem.sentence(1, false, 4),
                       starts_at: time_now,
+                      ends_at: time_now - 3.days)
+  end
+  4.times do
+    rounds << Round.create!(group: group,
+                      name: Faker::Lorem.sentence(1, false, 4),
+                      starts_at: time_now,
                       ends_at: time_now + 3.days)
+  end
+  4.times do
+    rounds << Round.create!(group: group,
+                      name: Faker::Lorem.sentence(1, false, 4),
+                      starts_at: time_now + 3.days,
+                      ends_at: time_now + 5.days)
   end
 end
 
