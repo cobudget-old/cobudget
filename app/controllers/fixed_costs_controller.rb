@@ -1,7 +1,7 @@
 class FixedCostsController < ApplicationController
   api :POST, '/fixed_costs', 'Create new fixed_cost'
   def create
-    respond_with create_resource(fixed_cost_params_create)
+    create_resource(fixed_cost_params_create)
   end
 
   api :GET, '/rounds/:round_id/fixed_costs/', 'Show fixed_costs for a particular round'
@@ -11,8 +11,7 @@ class FixedCostsController < ApplicationController
 
   api :PUT, '/fixed_costs/:fixed_cost_id', 'Update fixed_cost'
   def update
-    authorize fixed_cost
-    respond_with @fixed_cost.update_attributes(fixed_cost_params_update)
+    update_resource(fixed_cost_params_update)
   end
 
   api :DELETE, '/fixed_costs/:fixed_cost_id', 'Delete fixed_cost'

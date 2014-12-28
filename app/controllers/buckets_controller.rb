@@ -6,7 +6,7 @@ class BucketsController < ApplicationController
 
   api :POST, '/buckets/', 'Create a bucket'
   def create
-    respond_with create_resource(bucket_params_create)
+    create_resource(bucket_params_create)
   end
 
   api :PUT, '/buckets/:bucket_id', 'Update a bucket'

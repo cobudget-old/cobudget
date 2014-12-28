@@ -29,7 +29,7 @@ private
     resource = controller_name.classify.constantize.new(parameters)
     authorize resource
     resource.save
-    resource
+    respond_with resource
   end
 
   def update_resource(parameters)

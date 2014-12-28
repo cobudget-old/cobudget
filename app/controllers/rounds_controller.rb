@@ -6,7 +6,7 @@ class RoundsController < ApplicationController
 
   api :POST, '/rounds/', 'Create a round'
   def create
-    respond_with create_resource(round_params_create)
+    create_resource(round_params_create)
   end
 
 private

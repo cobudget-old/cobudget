@@ -6,7 +6,7 @@ class AllocationsController < ApplicationController
 
   api :POST, '/allocations/', 'Create allocation'
   def create
-    respond_with create_resource(allocation_params_create)
+    create_resource(allocation_params_create)
   end
 
   api :PUT, '/allocations/:allocation_id', 'Update allocation'

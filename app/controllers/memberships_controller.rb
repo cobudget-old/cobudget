@@ -1,13 +1,12 @@
 class MembershipsController < ApplicationController
   api :POST, '/memberships/', 'Create membership'
   def create
-    respond_with create_resource(membership_params_create)
+    create_resource(membership_params_create)
   end
 
   api :PUT, '/memberships/:membership_id', 'Update membership'
   def update
-    authorize membership
-    respond_with membership.update_attributes(membership_params_update)
+    update_resource(membership_params_update)
   end
 
   api :DELETE, '/memberships/:membership_id', 'Delete membership'
