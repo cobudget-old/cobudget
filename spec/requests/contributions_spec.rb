@@ -56,4 +56,21 @@ describe "Buckets" do
       expect(contribution.user).to eq user
     end
   end
+
+  describe "DELETE /contributions/:id" do
+    let(:contribution_hash) {
+      {
+        bucket_id: round.id,
+        user_id: contribution_user.id,
+        amount_cents: 2500
+      }
+    }
+
+    it "user deletes a contribution" do
+      contribution = Contribution.create contribution_hash
+      delete "/contributions/#{contribution.id}", {}, request_headers
+      expect(response.status).to eq 204
+      expect(Contribution.count).to eq 0
+    end
+  end
 end
