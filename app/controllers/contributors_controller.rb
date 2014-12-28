@@ -11,20 +11,20 @@ class ContributorsController < ApplicationController
     round
     allocation = Allocation.where(round_id: params[:round_id],
                                   user_id: params[:id]).first
-    alloc_amt = allocation ? allocation.amount_cents : 0
+    alloc_amt = allocation ? allocation.amount : BigDecimal.new(0)
 
     contributions = Contribution.for_round(params[:round_id])
                                 .where(user_id: params[:id])
 
     render json: { contributor: {
-      allocation_amount_cents: alloc_amt,
+      allocation_amount: alloc_amt,
       contributions: contributions } }
   end
 
   api :GET, '/rounds/:round_id/contributors/',
             'Gets all contributor\'s details for a given round'
   def index
-    allocations = round.allocations.order('amount_cents DESC')
+    allocations = round.allocations.order('amount DESC')
     members_without_allocations = round.group.members.order('name ASC').where('users.id not in (?)', allocations.map{|a| a.user_id})
     contributors = []
     allocations.each do |allocation|

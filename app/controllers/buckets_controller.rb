@@ -25,13 +25,13 @@ class BucketsController < ApplicationController
                                      :description,
                                      :round_id,
                                      :user_id,
-                                     :target_cents)
+                                     :target)
     end
 
     def bucket_params_update
       params.require(:bucket).permit(:name,
                                      :description,
                                      :user_id,
-                                     :target_cents)
+                                     :target)
     end
 end

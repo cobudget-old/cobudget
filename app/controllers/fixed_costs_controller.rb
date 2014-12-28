@@ -25,10 +25,10 @@ class FixedCostsController < ApplicationController
     end
 
     def fixed_cost_params_create
-      params.require(:fixed_cost).permit(:round_id, :name, :amount_cents, :description)
+      params.require(:fixed_cost).permit(:round_id, :name, :amount, :description)
     end
 
     def fixed_cost_params_update
-      params.require(:fixed_cost).permit(:name, :amount_cents, :description)
+      params.require(:fixed_cost).permit(:name, :amount, :description)
     end
 end

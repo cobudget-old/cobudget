@@ -3,5 +3,5 @@ class FixedCost < ActiveRecord::Base
 
   validates :name, presence: true
   validates :round_id, presence: true
-  validates :amount_cents, presence: true
+  validates :amount, presence: true
 end

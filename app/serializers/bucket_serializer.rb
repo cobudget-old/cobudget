@@ -1,8 +1,8 @@
 class BucketSerializer < ActiveModel::Serializer
   attributes :id,
              :name,
-             :contribution_total_cents,
-             :target_cents,
+             :contribution_total,
+             :target,
              :percentage_funded,
              :description
 
