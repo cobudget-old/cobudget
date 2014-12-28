@@ -16,7 +16,6 @@ gem 'foreigner'
 
 gem 'apipie-rails'
 gem 'active_model_serializers', '~> 0.9.0'
-gem 'inherited_resources'
 gem 'rack-cors', :require => 'rack/cors'
 
 # model utilities
