@@ -91,7 +91,7 @@ describe "FixedCosts" do
     context 'member' do
       before { membership }
       it "cannot delete fixed cost" do
-        put "/fixed_costs/#{fixed_cost.id}", {}, request_headers
+        delete "/fixed_costs/#{fixed_cost.id}", {}, request_headers
         fixed_cost.reload
         expect(response.status).to eq forbidden
         expect(fixed_cost.amount_cents).to eq 300

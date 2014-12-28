@@ -13,12 +13,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :groups, only: [:index, :show], defaults: { format: :json } do
+  resources :groups, only: [:index, :show, :create], defaults: { format: :json } do
     resources :memberships, only: [:index]
   end
   resources :memberships, only: [:create, :update, :destroy], defaults: { format: :json }
 
-  resources :rounds, only: [:show, :create], defaults: { format: :json } do
+  resources :rounds, only: [:show, :create, :update, :destroy], defaults: { format: :json } do
     resources :allocations, only: [:index]
     resources :fixed_costs, only: [:index]
     resources :contributors, only: [:show, :index]
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :allocations, only: [:create, :show, :update], defaults: { format: :json }
   resources :fixed_costs, only: [:create, :show, :update, :destroy], defaults: { format: :json }
 
-  resources :buckets, only: [:create, :show], defaults: { format: :json }
+  resources :buckets, only: [:create, :show, :update, :destroy], defaults: { format: :json }
 
   resources :contributions, only: [:create, :update], defaults: { format: :json }
 

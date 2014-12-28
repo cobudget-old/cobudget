@@ -62,15 +62,9 @@ GEM
       i18n (~> 0.5)
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
-    has_scope (0.6.0.rc)
-      actionpack (>= 3.2, < 5)
-      activesupport (>= 3.2, < 5)
     highline (1.6.21)
     hike (1.2.3)
     i18n (0.6.11)
-    inherited_resources (1.5.0)
-      has_scope (~> 0.6.0.rc)
-      responders (~> 1.0)
     json (1.8.1)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -134,8 +128,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
-    responders (1.1.1)
-      railties (>= 3.2, < 4.2)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -192,7 +184,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   foreigner
-  inherited_resources
   money-rails
   pg
   pry-rails

@@ -14,21 +14,36 @@ class ApplicationController < ActionController::API
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   respond_to :json
 
-  def self.inherit_resources
-    InheritedResources::Base.inherit_resources(self)
-    initialize_resources_class_accessors!
-    create_resources_url_helpers!
-  end
-
 private
   def user_not_authorized
     render json: { errors: { user: ["not authorized to do this"] } }, status: 403
   end
 
-  def create_resource(parameters)
-    resource = controller_name.classify.constantize.new(parameters)
+  # CRUD helpers
+  #
+
+  def resource
+    @resource ||= controller_name.classify.constantize.find(params[:id])
+  end
+
+  def create_resource(controller_params, **args)
+    resource = controller_name.classify.constantize.new(controller_params)
     authorize resource
     resource.save
-    resource
+    if args[:respond] == false
+      resource
+    else
+      respond_with resource
+    end
+  end
+
+  def update_resource(controller_params)
+    authorize resource
+    respond_with resource.update_attributes(controller_params)
+  end
+
+  def destroy_resource
+    authorize resource
+    respond_with resource.destroy
   end
 end

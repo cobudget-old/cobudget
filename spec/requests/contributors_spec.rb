@@ -1,12 +1,9 @@
 require 'rails_helper'
 
 describe "Memberships" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:round) { FactoryGirl.create(:round) }
-
   describe "GET /rounds/:round_id/contributors/" do
     it "displays contributors information for given round" do
-      membership = FactoryGirl.create(:membership, group: round.group)
+      membership = FactoryGirl.create(:membership, group: group)
       allocation = FactoryGirl.create(:allocation, round: round, amount_cents: 250)
       allocation2 = FactoryGirl.create(:allocation, round: round, amount_cents: 500)
       bucket = FactoryGirl.create(:bucket, round: round)

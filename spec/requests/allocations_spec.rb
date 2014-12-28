@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 describe "Allocations" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:round) { FactoryGirl.create(:round) }
-  let(:make_user_group_member) { FactoryGirl.create(:membership, group: round.group, user: user) }
-  let(:make_user_group_admin) { FactoryGirl.create(:membership,
-                           group: round.group, user: user, is_admin: true) }
-
   describe "POST /allocations" do
     let(:allocation_params) { {
       allocation: {

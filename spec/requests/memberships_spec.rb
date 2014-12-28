@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 describe "Memberships" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:new_member) { FactoryGirl.create(:user) }
-  let(:group) { FactoryGirl.create(:group) }
-  let(:make_user_group_admin) { FactoryGirl.create(:membership, user: user, group: group, is_admin: true) }
-  let(:make_user_group_member) { FactoryGirl.create(:membership, user: user, group: group) }
-
   describe "GET /groups/:group_id/memberships/" do
     it "displays memberships for a group" do
       membership1 = FactoryGirl.create(:membership, group_id: group.id)
@@ -27,6 +21,7 @@ describe "Memberships" do
   end
 
   describe "POST /memberships" do
+    let(:new_member) { FactoryGirl.create(:user) }
     let(:membership_params) { {
       membership: {
         user_id: new_member.id,

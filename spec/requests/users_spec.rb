@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "Users" do
-  let(:round) { FactoryGirl.create(:round) }
   let(:user) { FactoryGirl.create(:user, force_password_reset: true) }
   let(:another_user) { FactoryGirl.create(:user) }
 

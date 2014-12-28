@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
   has_many :memberships
   has_many :members, through: :memberships, source: :user
 
-  def latest_round_id
-    latest_round.id if latest_round
+  def add_admin(user)
+    memberships.create!(user: user, is_admin: true)
   end
 end
