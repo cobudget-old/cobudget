@@ -3,14 +3,19 @@ class ContributionsController < ApplicationController
   def create
     contribution = Contribution.new(contribution_params_create)
     contribution.user = current_user
+    authorize contribution
     contribution.save
     respond_with contribution
   end
 
   api :PUT, '/contributions/:contribution_id', 'Update contribution'
   def update
-    @contribution = Contribution.find(params[:id])
-    respond_with @contribution.update_attributes(contribution_params_update)
+    update_resource contribution_params_update
+  end
+
+  api :DELETE, '/contributions/:contribution_id', 'Deletes contribution'
+  def destroy
+    destroy_resource
   end
 
   private
