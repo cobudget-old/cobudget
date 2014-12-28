@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/open-app/cobudget-api.png?label=ready&title=Ready)](https://waffle.io/open-app/cobudget-api)
 # Cobudget backend interface
 
 [![Build Status](https://travis-ci.org/open-app/cobudget-api.svg?branch=master)](https://travis-ci.org/open-app/cobudget-api)
