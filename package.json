@@ -32,6 +32,8 @@
   "dependencies": {
     "angular": "^1.3.2",
     "angular-cookies": "^1.3.2",
+    "angular-markdown-directive": "git://github.com/ushahidi/angular-markdown-directive",
+    "angular-sanitize": "^1.3.8",
     "angular-ui-router": "^0.2.11",
     "big.js": "^2.5.1",
     "bootstrap-sass": "^3.3.1",
