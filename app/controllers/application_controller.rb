@@ -26,16 +26,20 @@ private
     @resource ||= controller_name.classify.constantize.find(params[:id])
   end
 
-  def create_resource(parameters)
-    resource = controller_name.classify.constantize.new(parameters)
+  def create_resource(controller_params, **args)
+    resource = controller_name.classify.constantize.new(controller_params)
     authorize resource
     resource.save
-    respond_with resource
+    if args[:respond] == false
+      resource
+    else
+      respond_with resource
+    end
   end
 
-  def update_resource(parameters)
+  def update_resource(controller_params)
     authorize resource
-    respond_with resource.update_attributes(parameters)
+    respond_with resource.update_attributes(controller_params)
   end
 
   def destroy_resource

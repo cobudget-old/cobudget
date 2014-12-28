@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :groups, only: [:index, :show], defaults: { format: :json } do
+  resources :groups, only: [:index, :show, :create], defaults: { format: :json } do
     resources :memberships, only: [:index]
   end
   resources :memberships, only: [:create, :update, :destroy], defaults: { format: :json }
