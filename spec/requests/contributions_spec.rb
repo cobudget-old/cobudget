@@ -31,4 +31,29 @@ describe "Buckets" do
       end
     end
   end
+
+  describe "PUT /contributions" do
+    let(:contribution_hash) {
+      {
+        bucket_id: round.id,
+        user_id: contribution_user.id,
+        amount_cents: 1500
+      }
+    }
+
+    it "user updates a contribution for themselves" do
+      contribution = Contribution.create contribution_hash
+
+      contribution_hash['amount_cents'] = 4500
+
+      put "/contributions/#{contribution.id}", {
+        contribution: contribution_hash
+      }.to_json, request_headers
+
+      expect(response.status).to eq 204
+      contribution = Contribution.first
+      expect(contribution.amount_cents).to eq 4500
+      expect(contribution.user).to eq user
+    end
+  end
 end
