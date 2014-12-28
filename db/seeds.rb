@@ -9,14 +9,6 @@
 puts 'Seed: Making lots of fake database entries!!!'
 
 
-### GROUPS
-
-groups = []
-5.times do
-  groups << Group.create!(name: Faker::Company.name)
-end
-
-
 ### USERS
 
 admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
@@ -27,6 +19,17 @@ users = [admin]
                password: 'password')
   users << user
 end
+
+
+### GROUPS
+
+groups = []
+5.times do
+  group = Group.create!(name: Faker::Company.name)
+  group.memberships.create!(user: admin, is_admin: true)
+  groups << group
+end
+
 
 ### ROUNDS
 
