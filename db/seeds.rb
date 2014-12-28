@@ -12,7 +12,7 @@ puts 'Seed: Making lots of fake database entries!!!'
 ### USERS
 
 admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
-users = [admin]
+users = []
 8.times do
   user = User.create!(name: Faker::Name.name,
                email: Faker::Internet.email,
@@ -24,7 +24,7 @@ end
 ### GROUPS
 
 groups = []
-5.times do
+2.times do
   group = Group.create!(name: Faker::Company.name)
   group.memberships.create!(user: admin, is_admin: true)
   groups << group
@@ -80,7 +80,7 @@ end
 #### ALLOCATIONS
 
 rounds.each do |round|
-  users.each do |user|
+  round.group.members.each do |user|
     Allocation.create(user: user,
                       round: round,
                       amount_cents: Random.rand(0..1000) * 100)
