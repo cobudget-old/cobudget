@@ -30,24 +30,6 @@ To configure database environments, edit `config/database.yml`.
 bundle exec rake db:setup
 ```
 
-*Create the db:*
-
-```
-bundle exec rake db:create
-```
-
-*Migrate the db:*
-
-````
-bundle exec rake db:migrate
-```
-
-*Drop the db*
-
-```
-bundle exec rake db:drop
-```
-
 ### Run
 
 *Start server:*
@@ -61,5 +43,5 @@ bundle exec rails s
 *Test*
 
 ```
-bundle exec rake spec
+bundle exec rspec
 ```
