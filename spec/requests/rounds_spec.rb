@@ -37,6 +37,39 @@ describe "Rounds" do
     end
   end
 
+  describe "PUT /rounds/:round_id" do
+    let(:round) { FactoryGirl.create(:round, name: 'Goody', group: group) }
+    let(:evil_group) { FactoryGirl.create(:group) }
+    let(:round_params) { {
+      round: {
+        name: 'Sky Round',
+        group_id: evil_group.id # this should be ignored
+      }
+    }.to_json }
+
+    context 'admin' do
+      before { make_user_group_admin }
+
+      it "updates a round" do
+        put "/rounds/#{round.id}", round_params, request_headers
+        round.reload
+        expect(response.status).to eq 204
+        expect(round.name).to eq 'Sky Round'
+        expect(round.group_id).not_to eq evil_group.id # don't let admin change group
+      end
+    end
+
+    context 'member' do
+      before { make_user_group_member }
+      it "cannot update round" do
+        put "/rounds/#{round.id}", round_params, request_headers
+        round.reload
+        expect(response.status).to eq 403
+        expect(round.name).not_to eq 'Sky Round'
+      end
+    end
+  end
+
   describe "DELETE /rounds/:round_id" do
     context 'admin' do
       before { make_user_group_admin }
