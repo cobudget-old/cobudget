@@ -72,7 +72,7 @@ rounds.each do |round|
                    name: Faker::Lorem.sentence(1, false, 4),
                    user: users.sample,
                    description: Faker::Lorem.paragraph(3, false, 14),
-                   target_cents: Random.rand(0..1000) * 100)
+                   target: Random.rand(0..1000))
   end
 end
 
@@ -83,7 +83,7 @@ rounds.each do |round|
   round.group.members.each do |user|
     Allocation.create(user: user,
                       round: round,
-                      amount_cents: Random.rand(0..1000) * 100)
+                      amount: Random.rand(0..1000))
   end
 end
 
@@ -93,9 +93,9 @@ end
 Bucket.find_each do |bucket|
   Random.rand(0..4).times do
     user = users.sample
-    user_allocation = user.allocations.where(round: bucket.round).first.amount_cents / 200
+    user_allocation = user.allocations.where(round: bucket.round).first.amount / 2
     Contribution.create(user: user,
-        amount_cents: Random.rand(0..user_allocation)*100,
+        amount: Random.rand(0..user_allocation),
         bucket: bucket)
   end
 end
