@@ -3,16 +3,10 @@ require 'rails_helper'
 describe "Users" do
   let(:round) { FactoryGirl.create(:round) }
   let(:user) { FactoryGirl.create(:user, force_password_reset: true) }
-
-  let(:request_headers) { {
-    "Accept" => "application/json",
-    "Content-Type" => "application/json",
-    "X-User-Token" => user.access_token,
-    "X-User-Email" => user.email,
-  } }
+  let(:another_user) { FactoryGirl.create(:user) }
 
   describe "POST /users/:user_id/change_password" do
-    context "if old password is correct it" do
+    context "old password is correct" do
       let(:password_params) {
         { user:
           { old_password: user.password,
@@ -20,17 +14,20 @@ describe "Users" do
         }.to_json
       }
 
-      before do
-        post "/users/#{user.id}/change_password", password_params, request_headers
-      end
-
       it "changes user's password " do
-        expect(response.status).to eq 204
+        post "/users/#{user.id}/change_password", password_params, request_headers
+        expect(response.status).to eq updated
         expect(user.reload.valid_password?('realgood')).to eq true
+        expect(user.force_password_reset).to eq false
       end
 
-      it "turns off force_password_reset if enabled" do
-        expect(user.reload.force_password_reset).to eq false
+      context 'trying to change password of another user' do
+        it 'doesnt work' do
+          post "/users/#{another_user.id}/change_password", password_params, request_headers
+          expect(response.status).to eq forbidden
+          expect(another_user.reload.valid_password?('realgood')).to eq false
+          expect(user.force_password_reset).to eq true
+        end
       end
     end
 
@@ -70,7 +67,7 @@ describe "Users" do
 
       get "/users/", {}, request_headers
 
-      expect(response.status).to eq 200 # success
+      expect(response.status).to eq success
 
       body = JSON.parse(response.body)
       names = []

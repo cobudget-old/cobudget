@@ -6,8 +6,7 @@ class BucketsController < ApplicationController
 
   api :POST, '/buckets/', 'Create a bucket'
   def create
-    # TODO: make sure only group admins can create new buckets
-    respond_with Bucket.create(bucket_params)
+    respond_with create_resource(bucket_params)
   end
 
   private

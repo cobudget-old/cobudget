@@ -4,13 +4,6 @@ describe "Memberships" do
   let(:user) { FactoryGirl.create(:user) }
   let(:round) { FactoryGirl.create(:round) }
 
-  let(:request_headers) { {
-    "Accept" => "application/json",
-    "Content-Type" => "application/json",
-    "X-User-Token" => user.access_token,
-    "X-User-Email" => user.email,
-  } }
-
   describe "GET /rounds/:round_id/contributors/" do
     it "displays contributors information for given round" do
       membership = FactoryGirl.create(:membership, group: round.group)

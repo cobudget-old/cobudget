@@ -6,23 +6,25 @@ class AllocationsController < ApplicationController
 
   api :POST, '/allocations/', 'Create allocation'
   def create
-    # TODO: only allow group admins to create allocations
-    respond_with Allocation.create(allocation_params)
+    respond_with create_resource(allocation_params_create)
   end
 
   api :PUT, '/allocations/:allocation_id', 'Update allocation'
   def update
-    # Dumb hack due to restangular issues
-    if params[:allocation].is_a?(String)
-      params[:allocation] = JSON.parse(params[:allocation])
-    end
-
-    @allocation = Allocation.find(params[:id])
-    respond_with @allocation.update_attributes(allocation_params)
+    authorize allocation
+    respond_with allocation.update_attributes(allocation_params_update)
   end
 
   private
-    def allocation_params
+    def allocation
+      @allocation ||= Allocation.find(params[:id])
+    end
+
+    def allocation_params_create
       params.require(:allocation).permit(:user_id, :round_id, :amount_cents)
+    end
+
+    def allocation_params_update
+      params.require(:allocation).permit(:amount_cents)
     end
 end

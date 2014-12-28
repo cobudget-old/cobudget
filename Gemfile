@@ -26,6 +26,7 @@ gem 'money-rails'
 # auth
 
 gem "devise"
+gem 'pundit'
 
 group :development do
   gem 'capistrano', '2.15.5'

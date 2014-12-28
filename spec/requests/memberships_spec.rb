@@ -2,14 +2,10 @@ require 'rails_helper'
 
 describe "Memberships" do
   let(:user) { FactoryGirl.create(:user) }
+  let(:new_member) { FactoryGirl.create(:user) }
   let(:group) { FactoryGirl.create(:group) }
-
-  let(:request_headers) { {
-    "Accept" => "application/json",
-    "Content-Type" => "application/json",
-    "X-User-Token" => user.access_token,
-    "X-User-Email" => user.email,
-  } }
+  let(:make_user_group_admin) { FactoryGirl.create(:membership, user: user, group: group, is_admin: true) }
+  let(:make_user_group_member) { FactoryGirl.create(:membership, user: user, group: group) }
 
   describe "GET /groups/:group_id/memberships/" do
     it "displays memberships for a group" do
@@ -31,53 +27,98 @@ describe "Memberships" do
   end
 
   describe "POST /memberships" do
-    it "creates a membership" do
-      membership_params = {
-        membership: {
-          user_id: user.id,
-          group_id: group.id
-        }
-      }.to_json
+    let(:membership_params) { {
+      membership: {
+        user_id: new_member.id,
+        group_id: group.id
+      }
+    }.to_json }
 
-      post "/memberships", membership_params, request_headers
+    context 'admin' do
+      before { make_user_group_admin }
+      it "creates a membership" do
+        post "/memberships", membership_params, request_headers
 
-      membership = Membership.first
+        membership = Membership.last
 
-      expect(response.status).to eq 201 # created
-      expect(membership.user).to eq user
-      expect(membership.group).to eq group
-      expect(membership.is_admin?).to eq false
+        expect(response.status).to eq 201
+        expect(membership.user).to eq new_member
+        expect(membership.group).to eq group
+        expect(membership.is_admin?).to eq false
+      end
+    end
+
+    context 'member' do
+      before { make_user_group_member }
+      it "cannot create membership" do
+        post "/memberships", membership_params, request_headers
+
+        membership = Membership.last
+
+        expect(response.status).to eq 403
+        expect(membership.user).not_to eq new_member
+      end
     end
   end
 
   describe "PUT /memberships/:membership_id" do
-    let(:membership) { FactoryGirl.create(:membership) }
+    let(:membership) { FactoryGirl.create(:membership, group: group) }
+    let(:evil_group) { FactoryGirl.create(:group) }
+    let(:membership_params) { {
+      membership: {
+        is_admin: true,
+        group_id: evil_group.id # this should be ignored
+      }
+    }.to_json }
 
-    it "updates a membership" do
-      membership_params = {
-        membership: {
-          is_admin: true
-        }
-      }.to_json
-      expect(membership.is_admin?).to eq false
+    context 'admin' do
+      before { make_user_group_admin }
+      it "updates a membership" do
+        put "/memberships/#{membership.id}", membership_params, request_headers
+        membership.reload
+        expect(response.status).to eq 204
+        expect(membership.is_admin?).to eq true
+        expect(membership.group).not_to eq evil_group # don't let admin be evil
+      end
+    end
 
-      put "/memberships/#{membership.id}", membership_params, request_headers
-
-      membership.reload
-      expect(response.status).to eq 204 # updated
-      expect(membership.is_admin?).to eq true
+    context 'member' do
+      before { make_user_group_member }
+      it "cannot update membership" do
+        put "/memberships/#{membership.id}", membership_params, request_headers
+        membership.reload
+        expect(response.status).to eq 403
+        expect(membership.is_admin?).to eq false
+      end
     end
   end
 
   describe "DELETE /memberships/:membership_id" do
-    let(:membership) { FactoryGirl.create(:membership) }
+    let(:membership) { FactoryGirl.create(:membership, group: group) }
 
-    it "deletes a membership" do
+    context 'admin' do
+      before { make_user_group_admin }
+      it "deletes a membership" do
+        delete "/memberships/#{membership.id}", {}, request_headers
+        expect(response.status).to eq 204 # updated
+        expect { membership.reload }.to raise_error # deleted
+      end
+    end
 
-      delete "/memberships/#{membership.id}", {}, request_headers
+    context 'member' do
+      before { @m = make_user_group_member }
 
-      expect(response.status).to eq 204 # updated
-      expect { membership.reload }.to raise_error # deleted
+      it "can delete their own membership" do
+        delete "/memberships/#{@m.id}", {}, request_headers
+        expect(response.status).to eq 204 # updated
+        expect { @m.reload }.to raise_error # deleted
+      end
+
+      it "cannot delete another member's membership" do
+        delete "/memberships/#{membership.id}", {}, request_headers
+        expect(response.status).to eq 403 # forbidden
+        expect { membership.reload }.not_to raise_error
+      end
     end
   end
 end

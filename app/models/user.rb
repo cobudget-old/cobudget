@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   has_many :allocations
 
   validates :name, presence: true
+
+  def is_admin_for?(group)
+    group.memberships.where(is_admin: true).where(user_id: id).exists?
+  end
 end
