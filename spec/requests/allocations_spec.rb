@@ -6,7 +6,7 @@ describe "Allocations" do
       allocation: {
         round_id: round.id,
         user_id: user.id,
-        amount_cents: 2500
+        amount: "25"
       }
     }.to_json }
 
@@ -17,7 +17,7 @@ describe "Allocations" do
         post "/allocations", allocation_params, request_headers
         alloc = Allocation.first
         expect(response.status).to eq created
-        expect(alloc.amount_cents).to eq 2500
+        expect(alloc.amount).to eq 25
         expect(alloc.user).to eq user
       end
     end
@@ -38,11 +38,11 @@ describe "Allocations" do
     let(:evil_round) { FactoryGirl.create(:round) }
     let(:allocation_params) { {
       allocation: {
-        amount_cents: 1500,
+        amount: "15",
         round_id: evil_round.id
       }
     }.to_json }
-    let(:allocation) { FactoryGirl.create(:allocation, amount_cents: 200, round: round) }
+    let(:allocation) { FactoryGirl.create(:allocation, amount: 2, round: round) }
 
     context 'admin' do
       before { make_user_group_admin }
@@ -51,7 +51,7 @@ describe "Allocations" do
         put "/allocations/#{allocation.id}", allocation_params, request_headers
         allocation.reload
         expect(response.status).to eq updated
-        expect(allocation.amount_cents).to eq 1500
+        expect(allocation.amount).to eq 15
         expect(allocation.round_id).not_to eq evil_round.id
       end
     end
@@ -63,7 +63,7 @@ describe "Allocations" do
         put "/allocations/#{allocation.id}", allocation_params, request_headers
         allocation.reload
         expect(response.status).to eq forbidden
-        expect(allocation.amount_cents).not_to eq 1500
+        expect(allocation.amount).not_to eq 15
       end
     end
   end

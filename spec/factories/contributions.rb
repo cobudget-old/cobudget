@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :contribution do
     user
     bucket
-    amount_cents 100
+    amount 1
   end
 end
