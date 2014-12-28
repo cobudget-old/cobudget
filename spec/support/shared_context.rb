@@ -4,7 +4,12 @@ module MyLetDeclarations
   # Everything you need for a basic test
   let(:user) { FactoryGirl.create(:user) }
   let(:group) { FactoryGirl.create(:group) }
+  let(:membership) { FactoryGirl.create(:membership, group: group) }
   let(:round) { FactoryGirl.create(:round, group: group) }
+  let(:fixed_cost) { FactoryGirl.create(:fixed_cost, round: round) }
+  let(:allocation) { FactoryGirl.create(:allocation, round: round) }
+  let(:bucket) { FactoryGirl.create(:bucket, round: round) }
+  let(:contribution) { FactoryGirl.create(:contribution, bucket: bucket) }
 
   # Convenience methods for testing permissions
   let(:make_user_group_member) { FactoryGirl.create(:membership, group: group, user: user) }

@@ -9,9 +9,14 @@ class RoundsController < ApplicationController
     create_resource(round_params_create)
   end
 
+  api :DELETE, '/rounds/:round_id', 'Deletes a round'
+  def destroy
+    destroy_resource
+  end
+
 private
   def round
-    @round ||= Round.find(params[:id])
+    @round ||= resource
   end
 
   def round_params_create

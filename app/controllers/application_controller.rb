@@ -25,6 +25,13 @@ private
     render json: { errors: { user: ["not authorized to do this"] } }, status: 403
   end
 
+  # CRUD helpers
+  #
+
+  def resource
+    @resource ||= controller_name.classify.constantize.find(params[:id])
+  end
+
   def create_resource(parameters)
     resource = controller_name.classify.constantize.new(parameters)
     authorize resource
@@ -33,8 +40,12 @@ private
   end
 
   def update_resource(parameters)
-    resource = controller_name.classify.constantize.find(params[:id])
     authorize resource
     respond_with resource.update_attributes(parameters)
+  end
+
+  def destroy_resource
+    authorize resource
+    respond_with resource.destroy
   end
 end

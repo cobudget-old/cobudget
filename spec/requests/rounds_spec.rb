@@ -36,4 +36,35 @@ describe "Rounds" do
       end
     end
   end
+
+  describe "DELETE /rounds/:round_id" do
+    context 'admin' do
+      before { make_user_group_admin }
+      it "deletes a round (and associated dependencies)" do
+        round
+        bucket
+        contribution
+        allocation
+        fixed_cost
+        delete "/rounds/#{round.id}", {}, request_headers
+        expect(response.status).to eq updated
+        expect { round.reload }.to raise_error # deleted
+        expect { bucket.reload }.to raise_error # deleted
+        expect { allocation.reload }.to raise_error # deleted
+        expect { contribution.reload }.to raise_error # deleted
+        expect { fixed_cost.reload }.to raise_error # deleted
+      end
+    end
+
+    context 'member' do
+      before { @m = make_user_group_member }
+
+      it "cannot delete a round" do
+        round
+        delete "/rounds/#{round.id}", {}, request_headers
+        expect(response.status).to eq forbidden
+        expect { round.reload }.not_to raise_error # not deleted
+      end
+    end
+  end
 end

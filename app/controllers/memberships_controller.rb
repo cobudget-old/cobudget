@@ -11,8 +11,7 @@ class MembershipsController < ApplicationController
 
   api :DELETE, '/memberships/:membership_id', 'Delete membership'
   def destroy
-    authorize membership
-    respond_with membership.destroy
+    destroy_resource
   end
 
   api :GET, '/groups/:group_id/memberships/', 'Get memberships for a particular group'

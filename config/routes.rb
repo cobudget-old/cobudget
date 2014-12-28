@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
   resources :memberships, only: [:create, :update, :destroy], defaults: { format: :json }
 
-  resources :rounds, only: [:show, :create], defaults: { format: :json } do
+  resources :rounds, only: [:show, :create, :destroy], defaults: { format: :json } do
     resources :allocations, only: [:index]
     resources :fixed_costs, only: [:index]
     resources :contributors, only: [:show, :index]

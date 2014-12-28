@@ -16,8 +16,7 @@ class FixedCostsController < ApplicationController
 
   api :DELETE, '/fixed_costs/:fixed_cost_id', 'Delete fixed_cost'
   def destroy
-    authorize fixed_cost
-    respond_with fixed_cost.destroy
+    destroy_resource
   end
 
   private
