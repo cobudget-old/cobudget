@@ -11,8 +11,7 @@ class AllocationsController < ApplicationController
 
   api :PUT, '/allocations/:allocation_id', 'Update allocation'
   def update
-    authorize allocation
-    respond_with allocation.update_attributes(allocation_params_update)
+    update_resource(allocation_params_update)
   end
 
   private

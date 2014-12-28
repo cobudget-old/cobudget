@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :allocations, only: [:create, :show, :update], defaults: { format: :json }
   resources :fixed_costs, only: [:create, :show, :update, :destroy], defaults: { format: :json }
 
-  resources :buckets, only: [:create, :show], defaults: { format: :json }
+  resources :buckets, only: [:create, :show, :update], defaults: { format: :json }
 
   resources :contributions, only: [:create, :update], defaults: { format: :json }
 

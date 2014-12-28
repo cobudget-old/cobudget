@@ -31,4 +31,10 @@ private
     resource.save
     resource
   end
+
+  def update_resource(parameters)
+    resource = controller_name.classify.constantize.find(params[:id])
+    authorize resource
+    respond_with resource.update_attributes(parameters)
+  end
 end
