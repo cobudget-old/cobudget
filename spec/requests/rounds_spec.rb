@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 describe "Rounds" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:group) { FactoryGirl.create(:group) }
-  let(:make_user_group_member) { FactoryGirl.create(:membership, group: group, user: user) }
-  let(:make_user_group_admin) { FactoryGirl.create(:membership, group: group, user: user, is_admin: true) }
-
   describe "POST /rounds" do
     let(:time_now) { Time.new(2007,11,1,15,25,0, "+09:00") }
     let(:round_params) { {

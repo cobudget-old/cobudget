@@ -1,10 +1,7 @@
 require 'rails_helper'
 
 describe "Buckets" do
-  let(:user) { FactoryGirl.create(:user) }
   let(:contribution_user) { user }
-  let(:bucket) { FactoryGirl.create(:bucket, round: round) }
-  let(:round) { FactoryGirl.create(:round) }
 
   describe "POST /contributions" do
     let(:contribution_params) { {

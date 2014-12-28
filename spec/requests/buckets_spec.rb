@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 describe "Buckets" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:round) { FactoryGirl.create(:round) }
-  let(:membership) { FactoryGirl.create(:membership, group: round.group, user: user) }
-  let(:admin_membership) { FactoryGirl.create(:membership,
-                           group: round.group, user: user, is_admin: true) }
-
   describe "POST /buckets" do
     let(:bucket_params) { {
       bucket: {
@@ -18,7 +12,7 @@ describe "Buckets" do
     }.to_json }
 
     context 'admin' do
-      before { admin_membership }
+      before { make_user_group_admin }
 
       it "creates a bucket" do
         post "/buckets", bucket_params, request_headers
@@ -29,7 +23,9 @@ describe "Buckets" do
       end
     end
 
-    context 'user' do
+    context 'member' do
+      before { make_user_group_member }
+
       it "cannot create buckets" do
         post "/buckets", bucket_params, request_headers
         bucket = Bucket.first
