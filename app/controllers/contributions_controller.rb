@@ -13,6 +13,11 @@ class ContributionsController < ApplicationController
     update_resource contribution_params_update
   end
 
+  api :DELETE, '/contributions/:contribution_id', 'Deletes contribution'
+  def destroy
+    destroy_resource
+  end
+
   private
     def contribution_params_create
       params.require(:contribution).permit(:bucket_id, :amount_cents)

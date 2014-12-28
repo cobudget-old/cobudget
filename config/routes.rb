@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   resources :buckets, only: [:create, :show, :update, :destroy], defaults: { format: :json }
 
-  resources :contributions, only: [:create, :update], defaults: { format: :json }
+  resources :contributions, only: [:create, :update, :destroy], defaults: { format: :json }
 
   root to: redirect('/docs')
 end
