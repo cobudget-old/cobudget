@@ -90,7 +90,7 @@ describe "Rounds" do
     end
 
     context 'member' do
-      before { @m = make_user_group_member }
+      before { make_user_group_member }
 
       it "cannot delete a round" do
         round

@@ -70,4 +70,30 @@ describe "Buckets" do
       end
     end
   end
+
+  describe "DELETE /buckets/:bucket_id" do
+    context 'admin' do
+      before { make_user_group_admin }
+      it "deletes a bucket (and associated dependencies)" do
+        bucket
+        contribution
+        delete "/buckets/#{bucket.id}", {}, request_headers
+        expect(response.status).to eq updated
+        expect { bucket.reload }.to raise_error # deleted
+        expect { contribution.reload }.to raise_error # deleted
+      end
+    end
+
+    context 'member' do
+      before { make_user_group_member }
+
+      it "cannot delete a bucket" do
+        bucket
+        delete "/buckets/#{bucket.id}", {}, request_headers
+        expect(response.status).to eq forbidden
+        expect { bucket.reload }.not_to raise_error # not deleted
+      end
+    end
+  end
+
 end
