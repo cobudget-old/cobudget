@@ -3,7 +3,11 @@ class GroupsController < ApplicationController
 
   api :GET, '/groups', 'List groups'
   def index
-    @groups = Group.all
+    if params[:member_id]
+      @groups = Group.includes('memberships').where(memberships: { user_id: params[:member_id] }).all
+    else
+      @groups = Group.all
+    end
     respond_with @groups
   end
 
