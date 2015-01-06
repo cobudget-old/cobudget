@@ -20,10 +20,10 @@ class AllocationsController < ApplicationController
     end
 
     def allocation_params_create
-      params.require(:allocation).permit(:user_id, :round_id, :amount_cents)
+      params.require(:allocation).permit(:user_id, :round_id, :amount)
     end
 
     def allocation_params_update
-      params.require(:allocation).permit(:amount_cents)
+      params.require(:allocation).permit(:amount)
     end
 end

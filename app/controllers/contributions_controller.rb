@@ -20,10 +20,10 @@ class ContributionsController < ApplicationController
 
   private
     def contribution_params_create
-      params.require(:contribution).permit(:bucket_id, :amount_cents)
+      params.require(:contribution).permit(:bucket_id, :amount)
     end
 
     def contribution_params_update
-      params.require(:contribution).permit(:amount_cents)
+      params.require(:contribution).permit(:amount)
     end
 end

@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210003814) do
+ActiveRecord::Schema.define(version: 20141228211743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "allocations", force: true do |t|
-    t.integer  "amount_cents"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "round_id"
+    t.decimal  "amount",     precision: 12, scale: 2, default: 0.0
   end
 
   add_index "allocations", ["round_id"], name: "index_allocations_on_round_id", using: :btree
@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(version: 20141210003814) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "round_id"
-    t.string   "name",         null: false
-    t.integer  "target_cents"
+    t.string   "name",                                               null: false
     t.text     "description"
     t.integer  "user_id"
+    t.decimal  "target",      precision: 12, scale: 2, default: 0.0
   end
 
   add_index "buckets", ["round_id"], name: "index_buckets_on_round_id", using: :btree
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 20141210003814) do
   create_table "contributions", force: true do |t|
     t.integer  "user_id"
     t.integer  "bucket_id"
-    t.integer  "amount_cents"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "amount",     precision: 12, scale: 2, default: 0.0
   end
 
   add_index "contributions", ["bucket_id"], name: "index_contributions_on_bucket_id", using: :btree
@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(version: 20141210003814) do
 
   create_table "fixed_costs", force: true do |t|
     t.string   "name"
-    t.integer  "amount_cents"
     t.integer  "round_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.decimal  "amount",      precision: 12, scale: 2, default: 0.0
   end
 
   add_index "fixed_costs", ["round_id"], name: "index_fixed_costs_on_round_id", using: :btree

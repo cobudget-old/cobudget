@@ -12,7 +12,7 @@ describe "FixedCosts" do
       fixed_cost: {
         round_id: round.id,
         name: "Rent",
-        amount_cents: 80000,
+        amount: "800",
         description: "Too much!"
       }
     }.to_json }
@@ -26,7 +26,7 @@ describe "FixedCosts" do
         fixed_cost = FixedCost.first
         expect(response.status).to eq 201 # created
         expect(fixed_cost.name).to eq "Rent"
-        expect(fixed_cost.amount_cents).to eq 80000
+        expect(fixed_cost.amount).to eq 800
         expect(fixed_cost.description).to eq "Too much!"
       end
     end
@@ -48,12 +48,12 @@ describe "FixedCosts" do
     let(:evil_round) { FactoryGirl.create(:group) }
     let(:fixed_cost_params) { {
       fixed_cost: {
-        amount_cents: 1500,
+        amount: 15,
         round_id: evil_round.id
       }
     }.to_json }
     let(:fixed_cost) { FactoryGirl.create(:fixed_cost, round: round,
-                                          amount_cents: 300) }
+                                          amount: 3) }
 
     context 'admin' do
       before { admin_membership }
@@ -61,7 +61,7 @@ describe "FixedCosts" do
         put "/fixed_costs/#{fixed_cost.id}", fixed_cost_params, request_headers
         fixed_cost.reload
         expect(response.status).to eq updated
-        expect(fixed_cost.amount_cents).to eq 1500
+        expect(fixed_cost.amount).to eq 15
         expect(fixed_cost.round_id).not_to eq evil_round.id
       end
     end
@@ -72,14 +72,14 @@ describe "FixedCosts" do
         put "/fixed_costs/#{fixed_cost.id}", fixed_cost_params, request_headers
         fixed_cost.reload
         expect(response.status).to eq forbidden
-        expect(fixed_cost.amount_cents).to eq 300
+        expect(fixed_cost.amount).to eq 3
       end
     end
   end
 
   describe "DELETE /fixed_costs/:fixed_cost_id" do
     let(:fixed_cost) { FactoryGirl.create(:fixed_cost, round: round,
-                                          amount_cents: 300) }
+                                          amount: 3) }
     context 'admin' do
       before { admin_membership }
       it "deletes a fixed_cost" do
@@ -94,23 +94,23 @@ describe "FixedCosts" do
         delete "/fixed_costs/#{fixed_cost.id}", {}, request_headers
         fixed_cost.reload
         expect(response.status).to eq forbidden
-        expect(fixed_cost.amount_cents).to eq 300
+        expect(fixed_cost.amount).to eq 3
       end
     end
   end
 
   describe "GET /rounds/:round_id/fixed_costs/" do
     it "displays fixed costs for a round" do
-      fixed_cost1 = FactoryGirl.create(:fixed_cost, amount_cents: 5432, round_id: round.id)
-      fixed_cost2 = FactoryGirl.create(:fixed_cost, amount_cents: 5432, round_id: round.id)
+      fixed_cost1 = FactoryGirl.create(:fixed_cost, amount: 54.32, round_id: round.id)
+      fixed_cost2 = FactoryGirl.create(:fixed_cost, amount: 54.32, round_id: round.id)
 
       get "/rounds/#{round.id}/fixed_costs/", {}, request_headers
 
       expect(response.status).to eq success
 
       body = JSON.parse(response.body)
-      expect(body["fixed_costs"][0]["amount_cents"]).to eq 5432
-      expect(body["fixed_costs"][1]["amount_cents"]).to eq 5432
+      expect(body["fixed_costs"][0]["amount"]).to eq "54.32"
+      expect(body["fixed_costs"][1]["amount"]).to eq "54.32"
     end
   end
 end

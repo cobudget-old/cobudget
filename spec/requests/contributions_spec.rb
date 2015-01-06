@@ -8,7 +8,7 @@ describe "Buckets" do
       contribution: {
         bucket_id: round.id,
         user_id: contribution_user.id,
-        amount_cents: 2500
+        amount: "25"
       }
     }.to_json }
 
@@ -16,7 +16,7 @@ describe "Buckets" do
       post "/contributions", contribution_params, request_headers
       contribution = Contribution.first
       expect(response.status).to eq 201
-      expect(contribution.amount_cents).to eq 2500
+      expect(contribution.amount).to eq 25
       expect(contribution.user).to eq user
     end
 
@@ -37,14 +37,14 @@ describe "Buckets" do
       {
         bucket_id: round.id,
         user_id: contribution_user.id,
-        amount_cents: 1500
+        amount: 15
       }
     }
 
     it "user updates a contribution for themselves" do
       contribution = Contribution.create contribution_hash
 
-      contribution_hash['amount_cents'] = 4500
+      contribution_hash['amount'] = "45"
 
       put "/contributions/#{contribution.id}", {
         contribution: contribution_hash
@@ -52,7 +52,7 @@ describe "Buckets" do
 
       expect(response.status).to eq 204
       contribution = Contribution.first
-      expect(contribution.amount_cents).to eq 4500
+      expect(contribution.amount).to eq 45
       expect(contribution.user).to eq user
     end
   end
@@ -62,12 +62,13 @@ describe "Buckets" do
       {
         bucket_id: round.id,
         user_id: contribution_user.id,
-        amount_cents: 2500
+        amount: 25
       }
     }
 
     it "user deletes a contribution" do
       contribution = Contribution.create contribution_hash
+      expect(Contribution.count).to eq 1
       delete "/contributions/#{contribution.id}", {}, request_headers
       expect(response.status).to eq 204
       expect(Contribution.count).to eq 0

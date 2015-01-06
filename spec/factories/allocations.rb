@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :allocation do
     user
     round
-    amount_cents 4000
+    amount 40
   end
 end

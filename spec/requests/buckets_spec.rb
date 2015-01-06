@@ -7,7 +7,7 @@ describe "Buckets" do
         name: 'Do things',
         round_id: round.id,
         user_id: user.id,
-        target_cents: 2500
+        target: "25"
       }
     }.to_json }
 
@@ -18,7 +18,7 @@ describe "Buckets" do
         post "/buckets", bucket_params, request_headers
         bucket = Bucket.first
         expect(response.status).to eq 201
-        expect(bucket.target_cents).to eq 2500
+        expect(bucket.target).to eq 25
         expect(bucket.user).to eq user
       end
     end
@@ -36,7 +36,7 @@ describe "Buckets" do
   end
 
   describe "PUT /buckets" do
-    let(:bucket) { FactoryGirl.create(:bucket, round: round, target_cents: 100) }
+    let(:bucket) { FactoryGirl.create(:bucket, round: round, target: 1) }
     let(:new_user) { FactoryGirl.create(:user) }
     let(:evil_round) { FactoryGirl.create(:round) }
     let(:bucket_params) { {
@@ -44,7 +44,7 @@ describe "Buckets" do
         name: 'Do more things',
         round_id: evil_round.id,
         user_id: new_user.id,
-        target_cents: 2500
+        target: "25"
       }
     }.to_json }
 
@@ -54,7 +54,7 @@ describe "Buckets" do
       it "updates a bucket" do
         put "/buckets/#{bucket.id}", bucket_params, request_headers
         expect(response.status).to eq updated
-        expect(bucket.reload.target_cents).to eq 2500
+        expect(bucket.reload.target).to eq 25
         expect(bucket.user).to eq new_user
         expect(bucket.round_id).not_to eq evil_round.id
       end
@@ -66,7 +66,7 @@ describe "Buckets" do
       it "cannot update buckets" do
         put "/buckets/#{bucket.id}", bucket_params, request_headers
         expect(response.status).to eq forbidden
-        expect(bucket.reload.target_cents).not_to eq 2500
+        expect(bucket.reload.target).not_to eq 25
       end
     end
   end
