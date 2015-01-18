@@ -11,11 +11,11 @@ describe "Memberships" do
       expect(response.status).to eq 200 # success
 
       body = JSON.parse(response.body)
-      usernames = []
-      usernames << body["memberships"][0]["user"]["name"]
-      usernames << body["memberships"][1]["user"]["name"]
-      expect(usernames).to include membership1.user.name
-      expect(usernames).to include membership2.user.name
+      membernames = []
+      membernames << body["memberships"][0]["member"]["name"]
+      membernames << body["memberships"][1]["member"]["name"]
+      expect(membernames).to include membership1.member.name
+      expect(membernames).to include membership2.member.name
       expect(body["memberships"][0]["is_admin"]).to eq(false)
     end
   end
@@ -24,7 +24,7 @@ describe "Memberships" do
     let(:new_member) { FactoryGirl.create(:user) }
     let(:membership_params) { {
       membership: {
-        user_id: new_member.id,
+        member_id: new_member.id,
         group_id: group.id
       }
     }.to_json }
@@ -37,7 +37,7 @@ describe "Memberships" do
         membership = Membership.last
 
         expect(response.status).to eq 201
-        expect(membership.user).to eq new_member
+        expect(membership.member).to eq new_member
         expect(membership.group).to eq group
         expect(membership.is_admin?).to eq false
       end
@@ -51,7 +51,7 @@ describe "Memberships" do
         membership = Membership.last
 
         expect(response.status).to eq 403
-        expect(membership.user).not_to eq new_member
+        expect(membership.member).not_to eq new_member
       end
     end
   end

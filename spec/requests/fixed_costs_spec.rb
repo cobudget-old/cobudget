@@ -3,9 +3,9 @@ require 'rails_helper'
 describe "FixedCosts" do
   let(:user) { FactoryGirl.create(:user) }
   let(:round) { FactoryGirl.create(:round) }
-  let(:membership) { FactoryGirl.create(:membership, group: round.group, user: user) }
+  let(:membership) { FactoryGirl.create(:membership, group: round.group, member: user) }
   let(:admin_membership) { FactoryGirl.create(:membership,
-                           group: round.group, user: user, is_admin: true) }
+                           group: round.group, member: user, is_admin: true) }
 
   describe "POST /fixed_costs" do
     let(:fixed_cost_params) { {

@@ -8,6 +8,6 @@ class MembershipPolicy < ApplicationPolicy
   end
 
   def destroy?
-    (record.user_id == user.id) || user.is_admin_for?(record.group)
+    (record.member_id == user.id) || user.is_admin_for?(record.group)
   end
 end

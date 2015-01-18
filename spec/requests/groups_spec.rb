@@ -17,13 +17,13 @@ describe "Groups" do
     end
   end
 
-  describe "GET /groups?user_id=1" do
+  describe "GET /groups?member_id=1" do
 
     before(:each) do
       @user = FactoryGirl.create(:user)
       @group1 = FactoryGirl.create(:group)
       @group2 = FactoryGirl.create(:group)
-      @membership1 = FactoryGirl.create(:membership, group_id: @group1.id, user_id: @user.id)
+      @membership1 = FactoryGirl.create(:membership, group_id: @group1.id, member_id: @user.id)
     end
 
     it "gets groups" do

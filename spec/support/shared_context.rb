@@ -12,9 +12,9 @@ module MyLetDeclarations
   let(:contribution) { FactoryGirl.create(:contribution, bucket: bucket) }
 
   # Convenience methods for testing permissions
-  let(:make_user_group_member) { FactoryGirl.create(:membership, group: group, user: user) }
+  let(:make_user_group_member) { FactoryGirl.create(:membership, group: group, member: user) }
   let(:make_user_group_admin) { FactoryGirl.create(:membership,
-                           group: group, user: user, is_admin: true) }
+                           group: group, member: user, is_admin: true) }
 
   # HTTP status codes
   let(:success) { 200 }

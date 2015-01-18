@@ -33,7 +33,7 @@ describe "Memberships" do
 
       # Contributors without allocations come last
       expect(body["contributors"][2]["allocation"]).to eq nil
-      expect(body["contributors"][2]["user"]["id"]).to eq membership.user_id
+      expect(body["contributors"][2]["user"]["id"]).to eq membership.member_id
     end
   end
 end

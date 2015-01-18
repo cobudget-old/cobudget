@@ -16,7 +16,7 @@ class MembershipsController < ApplicationController
 
   api :GET, '/groups/:group_id/memberships/', 'Get memberships for a particular group'
   def index
-    respond_with Group.find(params[:group_id]).memberships.includes('user').order('users.name ASC'), each_serializer: MembershipSerializer
+    respond_with Group.find(params[:group_id]).memberships.includes('member').order('users.name ASC'), each_serializer: MembershipSerializer
   end
 
 private
@@ -25,7 +25,7 @@ private
   end
 
   def membership_params_create
-    params.require(:membership).permit(:user_id, :group_id, :is_admin)
+    params.require(:membership).permit(:member_id, :group_id, :is_admin)
   end
 
   def membership_params_update

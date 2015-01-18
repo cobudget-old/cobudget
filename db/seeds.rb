@@ -26,7 +26,7 @@ end
 groups = []
 2.times do
   group = Group.create!(name: Faker::Company.name)
-  group.memberships.create!(user: admin, is_admin: true)
+  group.memberships.create!(member: admin, is_admin: true)
   groups << group
 end
 
@@ -60,7 +60,7 @@ end
 
 groups.each do |group|
   users.each do |user|
-    FactoryGirl.create(:membership, group: group, user: user)
+    FactoryGirl.create(:membership, group: group, member: user)
   end
 end
 
@@ -80,8 +80,8 @@ end
 #### ALLOCATIONS
 
 rounds.each do |round|
-  round.group.members.each do |user|
-    Allocation.create(user: user,
+  round.group.members.each do |member|
+    Allocation.create(user: member,
                       round: round,
                       amount: Random.rand(0..1000))
   end

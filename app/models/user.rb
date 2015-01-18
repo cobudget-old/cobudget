@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
 
   def is_admin_for?(group)
-    group.memberships.where(is_admin: true).where(user_id: id).exists?
+    group.memberships.where(is_admin: true).where(member_id: id).exists?
   end
 end

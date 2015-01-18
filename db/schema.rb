@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228211743) do
+ActiveRecord::Schema.define(version: 20150118015756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,32 +70,14 @@ ActiveRecord::Schema.define(version: 20141228211743) do
 
   create_table "memberships", force: true do |t|
     t.integer  "group_id",                   null: false
-    t.integer  "user_id",                    null: false
+    t.integer  "member_id",                  null: false
     t.boolean  "is_admin",   default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
-  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
-
-  create_table "people", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "projects", force: true do |t|
-    t.integer  "budget_id"
-    t.integer  "sponsor_id"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "min_cents"
-    t.integer  "target_cents"
-    t.integer  "max_cents"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "memberships", ["member_id"], name: "index_memberships_on_member_id", using: :btree
 
   create_table "rounds", force: true do |t|
     t.datetime "created_at"
@@ -129,8 +111,5 @@ ActiveRecord::Schema.define(version: 20141228211743) do
   add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  add_foreign_key "projects", "groups", name: "projects_budget_id_fk", column: "budget_id"
-  add_foreign_key "projects", "people", name: "projects_sponsor_id_fk", column: "sponsor_id"
 
 end
