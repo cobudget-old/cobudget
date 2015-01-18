@@ -1,5 +1,5 @@
 class RoundSerializer < ActiveModel::Serializer
-  attributes :id, :name, :group_id, :starts_at, :ends_at
+  attributes :id, :name, :group_id, :starts_at, :ends_at, :members_can_propose_buckets
   has_many :buckets
   has_many :allocations
 
