@@ -38,6 +38,7 @@ sassPaths =  [
   "node_modules/font-awesome/scss/"
   "node_modules/angular-xeditable/dist/css"
   "node_modules/angular-bootstrap-datetimepicker/src/css"
+  "node_modules/awesome-bootstrap-checkbox"
 ]
 
 styles = ->
