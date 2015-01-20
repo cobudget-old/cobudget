@@ -32,6 +32,8 @@ describe "Buckets" do
         expect(response.status).to eq 403
         expect(bucket).to eq nil
       end
+
+      it 'can create buckets if enabled on round'
     end
   end
 
@@ -68,6 +70,8 @@ describe "Buckets" do
         expect(response.status).to eq forbidden
         expect(bucket.reload.target).not_to eq 25
       end
+
+      it 'can update their own bucket if enabled on round'
     end
   end
 
@@ -93,6 +97,8 @@ describe "Buckets" do
         expect(response.status).to eq forbidden
         expect { bucket.reload }.not_to raise_error # not deleted
       end
+
+      it 'can delete their own bucket if enabled on round'
     end
   end
 
