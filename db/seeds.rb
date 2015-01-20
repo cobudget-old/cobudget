@@ -13,6 +13,8 @@ puts 'Seed: Making lots of fake database entries!!!'
 
 admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
 users = []
+user = User.create(name: 'User', email: 'user@example.com', password: 'password')
+users << user
 8.times do
   user = User.create!(name: Faker::Name.name,
                email: Faker::Internet.email,

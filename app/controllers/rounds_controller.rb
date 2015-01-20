@@ -21,10 +21,10 @@ class RoundsController < ApplicationController
 
 private
   def round_params_create
-    params.require(:round).permit(:name, :group_id, :starts_at, :ends_at)
+    params.require(:round).permit(:name, :group_id, :starts_at, :ends_at, :members_can_propose_buckets)
   end
 
   def round_params_update
-    params.require(:round).permit(:name, :starts_at, :ends_at)
+    params.require(:round).permit(:name, :starts_at, :ends_at, :members_can_propose_buckets)
   end
 end
