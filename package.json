@@ -9,7 +9,7 @@
     "start": "gulp build && node .",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
-    "test-spec": "testling",
+    "test-spec": "testling -x firefox",
     "test-e2e": "protractor protractor.js",
     "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
     "build": "gulp build",
