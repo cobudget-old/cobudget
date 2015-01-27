@@ -1,10 +1,12 @@
 // file for build all the sass together // and any config relating to the build // app config (like bootstrap variables) are in app module
 @import "node_modules/app/app";
 
-$icon-font-path: "../fonts/bootstrap/"
+$font-path: "../fonts"
+
+$icon-font-path: "#{$font-path}/bootstrap"
 @import "bootstrap";
 
-$fa-font-path: "../fonts/font-awesome";
+$fa-font-path: "#{$font-path}/font-awesome";
 @import "font-awesome";
 
 @import "awesome-bootstrap-checkbox";
