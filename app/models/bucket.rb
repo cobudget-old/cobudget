@@ -7,17 +7,4 @@ class Bucket < ActiveRecord::Base
   validates :round_id, presence: true
   validates :user_id, presence: true
   validates :target, presence: true
-
-  def contribution_total
-    contributions.sum(:amount)
-  end
-
-  def percentage_funded
-    percentage(contribution_total, target)
-  end
-
-  private
-    def percentage(x, y)
-      (x / y) * 100.0
-    end
 end
