@@ -22,29 +22,123 @@ describe "Memberships" do
 
   describe "POST /memberships" do
     let(:new_member) { FactoryGirl.create(:user) }
-    let(:membership_params) { {
-      membership: {
-        member_id: new_member.id,
-        group_id: group.id
-      }
-    }.to_json }
+    let(:existing_member) { FactoryGirl.create(:membership,
+      group: group, member: FactoryGirl.create(:user)).member }
+    let(:membership_params) { { membership: membership_details }.to_json }
 
     context 'admin' do
+      let(:memberships) { group.reload.memberships }
       before { make_user_group_admin }
-      it "creates a membership" do
-        post "/memberships", membership_params, request_headers
 
-        membership = Membership.last
+      context 'group_id is not present or invalid' do
+        let(:membership_details) { {group_id: ''} }
+        it 'returns error object' do
+            post "/memberships", membership_params, request_headers
+            body = JSON.parse(response.body)
+            expect(response.status).to eq unprocessable
+            expect(body['errors']['group_id']).to eq(["group not found"])
+        end
+      end
+      context 'member_id is present' do
+        let(:membership_details) { {
+          group_id: group.id, member_id: new_member.id } }
+        context 'user is not a member of the group' do
+          it "creates membership" do
+            post "/memberships", membership_params, request_headers
 
-        expect(response.status).to eq 201
-        expect(membership.member).to eq new_member
-        expect(membership.group).to eq group
-        expect(membership.is_admin?).to eq false
+            expect(response.status).to eq created
+            membership = memberships.where(member_id: new_member.id).first
+          end
+        end
+        context 'user already a member of the group' do
+          let(:membership_details) { {
+            group_id: group.id, member_id: existing_member.id } }
+          it "fails" do
+            post "/memberships", membership_params, request_headers
+            expect(response.status).to eq unprocessable
+          end
+        end
+      end
+      context 'email is present' do
+        context 'user with email already exists' do
+          context 'user is not a member of the group' do
+            let(:membership_details) { {
+              group_id: group.id, email: new_member.email } }
+            it "creates membership" do
+              post "/memberships", membership_params, request_headers
+              expect(response.status).to eq created
+              expect(memberships.where(member_id: new_member.id)).to exist
+            end
+          end
+          context 'user is already a member of the group' do
+            let(:membership_details) { {
+              group_id: group.id, email: existing_member.email } }
+            it "fails" do
+              post "/memberships", membership_params, request_headers
+              expect(response.status).to eq unprocessable
+            end
+          end
+        end
+        context 'user with email does not exist' do
+          let(:new_member) {double(email: 'jonny@gonny.commy', name: 'Jo')}
+          let(:membership_details) {{group_id: group.id, email: new_member.email}}
+          context 'name is not present' do
+            it 'creates user with email and uses first part of email for name' do
+              expect{
+                post "/memberships", membership_params, request_headers
+              }.to change{User.count}.by(1)
+              user = User.find_by(email: new_member.email) 
+              expect(user.name).to eq('jonny')
+            end
+          end
+          context 'name is present' do
+            before { membership_details[:name] = new_member.name }
+            it 'creates user with name and email' do
+              expect{
+                post "/memberships", membership_params, request_headers
+              }.to change{User.count}.by(1)
+              user = User.find_by(email: new_member.email) 
+              expect(user.name).to eq(new_member.name)
+            end
+          end
+          it 'emails login details to user' do
+            post "/memberships", membership_params, request_headers
+            email = ActionMailer::Base.deliveries.last
+            expect(email.to[0]).to match(new_member.email)
+          end
+          it 'adds user to group' do
+            post "/memberships", membership_params, request_headers
+            user = User.find_by(email: new_member.email)
+            expect(group.members.where(id: user.id)).to be_present
+          end
+        end
+      end
+      context 'member_id and email are present' do
+        let(:membership_details) {{group_id: group.id,
+          member_id: new_member.id, email: 'newww@goo.poo'}}
+        it 'creates membership based on member_id' do
+          post "/memberships", membership_params, request_headers
+          expect(group.memberships.where(member_id: new_member)).to exist
+        end
+      end
+      context 'is_admin is true' do
+        let(:membership_details) { {
+          group_id: group.id,
+          member_id: new_member.id,
+          is_admin: true } }
+        it 'create user as admin' do
+          post "/memberships", membership_params, request_headers
+          membership = group.memberships.where(member_id: new_member.id).first
+          expect(membership.is_admin?).to eq(true)
+        end
       end
     end
 
     context 'member' do
+      let(:membership_details) { {
+        group_id: group.id, member_id: new_member.id } }
       before { make_user_group_member }
+
       it "cannot create membership" do
         post "/memberships", membership_params, request_headers
 

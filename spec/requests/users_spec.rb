@@ -1,8 +1,54 @@
 require 'rails_helper'
 
 describe "Users" do
-  let(:user) { FactoryGirl.create(:user, force_password_reset: true) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:another_user) { FactoryGirl.create(:user) }
+
+  describe "PUT /users/:user_id" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:user_params) {
+      { user:
+        { name: 'Giddy TooGood',
+          email: 'giddy@toogood.gov',
+          password: 'johnkeyisgreat'
+        }
+      }.to_json
+    }
+    context 'user' do
+      it "updates their details (except for password)" do
+        put "/users/#{user.id}/", user_params, request_headers
+        user.reload
+        expect(response.status).to eq updated
+        expect(user.name).to eq 'Giddy TooGood'
+        expect(user.email).to eq 'giddy@toogood.gov'
+        expect(user.valid_password?('johnkeyisgreat')).to eq false
+      end
+      context 'is uninitialized' do
+        let(:user) { FactoryGirl.create(:user, initialized: false) }
+        it 'allows password update' do
+          put "/users/#{user.id}/", user_params, request_headers
+          user.reload
+          expect(response.status).to eq updated
+          expect(user.valid_password?('johnkeyisgreat')).to eq true
+        end
+        it 'sets initialized to true' do
+          user.update(initialized: false)
+          put "/users/#{user.id}/", user_params, request_headers
+          user.reload
+          expect(response.status).to eq updated
+          expect(user.initialized).to eq true
+        end
+      end
+      context "trying to update another user's details" do
+        it 'fails' do
+          put "/users/#{another_user.id}/", user_params, request_headers
+          expect(response.status).to eq forbidden
+          another_user.reload
+          expect(another_user.name).not_to eq 'Giddy TooGood'
+        end
+      end
+    end
+  end
 
   describe "POST /users/:user_id/change_password" do
     context "old password is correct" do
@@ -13,11 +59,10 @@ describe "Users" do
         }.to_json
       }
 
-      it "changes user's password " do
+      it "changes user's password" do
         post "/users/#{user.id}/change_password", password_params, request_headers
         expect(response.status).to eq updated
         expect(user.reload.valid_password?('realgood')).to eq true
-        expect(user.force_password_reset).to eq false
       end
 
       context 'trying to change password of another user' do
@@ -25,7 +70,6 @@ describe "Users" do
           post "/users/#{another_user.id}/change_password", password_params, request_headers
           expect(response.status).to eq forbidden
           expect(another_user.reload.valid_password?('realgood')).to eq false
-          expect(user.force_password_reset).to eq true
         end
       end
     end
@@ -43,7 +87,6 @@ describe "Users" do
       expect(response.status).to eq 400
       expect(body['errors']['password'][0]).to match("too short")
       expect(user.reload.valid_password?('a')).to eq false
-      expect(user.reload.force_password_reset).to eq true
     end
 
     it "doesn't change user's password if old password is incorrect" do
@@ -55,7 +98,6 @@ describe "Users" do
       post "/users/#{user.id}/change_password", password_params, request_headers
 
       expect(user.reload.valid_password?('realgood')).to eq false
-      expect(user.reload.force_password_reset).to eq true
       expect(response.status).to eq 400
     end
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118045413) do
+ActiveRecord::Schema.define(version: 20150212062818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,12 +92,12 @@ ActiveRecord::Schema.define(version: 20150118045413) do
   add_index "rounds", ["group_id"], name: "index_rounds_on_group_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",   null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20150118045413) do
     t.datetime "updated_at"
     t.string   "access_token"
     t.string   "name"
-    t.boolean  "force_password_reset"
+    t.boolean  "initialized",            default: true, null: false
   end
 
   add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true, using: :btree
