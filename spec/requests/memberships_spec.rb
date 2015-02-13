@@ -39,9 +39,9 @@ describe "Memberships" do
             expect(body['errors']['group_id']).to eq(["group not found"])
         end
       end
-      context 'member_id is present' do
+      context 'member.id is present' do
         let(:membership_details) { {
-          group_id: group.id, member_id: new_member.id } }
+          group_id: group.id, member: { id: new_member.id } } }
         context 'user is not a member of the group' do
           it "creates membership" do
             post "/memberships", membership_params, request_headers
@@ -52,7 +52,9 @@ describe "Memberships" do
         end
         context 'user already a member of the group' do
           let(:membership_details) { {
-            group_id: group.id, member_id: existing_member.id } }
+            group_id: group.id, member: {
+              id: existing_member.id
+            } } }
           it "fails" do
             post "/memberships", membership_params, request_headers
             expect(response.status).to eq unprocessable
@@ -63,7 +65,9 @@ describe "Memberships" do
         context 'user with email already exists' do
           context 'user is not a member of the group' do
             let(:membership_details) { {
-              group_id: group.id, email: new_member.email } }
+              group_id: group.id, member: {
+                email: new_member.email
+              } } }
             it "creates membership" do
               post "/memberships", membership_params, request_headers
               expect(response.status).to eq created
@@ -72,7 +76,9 @@ describe "Memberships" do
           end
           context 'user is already a member of the group' do
             let(:membership_details) { {
-              group_id: group.id, email: existing_member.email } }
+              group_id: group.id, member: {
+                email: existing_member.email
+              } } }
             it "fails" do
               post "/memberships", membership_params, request_headers
               expect(response.status).to eq unprocessable
@@ -81,7 +87,9 @@ describe "Memberships" do
         end
         context 'user with email does not exist' do
           let(:new_member) {double(email: 'jonny@gonny.commy', name: 'Jo')}
-          let(:membership_details) {{group_id: group.id, email: new_member.email}}
+          let(:membership_details) { { group_id: group.id, member: {
+            email: new_member.email
+          } } }
           context 'name is not present' do
             it 'creates user with email and uses first part of email for name' do
               expect{
@@ -92,7 +100,7 @@ describe "Memberships" do
             end
           end
           context 'name is present' do
-            before { membership_details[:name] = new_member.name }
+            before { membership_details[:member][:name] = new_member.name }
             it 'creates user with name and email' do
               expect{
                 post "/memberships", membership_params, request_headers
@@ -113,18 +121,18 @@ describe "Memberships" do
           end
         end
       end
-      context 'member_id and email are present' do
-        let(:membership_details) {{group_id: group.id,
-          member_id: new_member.id, email: 'newww@goo.poo'}}
+      context 'member.id and email are present' do
+        let(:membership_details) { { group_id: group.id,
+          member: { id: new_member.id, email: 'newww@goo.poo' } } }
         it 'creates membership based on member_id' do
           post "/memberships", membership_params, request_headers
-          expect(group.memberships.where(member_id: new_member)).to exist
+          expect(group.memberships.where(member_id: new_member.id)).to exist
         end
       end
       context 'is_admin is true' do
         let(:membership_details) { {
           group_id: group.id,
-          member_id: new_member.id,
+          member: { id: new_member.id },
           is_admin: true } }
         it 'create user as admin' do
           post "/memberships", membership_params, request_headers
@@ -136,7 +144,7 @@ describe "Memberships" do
 
     context 'member' do
       let(:membership_details) { {
-        group_id: group.id, member_id: new_member.id } }
+        group_id: group.id, member: { id: new_member.id } } }
       before { make_user_group_member }
 
       it "cannot create membership" do

@@ -1,24 +1,29 @@
 class MembershipsController < ApplicationController
   api :POST, '/memberships/', 'Create membership'
   def create
-    email = params[:membership].delete(:email)
     group = Group.find_by(id: membership_params_create[:group_id])
     return group_not_found_error unless group.present?
-    membership = Membership.new(membership_params_create)
-    if email && membership.member_id.blank?
-      if user = User.find_by(email: email)
-        membership.member_id = user.id
-      else
-        name = params[:membership][:name] 
+
+    member_id = params[:membership][:member][:id]
+    email = params[:membership][:member].delete(:email)
+
+    if member_id
+      member = User.find(member_id)
+    elsif email
+      if not (member = User.find_by(email: email))
+        name = params[:membership][:member][:name] 
         name ||= email[/[^@]+/]
         require 'SecureRandom'
         tmp_password = SecureRandom.hex(4)
-        user = User.create!(email: email, name: name, password: tmp_password)
-        membership.member_id = user.id
+        member = User.create!(email: email, name: name, password: tmp_password)
         # TODO: delayed_job or resque
-        UserMailer.invite_email(user, current_user, group, tmp_password).deliver!
+        UserMailer.invite_email(member, current_user, group, tmp_password).deliver!
       end
     end
+
+    membership = Membership.new(membership_params_create)
+    membership.member = member
+
     authorize membership
     membership.save
     respond_with membership
@@ -45,7 +50,7 @@ private
   end
 
   def membership_params_create
-    params.require(:membership).permit(:member_id, :group_id, :is_admin)
+    params.require(:membership).permit(:group_id, :is_admin)
   end
 
   def membership_params_update
