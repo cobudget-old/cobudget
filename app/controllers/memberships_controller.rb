@@ -13,7 +13,7 @@ class MembershipsController < ApplicationController
       if not (member = User.find_by(email: email))
         name = params[:membership][:member][:name] 
         name ||= email[/[^@]+/]
-        require 'SecureRandom'
+        require 'securerandom'
         tmp_password = SecureRandom.hex(4)
         member = User.create!(email: email, name: name, password: tmp_password)
         # TODO: delayed_job or resque
