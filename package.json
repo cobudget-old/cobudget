@@ -58,6 +58,7 @@
     "bootstrap-sass": "^3.3.1",
     "c3": "^0.3.0",
     "debug": "^2.1.0",
+    "email-validator": "^1.0.1",
     "es5-shim": "^4.0.3",
     "font-awesome": "^4.2.0",
     "gulp-build-branch": "^0.1.4",
