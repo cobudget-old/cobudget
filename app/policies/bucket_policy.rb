@@ -1,18 +1,21 @@
 class BucketPolicy < ApplicationPolicy
   def create?
-    user.is_admin_for?(record.round.group) or (
+    (
+      user.is_admin_for?(record.round.group) and
+      !record.round.closed?
+    ) or (
       record.round.group.members.include?(user) and
-      record.round.members_can_propose_buckets
+      (record.user_id == user.id) and
+      record.round.members_can_propose_buckets and
+      record.round.open_for_proposals?
     )
   end
 
   def update?
-    user.is_admin_for?(record.round.group) or
-      record.user_id == user.id
+    create?
   end
 
   def destroy?
-    user.is_admin_for?(record.round.group) or
-      record.user_id == user.id
+    create?
   end
 end
