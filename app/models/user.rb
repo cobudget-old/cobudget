@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def name_and_email
+    "#{name} <#{email}>"
+  end
+
   def is_admin_for?(group)
     group.memberships.where(is_admin: true).where(member_id: id).exists?
   end

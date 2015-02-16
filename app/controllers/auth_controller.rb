@@ -9,7 +9,7 @@ class AuthController < ApplicationController
                              name: user.name,
                              email: user.email,
                              access_token: user.access_token,
-                             force_password_reset: user.force_password_reset
+                             initialized: user.initialized
                              } }
       render json: user_hash
     else

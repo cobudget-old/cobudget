@@ -21,6 +21,7 @@ module MyLetDeclarations
   let(:created) { 201 }
   let(:updated) { 204 }
   let(:forbidden) { 403 }
+  let(:unprocessable) { 422 }
 
   let(:request_headers) { {
     "Accept" => "application/json",
