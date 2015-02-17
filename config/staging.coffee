@@ -1,3 +1,3 @@
 module.exports = {
-  "apiEndpoint": "https://cobudget-api.herokuapp.com"
+  "apiEndpoint": "https://staging-cobudget-api.herokuapp.com"
 }
