@@ -23,11 +23,15 @@ module MyLetDeclarations
   let(:forbidden) { 403 }
   let(:unprocessable) { 422 }
 
-  let(:request_headers) { {
+  let(:request_headers) { logged_in_headers }
+  let(:logged_out_headers) {{
     "Accept" => "application/json",
-    "Content-Type" => "application/json",
+    "Content-Type" => "application/json"
+  }}
+  let(:logged_in_headers) {{
     "X-User-Token" => user.access_token,
-    "X-User-Email" => user.email,
-  } }
+    "X-User-Email" => user.email
+  }.merge(logged_out_headers)}
+
 end
 RSpec.configure { |c| c.include MyLetDeclarations }

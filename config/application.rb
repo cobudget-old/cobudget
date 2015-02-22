@@ -32,5 +32,10 @@ module CobudgetApi
                  :max_age => 0
       end
     end
+
+    config.to_prepare do
+      Devise::PasswordsController.skip_before_filter :authenticate_from_token!,
+                                                     only: [:create, :update]
+    end
   end
 end
