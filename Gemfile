@@ -41,4 +41,7 @@ group :development, :test do
   gem 'simplecov', :require => false
 end
 
-gem 'rails_12factor', group: :production
+group :production do
+  gem 'puma'
+  gem 'rails_12factor'
+end

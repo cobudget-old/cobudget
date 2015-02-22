@@ -11,12 +11,11 @@ class MembershipsController < ApplicationController
       member = User.find(member_id)
     elsif email
       if not (member = User.find_by(email: email))
-        name = params[:membership][:member][:name] 
+        name = params[:membership][:member][:name]
         name ||= email[/[^@]+/]
         require 'securerandom'
         tmp_password = SecureRandom.hex(4)
         member = User.create!(email: email, name: name, password: tmp_password)
-        # TODO: delayed_job or resque
         UserMailer.invite_email(member, current_user, group, tmp_password).deliver!
       end
     end
