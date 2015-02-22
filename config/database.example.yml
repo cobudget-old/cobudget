@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: cobudget_development
+
+test:
+  adapter: postgresql
+  database: cobudget_test

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150213022658) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "round_id"
-    t.string   "name",                                               null: false
+    t.string   "name"
     t.text     "description"
     t.integer  "user_id"
     t.decimal  "target",      precision: 12, scale: 2, default: 0.0
