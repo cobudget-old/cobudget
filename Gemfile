@@ -27,6 +27,10 @@ gem 'money-rails'
 gem "devise"
 gem 'pundit'
 
+# server
+
+gem 'puma'
+
 group :development do
   gem 'capistrano', '2.15.5'
   gem "capistrano-rails", '~> 1.0.0'
@@ -42,6 +46,5 @@ group :development, :test do
 end
 
 group :production do
-  gem 'puma'
   gem 'rails_12factor'
 end
