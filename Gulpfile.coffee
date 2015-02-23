@@ -94,9 +94,9 @@ scripts = (isWatch) ->
         .pipe(mold.transformSourcesRelativeTo('./src'))
         .pipe(source('index.js'))
         .pipe(buffer())
-        #.pipe(sourcemaps.init(loadMaps: true))
+        .pipe(sourcemaps.init(loadMaps: true))
         .pipe(if isDeploy(nodeEnv) then require('gulp-uglify')() else util.noop())
-        #.pipe(sourcemaps.write('../maps'))
+        .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))
         .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
