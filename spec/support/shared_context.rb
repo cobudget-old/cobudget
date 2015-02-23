@@ -23,6 +23,7 @@ module MyLetDeclarations
   let(:forbidden) { 403 }
   let(:unprocessable) { 422 }
 
+  # Request headers
   let(:request_headers) { logged_in_headers }
   let(:logged_out_headers) {{
     "Accept" => "application/json",

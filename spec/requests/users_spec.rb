@@ -7,7 +7,7 @@ describe "Users" do
   context 'resetting password when logged out' do
     let(:request_headers) { logged_out_headers }
 
-    describe "POST /users/password/reset" do
+    describe "POST /users/reset_password" do
       let(:user) { FactoryGirl.create(:user) }
       let(:user_params) {
         { user:
@@ -16,7 +16,7 @@ describe "Users" do
       }
 
       it 'sends password reset email' do
-        post "/users/password", user_params, request_headers
+        post "/users/reset_password", user_params, request_headers
 
         email = ActionMailer::Base.deliveries.last
         expect(response.status).to eq created
@@ -25,7 +25,7 @@ describe "Users" do
       end
     end
 
-    describe "PUT /users/password" do
+    describe "PUT /users/reset_password" do
       let(:user) { FactoryGirl.create(:user) }
       let(:token) { user.send_reset_password_instructions }
       let(:user_params) { {user: reset_password_params}.to_json }
@@ -38,7 +38,7 @@ describe "Users" do
 
       context 'correct reset token' do
         it 'resets password' do
-          put "/users/password", user_params, request_headers
+          put "/users/reset_password", user_params, request_headers
           user.reload
           expect(response.status).to eq updated
           expect(user.valid_password?('johnkeyisgreat')).to eq(true)

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, defaults: {format: :json}, path_names: {
+    password: 'reset_password'
+  }
   apipie
   resources :auth, only: [], defaults: { format: :json } do
     collection do
