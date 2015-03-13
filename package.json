@@ -87,7 +87,6 @@
     "connect-livereload": "^0.5.0",
     "ecstatic": "^0.5.6",
     "envify": "^3.2.0",
-    "es6ify": "^1.6.0",
     "express": "^4.10.2",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^1.0.1",
