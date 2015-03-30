@@ -32,3 +32,13 @@ $fa-font-path: "#{$font-path}/font-awesome";
 @import "node_modules/round-contributors/round-contributors";
 
 @import "node_modules/layout/layout";
+
+// feedback form
+// NOTE where should this code be?
+.feedback {
+  z-index: 100000; // always on top
+  position: fixed;
+  right: round($grid-gutter-width / 2);
+  bottom: round($grid-gutter-width / 2);
+  background-color: #FFC0CB;
+}
