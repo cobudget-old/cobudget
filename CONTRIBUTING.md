@@ -8,8 +8,8 @@ When opening new issues or commenting on existing issues on this repository
 please make sure discussions are related to concrete technical issues with the
 Cobudget User Interface software.
 
-Discussion of non-technical topics including subjects like intellectual
-property, trademark and high level project questions should move to the
+Discussion of non-technical topics including subjects like
+high level project questions should move to the
 [top-level repository](https://github.com/open-app/cobudget)
 instead.
 
@@ -72,7 +72,7 @@ structured (license boilerplate, common includes, etc.).
 $ npm test
 ```
 
-TODO how to run individual test
+TODO how to run individual tests
 
 ### Step 6: Push
 
