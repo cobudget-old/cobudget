@@ -1,6 +1,6 @@
-# Cobudget User Interface Architecture
+# Cobudget User Interface Stack
 
-So you want to learn about the architecture of Cobudget's User Interface? Sweet!
+So you want to learn about the internals of Cobudget's User Interface? Sweet!
 
 ## Entry Points
 
