@@ -14,12 +14,12 @@ describe BucketPolicy do
       before { make_user_group_admin }
 
       context 'their own bucket' do
-        it { should permit(:create) }
+        it { should allow(:create) }
       end
 
       context "another user's buckets" do
         let(:bucket) { another_users_bucket }
-        it { should permit(:create) }
+        it { should allow(:create) }
       end
     end
 
@@ -27,7 +27,7 @@ describe BucketPolicy do
       before { make_user_group_member }
 
       context 'their own bucket' do
-        it { should_not permit(:create) }
+        it { should_not allow(:create) }
       end
     end
   end
@@ -39,12 +39,12 @@ describe BucketPolicy do
       before { make_user_group_admin }
 
       context 'their own bucket' do
-        it { should permit(:create) }
+        it { should allow(:create) }
       end
 
       context "another user's buckets" do
         let(:bucket) { another_users_bucket }
-        it { should permit(:create) }
+        it { should allow(:create) }
       end
     end
 
@@ -52,17 +52,17 @@ describe BucketPolicy do
       before { make_user_group_member }
 
       context 'their own bucket' do
-        it { should permit(:create) }
+        it { should allow(:create) }
       end
 
       context "another user's buckets" do
         let(:bucket) { another_users_bucket }
-        it { should_not permit(:create) }
+        it { should_not allow(:create) }
       end
     end
 
     context 'non-member' do
-      it { should_not permit(:create) }
+      it { should_not allow(:create) }
     end
   end
 
@@ -73,12 +73,12 @@ describe BucketPolicy do
       before { make_user_group_admin }
 
       context 'their own bucket' do
-        it { should permit(:create) }
+        it { should allow(:create) }
       end
 
       context "another user's buckets" do
         let(:bucket) { another_users_bucket }
-        it { should permit(:create) }
+        it { should allow(:create) }
       end
     end
 
@@ -86,12 +86,12 @@ describe BucketPolicy do
       before { make_user_group_member }
 
       context 'their own bucket' do
-        it { should_not permit(:create) }
+        it { should_not allow(:create) }
       end
 
       context "another user's buckets" do
         let(:bucket) { another_users_bucket }
-        it { should_not permit(:create) }
+        it { should_not allow(:create) }
       end
     end
   end
@@ -103,7 +103,7 @@ describe BucketPolicy do
       before { make_user_group_admin }
 
       context 'their own bucket' do
-        it { should_not permit(:create) }
+        it { should_not allow(:create) }
       end
     end
   end
