@@ -4,9 +4,9 @@ describe BucketPolicy do
   subject { policy }
 
   let(:policy) { BucketPolicy.new(user, bucket) }
-  let(:bucket) { FactoryGirl.create(:bucket, round: round, user: user) }
-  let(:another_user) { FactoryGirl.create(:user) }
-  let(:another_users_bucket) { FactoryGirl.create(:bucket, round: round,
+  let(:bucket) { create(:bucket, round: round, user: user) }
+  let(:another_user) { create(:user) }
+  let(:another_users_bucket) { create(:bucket, round: round,
     user: another_user) }
 
   context 'round pending' do
@@ -33,7 +33,7 @@ describe BucketPolicy do
   end
 
   context 'round open to proposals' do
-    let(:round) { FactoryGirl.create(:round_open_for_proposals, group: group) }
+    let(:round) { create(:round_open_for_proposals, group: group) }
 
     context "admin" do
       before { make_user_group_admin }
@@ -67,7 +67,7 @@ describe BucketPolicy do
   end
 
   context 'round open to contributions' do
-    let(:round) { FactoryGirl.create(:round_open_for_contributions, group: group) }
+    let(:round) { create(:round_open_for_contributions, group: group) }
 
     context "admin" do
       before { make_user_group_admin }
@@ -97,7 +97,7 @@ describe BucketPolicy do
   end
 
   context 'round closed' do
-    let(:round) { FactoryGirl.create(:round_closed, group: group) }
+    let(:round) { create(:round_closed, group: group) }
 
     context "admin" do
       before { make_user_group_admin }
