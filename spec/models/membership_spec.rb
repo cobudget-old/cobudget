@@ -17,8 +17,7 @@ RSpec.describe Membership, :type => :model do
     it { should validate_presence_of(:group_id) }
     it { should validate_presence_of(:member_id) }
     it "allows only one membership per user per group" do
-      create(:membership)
-      should validate_uniqueness_of(:member_id).scoped_to(:group_id)
+      expect(create(:membership)).to validate_uniqueness_of(:member_id).scoped_to(:group_id)
     end
   end
 
