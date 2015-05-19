@@ -45,6 +45,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
+  gem "nyan-cat-formatter"
 end
 
 group :production do
