@@ -10,19 +10,11 @@ class Round < ActiveRecord::Base
   validate :starts_at_before_ends_at
 
   def open_for_proposals?
-    if starts_at.present? && ends_at.present? && (starts_at > Time.zone.now)
-      true
-    else
-      false
-    end
+    starts_at.present? && ends_at.present? && (starts_at > Time.zone.now)
   end
 
   def closed?
-    if ends_at.present? && (ends_at < Time.zone.now)
-      true
-    else
-      false
-    end
+    ends_at.present? && (ends_at < Time.zone.now)
   end
 
   private
