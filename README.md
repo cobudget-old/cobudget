@@ -6,7 +6,9 @@
 
 Cobudget is a web app helping people collaborate on budgets. For more about the project as a whole, check out the [top-level repo](https://github.com/open-app/cobudget). This repo is the user interface component.
 
-#### Don't push to master - feature branches and pull requests please.
+## [CONTRIBUTING](./CONTRIBUTING.md)
+
+## [STACK](./STACK.md)
 
 ## How to...
 
