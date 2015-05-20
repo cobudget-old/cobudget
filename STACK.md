@@ -1,14 +1,14 @@
 # Cobudget User Interface Stack
 
-So you want to learn about the internals of Cobudget's User Interface? Sweet!
+So you want to learn about the internals of Cobudget's user interface? Sweet!
 
 ## Entry Points
 
 There are three entry points that are bundled to the client:
 
-1. [./src/index.js](./src/index.js): this is the entry point for [`browserify`](http://browserify.org) which traverses and transforms our Javascript into a single `build/scripts/index.js`.
-1. [./src/index.sass](./src/index.sass): this is the entry point for [`sass`](http://sass-lang.com) which traverses and transforms our Sass into a single `build/styles/index.css`.
-1. [./src/index.html](./src/index.html): this is the file delivered to the client on page fetch, which references the above JS and CSS entry points.
+1. [./src/index.js](./src/index.js): this is the entry point for [`browserify`](http://browserify.org) which traverses, transforms, and bundles our Javascript into a single `build/scripts/index.js`.
+1. [./src/index.sass](./src/index.sass): this is the entry point for [`sass`](http://sass-lang.com) which traverses, transforms, and bundles our Sass into a single `build/styles/index.css`.
+1. [./src/index.html](./src/index.html): this is the file delivered to the client on page fetch, which references the above JS and CSS bundles.
 
 ## Modules
 
@@ -44,11 +44,10 @@ Each modal module exports the format expected of an [Angular Bootstrap modal](ht
 
 The configuration data for various environments is located in [./config](./config), which due to the [config module](./src/node_modules/config), is accessible in any other module using CommonJS modules as `require('config')` or using Angular modules as `config`.
 
-## Build system
+## Task Runner / Build System
 
 We use Gulp, see [./Gulpfile.coffee](./Gulpfile.coffee) for more info.
 
 ## Tests
 
 We use Protractor and Testling-style tests, see [README](./README.md) for how to run.
-
