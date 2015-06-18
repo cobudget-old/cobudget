@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'csv'
 
 RSpec.describe Round, :type => :model do
 
@@ -20,6 +21,26 @@ RSpec.describe Round, :type => :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:group) }
+  end
+
+  describe "#generate_allocations_from(csv)" do
+
+    it "generates allocations for round from a 2-column csv file containing emails and allocations" do
+      csv = CSV.read('./spec/assets/test-csv.csv')
+      headers = csv.shift
+      group = create(:group)
+      csv.each { |email, allocation| create(:membership, group: group, member: create(:user, email: email)) }
+      round = create(:round, group: group)
+
+      round.generate_allocations_from!(csv)
+
+      csv.each do |email, allocation|
+        user_id = User.find_by_email(email).id
+        expect(round.allocations.find_by(user_id: user_id, amount: allocation.to_i)).to be_truthy
+      end
+
+    end
+
   end
 
   describe "#start_and_end_go_together" do
