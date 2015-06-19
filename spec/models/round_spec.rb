@@ -27,7 +27,6 @@ RSpec.describe Round, :type => :model do
 
     it "generates allocations for round from a 2-column csv file containing emails and allocations" do
       csv = CSV.read('./spec/assets/test-csv.csv')
-      headers = csv.shift
       group = create(:group)
       csv.each { |email, allocation| create(:membership, group: group, member: create(:user, email: email)) }
       round = create(:round, group: group)
