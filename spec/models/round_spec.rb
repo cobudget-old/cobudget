@@ -36,7 +36,6 @@ RSpec.describe Round, :type => :model do
         user_id = User.find_by_email(email).id
         expect(round.allocations.find_by(user_id: user_id, amount: allocation.to_i)).to be_truthy
       end
-
     end
 
   end
