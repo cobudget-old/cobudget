@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'csv'
 
 RSpec.describe Round, :type => :model do
 
