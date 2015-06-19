@@ -21,11 +21,20 @@ class RoundsController < ApplicationController
     destroy_resource
   end
 
-  api :POST, '/rounds/:round_id/upload_csv', 'generates allocations for round from csv'
-  def upload_csv
-    csv = params[:csv].tempfile
-    Round.generate_allocations_from(csv)
-    render status: 200
+  api :POST, '/rounds/:round_id/allocations/upload', 'generates allocations for round from csv'
+  def upload
+    round = Round.find_by_id(params[:round_id])
+    if current_user.is_admin_for?(round.group)
+      csv = CSV.read(params[:csv].tempfile)
+      round.generate_allocations_from!(csv)
+      render status: 201, json: {
+        message: "upload successful, allocations created"
+      }
+    else 
+      render status: 403, json: {
+        error: "not an admin brah"
+      }
+    end
   end
 
 private
