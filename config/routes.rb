@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :contributors, only: [:show, :index]
   end
 
-  post '/rounds/:round_id/upload_csv', to: 'rounds#upload_csv', as: 'upload_csv'
+  post '/rounds/:round_id/allocations/upload', to: 'rounds#upload', as: 'upload_allocations_for_round'
 
   # NOTE (JL): Added unsed show route here cause otherwise respond_with doesn't work
   # on the create action (not sure why??)
