@@ -26,7 +26,7 @@ class RoundsController < ApplicationController
     round = Round.find_by_id(params[:round_id])
     if current_user.is_admin_for?(round.group)
       csv = CSV.read(params[:csv].tempfile)
-      round.generate_allocations_from!(csv)
+      round.generate_allocations_from!(csv, current_user)
       render status: 201, json: {
         message: "upload successful, allocations created"
       }

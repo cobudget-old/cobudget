@@ -22,22 +22,84 @@ RSpec.describe Round, :type => :model do
     it { should validate_presence_of(:group) }
   end
 
-  describe "#generate_allocations_from(csv)" do
+  describe "#generate_allocations_from(csv, current_user)" do
+
+    before do
+      @csv = CSV.read('./spec/assets/test-csv.csv')
+      @group = create(:group)
+      @admin = create(:user)
+      @group.add_admin(@admin)
+      @csv.each { |email, allocation| @group.members << create(:user, email: email) }
+      @round = create(:round, group: @group)
+    end
 
     it "generates allocations for round from a 2-column csv file containing emails and allocations" do
-      csv = CSV.read('./spec/assets/test-csv.csv')
-      group = create(:group)
-      csv.each { |email, allocation| create(:membership, group: group, member: create(:user, email: email)) }
-      round = create(:round, group: group)
-
-      round.generate_allocations_from!(csv)
-
-      csv.each do |email, allocation|
+      @round.generate_allocations_from!(@csv, @admin)
+      @csv.each do |email, allocation|
         user_id = User.find_by_email(email).id
-        expect(round.allocations.find_by(user_id: user_id, amount: allocation.to_i)).to be_truthy
+        expect(@round.allocations.find_by(user_id: user_id, amount: allocation.to_i)).to be_truthy
       end
     end
 
+    context "if any cobudget users in csv not already a member of group" do
+      before do
+        @new_member = @group.members.last
+        @group.members.delete(@new_member.id)
+        @group.reload
+      end
+
+      it "should add them to the group" do
+        @round.generate_allocations_from!(@csv, @admin)
+        expect(@group.members).to include(@new_member)
+      end
+
+      it "should send them an 'invite to group' email" do
+        mail_double = double('mail')
+        expect(UserMailer).to receive(:invite_to_group_email).with(@new_member, @admin, @group, @round).and_return(mail_double)
+        expect(mail_double).to receive(:deliver!)
+        @round.generate_allocations_from!(@csv, @admin)
+      end
+
+      it "should generate allocation for the new group member" do
+        @round.generate_allocations_from!(@csv, @admin)
+        expect(@round.allocations.find_by(user_id: @new_member.id)).to be_truthy
+      end
+    end
+  
+    context "if any users in csv not a part of cobudget at all" do
+      before do
+        @new_member = @group.members.last.delete
+      end
+
+      it "should add them to cobudget" do
+        @round.generate_allocations_from!(@csv, @admin)
+        expect(User.find_by_email(@new_member.email)).to be_truthy
+      end
+
+      it "should add them to the group" do
+        @round.generate_allocations_from!(@csv, @admin)
+        expect(@group.members.find_by_email(@new_member.email)).to be_truthy
+      end
+
+      it "should send them an invite to cobudget email" do
+        mail_double = double('mail')
+        expect(UserMailer).to receive(:invite_to_group_email).and_return(mail_double)
+        expect(mail_double).to receive(:deliver!)
+        @round.generate_allocations_from!(@csv, @admin)
+      end
+
+      it "should send them an invite to group email" do
+        mail_double = double('mail')
+        expect(UserMailer).to receive(:invite_email).and_return(mail_double)
+        expect(mail_double).to receive(:deliver!)
+        @round.generate_allocations_from!(@csv, @admin)
+      end
+
+      it "should generate allocation for new cobudgeter" do
+        @round.generate_allocations_from!(@csv, @admin)
+        expect(@round.allocations.find_by(user: User.find_by_email(@new_member.email))).to be_truthy
+      end
+    end
   end
 
   describe "#start_and_end_go_together" do

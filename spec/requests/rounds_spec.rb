@@ -102,7 +102,6 @@ describe "Rounds" do
   end
 
   describe "POST /rounds/:round_id/allocations/upload" do
-
     before do
       @upload_csv = fixture_file_upload("./spec/assets/test-csv.csv")
       @csv = CSV.read(@upload_csv)
@@ -111,8 +110,7 @@ describe "Rounds" do
     end
 
     context "admin" do
-
-      before do 
+      before do
         make_user_group_admin
         post "/rounds/#{@round.id}/allocations/upload", { csv: @upload_csv }, request_headers
       end
@@ -124,11 +122,9 @@ describe "Rounds" do
       it "creates allocations for round from uploaded csv file" do
         expect(@round.allocations.length).to eq(@csv.length)
       end
-
     end
 
     context "member" do
-
       before do 
         make_user_group_member 
         post "/rounds/#{@round.id}/allocations/upload", { csv: @upload_csv }, request_headers
@@ -141,9 +137,6 @@ describe "Rounds" do
       it "does not create any allocations" do
         expect(@round.allocations.length).to eq(0)
       end
-
     end
-
   end
-
 end
