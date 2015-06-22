@@ -14,7 +14,8 @@ class Round < ActiveRecord::Base
       unless user = User.find_by_email(email)
         require 'securerandom'
         tmp_password = SecureRandom.hex(4)
-        user = User.create(name: "new user", email: email, password: tmp_password)
+        tmp_name = email[/[^@]+/]
+        user = User.create(name: tmp_name, email: email, password: tmp_password)
         UserMailer.invite_email(user, admin, group, tmp_password).deliver!
       end
 
