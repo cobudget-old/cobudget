@@ -1,3 +1,5 @@
+require 'csv'
+
 class RoundsController < ApplicationController
   api :GET, '/rounds/:round_id', 'Full details of round'
   def show
@@ -17,6 +19,17 @@ class RoundsController < ApplicationController
   api :DELETE, '/rounds/:round_id', 'Deletes a round'
   def destroy
     destroy_resource
+  end
+
+  api :POST, '/rounds/:round_id/allocations/upload', 'generates allocations for round from csv'
+  def upload
+    round = Round.find_by_id(params[:round_id])
+    authorize round
+    csv = CSV.read(params[:csv].tempfile)
+    round.generate_allocations_from!(csv, current_user)
+    render status: 201, json: {
+      message: "upload successful, allocations created"
+    }
   end
 
 private

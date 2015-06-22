@@ -9,6 +9,24 @@ class Round < ActiveRecord::Base
   validate :start_and_end_go_together
   validate :starts_at_before_ends_at
 
+  def generate_allocations_from!(csv, admin)
+    csv.each do |email, allocation|
+      unless user = User.find_by_email(email)
+        require 'securerandom'
+        tmp_password = SecureRandom.hex(4)
+        user = User.create(name: "new user", email: email, password: tmp_password)
+        UserMailer.invite_email(user, admin, group, tmp_password).deliver!
+      end
+
+      unless group.members.find_by_id(user.id)
+        group.members << user
+        UserMailer.invite_to_group_email(user, admin, group, self).deliver!
+      end
+
+      allocations.create(user_id: user.id, amount: allocation.to_i)
+    end
+  end
+
   def open_for_proposals?
     starts_at.present? && ends_at.present? && (starts_at > Time.zone.now)
   end
