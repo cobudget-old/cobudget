@@ -10,4 +10,8 @@ class RoundPolicy < ApplicationPolicy
   def update?
     user.is_admin_for?(record.group)
   end
+
+  def upload?
+    user.is_admin_for?(record.group)
+  end
 end

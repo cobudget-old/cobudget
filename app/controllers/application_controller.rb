@@ -46,4 +46,5 @@ private
     authorize resource
     respond_with resource.destroy
   end
+
 end
