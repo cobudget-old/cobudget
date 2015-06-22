@@ -2,4 +2,4 @@
 
 <p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at <%= @group.name %>.</p>
 
-<p>To contribute to this round, visit <%= link_to 'this link', "/#/groups/#{@group.id}/rounds/#{@round.id}" %>
+<p>To contribute to this round, visit <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}/rounds/#{@round.id}" %>
