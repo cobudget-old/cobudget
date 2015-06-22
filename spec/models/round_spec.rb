@@ -22,7 +22,7 @@ RSpec.describe Round, :type => :model do
     it { should validate_presence_of(:group) }
   end
 
-  describe "#generate_allocations_from(csv, current_user)" do
+  describe "#generate_new_members_and_allocations_from(csv, current_user)" do
 
     before do
       @csv = CSV.read('./spec/assets/test-csv.csv')
@@ -34,7 +34,7 @@ RSpec.describe Round, :type => :model do
     end
 
     it "generates allocations for round from a 2-column csv file containing emails and allocations" do
-      @round.generate_allocations_from!(@csv, @admin)
+      @round.generate_new_members_and_allocations_from!(@csv, @admin)
       @csv.each do |email, allocation|
         user_id = User.find_by_email(email).id
         expect(@round.allocations.find_by(user_id: user_id, amount: allocation.to_i)).to be_truthy
@@ -49,7 +49,7 @@ RSpec.describe Round, :type => :model do
       end
 
       it "should add them to the group" do
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
         expect(@group.members).to include(@new_member)
       end
 
@@ -57,11 +57,11 @@ RSpec.describe Round, :type => :model do
         mail_double = double('mail')
         expect(UserMailer).to receive(:invite_to_group_email).with(@new_member, @admin, @group, @round).and_return(mail_double)
         expect(mail_double).to receive(:deliver!)
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
       end
 
       it "should generate allocation for the new group member" do
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
         expect(@round.allocations.find_by(user_id: @new_member.id)).to be_truthy
       end
     end
@@ -72,12 +72,12 @@ RSpec.describe Round, :type => :model do
       end
 
       it "should add them to cobudget" do
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
         expect(User.find_by_email(@new_member.email)).to be_truthy
       end
 
       it "should add them to the group" do
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
         expect(@group.members.find_by_email(@new_member.email)).to be_truthy
       end
 
@@ -85,18 +85,18 @@ RSpec.describe Round, :type => :model do
         mail_double = double('mail')
         expect(UserMailer).to receive(:invite_to_group_email).and_return(mail_double)
         expect(mail_double).to receive(:deliver!)
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
       end
 
       it "should send them an invite to group email" do
         mail_double = double('mail')
         expect(UserMailer).to receive(:invite_email).and_return(mail_double)
         expect(mail_double).to receive(:deliver!)
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
       end
 
       it "should generate allocation for new cobudgeter" do
-        @round.generate_allocations_from!(@csv, @admin)
+        @round.generate_new_members_and_allocations_from!(@csv, @admin)
         expect(@round.allocations.find_by(user: User.find_by_email(@new_member.email))).to be_truthy
       end
     end

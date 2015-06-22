@@ -9,7 +9,7 @@ class Round < ActiveRecord::Base
   validate :start_and_end_go_together
   validate :starts_at_before_ends_at
 
-  def generate_allocations_from!(csv, admin)
+  def generate_new_members_and_allocations_from!(csv, admin)
     csv.each do |email, allocation|
       unless user = User.find_by_email(email)
         require 'securerandom'
@@ -23,7 +23,7 @@ class Round < ActiveRecord::Base
         UserMailer.invite_to_group_email(user, admin, group, self).deliver!
       end
 
-      allocations.create(user_id: user.id, amount: allocation.to_i)
+      allocations.create(user_id: user.id, amount: allocation.to_f)
     end
   end
 
