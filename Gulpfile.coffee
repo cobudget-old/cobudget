@@ -91,7 +91,7 @@ scripts = (isWatch) ->
       bundler.bundle()
         .on('error', util.log.bind(util, "browserify error"))
         .pipe(plumber({ errorHandler }))
-        .pipe(mold.transformSourcesRelativeTo('./src'))
+        .pipe(mold.transformSourcesRelativeTo(__dirname))
         .pipe(source('index.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init(loadMaps: true))
@@ -196,4 +196,3 @@ gulp.task('start', ['build', 'server'])
 # dev tasks
 gulp.task('watch', ['scripts-watch', 'styles-watch', 'html-watch', 'assets-watch'])
 gulp.task('develop', ['livereload', 'watch', 'server'])
-

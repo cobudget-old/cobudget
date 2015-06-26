@@ -77,7 +77,7 @@
   },
   "devDependencies": {
     "brfs": "^1.2.0",
-    "browserify": "^5.13.1",
+    "browserify": "^10.2.4",
     "browserify-ngannotate": "^0.7.1",
     "bundle-collapser": "^1.1.0",
     "chai": "^1.10.0",
@@ -102,7 +102,7 @@
     "gulp-util": "^3.0.1",
     "gulp-watch": "^1.2.0",
     "mocha": "^2.0.1",
-    "mold-source-map": "^0.3.0",
+    "mold-source-map": "^0.4.0",
     "napa": "^1.0.2",
     "protractor": "^1.4.0",
     "sinon": "^1.10.3",
@@ -112,7 +112,7 @@
     "txtify2": "^2.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.1.1"
+    "watchify": "^3.2.3"
   },
   "engines": {
     "node": ">=0.10.0"
