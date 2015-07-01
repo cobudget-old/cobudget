@@ -119,16 +119,46 @@ RSpec.describe Round, :type => :model do
   end
 
   describe "#publish!" do
+    context "if starts_at and ends_at times specified for round" do
+      before do
+        @round = create(:draft_round)
+        @round.starts_at = Time.zone.now + 1.days
+        @round.ends_at = Time.zone.now + 3.days
+      end
 
-    it "updates published to true" do
-      round = create(:draft_round)
-      round.publish!
-      expect(round.published).to eq(true)
+      it "updates published to true" do
+        @round.publish!
+        expect(@round.published).to eq(true)
+      end
+
+      it "send notification emails to everyone involved in the round" do
+        group = @round.group
+        5.times { create(:membership, group: group) }
+        members = group.members
+        members.each do |member|
+          mail_double = double('mail')
+          expect(UserMailer).to receive(:invite_to_propose_email).with(member, group, @round).and_return(mail_double)
+          expect(mail_double).to receive(:deliver!)
+        end
+        @round.publish!
+      end
+
+      it "the round's mode is updated to 'proposal'" do
+        @round.publish!
+        expect(@round.mode).to eq('proposal')
+      end
     end
 
-    xit "send notification emails to everyone involved in the round" do
-    end
+    context "if starts_at and ends_at times not specified for round" do
+      before do
+        @round = create(:draft_round)
+        @round.publish!
+      end
 
+      it "an error is added to the round" do
+        expect(@round.errors[:starts_at]).to include("starts_at and ends_at must both be specified before publishing and entering proposal mode")
+      end
+    end
   end
 
   describe "#start_and_end_go_together" do

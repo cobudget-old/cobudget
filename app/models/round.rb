@@ -38,8 +38,12 @@ class Round < ActiveRecord::Base
   end
 
   def publish!
-    update(published: true)
-    # will also send notification emails to everyone involved in the round
+    if publishable?
+      update(published: true)
+      group.members.each { |member| UserMailer.invite_to_propose_email(member, group, self).deliver! }
+    else
+      errors.add(:starts_at, "starts_at and ends_at must both be specified before publishing and entering proposal mode")  
+    end
   end
 
   private
@@ -54,5 +58,9 @@ class Round < ActiveRecord::Base
       if starts_at.present? && ends_at.present? && (starts_at > ends_at)
         errors.add(:starts_at, "starts_at must occur before ends_at.")
       end
+    end
+
+    def publishable?
+      starts_at.present? && ends_at.present?
     end
 end

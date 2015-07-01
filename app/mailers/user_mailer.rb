@@ -18,4 +18,13 @@ class UserMailer < ActionMailer::Base
         from: inviter.name_and_email,
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
+
+  def invite_to_propose_email(user, group, round)
+    @user = user
+    @group = group
+    @round = round
+    mail(to: user.name_and_email,
+        from: inviter.name_and_email,
+        subject: "Come propose buckets for \"#{round.name}\" in \"#{group.name}\" on Cobudget!")
+  end
 end
