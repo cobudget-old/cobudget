@@ -37,6 +37,11 @@ class Round < ActiveRecord::Base
     end
   end
 
+  def publish!
+    update(published: true)
+    # will also send notification emails to everyone involved in the round
+  end
+
   private
     def start_and_end_go_together
       if (starts_at.present? && ends_at.blank?) ||

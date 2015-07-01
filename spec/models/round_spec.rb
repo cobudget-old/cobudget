@@ -118,6 +118,19 @@ RSpec.describe Round, :type => :model do
     end
   end
 
+  describe "#publish!" do
+
+    it "updates published to true" do
+      round = create(:draft_round)
+      round.publish!
+      expect(round.published).to eq(true)
+    end
+
+    xit "send notification emails to everyone involved in the round" do
+    end
+
+  end
+
   describe "#start_and_end_go_together" do
     it "validates that both starts_at and ends_at to be present or neither be present" do
       expect { Round.create!(name: 'hi', group: group) }.not_to raise_error
