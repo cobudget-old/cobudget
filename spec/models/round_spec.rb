@@ -8,6 +8,7 @@ RSpec.describe Round, :type => :model do
     it { should have_db_column(:starts_at).of_type(:datetime) }
     it { should have_db_column(:ends_at).of_type(:datetime) }
     it { should have_db_column(:members_can_propose_buckets).of_type(:boolean) }
+    it { should have_db_column(:published).of_type(:boolean).with_options(default: false)}
   end
 
   describe "associations" do
