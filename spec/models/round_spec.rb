@@ -103,6 +103,21 @@ RSpec.describe Round, :type => :model do
     end
   end
 
+  describe "#mode" do
+    it "if unpublished -- draft mode" do
+      expect(create(:draft_round).mode).to eq("draft")
+    end
+    it "if published, and starts_at set but not reached -- proposal mode" do
+      expect(create(:round_open_for_proposals).mode).to eq("proposal")
+    end
+    it "if published, and current time is between starts_at and ends_at -- contribution mode" do
+      expect(create(:round_open_for_contributions).mode).to eq("contribution")
+    end
+    it "if published, and current time is after ends_at -- closed mode" do
+      expect(create(:round_closed).mode).to eq("closed")
+    end
+  end
+
   describe "#start_and_end_go_together" do
     it "validates that both starts_at and ends_at to be present or neither be present" do
       expect { Round.create!(name: 'hi', group: group) }.not_to raise_error
@@ -118,19 +133,4 @@ RSpec.describe Round, :type => :model do
     end    
   end
 
-  describe '#open_for_proposals?' do
-    it "returns true if starts_at and ends_at are defined and starts_at hasn't happened yet" do
-      expect(create(:round).open_for_proposals?).to be false
-      expect(create(:round_open_for_proposals).open_for_proposals?).to be true
-      expect(create(:round_open_for_contributions).open_for_proposals?).to be false
-      expect(create(:round_closed).open_for_proposals?).to be false
-    end
-  end
-
-  describe '#closed?' do
-    it "returns true if ends_at has already happened" do
-      expect(create(:round_open_for_contributions).closed?).to be false
-      expect(create(:round_closed).closed?).to be true
-    end
-  end
 end

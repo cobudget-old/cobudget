@@ -28,12 +28,13 @@ class Round < ActiveRecord::Base
     end
   end
 
-  def open_for_proposals?
-    starts_at.present? && ends_at.present? && (starts_at > Time.zone.now)
-  end
-
-  def closed?
-    ends_at.present? && (ends_at < Time.zone.now)
+  def mode
+    case 
+      when !published then "draft"
+      when published && starts_at.present? && ends_at.present? && Time.zone.now < starts_at then "proposal"
+      when published && starts_at.present? && ends_at.present? && Time.zone.now.between?(starts_at, ends_at) then "contribution"
+      when published && starts_at.present? && ends_at.present? && Time.zone.now > ends_at then "closed"
+    end
   end
 
   private
