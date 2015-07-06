@@ -37,29 +37,29 @@ class Round < ActiveRecord::Base
     end
   end
 
-  def publish!(skip_proposals, admin)
-    if skip_proposals
-      publish_and_open_for_contributions!(admin)
+  def publish!(args)
+    if args[:skip_proposals]
+      publish_and_open_for_contributions!(args)
     else
-      publish_and_open_for_proposals!(admin)
+      publish_and_open_for_proposals!(args)
     end
   end
 
-  def publish_and_open_for_proposals!(admin)
-    if publishable_and_ready_for_proposals?
-      update(published: true)
-      group.members.each { |member| UserMailer.invite_to_propose_email(member, admin, group, self).deliver! }
+  def publish_and_open_for_proposals!(args)
+    if args[:starts_at] && args[:ends_at] && args[:ends_at] > args[:starts_at]
+      update(published: true, starts_at: args[:starts_at], ends_at: args[:ends_at])
+      group.members.each { |member| UserMailer.invite_to_propose_email(member, args[:admin], group, self).deliver! }
     else
-      errors.add(:starts_at, "starts_at and ends_at must both be specified before publishing and entering proposal mode")  
+      errors.add(:starts_at, "starts_at and ends_at must both be present, and starts_at must occur before ends_at.")
     end
   end
 
-  def publish_and_open_for_contributions!(admin)
-    if publishable_and_ready_for_contributions?
-      update(published: true, starts_at: Time.zone.now)
-      group.members.each { |member| UserMailer.invite_to_contribute_email(member, admin, group, self).deliver! }
-    else
-      errors.add(:ends_at, "ends_at must be specified before publishing and entering contribution mode")
+  def publish_and_open_for_contributions!(args)
+    if args[:ends_at] && args[:ends_at] > Time.zone.now
+      update(published: true, starts_at: Time.zone.now, ends_at: args[:ends_at])
+      group.members.each { |member| UserMailer.invite_to_contribute_email(member, args[:admin], group, self).deliver! }
+    else 
+      errors.add(:ends_at, "ends_at must exist and occur in the future")
     end
   end
 
@@ -75,13 +75,5 @@ class Round < ActiveRecord::Base
       if starts_at.present? && ends_at.present? && (starts_at > ends_at)
         errors.add(:starts_at, "starts_at must occur before ends_at.")
       end
-    end
-
-    def publishable_and_ready_for_proposals?
-      starts_at.present? && ends_at.present?
-    end
-
-    def publishable_and_ready_for_contributions?
-      ends_at.present?
     end
 end

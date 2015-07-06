@@ -118,7 +118,7 @@ RSpec.describe Round, :type => :model do
     end
   end
 
-  describe "#publish_and_open_for_proposals!(admin)" do
+  describe "#publish_and_open_for_proposals!(args)" do
     before do
       @round = create(:draft_round)
       @admin = create(:user)
@@ -128,13 +128,17 @@ RSpec.describe Round, :type => :model do
       @members = @group.members
     end
 
-    context "if starts_at and ends_at times are both specified for round" do
+    context "if valid arguments" do
       before do
-        @round.update(starts_at: Time.zone.now + 1.days, ends_at: Time.zone.now + 3.days)
+        @valid_args = {
+          starts_at: Time.zone.now + 1.days,
+          ends_at: Time.zone.now + 3.days,
+          admin: @admin
+        }
       end
 
       it "updates published to true" do
-        @round.publish_and_open_for_proposals!(@admin)
+        @round.publish_and_open_for_proposals!(@valid_args)
         expect(@round.published).to eq(true)
       end
 
@@ -144,18 +148,18 @@ RSpec.describe Round, :type => :model do
           expect(UserMailer).to receive(:invite_to_propose_email).with(member, @admin, @group, @round).and_return(mail_double)
           expect(mail_double).to receive(:deliver!)
         end
-        @round.publish_and_open_for_proposals!(@admin)
+        @round.publish_and_open_for_proposals!(@valid_args)
       end
 
       it "the round's mode is updated to 'proposal'" do
-        @round.publish_and_open_for_proposals!(@admin)
+        @round.publish_and_open_for_proposals!(@valid_args)
         expect(@round.mode).to eq('proposal')
       end
     end
 
-    context "if starts_at and ends_at times are not both specified for round" do
+    context "if invalid arguments" do
       before do
-        @round.publish_and_open_for_proposals!(@admin)
+        @round.publish_and_open_for_proposals!({})
       end
 
       it "does not publish the round" do
@@ -163,12 +167,12 @@ RSpec.describe Round, :type => :model do
       end
 
       it "an error is added to the round" do
-        expect(@round.errors[:starts_at]).to include("starts_at and ends_at must both be specified before publishing and entering proposal mode")
+        expect(@round.errors[:starts_at]).to include("starts_at and ends_at must both be present, and starts_at must occur before ends_at.")
       end
     end
   end
 
-  describe "#publish_and_open_for_contributions!(admin)" do
+  describe "#publish_and_open_for_contributions!(args)" do
     before do
       @round = create(:draft_round)
       @admin = create(:user)
@@ -179,18 +183,21 @@ RSpec.describe Round, :type => :model do
       @members.each { |member| create(:allocation, user: member, round: @round) }
     end
 
-    context "if ends_at specified" do
+    context "if valid arguments" do
       before do
-        @round.update(ends_at: Time.zone.now + 3.days)
+        @valid_args = {
+          ends_at: Time.zone.now + 5.days,
+          admin: @admin
+        }
       end
 
       it "publishes the round" do
-        @round.publish_and_open_for_contributions!(@admin)
+        @round.publish_and_open_for_contributions!(@valid_args)
         expect(@round.published).to eq(true)
       end
 
       it "updates rounds mode to 'contribution'" do
-        @round.publish_and_open_for_contributions!(@admin)
+        @round.publish_and_open_for_contributions!(@valid_args)
         expect(@round.mode).to eq('contribution')
       end
 
@@ -200,13 +207,13 @@ RSpec.describe Round, :type => :model do
           expect(UserMailer).to receive(:invite_to_contribute_email).with(member, @admin, @group, @round).and_return(mail_double)          
           expect(mail_double).to receive(:deliver!)
         end
-        @round.publish_and_open_for_contributions!(@admin)
+        @round.publish_and_open_for_contributions!(@valid_args)
       end
     end
 
-    context "if ends_at not specified" do
+    context "if invalid arguments" do
       before do
-        @round.publish_and_open_for_contributions!(@admin)
+        @round.publish_and_open_for_contributions!({})
       end
 
       it "does not publish the round" do
@@ -214,7 +221,7 @@ RSpec.describe Round, :type => :model do
       end
 
       it "adds an error to the round" do
-        expect(@round.errors[:ends_at]).to include('ends_at must be specified before publishing and entering contribution mode')
+        expect(@round.errors[:ends_at]).to include('ends_at must exist and occur in the future')
       end
     end
   end
@@ -228,15 +235,26 @@ RSpec.describe Round, :type => :model do
 
     context "if skip_proposals is true" do
       it "calls publish_and_open_for_contributions!" do
-        expect(@round).to receive(:publish_and_open_for_contributions!).with(@admin)
-        @round.publish!(true, @admin)
+        args = {
+          skip_proposals: true,
+          admin: @admin,
+          ends_at: Time.zone.now + 4.days
+        }
+        expect(@round).to receive(:publish_and_open_for_contributions!).with(args)
+        @round.publish!(args)
       end
     end
 
     context "if skip_proposals is false" do
       it "calls publish_and_open_for_proposals!" do
-        expect(@round).to receive(:publish_and_open_for_proposals!).with(@admin)
-        @round.publish!(false, @admin)
+        args = {
+          skip_proposals: false,
+          admin: @admin,
+          starts_at: Time.zone.now + 1.days,
+          ends_at: Time.zone.now + 4.days
+        }
+        expect(@round).to receive(:publish_and_open_for_proposals!).with(args)
+        @round.publish!(args)
       end
     end
   end
