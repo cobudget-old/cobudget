@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   post '/rounds/:round_id/allocations/upload', to: 'rounds#upload', as: 'upload_allocations_for_round'
+  put '/rounds/:round_id/publish', to: 'rounds#publish', as: 'publish_round'
 
   # NOTE (JL): Added unsed show route here cause otherwise respond_with doesn't work
   # on the create action (not sure why??)

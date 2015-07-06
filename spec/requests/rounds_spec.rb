@@ -139,4 +139,130 @@ describe "Rounds" do
       end
     end
   end
+
+  describe "PUT '/rounds/:round_id/publish" do
+    context "admin" do
+      before do
+        make_user_group_admin
+        @admin = user
+        @round = create(:round, group: group)
+        create(:allocation, user: @admin, round: @round)
+      end
+
+      context "if skip_proposals: false" do
+        context "and valid params" do 
+          before do
+            @valid_params = {
+              round: {
+                skip_proposals: false,
+                starts_at: Time.zone.now + 1.days, 
+                ends_at: Time.zone.now + 4.days
+              }
+            }.to_json
+            put "/rounds/#{@round.id}/publish", @valid_params, request_headers
+            @round.reload
+          end
+
+          it "the round is published" do 
+            expect(@round.published).to eq(true)
+          end
+
+          it "the round enters proposal mode" do
+            expect(@round.mode).to eq("proposal")
+          end
+
+          it "returns http status 'updated'" do
+            expect(response.status).to eq updated
+          end
+        end
+
+        context "and invalid params" do 
+          before do
+            @invalid_params = {
+              round: {
+                skip_proposals: false
+              }
+            }.to_json
+            put "/rounds/#{@round.id}/publish", @invalid_params, request_headers
+          end
+
+          it "returns http status 'unprocessable'" do
+            expect(response.status).to eq unprocessable
+          end
+
+          it "returns errors" do
+            expect(response.body).to include("errors")
+          end
+        end
+      end
+
+      context "if skip_proposals: true" do
+        context "and valid params" do
+          before do
+            @valid_params = {
+              round: {
+                skip_proposals: true,
+                ends_at: Time.zone.now + 4.days
+              }
+            }.to_json
+            put "/rounds/#{@round.id}/publish", @valid_params, request_headers
+            @round.reload
+          end
+
+          it "the round is published" do
+            expect(@round.published).to eq(true)
+          end
+
+          it "the round is in 'contribution' mode" do
+            expect(@round.mode).to eq('contribution')
+          end
+
+          it "returns http status 'updated'" do
+            expect(response.status).to eq updated
+          end
+        end
+
+        context "and invalid params" do
+          before do
+            @invalid_params = {
+              round: {
+                skip_proposals: true
+              }
+            }.to_json
+            put "/rounds/#{@round.id}/publish", @invalid_params, request_headers
+            @round.reload
+          end          
+
+          it "the round is not published" do
+            expect(@round.published).to eq(false)
+          end
+
+          it "returns http status 'unprocessable'" do
+            expect(response.status).to eq unprocessable
+          end
+
+          it "returns errors" do
+            expect(response.body).to include("errors")
+          end
+        end
+      end
+    end
+
+    context "member" do
+      before do 
+        @round = create(:draft_round)
+        make_user_group_member 
+      end
+
+      it "returns http status 'forbidden'" do
+        put "/rounds/#{@round.id}/publish", {}, request_headers
+        expect(response.status).to eq forbidden
+      end
+
+      it "round is not published" do
+        expect(@round).not_to receive(:publish!)
+        put "/rounds/#{@round.id}/publish", {}, request_headers          
+      end      
+    end
+  end
 end
