@@ -1,0 +1,5 @@
+<p>Hi there!</p>
+
+<p>The <%= @round.name %> round is now open for funding, and you have <%= @allocation_amount %> to spend!</p>
+
+<p>Visit <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}/rounds/#{@round.id}" %> to fund buckets for this round.</p>
