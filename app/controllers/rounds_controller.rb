@@ -21,7 +21,7 @@ class RoundsController < ApplicationController
     destroy_resource
   end
 
-  api :POST, '/rounds/:round_id/allocations/upload', 'generates allocations for round from csv'
+  api :POST, '/rounds/:round_id/allocations/upload', 'Generates allocations for round from csv'
   def upload
     round = Round.find_by_id(params[:round_id])
     authorize round
