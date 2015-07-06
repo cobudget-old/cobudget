@@ -118,45 +118,125 @@ RSpec.describe Round, :type => :model do
     end
   end
 
-  describe "#publish!" do
-    context "if starts_at and ends_at times specified for round" do
+  describe "#publish_and_open_for_proposals!(admin)" do
+    before do
+      @round = create(:draft_round)
+      @admin = create(:user)
+      @group = @round.group
+      @group.add_admin(@admin)
+      5.times { create(:membership, group: @group) }
+      @members = @group.members
+    end
+
+    context "if starts_at and ends_at times are both specified for round" do
       before do
-        @round = create(:draft_round)
-        @round.starts_at = Time.zone.now + 1.days
-        @round.ends_at = Time.zone.now + 3.days
+        @round.update(starts_at: Time.zone.now + 1.days, ends_at: Time.zone.now + 3.days)
       end
 
       it "updates published to true" do
-        @round.publish!
+        @round.publish_and_open_for_proposals!(@admin)
         expect(@round.published).to eq(true)
       end
 
       it "send notification emails to everyone involved in the round" do
-        group = @round.group
-        5.times { create(:membership, group: group) }
-        members = group.members
-        members.each do |member|
+        @members.each do |member|
           mail_double = double('mail')
-          expect(UserMailer).to receive(:invite_to_propose_email).with(member, group, @round).and_return(mail_double)
+          expect(UserMailer).to receive(:invite_to_propose_email).with(member, @admin, @group, @round).and_return(mail_double)
           expect(mail_double).to receive(:deliver!)
         end
-        @round.publish!
+        @round.publish_and_open_for_proposals!(@admin)
       end
 
       it "the round's mode is updated to 'proposal'" do
-        @round.publish!
+        @round.publish_and_open_for_proposals!(@admin)
         expect(@round.mode).to eq('proposal')
       end
     end
 
-    context "if starts_at and ends_at times not specified for round" do
+    context "if starts_at and ends_at times are not both specified for round" do
       before do
-        @round = create(:draft_round)
-        @round.publish!
+        @round.publish_and_open_for_proposals!(@admin)
+      end
+
+      it "does not publish the round" do
+        expect(@round.published).to eq(false)
       end
 
       it "an error is added to the round" do
         expect(@round.errors[:starts_at]).to include("starts_at and ends_at must both be specified before publishing and entering proposal mode")
+      end
+    end
+  end
+
+  describe "#publish_and_open_for_contributions!(admin)" do
+    before do
+      @round = create(:draft_round)
+      @admin = create(:user)
+      @group = @round.group
+      @group.add_admin(@admin)
+      5.times { create(:membership, group: @group) }
+      @members = @group.members
+      @members.each { |member| create(:allocation, user: member, round: @round) }
+    end
+
+    context "if ends_at specified" do
+      before do
+        @round.update(ends_at: Time.zone.now + 3.days)
+      end
+
+      it "publishes the round" do
+        @round.publish_and_open_for_contributions!(@admin)
+        expect(@round.published).to eq(true)
+      end
+
+      it "updates rounds mode to 'contribution'" do
+        @round.publish_and_open_for_contributions!(@admin)
+        expect(@round.mode).to eq('contribution')
+      end
+
+      it "sends emails to all members of the round, inviting them to contribute" do
+        @members.each do |member|
+          mail_double = double('mail')
+          expect(UserMailer).to receive(:invite_to_contribute_email).with(member, @admin, @group, @round).and_return(mail_double)          
+          expect(mail_double).to receive(:deliver!)
+        end
+        @round.publish_and_open_for_contributions!(@admin)
+      end
+    end
+
+    context "if ends_at not specified" do
+      before do
+        @round.publish_and_open_for_contributions!(@admin)
+      end
+
+      it "does not publish the round" do
+        expect(@round.published).to eq(false)
+      end
+
+      it "adds an error to the round" do
+        expect(@round.errors[:ends_at]).to include('ends_at must be specified before publishing and entering contribution mode')
+      end
+    end
+  end
+
+  describe "publish!(admin)" do
+    before do
+      @round = create(:round)
+      @admin = create(:user)
+      @round.group.add_admin(@admin)
+    end
+
+    context "if skip_proposals is true" do
+      it "calls publish_and_open_for_contributions!" do
+        expect(@round).to receive(:publish_and_open_for_contributions!).with(@admin)
+        @round.publish!(true, @admin)
+      end
+    end
+
+    context "if skip_proposals is false" do
+      it "calls publish_and_open_for_proposals!" do
+        expect(@round).to receive(:publish_and_open_for_proposals!).with(@admin)
+        @round.publish!(false, @admin)
       end
     end
   end

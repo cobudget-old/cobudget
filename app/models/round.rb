@@ -37,12 +37,29 @@ class Round < ActiveRecord::Base
     end
   end
 
-  def publish!
-    if publishable?
+  def publish!(skip_proposals, admin)
+    if skip_proposals
+      publish_and_open_for_contributions!(admin)
+    else
+      publish_and_open_for_proposals!(admin)
+    end
+  end
+
+  def publish_and_open_for_proposals!(admin)
+    if publishable_and_ready_for_proposals?
       update(published: true)
-      group.members.each { |member| UserMailer.invite_to_propose_email(member, group, self).deliver! }
+      group.members.each { |member| UserMailer.invite_to_propose_email(member, admin, group, self).deliver! }
     else
       errors.add(:starts_at, "starts_at and ends_at must both be specified before publishing and entering proposal mode")  
+    end
+  end
+
+  def publish_and_open_for_contributions!(admin)
+    if publishable_and_ready_for_contributions?
+      update(published: true, starts_at: Time.now)
+      group.members.each { |member| UserMailer.invite_to_contribute_email(member, admin, group, self).deliver! }
+    else
+      errors.add(:ends_at, "ends_at must be specified before publishing and entering contribution mode")
     end
   end
 
@@ -60,7 +77,11 @@ class Round < ActiveRecord::Base
       end
     end
 
-    def publishable?
+    def publishable_and_ready_for_proposals?
       starts_at.present? && ends_at.present?
+    end
+
+    def publishable_and_ready_for_contributions?
+      ends_at.present?
     end
 end
