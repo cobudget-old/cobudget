@@ -56,7 +56,7 @@ class Round < ActiveRecord::Base
 
   def publish_and_open_for_contributions!(admin)
     if publishable_and_ready_for_contributions?
-      update(published: true, starts_at: Time.now)
+      update(published: true, starts_at: Time.zone.now)
       group.members.each { |member| UserMailer.invite_to_contribute_email(member, admin, group, self).deliver! }
     else
       errors.add(:ends_at, "ends_at must be specified before publishing and entering contribution mode")
