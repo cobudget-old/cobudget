@@ -50,7 +50,7 @@ class Round < ActiveRecord::Base
       update(published: true, starts_at: args[:starts_at], ends_at: args[:ends_at])
       group.members.each { |member| UserMailer.invite_to_propose_email(member, args[:admin], group, self).deliver! }
     else
-      errors.add(:starts_at, "starts_at and ends_at must both be present, and starts_at must occur before ends_at.")
+      errors.add(:starts_at, "and ends_at must both be present, and starts_at must occur before ends_at.")
     end
   end
 
@@ -59,7 +59,7 @@ class Round < ActiveRecord::Base
       update(published: true, starts_at: Time.zone.now, ends_at: args[:ends_at])
       allocations.each { |allocation| UserMailer.invite_to_contribute_email(allocation.user, args[:admin], group, self).deliver! }
     else 
-      errors.add(:ends_at, "ends_at must exist and occur in the future")
+      errors.add(:ends_at, "must exist and occur in the future")
     end
   end
 
