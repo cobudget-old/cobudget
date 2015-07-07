@@ -6,7 +6,6 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-
 # persistance
 
 gem 'pg'
@@ -46,7 +45,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
-  gem "nyan-cat-formatter"
   gem 'timecop', '~> 0.7.4'
 end
 
