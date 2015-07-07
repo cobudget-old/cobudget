@@ -170,7 +170,7 @@ RSpec.describe Round, :type => :model do
       end
 
       it "an error is added to the round" do
-        expect(@round.errors[:starts_at]).to include("starts_at and ends_at must both be present, and starts_at must occur before ends_at.")
+        expect(@round.errors[:starts_at]).to include("and ends_at must both be present, and starts_at must occur before ends_at.")
       end
     end
   end
@@ -229,7 +229,7 @@ RSpec.describe Round, :type => :model do
       end
 
       it "adds an error to the round" do
-        expect(@round.errors[:ends_at]).to include('ends_at must exist and occur in the future')
+        expect(@round.errors[:ends_at]).to include('must exist and occur in the future')
       end
     end
   end

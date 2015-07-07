@@ -154,7 +154,7 @@ describe "Rounds" do
           before do
             @valid_params = {
               round: {
-                skip_proposals: false,
+                skip_proposals: "false",
                 starts_at: Time.zone.now + 1.days, 
                 ends_at: Time.zone.now + 4.days
               }
@@ -180,7 +180,7 @@ describe "Rounds" do
           before do
             @invalid_params = {
               round: {
-                skip_proposals: false
+                skip_proposals: "false"
               }
             }.to_json
             put "/rounds/#{@round.id}/publish", @invalid_params, request_headers
@@ -201,7 +201,7 @@ describe "Rounds" do
           before do
             @valid_params = {
               round: {
-                skip_proposals: true,
+                skip_proposals: "true",
                 ends_at: Time.zone.now + 4.days
               }
             }.to_json
@@ -226,7 +226,7 @@ describe "Rounds" do
           before do
             @invalid_params = {
               round: {
-                skip_proposals: true
+                skip_proposals: "true"
               }
             }.to_json
             put "/rounds/#{@round.id}/publish", @invalid_params, request_headers
