@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.5'
+gem 'rails', '~> 4.2.3'
 
 gem 'rails-api'
 
@@ -17,6 +17,7 @@ gem 'foreigner'
 gem 'apipie-rails'
 gem 'active_model_serializers', '~> 0.9.0'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'responders', '~> 2.0'
 
 # model utilities
 

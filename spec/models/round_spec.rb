@@ -57,7 +57,7 @@ RSpec.describe Round, :type => :model do
       it "should send them an 'invite to group' email" do
         mail_double = double('mail')
         expect(UserMailer).to receive(:invite_to_group_email).with(@new_member, @admin, @group, @round).and_return(mail_double)
-        expect(mail_double).to receive(:deliver!)
+        expect(mail_double).to receive(:deliver_later!)
         @round.generate_new_members_and_allocations_from!(@csv, @admin)
       end
 
@@ -85,14 +85,14 @@ RSpec.describe Round, :type => :model do
       it "should send them an invite to cobudget email" do
         mail_double = double('mail')
         expect(UserMailer).to receive(:invite_to_group_email).and_return(mail_double)
-        expect(mail_double).to receive(:deliver!)
+        expect(mail_double).to receive(:deliver_later!)
         @round.generate_new_members_and_allocations_from!(@csv, @admin)
       end
 
       it "should send them an invite to group email" do
         mail_double = double('mail')
         expect(UserMailer).to receive(:invite_email).and_return(mail_double)
-        expect(mail_double).to receive(:deliver!)
+        expect(mail_double).to receive(:deliver_later!)
         @round.generate_new_members_and_allocations_from!(@csv, @admin)
       end
 
@@ -149,7 +149,7 @@ RSpec.describe Round, :type => :model do
         @members.each do |member|
           mail_double = double('mail')
           expect(UserMailer).to receive(:invite_to_propose_email).with(member, @admin, @group, @round).and_return(mail_double)
-          expect(mail_double).to receive(:deliver!)
+          expect(mail_double).to receive(:deliver_later!)
         end
         @round.publish_and_open_for_proposals!(@valid_args)
       end
@@ -212,7 +212,7 @@ RSpec.describe Round, :type => :model do
           member = allocation.user
           mail_double = double('mail')
           expect(UserMailer).to receive(:invite_to_contribute_email).with(member, @admin, @group, @round).and_return(mail_double)          
-          expect(mail_double).to receive(:deliver!)
+          expect(mail_double).to receive(:deliver_later!)
         end
         expect(UserMailer).not_to receive(:invite_to_contribute_email).with(@member_with_no_allocation, @admin, @group, @round)
         @round.publish_and_open_for_contributions!(@valid_args)

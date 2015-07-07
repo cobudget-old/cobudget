@@ -16,12 +16,12 @@ class Round < ActiveRecord::Base
         tmp_password = SecureRandom.hex(4)
         tmp_name = email[/[^@]+/]
         user = User.create(name: tmp_name, email: email, password: tmp_password)
-        UserMailer.invite_email(user, admin, group, tmp_password).deliver!
+        UserMailer.invite_email(user, admin, group, tmp_password).deliver_later!
       end
 
       unless group.members.find_by_id(user.id)
         group.members << user
-        UserMailer.invite_to_group_email(user, admin, group, self).deliver!
+        UserMailer.invite_to_group_email(user, admin, group, self).deliver_later!
       end
 
       allocations.create(user_id: user.id, amount: allocation.to_f)
@@ -48,7 +48,7 @@ class Round < ActiveRecord::Base
   def publish_and_open_for_proposals!(args)
     if args[:starts_at] && args[:ends_at] && args[:ends_at] > args[:starts_at]
       update(published: true, starts_at: args[:starts_at], ends_at: args[:ends_at])
-      group.members.each { |member| UserMailer.invite_to_propose_email(member, args[:admin], group, self).deliver! }
+      group.members.each { |member| UserMailer.invite_to_propose_email(member, args[:admin], group, self).deliver_later! }
     else
       errors.add(:starts_at, "and ends_at must both be present, and starts_at must occur before ends_at.")
     end
@@ -57,7 +57,7 @@ class Round < ActiveRecord::Base
   def publish_and_open_for_contributions!(args)
     if args[:ends_at] && args[:ends_at] > Time.zone.now
       update(published: true, starts_at: Time.zone.now, ends_at: args[:ends_at])
-      allocations.each { |allocation| UserMailer.invite_to_contribute_email(allocation.user, args[:admin], group, self).deliver! }
+      allocations.each { |allocation| UserMailer.invite_to_contribute_email(allocation.user, args[:admin], group, self).deliver_later! }
     else 
       errors.add(:ends_at, "must exist and occur in the future")
     end
