@@ -47,6 +47,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
   gem "nyan-cat-formatter"
+  gem 'timecop', '~> 0.7.4'
 end
 
 group :production do
