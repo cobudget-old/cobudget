@@ -107,12 +107,15 @@ RSpec.describe Round, :type => :model do
     it "if unpublished -- draft mode" do
       expect(create(:draft_round).mode).to eq("draft")
     end
+
     it "if published, and starts_at set but not reached -- proposal mode" do
       expect(create(:round_open_for_proposals).mode).to eq("proposal")
     end
+
     it "if published, and current time is between starts_at and ends_at -- contribution mode" do
       expect(create(:round_open_for_contributions).mode).to eq("contribution")
     end
+    
     it "if published, and current time is after ends_at -- closed mode" do
       expect(create(:round_closed).mode).to eq("closed")
     end
@@ -278,5 +281,4 @@ RSpec.describe Round, :type => :model do
       expect { Round.create!(name: 'hi', group: group, starts_at: Time.now + 2.days, ends_at: Time.now + 1.day) }.to raise_error
     end    
   end
-
 end
