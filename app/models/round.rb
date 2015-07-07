@@ -57,7 +57,7 @@ class Round < ActiveRecord::Base
   def publish_and_open_for_contributions!(args)
     if args[:ends_at] && args[:ends_at] > Time.zone.now
       update(published: true, starts_at: Time.zone.now, ends_at: args[:ends_at])
-      group.members.each { |member| UserMailer.invite_to_contribute_email(member, args[:admin], group, self).deliver! }
+      allocations.each { |allocation| UserMailer.invite_to_contribute_email(allocation.user, args[:admin], group, self).deliver! }
     else 
       errors.add(:ends_at, "ends_at must exist and occur in the future")
     end
