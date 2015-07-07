@@ -32,7 +32,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @group = group
     @round = round
-    @allocation_amount = round.allocations.find_by(user_id: user.id).formatted_amount || 0
+    @allocation_amount = round.allocations.find_by(user_id: user.id).formatted_amount
     mail(to: user.name_and_email,
         from: inviter.name_and_email,
         subject: "Come fund buckets for \"#{round.name}\" in \"#{group.name}\" on Cobudget!")
