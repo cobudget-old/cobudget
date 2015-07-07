@@ -56,6 +56,7 @@ private
   end
 
   def round_params_publish
+    params[:round][:skip_proposals] = params[:round][:skip_proposals] == "true"
     params.require(:round).permit(:skip_proposals, :starts_at, :ends_at)
   end
 end
