@@ -110,9 +110,10 @@ describe "Memberships" do
             end
           end
           it 'emails login details to user' do
+            mail_double = double('mail')
+            expect(UserMailer).to receive(:invite_email).and_return(mail_double)
+            expect(mail_double).to receive(:deliver_later!)
             post "/memberships", membership_params, request_headers
-            email = ActionMailer::Base.deliveries.last
-            expect(email.to[0]).to match(new_member.email)
           end
           it 'adds user to group' do
             post "/memberships", membership_params, request_headers
