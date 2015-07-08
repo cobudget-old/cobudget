@@ -37,5 +37,7 @@ module CobudgetApi
       Devise::PasswordsController.skip_before_filter :authenticate_from_token!,
                                                      only: [:create, :update]
     end
+    
+    config.active_job.queue_adapter = :sidekiq
   end
 end
