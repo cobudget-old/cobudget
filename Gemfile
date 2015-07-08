@@ -33,6 +33,8 @@ gem 'puma'
 
 gem 'sidekiq'
 
+gem 'sinatra', :require => nil
+
 group :development do
   gem 'capistrano', '2.15.5'
   gem "capistrano-rails", '~> 1.0.0'
