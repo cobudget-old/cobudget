@@ -205,16 +205,7 @@ RSpec.describe Round, :type => :model do
       end
 
       it "sends emails to members of the round with an allocation, inviting them to contribute" do
-        @member_with_no_allocation = create(:user)
-        create(:membership, group: @group, member: @member_with_no_allocation)
-        @group.reload
-        @round.allocations.each do |allocation|
-          member = allocation.user
-          mail_double = double('mail')
-          expect(UserMailer).to receive(:invite_to_contribute_email).with(member, @admin, @group, @round).and_return(mail_double)          
-          expect(mail_double).to receive(:deliver_later!)
-        end
-        expect(UserMailer).not_to receive(:invite_to_contribute_email).with(@member_with_no_allocation, @admin, @group, @round)
+        expect(SendInvitationsToContributeJob).to receive(:perform_later).with(@admin, @group, @round)
         @round.publish_and_open_for_contributions!(@valid_args)
       end
     end
