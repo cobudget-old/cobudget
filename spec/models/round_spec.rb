@@ -146,11 +146,14 @@ RSpec.describe Round, :type => :model do
       end
 
       it "send notification emails to everyone involved in the round" do
-        @members.each do |member|
-          mail_double = double('mail')
-          expect(UserMailer).to receive(:invite_to_propose_email).with(member, @admin, @group, @round).and_return(mail_double)
-          expect(mail_double).to receive(:deliver_later!)
-        end
+        expect(SendInvitationsToProposeJob).to receive(:perform_later).with(@admin, @group, @round)
+        @round.publish_and_open_for_proposals!(@valid_args)
+      end
+
+      it "schedules 'invite to contribute' emails to be run at the 'starts_at' time specified in params" do
+        configured_job_double = double('configured_job')
+        expect(SendInvitationsToContributeJob).to receive(:set).with(wait_until: @valid_args[:starts_at]).and_return(configured_job_double)
+        expect(configured_job_double).to receive(:perform_later).with(@admin, @group, @round)
         @round.publish_and_open_for_proposals!(@valid_args)
       end
 

@@ -48,7 +48,8 @@ class Round < ActiveRecord::Base
   def publish_and_open_for_proposals!(args)
     if args[:starts_at] && args[:ends_at] && args[:ends_at] > args[:starts_at]
       update(published: true, starts_at: args[:starts_at], ends_at: args[:ends_at])
-      group.members.each { |member| UserMailer.invite_to_propose_email(member, args[:admin], group, self).deliver_later! }
+      SendInvitationsToProposeJob.perform_later(args[:admin], group, self)
+      SendInvitationsToContributeJob.set(wait_until: args[:starts_at]).perform_later(args[:admin], group, self)
     else
       errors.add(:starts_at, "and ends_at must both be present, and starts_at must occur before ends_at.")
     end
