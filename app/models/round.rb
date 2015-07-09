@@ -50,6 +50,7 @@ class Round < ActiveRecord::Base
       update(published: true, starts_at: args[:starts_at], ends_at: args[:ends_at])
       SendInvitationsToProposeJob.perform_later(args[:admin], group, self)
       SendInvitationsToContributeJob.set(wait_until: args[:starts_at]).perform_later(args[:admin], group, self)
+      SendRoundClosedNotificationsJob.set(wait_until: args[:ends_at]).perform_later(args[:admin], group, self)
     else
       errors.add(:starts_at, "and ends_at must both be present, and starts_at must occur before ends_at.")
     end
@@ -59,6 +60,7 @@ class Round < ActiveRecord::Base
     if args[:ends_at] && args[:ends_at] > Time.zone.now
       update(published: true, starts_at: Time.zone.now, ends_at: args[:ends_at])
       SendInvitationsToContributeJob.perform_later(args[:admin], group, self)
+      SendRoundClosedNotificationsJob.set(wait_until: args[:ends_at]).perform_later(args[:admin], group, self)
     else 
       errors.add(:ends_at, "must exist and occur in the future")
     end

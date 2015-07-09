@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Round, :type => :model do
-
   describe "fields" do
     it { should have_db_column(:group_id).with_options(null: false) }
     it { should have_db_column(:name).of_type(:string).with_options(null: false) }
@@ -145,7 +144,7 @@ RSpec.describe Round, :type => :model do
         expect(@round.published).to eq(true)
       end
 
-      it "send notification emails to everyone involved in the round" do
+      it "immediately sends notification emails to everyone involved in the round" do
         expect(SendInvitationsToProposeJob).to receive(:perform_later).with(@admin, @group, @round)
         @round.publish_and_open_for_proposals!(@valid_args)
       end
@@ -155,6 +154,13 @@ RSpec.describe Round, :type => :model do
         expect(SendInvitationsToContributeJob).to receive(:set).with(wait_until: @valid_args[:starts_at]).and_return(configured_job_double)
         expect(configured_job_double).to receive(:perform_later).with(@admin, @group, @round)
         @round.publish_and_open_for_proposals!(@valid_args)
+      end
+
+      it "schedules 'round is closed' emails to be run at the 'ends_at' time specified in params" do
+        configured_job_double = double('configured_job')
+        expect(SendRoundClosedNotificationsJob).to receive(:set).with(wait_until: @valid_args[:ends_at]).and_return(configured_job_double)
+        expect(configured_job_double).to receive(:perform_later).with(@admin, @group, @round)
+        @round.publish_and_open_for_proposals!(@valid_args)        
       end
 
       it "the round's mode is updated to 'proposal'" do
@@ -207,9 +213,16 @@ RSpec.describe Round, :type => :model do
         expect(@round.mode).to eq('contribution')
       end
 
-      it "sends emails to members of the round with an allocation, inviting them to contribute" do
+      it "immediately sends emails to members of the round with an allocation, inviting them to contribute" do
         expect(SendInvitationsToContributeJob).to receive(:perform_later).with(@admin, @group, @round)
         @round.publish_and_open_for_contributions!(@valid_args)
+      end
+
+      it "schedules 'round is closed' emails to be run at the 'ends_at' time specified in params" do
+        configured_job_double = double('configured_job')
+        expect(SendRoundClosedNotificationsJob).to receive(:set).with(wait_until: @valid_args[:ends_at]).and_return(configured_job_double)
+        expect(configured_job_double).to receive(:perform_later).with(@admin, @group, @round)
+        @round.publish_and_open_for_contributions!(@valid_args)        
       end
     end
 
