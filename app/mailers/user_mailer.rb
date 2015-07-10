@@ -9,40 +9,39 @@ class UserMailer < ActionMailer::Base
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
-  def invite_to_group_email(user, inviter, group, round)
+  def invite_to_group_email(user, inviter, group)
     @user = user
     @inviter = inviter
     @group = group
-    @round = round
     mail(to: user.name_and_email,
         from: inviter.name_and_email,
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
-  def invite_to_propose_email(user, inviter, group, round)
+  def invite_to_propose_email(user, inviter, round)
     @user = user
-    @group = group
+    @group = round.group
     @round = round
     mail(to: user.name_and_email,
         from: inviter.name_and_email,
-        subject: "Come propose buckets for \"#{round.name}\" in \"#{group.name}\" on Cobudget!")
+        subject: "Come propose buckets for \"#{round.name}\" in \"#{@group.name}\" on Cobudget!")
   end
 
-  def invite_to_contribute_email(user, inviter, group, round)
+  def invite_to_contribute_email(user, inviter, round)
     @user = user
-    @group = group
+    @group = round.group
     @round = round
     @allocation_amount = round.allocations.find_by(user_id: user.id).formatted_amount
     mail(to: user.name_and_email,
         from: inviter.name_and_email,
-        subject: "Come fund buckets for \"#{round.name}\" in \"#{group.name}\" on Cobudget!")
+        subject: "Come fund buckets for \"#{round.name}\" in \"#{@group.name}\" on Cobudget!")
   end
 
-  def round_closed_email(user, sender, group, round)
-    @group = group
+  def round_closed_email(user, sender, round)
+    @group = round.group
     @round = round
     mail(to: user.name_and_email,
         from: sender.name_and_email,
-        subject: "#{round.name} in #{group.name}")
+        subject: "#{round.name} in #{@group.name} has closed!")
   end
 end
