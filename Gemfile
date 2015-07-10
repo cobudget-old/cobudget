@@ -50,6 +50,7 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
   gem 'timecop', '~> 0.7.4'
+  gem 'email_spec', '~> 1.6.0'
 end
 
 group :production do

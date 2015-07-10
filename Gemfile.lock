@@ -38,6 +38,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.8)
     apipie-rails (0.3.4)
       json
     arel (6.0.0)
@@ -68,6 +69,9 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    email_spec (1.6.0)
+      launchy (~> 2.1)
+      mail (~> 2.2)
     erubis (2.7.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -84,6 +88,8 @@ GEM
     hitimes (1.2.2)
     i18n (0.7.0)
     json (1.8.3)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -232,6 +238,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.0.0)
   database_cleaner
   devise
+  email_spec (~> 1.6.0)
   factory_girl_rails
   faker
   foreigner
