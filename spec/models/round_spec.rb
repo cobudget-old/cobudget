@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Round, :type => :model do
-
   describe "#mode" do
     it "if unpublished -- draft mode" do
       expect(create(:draft_round).mode).to eq("draft")
