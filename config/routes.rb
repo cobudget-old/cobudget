@@ -24,13 +24,16 @@ Rails.application.routes.draw do
   resources :memberships, only: [:create, :update, :destroy], defaults: { format: :json }
 
   resources :rounds, only: [:show, :create, :update, :destroy], defaults: { format: :json } do
+    member do
+      put :open_for_proposals
+      put :open_for_contributions
+    end
     resources :allocations, only: [:index]
     resources :fixed_costs, only: [:index]
     resources :contributors, only: [:show, :index]
   end
 
-  post '/rounds/:round_id/allocations/upload', to: 'rounds#upload', as: 'upload_allocations_for_round'
-  put '/rounds/:round_id/publish', to: 'rounds#publish', as: 'publish_round'
+  post '/rounds/:id/allocations/upload', to: 'rounds#upload', as: 'upload_allocations_for_round'
 
   # NOTE (JL): Added unsed show route here cause otherwise respond_with doesn't work
   # on the create action (not sure why??)
