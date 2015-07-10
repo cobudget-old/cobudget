@@ -43,7 +43,7 @@ class Round < ActiveRecord::Base
   end
 
   def has_valid_duration?
-    starts_at.present? && ends_at.present? && starts_at < ends_at
+    starts_at < ends_at
   end
 
   private
