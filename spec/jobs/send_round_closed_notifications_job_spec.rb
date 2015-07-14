@@ -11,10 +11,10 @@ RSpec.describe SendRoundClosedNotificationsJob, type: :job do
 
     members.each do |member|
       mail_double = double('mail')
-      expect(UserMailer).to receive(:round_closed_email).with(member, admin, group, round).and_return(mail_double)
+      expect(UserMailer).to receive(:round_closed_email).with(member, admin, round).and_return(mail_double)
       expect(mail_double).to receive(:deliver_later!)
     end
 
-    SendRoundClosedNotificationsJob.perform_now(admin, group, round)
+    SendRoundClosedNotificationsJob.perform_now(admin, round)
   end
 end
