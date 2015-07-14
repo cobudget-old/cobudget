@@ -44,7 +44,6 @@ RSpec.configure do |config|
   config.after(:all) do 
     Sidekiq::Queue.new("mailers").clear
     Sidekiq::ScheduledSet.new.each { |job| job.delete }
-    reset_mailer
   end
 
 # The settings below are suggested to provide a good initial experience
