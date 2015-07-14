@@ -2,18 +2,18 @@ module MyLetDeclarations
   extend RSpec::SharedContext
 
   # Everything you need for a basic test
-  let(:user) { FactoryGirl.create(:user) }
-  let(:group) { FactoryGirl.create(:group) }
-  let(:membership) { FactoryGirl.create(:membership, group: group) }
-  let(:round) { FactoryGirl.create(:round, group: group) }
-  let(:fixed_cost) { FactoryGirl.create(:fixed_cost, round: round) }
-  let(:allocation) { FactoryGirl.create(:allocation, round: round) }
-  let(:bucket) { FactoryGirl.create(:bucket, round: round) }
-  let(:contribution) { FactoryGirl.create(:contribution, bucket: bucket) }
+  let(:user) { create(:user) }
+  let(:group) { create(:group) }
+  let(:membership) { create(:membership, group: group) }
+  let(:round) { create(:round, group: group) }
+  let(:fixed_cost) { create(:fixed_cost, round: round) }
+  let(:allocation) { create(:allocation, round: round) }
+  let(:bucket) { create(:bucket, round: round) }
+  let(:contribution) { create(:contribution, bucket: bucket) }
 
   # Convenience methods for testing permissions
-  let(:make_user_group_member) { FactoryGirl.create(:membership, group: group, member: user) }
-  let(:make_user_group_admin) { FactoryGirl.create(:membership,
+  let(:make_user_group_member) { create(:membership, group: group, member: user) }
+  let(:make_user_group_admin) { create(:membership,
                            group: group, member: user, is_admin: true) }
 
   # HTTP status codes
