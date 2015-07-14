@@ -38,8 +38,8 @@ describe "Rounds" do
   end
 
   describe "PUT /rounds/:round_id" do
-    let(:round) { FactoryGirl.create(:round, name: 'Goody', group: group) }
-    let(:evil_group) { FactoryGirl.create(:group) }
+    let(:round) { create(:round, name: 'Goody', group: group) }
+    let(:evil_group) { create(:group) }
     let(:round_params) { {
       round: {
         name: 'Sky Round',
