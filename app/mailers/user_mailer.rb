@@ -24,7 +24,7 @@ class UserMailer < ActionMailer::Base
     @round = round
     mail(to: user.name_and_email,
         from: inviter.name_and_email,
-        subject: "Come propose buckets for \"#{round.name}\" in \"#{@group.name}\" on Cobudget!")
+        subject: "Propose Projects for Funding in Cobudget")
   end
 
   def invite_to_contribute_email(user, inviter, round)
@@ -34,9 +34,9 @@ class UserMailer < ActionMailer::Base
     @allocation_amount = round.allocations.find_by(user_id: user.id).formatted_amount
     mail(to: user.name_and_email,
         from: inviter.name_and_email,
-        subject: "Come fund buckets for \"#{round.name}\" in \"#{@group.name}\" on Cobudget!")
+        subject: "You have #{@allocation_amount} - Fund projects now in Cobudget!")
   end
-
+  
   def round_closed_email(user, sender, round)
     @group = round.group
     @round = round
