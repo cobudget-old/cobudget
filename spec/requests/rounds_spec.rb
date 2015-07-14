@@ -140,111 +140,40 @@ describe "Rounds" do
     end
   end
 
-  describe "PUT '/rounds/:round_id/publish" do
+  describe "PUT '/rounds/:round_id/open_for_proposals" do
     context "admin" do
       before do
         make_user_group_admin
         @admin = user
-        @round = create(:round, group: group)
-        create(:allocation, user: @admin, round: @round)
+        create(:allocation, user: @admin, round: round)
+        @valid_params = {
+          round: {
+            starts_at: Time.zone.now + 1.days,
+            ends_at: Time.zone.now + 2.days
+          }
+        }.to_json
+        put "/rounds/#{round.id}/open_for_proposals", @valid_params, request_headers
       end
 
-      context "if skip_proposals: false" do
-        context "and valid params" do 
-          before do
-            @valid_params = {
-              round: {
-                skip_proposals: "false",
-                starts_at: Time.zone.now + 1.days, 
-                ends_at: Time.zone.now + 4.days
-              }
-            }.to_json
-            put "/rounds/#{@round.id}/publish", @valid_params, request_headers
-            @round.reload
-          end
-
-          it "the round is published" do 
-            expect(@round.published).to eq(true)
-          end
-
-          it "the round enters proposal mode" do
-            expect(@round.mode).to eq("proposal")
-          end
-
-          it "returns http status 'updated'" do
-            expect(response.status).to eq updated
-          end
-        end
-
-        context "and invalid params" do 
-          before do
-            @invalid_params = {
-              round: {
-                skip_proposals: "false"
-              }
-            }.to_json
-            put "/rounds/#{@round.id}/publish", @invalid_params, request_headers
-          end
-
-          it "returns http status 'unprocessable'" do
-            expect(response.status).to eq unprocessable
-          end
-
-          it "returns errors" do
-            expect(response.body).to include("errors")
-          end
-        end
+      it "returns http status 'success'" do
+        expect(response).to have_http_status success
       end
 
-      context "if skip_proposals: true" do
-        context "and valid params" do
-          before do
-            @valid_params = {
-              round: {
-                skip_proposals: "true",
-                ends_at: Time.zone.now + 4.days
-              }
-            }.to_json
-            put "/rounds/#{@round.id}/publish", @valid_params, request_headers
-            @round.reload
-          end
+      it "publishes the round" do
+        expect(round.reload.published?).to eq(true)
+      end
 
-          it "the round is published" do
-            expect(@round.published).to eq(true)
-          end
+      it "round enters 'proposal' mode" do
+        expect(round.reload.mode).to eq('proposal')
+      end
 
-          it "the round is in 'contribution' mode" do
-            expect(@round.mode).to eq('contribution')
-          end
+      xit "immediately sends 'come propose' emails" do
+      end
 
-          it "returns http status 'updated'" do
-            expect(response.status).to eq updated
-          end
-        end
+      xit "schedules 'come contribute' emails at specified starts_at time" do
+      end
 
-        context "and invalid params" do
-          before do
-            @invalid_params = {
-              round: {
-                skip_proposals: "true"
-              }
-            }.to_json
-            put "/rounds/#{@round.id}/publish", @invalid_params, request_headers
-            @round.reload
-          end          
-
-          it "the round is not published" do
-            expect(@round.published).to eq(false)
-          end
-
-          it "returns http status 'unprocessable'" do
-            expect(response.status).to eq unprocessable
-          end
-
-          it "returns errors" do
-            expect(response.body).to include("errors")
-          end
-        end
+      xit "schedules 'round closed' emails at specified ends_at time" do
       end
     end
 
@@ -252,17 +181,67 @@ describe "Rounds" do
       before do 
         @round = create(:draft_round)
         make_user_group_member 
+        put "/rounds/#{@round.id}/open_for_proposals", {}, request_headers
       end
 
       it "returns http status 'forbidden'" do
-        put "/rounds/#{@round.id}/publish", {}, request_headers
-        expect(response.status).to eq forbidden
+        expect(response).to have_http_status forbidden
       end
 
       it "round is not published" do
-        expect(@round).not_to receive(:publish!)
-        put "/rounds/#{@round.id}/publish", {}, request_headers          
+        expect(@round.published?).to eq(false)
       end      
+    end
+  end
+
+  describe "PUT '/rounds/:round_id/open_for_contributions" do
+    context "admin" do
+      before do
+        make_user_group_admin
+        @admin = user
+        create(:allocation, user: @admin, round: round)
+        @valid_params = {
+          round: {
+            starts_at: Time.zone.now + 1.days,
+            ends_at: Time.zone.now + 2.days
+          }
+        }.to_json
+        put "/rounds/#{round.id}/open_for_contributions", @valid_params, request_headers
+      end
+
+      it "returns http status 'success'" do
+        expect(response).to have_http_status success
+      end
+
+      it "publishes the round" do
+        expect(round.reload.published?).to eq(true)
+      end
+
+      it "round enters contribution mode" do
+        expect(round.reload.mode).to eq('contribution')
+      end
+
+      xit "immediately sends 'come contribute' emails" do
+      end
+
+      xit "schedules 'round closed' emails at specified ends_at time" do
+      end
+    end
+
+    context "member" do
+      before do 
+        @round = create(:draft_round)
+        make_user_group_member 
+        put "/rounds/#{@round.id}/open_for_contributions", {}, request_headers
+      end
+
+      it "returns http status 'forbidden'" do
+        expect(response).to have_http_status forbidden
+      end
+
+      it "round is not published" do
+        expect(@round.published?).to eq(false)
+      end            
     end
   end
 end
