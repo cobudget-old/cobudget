@@ -59,7 +59,7 @@ private
     if @round.errors.any?
       render status: 422, json: { errors: @round.errors.full_messages }
     else
-      render status: 204, nothing: true
+      render status: 200, json: @round.as_json(only: [:id, :starts_at, :ends_at])
     end
   end
 end
