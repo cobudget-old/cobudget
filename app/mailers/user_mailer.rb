@@ -36,7 +36,7 @@ class UserMailer < ActionMailer::Base
         from: inviter.name_and_email,
         subject: "You have #{@allocation_amount} - Fund projects now in Cobudget!")
   end
-  
+
   def round_closed_email(user, sender, round)
     @group = round.group
     @round = round
