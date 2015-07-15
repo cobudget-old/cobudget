@@ -31,7 +31,8 @@ gem 'pundit'
 
 gem 'puma'
 
-gem 'sidekiq'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 gem 'sinatra', :require => nil
 
@@ -50,7 +51,6 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
   gem 'timecop', '~> 0.7.4'
-  gem 'email_spec', '~> 1.6.0'
 end
 
 group :production do
