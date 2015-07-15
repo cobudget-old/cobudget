@@ -3,7 +3,7 @@ class SendRoundClosedNotificationsJob < ActiveJob::Base
 
   def perform(sender, round)
     round.group.members.each do |member|
-      UserMailer.round_closed_email(member, sender, round).deliver_later!      
+      UserMailer.round_closed_email(member, sender, round).deliver_later      
     end
   end
 end
