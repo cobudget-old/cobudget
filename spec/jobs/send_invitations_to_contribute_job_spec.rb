@@ -18,7 +18,7 @@ RSpec.describe SendInvitationsToContributeJob, type: :job do
     round.allocations.each do |allocation|
       mail_double = double('mail')
       expect(UserMailer).to receive(:invite_to_contribute_email).with(allocation.user, admin, round).and_return(mail_double)
-      expect(mail_double).to receive(:deliver_later!)
+      expect(mail_double).to receive(:deliver_later)
     end
 
     expect(UserMailer).not_to receive(:invite_to_contribute_email).with(member_with_no_allocation, admin, round)

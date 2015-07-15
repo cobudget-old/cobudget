@@ -12,7 +12,7 @@ RSpec.describe SendInvitationsToProposeJob, type: :job do
     members.each do |member|
       mail_double = double('mail')
       expect(UserMailer).to receive(:invite_to_propose_email).with(member, admin, round).and_return(mail_double)
-      expect(mail_double).to receive(:deliver_later!)
+      expect(mail_double).to receive(:deliver_later)
     end
 
     SendInvitationsToProposeJob.perform_now(admin, round)
