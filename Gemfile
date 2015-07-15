@@ -50,7 +50,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
-  gem 'timecop', '~> 0.7.4'
 end
 
 group :production do
