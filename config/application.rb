@@ -38,7 +38,7 @@ module CobudgetApi
                                                      only: [:create, :update]
     end
     
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :delayed_job
 
     config.eager_load_paths += %W( #{config.root}/services )
   end

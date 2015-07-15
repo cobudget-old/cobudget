@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
-
   devise_for :users, defaults: {format: :json}, path_names: {
     password: 'reset_password'
   }
