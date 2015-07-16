@@ -27,15 +27,6 @@ mailcatcher
 
 and visit: http://localhost:1080/
 
-Install [Redis Server](http://redis.io/download)
-
-```
-wget http://download.redis.io/releases/redis-3.0.2.tar.gz
-tar xzf redis-3.0.2.tar.gz
-cd redis-3.0.2
-make
-```
-
 ### Configure
 
 To configure database environments, edit `config/database.yml`.
@@ -56,16 +47,10 @@ bundle exec rake db:setup
 bundle exec rails s
 ```
 
-*Start redis server*
+*Start Workers*
 
 ```
-redis-server
-```
-
-*Start sidekiq*
-
-```
-bundle exec sidekiq -q default -q mailers
+rake jobs:work
 ```
 
 ### Test
