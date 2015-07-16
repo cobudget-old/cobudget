@@ -34,6 +34,8 @@ gem 'puma'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
+gem 'airbrake'
+
 gem 'sinatra', :require => nil
 
 group :development do
