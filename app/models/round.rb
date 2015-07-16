@@ -25,7 +25,9 @@ class Round < ActiveRecord::Base
         UserMailer.invite_to_group_email(user, admin, group).deliver_later!
       end
 
-      allocations.create(user_id: user.id, amount: allocation.to_f)
+      if allocation.to_f > 0
+        allocations.create(user_id: user.id, amount: allocation.to_f).perform_later
+      end
     end
   end
 
