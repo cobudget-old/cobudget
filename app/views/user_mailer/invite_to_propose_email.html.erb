@@ -1,5 +1,35 @@
-<p>Do you have an idea for a project you would like funded through Cobudget? The next round of funding for <%= @group.name %> will be starting soon. Propose a project now!</p>
+<% if @group.id == 1 %>
 
-<p>Cobudget is a collaborative process where groups decide how to spend money together. If you're getting this email, it means you are invited to request project funding from your group. When the funding round begins, people with money available will check out the proposed projects and decide where to spend their part of the group's funds.</p>
+  <p>Hello! You are invited to apply for funding to carry out work for Enspiral Services, in a process called Collaborative Funding, where we collectively decide how to spend our shared resources.</p>
 
-<p>Visit <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}/rounds/#{@round.id}" %> to propose a bucket for this round.</p>
+  <p>The funding phase will begin August 1. This is a special double round because we skipped last month while we updated Cobudget and the process around it. Only people who have contributed financially to Enspiral Services during June-July will have funds to spend (if you do, you’ll get an email notification). But everyone in Services is welcome to propose projects to be funded!</p>
+
+  <p>If you didn’t already have a Cobudget account set up, you should have received a separate email with your password. If you have any trouble logging in, contact <a href="mailto:eugene@enspiral.com">eugene@enspiral.com</a></p>
+
+  <p>Thanks for your patience and support while we develop Cobudget in this alpha stage! In the future this will all be more user friendly.</p>
+
+  <p>Note: Enspiral Foundation and Enspiral Services will be running two separate Cobudget rounds at the same time. Some people will be involved in both. </p>
+
+<% elsif @group.id == 2 %>  
+
+  <p>All Enspiral Contributors (you!) are invited to apply for funding to carry out work that furthers the Enspiral Foundation’s strategy (<a href="https://github.com/enspiral/agreements/blob/master/agreements/2015-strategy.md">see it here</a>). This process is called Collaborative Funding, where we collectively decide how to spend our shared resources, and the software we’re using to do it is Cobudget.</p>
+  
+  <p>The funding phase will begin August 1. This is a special double round because we skipped last month while we updated Cobudget and the process around it. If you submitted a bucket request through the old process, don’t worry we will copy it across to Cobudget for you.</p>
+
+  <p>Only ventures who have contributed financially to the Enspiral Foundation, and Enspiral Members, will have funds to spend (if you do, you’ll get an email notification). But everyone is welcome to propose projects to be funded!</p>
+
+  <p>If you didn’t already have a Cobudget account set up, you should have received a separate email with your password. If you have any trouble logging in, contact <a href="mailto:eugene@enspiral.com">eugene@enspiral.com</a></p>
+
+  <p>Thanks for your patience and support while we develop Cobudget in this alpha stage! In the future this will all be more user friendly.</p>
+
+  <p>Note: Enspiral Foundation and Enspiral Services will be running two separate Cobudget rounds at the same time. Some people will be involved in both.</p>
+
+<% end %>
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+<!-- <p>Do you have an idea for a project you would like funded through Cobudget? The next round of funding for <%= @group.name %> will be starting soon. Propose a project now!</p>
+
+<p>Cobudget is a collaborative process where groups decide how to spend money together. If you're getting this email, it means you are invited to request project funding from your group. When the funding round begins, people with money available will check out the proposed projects and decide where to spend their part of the group's funds.</p> -->
+
+ <p>Visit <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}/rounds/#{@round.id}" %> to propose a bucket for this round.</p>
