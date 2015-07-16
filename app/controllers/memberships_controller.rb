@@ -16,7 +16,7 @@ class MembershipsController < ApplicationController
         require 'securerandom'
         tmp_password = SecureRandom.hex(4)
         member = User.create!(email: email, name: name, password: tmp_password)
-        UserMailer.invite_email(member, current_user, group, tmp_password).deliver!
+        UserMailer.invite_email(member, current_user, group, tmp_password).deliver_later!
       end
     end
 

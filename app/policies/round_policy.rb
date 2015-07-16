@@ -14,4 +14,12 @@ class RoundPolicy < ApplicationPolicy
   def upload?
     user.is_admin_for?(record.group)
   end
+
+  def open_for_proposals?
+    user.is_admin_for?(record.group)
+  end
+
+  def open_for_contributions?
+    user.is_admin_for?(record.group)
+  end
 end

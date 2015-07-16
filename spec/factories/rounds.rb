@@ -5,6 +5,12 @@ FactoryGirl.define do
     members_can_propose_buckets true
   end
 
+  factory :draft_round, class: :round do
+    name { Faker::Company.name }
+    group
+    members_can_propose_buckets true
+  end
+
   factory :round_open_for_proposals, class: :round do
     name { Faker::Company.name }
     group

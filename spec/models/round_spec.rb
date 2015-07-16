@@ -1,104 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe Round, :type => :model do
-
-  describe "fields" do
-    it { should have_db_column(:group_id).with_options(null: false) }
-    it { should have_db_column(:name).of_type(:string).with_options(null: false) }
-    it { should have_db_column(:starts_at).of_type(:datetime) }
-    it { should have_db_column(:ends_at).of_type(:datetime) }
-    it { should have_db_column(:members_can_propose_buckets).of_type(:boolean) }
-  end
-
-  describe "associations" do
-    it { should belong_to(:group) }
-    it { should have_many(:buckets).dependent(:destroy) }
-    it { should have_many(:allocations).dependent(:destroy) }
-    it { should have_many(:fixed_costs).dependent(:destroy) }
-  end
-
-  describe "validations" do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:group) }
-  end
-
-  describe "#generate_new_members_and_allocations_from(csv, current_user)" do
-
-    before do
-      @csv = CSV.read('./spec/assets/test-csv.csv')
-      @group = create(:group)
-      @admin = create(:user)
-      @group.add_admin(@admin)
-      @csv.each { |email, allocation| @group.members << create(:user, email: email) }
-      @round = create(:round, group: @group)
+  describe "#mode" do
+    it "if unpublished -- draft mode" do
+      expect(create(:draft_round).mode).to eq("draft")
     end
 
-    it "generates allocations for round from a 2-column csv file containing emails and allocations" do
-      @round.generate_new_members_and_allocations_from!(@csv, @admin)
-      @csv.each do |email, allocation|
-        user_id = User.find_by_email(email).id
-        expect(@round.allocations.find_by(user_id: user_id, amount: allocation.to_i)).to be_truthy
-      end
+    it "if published, and starts_at set but not reached -- proposal mode" do
+      expect(create(:round_open_for_proposals).mode).to eq("proposal")
     end
 
-    context "if any cobudget users in csv not already a member of group" do
-      before do
-        @new_member = @group.members.last
-        @group.members.delete(@new_member.id)
-        @group.reload
-      end
-
-      it "should add them to the group" do
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-        expect(@group.members).to include(@new_member)
-      end
-
-      it "should send them an 'invite to group' email" do
-        mail_double = double('mail')
-        expect(UserMailer).to receive(:invite_to_group_email).with(@new_member, @admin, @group, @round).and_return(mail_double)
-        expect(mail_double).to receive(:deliver!)
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-      end
-
-      it "should generate allocation for the new group member" do
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-        expect(@round.allocations.find_by(user_id: @new_member.id)).to be_truthy
-      end
+    it "if published, and current time is between starts_at and ends_at -- contribution mode" do
+      expect(create(:round_open_for_contributions).mode).to eq("contribution")
     end
-  
-    context "if any users in csv not a part of cobudget at all" do
-      before do
-        @new_member = @group.members.last.delete
-      end
+    
+    it "if published, and current time is after ends_at -- closed mode" do
+      expect(create(:round_closed).mode).to eq("closed")
+    end
+  end
 
-      it "should add them to cobudget" do
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-        expect(User.find_by_email(@new_member.email)).to be_truthy
-      end
+  describe "#published?" do
+    it "returns true if starts_at and ends_at are both present" do
+      expect(create(:round_open_for_proposals).published?).to eq(true)
+    end
 
-      it "should add them to the group" do
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-        expect(@group.members.find_by_email(@new_member.email)).to be_truthy
-      end
+    it "returns false otherwise" do
+      expect(create(:draft_round).published?).to eq(false)
+    end
+  end
 
-      it "should send them an invite to cobudget email" do
-        mail_double = double('mail')
-        expect(UserMailer).to receive(:invite_to_group_email).and_return(mail_double)
-        expect(mail_double).to receive(:deliver!)
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-      end
+  describe "has_valid_duration?" do
+    it "returns true if starts_at and ends_at are present, and starts_at is before ends_at" do
+      expect(create(:round_open_for_proposals).has_valid_duration?).to eq(true)
+    end
 
-      it "should send them an invite to group email" do
-        mail_double = double('mail')
-        expect(UserMailer).to receive(:invite_email).and_return(mail_double)
-        expect(mail_double).to receive(:deliver!)
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-      end
-
-      it "should generate allocation for new cobudgeter" do
-        @round.generate_new_members_and_allocations_from!(@csv, @admin)
-        expect(@round.allocations.find_by(user: User.find_by_email(@new_member.email))).to be_truthy
-      end
+    it "otherwise, returns false" do
+      expect(create(:draft_round).has_valid_duration?).to eq(false)
     end
   end
 
@@ -117,19 +54,16 @@ RSpec.describe Round, :type => :model do
     end    
   end
 
-  describe '#open_for_proposals?' do
-    it "returns true if starts_at and ends_at are defined and starts_at hasn't happened yet" do
-      expect(create(:round).open_for_proposals?).to be false
-      expect(create(:round_open_for_proposals).open_for_proposals?).to be true
-      expect(create(:round_open_for_contributions).open_for_proposals?).to be false
-      expect(create(:round_closed).open_for_proposals?).to be false
+  describe "#has_valid_duration_validator" do
+    it "checks that a round has a valid_duration" do
+      round = build(:round_open_for_proposals)
+      expect(round.valid?).to eq(true)
     end
-  end
 
-  describe '#closed?' do
-    it "returns true if ends_at has already happened" do
-      expect(create(:round_open_for_contributions).closed?).to be false
-      expect(create(:round_closed).closed?).to be true
+    it "adds an error if round duration not valid" do
+      round = build(:draft_round)
+      round.assign_attributes(starts_at: Time.zone.now, ends_at: Time.zone.now - 1.days)
+      expect(round.valid?).to eq(false)
     end
   end
 end

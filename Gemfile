@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.5'
+gem 'rails', '~> 4.2.3'
 
 gem 'rails-api'
 
 gem 'spring', :group => :development
-
 
 # persistance
 
@@ -17,6 +16,7 @@ gem 'foreigner'
 gem 'apipie-rails'
 gem 'active_model_serializers', '~> 0.9.0'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'responders', '~> 2.0'
 
 # model utilities
 
@@ -30,6 +30,11 @@ gem 'pundit'
 # server
 
 gem 'puma'
+
+gem 'delayed_job_active_record'
+gem 'daemons'
+
+gem 'sinatra', :require => nil
 
 group :development do
   gem 'capistrano', '2.15.5'
@@ -45,7 +50,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem 'shoulda-matchers'
-  gem "nyan-cat-formatter"
 end
 
 group :production do

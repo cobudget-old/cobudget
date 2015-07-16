@@ -20,3 +20,5 @@
 .DS_Store
 /vendor
 /coverage
+
+dump.rb
