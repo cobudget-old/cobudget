@@ -38,6 +38,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    airbrake (4.3.0)
+      builder
+      multi_json
     apipie-rails (0.3.4)
       json
     arel (6.0.2)
@@ -103,6 +106,7 @@ GEM
       monetize (~> 1.1.0)
       money (~> 6.5.0)
       railties (>= 3.0)
+    multi_json (1.11.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -216,6 +220,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.9.0)
+  airbrake
   apipie-rails
   capistrano (= 2.15.5)
   capistrano-rails (~> 1.0.0)
