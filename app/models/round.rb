@@ -11,7 +11,7 @@ class Round < ActiveRecord::Base
   validate :has_valid_duration_validator
 
   def generate_new_members_and_allocations_from!(csv, admin)
-    csv.each do |email, allocation|
+    csv.each do |email, allocation_amount|
       email = email.downcase.strip
 
       unless user = User.find_by_email(email)
@@ -27,8 +27,10 @@ class Round < ActiveRecord::Base
         UserMailer.invite_to_group_email(user, admin, group).deliver_later!
       end
 
-      if allocation.to_f > 0
-        allocations.create(user_id: user.id, amount: allocation.to_f)
+      if allocation = allocations.find_by(user_id: user.id)
+        allocation.update(amount: allocation_amount)
+      else
+        allocations.create(user_id: user.id, amount: allocation_amount.to_f)
       end
     end
   end
