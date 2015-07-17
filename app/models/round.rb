@@ -12,6 +12,8 @@ class Round < ActiveRecord::Base
 
   def generate_new_members_and_allocations_from!(csv, admin)
     csv.each do |email, allocation|
+      email.downcase!
+      
       unless user = User.find_by_email(email)
         require 'securerandom'
         tmp_password = SecureRandom.hex(4)
