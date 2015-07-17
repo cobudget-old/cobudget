@@ -28,7 +28,7 @@ class Round < ActiveRecord::Base
       end
 
       if allocation.to_f > 0
-        allocations.create(user_id: user.id, amount: allocation.to_f).perform_later
+        allocations.create(user_id: user.id, amount: allocation.to_f)
       end
     end
   end
