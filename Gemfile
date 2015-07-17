@@ -56,6 +56,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'delayed-plugins-airbrake'
 end
 
 ruby "2.2.1"
