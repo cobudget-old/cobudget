@@ -5,10 +5,8 @@ module MyLetDeclarations
   let(:user) { create(:user) }
   let(:group) { create(:group) }
   let(:membership) { create(:membership, group: group) }
-  let(:round) { create(:round, group: group) }
-  let(:fixed_cost) { create(:fixed_cost, round: round) }
-  let(:allocation) { create(:allocation, round: round) }
-  let(:bucket) { create(:bucket, round: round) }
+  let(:allocation) { create(:allocation, group: group) }
+  let(:bucket) { create(:bucket, group: group) }
   let(:contribution) { create(:contribution, bucket: bucket) }
 
   # Convenience methods for testing permissions
