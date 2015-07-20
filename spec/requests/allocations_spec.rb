@@ -35,14 +35,14 @@ describe "Allocations" do
   end
 
   describe "PUT /allocations/:allocation_id" do
-    let(:evil_round) { FactoryGirl.create(:round) }
+    let(:evil_round) { create(:round) }
     let(:allocation_params) { {
       allocation: {
         amount: "15",
         round_id: evil_round.id
       }
     }.to_json }
-    let(:allocation) { FactoryGirl.create(:allocation, amount: 2, round: round) }
+    let(:allocation) { create(:allocation, amount: 2, round: round) }
 
     context 'admin' do
       before { make_user_group_admin }

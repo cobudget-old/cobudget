@@ -21,7 +21,7 @@ describe "Buckets" do
     end
 
     context 'trying to create a contribution for another user' do
-      let(:contribution_user) { FactoryGirl.create(:user) }
+      let(:contribution_user) { create(:user) }
 
       it "creates one for the current user instead" do
         post "/contributions", contribution_params, request_headers

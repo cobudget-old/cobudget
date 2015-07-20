@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Auth" do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
 
   let(:request_headers) { {
     "Accept" => "application/json",

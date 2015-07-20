@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe "Users" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:another_user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
+  let(:another_user) { create(:user) }
 
   context 'resetting password when logged out' do
     let(:request_headers) { logged_out_headers }
 
     describe "POST /users/reset_password" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
       let(:user_params) {
         { user:
           { email: user.email }
@@ -26,7 +26,7 @@ describe "Users" do
     end
 
     describe "PUT /users/reset_password" do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
       let(:token) { user.send_reset_password_instructions }
       let(:user_params) { {user: reset_password_params}.to_json }
       let(:reset_password_params) {
@@ -48,7 +48,7 @@ describe "Users" do
   end
 
   describe "PUT /users/:user_id" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
     let(:user_params) {
       { user:
         { name: 'Giddy TooGood',
@@ -67,7 +67,7 @@ describe "Users" do
         expect(user.valid_password?('johnkeyisgreat')).to eq false
       end
       context 'is uninitialized' do
-        let(:user) { FactoryGirl.create(:user, initialized: false) }
+        let(:user) { create(:user, initialized: false) }
         it 'allows password update' do
           put "/users/#{user.id}/", user_params, request_headers
           user.reload
@@ -147,7 +147,7 @@ describe "Users" do
 
   describe "GET /users/" do
     it "displays users" do
-      user2 = FactoryGirl.create(:user)
+      user2 = create(:user)
 
       get "/users/", {}, request_headers
 

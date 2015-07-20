@@ -20,10 +20,10 @@ describe "Groups" do
   describe "GET /groups?member_id=1" do
 
     before(:each) do
-      @user = FactoryGirl.create(:user)
-      @group1 = FactoryGirl.create(:group)
-      @group2 = FactoryGirl.create(:group)
-      @membership1 = FactoryGirl.create(:membership, group_id: @group1.id, member_id: @user.id)
+      @user = create(:user)
+      @group1 = create(:group)
+      @group2 = create(:group)
+      @membership1 = create(:membership, group_id: @group1.id, member_id: @user.id)
     end
 
     it "gets groups" do

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe "FixedCosts" do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:round) { FactoryGirl.create(:round) }
-  let(:membership) { FactoryGirl.create(:membership, group: round.group, member: user) }
-  let(:admin_membership) { FactoryGirl.create(:membership,
+  let(:user) { create(:user) }
+  let(:round) { create(:round) }
+  let(:membership) { create(:membership, group: round.group, member: user) }
+  let(:admin_membership) { create(:membership,
                            group: round.group, member: user, is_admin: true) }
 
   describe "POST /fixed_costs" do
@@ -45,14 +45,14 @@ describe "FixedCosts" do
   end
 
   describe "PUT /fixed_costs/:fixed_cost_id" do
-    let(:evil_round) { FactoryGirl.create(:group) }
+    let(:evil_round) { create(:group) }
     let(:fixed_cost_params) { {
       fixed_cost: {
         amount: 15,
         round_id: evil_round.id
       }
     }.to_json }
-    let(:fixed_cost) { FactoryGirl.create(:fixed_cost, round: round,
+    let(:fixed_cost) { create(:fixed_cost, round: round,
                                           amount: 3) }
 
     context 'admin' do
@@ -78,7 +78,7 @@ describe "FixedCosts" do
   end
 
   describe "DELETE /fixed_costs/:fixed_cost_id" do
-    let(:fixed_cost) { FactoryGirl.create(:fixed_cost, round: round,
+    let(:fixed_cost) { create(:fixed_cost, round: round,
                                           amount: 3) }
     context 'admin' do
       before { admin_membership }
@@ -101,8 +101,8 @@ describe "FixedCosts" do
 
   describe "GET /rounds/:round_id/fixed_costs/" do
     it "displays fixed costs for a round" do
-      fixed_cost1 = FactoryGirl.create(:fixed_cost, amount: 54.32, round_id: round.id)
-      fixed_cost2 = FactoryGirl.create(:fixed_cost, amount: 54.32, round_id: round.id)
+      fixed_cost1 = create(:fixed_cost, amount: 54.32, round_id: round.id)
+      fixed_cost2 = create(:fixed_cost, amount: 54.32, round_id: round.id)
 
       get "/rounds/#{round.id}/fixed_costs/", {}, request_headers
 

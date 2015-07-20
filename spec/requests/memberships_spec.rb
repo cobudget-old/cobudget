@@ -3,8 +3,8 @@ require 'rails_helper'
 describe "Memberships" do
   describe "GET /groups/:group_id/memberships/" do
     it "displays memberships for a group" do
-      membership1 = FactoryGirl.create(:membership, group_id: group.id)
-      membership2 = FactoryGirl.create(:membership, group_id: group.id)
+      membership1 = create(:membership, group_id: group.id)
+      membership2 = create(:membership, group_id: group.id)
 
       get "/groups/#{group.id}/memberships/", {}, request_headers
 
@@ -21,9 +21,9 @@ describe "Memberships" do
   end
 
   describe "POST /memberships" do
-    let(:new_member) { FactoryGirl.create(:user) }
-    let(:existing_member) { FactoryGirl.create(:membership,
-      group: group, member: FactoryGirl.create(:user)).member }
+    let(:new_member) { create(:user) }
+    let(:existing_member) { create(:membership,
+      group: group, member: create(:user)).member }
     let(:membership_params) { { membership: membership_details }.to_json }
 
     context 'admin' do
@@ -160,8 +160,8 @@ describe "Memberships" do
   end
 
   describe "PUT /memberships/:membership_id" do
-    let(:membership) { FactoryGirl.create(:membership, group: group) }
-    let(:evil_group) { FactoryGirl.create(:group) }
+    let(:membership) { create(:membership, group: group) }
+    let(:evil_group) { create(:group) }
     let(:membership_params) { {
       membership: {
         is_admin: true,
@@ -192,7 +192,7 @@ describe "Memberships" do
   end
 
   describe "DELETE /memberships/:membership_id" do
-    let(:membership) { FactoryGirl.create(:membership, group: group) }
+    let(:membership) { create(:membership, group: group) }
 
     context 'admin' do
       before { make_user_group_admin }
