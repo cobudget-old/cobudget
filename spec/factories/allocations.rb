@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :allocation do
     user
-    round
+    group
     amount 40
   end
 end

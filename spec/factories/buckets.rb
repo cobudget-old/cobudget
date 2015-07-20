@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :bucket do
     name { Faker::Company.name }
-    round
+    group
     user
     target 500
   end
