@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720232941) do
+ActiveRecord::Schema.define(version: 20150720233501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,14 +29,13 @@ ActiveRecord::Schema.define(version: 20150720232941) do
   create_table "buckets", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "round_id"
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
     t.decimal  "target",      precision: 12, scale: 2, default: 0.0
+    t.integer  "group_id"
   end
 
-  add_index "buckets", ["round_id"], name: "index_buckets_on_round_id", using: :btree
   add_index "buckets", ["user_id"], name: "index_buckets_on_user_id", using: :btree
 
   create_table "contributions", force: :cascade do |t|
