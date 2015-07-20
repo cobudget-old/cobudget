@@ -1,7 +1,7 @@
 class AllocationsController < ApplicationController
-  api :GET, '/rounds/:round_id/allocations/', 'Get allocation for a particular round'
+  api :GET, '/groups/:group_id/allocations/', 'Get allocation for a particular round'
   def index
-    respond_with Round.find(params[:round_id]).allocations
+    respond_with Group.find(params[:group_id]).allocations
   end
 
   api :POST, '/allocations/', 'Create allocation'
@@ -20,7 +20,7 @@ class AllocationsController < ApplicationController
     end
 
     def allocation_params_create
-      params.require(:allocation).permit(:user_id, :round_id, :amount)
+      params.require(:allocation).permit(:user_id, :group_id, :amount)
     end
 
     def allocation_params_update

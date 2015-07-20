@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :groups, only: [:index, :show, :create], defaults: { format: :json } do
+    resources :allocations, only: [:index]
     resources :memberships, only: [:index]
   end
   resources :memberships, only: [:create, :update, :destroy], defaults: { format: :json }
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
       put :open_for_proposals
       put :open_for_contributions
     end
-    resources :allocations, only: [:index]
     resources :contributors, only: [:show, :index]
   end
 

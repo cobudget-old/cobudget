@@ -4,7 +4,7 @@ describe "Allocations" do
   describe "POST /allocations" do
     let(:allocation_params) { {
       allocation: {
-        round_id: round.id,
+        group_id: group.id,
         user_id: user.id,
         amount: "25"
       }
@@ -35,14 +35,14 @@ describe "Allocations" do
   end
 
   describe "PUT /allocations/:allocation_id" do
-    let(:evil_round) { create(:round) }
+    let(:evil_group) { create(:group) }
     let(:allocation_params) { {
       allocation: {
         amount: "15",
-        round_id: evil_round.id
+        group_id: evil_group.id
       }
     }.to_json }
-    let(:allocation) { create(:allocation, amount: 2, round: round) }
+    let(:allocation) { create(:allocation, amount: 2, group: group) }
 
     context 'admin' do
       before { make_user_group_admin }
@@ -52,7 +52,7 @@ describe "Allocations" do
         allocation.reload
         expect(response.status).to eq updated
         expect(allocation.amount).to eq 15
-        expect(allocation.round_id).not_to eq evil_round.id
+        expect(allocation.group_id).not_to eq evil_group.id
       end
     end
 

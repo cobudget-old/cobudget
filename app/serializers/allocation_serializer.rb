@@ -1,3 +1,3 @@
 class AllocationSerializer < ActiveModel::Serializer
-  attributes :id, :amount, :round_id, :user_id
+  attributes :id, :amount, :group_id, :user_id
 end
