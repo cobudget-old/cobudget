@@ -1,23 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Contribution, :type => :model do
-
-  describe "fields" do
-  	it { should have_db_column(:amount).of_type(:decimal).with_options(precision: 12, scale: 2, default: 0.0) }
-  end
-
-  describe "associations" do
-    it { should belong_to(:bucket) }
-    it { should belong_to(:user) }
-  end
-
-  describe "validations" do
-    it { should validate_presence_of(:bucket_id) }
-    it { should validate_presence_of(:user_id) }
-    it { should validate_uniqueness_of(:user_id).scoped_to(:bucket_id) }
-    it { should validate_numericality_of(:amount).is_greater_than(0) }
-  end
-
   describe "#self.for_round(round_id)" do
   	it "returns all contributions from buckets with specified round_id" do
   		round1 = create(:round_open_for_contributions)
@@ -32,5 +15,4 @@ RSpec.describe Contribution, :type => :model do
   		expect(Contribution.for_round(round2.id)).to eq(contributions2)
   	end
   end
-
 end

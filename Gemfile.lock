@@ -191,8 +191,6 @@ GEM
       rspec-mocks (~> 3.3.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
-    shoulda-matchers (2.8.0)
-      activesupport (>= 3.0.0)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -247,7 +245,6 @@ DEPENDENCIES
   rails_12factor
   responders (~> 2.0)
   rspec-rails (~> 3.0)
-  shoulda-matchers
   simplecov
   sinatra
   spring

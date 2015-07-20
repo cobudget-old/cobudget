@@ -54,7 +54,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'simplecov', :require => false
-  gem 'shoulda-matchers'
 end
 
 group :production do
