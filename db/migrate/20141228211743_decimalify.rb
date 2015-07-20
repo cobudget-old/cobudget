@@ -11,10 +11,6 @@ class Decimalify < ActiveRecord::Migration
     add_column :contributions, :amount, :decimal, :precision => 12, :scale => 2, :default => 0.00
     execute "UPDATE contributions SET amount = amount_cents / 100"
     remove_column :contributions, :amount_cents
-
-    add_column :fixed_costs, :amount, :decimal, :precision => 12, :scale => 2, :default => 0.00
-    execute "UPDATE fixed_costs SET amount = amount_cents / 100"
-    remove_column :fixed_costs, :amount_cents
   end
 
   def down
@@ -29,9 +25,5 @@ class Decimalify < ActiveRecord::Migration
     add_column :contributions, :amount_cents, :integer
     execute "UPDATE contributions SET amount_cents = amount * 100"
     remove_column :contributions, :amount
-
-    add_column :fixed_costs, :amount_cents, :integer
-    execute "UPDATE fixed_costs SET amount_cents = amount * 100"
-    remove_column :fixed_costs, :amount
   end
 end

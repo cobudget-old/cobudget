@@ -25,7 +25,6 @@ Rails.application.routes.draw do
       put :open_for_contributions
     end
     resources :allocations, only: [:index]
-    resources :fixed_costs, only: [:index]
     resources :contributors, only: [:show, :index]
   end
 
@@ -34,7 +33,6 @@ Rails.application.routes.draw do
   # NOTE (JL): Added unsed show route here cause otherwise respond_with doesn't work
   # on the create action (not sure why??)
   resources :allocations, only: [:create, :show, :update], defaults: { format: :json }
-  resources :fixed_costs, only: [:create, :show, :update, :destroy], defaults: { format: :json }
 
   resources :buckets, only: [:create, :show, :update, :destroy], defaults: { format: :json }
 
