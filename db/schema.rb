@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714235506) do
+ActiveRecord::Schema.define(version: 20150720232941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,21 +20,20 @@ ActiveRecord::Schema.define(version: 20150714235506) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "round_id"
     t.decimal  "amount",     precision: 12, scale: 2, default: 0.0
+    t.integer  "group_id"
   end
 
-  add_index "allocations", ["round_id"], name: "index_allocations_on_round_id", using: :btree
   add_index "allocations", ["user_id"], name: "index_allocations_on_user_id", using: :btree
 
   create_table "buckets", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "round_id"
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.decimal  "target",                  precision: 12, scale: 2, default: 0.0
+    t.decimal  "target",      precision: 12, scale: 2, default: 0.0
   end
 
   add_index "buckets", ["round_id"], name: "index_buckets_on_round_id", using: :btree
@@ -67,19 +66,8 @@ ActiveRecord::Schema.define(version: 20150714235506) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "fixed_costs", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.integer  "round_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "description"
-    t.decimal  "amount",                  precision: 12, scale: 2, default: 0.0
-  end
-
-  add_index "fixed_costs", ["round_id"], name: "index_fixed_costs_on_round_id", using: :btree
-
   create_table "groups", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,8 +86,8 @@ ActiveRecord::Schema.define(version: 20150714235506) do
   create_table "rounds", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "group_id",                                null: false
-    t.string   "name",                        limit: 255, null: false
+    t.integer  "group_id",                    null: false
+    t.string   "name",                        null: false
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.boolean  "members_can_propose_buckets"
@@ -108,21 +96,21 @@ ActiveRecord::Schema.define(version: 20150714235506) do
   add_index "rounds", ["group_id"], name: "index_rounds_on_group_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "access_token",           limit: 255
-    t.string   "name",                   limit: 255
-    t.boolean  "initialized",                        default: false, null: false
+    t.string   "access_token"
+    t.string   "name"
+    t.boolean  "initialized",            default: false, null: false
   end
 
   add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true, using: :btree
