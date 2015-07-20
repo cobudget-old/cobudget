@@ -3,13 +3,13 @@ require 'rails_helper'
 describe "Memberships" do
   describe "GET /rounds/:round_id/contributors/" do
     it "displays contributors information for given round" do
-      membership = FactoryGirl.create(:membership, group: group)
-      allocation = FactoryGirl.create(:allocation, round: round, amount: 2.5)
-      allocation2 = FactoryGirl.create(:allocation, round: round, amount: 5)
-      bucket = FactoryGirl.create(:bucket, round: round)
-      bucket2 = FactoryGirl.create(:bucket, round: round)
-      contribution = FactoryGirl.create(:contribution, bucket: bucket, user: allocation2.user, amount: 1)
-      contribution2 = FactoryGirl.create(:contribution, bucket: bucket2, user: allocation2.user, amount: 2)
+      membership = create(:membership, group: group)
+      allocation = create(:allocation, round: round, amount: 2.5) # 2.5 dollas
+      allocation2 = create(:allocation, round: round, amount: 5) # 5 dollas
+      bucket = create(:bucket, round: round)
+      bucket2 = create(:bucket, round: round) 
+      contribution = create(:contribution, bucket: bucket, user: allocation2.user, amount: 1) # allocation 1 now 1.5 dollas 
+      contribution2 = create(:contribution, bucket: bucket2, user: allocation2.user, amount: 2) # allocation 2 now 3 dollas
 
       get "/rounds/#{round.id}/contributors/", {}, request_headers
 
