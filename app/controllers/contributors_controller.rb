@@ -24,12 +24,12 @@ class ContributorsController < ApplicationController
   api :GET, '/rounds/:round_id/contributors/',
             'Gets all contributor\'s details for a given round'
   def index
-    allocations = round.allocations.order('amount DESC')
-    members_without_allocations = round.group.members.order('name ASC').where('users.id not in (?)', allocations.map{|a| a.user_id})
+    allocations = round.allocations.order(amount: :desc)
+    members_without_allocations = round.group.members.order(name: :asc).where('users.id not in (?)', allocations.map{|a| a.user_id})
     contributors = []
     allocations.each do |allocation|
       contributions = Contribution.for_round(params[:round_id])
-                                  .where(user_id: allocation.user_id)
+                                  .where(user_id: allocation.user_id).order(amount: :desc)
       contributors << {
         user: UserSerializer.new(allocation.user).attributes,
         allocation: AllocationSerializer.new(allocation).attributes,
@@ -45,7 +45,7 @@ class ContributorsController < ApplicationController
     render json: { contributors: contributors }
   end
 
-  private
+  private 
     def round
       @round ||= Round.includes(:allocations).find(params[:round_id])
     end
