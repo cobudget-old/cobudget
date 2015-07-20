@@ -25,7 +25,7 @@ class RoundsController < ApplicationController
   def upload
     load_and_authorize_round
     csv = CSV.read(params[:csv].tempfile)
-    @round.generate_new_members_and_allocations_from!(csv, current_user)
+    @round.delay.generate_new_members_and_allocations_from!(csv, current_user)
     render status: 201, json: { message: "upload successful" }
   end
 

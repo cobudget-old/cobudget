@@ -34,6 +34,8 @@ gem 'puma'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
+gem 'airbrake'
+
 gem 'sinatra', :require => nil
 
 # error tracking
@@ -57,6 +59,7 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'delayed-plugins-airbrake'
 end
 
 ruby "2.2.1"
