@@ -8,12 +8,12 @@ class ContributionsController < ApplicationController
     respond_with contribution
   end
 
-  api :PUT, '/contributions/:contribution_id', 'Update contribution'
+  api :PUT, '/contributions/:id', 'Update contribution'
   def update
     update_resource contribution_params_update
   end
 
-  api :DELETE, '/contributions/:contribution_id', 'Deletes contribution'
+  api :DELETE, '/contributions/:id', 'Deletes contribution'
   def destroy
     destroy_resource
   end
