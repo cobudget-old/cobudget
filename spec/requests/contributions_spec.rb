@@ -6,7 +6,7 @@ describe "Buckets" do
   describe "POST /contributions" do
     let(:contribution_params) { {
       contribution: {
-        bucket_id: round.id,
+        bucket_id: bucket.id,
         user_id: contribution_user.id,
         amount: "25"
       }
@@ -35,7 +35,7 @@ describe "Buckets" do
   describe "PUT /contributions" do
     let(:contribution_hash) {
       {
-        bucket_id: round.id,
+        bucket_id: bucket.id,
         user_id: contribution_user.id,
         amount: 15
       }
@@ -60,7 +60,7 @@ describe "Buckets" do
   describe "DELETE /contributions/:id" do
     let(:contribution_hash) {
       {
-        bucket_id: round.id,
+        bucket_id: bucket.id,
         user_id: contribution_user.id,
         amount: 25
       }
