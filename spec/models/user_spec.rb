@@ -20,4 +20,15 @@ RSpec.describe User, :type => :model do
 		  expect(user.is_admin_for?(admin_membership.group)).to eq true
 		end
 	end
+
+	describe "#is_member_of?(group)" do
+		it "returns false if user isn't a member of group" do
+			make_user_group_member
+			expect(user.is_member_of?(group)).to eq(true)
+		end
+
+		it "returns true if user is a member of the group" do
+			expect(user.is_member_of?(group)).to eq(false)
+		end
+	end
 end

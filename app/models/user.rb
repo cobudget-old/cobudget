@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
   def is_admin_for?(group)
     group.memberships.where(is_admin: true).where(member_id: id).exists?
   end
+
+  def is_member_of?(group)
+    group.members.include?(self)
+  end
 end
