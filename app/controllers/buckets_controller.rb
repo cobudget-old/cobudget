@@ -1,20 +1,20 @@
 class BucketsController < ApplicationController
-  api :GET, '/buckets/:bucket_id', 'Full details of bucket'
+  api :GET, '/buckets/:id', 'Full details of bucket'
   def show
     respond_with resource
   end
 
-  api :POST, '/buckets/', 'Create a bucket'
+  api :POST, '/buckets', 'Create a bucket'
   def create
     create_resource(bucket_params_create)
   end
 
-  api :PUT, '/buckets/:bucket_id', 'Update a bucket'
+  api :PUT, '/buckets/:id', 'Update a bucket'
   def update
     update_resource(bucket_params_update)
   end
 
-  api :DELETE, '/buckets/:round_id', 'Deletes a bucket'
+  api :DELETE, '/buckets/:id', 'Deletes a bucket'
   def destroy
     destroy_resource
   end
