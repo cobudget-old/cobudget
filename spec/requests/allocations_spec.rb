@@ -15,10 +15,8 @@ describe "Allocations" do
 
       it "creates an allocation" do
         post "/allocations", allocation_params, request_headers
-        alloc = Allocation.first
         expect(response.status).to eq created
-        expect(alloc.amount).to eq 25
-        expect(alloc.user).to eq user
+        expect(Allocation.find_by(group: group, user: user, amount: 25)).to be_truthy
       end
     end
 
@@ -27,9 +25,8 @@ describe "Allocations" do
 
       it "cannot create allocations" do
         post "/allocations", allocation_params, request_headers
-        alloc = Allocation.first
         expect(response.status).to eq forbidden
-        expect(alloc).to eq nil
+        expect(Allocation.find_by(group: group, user: user, amount: 25)).to be_nil
       end
     end
   end
@@ -39,19 +36,25 @@ describe "Allocations" do
     let(:allocation_params) { {
       allocation: {
         amount: "15",
-        group_id: evil_group.id
+        group_id: evil_group.id 
       }
     }.to_json }
     let(:allocation) { create(:allocation, amount: 2, group: group) }
 
     context 'admin' do
-      before { make_user_group_admin }
-
-      it "updates an allocation" do
+      before do
+        make_user_group_admin
         put "/allocations/#{allocation.id}", allocation_params, request_headers
         allocation.reload
+      end
+
+      it "updates an allocation" do
         expect(response.status).to eq updated
         expect(allocation.amount).to eq 15
+      end
+
+      it "cannot update group_id" do
+        expect(response.status).to eq updated
         expect(allocation.group_id).not_to eq evil_group.id
       end
     end

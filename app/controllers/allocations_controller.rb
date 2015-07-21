@@ -1,5 +1,5 @@
 class AllocationsController < ApplicationController
-  api :GET, '/groups/:group_id/allocations/', 'Get allocation for a particular round'
+  api :GET, '/groups/:group_id/allocations', 'Get allocation for a particular round'
   def index
     respond_with Group.find(params[:group_id]).allocations
   end
