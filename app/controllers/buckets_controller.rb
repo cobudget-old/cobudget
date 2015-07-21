@@ -23,7 +23,7 @@ class BucketsController < ApplicationController
     def bucket_params_create
       params.require(:bucket).permit(:name,
                                      :description,
-                                     :round_id,
+                                     :group_id,
                                      :user_id,
                                      :target)
     end
