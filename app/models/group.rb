@@ -9,4 +9,15 @@ class Group < ActiveRecord::Base
   def add_admin(user)
     memberships.create!(member: user, is_admin: true)
   end
+
+  def balance_for(user)
+    allocation_sum = allocations.where(user: user)
+                                .map { |allocation| allocation.amount }
+                                .reduce(:+) || 0
+    contribution_sum = buckets.map { |bucket| bucket.contributions }.flatten
+                              .select { |contribution| contribution.user == user }
+                              .map { |contribution| contribution.amount }
+                              .reduce(:+) || 0
+    balance = allocation_sum - contribution_sum
+  end
 end
