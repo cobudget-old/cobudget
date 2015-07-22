@@ -1,27 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-puts 'Seed: Making lots of fake database entries!!!'
-
-
 ### USERS
 
-admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
-users = []
-user = User.create(name: 'User', email: 'user@example.com', password: 'password')
-users << user
-8.times do
-  user = User.create!(name: Faker::Name.name,
-               email: Faker::Internet.email,
-               password: 'password')
-  users << user
-end
+Allocation.destroy_all
+Bucket.destroy_all
+Contribution.destroy_all
+Group.destroy_all
+Membership.destroy_all
+User.destroy_all
 
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
+puts "generated admin account email: 'admin@example.com', password: 'password'"
+non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password')
+puts "generated user account email: 'user@example.com', password: 'password'"
+
+users = []
+18.times do
+  users << User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: 'password')
+end
+puts "generated 18 more fake users"
 
 ### GROUPS
 
@@ -29,77 +24,54 @@ groups = []
 2.times do
   group = Group.create!(name: Faker::Company.name)
   group.memberships.create!(member: admin, is_admin: true)
+  group.memberships.create!(member: non_admin, is_admin: false)
   groups << group
 end
-
-
-### ROUNDS
-
-rounds = []
-time_now = Time.now
-groups.each do |group|
-  4.times do
-    rounds << Round.create!(group: group,
-                      name: Faker::Lorem.sentence(1, false, 4),
-                      starts_at: time_now - 5.days,
-                      ends_at: time_now - 3.days)
-  end
-  4.times do
-    rounds << Round.create!(group: group,
-                      name: Faker::Lorem.sentence(1, false, 4),
-                      starts_at: time_now,
-                      ends_at: time_now + 3.days)
-  end
-  4.times do
-    rounds << Round.create!(group: group,
-                      name: Faker::Lorem.sentence(1, false, 4),
-                      starts_at: time_now + 3.days,
-                      ends_at: time_now + 5.days)
-  end
-end
+puts "generated 2 fake groups"
+puts "added admin and user accounts to both groups"
 
 ### MEMBERSHIPS
 
-groups.each do |group|
-  users.each do |user|
-    FactoryGirl.create(:membership, group: group, member: user)
-  end
+users.each do |user|
+  FactoryGirl.create(:membership, group: groups.sample, member: user)
 end
+puts "added users as members to one of the groups"
 
 ### BUCKETS
 
-rounds.each do |round|
+groups.each do |group|
   7.times do
-    Bucket.create!(round: round,
-                   name: Faker::Lorem.sentence(1, false, 4),
-                   user: users.sample,
-                   description: Faker::Lorem.paragraph(3, false, 14),
-                   target: Random.rand(0..1000))
+    group.buckets.create(name: Faker::Lorem.sentence(1, false, 4), 
+                         user: group.members.sample, 
+                         description: Faker::Lorem.paragraph(3, false, 14), 
+                         target: rand(0..1000))
   end
 end
-
+puts "created 7 buckets for both groups"
 
 #### ALLOCATIONS
 
-rounds.each do |round|
-  round.group.members.each do |member|
-    Allocation.create(user: member,
-                      round: round,
-                      amount: Random.rand(0..1000))
+groups.each do |group|
+  group.members.each do |member|
+    rand(1..4).times { group.allocations.create(user: member, amount: rand(0..1000)) }
   end
 end
+puts "created 1-4 allocations for each member in each group"
 
 
 ### CONTRIBUTIONS
 
-Bucket.find_each do |bucket|
-  Random.rand(0..4).times do
-    user = users.sample
-    user_allocation = user.allocations.where(round: bucket.round).first.amount / 2
-    Contribution.create(user: user,
-        amount: Random.rand(0..user_allocation),
-        bucket: bucket)
+groups.each do |group|
+  group.buckets.each do |bucket|
+    rand(0..4).times do
+      bucket_target = bucket.target
+      member = group.members.sample
+      member_balance = group.balance_for(member)
+      bucket.contributions.create(user: member, amount: member_balance / 2)
+    end
   end
 end
+
+puts "created 0 - 4 contributions for each bucket in each group"
 
 puts 'Seed: Complete!'
