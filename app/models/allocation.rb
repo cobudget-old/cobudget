@@ -3,7 +3,7 @@ class Allocation < ActiveRecord::Base
   belongs_to :user
 
   validates :group_id, presence: true
-  validates :user_id, presence: true, uniqueness: {scope: :group_id}
+  validates :user_id, presence: true
   validates :amount, presence: true
 
   def formatted_amount
