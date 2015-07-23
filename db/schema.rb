@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720233501) do
+ActiveRecord::Schema.define(version: 20150723024055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,18 +81,6 @@ ActiveRecord::Schema.define(version: 20150720233501) do
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
   add_index "memberships", ["member_id"], name: "index_memberships_on_member_id", using: :btree
-
-  create_table "rounds", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "group_id",                    null: false
-    t.string   "name",                        null: false
-    t.datetime "starts_at"
-    t.datetime "ends_at"
-    t.boolean  "members_can_propose_buckets"
-  end
-
-  add_index "rounds", ["group_id"], name: "index_rounds_on_group_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
