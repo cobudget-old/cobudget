@@ -101,8 +101,6 @@ describe "Buckets" do
   end
 
   describe "DELETE '/buckets/:bucket_id'" do
-    ## still gotta refactor this shit
-
     context "owner of bucket" do
       it "deletes a bucket (and associated dependencies)" do
         contribution
