@@ -50,4 +50,3 @@ describe "Groups" do
     end
   end
 end
-
