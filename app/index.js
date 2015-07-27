@@ -30,3 +30,5 @@ angular.module('cobudget', [
 .controller('ApplicationController', require('app/controllers/app-controller'))
 .factory('UserModel', require('app/models/user-model'))
 .factory('login', require('app/modules/login'))
+.factory('AlertModel', require('app/modules/alert/model'))
+.factory('AlertCollection', require('app/modules/alert/collection'))

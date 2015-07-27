@@ -1,5 +1,5 @@
 /* @ngInject */
-module.exports = function ($scope, $urlRouter, $modal, authModel, $http) {
+module.exports = function ($scope, $urlRouter, $modal, authModel, $http, login) {
 
   $scope.currentUser = authModel;
 
@@ -27,4 +27,6 @@ module.exports = function ($scope, $urlRouter, $modal, authModel, $http) {
   });
 
   $scope.updateCurrentUser();
+
+  login.openLogin()
 };
