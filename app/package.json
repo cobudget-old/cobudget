@@ -3,7 +3,7 @@
     "transform": [
       "babelify",
       "envify",
-      ["evalify", { "files": ["app/config/index.js", "node_modules/app/config/index.js"] } ],
+      ["evalify", { "files": ["app/configs/app.js", "node_modules/app/configs/app.js"] } ],
       ["browserify-ngannotate", { "ext": [ ".js" ] } ],
       ["txtify2", { "extensions": [ "html" ] } ]
     ]
