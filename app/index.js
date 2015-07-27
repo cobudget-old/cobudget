@@ -14,13 +14,19 @@ if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
 }
 
+require('app/modules/auth')
+
 angular.module('cobudget', [
   'ui.router',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
   'xeditable',
   'btford.markdown',
-  'lr.upload'
+  'lr.upload',
+  'cobudget.auth'
 ])
 .constant('config', require('app/configs/app'))
 .config(require('app/configs/http'))
+.controller('ApplicationController', require('app/controllers/app-controller'))
+.factory('UserModel', require('app/models/user-model'))
+.factory('login', require('app/modules/login'))
