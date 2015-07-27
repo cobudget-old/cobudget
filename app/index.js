@@ -22,3 +22,4 @@ angular.module('cobudget', [
   'btford.markdown',
   'lr.upload'
 ])
+.constant('config', require('app/config'))

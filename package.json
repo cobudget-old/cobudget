@@ -3,7 +3,7 @@
   "version": "1.0.0-beta",
   "description": "user interface for Cobudget!",
   "main": "./server.js",
-  "browser": "./app/index.js",
+  "browser": "./index.js",
   "scripts": {
     "install": "napa",
     "start": "gulp build && node .",
@@ -20,12 +20,6 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/open-app/cobudget-ui.git"
-  },
-  "browserify": {
-    "transform": [
-      "babelify",
-      "envify"
-    ]
   },
   "testling": {
     "files": "src/node_modules/**/spec/**/*.coffee",

@@ -1,0 +1,9 @@
+{
+  "browserify": {
+    "transform": [
+      "babelify",
+      "envify",
+      ["evalify", { "files": ["app/config/index.js", "node_modules/app/config/index.js"] } ]
+    ]
+  }
+}
