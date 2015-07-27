@@ -23,3 +23,4 @@ angular.module('cobudget', [
   'lr.upload'
 ])
 .constant('config', require('app/configs/app'))
+.config(require('app/configs/http'))
