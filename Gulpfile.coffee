@@ -44,9 +44,9 @@ sassPaths =  [
 styles = ->
 
   entryFilter = filter (file) ->
-    /src\/[^\/]+\.(sass|scss)$/.test(file.path)
+    /app\/[^\/]+\.(sass|scss)$/.test(file.path)
 
-  srcPaths = ['src/**/']
+  srcPaths = ['app/**/']
     .concat(sassPaths)
     .map (path) -> path + "*.{sass,scss}"
 
@@ -73,7 +73,7 @@ styles = ->
 
 gulp.task 'styles-build', styles
 gulp.task 'styles-watch', ['styles-build'], ->
-  gulp.watch('src/**/*.sass', ['styles-build'])
+  gulp.watch('app/**/*.sass', ['styles-build'])
 
 #
 # scripts
@@ -122,7 +122,7 @@ gulp.task 'scripts-watch', scripts(true)
 # assets
 #
 html = (isWatch) ->
-  glob = 'src/index.html'
+  glob = 'app/index.html'
   ->
     gulp.src(glob)
       .pipe(if isWatch then watch(glob) else util.noop())
@@ -133,7 +133,7 @@ gulp.task 'html-build', html(false)
 gulp.task 'html-watch', html(true)
 
 assetPaths = {
-  "src/assets/**/*": "build"
+  "app/assets/**/*": "build"
   "node_modules/es5-shim/es5-shim*": "build/lib/es5-shim"
   "node_modules/json3/lib/json3*": "build/lib/json3"
   "node_modules/font-awesome/fonts/*": "build/fonts/font-awesome"

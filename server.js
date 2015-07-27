@@ -1,3 +1,3 @@
 var port = process.env.PORT || 9000;
-require('coffee-script/register')
-require('./src/server')().listen(port)
+require('babel/register')
+require('./app/server')().listen(port)
