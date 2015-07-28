@@ -1,11 +1,11 @@
 var State = require('ampersand-state')
 
 /* @ngInject */
-module.exports = function () {
+global.cobudgetApp.factory('AlertModel', function () {
   return State.extend({
     props: {
       type: "string",
       msg: "string"
     },
   })
-}
+});

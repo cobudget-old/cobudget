@@ -1,8 +1,8 @@
 var Collection = require('ampersand-collection')
 
 /* @ngInject */
-module.exports = function (AlertModel) {
+global.cobudgetApp.factory('AlertCollection', function (AlertModel) {
   return Collection.extend({
     model: AlertModel
   })
-}
+})

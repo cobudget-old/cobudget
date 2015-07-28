@@ -7,7 +7,7 @@ var forgotConfirmedModal = require('./forgot-confirmed-modal');
 var resetLoginModal = require('./reset-login-modal');
 
 /* @ngInject */
-module.exports = function ($modal, authModel, AuthService, $state, $stateParams, $location) {
+global.cobudgetApp.factory('login', function ($modal, authModel, AuthService, $state, $stateParams, $location) {
 
   var login = {};
 
@@ -138,4 +138,4 @@ module.exports = function ($modal, authModel, AuthService, $state, $stateParams,
   }
 
   return login;
-};
+});

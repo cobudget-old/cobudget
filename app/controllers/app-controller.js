@@ -1,5 +1,5 @@
 /* @ngInject */
-module.exports = function ($scope, $urlRouter, $modal, authModel, $http, login) {
+global.cobudgetApp.controller('ApplicationController', function ($scope, $urlRouter, $modal, authModel, $http, login) {
 
   $scope.currentUser = authModel;
 
@@ -29,4 +29,4 @@ module.exports = function ($scope, $urlRouter, $modal, authModel, $http, login) 
   $scope.updateCurrentUser();
 
   login.openLogin()
-};
+});

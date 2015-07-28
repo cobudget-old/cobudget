@@ -16,7 +16,7 @@ if (process.env.NODE_ENV != 'production') {
 
 require('app/modules/auth')
 
-angular.module('cobudget', [
+global.cobudgetApp = angular.module('cobudget', [
   'ui.router',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
@@ -27,8 +27,9 @@ angular.module('cobudget', [
 ])
 .constant('config', require('app/configs/app'))
 .config(require('app/configs/http'))
-.controller('ApplicationController', require('app/controllers/app-controller'))
-.factory('UserModel', require('app/models/user-model'))
-.factory('login', require('app/modules/login'))
-.factory('AlertModel', require('app/modules/alert/model'))
-.factory('AlertCollection', require('app/modules/alert/collection'))
+
+require('app/controllers/app-controller')
+require('app/models/user-model')
+require('app/modules/login')
+require('app/modules/alert/model')
+require('app/modules/alert/collection')
