@@ -24,8 +24,9 @@ gem 'money-rails'
 
 # auth
 
-gem "devise"
+gem 'devise'
 gem 'pundit'
+gem 'devise_token_auth'
 
 # server
 
