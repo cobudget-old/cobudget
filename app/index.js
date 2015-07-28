@@ -28,6 +28,8 @@ global.cobudgetApp = angular.module('cobudget', [
 .constant('config', require('app/configs/app'))
 .config(require('app/configs/http'))
 
+require('app/angular-record-store')
+
 require('app/controllers/app-controller')
 require('app/models/user-model')
 require('app/modules/login')
