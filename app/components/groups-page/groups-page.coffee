@@ -1,6 +1,5 @@
-global.cobudgetApp.directive 'groupsPage', ->
-  restrict: 'E'
+module.exports = 
+  url: '/groups'
   template: require('app/components/groups-page/groups-page.html')
-  replace: true # what is this?
   controller: ($scope, Records) ->
-    $scope.hello = "hi"
+    console.log(Records.groups.fetch({}))
