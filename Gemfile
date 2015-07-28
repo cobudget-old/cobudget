@@ -27,6 +27,7 @@ gem 'money-rails'
 gem 'devise'
 gem 'pundit'
 gem 'devise_token_auth'
+gem 'omniauth'
 
 # server
 
