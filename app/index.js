@@ -35,6 +35,10 @@ require('app/routes.coffee')
 require('app/angular-record-store.coffee')
 
 require('app/controllers/application-controller')
+
+require('app/records-interfaces/group-records-interface.coffee')
+require('app/models/group-model.coffee')
+
 require('app/models/user-model')
 require('app/modules/login')
 require('app/modules/alert/model')
