@@ -1,8 +1,10 @@
 global.jQuery = require('jquery')
+global._ = require('lodash')
+
 require('angular')
 require('bootstrap-sass/assets/javascripts/bootstrap')
 require('angular-bootstrap/ui-bootstrap-tpls-0.12.0')
-require('angular-route')
+require('angular-ui-router')
 global.moment = require('moment')
 require('angular-bootstrap-datetimepicker/src/js/datetimepicker')
 require('angular-xeditable/dist/js/xeditable')
@@ -17,7 +19,7 @@ if (process.env.NODE_ENV != 'production') {
 require('app/modules/auth')
 
 global.cobudgetApp = angular.module('cobudget', [
-  'ngRoute',
+  'ui.router',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
   'xeditable',
