@@ -1,7 +1,8 @@
 {
   "browserify": {
     "transform": [
-      ["browserify-ngannotate", { "ext": [ ".js" ] } ],
+      ["coffeeify", { "extension": ".coffee" } ],
+      ["browserify-ngannotate", { "ext": [ ".js", ".coffee" ] } ],
       "babelify",
       "envify",
       ["evalify", { "files": ["app/configs/app.js", "node_modules/app/configs/app.js"] } ],
