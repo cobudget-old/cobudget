@@ -1,5 +1,5 @@
 /* @ngInject */
-global.cobudgetApp.controller('ApplicationController', function ($scope, $urlRouter, $modal, authModel, $http, login) {
+global.cobudgetApp.controller('ApplicationController', function ($scope, $modal, authModel, $http, login) {
 
   $scope.currentUser = authModel;
 
