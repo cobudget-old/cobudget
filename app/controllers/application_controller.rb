@@ -1,12 +1,14 @@
 class ApplicationController < ActionController::API
 # class ApplicationController < ActionController::Base
+  include DeviseTokenAuth::Concerns::SetUserByToken
   # include ActionController::MimeResponds
   include ActionController::ImplicitRender
   include ActionController::Serialization
   # include ::ActionController::Cookies
 
-  include TokenAuthentication
-  before_filter :authenticate_from_token!
+  ### commenting this out for now, this is the former authentication scheme 
+  # include TokenAuthentication
+  # before_filter :authenticate_from_token!
 
   include Pundit
 
@@ -46,5 +48,4 @@ private
     authorize resource
     respond_with resource.destroy
   end
-
 end
