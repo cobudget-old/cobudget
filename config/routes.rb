@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
   devise_for :users, defaults: {format: :json}, skip: [:sessions, :registrations], path_names: {
     password: 'reset_password'
   }
