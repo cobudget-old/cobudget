@@ -1,18 +1,12 @@
 class ApplicationController < ActionController::API
-# class ApplicationController < ActionController::Base
   include DeviseTokenAuth::Concerns::SetUserByToken
-  # include ActionController::MimeResponds
   include ActionController::ImplicitRender
   include ActionController::Serialization
-  # include ::ActionController::Cookies
-
-  ### commenting this out for now, this is the former authentication scheme 
-  # include TokenAuthentication
-  # before_filter :authenticate_from_token!
+  
+  before_action :authenticate_user!
 
   include Pundit
 
-  # protect_from_forgery with: :exception
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   respond_to :json
 
