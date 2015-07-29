@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, defaults: {format: :json}, path_names: {
+  devise_for :users, defaults: {format: :json}, skip: [:sessions, :registrations], path_names: {
     password: 'reset_password'
   }
   apipie
