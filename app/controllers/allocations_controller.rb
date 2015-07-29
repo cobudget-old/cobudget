@@ -1,4 +1,6 @@
 class AllocationsController < ApplicationController
+  before_action :authenticate_user!
+  
   api :GET, '/groups/:group_id/allocations', 'Get allocations for a particular group'
   def index
     respond_with Group.find(params[:group_id]).allocations

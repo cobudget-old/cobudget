@@ -3,8 +3,6 @@ class ApplicationController < ActionController::API
   include ActionController::ImplicitRender
   include ActionController::Serialization
   
-  before_action :authenticate_user!
-
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

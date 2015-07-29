@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!
+  
   respond_to :json
 
   api :GET, '/groups', 'List groups'

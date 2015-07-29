@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  
   api :GET, '/users/', 'Get list of users'
   def index
     # TODO: delete this as soon as we implement add-user-to-group on the UI
