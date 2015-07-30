@@ -23,13 +23,14 @@ module CobudgetApi
     # Required to be false for session_store
     # config.api_only = false
 
-    config.middleware.insert_before 0, "Rack::Cors", :logger => (-> { Rails.logger }) do
+    config.active_record.raise_in_transactional_callbacks = true
+    config.middleware.use Rack::Cors do
       allow do
         origins '*'
         resource '*',
-                 :headers => :any,
-                 :methods => [:get, :post, :delete, :put, :options, :head],
-                 :max_age => 0
+          :headers => :any,
+          :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          :methods => [:get, :post, :options, :delete, :put]
       end
     end
 
