@@ -8,6 +8,10 @@ require('angular-sanitize/angular-sanitize')
 require('angular-cookie')
 require('ng-token-auth')
 
+require('angular-aria')
+require('angular-animate')
+require('angular-material')
+
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
 }
@@ -15,7 +19,8 @@ if (process.env.NODE_ENV != 'production') {
 /* @ngInject */
 global.cobudgetApp = angular.module('cobudget', [
   'ui.router',
-  'ng-token-auth'
+  'ng-token-auth',
+  'ngMaterial'
 ])
 .constant('config', require('app/configs/app'))
 
