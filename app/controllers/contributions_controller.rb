@@ -1,6 +1,4 @@
-class ContributionsController < ApplicationController
-  before_action :authenticate_user!
-  
+class ContributionsController < AuthenticatedController
   api :POST, '/contributions', 'Create new contribution'
   def create
     contribution = Contribution.new(contribution_params_create)

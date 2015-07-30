@@ -1,6 +1,4 @@
-class BucketsController < ApplicationController
-  before_action :authenticate_user!
-  
+class BucketsController < AuthenticatedController
   api :GET, '/buckets/:id', 'Full details of bucket'
   def show
     respond_with resource

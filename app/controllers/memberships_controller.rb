@@ -1,6 +1,4 @@
-class MembershipsController < ApplicationController
-  before_action :authenticate_user!
-  
+class MembershipsController < AuthenticatedController
   api :POST, '/memberships/', 'Create membership'
   def create
     group = Group.find_by(id: membership_params_create[:group_id])
