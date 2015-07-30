@@ -1,34 +1,25 @@
 global.jQuery = require('jquery')
 global._ = require('lodash')
+global.moment = require('moment')
 
 require('angular')
-require('bootstrap-sass/assets/javascripts/bootstrap')
-require('angular-bootstrap/ui-bootstrap-tpls-0.12.0')
 require('angular-ui-router')
-global.moment = require('moment')
-require('angular-bootstrap-datetimepicker/src/js/datetimepicker')
-require('angular-xeditable/dist/js/xeditable')
 require('angular-sanitize/angular-sanitize')
-require('angular-markdown-directive/markdown')
-require('angular-upload')
+require('angular-cookie')
+require('ng-token-auth')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
 }
 
-require('app/modules/auth')
-
+/* @ngInject */
 global.cobudgetApp = angular.module('cobudget', [
   'ui.router',
-  'ui.bootstrap',
-  'ui.bootstrap.datetimepicker',
-  'xeditable',
-  'btford.markdown',
-  'lr.upload',
-  'cobudget.auth'
+  'ng-token-auth'
 ])
 .constant('config', require('app/configs/app'))
-.config(require('app/configs/http'))
+
+require('app/configs/auth.coffee')
 
 require('app/routes.coffee')
 
@@ -38,8 +29,3 @@ require('app/controllers/application-controller')
 
 require('app/records-interfaces/group-records-interface.coffee')
 require('app/models/group-model.coffee')
-
-require('app/models/user-model')
-require('app/modules/login')
-require('app/modules/alert/model')
-require('app/modules/alert/collection')
