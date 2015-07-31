@@ -10,6 +10,7 @@ class Group < ActiveRecord::Base
     memberships.create!(member: user, is_admin: true)
   end
 
+  # should be done in SQL!
   def balance_for(user)
     allocation_sum = allocations.where(user: user)
                                 .map { |allocation| allocation.amount }
