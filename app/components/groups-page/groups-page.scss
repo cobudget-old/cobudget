@@ -1,26 +1,36 @@
-.groups-page-menu-button {
-  position: relative;
-  margin: 0;
-  padding: 0;
+.groups-page__toolbar {
+  background: $cobudget-blue;
 }
 
-.groups-page-menu-button-icon {
-  font-size: 35px;
+.groups-page__menu-bar {
+  height: $medium-height;
+}
+
+.groups-page__menu-icon {
+  @include fontGrande;
   line-height: 3rem;
 }
 
-.groups-page-menu-group-title {
-  font-size: 20px;
+.groups-page__group-name {
+  @include fontLarge;
 }
 
-.groups-page-group-funds {
-  height: 40px;
+.groups-page__funds-bar {
 }
 
-.groups-page-group-funds {
+.groups-page__funds-overview {
+  overflow: auto;
 }
 
-.groups-page-group-funds-icon {
-  font-size: 35px;
-  margin-left: 5px;
+.groups-page__funds-overview-header {
+  @include fontTiny;
+}
+
+.groups-page__funds-icon {
+  @include fontGrande;
+  margin-right: 10px;
+}
+
+.groups-page__funds-overview-amount {
+  @include fontGrande;
 }

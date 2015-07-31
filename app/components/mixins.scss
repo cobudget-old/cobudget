@@ -27,37 +27,6 @@ $disagree-border-color: darken($disagree-color, 10%);
 $abstain-border-color: darken($abstain-color, 10%);
 $block-border-color: darken($block-color, 10%);
 
-@mixin fontTiny {
-  font-size: 12px;
-  line-height: 14px;
-}
-
-@mixin fontSmall {
-  font-size: 13px;
-  line-height: 15px;
-}
-
-@mixin fontMedium {
-  font-size: 14px;
-  line-height: 20px;
-}
-
-@mixin fontCrapName{
-  font-size: 15px;
-  line-height: 20px;
-}
-
-@mixin fontLarge {
-  font-size: 20px;
-  line-height: 24px;
-}
-
-@mixin fontGrande {
-  font-size: 24px;
-  line-height: 27px;
-}
-
-
 @mixin fontHelvetica {
   font-family: "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
   font-weight:400;
@@ -202,4 +171,41 @@ $cardPaddingSize: 15px;
 .lmo-version {
   color: #666;
   font-size: 11px;
+}
+
+
+// stuff used by cobudget:
+$cobudget-blue: #6064FF;
+$small-height: 36px;
+$medium-height: 48px;
+$large-height: 60px;
+
+@mixin fontTiny {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@mixin fontSmall {
+  font-size: 13px;
+  line-height: 15px;
+}
+
+@mixin fontMedium {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@mixin fontCrapName{
+  font-size: 15px;
+  line-height: 20px;
+}
+
+@mixin fontLarge {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@mixin fontGrande {
+  font-size: 24px;
+  line-height: 27px;
 }

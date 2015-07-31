@@ -1,28 +1,40 @@
 <div class="groups-page">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
+
+  <md-toolbar class="groups-page__toolbar">
+
+    <div class="md-toolbar-tools groups-page__menu-bar">
       <md-button class="md-icon-button" aria-label="Settings">
-        <i class="material-icons groups-page-menu-button-icon">menu</i>
+        <i class="material-icons groups-page__menu-icon">menu</i>
       </md-button>
-      <h2>
-        <span class="groups-page-menu-group-title">Enspiral</span>
-      </h2>
+      <span class="groups-page__group-name">Enspiral</span>
       <span flex></span>
       <md-button class="md-icon-button groups-page-menu-button" aria-label="More">
-        <i class="material-icons groups-page-menu-button-icon">more_vert</i>
+        <i class="material-icons groups-page__menu-icon">more_vert</i>
       </md-button>
     </div>
 
-    <div layout="row" class="groups-page-group-funds">
-      <div flex="50">
-        <i class="material-icons groups-page-group-funds-icon">person</i>
-        <span>Meow</span>
-
+    <div class="md-toolbar-tools groups-page__funds-bar">
+      <div flex="50" layout="row" class="groups-page__funds-overview" >
+        <div layout="column" layout-align="center center">
+          <i class="material-icons groups-page__funds-icon">person</i>
+        </div>
+        <div layout="column" layout-align="center center">
+          <span class="groups-page__funds-overview-header">Your funds</span>
+          <span class="groups-page__funds-overview-amount">$3500</span>
+        </div>
       </div>
-      <div flex="50">
-        <i class="material-icons groups-page-group-funds-icon">group</i>      
-        <span>Meow</span>
+      <div flex="50" layout="row" class="groups-page__funds-overview" >
+        <div layout="column" layout-align="center center">
+          <i class="material-icons groups-page__funds-icon">group</i>
+        </div>
+        <div layout="column" layout-align="center center">
+          <span class="groups-page__funds-overview-header">Total funds</span>
+          <span class="groups-page__funds-overview-amount">$15000</span>
+        </div>
       </div>
     </div>
+
+
   </md-toolbar>
+  
 </div>
