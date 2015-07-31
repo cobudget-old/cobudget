@@ -71,7 +71,7 @@
         <div layout="column" flex class="groups-page__project-container">
           <span class="groups-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
           <span class="groups-page__project-funding">{{ project.amountRemaining | currency : "$" : 0  }} to go</span>
-          <md-progress-linear md-mode="determinate" value="10" class="groups-page__progress-bar"></md-progress-linear>
+          <md-progress-linear md-mode="determinate" value="{{ project.percentFunded }}" class="groups-page__progress-bar"></md-progress-linear>
         </div>
       </md-list-item>
     </md-list>

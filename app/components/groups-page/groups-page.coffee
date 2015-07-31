@@ -13,15 +13,18 @@ module.exports =
     $scope.projects = [
       {
         name: "Improve remote meeting experience",
-        amountRemaining: 2300
+        amountRemaining: 2300,
+        percentFunded: 10
       },
       {
         name: "Repay outstanding debts",
-        amountRemaining: 500
+        amountRemaining: 500,
+        percentFunded: 70
       },
       {
         name: "Enspiral Stickers!!!",
-        amountRemaining: 50
+        amountRemaining: 50,
+        percentFunded: 92
       }
     ]
 
