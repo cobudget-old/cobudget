@@ -176,6 +176,9 @@ $cardPaddingSize: 15px;
 
 // stuff used by cobudget:
 $cobudget-blue: #6064FF;
+$cobudget-grey: #BDBDBD;
+$cobudget-orange: #FF8600;
+
 $small-height: 36px;
 $medium-height: 48px;
 $large-height: 60px;
@@ -195,9 +198,9 @@ $large-height: 60px;
   line-height: 20px;
 }
 
-@mixin fontCrapName{
-  font-size: 15px;
-  line-height: 20px;
+@mixin fontMedLarge {
+  font-size: 16px;
+  line-height: 22px;
 }
 
 @mixin fontLarge {

@@ -1,5 +1,8 @@
+// toolbar heading
+
 .groups-page__toolbar {
   background: $cobudget-blue;
+  position: fixed;
 }
 
 .groups-page__menu-bar {
@@ -8,18 +11,16 @@
 
 .groups-page__menu-icon {
   @include fontGrande;
-  line-height: 3rem;
 }
 
 .groups-page__group-name {
   @include fontLarge;
 }
 
-.groups-page__funds-bar {
-}
+// toolbar funds 
 
-.groups-page__funds-overview {
-  overflow: auto;
+.groups-page__funds-bar {
+  height: $medium-height;
 }
 
 .groups-page__funds-overview-header {
@@ -33,4 +34,80 @@
 
 .groups-page__funds-overview-amount {
   @include fontGrande;
+}
+
+.groups-page__tabs {
+  @include fontMedium;
+  background: $cobudget-blue;
+  height: $medium-height;
+}
+
+.groups-page__tabs md-tabs-wrapper {
+  background: $cobudget-blue;
+}
+
+.groups-page__tab-label {
+  @include fontMedium;
+  color: white;
+}
+
+.groups-page md-ink-bar {
+  background: white;
+}
+
+// content
+
+.groups-page__content {
+  padding-bottom: 10px;
+}
+
+// projects
+
+.groups-page__content {
+  top: calc(#{$medium-height} * 3);
+}
+
+.groups-page__projects-heading {
+  @include fontSmall;
+  color: $cobudget-blue;
+}
+
+.groups-page__project-container {
+  padding: 3px 0;
+}
+
+.groups-page__project-title {
+  @include fontMedLarge;
+}
+
+.groups-page__project-funding {
+  @include fontSmall;
+  color: $grey-on-white;
+}
+
+.groups-page__progress-bar {
+  margin-bottom: 10px;
+}
+
+.groups-page__progress-bar .md-container {
+  background: $cobudget-grey;
+}
+
+.groups-page__progress-bar .md-bar {
+  background: $cobudget-orange;
+}
+
+// drafts
+
+.groups-page__drafts-heading {
+  color: $cobudget-blue;
+}
+
+.groups-page__draft-title {
+  @include fontMedLarge;
+}
+
+.groups-page__draft-author {
+  @include fontSmall;
+  color: $grey-on-white;
 }

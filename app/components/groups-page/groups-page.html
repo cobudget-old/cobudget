@@ -4,12 +4,16 @@
 
     <div class="md-toolbar-tools groups-page__menu-bar">
       <md-button class="md-icon-button" aria-label="Settings">
-        <i class="material-icons groups-page__menu-icon">menu</i>
+        <div layout="column" layout-align="center center">
+          <i class="material-icons groups-page__menu-icon">menu</i>
+        </div>
       </md-button>
       <span class="groups-page__group-name">Enspiral</span>
       <span flex></span>
       <md-button class="md-icon-button groups-page-menu-button" aria-label="More">
-        <i class="material-icons groups-page__menu-icon">more_vert</i>
+        <div layout="column" layout-align="center center">
+          <i class="material-icons groups-page__menu-icon">more_vert</i>
+        </div>
       </md-button>
     </div>
 
@@ -33,39 +37,77 @@
         </div>
       </div>
     </div>
+
+    <md-tabs class="groups-page__tabs" md-stretch-tabs="never">
+      <md-tab>
+        <md-tab-label>
+          <span class="groups-page__tab-label">ALL PROJECTS</span>
+        </md-tab-label>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>
+          <span class="groups-page__tab-label">FUNDERS</span>
+        </md-tab-label>
+      </md-tab>
+    </md-tabs>
+
   </md-toolbar>
 
-  <md-tabs class="md-accent"  md-align-tabs="top">
-    <md-tab id="tab1">
-      <md-tab-label>ALL PROJECTS</md-tab-label>
-      <md-tab-body>
-        HERES A LIST OF PROJECTS:<br>
-        PROJECT<br>
-        PROJECT<br>
-        PROJECT<br>
-        PROJECT<br>
-        PROJECT<br>
-        PROJECT<br>
-        PROJECT<br>
-        PROJECT<br>
-      </md-tab-body>
-    </md-tab>
+  <md-content class="groups-page__content">
 
-    <md-tab id="tab2">
-      <md-tab-label>FUNDERS</md-tab-label>
-      <md-tab-body>
-        HERE IS A LIST OF FUNDERS:<br>
-        FUNDER<br>
-        FUNDER<br>
-        FUNDER<br>
-        FUNDER<br>
-        FUNDER<br>
-        FUNDER<br>
-        FUNDER<br>
-        FUNDER<br>
-        FUNDER<br>
-      </md-tab-body>
-    </md-tab>
-  </md-tabs>
-  
+    <md-list class="groups-page__projects">
+      <md-subheader class="groups-page__projects-heading">Funding Now</md-subheader>
+      <md-list-item>
+        <div layout="column" flex class="groups-page__project-container">
+          <span class="groups-page__project-title">Improve remote meeting experience</span>
+          <span class="groups-page__project-funding">$2300 to go</span>
+          <md-progress-linear md-mode="determinate" value="10" class="groups-page__progress-bar"></md-progress-linear>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div layout="column" flex class="groups-page__project-container">
+          <span class="groups-page__project-title">Repay outstanding debts</span>
+          <span class="groups-page__project-funding">$500 to go</span>
+          <md-progress-linear md-mode="determinate" value="70" class="groups-page__progress-bar"></md-progress-linear>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div layout="column" flex class="groups-page__project-container">
+          <span class="groups-page__project-title">Enspiral Stickers!!!</span>
+          <span class="groups-page__project-funding">$50 to go</span>
+          <md-progress-linear md-mode="determinate" value="93" class="groups-page__progress-bar"></md-progress-linear>
+        </div>
+      </md-list-item>
+    </md-list>
+
+    <md-list class="groups-page__drafts">
+      <md-subheader class="groups-page__drafts-heading">Drafts</md-subheader>
+      <md-list-item>
+        <div layout="column" flex class="groups-page__draft-container">
+          <span class="groups-page__draft-title">90 Second Enspiral Animation</span>
+          <span class="groups-page__draft-author">created by Alanna Krause 10 days ago</span>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div layout="column" flex class="groups-page__draft-container">
+          <span class="groups-page__draft-title">Support Loomio crowdfunding campaign</span>
+          <span class="groups-page__draft-author">created by Richard Bartlett 10 days ago</span>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div layout="column" flex class="groups-page__draft-container">
+          <span class="groups-page__draft-title">Social Enterprise Weekend</span>
+          <span class="groups-page__draft-author">created by Michael 10 days ago</span>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div layout="column" flex class="groups-page__draft-container">
+          <span class="groups-page__draft-title">Laser Cutter</span>
+          <span class="groups-page__draft-author">created by Eugene 8 days ago</span>
+        </div>
+      </md-list-item>
+    </md-list>
+
+  </md-content>
+
 </div>
