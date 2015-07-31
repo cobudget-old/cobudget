@@ -56,7 +56,19 @@
   <md-content class="groups-page__content">
 
     <md-list class="groups-page__projects">
-      <md-subheader class="groups-page__projects-heading">Funding Now</md-subheader>
+
+      <div layout="row">
+        <md-subheader class="groups-page__subheader-title">Funding Now</md-subheader>
+        <div flex></div>
+        <div layout="column" layout-align="center center">
+          <md-button class="md-icon-button" aria-label="Settings">
+            <div layout="column" layout-align="center center">
+              <i class="material-icons groups-page__help-icon">help</i>
+            </div>
+          </md-button>
+        </div>
+      </div>
+
       <md-list-item>
         <div layout="column" flex class="groups-page__project-container">
           <span class="groups-page__project-title">Improve remote meeting experience</span>
@@ -64,6 +76,7 @@
           <md-progress-linear md-mode="determinate" value="10" class="groups-page__progress-bar"></md-progress-linear>
         </div>
       </md-list-item>
+
       <md-list-item>
         <div layout="column" flex class="groups-page__project-container">
           <span class="groups-page__project-title">Repay outstanding debts</span>
@@ -71,6 +84,7 @@
           <md-progress-linear md-mode="determinate" value="70" class="groups-page__progress-bar"></md-progress-linear>
         </div>
       </md-list-item>
+      
       <md-list-item>
         <div layout="column" flex class="groups-page__project-container">
           <span class="groups-page__project-title">Enspiral Stickers!!!</span>
@@ -78,34 +92,51 @@
           <md-progress-linear md-mode="determinate" value="93" class="groups-page__progress-bar"></md-progress-linear>
         </div>
       </md-list-item>
+
     </md-list>
 
     <md-list class="groups-page__drafts">
-      <md-subheader class="groups-page__drafts-heading">Drafts</md-subheader>
+
+      <div layout="row">
+        <md-subheader class="groups-page__subheader-title">Drafts</md-subheader>
+        <div flex></div>
+        <div layout="column" layout-align="center center">
+          <md-button class="md-icon-button" aria-label="Settings">
+            <div layout="column" layout-align="center center">
+              <i class="material-icons groups-page__help-icon">help</i>
+            </div>
+          </md-button>
+        </div>
+      </div>
+
       <md-list-item>
         <div layout="column" flex class="groups-page__draft-container">
           <span class="groups-page__draft-title">90 Second Enspiral Animation</span>
           <span class="groups-page__draft-author">created by Alanna Krause 10 days ago</span>
         </div>
       </md-list-item>
+
       <md-list-item>
         <div layout="column" flex class="groups-page__draft-container">
           <span class="groups-page__draft-title">Support Loomio crowdfunding campaign</span>
           <span class="groups-page__draft-author">created by Richard Bartlett 10 days ago</span>
         </div>
       </md-list-item>
+
       <md-list-item>
         <div layout="column" flex class="groups-page__draft-container">
           <span class="groups-page__draft-title">Social Enterprise Weekend</span>
           <span class="groups-page__draft-author">created by Michael 10 days ago</span>
         </div>
       </md-list-item>
+
       <md-list-item>
         <div layout="column" flex class="groups-page__draft-container">
           <span class="groups-page__draft-title">Laser Cutter</span>
           <span class="groups-page__draft-author">created by Eugene 8 days ago</span>
         </div>
       </md-list-item>
+
     </md-list>
 
   </md-content>

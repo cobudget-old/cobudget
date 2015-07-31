@@ -59,18 +59,19 @@
 
 .groups-page__content {
   padding-bottom: 10px;
-}
-
-// projects
-
-.groups-page__content {
   top: calc(#{$medium-height} * 3);
 }
 
-.groups-page__projects-heading {
-  @include fontSmall;
+.groups-page__subheader-title {
   color: $cobudget-blue;
 }
+
+.groups-page__help-icon {
+  margin-right: 10px;
+  color: $cobudget-grey;
+}
+
+// projects
 
 .groups-page__project-container {
   padding: 3px 0;
