@@ -1,7 +1,7 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('app/components/group-page/group-page.html')
-  controller: ($scope, $auth, Records, $stateParams) ->
+  controller: ($scope, $auth, Records, $stateParams, $location) ->
     # console.log('groupId: ', $stateParams.groupId)
     # Records.groups.findOrFetchByKey($stateParams.groupId).then (group) =>
     #   console.log('found group: ', Records.groups.find($stateParams.groupId))
@@ -15,7 +15,12 @@ module.exports =
     
     window.scrollHeight = 0;
 
+    # TO-DO: add this to application controller, and have all other controllers inherit from it.
+    $scope.go = (path) ->
+      $location.path(path)
+
     $scope.group = 
+      id: 1
       name: "Enspiral"
       personalFunds: 3500
       totalFunds: 15000
