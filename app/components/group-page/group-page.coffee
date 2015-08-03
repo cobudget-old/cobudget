@@ -15,9 +15,8 @@ module.exports =
     
     window.scrollHeight = 0;
 
-    # TO-DO: add this to application controller, and have all other controllers inherit from it.
-    $scope.go = (path) ->
-      $location.path(path)
+    $scope.createProject = () ->
+      $location.path("/groups/#{$stateParams.groupId}/projects/new")
 
     $scope.group = 
       id: 1
