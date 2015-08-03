@@ -1,113 +1,113 @@
 // toolbar heading
 
-.groups-page__toolbar {
+.group-page__toolbar {
   background: $cobudget-blue;
   position: fixed;
 }
 
-.groups-page__menu-bar {
+.group-page__menu-bar {
   height: $medium-height;
 }
 
-.groups-page__menu-icon {
+.group-page__menu-icon {
   @include fontGrande;
 }
 
-.groups-page__group-name {
+.group-page__group-name {
   @include fontLarge;
 }
 
 // toolbar funds 
 
-.groups-page__funds-bar {
+.group-page__funds-bar {
   height: $medium-height;
 }
 
-.groups-page__funds-overview-header {
+.group-page__funds-overview-header {
   @include fontTiny;
 }
 
-.groups-page__funds-icon {
+.group-page__funds-icon {
   @include fontGrande;
   margin-right: 10px;
 }
 
-.groups-page__funds-overview-amount {
+.group-page__funds-overview-amount {
   @include fontGrande;
 }
 
-.groups-page__tabs {
+.group-page__tabs {
   @include fontMedium;
   background: $cobudget-blue;
   height: $medium-height;
 }
 
-.groups-page__tabs md-tabs-wrapper {
+.group-page__tabs md-tabs-wrapper {
   background: $cobudget-blue;
 }
 
-.groups-page__tab-label {
+.group-page__tab-label {
   @include fontMedium;
   color: white;
 }
 
-.groups-page md-ink-bar {
+.group-page md-ink-bar {
   background: white;
 }
 
 // content
 
-.groups-page__content {
+.group-page__content {
   padding-bottom: 10px;
   top: calc(#{$medium-height} * 3);
 }
 
-.groups-page__subheader-title {
+.group-page__subheader-title {
   color: $cobudget-blue;
 }
 
-.groups-page__help-icon {
+.group-page__help-icon {
   color: $cobudget-grey;
 }
 
 // projects
 
-.groups-page__project-container {
+.group-page__project-container {
   padding: 3px 0;
 }
 
-.groups-page__project-title {
+.group-page__project-title {
   @include fontMedLarge;
 }
 
-.groups-page__project-funding {
+.group-page__project-funding {
   @include fontSmall;
   color: $grey-on-white;
 }
 
-.groups-page__progress-bar {
+.group-page__progress-bar {
   margin-bottom: 10px;
 }
 
-.groups-page__progress-bar .md-container {
+.group-page__progress-bar .md-container {
   background: $cobudget-grey;
 }
 
-.groups-page__progress-bar .md-bar {
+.group-page__progress-bar .md-bar {
   background: $cobudget-orange;
 }
 
 // drafts
 
-.groups-page__drafts-heading {
+.group-page__drafts-heading {
   color: $cobudget-blue;
 }
 
-.groups-page__draft-title {
+.group-page__draft-title {
   @include fontMedLarge;
 }
 
-.groups-page__draft-author {
+.group-page__draft-author {
   @include fontSmall;
   color: $grey-on-white;
 }
