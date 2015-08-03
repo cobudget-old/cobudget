@@ -1,8 +1,18 @@
 module.exports = 
-  url: '/groups'
+  url: '/groups/:groupId'
   template: require('app/components/groups-page/groups-page.html')
-  controller: ($scope, $auth, Records) ->
+  controller: ($scope, $auth, Records, $stateParams) ->
+    # console.log('groupId: ', $stateParams.groupId)
+    # Records.groups.findOrFetchByKey($stateParams.groupId).then (group) =>
+    #   console.log('found group: ', Records.groups.find($stateParams.groupId))
+    #   console.log('group: ', group)
+      # console.log('group: ', Records.groups.find($stateParams.groupId))
+      # console.log('RecordsGroupCollection: ', Records.groups.collection)
+      # $scope.group = group
 
+      # $scope.group = group
+      # Records.buckets.fetchByGroupId(group.id)
+    
     window.scrollHeight = 0;
 
     $scope.group = 
