@@ -111,3 +111,11 @@
   @include fontSmall;
   color: $grey-on-white;
 }
+
+// fixed-position create project FAB
+
+.group-page__create-project-fab {
+  position: fixed;
+  right: 10px;
+  bottom: 15px;
+}
