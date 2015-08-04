@@ -7,4 +7,8 @@ class Bucket < ActiveRecord::Base
   validates :group_id, presence: true
   validates :user_id, presence: true
   validates :target, presence: true
+
+  def total_contributions
+    contributions.sum(:amount)
+  end
 end

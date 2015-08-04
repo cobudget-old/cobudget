@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     # on the create action (not sure why??)
     resources :allocations, only: [:create, :show, :update]
 
-    resources :buckets, only: [:create, :show, :update, :destroy]
+    resources :buckets, only: [:index, :create, :show, :update, :destroy]
 
     resources :contributions, only: [:create, :update, :destroy]
   end
