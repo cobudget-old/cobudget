@@ -53,11 +53,10 @@ puts "created 7 buckets for both groups"
 
 groups.each do |group|
   group.members.each do |member|
-    rand(1..4).times { group.allocations.create(user: member, amount: rand(0..1000)) }
+    rand(1..4).times { group.allocations.create(user: member, amount: rand(0..300)) }
   end
 end
 puts "created 1-4 allocations for each member in each group"
-
 
 ### CONTRIBUTIONS
 
@@ -67,7 +66,7 @@ groups.each do |group|
       bucket_target = bucket.target
       member = group.members.sample
       member_balance = group.balance_for(member)
-      bucket.contributions.create(user: member, amount: member_balance / 2)
+      bucket.contributions.create(user: member, amount: member_balance / 3)
     end
   end
 end
