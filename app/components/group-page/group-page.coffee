@@ -4,47 +4,13 @@ module.exports =
   controller: ($scope, Records, $stateParams, $location) ->
     groupId = parseInt($stateParams.groupId) 
     Records.groups.findOrFetchByKey(groupId).then (group) ->
-      console.log('group: ', group)
+      $scope.group = group
+      Records.buckets.fetchByGroupId(group.id)
 
-    # console.log('groupId: ', $stateParams.groupId)
-    # Records.groups.findOrFetchByKey($stateParams.groupId).then (group) =>
-    #   console.log('found group: ', Records.groups.find($stateParams.groupId))
-    #   console.log('group: ', group)
-      # console.log('group: ', Records.groups.find($stateParams.groupId))
-      # console.log('RecordsGroupCollection: ', Records.groups.collection)
-      # $scope.group = group
-
-      # $scope.group = group
-      # Records.buckets.fetchByGroupId(group.id)
-    
     window.scrollHeight = 0;
 
     $scope.createProject = () ->
       $location.path("/groups/#{$stateParams.groupId}/projects/new")
-
-    $scope.group = 
-      id: 1
-      name: "Enspiral"
-      personalFunds: 3500
-      totalFunds: 15000
-
-    $scope.projects = [
-      {
-        name: "Improve remote meeting experience",
-        amountRemaining: 2300,
-        percentFunded: 10
-      },
-      {
-        name: "Repay outstanding debts",
-        amountRemaining: 500,
-        percentFunded: 70
-      },
-      {
-        name: "Enspiral Stickers!!!",
-        amountRemaining: 50,
-        percentFunded: 92
-      }
-    ]
 
     $scope.drafts = [
       {

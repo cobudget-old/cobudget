@@ -8,7 +8,7 @@
           <i class="material-icons group-page__menu-icon">menu</i>
         </div>
       </md-button>
-      <span class="group-page__group-name">{{ group.name }}</span>
+      <span class="group-page__group-name">{{ group.name | limitTo: 16 }} <span ng-if="group.name.length > 16">...</span></span>
       <span flex></span>
       <md-button class="md-icon-button group-page-menu-button" aria-label="More">
         <div layout="column" layout-align="center center">
@@ -67,11 +67,11 @@
           </md-button>
         </div>
       </div>
-      <md-list-item ng-repeat="project in projects">
+      <md-list-item ng-repeat="project in group.buckets()">
         <div layout="column" flex class="group-page__project-container">
           <span class="group-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
-          <span class="group-page__project-funding">{{ project.amountRemaining | currency : "$" : 0  }} to go</span>
-          <md-progress-linear md-mode="determinate" value="{{ project.percentFunded }}" class="group-page__progress-bar"></md-progress-linear>
+          <span class="group-page__project-funding">{{ project.amountRemaining() | currency : "$" : 0  }} to go</span>
+          <md-progress-linear md-mode="determinate" value="{{ project.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
         </div>
       </md-list-item>
     </md-list>
