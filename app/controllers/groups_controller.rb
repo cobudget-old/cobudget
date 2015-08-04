@@ -18,9 +18,10 @@ class GroupsController < AuthenticatedController
     respond_with group
   end
 
-  api :GET, '/groups/:organization_id', 'Full details of group'
+  api :GET, '/groups/:id', 'Full details of group'
   def show
-    respond_with resource
+    @group = Group.find(params[:id])
+    render json: [@group]
   end
 
 private
