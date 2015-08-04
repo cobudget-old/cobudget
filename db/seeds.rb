@@ -40,28 +40,40 @@ puts "added users as members to one of the groups"
 ### BUCKETS
 
 groups.each do |group|
-  7.times do
+  rand(5..7).times do
     group.buckets.create(name: Faker::Lorem.sentence(1, false, 4), 
                          user: group.members.sample, 
                          description: Faker::Lorem.paragraph(3, false, 14), 
-                         target: rand(0..1000))
+                         target: rand(0..1000),
+                         published: true)
   end
 end
-puts "created 7 buckets for both groups"
+puts "created 5 - 7 buckets for both groups"
 
-#### ALLOCATIONS
+### DRAFTS
+
+groups.each do |group|
+  rand(5..7).times do
+    group.buckets.create(name: Faker::Lorem.sentence(1, false, 4), 
+                         user: group.members.sample, 
+                         description: Faker::Lorem.paragraph(3, false, 14))
+  end
+end
+puts "created 5 - 7 draft buckets for both groups"
+
+### ALLOCATIONS
 
 groups.each do |group|
   group.members.each do |member|
     rand(1..4).times { group.allocations.create(user: member, amount: rand(0..300)) }
   end
 end
-puts "created 1-4 allocations for each member in each group"
+puts "created 1 - 4 allocations for each member in each group"
 
 ### CONTRIBUTIONS
 
 groups.each do |group|
-  group.buckets.each do |bucket|
+  group.buckets.where(published: true).each do |bucket|
     rand(0..4).times do
       bucket_target = bucket.target
       member = group.members.sample
@@ -71,6 +83,6 @@ groups.each do |group|
   end
 end
 
-puts "created 0 - 4 contributions for each bucket in each group"
+puts "created 0 - 4 contributions for each published bucket in each group"
 
 puts 'Seed: Complete!'
