@@ -12,13 +12,18 @@ class Group < ActiveRecord::Base
 
   # should be done in SQL!
   def balance_for(user)
-    allocation_sum = allocations.where(user: user)
-                                .map { |allocation| allocation.amount }
-                                .reduce(:+) || 0
+    allocation_sum = allocations.where(user: user).sum(:amount) || 0
     contribution_sum = buckets.map { |bucket| bucket.contributions }.flatten
                               .select { |contribution| contribution.user == user }
                               .map { |contribution| contribution.amount }
                               .reduce(:+) || 0
     balance = allocation_sum - contribution_sum
   end
+
+  # going to try to do this on the client side instead
+  # def balance
+  #   allocation_sum = allocations.sum(:amount)
+  #   contribution_sum = buckets.sum(:total_contributions)
+  #   allocation_sum - contribution_sum
+  # end
 end
