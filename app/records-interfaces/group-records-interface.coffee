@@ -1,4 +1,4 @@
-null # ridiculous hack due to coffee class extends
+null
 
 ### @ngInject ###
 global.cobudgetApp.factory 'GroupRecordsInterface', (BaseRecordsInterface, GroupModel) -> 
