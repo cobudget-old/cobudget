@@ -2,6 +2,10 @@ module.exports =
   url: '/groups/:groupId'
   template: require('app/components/group-page/group-page.html')
   controller: ($scope, Records, $stateParams, $location) ->
+    groupId = parseInt($stateParams.groupId) 
+    Records.groups.findOrFetchByKey(groupId).then (group) ->
+      console.log('group: ', group)
+
     # console.log('groupId: ', $stateParams.groupId)
     # Records.groups.findOrFetchByKey($stateParams.groupId).then (group) =>
     #   console.log('found group: ', Records.groups.find($stateParams.groupId))
