@@ -9,5 +9,14 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     setupViews: ->
       @setupView 'buckets', 'createdAt', true # has_many ___, order, up/down
 
-    buckets: ->
-      @bucketsView.data()
+    publishedBuckets: ->
+      _.filter @bucketsView.data(), (bucket) ->
+        bucket.published
+
+    draftBuckets: ->
+      _.filter @bucketsView.data(), (bucket) ->
+        !bucket.published
+        
+    # personalFunds: ->
+
+    # totalFunds: ->

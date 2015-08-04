@@ -24,7 +24,8 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="group-page__funds-overview-header">Your funds</span>
-          <span class="group-page__funds-overview-amount">{{ group.personalFunds | currency : "$" : 0 }}</span>
+          <!-- <span class="group-page__funds-overview-amount">{{ group.personalFunds | currency : "$" : 0 }}</span> -->
+          <span class="group-page__funds-overview-amount">$250</span>
         </div>
       </div>
       <div flex="50" layout="row" class="group-page__funds-overview" >
@@ -33,7 +34,8 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="group-page__funds-overview-header">Total funds</span>
-          <span class="group-page__funds-overview-amount">{{ group.totalFunds | currency : "$" : 0  }}</span>
+          <!-- <span class="group-page__funds-overview-amount">{{ group.totalFunds | currency : "$" : 0  }}</span> -->
+          <span class="group-page__funds-overview-amount">$10000</span>
         </div>
       </div>
     </div>
@@ -67,7 +69,7 @@
           </md-button>
         </div>
       </div>
-      <md-list-item ng-repeat="project in group.buckets()">
+      <md-list-item ng-repeat="project in group.publishedBuckets()">
         <div layout="column" flex class="group-page__project-container">
           <span class="group-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
           <span class="group-page__project-funding">{{ project.amountRemaining() | currency : "$" : 0  }} to go</span>
@@ -89,7 +91,7 @@
         </div>
       </div>
 
-      <md-list-item ng-repeat="draft in drafts">
+      <md-list-item ng-repeat="draft in group.draftBuckets()">
         <div layout="column" flex class="group-page__draft-container">
           <span class="group-page__draft-title">{{ draft.name | limitTo: 30 }}<span ng-if="draft.name.length > 30">...</span></span>
           <span class="group-page__draft-author">created by {{ draft.author }} {{ draft.age }} days ago</span>
