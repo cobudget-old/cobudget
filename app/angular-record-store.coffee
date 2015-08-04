@@ -10,9 +10,9 @@ app.factory('RecordStore', AngularRecordStore.RecordStore)
 # $compile is a joke, actually $upload (current version used is 3.x, need to update, might not even need to use)
 app.factory('RestfulClient', ['$http', '$compile', AngularRecordStore.RestfulClient])
 
-app.factory 'Records', ['RecordStore', 'GroupRecordsInterface', (RecordStore, GroupRecordsInterface) ->
+app.factory 'Records', (RecordStore, GroupRecordsInterface, BucketRecordsInterface) ->
   db = new Loki('cobudgetApp')
   recordStore = new RecordStore(db)
   recordStore.addRecordsInterface(GroupRecordsInterface)
+  recordStore.addRecordsInterface(BucketRecordsInterface)
   recordStore
-]

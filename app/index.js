@@ -34,3 +34,6 @@ require('app/controllers/application-controller')
 
 require('app/records-interfaces/group-records-interface.coffee')
 require('app/models/group-model.coffee')
+
+require('app/records-interfaces/bucket-records-interface.coffee')
+require('app/models/bucket-model.coffee')
