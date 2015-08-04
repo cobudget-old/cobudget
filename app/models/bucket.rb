@@ -6,9 +6,12 @@ class Bucket < ActiveRecord::Base
   validates :name, presence: true
   validates :group_id, presence: true
   validates :user_id, presence: true
-  validates :target, presence: true
 
   def total_contributions
     contributions.sum(:amount)
+  end
+
+  def publish!(target)
+    update(target: target, published: true)
   end
 end
