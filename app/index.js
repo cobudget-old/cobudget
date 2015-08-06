@@ -18,6 +18,8 @@ if (process.env.NODE_ENV != 'production') {
 
 require('app/modules/auth')
 
+var concatenify = require('concatenify')
+
 global.cobudgetApp = angular.module('cobudget', [
   'ui.router',
   'ui.bootstrap',
@@ -31,13 +33,12 @@ global.cobudgetApp = angular.module('cobudget', [
 .config(require('app/configs/http'))
 
 require('app/routes.coffee')
-
 require('app/angular-record-store.coffee')
 
-require('app/controllers/application-controller')
-
-require('app/records-interfaces/group-records-interface.coffee')
-require('app/models/group-model.coffee')
+concatenify('libs/*.(js|coffee)')
+concatenify('libs/controllers/*.(js|coffee)')
+concatenify('libs/records-interfaces/*.(js|coffee)')
+concatenify('libs/models/*.(js|coffee)')
 
 require('app/models/user-model')
 require('app/modules/login')
