@@ -79,7 +79,6 @@ gulp.task 'styles-watch', ['styles-build'], ->
 # scripts
 #
 browserify = require('browserify')
-mold = require('mold-source-map')
 
 scripts = (isWatch) ->
   ->
@@ -91,7 +90,6 @@ scripts = (isWatch) ->
       bundler.bundle()
         .on('error', util.log.bind(util, "browserify error"))
         .pipe(plumber({ errorHandler }))
-        .pipe(mold.transformSourcesRelativeTo(__dirname))
         .pipe(source('index.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init(loadMaps: true))
