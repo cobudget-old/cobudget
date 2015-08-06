@@ -51,7 +51,6 @@
     "angular-ui-router": "^0.2.11",
     "angular-upload": "git://github.com/leon/angular-upload",
     "angular_record_store": "loomio/angular_record_store#1.0.3",
-    "babelify": "^5.0.3",
     "bootstrap-sass": "^3.3.1",
     "coffeeify": "^1.1.0",
     "debug": "^2.1.0",
@@ -67,6 +66,7 @@
   },
   "devDependencies": {
     "babel": "^5.8.9",
+    "babelify": "^5.0.3",
     "brfs": "^1.2.0",
     "browserify": "^10.2.4",
     "browserify-ngannotate": "^0.7.1",
