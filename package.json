@@ -52,7 +52,6 @@
     "angular-upload": "git://github.com/leon/angular-upload",
     "angular_record_store": "loomio/angular_record_store#1.0.3",
     "bootstrap-sass": "^3.3.1",
-    "coffeeify": "^1.1.0",
     "debug": "^2.1.0",
     "es5-shim": "^4.0.3",
     "font-awesome": "^4.2.0",
