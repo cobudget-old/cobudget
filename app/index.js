@@ -11,6 +11,7 @@ require('ng-token-auth')
 require('angular-aria')
 require('angular-animate')
 require('angular-material')
+require('angular-messages')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -20,7 +21,8 @@ if (process.env.NODE_ENV != 'production') {
 global.cobudgetApp = angular.module('cobudget', [
   'ui.router',
   'ng-token-auth',
-  'ngMaterial'
+  'ngMaterial',
+  'ngMessages'
 ])
 .constant('config', require('app/configs/app'))
 
