@@ -1,0 +1,17 @@
+// toolbar heading
+
+.create-project__toolbar {
+  background: $cobudget-blue;
+}
+
+.create-project__cancel-icon {
+  @include fontGrande;
+}
+
+.create-project__header-text {
+  @include fontLarge;
+}
+
+.create-project__done-button-text {
+  margin-right: 5px; 
+}

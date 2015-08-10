@@ -1,4 +1,20 @@
 <div class="create-project-page">
-  <h1> this is the create-project page </h1>
-  <button ng-click="cancel()">X</button>
+
+  <md-toolbar class="create-project__toolbar" layout-align="column">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons create-project__cancel-icon">close</i>
+        </div>
+      </md-button>
+      <span class="create-project__header-text">New Project</span>
+      <span flex></span>
+      <md-button class="md-icon-button create-project__done-button" aria-label="done">
+        <div layout="column" layout-align="center center">
+          <span class="create-project__done-button-text">Done</span>
+        </div>
+      </md-button>
+    </div>
+  </md-toolbar>
+
 </div>
