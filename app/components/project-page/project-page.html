@@ -1,3 +1,44 @@
 <div class="project-page">
-  this is the project page
+
+  <md-toolbar class="project-page__toolbar">
+
+    <div class="md-toolbar-tools project-page__menu-bar">
+      <md-button class="md-icon-button" aria-label="Back">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons project-page__menu-icon">arrow_back</i>
+        </div>
+      </md-button>
+      <span flex></span>
+      <md-button class="md-icon-button project-page-menu-button" aria-label="More">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons project-page__menu-icon">more_vert</i>
+        </div>
+      </md-button>
+    </div>
+
+    <div class="md-toolbar-tools project-page__funds-bar">
+      <div flex="50" layout="row" class="project-page__funds-overview" >
+        <div layout="column" layout-align="center center">
+          <i class="material-icons project-page__funds-icon">person</i>
+        </div>
+        <div layout="column" layout-align="center center">
+          <span class="project-page__funds-overview-header">Your funds</span>
+          <!-- <span class="project-page__funds-overview-amount">{{ group.personalFunds | currency : "$" : 0 }}</span> -->
+          <span class="project-page__funds-overview-amount">$250</span>
+        </div>
+      </div>
+      <div flex="50" layout="row" class="project-page__funds-overview" >
+        <div layout="column" layout-align="center center">
+          <i class="material-icons project-page__funds-icon">group</i>
+        </div>
+        <div layout="column" layout-align="center center">
+          <span class="project-page__funds-overview-header">Total funds</span>
+          <!-- <span class="project-page__funds-overview-amount">{{ group.totalFunds | currency : "$" : 0  }}</span> -->
+          <span class="project-page__funds-overview-amount">$10000</span>
+        </div>
+      </div>
+    </div>
+
+  </md-toolbar>  
+
 </div>

@@ -1,0 +1,55 @@
+// toolbar heading
+
+.project-page__toolbar {
+  background: $cobudget-blue;
+}
+
+.project-page__menu-bar {
+  height: $medium-height;
+}
+
+.project-page__menu-icon {
+  @include fontGrande;
+}
+
+.project-page__group-name {
+  @include fontLarge;
+}
+
+// toolbar funds 
+
+.project-page__funds-bar {
+  height: $large-height;
+}
+
+.project-page__funds-overview-header {
+  @include fontTiny;
+}
+
+.project-page__funds-icon {
+  @include fontGrande;
+  margin-right: 10px;
+}
+
+.project-page__funds-overview-amount {
+  @include fontGrande;
+}
+
+.project-page__tabs {
+  @include fontMedium;
+  background: $cobudget-blue;
+  height: $medium-height;
+}
+
+.project-page__tabs md-tabs-wrapper {
+  background: $cobudget-blue;
+}
+
+.project-page__tab-label {
+  @include fontMedium;
+  color: white;
+}
+
+.project-page md-ink-bar {
+  background: white;
+}
