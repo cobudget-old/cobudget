@@ -29,13 +29,12 @@ global.cobudgetApp = angular.module('cobudget', [
 require('app/configs/auth.coffee')
 
 require('app/routes.coffee')
-
 require('app/angular-record-store.coffee')
 
-require('app/controllers/application-controller')
-
-require('app/records-interfaces/group-records-interface.coffee')
-require('app/models/group-model.coffee')
+var concatenify = require('concatenify')
+concatenify('./controllers/*.{js,coffee}')
+concatenify('./records-interfaces/*.{js,coffee}')
+concatenify('./models/*.{js,coffee}')
 
 require('app/records-interfaces/bucket-records-interface.coffee')
 require('app/models/bucket-model.coffee')

@@ -76,23 +76,21 @@ gulp.task 'styles-watch', ['styles-build'], ->
 # scripts
 #
 browserify = require('browserify')
-mold = require('mold-source-map')
 
 scripts = (isWatch) ->
   ->
-    plugin = (bundler) ->
+    setup = (bundler) ->
+      if isDeploy(nodeEnv)
+        bundler.transform(global: true, 'uglifyify')
       bundler
-        .plugin(require('bundle-collapser/plugin'))
 
     bundle = (bundler) ->
       bundler.bundle()
         .on('error', util.log.bind(util, "browserify error"))
         .pipe(plumber({ errorHandler }))
-        .pipe(mold.transformSourcesRelativeTo(__dirname))
         .pipe(source('index.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init(loadMaps: true))
-        .pipe(if isDeploy(nodeEnv) then require('gulp-uglify')() else util.noop())
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))
         .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
@@ -104,13 +102,13 @@ scripts = (isWatch) ->
 
     if (isWatch)
       watchify = require('watchify')
-      bundler = watchify(browserify(extend(args, watchify.args)))
+      bundler = setup(watchify(browserify(extend(args, watchify.args))))
       rebundle = -> bundle(bundler)
       bundler.on('update', rebundle)
       bundler.on('log', console.log.bind(console))
       rebundle()
     else
-      bundle(plugin(browserify(args)))
+      bundle(setup(browserify(args)))
 
 gulp.task 'scripts-build', scripts(false)
 gulp.task 'scripts-watch', scripts(true)
