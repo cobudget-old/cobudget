@@ -1,4 +1,20 @@
 <div class="welcome-page">
-  <h1> HEYYYYY </h1>
-  <button ng-click="login()">login</button>
+  <md-toolbar class="md-primary welcome-page__toolbar">
+    <h1 class="md-toolbar-tools welcome-page__heading" layout-align="center">Welcome to Cobudget!</h1>
+  </md-toolbar>
+
+  <md-content layout-padding>
+    <form>
+      <md-input-container>
+        <label>email</label>
+        <input name="email">
+      </md-input-container>
+      <md-input-container>
+        <label>password</label>
+        <input name="password">
+      </md-input-container>
+    </form>
+    <button ng-click="login()">login</button>
+  </md-content>
+
 </div>
