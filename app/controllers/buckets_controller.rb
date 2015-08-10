@@ -1,18 +1,20 @@
 class BucketsController < AuthenticatedController
   api :GET, '/buckets?group_id='
   def index 
-    @group = Group.find(params[:group_id])
-    render json: @group.buckets
+    group = Group.find(params[:group_id])
+    render json: group.buckets
   end
 
   api :GET, '/buckets/:id', 'Full details of bucket'
   def show
-    respond_with resource
+    bucket = Bucket.find(params[:id])
+    render json: bucket
   end
 
   api :POST, '/buckets', 'Create a bucket'
   def create
-    create_resource(bucket_params_create)
+    bucket = Bucket.create(bucket_params_create)
+    render json: bucket
   end
 
   api :PUT, '/buckets/:id', 'Update a bucket'
