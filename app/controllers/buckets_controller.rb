@@ -29,17 +29,12 @@ class BucketsController < AuthenticatedController
 
   private
     def bucket_params_create
-      params.require(:bucket).permit(:name,
-                                     :description,
-                                     :group_id,
-                                     :user_id,
-                                     :target)
+      # TODO: put user_id back in once we have a concept of 'current_user' in the API
+      params.require(:bucket).permit(:name, :description, :group_id, :target).merge(user_id: current_user.id)
     end
 
     def bucket_params_update
-      params.require(:bucket).permit(:name,
-                                     :description,
-                                     :user_id,
-                                     :target)
+      # TODO: put user_id back in once we have a concept of 'current_user' in the API
+      params.require(:bucket).permit(:name, :description, :target) 
     end
 end
