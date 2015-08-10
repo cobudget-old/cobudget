@@ -2,25 +2,12 @@
 // and any config relating to the build.
 // app config (like bootstrap variables) are also here, before anything else.
 
-$font-path: "../fonts";
-
-$icon-font-path: "#{$font-path}/bootstrap/";
-@import "bootstrap";
-
-$fa-font-path: "#{$font-path}/font-awesome";
-@import "font-awesome";
-
-@import "awesome-bootstrap-checkbox";
-
-@import "datetimepicker.css";
-@import "xeditable.css";
-
 // feedback form
 // NOTE where should this code be?
-.feedback {
-  z-index: 100000; // always on top
-  position: fixed;
-  right: round($grid-gutter-width / 2);
-  bottom: round($grid-gutter-width / 2);
-  background-color: #FFC0CB;
-}
+
+// ask mikey how to mass import shit
+@import './components/mixins.scss';
+@import './components/utilities.scss';
+@import './components/welcome-page/welcome-page.scss';
+@import './components/group-page/group-page.scss';
+@import './components/create-project-page/create-project-page.scss';

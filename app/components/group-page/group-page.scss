@@ -1,0 +1,121 @@
+// toolbar heading
+
+.group-page__toolbar {
+  background: $cobudget-blue;
+  position: fixed;
+}
+
+.group-page__menu-bar {
+  height: $medium-height;
+}
+
+.group-page__menu-icon {
+  @include fontGrande;
+}
+
+.group-page__group-name {
+  @include fontLarge;
+}
+
+// toolbar funds 
+
+.group-page__funds-bar {
+  height: $medium-height;
+}
+
+.group-page__funds-overview-header {
+  @include fontTiny;
+}
+
+.group-page__funds-icon {
+  @include fontGrande;
+  margin-right: 10px;
+}
+
+.group-page__funds-overview-amount {
+  @include fontGrande;
+}
+
+.group-page__tabs {
+  @include fontMedium;
+  background: $cobudget-blue;
+  height: $medium-height;
+}
+
+.group-page__tabs md-tabs-wrapper {
+  background: $cobudget-blue;
+}
+
+.group-page__tab-label {
+  @include fontMedium;
+  color: white;
+}
+
+.group-page md-ink-bar {
+  background: white;
+}
+
+// content
+
+.group-page__content {
+  padding-bottom: 10px;
+  top: calc(#{$medium-height} * 3);
+}
+
+.group-page__subheader-title {
+  color: $cobudget-blue;
+}
+
+.group-page__help-icon {
+  color: $cobudget-grey;
+}
+
+// projects
+
+.group-page__project-container {
+  padding: 3px 0;
+}
+
+.group-page__project-title {
+  @include fontMedLarge;
+}
+
+.group-page__project-funding {
+  @include fontSmall;
+  color: $grey-on-white;
+}
+
+.group-page__progress-bar {
+  margin-bottom: 10px;
+}
+
+.group-page__progress-bar .md-container {
+  background: $cobudget-grey;
+}
+
+.group-page__progress-bar .md-bar {
+  background: $cobudget-orange;
+}
+
+// drafts
+
+.group-page__drafts-heading {
+  color: $cobudget-blue;
+}
+
+.group-page__draft-title {
+  @include fontMedLarge;
+}
+
+.group-page__draft-author {
+  @include fontSmall;
+  color: $grey-on-white;
+}
+
+// fixed-position create project FAB
+
+.group-page__create-project-fab {
+  position: fixed;
+  right: 10px;
+  bottom: 15px;
+}

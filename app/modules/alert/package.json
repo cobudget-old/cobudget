@@ -1,8 +1,0 @@
-{
-  "browserify": {
-    "transform": [
-      ["browserify-ngannotate", { "ext": [ ".js" ] } ],
-      "babelify"
-    ]
-  }
-}
