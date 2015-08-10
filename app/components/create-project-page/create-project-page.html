@@ -1,4 +1,52 @@
 <div class="create-project-page">
-  <h1> this is the create-project page </h1>
-  <button ng-click="cancel()">X</button>
+
+  <md-toolbar class="md-whiteframe-z1 create-project-page__toolbar" layout-align="column">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons create-project-page__cancel-icon">close</i>
+        </div>
+      </md-button>
+      <span class="create-project-page__header-text">New Project</span>
+      <span flex></span>
+      <md-button class="md-icon-button create-project-page__done-button" aria-label="done" ng-click="done()">
+        <div layout="column" layout-align="center center">
+          <span class="create-project-page__done-button-text">Done</span>
+        </div>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content>
+
+    <md-subheader class="create-project-page__subheader-title">You're about to make a project draft</md-subheader>
+    <md-subheader class="create-project-page__subheader-text">Create a project draft to propose an idea to your peers and get feedback. Once your project gets endorsed, you can request funding.</md-subheader>
+
+    <form name='bucketForm' class="create-project-page__form" ng-keyUp="$event.keyCode == 13 ? done() : null">
+
+      <md-input-container>
+        <label>Title</label>
+        <input required name="name" type="text" ng-model="bucket.name">
+        <div ng-messages="bucketForm.name.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Description</label>
+        <textarea required name="description" ng-model="bucket.description"></textarea>
+        <div ng-messages="bucketForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Estimated Funding Target (optional)</label>
+        <input name="target" type="number" ng-model="bucket.target">
+      </md-input-container>
+
+    </form>
+
+  </md-content>
+
 </div>

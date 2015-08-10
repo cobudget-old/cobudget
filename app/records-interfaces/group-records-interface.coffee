@@ -1,5 +1,3 @@
-null
-
 ### @ngInject ###
 global.cobudgetApp.factory 'GroupRecordsInterface', (BaseRecordsInterface, GroupModel) -> 
   class GroupRecordsInterface extends BaseRecordsInterface
