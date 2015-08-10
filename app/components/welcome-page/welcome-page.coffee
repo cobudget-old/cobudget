@@ -1,6 +1,6 @@
 module.exports = 
   url: '/'
-  template: require('app/components/welcome-page/welcome-page.html')
+  template: require('./welcome-page.html')
   controller: ($scope, $auth, $location) ->
     $scope.login = (formData) ->
       $scope.formError = ""
