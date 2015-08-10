@@ -70,7 +70,7 @@
         </div>
       </div>
       <md-list-item ng-repeat="project in group.publishedBuckets()">
-        <div layout="column" flex class="group-page__project-container">
+        <div layout="column" flex class="group-page__project-container" ng-click="showProject(project)">
           <span class="group-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
           <span class="group-page__project-funding">{{ project.amountRemaining() | currency : "$" : 0  }} to go</span>
           <md-progress-linear md-mode="determinate" value="{{ project.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
