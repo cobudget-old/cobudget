@@ -11,4 +11,4 @@ module.exports =
     $scope.done = () ->
       if $scope.bucketForm.$valid
         $scope.bucket.save().then ->
-        $scope.cancel()
+          $scope.cancel()
