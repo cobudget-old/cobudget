@@ -15,4 +15,5 @@ app.factory 'Records', (RecordStore, GroupRecordsInterface, BucketRecordsInterfa
   recordStore = new RecordStore(db)
   recordStore.addRecordsInterface(GroupRecordsInterface)
   recordStore.addRecordsInterface(BucketRecordsInterface)
+  recordStore.addRecordsInterface(UserRecordsInterface)
   recordStore
