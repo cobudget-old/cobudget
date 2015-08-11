@@ -38,6 +38,7 @@
 // header card
 
 .project-page__header-card {
+  // position: relative;
   background: $cobudget-navy;
   color: white;
 }
@@ -53,6 +54,24 @@
   display: block;
   @include fontTiny;
   color: $cobudget-grey;
+}
+
+.project-page__fund-fab-container {
+  position: relative;
+  height: 0;
+}
+
+.project-page__fund-fab {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-50%);
+  right: 15px;
+}
+
+.project-page .md-button.md-fab {
+  background: white;
+  color: black;
 }
 
 // description card

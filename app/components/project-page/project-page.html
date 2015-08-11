@@ -45,7 +45,15 @@
         <span class="project-page__title">{{ bucket.name }}</span>
         <span class="project-page__author">created by {{ bucket.authorName }} {{ bucket.ageInDays }} days ago</span>
       </md-card-content>
-
+  
+      <div class="project-page__fund-fab-container">
+        <md-button class="md-fab project-page__fund-fab" aria-label="Fund">
+          <div layout="column" layout-align="center center">
+            <i class="material-icons">attach_money</i>
+          </div>
+        </md-button>
+      </div>
+  
       <md-card-content class="project-page__description-card">
         <span class="project-page__description-header">Description</span>
 
