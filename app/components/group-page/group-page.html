@@ -54,7 +54,6 @@
   </md-toolbar>
 
   <md-content class="group-page__content">
-
     <div class="group-page__all-projects" ng-if="tabSelected === 0">
       <md-list class="group-page__projects">
         <div layout="row">
@@ -99,6 +98,8 @@
       </md-list>      
     </div>
 
+    <div class="group-page__funders" ng-if="tabSelected === 1">
+    </div>
   </md-content>
 
   <md-button class="md-fab group-page__create-project-fab" ng-click="createProject()">

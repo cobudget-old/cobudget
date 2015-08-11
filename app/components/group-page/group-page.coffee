@@ -15,7 +15,5 @@ module.exports =
     $scope.showProject = (project) ->
       $location.path("/groups/#{$stateParams.groupId}/projects/#{project.id}")
 
-    $scope.tabSelected = 0
-
     $scope.selectTab = (tabNum) ->
       $scope.tabSelected = parseInt tabNum
