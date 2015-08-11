@@ -1,5 +1,4 @@
 <div class="project-page">
-
   <md-toolbar class="project-page__toolbar">
     <div class="md-toolbar-tools project-page__menu-bar">
       <md-button class="md-icon-button" aria-label="Back" ng-click="back()">
@@ -41,16 +40,24 @@
   </md-toolbar>  
 
   <md-content>
-
     <md-card>
       <md-card-content class="project-page__header-card">
         <span class="project-page__title">{{ bucket.name }}</span>
         <span class="project-page__author">created by {{ bucket.authorName }} {{ bucket.ageInDays }} days ago</span>
       </md-card-content>
+
       <md-card-content class="project-page__description-card">
         <span class="project-page__description-header">Description</span>
-        <p class="project-page__description-text">{{ bucket.description | limitTo: 100 }} <span ng-if="bucket.description.length > 100">...</span></p>
-        <md-button md-no-ink class="md-primary project-page__more-button">Read More</md-button>
+
+        <div ng-hide="showFullDescription">
+          <p class="project-page__description-text">{{ bucket.description | limitTo:100 }} <span ng-if="bucket.description.length > 100">...</span></p>
+          <md-button md-no-ink class="md-primary project-page__more-button" ng-click="readMore()">Read More</md-button>          
+        </div>
+
+        <div ng-show="showFullDescription">
+          <p class="project-page__description-text">{{ bucket.description }}</p>
+          <md-button md-no-ink class="md-primary project-page__more-button" ng-click="showLess()">Show Less</md-button>
+        </div>
       </md-card-content>
     </md-card>
 
@@ -65,20 +72,18 @@
             <span class="project-page__progress-amount">{{ bucket.numOfContributors }}</span>
             <span class="project-page__progress-unit">backers</span>
           </div>
+
           <div flex>
             <span class="project-page__progress-amount">{{ bucket.totalContributions | currency : "$" : 0 }}</span>
             <span class="project-page__progress-unit">pledged of {{ bucket.target | currency : "$" : 0 }}</span>
           </div>
+
           <div flex="25">
             <span class="project-page__progress-amount">{{ bucket.ageInDays }}</span>
             <span class="project-page__progress-unit">days left</span>
           </div>
         </div>
-
       </md-card-content>
     </md-card>
-
   </md-content>
-
-
 </div>

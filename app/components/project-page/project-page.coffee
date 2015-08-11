@@ -15,3 +15,10 @@ module.exports =
     $scope.back = ->
       $location.path("/groups/#{groupId}")
 
+    $scope.showFullDescription = false
+
+    $scope.readMore = ->
+      $scope.showFullDescription = true
+
+    $scope.showLess = ->
+      $scope.showFullDescription = false
