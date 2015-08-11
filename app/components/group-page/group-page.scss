@@ -119,3 +119,30 @@
   right: 10px;
   bottom: 15px;
 }
+
+// funders
+
+.group-page__funder-container {
+}
+
+.group-page__funder-name {
+  @include fontMedLarge;  
+  padding-left: 16px;
+}
+
+.group-page__funder-balance {
+  @include fontLarge;
+  color: $cobudget-green;
+}
+
+
+
+
+
+
+
+
+
+
+
+

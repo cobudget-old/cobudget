@@ -54,7 +54,7 @@
   </md-toolbar>
 
   <md-content class="group-page__content">
-    <div class="group-page__all-projects" ng-if="tabSelected === 0">
+    <div class="group-page__projects-content" ng-if="tabSelected === 0">
       <md-list class="group-page__projects">
         <div layout="row">
           <md-subheader class="group-page__subheader-title">Funding Now</md-subheader>
@@ -98,7 +98,39 @@
       </md-list>      
     </div>
 
-    <div class="group-page__funders" ng-if="tabSelected === 1">
+    <div class="group-page__funders-content" ng-if="tabSelected === 1">
+      <md-list class="group-page__funders">
+        <div layout="row">
+          <md-subheader class="group-page__subheader-title">{{ group.name }} Funders</md-subheader>
+          <div flex></div>
+          <md-button class="md-icon-button" aria-label="Settings">
+            <div layout="column" layout-align="center center">
+              <i class="material-icons group-page__help-icon">help</i>
+            </div>
+          </md-button>
+        </div>
+
+        <md-list-item ng-repeat="funder in funders">
+
+          <div layout="row" flex class="group-page__funder-container">
+
+            <div layout="column" layout-align="center start" flex="50">
+              <span class="group-page__funder-name">{{ funder.name | limitTo: 16 }} <span ng-if="funder.name.length > 16">...</span></span>
+            </div>
+
+            <div flex layout="column" layout-align="center end">
+              <span class="group-page__funder-balance">{{ funder.balance | currency : "$" : 0 }}</span>
+            </div>
+            
+            <md-button class="md-icon-button group-page__funder-more-button" aria-label="More">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons group-page__funder-more-button-icon">more_vert</i>
+              </div>
+            </md-button>
+
+          </div>
+        </md-list-item>
+      </md-list>
     </div>
   </md-content>
 
