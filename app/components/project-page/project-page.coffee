@@ -5,9 +5,10 @@ module.exports =
 
     groupId = parseInt $stateParams.groupId
     projectId = parseInt $stateParams.projectId
-
+    
     Records.buckets.findOrFetchByKey(projectId).then (bucket) ->
       $scope.bucket = bucket
 
     $scope.back = ->
       $location.path("/groups/#{groupId}")
+

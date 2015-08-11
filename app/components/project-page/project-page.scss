@@ -35,21 +35,99 @@
   @include fontGrande;
 }
 
-.project-page__tabs {
-  @include fontMedium;
-  background: $cobudget-blue;
-  height: $medium-height;
-}
+// header card
 
-.project-page__tabs md-tabs-wrapper {
-  background: $cobudget-blue;
-}
-
-.project-page__tab-label {
-  @include fontMedium;
+.project-page__header-card {
+  background: $cobudget-navy;
   color: white;
 }
 
-.project-page md-ink-bar {
-  background: white;
+.project-page__title {
+  display: block;
+  @include fontGrande;
+  margin-top: 60px;
+  margin-bottom: 10px;
+}
+
+.project-page__author {
+  display: block;
+  @include fontTiny;
+  color: $cobudget-grey;
+}
+
+// description card
+
+.project-page__description-card {
+  background: $cobudget-light-grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.project-page__description-header {
+  @include fontLarge;
+}
+
+.project-page__description-text {
+  @include fontSmall;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.project-page__more-button {
+  @include fontMedium;
+  margin: 0;
+  padding: 0;
+}
+
+// progress card
+
+.project-page__progress-card {
+  margin-top: 10px;
+}
+
+.project-page__progress-card-content {
+  background: $cobudget-light-grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.project-page__progress-header {
+  display: block;
+  @include fontLarge;
+  margin-bottom: 10px;
+}
+
+.project-page__progress-bar {
+  margin-bottom: 15px;
+}
+
+.project-page__progress-bar .md-container {
+  background: $cobudget-grey;
+}
+
+.project-page__progress-bar .md-bar {
+  background: $cobudget-orange;
+}
+
+.project-page md-progress-linear:not([md-mode="indeterminate"]) .md-container {
+  height: 15px;
+}
+
+.project-page md-progress-linear:not([md-mode="indeterminate"]) .md-bar {
+  height: 15px;
+}
+
+.project-page__progress-info {
+  margin-top: 25px;
+}
+
+.project-page__progress-amount {
+  display: block;
+  @include fontLarge;
+}
+
+.project-page__progress-unit {
+  display: block;  
+  @include fontSmall;
+  color: $grey-on-white;
 }
