@@ -9,5 +9,8 @@ module.exports =
       
     window.scrollHeight = 0;
 
-    $scope.createProject = () ->
+    $scope.createProject = ->
       $location.path("/groups/#{$stateParams.groupId}/projects/new")
+
+    $scope.showProject = (project) ->
+      $location.path("/groups/#{$stateParams.groupId}/projects/#{project.id}")

@@ -1,0 +1,151 @@
+// toolbar heading
+
+.project-page__toolbar {
+  background: $cobudget-blue;
+}
+
+.project-page__menu-bar {
+  height: $medium-height;
+}
+
+.project-page__menu-icon {
+  @include fontGrande;
+}
+
+.project-page__group-name {
+  @include fontLarge;
+}
+
+// toolbar funds 
+
+.project-page__funds-bar {
+  height: $large-height;
+}
+
+.project-page__funds-overview-header {
+  @include fontTiny;
+}
+
+.project-page__funds-icon {
+  @include fontGrande;
+  margin-right: 10px;
+}
+
+.project-page__funds-overview-amount {
+  @include fontGrande;
+}
+
+// header card
+
+.project-page__header-card {
+  background: $cobudget-navy;
+  color: white;
+}
+
+.project-page__title {
+  display: block;
+  @include fontGrande;
+  margin-top: 60px;
+  margin-bottom: 10px;
+}
+
+.project-page__author {
+  display: block;
+  @include fontTiny;
+  color: $cobudget-grey;
+}
+
+.project-page__fund-fab-container {
+  position: relative;
+  height: 0;
+}
+
+.project-page__fund-fab {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-50%);
+  right: 15px;
+}
+
+.project-page .md-button.md-fab {
+  background: white;
+  color: black;
+}
+
+// description card
+
+.project-page__description-card {
+  background: $cobudget-light-grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.project-page__description-header {
+  @include fontLarge;
+}
+
+.project-page__description-text {
+  @include fontSmall;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.project-page__more-button {
+  @include fontMedium;
+  margin: 0;
+  padding: 0;
+}
+
+// progress card
+
+.project-page__progress-card {
+  margin-top: 10px;
+}
+
+.project-page__progress-card-content {
+  background: $cobudget-light-grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.project-page__progress-header {
+  display: block;
+  @include fontLarge;
+  margin-bottom: 10px;
+}
+
+.project-page__progress-bar {
+  margin-bottom: 15px;
+}
+
+.project-page__progress-bar .md-container {
+  background: $cobudget-grey;
+}
+
+.project-page__progress-bar .md-bar {
+  background: $cobudget-orange;
+}
+
+.project-page md-progress-linear:not([md-mode="indeterminate"]) .md-container {
+  height: 15px;
+}
+
+.project-page md-progress-linear:not([md-mode="indeterminate"]) .md-bar {
+  height: 15px;
+}
+
+.project-page__progress-info {
+  margin-top: 25px;
+}
+
+.project-page__progress-amount {
+  display: block;
+  @include fontLarge;
+}
+
+.project-page__progress-unit {
+  display: block;  
+  @include fontSmall;
+  color: $grey-on-white;
+}

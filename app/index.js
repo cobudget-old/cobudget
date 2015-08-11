@@ -35,6 +35,3 @@ var concatenify = require('concatenify')
 concatenify('./controllers/*.{js,coffee}')
 concatenify('./records-interfaces/*.{js,coffee}')
 concatenify('./models/*.{js,coffee}')
-
-require('app/records-interfaces/bucket-records-interface.coffee')
-require('app/models/bucket-model.coffee')
