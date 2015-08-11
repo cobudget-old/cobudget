@@ -7,6 +7,7 @@
           <i class="material-icons project-page__menu-icon">arrow_back</i>
         </div>
       </md-button>
+      <span class="project-page__group-name">{{ group.name | limitTo: 16 }} <span ng-if="group.name.length > 16">...</span></span>
       <span flex></span>
       <md-button class="md-icon-button project-page-menu-button" aria-label="More">
         <div layout="column" layout-align="center center">
