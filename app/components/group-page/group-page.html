@@ -1,7 +1,6 @@
 <div class="group-page">
 
   <md-toolbar class="group-page__toolbar">
-
     <div class="md-toolbar-tools group-page__menu-bar">
       <md-button class="md-icon-button" aria-label="Settings">
         <div layout="column" layout-align="center center">
@@ -41,63 +40,64 @@
     </div>
 
     <md-tabs class="group-page__tabs" md-stretch-tabs="never">
-      <md-tab>
+      <md-tab md-on-select="selectTab(0)">
         <md-tab-label>
           <span class="group-page__tab-label">ALL PROJECTS</span>
         </md-tab-label>
       </md-tab>
-      <md-tab>
+      <md-tab md-on-select="selectTab(1)">
         <md-tab-label>
           <span class="group-page__tab-label">FUNDERS</span>
         </md-tab-label>
       </md-tab>
     </md-tabs>
-
   </md-toolbar>
 
   <md-content class="group-page__content">
 
-    <md-list class="group-page__projects">
-      <div layout="row">
-        <md-subheader class="group-page__subheader-title">Funding Now</md-subheader>
-        <div flex></div>
-        <div layout="column" layout-align="center center">
-          <md-button class="md-icon-button" aria-label="Settings">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons group-page__help-icon">help</i>
-            </div>
-          </md-button>
+    <div class="group-page__all-projects" ng-if="tabSelected === 0">
+      <md-list class="group-page__projects">
+        <div layout="row">
+          <md-subheader class="group-page__subheader-title">Funding Now</md-subheader>
+          <div flex></div>
+          <div layout="column" layout-align="center center">
+            <md-button class="md-icon-button" aria-label="Settings">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons group-page__help-icon">help</i>
+              </div>
+            </md-button>
+          </div>
         </div>
-      </div>
-      <md-list-item ng-repeat="project in group.publishedBuckets()">
-        <div layout="column" flex class="group-page__project-container" ng-click="showProject(project)">
-          <span class="group-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
-          <span class="group-page__project-funding">{{ project.amountRemaining() | currency : "$" : 0  }} to go</span>
-          <md-progress-linear md-mode="determinate" value="{{ project.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
-        </div>
-      </md-list-item>
-    </md-list>
+        <md-list-item ng-repeat="project in group.publishedBuckets()">
+          <div layout="column" flex class="group-page__project-container" ng-click="showProject(project)">
+            <span class="group-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
+            <span class="group-page__project-funding">{{ project.amountRemaining() | currency : "$" : 0  }} to go</span>
+            <md-progress-linear md-mode="determinate" value="{{ project.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
+          </div>
+        </md-list-item>
+      </md-list>
 
-    <md-list class="group-page__drafts">
-      <div layout="row">
-        <md-subheader class="group-page__subheader-title">Drafts</md-subheader>
-        <div flex></div>
-        <div layout="column" layout-align="center center">
-          <md-button class="md-icon-button" aria-label="Settings">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons group-page__help-icon">help</i>
-            </div>
-          </md-button>
+      <md-list class="group-page__drafts">
+        <div layout="row">
+          <md-subheader class="group-page__subheader-title">Drafts</md-subheader>
+          <div flex></div>
+          <div layout="column" layout-align="center center">
+            <md-button class="md-icon-button" aria-label="Settings">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons group-page__help-icon">help</i>
+              </div>
+            </md-button>
+          </div>
         </div>
-      </div>
 
-      <md-list-item ng-repeat="draft in group.draftBuckets()">
-        <div layout="column" flex class="group-page__draft-container">
-          <span class="group-page__draft-title">{{ draft.name | limitTo: 30 }}<span ng-if="draft.name.length > 30">...</span></span>
-          <span class="group-page__draft-author">created by {{ draft.authorName }} {{ draft.ageInDays }} days ago</span>
-        </div>
-      </md-list-item>
-    </md-list>
+        <md-list-item ng-repeat="draft in group.draftBuckets()">
+          <div layout="column" flex class="group-page__draft-container">
+            <span class="group-page__draft-title">{{ draft.name | limitTo: 30 }}<span ng-if="draft.name.length > 30">...</span></span>
+            <span class="group-page__draft-author">created by {{ draft.authorName }} {{ draft.ageInDays }} days ago</span>
+          </div>
+        </md-list-item>
+      </md-list>      
+    </div>
 
   </md-content>
 
