@@ -14,4 +14,17 @@ class Bucket < ActiveRecord::Base
   def publish!(target)
     update(target: target, published: true)
   end
+
+  # TODO: eventually bring this stuff onto the client side
+  def author_name
+    user.name
+  end
+
+  def num_of_contributors
+    contributions.length
+  end
+
+  def age_in_days
+    (Time.zone.now - created_at).to_i / 1.day
+  end
 end
