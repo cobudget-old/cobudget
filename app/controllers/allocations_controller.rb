@@ -1,7 +1,8 @@
 class AllocationsController < AuthenticatedController
-  api :GET, '/groups/:group_id/allocations', 'Get allocations for a particular group'
+  api :GET, '/allocations?group_id=', 'Get allocations for a particular group'
   def index
-    respond_with Group.find(params[:group_id]).allocations
+    group = Group.find(params[:group_id])
+    render json: group.allocations
   end
 
   api :POST, '/allocations/', 'Create allocation'
