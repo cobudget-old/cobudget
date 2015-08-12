@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 
   before_validation :assign_uid_and_provider
 
-
   ### from previous authentication scheme ###
   # include TokenAuthenticable
 
