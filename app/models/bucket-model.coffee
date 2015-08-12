@@ -1,4 +1,6 @@
-# @ngInject
+null
+
+### @ngInject ###
 global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
   class BucketModel extends BaseModel
     @singular: 'bucket'
