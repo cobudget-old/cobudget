@@ -1,7 +1,7 @@
 ### @ngInject ###
-global.cobudgetApp.factory 'GroupRecordsInterface', (BaseRecordsInterface, GroupModel) -> 
+global.cobudgetApp.factory 'GroupRecordsInterface', (config, BaseRecordsInterface, GroupModel) -> 
   class GroupRecordsInterface extends BaseRecordsInterface
     model: GroupModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @restfulClient.apiPrefix = 'http://localhost:3000/api/v1'
+      @restfulClient.apiPrefix = config.apiPrefix 
