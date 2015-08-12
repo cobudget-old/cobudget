@@ -1,4 +1,7 @@
 class MembershipSerializer < ActiveModel::Serializer
-  attributes :id, :group_id, :is_admin, :created_at
-  has_one :member
+  embed :ids, include: true
+  attributes :id, :is_admin, :created_at, :total_allocations, :total_contributions
+
+  has_one :member, serializer: UserSerializer, root: 'users'
+  has_one :group, serializer: GroupSerializer, root: 'groups'
 end
