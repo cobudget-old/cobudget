@@ -1,0 +1,22 @@
+// toolbar heading
+
+.draft-page md-toolbar {
+  min-height: 0;
+}
+
+.draft-page__toolbar {
+  background: $cobudget-blue;
+  position: fixed;
+}
+
+.draft-page__menu-bar {
+  height: $large-height;
+}
+
+.draft-page__menu-icon {
+  @include fontGrande;
+}
+
+.draft-page__group-name {
+  @include fontLarge;
+}

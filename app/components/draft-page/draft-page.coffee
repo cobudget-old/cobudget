@@ -3,5 +3,21 @@ module.exports =
   template: require('./draft-page.html')
   controller: ($scope, Records, $stateParams, $location) ->
     window.scrollHeight = 0;
-    console.log('this is the drafts page')
+
+    groupId = parseInt $stateParams.groupId
+
+    Records.groups.findOrFetchByKey(groupId).then (group) ->
+      $scope.group = group
+
+    $scope.back = ->
+      $location.path("/groups/#{groupId}")
+
+    $scope.showFullDescription = false
+
+    $scope.readMore = ->
+      $scope.showFullDescription = true
+
+    $scope.showLess = ->
+      $scope.showFullDescription = false
+
     return

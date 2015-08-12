@@ -1,3 +1,21 @@
 <div class="draft-page">
-  drafts page yall
+  <md-toolbar class="draft-page__toolbar">
+    <div class="md-toolbar-tools draft-page__menu-bar">
+      <md-button class="md-icon-button" aria-label="Settings">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons draft-page__menu-icon">menu</i>
+        </div>
+      </md-button>
+
+      <span class="draft-page__group-name">{{ group.name | limitTo: 16 }} <span ng-if="draft.name.length > 16">...</span></span>
+
+      <span flex></span>
+
+      <md-button class="md-icon-button draft-page-menu-button" aria-label="More">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons draft-page__menu-icon">more_vert</i>
+        </div>
+      </md-button>
+    </div>
+   </md-toolbar> 
 </div>
