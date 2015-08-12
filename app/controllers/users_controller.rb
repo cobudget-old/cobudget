@@ -1,10 +1,4 @@
 class UsersController < AuthenticatedController
-  api :GET, '/users/', 'Get list of users'
-  def index
-    # TODO: delete this as soon as we implement add-user-to-group on the UI
-    respond_with User.order('name ASC').all
-  end
-
   def update
     authorize user
     initialize_user_update_params
