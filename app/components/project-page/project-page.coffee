@@ -22,3 +22,5 @@ module.exports =
 
     $scope.showLess = ->
       $scope.showFullDescription = false
+
+    return
