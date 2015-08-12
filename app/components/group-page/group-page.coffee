@@ -6,8 +6,8 @@ module.exports =
     Records.groups.findOrFetchByKey(groupId).then (group) ->
       $scope.group = group
       Records.buckets.fetchByGroupId(group.id)
-      Records.users.fetchByGroupId(group.id)
-      
+      Records.memberships.fetchByGroupId(group.id)
+
     window.scrollHeight = 0;
 
     $scope.createProject = ->
@@ -18,28 +18,5 @@ module.exports =
 
     $scope.selectTab = (tabNum) ->
       $scope.tabSelected = parseInt tabNum
-
-    $scope.funders = [
-      {
-        name: "Alanna Krause",
-        balance: 1200
-      },
-      {
-        name: "Derek Razo",
-        balance: 800
-      },
-      {
-        name: "Elon Musk",
-        balance: 720
-      },
-      {
-        name: "Jason Belling",
-        balance: 300
-      },
-      {
-        name: "Jessy Kate Schinger",
-        balance: 110
-      }
-    ]
 
     return

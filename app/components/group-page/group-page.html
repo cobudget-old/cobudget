@@ -110,16 +110,16 @@
           </md-button>
         </div>
 
-        <md-list-item ng-repeat="funder in funders">
+        <md-list-item ng-repeat="membership in group.memberships()">
 
           <div layout="row" flex class="group-page__funder-container">
 
             <div layout="column" layout-align="center start" flex="50">
-              <span class="group-page__funder-name">{{ funder.name | limitTo: 16 }} <span ng-if="funder.name.length > 16">...</span></span>
+              <span class="group-page__funder-name">{{ membership.member().name | limitTo: 16 }} <span ng-if="funder.name.length > 16">...</span></span>
             </div>
 
             <div flex layout="column" layout-align="center end">
-              <span class="group-page__funder-balance">{{ funder.balance | currency : "$" : 0 }}</span>
+              <span class="group-page__funder-balance">{{ membership.balance() | currency : "$" : 0 }}</span>
             </div>
             
             <md-button class="md-icon-button group-page__funder-more-button" aria-label="More">
