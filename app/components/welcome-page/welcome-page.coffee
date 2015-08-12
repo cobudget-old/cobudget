@@ -14,3 +14,5 @@ module.exports =
 
     $scope.$on 'auth:login-error', () ->
       $scope.formError = "Invalid Credentials"
+
+    return

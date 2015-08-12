@@ -6,7 +6,8 @@ module.exports =
     Records.groups.findOrFetchByKey(groupId).then (group) ->
       $scope.group = group
       Records.buckets.fetchByGroupId(group.id)
-      
+      Records.memberships.fetchByGroupId(group.id)
+
     window.scrollHeight = 0;
 
     $scope.createProject = ->
@@ -14,3 +15,8 @@ module.exports =
 
     $scope.showProject = (project) ->
       $location.path("/groups/#{$stateParams.groupId}/projects/#{project.id}")
+
+    $scope.selectTab = (tabNum) ->
+      $scope.tabSelected = parseInt tabNum
+
+    return

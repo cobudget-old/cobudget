@@ -1,3 +1,3 @@
 module.exports = {
-  apiEndpoint: "http://localhost:3000"
+  apiPrefix: "http://localhost:3000/api/v1"
 }

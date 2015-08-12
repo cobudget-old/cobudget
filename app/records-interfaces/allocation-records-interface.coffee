@@ -1,9 +1,9 @@
 null 
 
 ### @ngInject ###
-global.cobudgetApp.factory 'BucketRecordsInterface', (config, BaseRecordsInterface, BucketModel) -> 
-  class BucketRecordsInterface extends BaseRecordsInterface
-    model: BucketModel
+global.cobudgetApp.factory 'AllocationRecordsInterface', (config, BaseRecordsInterface, AllocationModel) -> 
+  class AllocationRecordsInterface extends BaseRecordsInterface
+    model: AllocationModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
       @restfulClient.apiPrefix = config.apiPrefix 
