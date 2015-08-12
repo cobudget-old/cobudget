@@ -6,6 +6,7 @@ module.exports =
     Records.groups.findOrFetchByKey(groupId).then (group) ->
       $scope.group = group
       Records.buckets.fetchByGroupId(group.id)
+      Records.users.fetchByGroupId(group.id)
       
     window.scrollHeight = 0;
 
