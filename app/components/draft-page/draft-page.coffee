@@ -1,5 +1,5 @@
 module.exports = 
-  url: '/groups/:groupId/drafts'
+  url: '/groups/:groupId/drafts/:draftId'
   template: require('./draft-page.html')
   controller: ($scope, Records, $stateParams, $location) ->
     window.scrollHeight = 0;
