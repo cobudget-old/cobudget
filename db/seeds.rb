@@ -56,7 +56,8 @@ groups.each do |group|
   rand(5..7).times do
     group.buckets.create(name: Faker::Lorem.sentence(1, false, 4), 
                          user: group.members.sample, 
-                         description: Faker::Lorem.paragraph(3, false, 14))
+                         description: Faker::Lorem.paragraph(3, false, 14),
+                         target: [rand(1..4200), 0].sample)
   end
 end
 puts "created 5 - 7 draft buckets for both groups"
