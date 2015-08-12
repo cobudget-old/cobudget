@@ -27,7 +27,7 @@
       </md-card-content>
 
       <md-card-content class="draft-page__description-card">
-        <div layout="row">
+        <div layout="row" ng-if="draft.target > 0">
           <span class="draft-page__description-header">Funding Target</span>
           <span flex="10"></span>
           <span class="draft-page__description-header" flex>{{ draft.target | currency : "$" : 0  }}</span>

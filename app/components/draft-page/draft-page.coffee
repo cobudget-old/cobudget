@@ -5,9 +5,14 @@ module.exports =
     window.scrollHeight = 0;
 
     groupId = parseInt $stateParams.groupId
+    draftId = parseInt $stateParams.draftId
 
     Records.groups.findOrFetchByKey(groupId).then (group) ->
       $scope.group = group
+
+    Records.buckets.findOrFetchByKey(draftId).then (draft) ->
+      console.log(draft)
+      $scope.draft = draft
 
     $scope.back = ->
       $location.path("/groups/#{groupId}")
@@ -19,16 +24,5 @@ module.exports =
 
     $scope.showLess = ->
       $scope.showFullDescription = false
-
-    $scope.draft = {
-      id : 1,
-      name : '90 Second Enspiral Animation',
-      authorName : 'Alanna Krause',
-      ageInDays : 2,
-      target : 500,
-      description : 'We have been gearing up for a big external marketing campaign for the first half of the year. Nanz and I would like to raise this money to We have been gearing up for a big external marketing campaign for the first half of the year. Nanz and I would like to raise this money to.',
-      status : 'draft',
-      imageUrl : 'img/default-draft-image.svg'
-    }
 
     return
