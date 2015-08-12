@@ -18,4 +18,31 @@
       </md-button>
     </div>
    </md-toolbar> 
+
+  <md-content class="draft-page__content">
+    <md-card class="draft-page__header-card">
+      <md-card-content class="draft-page__header-card-content">
+        <span class="draft-page__title">{{ draft.name }}</span>
+        <span class="draft-page__author">created by {{ draft.authorName }} {{ draft.ageInDays }} days ago</span>
+      </md-card-content>
+
+      <md-card-content class="draft-page__description-card">
+        <div layout="row">
+          <span class="draft-page__description-header">Funding Target</span>
+          <span flex="10"></span>
+          <span class="draft-page__description-header" flex>{{ draft.target | currency : "$" : 0  }}</span>
+        </div>
+
+        <div ng-hide="showFullDescription">
+          <p class="draft-page__description-text">{{ draft.description | limitTo:100 }} <span ng-if="draft.description.length > 100">...</span></p>
+          <md-button md-no-ink class="md-primary draft-page__more-button" ng-click="readMore()">Read More</md-button>          
+        </div>
+
+        <div ng-show="showFullDescription">
+          <p class="draft-page__description-text">{{ draft.description }}</p>
+          <md-button md-no-ink class="md-primary draft-page__more-button" ng-click="showLess()">Show Less</md-button>
+        </div>
+      </md-card-content>
+    </md-card>
+  </md-content>
 </div>

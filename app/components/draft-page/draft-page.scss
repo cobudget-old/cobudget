@@ -20,3 +20,55 @@
 .draft-page__group-name {
   @include fontLarge;
 }
+
+// header card
+
+.draft-page__content {
+  padding-bottom: 10px;
+  top: $large-height;
+}
+
+.draft-page__header-card {
+}
+
+.draft-page__header-card-content {
+  margin-top: $large-height;
+  background: rgba(0,0,0,0.7);
+  color: white;
+}
+
+.draft-page__title {
+  display: block;
+  @include fontGrande;
+  margin-bottom: 10px;
+}
+
+.draft-page__author {
+  display: block;
+  @include fontTiny;
+  color: $cobudget-grey;
+}
+
+// description card
+
+.draft-page__description-card {
+  background: $cobudget-light-grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.draft-page__description-header {
+  @include fontMedLarge;
+}
+
+.draft-page__description-text {
+  @include fontSmall;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.draft-page__more-button {
+  @include fontMedium;
+  margin: 0;
+  padding: 0;
+}

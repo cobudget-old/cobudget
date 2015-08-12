@@ -20,4 +20,15 @@ module.exports =
     $scope.showLess = ->
       $scope.showFullDescription = false
 
+    $scope.draft = {
+      id : 1,
+      name : '90 Second Enspiral Animation',
+      authorName : 'Alanna Krause',
+      ageInDays : 2,
+      target : 500,
+      description : 'We have been gearing up for a big external marketing campaign for the first half of the year. Nanz and I would like to raise this money to We have been gearing up for a big external marketing campaign for the first half of the year. Nanz and I would like to raise this money to.',
+      status : 'draft',
+      imageUrl : 'img/default-draft-image.svg'
+    }
+
     return
