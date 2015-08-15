@@ -112,7 +112,7 @@
 
 .draft-page__discussion-header {
   @include fontLarge;
-  margin-bottom: 20px;
+  height: 25px;
 }
 
 
@@ -127,3 +127,6 @@
   @include fontGrande;
 }
 
+
+.draft-page__comment-form {
+}

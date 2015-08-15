@@ -92,7 +92,11 @@
     <md-card class="draft-page__discussion-card">
       <md-card-content class="draft-page__discussion-card-content">
         <div class="draft-page__discussion-header" layout="row">
-          <span>Discussion</span>
+          <span>
+            <div layout="column" layout-align="center center">
+              Discussion
+            </div>
+          </span>
           <span flex></span>
           <span>
             <div layout="column" layout-align="center center">
@@ -101,7 +105,17 @@
             </div>
           </span>
         </div>
+
+        <form name='commentForm' class="draft-page__comment-form" ng-keyUp="$event.keyCode == 13 ? done() : null">
+
+          <md-input-container>
+            <label>Add a comment</label>
+            <input name="text" type="text" ng-model="newComment.name">
+          </md-input-container>
+
+        </form>
       </md-card-content>
+
     </md-card>
   </md-content>
 
