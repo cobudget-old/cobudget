@@ -90,6 +90,13 @@
   width: 50px;
 }
 
+.draft-page__status-flagpoint-divider {
+  position: relative;
+  height: 3px;
+  background: $cobudget-grey;
+  bottom: 10px;
+}
+
 .draft-page__status-flagpoint-icon-active {
   color: gold;
 }
