@@ -11,7 +11,6 @@ module.exports =
       $scope.group = group
 
     Records.buckets.findOrFetchByKey(draftId).then (draft) ->
-      console.log(draft)
       $scope.draft = draft
 
     $scope.back = ->
@@ -26,3 +25,18 @@ module.exports =
       $scope.showFullDescription = false
 
     return
+
+    $scope.comments = [
+      {
+        authorName: "Jasmine Park",
+        text: "WOW I have been waiting so long for something like this",
+      },
+      {
+        authorName: "Jason Mraz",
+        text: "Awesome idea. This will be a really valuable asset when we're talking to new clients. If possible, I would love to be involved in writing the text for the voiceover.",
+      },
+      {
+        authorName: "Eddie Kingler",
+        text: "I'm concerned about this. IMHO we're not really ready for a marketing blitz.",
+      },
+    ]
