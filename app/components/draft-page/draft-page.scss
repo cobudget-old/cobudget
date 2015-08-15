@@ -28,9 +28,6 @@
   top: $large-height;
 }
 
-.draft-page__header-card {
-}
-
 .draft-page__header-card-content {
   margin-top: $large-height;
   background: rgba(0,0,0,0.7);
@@ -110,3 +107,23 @@
   @include fontTiny;
   text-align: center;
 }
+
+// discussion card
+
+.draft-page__discussion-header {
+  @include fontLarge;
+  margin-bottom: 20px;
+}
+
+
+.draft-page__comment-count {
+  color: white;
+  position: relative;
+  bottom: 23px;
+  @include fontSmall;
+}
+
+.draft-page__comment-count-icon {
+  @include fontGrande;
+}
+

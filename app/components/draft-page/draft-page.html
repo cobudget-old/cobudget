@@ -88,6 +88,21 @@
         </div>
       </md-card-content>
     </md-card>
+
+    <md-card class="draft-page__discussion-card">
+      <md-card-content class="draft-page__discussion-card-content">
+        <div class="draft-page__discussion-header" layout="row">
+          <span>Discussion</span>
+          <span flex></span>
+          <span>
+            <div layout="column" layout-align="center center">
+              <i class="material-icons draft-page__comment-count-icon">messenger</i>
+              <div class="draft-page__comment-count">{{ comments.length }}</div>
+            </div>
+          </span>
+        </div>
+      </md-card-content>
+    </md-card>
   </md-content>
 
 </div>

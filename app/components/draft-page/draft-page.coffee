@@ -24,8 +24,6 @@ module.exports =
     $scope.showLess = ->
       $scope.showFullDescription = false
 
-    return
-
     $scope.comments = [
       {
         authorName: "Jasmine Park",
@@ -40,3 +38,5 @@ module.exports =
         text: "I'm concerned about this. IMHO we're not really ready for a marketing blitz.",
       },
     ]
+    
+    return
