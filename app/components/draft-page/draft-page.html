@@ -107,14 +107,21 @@
         </div>
 
         <form name='commentForm' class="draft-page__comment-form" ng-keyUp="$event.keyCode == 13 ? done() : null">
-
           <md-input-container>
             <label>Add a comment</label>
             <input name="text" type="text" ng-model="newComment.name">
           </md-input-container>
-
         </form>
+
       </md-card-content>
+      
+      <md-list>
+        <md-list-item class="draft-page__comment" ng-repeat="comment in comments" layout="column" layout-align="center start">
+          <md-divider></md-divider>
+          <div class="draft-page__comment-author">{{ comment.authorName }}</div>
+          <div class="draft-page__comment-text">{{ comment.text }}</div>
+        </md-list-item>
+      </md-list>
 
     </md-card>
   </md-content>

@@ -70,6 +70,10 @@
 
 // status card
 
+.draft-page__status-card {
+  background: $cobudget-light-grey;
+}
+
 .draft-page__status-header {
   @include fontLarge;
   margin-bottom: 20px;
@@ -115,7 +119,6 @@
   height: 25px;
 }
 
-
 .draft-page__comment-count {
   color: white;
   position: relative;
@@ -127,6 +130,25 @@
   @include fontGrande;
 }
 
+.draft-page md-input-container {
+  padding: 0;
+}
 
-.draft-page__comment-form {
+.draft-page__comment {
+  background: $cobudget-light-grey;
+}
+
+.draft-page__comment-author {
+  @include fontLarge;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+.draft-page__comment-text {
+  @include fontMedium;
+  margin-bottom: 10px;
+}
+
+.draft-page md-list {
+  padding-bottom: 0;
 }
