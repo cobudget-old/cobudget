@@ -79,6 +79,7 @@
 }
 
 .draft-page__status-flagpoints {
+  margin-bottom: 20px;
 }
 
 .draft-page__status-flagpoint-text {
@@ -103,4 +104,9 @@
 
 .draft-page__status-flagpoint-icon-inactive {
   color: $grey-on-white;
+}
+
+.draft-page__status-description {
+  @include fontTiny;
+  text-align: center;
 }
