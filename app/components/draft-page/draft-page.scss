@@ -38,13 +38,11 @@
 }
 
 .draft-page__title {
-  display: block;
   @include fontGrande;
   margin-bottom: 10px;
 }
 
 .draft-page__author {
-  display: block;
   @include fontTiny;
   color: $cobudget-grey;
 }
@@ -71,4 +69,31 @@
   @include fontMedium;
   margin: 0;
   padding: 0;
+}
+
+// status card
+
+.draft-page__status-header {
+  @include fontLarge;
+  margin-bottom: 20px;
+}
+
+.draft-page__status-flagpoints {
+}
+
+.draft-page__status-flagpoint-text {
+  @include fontMedium;
+  color: $grey-on-white;
+}
+
+.draft-page__status-flagpoint {
+  width: 50px;
+}
+
+.draft-page__status-flagpoint-icon-active {
+  color: gold;
+}
+
+.draft-page__status-flagpoint-icon-inactive {
+  color: $grey-on-white;
 }

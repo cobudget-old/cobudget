@@ -22,8 +22,8 @@
   <md-content class="draft-page__content">
     <md-card class="draft-page__header-card">
       <md-card-content class="draft-page__header-card-content">
-        <span class="draft-page__title">{{ draft.name }}</span>
-        <span class="draft-page__author">created by {{ draft.authorName }} {{ draft.ageInDays }} days ago</span>
+        <div class="draft-page__title">{{ draft.name }}</div>
+        <div class="draft-page__author">created by {{ draft.authorName }} {{ draft.ageInDays }} days ago</div>
       </md-card-content>
 
       <md-card-content class="draft-page__description-card">
@@ -44,5 +44,43 @@
         </div>
       </md-card-content>
     </md-card>
+
+    <md-card class="draft-page__status-card">
+      <md-card-content class="draft-page__status-card-content">
+        <div class="draft-page__status-header">Status</div>
+        <div class-"draft-page__status-roadmap" >
+          <div class="draft-page__status-flagpoints" layout="row" layout-align="space-between center">
+            <div class="draft-page__status-flagpoint">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons draft-page__status-flagpoint-icon-active">radio_button_on</i>
+                <span class="draft-page__status-flagpoint-text">Draft</span>
+              </div>
+            </div>
+
+            <div class="draft-page__status-flagpoint">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons draft-page__status-flagpoint-icon-inactive">radio_button_off</i>
+                <span class="draft-page__status-flagpoint-text">Live</span>
+              </div>
+            </div>
+
+            <div class="draft-page__status-flagpoint">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons draft-page__status-flagpoint-icon-inactive">radio_button_off</i>
+                <span class="draft-page__status-flagpoint-text">Funded</span>
+              </div>
+            </div>
+
+            <div class="draft-page__status-flagpoint">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons draft-page__status-flagpoint-icon-inactive">radio_button_off</i>
+                <span class="draft-page__status-flagpoint-text">Done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
   </md-content>
+
 </div>
