@@ -5,6 +5,5 @@ class CommentSerializer < ActiveModel::Serializer
              :user_id,
              :text,
              :created_at,
-             :updated_at,
-             :author_name
+             :updated_at
 end
