@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   apipie
 
-
   scope path: 'api/v1', defaults: { format: :json } do
     mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
     devise_for :users, defaults: {format: :json}, skip: [:sessions, :registrations], path_names: {
@@ -18,7 +17,7 @@ Rails.application.routes.draw do
 
     resources :groups, only: [:index, :show, :create]
 
-    resources :buckets, only: [:index]
+    resources :comments, only: [:index]
 
     resources :memberships, only: [:index, :create, :update, :destroy] do
       collection do
@@ -36,5 +35,4 @@ Rails.application.routes.draw do
   end
   
   root to: redirect('/docs')
-
 end
