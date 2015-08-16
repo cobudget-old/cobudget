@@ -24,7 +24,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     members: ->
       _.map @memberships(), (membership) ->
         membership.member()
-              
+                      
     # personalFunds: ->
 
     # totalFunds: ->
