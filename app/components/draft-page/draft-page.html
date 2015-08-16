@@ -118,7 +118,7 @@
       <md-list>
         <md-list-item class="draft-page__comment" ng-repeat="comment in draft.comments()" layout="column" layout-align="center start">
           <md-divider></md-divider>
-          <div class="draft-page__comment-author">{{ comment.authorName }}</div>
+          <div class="draft-page__comment-author">{{ comment.author().name }}</div>
           <div class="draft-page__comment-text">{{ comment.text }}</div>
         </md-list-item>
       </md-list>

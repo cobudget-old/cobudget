@@ -7,3 +7,6 @@ global.cobudgetApp.factory 'CommentModel', (BaseModel) ->
     @plural: 'comments'
     @indices: ['bucketId', 'userId']
     @attributeNames = ['text', 'createdAt', 'updatedAt', 'userId', 'bucketId']
+
+    author: ->
+      @recordStore.users.find(@userId)
