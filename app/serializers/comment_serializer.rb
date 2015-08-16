@@ -1,0 +1,8 @@
+class CommentSerializer < ActiveModel::Serializer
+  embed :ids, include: true
+  attributes :id,
+             :bucket_id,
+             :user_id,
+             :text,
+             :created_at,
+end

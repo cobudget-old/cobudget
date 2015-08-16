@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
     resources :groups, only: [:index, :show, :create]
 
+    resources :buckets, only: [:index]
+
     resources :memberships, only: [:index, :create, :update, :destroy] do
       collection do
         get :my_memberships
