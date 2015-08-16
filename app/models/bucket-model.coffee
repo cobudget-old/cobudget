@@ -8,8 +8,14 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
     @indices: ['groupId']
     @attributeNames = ['name', 'description', 'target', 'userId', 'groupId']
 
+    setupViews: ->
+      @setupView 'comments', 'createdAt', true
+
     amountRemaining: ->
       @target - @totalContributions
 
     percentFunded: ->
       @totalContributions / @target * 100
+
+    comments: ->
+      @commentsView.data()

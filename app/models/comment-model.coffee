@@ -5,5 +5,5 @@ global.cobudgetApp.factory 'CommentModel', (BaseModel) ->
   class CommentModel extends BaseModel
     @singular: 'comment'
     @plural: 'comments'
-    @indices: ['bucketId']
+    @indices: ['bucketId', 'userId']
     @attributeNames = ['text', 'createdAt', 'updatedAt', 'userId', 'bucketId']

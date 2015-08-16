@@ -101,7 +101,7 @@
           <span>
             <div layout="column" layout-align="center center">
               <i class="material-icons draft-page__comment-count-icon">messenger</i>
-              <div class="draft-page__comment-count">{{ comments.length }}</div>
+              <div class="draft-page__comment-count">{{ draft.comments().length }}</div>
             </div>
           </span>
         </div>
@@ -114,9 +114,9 @@
         </form>
 
       </md-card-content>
-      
+
       <md-list>
-        <md-list-item class="draft-page__comment" ng-repeat="comment in comments" layout="column" layout-align="center start">
+        <md-list-item class="draft-page__comment" ng-repeat="comment in draft.comments()" layout="column" layout-align="center start">
           <md-divider></md-divider>
           <div class="draft-page__comment-author">{{ comment.authorName }}</div>
           <div class="draft-page__comment-text">{{ comment.text }}</div>

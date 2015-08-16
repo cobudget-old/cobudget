@@ -12,8 +12,7 @@ module.exports =
 
     Records.buckets.findOrFetchByKey(draftId).then (draft) ->
       $scope.draft = draft
-      Records.comments.fetchByBucketId(draftId).then (comments) ->
-        console.log('comments: ', comments)
+      Records.comments.fetchByBucketId(draftId)
 
     $scope.back = ->
       $location.path("/groups/#{groupId}")
@@ -25,20 +24,5 @@ module.exports =
 
     $scope.showLess = ->
       $scope.showFullDescription = false
-
-    $scope.comments = [
-      {
-        authorName: "Jasmine Park",
-        text: "WOW I have been waiting so long for something like this",
-      },
-      {
-        authorName: "Jason Mraz",
-        text: "Awesome idea. This will be a really valuable asset when we're talking to new clients. If possible, I would love to be involved in writing the text for the voiceover.",
-      },
-      {
-        authorName: "Eddie Kingler",
-        text: "I'm concerned about this. IMHO we're not really ready for a marketing blitz.",
-      },
-    ]
 
     return
