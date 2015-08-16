@@ -12,6 +12,8 @@ module.exports =
 
     Records.buckets.findOrFetchByKey(draftId).then (draft) ->
       $scope.draft = draft
+      Records.comments.fetchByBucketId(draftId).then (comments) ->
+        console.log('comments: ', comments)
 
     $scope.back = ->
       $location.path("/groups/#{groupId}")
@@ -38,5 +40,5 @@ module.exports =
         text: "I'm concerned about this. IMHO we're not really ready for a marketing blitz.",
       },
     ]
-    
+
     return
