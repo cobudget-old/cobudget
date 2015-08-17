@@ -2,7 +2,6 @@ module.exports =
   url: '/groups/:groupId/drafts/:draftId'
   template: require('./draft-page.html')
   controller: ($scope, Records, $stateParams, $location) ->
-    window.scrollHeight = 0;
 
     groupId = parseInt $stateParams.groupId
     draftId = parseInt $stateParams.draftId
@@ -12,7 +11,8 @@ module.exports =
 
     Records.buckets.findOrFetchById(draftId).then (draft) ->
       $scope.draft = draft
-      Records.comments.fetchByBucketId(draftId)
+      Records.comments.fetchByBucketId(draftId).then ->
+        window.scrollTo(0, 0)
 
     $scope.back = ->
       $location.path("/groups/#{groupId}")
