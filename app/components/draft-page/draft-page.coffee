@@ -26,8 +26,9 @@ module.exports =
       $scope.showFullDescription = false
 
     $scope.newComment = Records.comments.build(bucketId: draftId)
-    
+
     $scope.createComment = ->
       $scope.newComment.save()
+      $scope.newComment = Records.comments.build(bucketId: draftId)
 
     return
