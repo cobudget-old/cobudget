@@ -43,7 +43,7 @@
     <md-card>
       <md-card-content class="project-page__header-card-content">
         <span class="project-page__title">{{ bucket.name }}</span>
-        <span class="project-page__author">created by {{ bucket.author().name }} {{ bucket.ageInDays() }} days ago</span>
+        <span class="project-page__author">created by {{ bucket.author().name }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
       </md-card-content>
   
       <div class="project-page__fund-fab-container">
@@ -87,7 +87,9 @@
           </div>
 
           <div flex="25">
-            <span class="project-page__progress-amount">{{ bucket.ageInDays() }}</span>
+<!--             <span class="project-page__progress-amount">{{ bucket.createdAt | timeFromNowAmount }}</span>
+            <span class="project-page__progress-unit">{{ bucket.endsAt | timeFromNowUnits }} left</span> -->
+            <span class="project-page__progress-amount">X</span>
             <span class="project-page__progress-unit">days left</span>
           </div>
         </div>

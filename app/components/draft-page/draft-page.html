@@ -23,7 +23,7 @@
     <md-card class="draft-page__header-card">
       <md-card-content class="draft-page__header-card-content">
         <div class="draft-page__title">{{ draft.name }}</div>
-        <div class="draft-page__author">created by {{ draft.author().name }} {{ draft.ageInDays() }} days ago</div>
+        <div class="draft-page__author">created by {{ draft.author().name }} {{ draft.createdAt | timeFromNowInWords }} ago</div>
       </md-card-content>
 
       <md-card-content class="draft-page__description-card">

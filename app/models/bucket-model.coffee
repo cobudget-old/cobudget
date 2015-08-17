@@ -17,7 +17,3 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     percentFunded: ->
       @totalContributions / @target * 100
-
-    #temporary hardcoded value
-    ageInDays: ->
-      2
