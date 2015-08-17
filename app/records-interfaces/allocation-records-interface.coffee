@@ -6,7 +6,7 @@ global.cobudgetApp.factory 'AllocationRecordsInterface', (config, BaseRecordsInt
     model: AllocationModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @restfulClient.apiPrefix = config.apiPrefix 
+      @remote.apiPrefix = config.apiPrefix 
     fetchByGroupId: (groupId) ->
       @fetch
         params:

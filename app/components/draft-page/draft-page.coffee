@@ -7,10 +7,10 @@ module.exports =
     groupId = parseInt $stateParams.groupId
     draftId = parseInt $stateParams.draftId
 
-    Records.groups.findOrFetchByKey(groupId).then (group) ->
+    Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
 
-    Records.buckets.findOrFetchByKey(draftId).then (draft) ->
+    Records.buckets.findOrFetchById(draftId).then (draft) ->
       $scope.draft = draft
       Records.comments.fetchByBucketId(draftId)
 

@@ -3,7 +3,7 @@ module.exports =
   template: require('./group-page.html')
   controller: ($scope, Records, $stateParams, $location) ->
     groupId = parseInt($stateParams.groupId) 
-    Records.groups.findOrFetchByKey(groupId).then (group) ->
+    Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
       Records.buckets.fetchByGroupId(group.id)
       Records.memberships.fetchByGroupId(group.id)

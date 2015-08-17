@@ -3,4 +3,4 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
     model: UserModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @restfulClient.apiPrefix = config.apiPrefix
+      @remote.apiPrefix = config.apiPrefix
