@@ -11,7 +11,8 @@ module.exports =
 
     Records.buckets.findOrFetchById(projectId).then (bucket) ->
       $scope.bucket = bucket
-            
+      window.scrollTo(0, 0)
+
     $scope.back = ->
       $location.path("/groups/#{groupId}")
 
