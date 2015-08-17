@@ -106,10 +106,11 @@
           </span>
         </div>
 
-        <form name='commentForm' class="draft-page__comment-form" ng-keyUp="$event.keyCode == 13 ? createComment() : null">
+        <form name='commentForm' class="draft-page__comment-form" ng-submit="createComment()">
           <md-input-container>
             <label>Add a comment</label>
             <input name="text" type="text" ng-model="newComment.text">
+            <input class="cob-hidden-submit-button" type="submit">
           </md-input-container>
         </form>
 
