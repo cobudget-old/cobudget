@@ -1,15 +1,13 @@
 class BucketSerializer < ActiveModel::Serializer
   embed :ids, include: true
+  has_one :user
+  has_one :group
   attributes :id,
-             :group_id,
-             :user_id,
              :name,
              :target,
              :description,
              :created_at,
              :published,
              :total_contributions,
-             :author_name,
-             :num_of_contributors,
-             :age_in_days
+             :num_of_contributors
 end
