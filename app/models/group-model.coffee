@@ -6,21 +6,19 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     @singular: 'group'
     @plural: 'groups'
 
-    setupViews: ->
-      @setupView 'buckets', 'createdAt', true
-      @setupView 'memberships', 'createdAt', true
+    relationships: ->
+      @hasMany 'buckets'
+      @hasMany 'memberships'
 
     publishedBuckets: ->
-      _.filter @bucketsView.data(), (bucket) ->
+      _.filter @buckets(), (bucket) ->
         bucket.published
 
     draftBuckets: ->
-      _.filter @bucketsView.data(), (bucket) ->
+      _.filter @buckets(), (bucket) ->
         !bucket.published
 
-    memberships: ->
-      @membershipsView.data()
-
+    # hasManyThrough doesn't yet exist quite yet
     members: ->
       _.map @memberships(), (membership) ->
         membership.member()

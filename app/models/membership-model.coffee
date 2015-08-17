@@ -4,11 +4,9 @@ global.cobudgetApp.factory 'MembershipModel', (BaseModel) ->
     @plural: 'memberships'
     @indices: ['groupId', 'memberId']
 
-    member: ->
-      @recordStore.users.find(@memberId)
-
-    group: ->
-      @recordStore.groups.find(@groupId)
+    relationships: ->
+      @belongsTo 'member', from: 'users'
+      @belongsTo 'group'
 
     balance: ->
       parseFloat(@totalAllocations) - parseFloat(@totalContributions)

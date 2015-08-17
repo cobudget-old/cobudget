@@ -6,7 +6,7 @@ global.cobudgetApp.factory 'CommentRecordsInterface', (config, BaseRecordsInterf
     model: CommentModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @restfulClient.apiPrefix = config.apiPrefix 
+      @remote.apiPrefix = config.apiPrefix 
     fetchByBucketId: (bucketId) ->
       @fetch
         params:

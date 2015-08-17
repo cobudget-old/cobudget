@@ -6,4 +6,4 @@ global.cobudgetApp.factory 'GroupRecordsInterface', (config, BaseRecordsInterfac
     model: GroupModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @restfulClient.apiPrefix = config.apiPrefix 
+      @remote.apiPrefix = config.apiPrefix 
