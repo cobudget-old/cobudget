@@ -6,8 +6,7 @@ global.cobudgetApp.factory 'CommentModel', (BaseModel) ->
     @singular: 'comment'
     @plural: 'comments'
     @indices: ['bucketId', 'userId']
-    # @attributeNames = ['text', 'createdAt', 'updatedAt', 'userId', 'bucketId']
-    @serializableAttributes: ['bucketId', 'text']
+    @serializableAttributes: ['bucketId', 'body']
 
     relationships: ->
       @belongsTo 'author', from: 'users', by: 'userId'

@@ -109,7 +109,7 @@
         <form name='commentForm' class="draft-page__comment-form" ng-submit="createComment()">
           <md-input-container>
             <label>Add a comment</label>
-            <input name="text" type="text" ng-model="newComment.text">
+            <input name="body" type="text" ng-model="newComment.body">
           </md-input-container>
 
           <md-input-container class="cob-hidden-submit-button">
@@ -123,7 +123,7 @@
         <md-list-item class="draft-page__comment" ng-repeat="comment in draft.comments()" layout="column" layout-align="center start">
           <md-divider></md-divider>
           <div class="draft-page__comment-author">{{ comment.author().name }}</div>
-          <div class="draft-page__comment-text">{{ comment.text }}</div>
+          <div class="draft-page__comment-body">{{ comment.body }}</div>
         </md-list-item>
       </md-list>
 
