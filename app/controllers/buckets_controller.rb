@@ -8,13 +8,13 @@ class BucketsController < AuthenticatedController
   api :GET, '/buckets/:id', 'Full details of bucket'
   def show
     bucket = Bucket.find(params[:id])
-    render json: bucket
+    render json: [bucket]
   end
 
   api :POST, '/buckets', 'Create a bucket'
   def create
     bucket = Bucket.create(bucket_params_create)
-    render json: bucket
+    render json: [bucket]
   end
 
   api :PUT, '/buckets/:id', 'Update a bucket'
