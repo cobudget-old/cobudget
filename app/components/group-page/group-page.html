@@ -100,20 +100,8 @@
 
     <div class="group-page__funders-content" ng-if="tabSelected === 1">
       <md-list class="group-page__funders">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">{{ group.name }} Funders</md-subheader>
-          <div flex></div>
-          <md-button class="md-icon-button" aria-label="Settings">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons group-page__help-icon">help</i>
-            </div>
-          </md-button>
-        </div>
-
         <md-list-item ng-repeat="membership in group.memberships()">
-
           <div layout="row" flex class="group-page__funder-container">
-
             <div layout="column" layout-align="center start" flex="50">
               <span class="group-page__funder-name">{{ membership.member().name | limitTo: 16 }} <span ng-if="funder.name.length > 16">...</span></span>
             </div>
@@ -127,7 +115,6 @@
                 <i class="material-icons group-page__funder-more-button-icon">more_vert</i>
               </div>
             </md-button>
-
           </div>
         </md-list-item>
       </md-list>
