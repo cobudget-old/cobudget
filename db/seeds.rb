@@ -46,7 +46,8 @@ groups.each do |group|
                          user: group.members.sample, 
                          description: Faker::Lorem.paragraph(3, false, 14), 
                          target: rand(0..1000),
-                         published: true)
+                         published: true,
+                         created_at: Time.zone.now - rand(1..10).days)
     rand(10).times { bucket.comments.create(user: group.members.sample, text: Faker::Lorem.sentence) }
   end
 end
@@ -59,7 +60,8 @@ groups.each do |group|
     bucket = group.buckets.create(name: Faker::Lorem.sentence(1, false, 4), 
                          user: group.members.sample, 
                          description: Faker::Lorem.paragraph(3, false, 14),
-                         target: [rand(1..4200), 0].sample)
+                         target: [rand(1..4200), 0].sample,
+                         created_at: Time.zone.now - rand(1..10).days)
     rand(10).times { bucket.comments.create(user: group.members.sample, text: Faker::Lorem.sentence) }
   end
 end
