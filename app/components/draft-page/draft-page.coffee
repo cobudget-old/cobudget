@@ -25,4 +25,10 @@ module.exports =
     $scope.showLess = ->
       $scope.showFullDescription = false
 
+    $scope.newComment = Records.comments.build()
+
+    $scope.createComment = ->
+      console.log('newComment: ', $scope.newComment)
+      $scope.newComment.save()
+
     return
