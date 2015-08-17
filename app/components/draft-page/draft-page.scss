@@ -138,8 +138,8 @@
   background: $cobudget-light-grey;
 }
 
-.draft-page__comment-author {
-  @include fontLarge;
+.draft-page__comment-author-name {
+  @include fontMedLarge;
   margin-top: 10px;
   margin-bottom: 3px;
 }
