@@ -13,6 +13,6 @@ class CommentsController < AuthenticatedController
 
   private
     def comment_params
-      params.require(:comment).permit(:bucket_id, :text).merge(user_id: current_user.id)
+      params.require(:comment).permit(:bucket_id, :body).merge(user_id: current_user.id)
     end
 end
