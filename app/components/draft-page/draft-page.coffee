@@ -28,7 +28,6 @@ module.exports =
     $scope.newComment = Records.comments.build(bucketId: draftId)
     
     $scope.createComment = ->
-      console.log('newComment: ', $scope.newComment)
       $scope.newComment.save()
 
     return
