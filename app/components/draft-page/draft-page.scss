@@ -109,7 +109,11 @@
 
 .draft-page__status-description {
   @include fontTiny;
-  text-align: center;
+}
+
+.draft-page .md-button.md-primary.md-raised {
+  background-color: $cobudget-lime;
+  margin-left: 0;
 }
 
 // discussion card
