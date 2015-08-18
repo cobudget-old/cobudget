@@ -89,7 +89,7 @@
           </div>
         </div>
 
-        <md-list-item ng-repeat="draft in group.draftBuckets()" ng-click="showDraft(draft.id)">
+        <md-list-item ng-repeat="draft in group.draftBuckets()" ng-click="showProject(draft.id)">
           <div layout="column" flex class="group-page__draft-container">
             <span class="group-page__draft-title">{{ draft.name | limitTo: 30 }}<span ng-if="draft.name.length > 30">...</span></span>
             <span class="group-page__draft-author">created by {{ draft.author().name }} {{ draft.createdAt | timeFromNowInWords }} ago</span>

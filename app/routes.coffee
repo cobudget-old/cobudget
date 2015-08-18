@@ -7,4 +7,3 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'welcome', require('app/components/welcome-page/welcome-page.coffee')
     .state 'create-project', require('app/components/create-project-page/create-project-page.coffee')
     .state 'project', require('app/components/project-page/project-page.coffee')
-    .state 'draft', require('app/components/draft-page/draft-page.coffee')

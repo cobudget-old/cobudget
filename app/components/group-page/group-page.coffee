@@ -16,9 +16,6 @@ module.exports =
     $scope.showProject = (projectId) ->
       $location.path("/groups/#{$stateParams.groupId}/projects/#{projectId}")
 
-    $scope.showDraft = (draftId) ->
-      $location.path("/groups/#{$stateParams.groupId}/drafts/#{draftId}")
-
     $scope.selectTab = (tabNum) ->
       $scope.tabSelected = parseInt tabNum
 
