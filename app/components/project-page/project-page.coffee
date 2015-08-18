@@ -11,6 +11,7 @@ module.exports =
 
     Records.buckets.findOrFetchById(projectId).then (project) ->
       $scope.project = project
+      $scope.status = project.status
       Records.comments.fetchByBucketId(projectId).then ->
         window.scrollTo(0, 0)
 
@@ -27,7 +28,6 @@ module.exports =
 
     $scope.statuses = ['draft', 'live', 'funded', 'done']
     $scope.statusIndex = 0
-    $scope.status = $scope.statuses[0]
     
     $scope.toggleStatus = ->
       $scope.statusIndex++

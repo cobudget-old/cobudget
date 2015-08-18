@@ -10,13 +10,13 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @hasMany 'buckets'
       @hasMany 'memberships'
 
-    publishedBuckets: ->
+    liveBuckets: ->
       _.filter @buckets(), (bucket) ->
-        bucket.published
+        bucket.status == 'live'
 
     draftBuckets: ->
       _.filter @buckets(), (bucket) ->
-        !bucket.published
+        bucket.status == 'draft'
 
     # hasManyThrough doesn't yet exist quite yet
     members: ->
