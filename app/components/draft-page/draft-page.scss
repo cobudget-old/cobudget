@@ -77,6 +77,59 @@
   padding: 0;
 }
 
+// progress card
+
+.draft-page__progress-card {
+  margin-top: 10px;
+}
+
+.draft-page__progress-card-content {
+  background: $cobudget-light-grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.draft-page__progress-header {
+  display: block;
+  @include fontLarge;
+  margin-bottom: 10px;
+}
+
+.draft-page__progress-bar {
+  margin-bottom: 15px;
+}
+
+.draft-page__progress-bar .md-container {
+  background: $cobudget-grey;
+}
+
+.draft-page__progress-bar .md-bar {
+  background: $cobudget-orange;
+}
+
+.draft-page md-progress-linear:not([md-mode="indeterminate"]) .md-container {
+  height: 15px;
+}
+
+.draft-page md-progress-linear:not([md-mode="indeterminate"]) .md-bar {
+  height: 15px;
+}
+
+.draft-page__progress-info {
+  margin-top: 25px;
+}
+
+.draft-page__progress-amount {
+  display: block;
+  @include fontLarge;
+}
+
+.draft-page__progress-unit {
+  display: block;  
+  @include fontSmall;
+  color: $grey-on-white;
+}
+
 // status card
 
 .draft-page__status-card {
