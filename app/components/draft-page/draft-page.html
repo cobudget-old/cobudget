@@ -139,14 +139,14 @@
             </div>
           </div>
         </div>
-        <div class="draft-page__status-description">
-          <p>
-            <em>This project is still being discussed + designed</em>
-          </p>
-          <p>
-            <em>As an administrator or creator, you can approve this project for funding when it is ready</em>
-          </p>
+        <div class="draft-page__status-description" ng-show="status === 'draft'">
+          <p><em>This project is still being discussed and designed</em></p>
+          <p><em>As an administrator or creator, you can approve this project for funding when it is ready</em></p>
           <md-button class="md-raised md-primary">Start Funding</md-button>
+        </div>
+
+        <div class="draft-page__status-description" ng-show="status === 'live'">
+          <p><em>This project has been launched and can be funded.</em></p>
         </div>
       </md-card-content>
     </md-card>
