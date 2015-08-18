@@ -6,7 +6,7 @@ global.cobudgetApp.factory 'MembershipRecordsInterface', (config, BaseRecordsInt
     model: MembershipModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @restfulClient.apiPrefix = config.apiPrefix
+      @remote.apiPrefix = config.apiPrefix
     fetchMyMemberships: ->
       @fetch
         path: 'my_memberships'

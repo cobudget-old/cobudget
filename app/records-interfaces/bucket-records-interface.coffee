@@ -6,7 +6,7 @@ global.cobudgetApp.factory 'BucketRecordsInterface', (config, BaseRecordsInterfa
     model: BucketModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @restfulClient.apiPrefix = config.apiPrefix 
+      @remote.apiPrefix = config.apiPrefix 
     fetchByGroupId: (groupId) ->
       @fetch
         params:

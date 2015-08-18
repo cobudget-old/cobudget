@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <md-tabs class="group-page__tabs" md-stretch-tabs="never">
+    <md-tabs class="group-page__tabs" md-stretch-tabs="auto" md-dynamic-height>
       <md-tab md-on-select="selectTab(0)">
         <md-tab-label>
           <span class="group-page__tab-label">ALL PROJECTS</span>
@@ -68,7 +68,7 @@
           </div>
         </div>
         <md-list-item ng-repeat="project in group.publishedBuckets()">
-          <div layout="column" flex class="group-page__project-container" ng-click="showProject(project)">
+          <div layout="column" flex class="group-page__project-container" ng-click="showProject(project.id)">
             <span class="group-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
             <span class="group-page__project-funding">{{ project.amountRemaining() | currency : "$" : 0  }} to go</span>
             <md-progress-linear md-mode="determinate" value="{{ project.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
@@ -89,10 +89,10 @@
           </div>
         </div>
 
-        <md-list-item ng-repeat="draft in group.draftBuckets()">
+        <md-list-item ng-repeat="draft in group.draftBuckets()" ng-click="showDraft(draft.id)">
           <div layout="column" flex class="group-page__draft-container">
             <span class="group-page__draft-title">{{ draft.name | limitTo: 30 }}<span ng-if="draft.name.length > 30">...</span></span>
-            <span class="group-page__draft-author">created by {{ draft.authorName }} {{ draft.ageInDays }} days ago</span>
+            <span class="group-page__draft-author">created by {{ draft.author().name }} {{ draft.createdAt | timeFromNowInWords }} ago</span>
           </div>
         </md-list-item>
       </md-list>      
@@ -100,20 +100,8 @@
 
     <div class="group-page__funders-content" ng-if="tabSelected === 1">
       <md-list class="group-page__funders">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">{{ group.name }} Funders</md-subheader>
-          <div flex></div>
-          <md-button class="md-icon-button" aria-label="Settings">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons group-page__help-icon">help</i>
-            </div>
-          </md-button>
-        </div>
-
         <md-list-item ng-repeat="membership in group.memberships()">
-
           <div layout="row" flex class="group-page__funder-container">
-
             <div layout="column" layout-align="center start" flex="50">
               <span class="group-page__funder-name">{{ membership.member().name | limitTo: 16 }} <span ng-if="funder.name.length > 16">...</span></span>
             </div>
@@ -127,7 +115,6 @@
                 <i class="material-icons group-page__funder-more-button-icon">more_vert</i>
               </div>
             </md-button>
-
           </div>
         </md-list-item>
       </md-list>

@@ -264,3 +264,9 @@ label.label-with-details{
 .lmo-rounded-corners {
   @include roundedCorners;
 }
+
+.cob-hidden-submit-button {
+  position: absolute;
+  top: -10000px;
+  left: -10000px;
+}

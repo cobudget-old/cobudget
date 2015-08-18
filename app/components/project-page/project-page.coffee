@@ -6,12 +6,13 @@ module.exports =
     groupId = parseInt $stateParams.groupId
     projectId = parseInt $stateParams.projectId
     
-    Records.groups.findOrFetchByKey(groupId).then (group) ->
+    Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
 
-    Records.buckets.findOrFetchByKey(projectId).then (bucket) ->
+    Records.buckets.findOrFetchById(projectId).then (bucket) ->
       $scope.bucket = bucket
-      
+      window.scrollTo(0, 0)
+
     $scope.back = ->
       $location.path("/groups/#{groupId}")
 

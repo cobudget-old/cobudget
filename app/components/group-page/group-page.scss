@@ -6,7 +6,7 @@
 }
 
 .group-page__menu-bar {
-  height: $medium-height;
+  height: $large-height;
 }
 
 .group-page__menu-icon {
@@ -59,7 +59,7 @@
 
 .group-page__content {
   padding-bottom: 10px;
-  top: calc(#{$medium-height} * 3);
+  top: calc(#{$medium-height} * 2 + #{$large-height});
 }
 
 .group-page__subheader-title {
