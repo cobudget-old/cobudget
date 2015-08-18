@@ -17,8 +17,17 @@
   @include fontGrande;
 }
 
-.draft-page__group-name {
+.draft-page__personal-funds {
   @include fontLarge;
+}
+
+.draft-page__funds-overview-header {
+  @include fontTiny;
+}
+
+.draft-page__funds-icon {
+  @include fontGrande;
+  margin-right: 10px;
 }
 
 // header card

@@ -7,11 +7,20 @@
         </div>
       </md-button>
 
-      <span class="draft-page__group-name">{{ group.name | limitTo: 16 }} <span ng-if="draft.name.length > 16">...</span></span>
+      <span class="draft-page__personal-funds" layout="row" layout-align="start center" ng-if="status == 'live'">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons project-page__funds-icon">person</i>
+        </div>
+        <div layout="column" layout-align="center center">
+          <span class="draft-page__funds-overview-header">Your funds</span>
+          <!-- <span class="draft-page__funds-overview-amount">{{ group.personalFunds | currency : "$" : 0 }}</span> -->
+          <span class="draft-page__funds-overview-amount">$250</span>
+        </div>
+      </span>
 
       <span flex></span>
 
-      <md-button class="md-icon-button draft-page-menu-button" aria-label="More">
+      <md-button class="md-icon-button draft-page-menu-button" aria-label="More" ng-click="toggleStatus()">
         <div layout="column" layout-align="center center">
           <i class="material-icons draft-page__menu-icon">more_vert</i>
         </div>
