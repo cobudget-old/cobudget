@@ -145,9 +145,13 @@
   margin-bottom: 20px;
 }
 
-.draft-page__status-flagpoint-text {
+.draft-page__status-flagpoint-text-inactive {
   @include fontMedium;
   color: $grey-on-white;
+}
+
+.draft-page__status-flagpoint-text-active {
+  @include fontMedium;
 }
 
 .draft-page__status-flagpoint {
@@ -161,8 +165,12 @@
   bottom: 10px;
 }
 
-.draft-page__status-flagpoint-icon-active {
+.draft-page__draft-icon {
   color: gold;
+}
+
+.draft-page__live-icon {
+  color: $cobudget-lime;
 }
 
 .draft-page__status-flagpoint-icon-inactive {

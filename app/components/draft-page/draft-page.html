@@ -86,40 +86,56 @@
         <div class="draft-page__status-header">Status</div>
         <div class="draft-page__status-flagpoints" layout="row" layout-align="space-between center">
           <div class="draft-page__status-flagpoint">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons draft-page__draft-icon" ng-show="status === 'draft'">radio_button_on</i>
-              <i class="material-icons draft-page__draft-icon" ng-hide="status === 'draft'">radio_button_off</i>
-              <span class="draft-page__status-flagpoint-text">Draft</span>
+            <div layout="column" layout-align="center center" ng-show="status === 'draft'">
+              <i class="material-icons draft-page__draft-icon">radio_button_on</i>
+              <span class="draft-page__status-flagpoint-text-active">Draft</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'draft'">
+              <i class="material-icons">radio_button_off</i>
+              <span class="draft-page__status-flagpoint-text-inactive">Draft</span>
             </div>
           </div>
 
           <div class="draft-page__status-flagpoint-divider" flex></div>
 
           <div class="draft-page__status-flagpoint">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons draft-page__live-icon" ng-show="status === 'live'">radio_button_on</i>
-              <i class="material-icons draft-page__live-icon" ng-hide="status === 'live'">radio_button_off</i>
-              <span class="draft-page__status-flagpoint-text">Live</span>
+            <div layout="column" layout-align="center center" ng-show="status === 'live'">
+              <i class="material-icons draft-page__live-icon">radio_button_on</i>
+              <span class="draft-page__status-flagpoint-text-active">Live</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'live'">
+              <i class="material-icons">radio_button_off</i>
+              <span class="draft-page__status-flagpoint-text-inactive">Live</span>
             </div>
           </div>
 
           <div class="draft-page__status-flagpoint-divider" flex></div>
 
           <div class="draft-page__status-flagpoint">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons draft-page__funded-icon" ng-show="status === 'funded'">radio_button_on</i>
-              <i class="material-icons draft-page__funded-icon" ng-hide="status === 'funded'">radio_button_off</i>
-              <span class="draft-page__status-flagpoint-text">Funded</span>
+            <div layout="column" layout-align="center center" ng-show="status === 'funded'">
+              <i class="material-icons draft-page__funded-icon">radio_button_on</i>
+              <span class="draft-page__status-flagpoint-text-active">Funded</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'funded'">
+              <i class="material-icons">radio_button_off</i>
+              <span class="draft-page__status-flagpoint-text-inactive">Funded</span>
             </div>
           </div>
 
           <div class="draft-page__status-flagpoint-divider" flex></div>
 
           <div class="draft-page__status-flagpoint">
-            <div layout="column" layout-align="center center">
-              <i class="material-icons draft-page__done-icon" ng-show="status === 'done'">radio_button_on</i>
-              <i class="material-icons draft-page__done-icon" ng-hide="status === 'done'">radio_button_off</i>
-              <span class="draft-page__status-flagpoint-text">Done</span>
+            <div layout="column" layout-align="center center" ng-show="status === 'done'">
+              <i class="material-icons draft-page__done-icon">radio_button_on</i>
+              <span class="draft-page__status-flagpoint-text-active">Done</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'done'">
+              <i class="material-icons">radio_button_off</i>
+              <span class="draft-page__status-flagpoint-text-inactive">Done</span>
             </div>
           </div>
         </div>
