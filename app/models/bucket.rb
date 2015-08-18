@@ -19,6 +19,7 @@ class Bucket < ActiveRecord::Base
 
   # TODO: eventually bring this stuff onto the client side
   def num_of_contributors
+    # TODO: this should be the number of contributions with unique user_id
     contributions.length
   end
 end
