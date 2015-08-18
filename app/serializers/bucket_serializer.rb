@@ -7,7 +7,7 @@ class BucketSerializer < ActiveModel::Serializer
              :target,
              :description,
              :created_at,
-             :published,
+             :status,
              :total_contributions,
              :num_of_contributors
 end
