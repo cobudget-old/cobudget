@@ -11,6 +11,9 @@ Rails.application.routes.draw do
       member do
         post :change_password
       end
+      collection do
+        get :me
+      end
     end
 
     resources :allocations, only: [:index]

@@ -1,4 +1,10 @@
 class UsersController < AuthenticatedController
+
+  def me
+    render json: [current_user]
+  end
+
+
   def update
     authorize user
     initialize_user_update_params
