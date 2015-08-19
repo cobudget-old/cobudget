@@ -37,6 +37,10 @@
   top: $large-height;
 }
 
+.project-page__header-card {
+  background-image: url('./../img/collab-funding.svg');
+}
+
 .project-page__header-card-content {
   margin-top: $large-height;
   background: rgba(0,0,0,0.7);
