@@ -73,8 +73,8 @@
           <div flex="25">
 <!--             <span class="project-page__progress-amount">{{ project.createdAt | timeFromNowAmount }}</span>
             <span class="project-page__progress-unit">{{ project.endsAt | timeFromNowUnits }} left</span> -->
-            <span class="project-page__progress-amount">X</span>
-            <span class="project-page__progress-unit">days left</span>
+            <span class="project-page__progress-amount">{{ project.fundingClosesAt | timeToNowAmount }}</span>
+            <span class="project-page__progress-unit">{{ project.fundingClosesAt | timeToNowUnits }} left</span>
           </div>
         </div>
       </md-card-content>
