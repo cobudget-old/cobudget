@@ -1,3 +1,6 @@
+null
+
+### @ngInject ###
 global.cobudgetApp.factory 'MembershipModel', (BaseModel) ->
   class MembershipModel extends BaseModel
     @singular: 'membership'

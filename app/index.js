@@ -22,7 +22,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ui.router',
   'ng-token-auth',
   'ngMaterial',
-  'ngMessages'
+  'ngMessages',
+  'ipCookie'
 ])
 .constant('config', require('app/configs/app'))
 
@@ -36,3 +37,4 @@ concatenify('./controllers/*.{js,coffee}')
 concatenify('./records-interfaces/*.{js,coffee}')
 concatenify('./models/*.{js,coffee}')
 concatenify('./filters/*.{js,coffee}')
+concatenify('./services/*.{js,coffee}')

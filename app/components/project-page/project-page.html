@@ -13,8 +13,7 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="project-page__funds-overview-header">Your funds</span>
-          <!-- <span class="project-page__funds-overview-amount">{{ group.personalFunds | currency : "$" : 0 }}</span> -->
-          <span class="project-page__funds-overview-amount">$250</span>
+          <span class="project-page__funds-overview-amount">{{ currentMembership.balance() | currency : "$" : 0 }}</span>
         </div>
       </span>
 

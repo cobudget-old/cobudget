@@ -17,3 +17,9 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     percentFunded: ->
       @totalContributions / @target * 100
+
+    # openForFunding: ->
+    #   @remote.postMember(@,'open_for_funding',{target: @target, })
+      # Moment.format *****
+      # @remote is an instance of the restful client        
+      

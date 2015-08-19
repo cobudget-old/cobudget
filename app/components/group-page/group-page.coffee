@@ -1,10 +1,12 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser) ->
     groupId = parseInt($stateParams.groupId) 
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
+      $scope.currentMembership = group.membershipFor(CurrentUser.get())
+      console.log('(group-page) currentMembership: ', $scope.currentMembership)
       Records.buckets.fetchByGroupId(group.id)
       Records.memberships.fetchByGroupId(group.id)
 
