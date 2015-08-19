@@ -44,6 +44,7 @@ class MembershipsController < AuthenticatedController
     render json: group.memberships
   end
 
+  api :GET, 'memberships/my_memberships', 'Get memberships for the current_user'
   def my_memberships
     render json: Membership.where(member_id: current_user.id)
   end
