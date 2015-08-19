@@ -44,4 +44,7 @@ module.exports =
     $scope.userCanStartFunding = ->
       $scope.currentMembership.isAdmin || $scope.project.author().id == $scope.currentMembership.member().id
 
+    $scope.openForFunding = ->
+      $scope.project.openForFunding()
+
     return

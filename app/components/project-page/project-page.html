@@ -136,13 +136,13 @@
             </div>
           </div>
         </div>
-        
+
         <div class="project-page__status-description" ng-show="status === 'draft'">
           <p><em>This project is still being discussed and designed</em></p>
 
           <div ng-show='userCanStartFunding()'>
             <p><em>As an administrator or creator, you can approve this project for funding when it is ready</em></p>
-            <md-button class="md-raised md-primary">Start Funding</md-button>
+            <md-button class="md-raised md-primary" ng-click='openForFunding()'>Start Funding</md-button>
           </div>
         </div>
 
