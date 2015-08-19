@@ -1,22 +1,13 @@
 <div class="project-page">
   <md-toolbar class="project-page__toolbar">
     <div class="md-toolbar-tools project-page__menu-bar">
-      <md-button class="md-icon-button" aria-label="Back" ng-click="back()">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="back()">
         <div layout="column" layout-align="center center">
           <i class="material-icons project-page__menu-icon">arrow_back</i>
         </div>
       </md-button>
-      <span class="project-page__group-name">{{ group.name | limitTo: 16 }} <span ng-if="group.name.length > 16">...</span></span>
-      <span flex></span>
-      <md-button class="md-icon-button project-page-menu-button" aria-label="More">
-        <div layout="column" layout-align="center center">
-          <i class="material-icons project-page__menu-icon">more_vert</i>
-        </div>
-      </md-button>
-    </div>
 
-    <div class="md-toolbar-tools project-page__funds-bar">
-      <div flex="50" layout="row" class="project-page__funds-overview" >
+      <span class="project-page__personal-funds" layout="row" layout-align="start center" ng-if="status == 'live'">
         <div layout="column" layout-align="center center">
           <i class="material-icons project-page__funds-icon">person</i>
         </div>
@@ -25,75 +16,180 @@
           <!-- <span class="project-page__funds-overview-amount">{{ group.personalFunds | currency : "$" : 0 }}</span> -->
           <span class="project-page__funds-overview-amount">$250</span>
         </div>
-      </div>
-      <div flex="50" layout="row" class="project-page__funds-overview" >
-        <div layout="column" layout-align="center center">
-          <i class="material-icons project-page__funds-icon">group</i>
-        </div>
-        <div layout="column" layout-align="center center">
-          <span class="project-page__funds-overview-header">Total funds</span>
-          <!-- <span class="project-page__funds-overview-amount">{{ group.totalFunds | currency : "$" : 0  }}</span> -->
-          <span class="project-page__funds-overview-amount">$10000</span>
-        </div>
-      </div>
-    </div>
-  </md-toolbar>  
+      </span>
 
-  <md-content>
-    <md-card>
+      <span flex></span>
+
+      <md-button class="md-icon-button project-page-menu-button" aria-label="More" ng-click="toggleStatus()">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons project-page__menu-icon">more_vert</i>
+        </div>
+      </md-button>
+    </div>
+   </md-toolbar> 
+
+  <md-content class="project-page__content">
+    <md-card class="project-page__header-card">
       <md-card-content class="project-page__header-card-content">
-        <span class="project-page__title">{{ bucket.name }}</span>
-        <span class="project-page__author">created by {{ bucket.author().name }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
+        <div class="project-page__title">{{ project.name }}</div>
+        <div class="project-page__author">created by {{ project.author().name }} {{ project.createdAt | timeFromNowInWords }} ago</div>
       </md-card-content>
-  
-      <div class="project-page__fund-fab-container">
-        <md-button class="md-fab project-page__fund-fab" aria-label="Fund">
-          <div layout="column" layout-align="center center">
-            <i class="material-icons">attach_money</i>
-          </div>
-        </md-button>
-      </div>
-  
+
       <md-card-content class="project-page__description-card">
-        <span class="project-page__description-header">Description</span>
+        <div layout="row" ng-if="project.target > 0">
+          <span class="project-page__description-header">Funding Target</span>
+          <span flex="10"></span>
+          <span class="project-page__description-header" flex>{{ project.target | currency : "$" : 0  }}</span>
+        </div>
 
         <div ng-hide="showFullDescription">
-          <p class="project-page__description-text">{{ bucket.description | limitTo:100 }} <span ng-if="bucket.description.length > 100">...</span></p>
+          <p class="project-page__description-text">{{ project.description | limitTo:100 }} <span ng-if="project.description.length > 100">...</span></p>
           <md-button md-no-ink class="md-primary project-page__more-button" ng-click="readMore()">Read More</md-button>          
         </div>
 
         <div ng-show="showFullDescription">
-          <p class="project-page__description-text">{{ bucket.description }}</p>
+          <p class="project-page__description-text">{{ project.description }}</p>
           <md-button md-no-ink class="md-primary project-page__more-button" ng-click="showLess()">Show Less</md-button>
         </div>
       </md-card-content>
     </md-card>
 
-    <md-card class="project-page__progress-card">
+    <md-card class="draftf-page__progress-card" ng-if="status == 'live'">
       <md-card-content class="project-page__progress-card-content">
         <span class="project-page__progress-header">Progress</span>
 
-        <md-progress-linear md-mode="determinate" value="{{ bucket.percentFunded() }}" class="project-page__progress-bar"></md-progress-linear>
+        <md-progress-linear md-mode="determinate" value="{{ project.percentFunded() }}" class="project-page__progress-bar"></md-progress-linear>
 
         <div layout="row" class="project-page__progress-info">
           <div flex="25">
-            <span class="project-page__progress-amount">{{ bucket.numOfContributors }}</span>
+            <span class="project-page__progress-amount">{{ project.numOfContributors }}</span>
             <span class="project-page__progress-unit">backers</span>
           </div>
 
           <div flex>
-            <span class="project-page__progress-amount">{{ bucket.totalContributions | currency : "$" : 0 }}</span>
-            <span class="project-page__progress-unit">pledged of {{ bucket.target | currency : "$" : 0 }}</span>
+            <span class="project-page__progress-amount">{{ project.totalContributions | currency : "$" : 0 }}</span>
+            <span class="project-page__progress-unit">pledged of {{ project.target | currency : "$" : 0 }}</span>
           </div>
 
           <div flex="25">
-<!--             <span class="project-page__progress-amount">{{ bucket.createdAt | timeFromNowAmount }}</span>
-            <span class="project-page__progress-unit">{{ bucket.endsAt | timeFromNowUnits }} left</span> -->
+<!--             <span class="project-page__progress-amount">{{ project.createdAt | timeFromNowAmount }}</span>
+            <span class="project-page__progress-unit">{{ project.endsAt | timeFromNowUnits }} left</span> -->
             <span class="project-page__progress-amount">X</span>
             <span class="project-page__progress-unit">days left</span>
           </div>
         </div>
       </md-card-content>
     </md-card>
+
+    <md-card class="project-page__status-card">
+      <md-card-content class="project-page__status-card-content">
+        <div class="project-page__status-header">Status</div>
+        <div class="project-page__status-flagpoints" layout="row" layout-align="space-between center">
+          <div class="project-page__status-flagpoint">
+            <div layout="column" layout-align="center center" ng-show="status === 'draft'">
+              <i class="material-icons project-page__draft-icon">radio_button_on</i>
+              <span class="project-page__status-flagpoint-text-active">Draft</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'draft'">
+              <i class="material-icons project-page__status-icon-inactive">radio_button_off</i>
+              <span class="project-page__status-flagpoint-text-inactive">Draft</span>
+            </div>
+          </div>
+
+          <div class="project-page__status-flagpoint-divider" flex></div>
+
+          <div class="project-page__status-flagpoint">
+            <div layout="column" layout-align="center center" ng-show="status === 'live'">
+              <i class="material-icons project-page__live-icon">radio_button_on</i>
+              <span class="project-page__status-flagpoint-text-active">Live</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'live'">
+              <i class="material-icons project-page__status-icon-inactive">radio_button_off</i>
+              <span class="project-page__status-flagpoint-text-inactive">Live</span>
+            </div>
+          </div>
+
+          <div class="project-page__status-flagpoint-divider" flex></div>
+
+          <div class="project-page__status-flagpoint">
+            <div layout="column" layout-align="center center" ng-show="status === 'funded'">
+              <i class="material-icons project-page__funded-icon">radio_button_on</i>
+              <span class="project-page__status-flagpoint-text-active">Funded</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'funded'">
+              <i class="material-icons project-page__status-icon-inactive">radio_button_off</i>
+              <span class="project-page__status-flagpoint-text-inactive">Funded</span>
+            </div>
+          </div>
+
+          <div class="project-page__status-flagpoint-divider" flex></div>
+
+          <div class="project-page__status-flagpoint">
+            <div layout="column" layout-align="center center" ng-show="status === 'done'">
+              <i class="material-icons project-page__done-icon">radio_button_on</i>
+              <span class="project-page__status-flagpoint-text-active">Done</span>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-hide="status === 'done'">
+              <i class="material-icons project-page__status-icon-inactive">radio_button_off</i>
+              <span class="project-page__status-flagpoint-text-inactive">Done</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-page__status-description" ng-show="status === 'draft'">
+          <p><em>This project is still being discussed and designed</em></p>
+          <p><em>As an administrator or creator, you can approve this project for funding when it is ready</em></p>
+          <md-button class="md-raised md-primary">Start Funding</md-button>
+        </div>
+
+        <div class="project-page__status-description" ng-show="status === 'live'">
+          <p><em>This project has been launched and can be funded.</em></p>
+        </div>
+      </md-card-content>
+    </md-card>
+
+    <md-card class="project-page__discussion-card">
+      <md-card-content class="project-page__discussion-card-content">
+        <div class="project-page__discussion-header" layout="row">
+          <span>
+            <div layout="column" layout-align="center center">
+              Discussion
+            </div>
+          </span>
+          <span flex></span>
+          <span>
+            <div layout="column" layout-align="center center">
+              <i class="material-icons project-page__comment-count-icon">messenger</i>
+              <div class="project-page__comment-count">{{ project.comments().length }}</div>
+            </div>
+          </span>
+        </div>
+
+        <form name='commentForm' class="project-page__comment-form" ng-submit="createComment()">
+          <md-input-container>
+            <label>Add a comment</label>
+            <input name="body" type="text" ng-model="newComment.body">
+          </md-input-container>
+
+          <md-input-container class="cob-hidden-submit-button">
+            <input type="submit" aria-label="submit">
+          </md-input-container>
+        </form>
+
+      </md-card-content>
+
+      <md-list>
+        <md-list-item class="project-page__comment" ng-repeat="comment in project.comments()" layout="column" layout-align="center start">
+          <md-divider></md-divider>
+          <div class="project-page__comment-author-name">{{ comment.author().name }}</div>
+          <div class="project-page__comment-body">{{ comment.body }}</div>
+        </md-list-item>
+      </md-list>
+
+    </md-card>
   </md-content>
+
 </div>
