@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818071945) do
+ActiveRecord::Schema.define(version: 20150819090454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,9 +32,10 @@ ActiveRecord::Schema.define(version: 20150818071945) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.decimal  "target",      precision: 12, scale: 2, default: 0.0
+    t.decimal  "target",            precision: 12, scale: 2, default: 0.0
     t.integer  "group_id"
-    t.string   "status",                               default: "draft"
+    t.string   "status",                                     default: "draft"
+    t.datetime "funding_closes_at"
   end
 
   add_index "buckets", ["user_id"], name: "index_buckets_on_user_id", using: :btree
