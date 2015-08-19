@@ -1,4 +1,4 @@
 class GroupSerializer < ActiveModel::Serializer
   embed :ids, include: true
-  attributes :id, :name
+  attributes :id, :name, :balance
 end
