@@ -53,7 +53,7 @@
       </md-card-content>
     </md-card>
 
-    <md-card class="draftf-page__progress-card" ng-if="status == 'live'">
+    <md-card class="draft-page__progress-card" ng-if="status == 'live'">
       <md-card-content class="project-page__progress-card-content">
         <span class="project-page__progress-header">Progress</span>
 
@@ -140,8 +140,11 @@
         </div>
         <div class="project-page__status-description" ng-show="status === 'draft'">
           <p><em>This project is still being discussed and designed</em></p>
-          <p><em>As an administrator or creator, you can approve this project for funding when it is ready</em></p>
-          <md-button class="md-raised md-primary">Start Funding</md-button>
+
+          <div ng-show='userCanStartFunding()'>
+            <p><em>As an administrator or creator, you can approve this project for funding when it is ready</em></p>
+            <md-button class="md-raised md-primary">Start Funding</md-button>
+          </div>
         </div>
 
         <div class="project-page__status-description" ng-show="status === 'live'">

@@ -41,4 +41,7 @@ module.exports =
       $scope.newComment.save()
       $scope.newComment = Records.comments.build(bucketId: projectId)
 
+    $scope.userCanStartFunding = ->
+      $scope.currentMembership.isAdmin || $scope.project.author().id == $scope.currentMembership.member().id
+
     return
