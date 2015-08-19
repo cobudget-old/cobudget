@@ -47,7 +47,9 @@ groups.each do |group|
                          description: Faker::Lorem.paragraph(3, false, 14), 
                          target: rand(0..1000),
                          status: 'live',
-                         created_at: Time.zone.now - rand(1..10).days)
+                         created_at: Time.zone.now - rand(1..10).days,
+                         funding_closes_at: Time.zone.now + rand(10..30).days
+                         )
     rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }
   end
 end
@@ -83,8 +85,9 @@ groups.each do |group|
   group.buckets.where(status: 'live').each do |bucket|
     rand(0..4).times do
       bucket_target = bucket.target
-      member = group.members.sample
-      member_balance = group.balance_for(member)
+      membership = group.memberships.sample
+      member = membership.member
+      member_balance = membership.total_allocations - membership.total_contributions
       bucket.contributions.create(user: member, amount: member_balance / 3)
     end
   end
