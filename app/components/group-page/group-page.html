@@ -23,8 +23,7 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="group-page__funds-overview-header">Your funds</span>
-          <!-- <span class="group-page__funds-overview-amount">{{ group.personalFunds | currency : "$" : 0 }}</span> -->
-          <span class="group-page__funds-overview-amount">$250</span>
+          <span class="group-page__funds-overview-amount">{{ currentMembership.balance() | currency : "$" : 0 }}</span>
         </div>
       </div>
       <div flex="50" layout="row" class="group-page__funds-overview" >
@@ -33,8 +32,7 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="group-page__funds-overview-header">Total funds</span>
-          <!-- <span class="group-page__funds-overview-amount">{{ group.totalFunds | currency : "$" : 0  }}</span> -->
-          <span class="group-page__funds-overview-amount">$10000</span>
+          <span class="group-page__funds-overview-amount">{{ group.balance | currency : "$" : 0  }}</span>
         </div>
       </div>
     </div>
