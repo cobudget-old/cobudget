@@ -38,7 +38,7 @@ users.each do |user|
 end
 puts "added users as members to one of the groups"
 
-### BUCKETS
+### LIVE BUCKETS
 
 groups.each do |group|
   rand(5..7).times do
@@ -46,12 +46,12 @@ groups.each do |group|
                          user: group.members.sample, 
                          description: Faker::Lorem.paragraph(3, false, 14), 
                          target: rand(0..1000),
-                         published: true,
+                         status: 'live',
                          created_at: Time.zone.now - rand(1..10).days)
     rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }
   end
 end
-puts "created 5 - 7 buckets for both groups with 0 - 9 comments"
+puts "created 5 - 7 live buckets for both groups with 0 - 9 comments"
 
 ### DRAFTS
 
@@ -61,6 +61,7 @@ groups.each do |group|
                          user: group.members.sample, 
                          description: Faker::Lorem.paragraph(3, false, 14),
                          target: [rand(1..4200), 0].sample,
+                         status: 'draft',
                          created_at: Time.zone.now - rand(1..10).days)
     rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }
   end
@@ -79,7 +80,7 @@ puts "created 1 - 4 allocations for each member in each group"
 ### CONTRIBUTIONS
 
 groups.each do |group|
-  group.buckets.where(published: true).each do |bucket|
+  group.buckets.where(status: 'live').each do |bucket|
     rand(0..4).times do
       bucket_target = bucket.target
       member = group.members.sample
@@ -89,6 +90,6 @@ groups.each do |group|
   end
 end
 
-puts "created 0 - 4 contributions for each published bucket in each group"
+puts "created 0 - 4 contributions for each live bucket in each group"
 
 puts 'Seed: Complete!'

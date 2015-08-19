@@ -7,17 +7,19 @@ class Bucket < ActiveRecord::Base
   validates :name, presence: true
   validates :group_id, presence: true
   validates :user_id, presence: true
+  validates :status, presence: true
 
   def total_contributions
     contributions.sum(:amount)
   end
 
-  def publish!(target)
-    update(target: target, published: true)
+  def open_for_funding!(target:, ends_at:)
+    update(target: target, status: 'live')
   end
 
   # TODO: eventually bring this stuff onto the client side
   def num_of_contributors
+    # TODO: this should be the number of contributions with unique user_id
     contributions.length
   end
 end
