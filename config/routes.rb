@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resources :allocations, only: [:create, :show, :update]
 
     resources :buckets, only: [:index, :create, :show, :update, :destroy] do
-      collection do
+      member do
         post :open_for_funding
       end
     end
