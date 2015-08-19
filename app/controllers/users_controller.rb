@@ -1,9 +1,7 @@
 class UsersController < AuthenticatedController
-
   def me
     render json: [current_user]
   end
-
 
   def update
     authorize user
