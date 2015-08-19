@@ -70,7 +70,7 @@
             <span class="project-page__progress-unit">pledged of {{ project.target | currency : "$" : 0 }}</span>
           </div>
 
-          <div flex="25">
+          <div flex="25" ng-show="project.fundingClosesAt">
             <span class="project-page__progress-amount">{{ project.fundingClosesAt | timeToNowAmount }}</span>
             <span class="project-page__progress-unit">{{ project.fundingClosesAt | timeToNowUnits }} left</span>
           </div>
