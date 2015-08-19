@@ -28,8 +28,8 @@ class BucketsController < AuthenticatedController
   end
 
   def open_for_funding
-    bucket = Bucket.find(params[:bucket_id])
-    # TODO: abstract to service
+    bucket = Bucket.find(params[:id])
+    # TODO: abstract to service once background jobs and other things become necessary
     bucket.open_for_funding(target: params[:target], funding_closes_at: params[:funding_closes_at])
     render json: [bucket]
   end
