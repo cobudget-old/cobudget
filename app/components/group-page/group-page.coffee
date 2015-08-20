@@ -13,9 +13,6 @@ module.exports =
 
     window.scrollHeight = 0;
 
-    if $scope.newProjectOpenForFundingId = ipCookie('newProjectOpenForFundingId')
-      $scope.showToast = true
-
     $scope.createProject = ->
       $location.path("/groups/#{$stateParams.groupId}/projects/new")
 
@@ -24,5 +21,18 @@ module.exports =
 
     $scope.selectTab = (tabNum) ->
       $scope.tabSelected = parseInt tabNum
+
+    $scope.toggleToastStyling = () ->
+      jQuery('.group-page__create-project-fab').toggleClass('group-page__create-project-fab-toasty')
+      jQuery('.group-page__content').toggleClass('group-page__content-toasty')
+
+    if $scope.newProjectOpenForFundingId = ipCookie('newProjectOpenForFundingId')
+      $scope.showToast = true
+      $scope.toggleToastStyling()
+      
+    $scope.showNewLiveProject = (projectId) ->
+      ipCookie('newProjectOpenForFundingId', null)
+      $scope.toggleToastStyling()
+      $scope.showProject(projectId)
 
     return

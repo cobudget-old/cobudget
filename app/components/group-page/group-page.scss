@@ -62,6 +62,11 @@
   top: calc(#{$medium-height} * 2 + #{$large-height});
 }
 
+.group-page__content-toasty {
+  padding-bottom: $large-height;
+}
+
+
 .group-page__subheader-title {
   color: $cobudget-blue;
 }
@@ -121,11 +126,19 @@
 }
 
 .group-page__create-project-fab {
-  margin-right: 10px;
-  margin-bottom: 10px;
+  position: fixed;
+  right: 10px;
+  bottom: 15px;
+}
+
+.group-page__create-project-fab-toasty {
+  bottom: calc(#{$large-height} + 15px);
 }
 
 .group-page__toast {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   height: $large-height;
   background: rgba(0,0,0,0.8);
 }

@@ -2,9 +2,7 @@ module.exports =
   url: '/groups/:groupId/projects/:projectId'
   template: require('./project-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie) ->
-
-    ipCookie('newProjectOpenForFundingId', null)
-
+    
     groupId = parseInt $stateParams.groupId
     projectId = parseInt $stateParams.projectId
 
