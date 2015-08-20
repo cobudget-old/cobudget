@@ -13,8 +13,9 @@ class Bucket < ActiveRecord::Base
     contributions.sum(:amount)
   end
 
-  def open_for_funding!(target:, ends_at:)
-    update(target: target, status: 'live')
+  # funding_closes_at, need to think more about the implications of setting this
+  def open_for_funding(target:, funding_closes_at:)
+    update(target: target, status: 'live', funding_closes_at: funding_closes_at)
   end
 
   # TODO: eventually bring this stuff onto the client side

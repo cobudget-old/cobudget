@@ -27,6 +27,13 @@ class BucketsController < AuthenticatedController
     destroy_resource
   end
 
+  def open_for_funding
+    bucket = Bucket.find(params[:id])
+    # TODO: abstract to service once background jobs and other things become necessary
+    bucket.open_for_funding(target: params[:target], funding_closes_at: params[:funding_closes_at])
+    render json: [bucket]
+  end
+
   private
     def bucket_params_create
       # TODO: put user_id back in once we have a concept of 'current_user' in the API

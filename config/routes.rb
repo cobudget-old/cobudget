@@ -32,7 +32,11 @@ Rails.application.routes.draw do
     # on the create action (not sure why??)
     resources :allocations, only: [:create, :show, :update]
 
-    resources :buckets, only: [:index, :create, :show, :update, :destroy]
+    resources :buckets, only: [:index, :create, :show, :update, :destroy] do
+      member do
+        post :open_for_funding
+      end
+    end
 
     resources :contributions, only: [:create, :update, :destroy]
   end

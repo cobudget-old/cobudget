@@ -9,5 +9,6 @@ class BucketSerializer < ActiveModel::Serializer
              :created_at,
              :status,
              :total_contributions,
-             :num_of_contributors
+             :num_of_contributors,
+             :funding_closes_at
 end
