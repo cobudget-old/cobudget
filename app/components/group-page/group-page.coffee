@@ -13,8 +13,8 @@ module.exports =
 
     window.scrollHeight = 0;
 
-    if ipCookie('newProjectOpenForFunding')
-      alert('meow meow')
+    if $scope.newProjectOpenForFundingId = ipCookie('newProjectOpenForFundingId')
+      $scope.showToast = true
 
     $scope.createProject = ->
       $location.path("/groups/#{$stateParams.groupId}/projects/new")
