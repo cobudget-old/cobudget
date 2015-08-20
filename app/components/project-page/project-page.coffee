@@ -1,8 +1,8 @@
 module.exports = 
   url: '/groups/:groupId/projects/:projectId'
   template: require('./project-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser) ->
-
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie) ->
+    
     groupId = parseInt $stateParams.groupId
     projectId = parseInt $stateParams.projectId
 
@@ -43,5 +43,10 @@ module.exports =
 
     $scope.userCanStartFunding = ->
       $scope.currentMembership.isAdmin || $scope.project.author().id == $scope.currentMembership.member().id
+
+    $scope.openForFunding = ->
+      $scope.project.openForFunding()
+      ipCookie('newProjectOpenForFundingId', $stateParams.projectId)
+      $scope.back()
 
     return

@@ -62,6 +62,11 @@
   top: calc(#{$medium-height} * 2 + #{$large-height});
 }
 
+.group-page__content-toasty {
+  padding-bottom: $large-height;
+}
+
+
 .group-page__subheader-title {
   color: $cobudget-blue;
 }
@@ -114,16 +119,44 @@
 
 // fixed-position create project FAB
 
+.group-page__footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
 .group-page__create-project-fab {
   position: fixed;
   right: 10px;
   bottom: 15px;
 }
 
-// funders
-
-.group-page__funder-container {
+.group-page__create-project-fab-toasty {
+  bottom: calc(#{$large-height} + 15px);
 }
+
+.group-page__toast {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: $large-height;
+  background: rgba(0,0,0,0.8);
+}
+
+.group-page__toast-text {
+  @include fontSmall;
+  color: white;
+  padding-left: 20px;  
+}
+
+.group-page__toast-button {
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  color: $cobudget-jade;
+}
+
+// funders
 
 .group-page__funder-name {
   @include fontMedLarge;  
@@ -134,15 +167,3 @@
   @include fontLarge;
   color: $cobudget-green;
 }
-
-
-
-
-
-
-
-
-
-
-
-

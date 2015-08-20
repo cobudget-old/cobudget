@@ -117,13 +117,21 @@
         </md-list-item>
       </md-list>
     </div>
+
+    <md-button class="md-fab group-page__create-project-fab" ng-click="createProject()">
+      <div layout="column" layout-align="center center">
+        <i class="material-icons">add</i>
+      </div>
+    </md-button>
   </md-content>
 
-  <md-button class="md-fab group-page__create-project-fab" ng-click="createProject()">
-    <div layout="column" layout-align="center center">
-      <i class="material-icons">add</i>
+  <div layout="row" layout-align="center center" class="group-page__toast" ng-show="showToast">
+    <div class="group-page__toast-text" flex>
+      You launched a project for funding
     </div>
-  </md-button>
-
+    <div>
+      <md-button class="group-page__toast-button" ng-click="showNewLiveProject(newProjectOpenForFundingId)">View</md-button>
+    </div>      
+  </div>
 </div>
 
