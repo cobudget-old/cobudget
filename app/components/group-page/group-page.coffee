@@ -1,4 +1,7 @@
 module.exports = 
+  resolve: 
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId'
   template: require('./group-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie) ->
