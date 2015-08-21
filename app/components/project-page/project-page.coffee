@@ -54,4 +54,7 @@ module.exports =
     $scope.editDraft = ->
       $location.path("/groups/#{groupId}/projects/#{projectId}/edit")
 
+    $scope.userCanEditDraft = ->
+      $scope.project.status == 'draft' && $scope.userCanStartFunding()
+
     return
