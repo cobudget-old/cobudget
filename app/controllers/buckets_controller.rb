@@ -25,7 +25,15 @@ class BucketsController < AuthenticatedController
 
   api :PUT, '/buckets/:id', 'Update a bucket'
   def update
-    update_resource(bucket_params_update)
+    bucket = Bucket.find(params[:id])
+    bucket.update_attributes(bucket_params_update)
+    if bucket.save
+      render json: [bucket]
+    else
+      render json: {
+        errors: bucket.errors.full_messages
+      }, status: 400
+    end
   end
 
   api :DELETE, '/buckets/:id', 'Deletes a bucket'
