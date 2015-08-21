@@ -1,0 +1,42 @@
+// toolbar heading
+
+.edit-project-page__toolbar {
+  background: $cobudget-blue;
+}
+
+.edit-project-page__cancel-icon {
+  @include fontGrande;
+}
+
+.edit-project-page__header-text {
+  @include fontLarge;
+}
+
+.edit-project-page__done-button-text {
+  margin-right: 5px; 
+}
+
+// help text
+
+.edit-project-page__subheader-title {
+  color: $cobudget-blue;
+}
+
+.edit-project-page__subheader-text {
+  @include fontMedium;
+}
+
+.edit-project-page__subheader-text .md-subheader-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// form
+
+.edit-project-page__form {
+  padding: 10px;
+}
+
+.edit-project-page__target-optional-text {
+  color: $cobudget-blue;
+}

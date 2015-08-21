@@ -10,5 +10,6 @@ module.exports =
 
     $scope.done = () ->
       if $scope.bucketForm.$valid
-        $scope.bucket.save().then ->
+        # temp hack - because, save doesn't set the right request headers
+        $scope.bucket.create().then ->
           $scope.cancel()

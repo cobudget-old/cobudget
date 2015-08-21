@@ -19,6 +19,10 @@
 
       <span flex></span>
 
+      <span ng-show="userCanEditDraft()">
+        <md-button class="project-page__edit-button" ng-click="editDraft()">Edit</md-button>
+      </span>
+
       <md-button class="md-icon-button project-page-menu-button" aria-label="More" ng-click="toggleStatus()">
         <div layout="column" layout-align="center center">
           <i class="material-icons project-page__menu-icon">more_vert</i>

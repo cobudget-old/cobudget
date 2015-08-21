@@ -20,4 +20,12 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     openForFunding: ->
       @remote.postMember(@id,'open_for_funding', {target: @target, fundingClosesAt: @fundingClosesAt})
-      
+    
+    # temp hack to allow post requests
+    create: ->
+      @remote.create
+        bucket:
+          description: @description
+          name: @name 
+          target: @target
+          group_id: @groupId

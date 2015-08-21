@@ -51,4 +51,10 @@ module.exports =
       ipCookie('newProjectOpenForFundingId', $stateParams.projectId)
       $scope.back()
 
+    $scope.editDraft = ->
+      $location.path("/groups/#{groupId}/projects/#{projectId}/edit")
+
+    $scope.userCanEditDraft = ->
+      $scope.project && $scope.project.status == 'draft' && $scope.userCanStartFunding()
+
     return
