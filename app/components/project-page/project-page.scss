@@ -30,6 +30,13 @@
   margin-right: 10px;
 }
 
+.project-page__edit-button {
+  margin: 0;
+  padding: 0;
+  // doesn't work for some reason?
+  width: 60px;
+}
+
 // header card
 
 .project-page__content {

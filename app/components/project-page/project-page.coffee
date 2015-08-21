@@ -51,4 +51,7 @@ module.exports =
       ipCookie('newProjectOpenForFundingId', $stateParams.projectId)
       $scope.back()
 
+    $scope.editDraft = ->
+      $location.path("/groups/#{groupId}/projects/#{projectId}/edit")
+
     return
