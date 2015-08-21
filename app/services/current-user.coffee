@@ -1,11 +1,6 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'CurrentUser', (Records, ipCookie) ->
-
-  setId: (id) ->
-    ipCookie('currentUserId', id)
-
-  get: ->
-    id = ipCookie('currentUserId')
-    Records.users.find(id)
+global.cobudgetApp.factory 'CurrentUser', (Records) ->
+  ->
+    Records.users.find(global.cobudgetApp.currentUserId)
