@@ -12,7 +12,6 @@ module.exports =
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
       $scope.currentMembership = group.membershipFor(CurrentUser())
-      console.log('(project-page) currentMembership: ', $scope.currentMembership)
 
     Records.buckets.findOrFetchById(projectId).then (project) ->
       $scope.project = project
