@@ -1,4 +1,7 @@
 module.exports = 
+  resolve: 
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/projects/:projectId'
   template: require('./project-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie) ->
@@ -8,7 +11,7 @@ module.exports =
 
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
-      $scope.currentMembership = group.membershipFor(CurrentUser.get())
+      $scope.currentMembership = group.membershipFor(CurrentUser())
       console.log('(project-page) currentMembership: ', $scope.currentMembership)
 
     Records.buckets.findOrFetchById(projectId).then (project) ->
