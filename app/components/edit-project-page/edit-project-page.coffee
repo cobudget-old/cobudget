@@ -15,5 +15,5 @@ module.exports =
 
     $scope.done = () ->
       if $scope.bucketForm.$valid
-        alert('submitting form!')
+        $scope.bucket.save()
         $scope.cancel()
