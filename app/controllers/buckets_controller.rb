@@ -23,7 +23,7 @@ class BucketsController < AuthenticatedController
     end
   end
 
-  api :PUT, '/buckets/:id', 'Update a bucket'
+  api :PATCH, '/buckets/:id', 'Update a bucket'
   def update
     bucket = Bucket.find(params[:id])
     bucket.update_attributes(bucket_params_update)
