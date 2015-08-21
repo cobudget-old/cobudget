@@ -13,8 +13,14 @@ class BucketsController < AuthenticatedController
 
   api :POST, '/buckets', 'Create a bucket'
   def create
-    bucket = Bucket.create(bucket_params_create)
-    render json: [bucket]
+    bucket = Bucket.new(bucket_params_create)
+    if bucket.save
+      render json: [bucket]
+    else 
+      render json: {
+        errors: bucket.errors.full_messages
+      }, status: 400
+    end
   end
 
   api :PUT, '/buckets/:id', 'Update a bucket'
