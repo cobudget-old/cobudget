@@ -18,12 +18,11 @@
   </md-toolbar>
 
   <md-content>
-
     <md-subheader class="create-project-page__subheader-title">You're about to make a project draft</md-subheader>
+
     <md-subheader class="create-project-page__subheader-text">Create a project draft to propose an idea to your peers and get feedback. Once your project gets endorsed, you can request funding.</md-subheader>
 
-    <form name='bucketForm' class="create-project-page__form" ng-keyUp="$event.keyCode == 13 ? done() : null">
-
+    <form name='bucketForm' class="create-project-page__form">
       <md-input-container>
         <label>Title</label>
         <input required name="name" type="text" ng-model="bucket.name">
@@ -44,9 +43,6 @@
         <label>Estimated Funding Target (optional)</label>
         <input name="target" type="number" ng-model="bucket.target">
       </md-input-container>
-
     </form>
-
   </md-content>
-
 </div>
