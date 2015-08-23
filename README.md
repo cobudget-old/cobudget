@@ -48,14 +48,15 @@ npm start
 NODE_ENV=production npm run stage
 ```
 
-*Deploy (push to dokku)*
+*Deploy (push to heroku)*
 
 ```
-git remote add deploy dokku@next.cobudget.co:app
+npm run set-remote
+npm run set-buildpack
 ```
 
 ```
-NODE_ENV=production npm run deploy
+npm run deploy
 ```
 
 ### Test
