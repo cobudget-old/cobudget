@@ -42,13 +42,13 @@ npm start
 
 ### Deploy
 
-*Stage (push to gh-pages)*
+*Stage (push to this repo's gh-pages)*
 
 ```
 NODE_ENV=production npm run stage
 ```
 
-*Deploy (push to heroku)*
+*Deploy (push to prod repo's gh-pages)*
 
 ```
 npm run set-remote
