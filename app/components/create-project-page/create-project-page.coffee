@@ -1,16 +1,19 @@
 module.exports = 
-  url: '/groups/:groupId/projects/new'
+  url: '/projects/new'
   template: require('./create-project-page.html')
-  controller: ($scope, Records, $stateParams, $location, Toast) ->
+  controller: ($scope, Records, $location, Toast) ->
+
+    groupId = global.cobudgetApp.currentGroupId
+
     $scope.bucket = Records.buckets.build()
-    $scope.bucket.groupId = parseInt($stateParams.groupId)
+    $scope.bucket.groupId = groupId
       
     $scope.cancel = () ->
-      $location.path("/groups/#{$stateParams.groupId}")
+      $location.path("/groups/#{groupId}")
 
     $scope.done = () ->
       if $scope.bucketForm.$valid
         $scope.bucket.save().then (data) ->
-          bucketId = data.buckets[0].id
-          $location.path("/groups/#{$scope.bucket.groupId}/projects/#{bucketId}")
+          projectId = data.buckets[0].id
+          $location.path("/projects/#{projectId}")
           Toast.show('You launched a project for funding')
