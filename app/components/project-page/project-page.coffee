@@ -2,11 +2,11 @@ module.exports =
   resolve: 
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-  url: '/groups/:groupId/projects/:projectId'
+  url: '/projects/:projectId'
   template: require('./project-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie) ->
     
-    groupId = parseInt $stateParams.groupId
+    groupId = global.cobudgetApp.currentGroupId
     projectId = parseInt $stateParams.projectId
 
     Records.groups.findOrFetchById(groupId).then (group) ->
@@ -52,7 +52,7 @@ module.exports =
       $scope.back()
 
     $scope.editDraft = ->
-      $location.path("/groups/#{groupId}/projects/#{projectId}/edit")
+      $location.path("/projects/#{projectId}/edit")
 
     $scope.userCanEditDraft = ->
       $scope.project && $scope.project.status == 'draft' && $scope.userCanStartFunding()
