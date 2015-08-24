@@ -2,7 +2,7 @@ module.exports =
   url: '/'
   template: require('./welcome-page.html')
   controller: ($scope, $auth, $location, Records, $rootScope) ->
-
+    
     $scope.login = (formData) ->
       $scope.formError = ""
       $auth.submitLogin
