@@ -1,4 +1,6 @@
 require 'faker'
+require 'factory_girl_rails'
+
 ### USERS
 
 Allocation.destroy_all
