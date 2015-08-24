@@ -1,3 +1,4 @@
+require 'faker'
 ### USERS
 
 Allocation.destroy_all
