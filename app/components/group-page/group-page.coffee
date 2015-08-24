@@ -2,11 +2,9 @@ module.exports =
   resolve: 
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-    checkIfUserSignedIn: ->
-      global.cobudgetApp.checkIfUserSignedIn
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie, Toast) ->
 
     groupId = parseInt($stateParams.groupId) 
     Records.groups.findOrFetchById(groupId).then (group) ->

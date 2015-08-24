@@ -1,10 +1,7 @@
 module.exports = 
-  resolve: 
-    checkIfUserSignedIn: ->
-      global.cobudgetApp.checkIfUserSignedIn
   url: '/groups/:groupId/projects/new'
   template: require('./create-project-page.html')
-  controller: ($scope, Records, $stateParams, $location) ->
+  controller: ($scope, Records, $stateParams, $location, Toast) ->
     $scope.bucket = Records.buckets.build()
     $scope.bucket.groupId = parseInt($stateParams.groupId)
       
