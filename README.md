@@ -42,20 +42,21 @@ npm start
 
 ### Deploy
 
-*Stage (push to gh-pages)*
+*Stage (push to this repo's gh-pages)*
 
 ```
 NODE_ENV=production npm run stage
 ```
 
-*Deploy (push to dokku)*
+*Deploy (push to prod repo's gh-pages)*
 
 ```
-git remote add deploy dokku@next.cobudget.co:app
+npm run set-remote
+npm run set-buildpack
 ```
 
 ```
-NODE_ENV=production npm run deploy
+npm run deploy
 ```
 
 ### Test
