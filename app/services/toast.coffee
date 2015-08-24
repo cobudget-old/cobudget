@@ -5,7 +5,9 @@ global.cobudgetApp.factory 'Toast', ($mdToast, $location) ->
   new class Toast
 
     show: (msg) ->
-      $mdToast.show($mdToast.simple().content(msg))
+      toast = $mdToast.simple()
+        .content(msg)
+      $mdToast.show(toast)
 
     showAndRedirect: (msg, path) ->
       toast = $mdToast.simple()
