@@ -16,4 +16,6 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location) ->
 
   $rootScope.$on 'auth:login-success', (event, user) ->
     authSuccess(event, user).then ->
-      $location.path('/groups/1')
+      # TODO: later, this will be the first group that the user is a member of
+      global.cobudgetApp.currentGroupId = 1
+      $location.path("/groups/#{global.cobudgetApp.currentGroupId}")
