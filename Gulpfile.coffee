@@ -80,8 +80,8 @@ browserify = require('browserify')
 scripts = (isWatch) ->
   ->
     setup = (bundler) ->
-      if isDeploy(nodeEnv)
-        bundler.transform(global: true, 'uglifyify')
+      #if isDeploy(nodeEnv)
+      #  bundler.transform(global: true, 'uglifyify')
       bundler
 
     bundle = (bundler) ->
