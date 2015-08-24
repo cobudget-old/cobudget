@@ -26,7 +26,3 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     membershipFor: (member) ->
       _.first _.filter @memberships(), (membership) ->
         membership.memberId == member.id
-
-    # personalFunds: ->
-
-    # totalFunds: ->
