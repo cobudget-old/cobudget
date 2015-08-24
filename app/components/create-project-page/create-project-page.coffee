@@ -1,15 +1,19 @@
 module.exports = 
-  url: '/groups/:groupId/projects/new'
+  url: '/projects/new'
   template: require('./create-project-page.html')
-  controller: ($scope, Records, $stateParams, $location) ->
+  controller: ($scope, Records, $location, Toast) ->
+
+    groupId = global.cobudgetApp.currentGroupId
+
     $scope.bucket = Records.buckets.build()
-    $scope.bucket.groupId = parseInt($stateParams.groupId)
+    $scope.bucket.groupId = groupId
       
     $scope.cancel = () ->
-      $location.path("/groups/#{$stateParams.groupId}")
+      $location.path("/groups/#{groupId}")
 
     $scope.done = () ->
       if $scope.bucketForm.$valid
-        # temp hack - because, save doesn't set the right request headers
-        $scope.bucket.create().then ->
-          $scope.cancel()
+        $scope.bucket.save().then (data) ->
+          projectId = data.buckets[0].id
+          $location.path("/projects/#{projectId}")
+          Toast.show('You drafted a new project')

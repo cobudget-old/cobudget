@@ -1,5 +1,4 @@
 <div class="welcome-page">
-
   <md-toolbar class="md-primary welcome-page__toolbar">
     <h1 class="md-toolbar-tools welcome-page__heading" layout-align="center">Welcome to Cobudget!</h1>
   </md-toolbar>
@@ -7,16 +6,18 @@
   <md-content layout-padding>
     <form novalidate ng-submit="login(formData)">
       <div class="welcome-page__form-errors">{{ formError }}</div>
+
       <md-input-container>
         <label>email</label>
         <input name="email" type="email" ng-model="formData.email">
       </md-input-container>
+
       <md-input-container>
         <label>password</label>
         <input name="password" type="password" ng-model="formData.password">
       </md-input-container>
+  
       <input type="submit" value="log in">
     </form>
   </md-content>
-
 </div>
