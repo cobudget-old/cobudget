@@ -1,7 +1,18 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'Toast', ($mdToast) ->
+global.cobudgetApp.factory 'Toast', ($mdToast, $location) ->
   new class Toast
+
     show: (msg) ->
       $mdToast.show($mdToast.simple().content(msg))
+
+    showAndRedirect: (msg, path) ->
+      toast = $mdToast.simple()
+        .content(msg)
+        .action('VIEW')
+        .highlightAction(false)
+
+      $mdToast.show(toast).then (res) ->
+        if res == 'ok'
+          $location.path(path)

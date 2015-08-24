@@ -4,7 +4,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/projects/:projectId'
   template: require('./project-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, ipCookie) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
     
     groupId = global.cobudgetApp.currentGroupId
     projectId = parseInt $stateParams.projectId
@@ -48,7 +48,7 @@ module.exports =
 
     $scope.openForFunding = ->
       $scope.project.openForFunding()
-      ipCookie('newProjectOpenForFundingId', $stateParams.projectId)
+      Toast.showAndRedirect('You launched a project for funding', "/projects/#{projectId}")
       $scope.back()
 
     $scope.editDraft = ->
