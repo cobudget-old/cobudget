@@ -18,10 +18,10 @@ module.exports =
     window.scrollHeight = 0;
 
     $scope.createProject = ->
-      $location.path("/groups/#{$stateParams.groupId}/projects/new")
+      $location.path("/projects/new")
 
     $scope.showProject = (projectId) ->
-      $location.path("/groups/#{$stateParams.groupId}/projects/#{projectId}")
+      $location.path("/projects/#{projectId}")
 
     $scope.selectTab = (tabNum) ->
       $scope.tabSelected = parseInt tabNum
