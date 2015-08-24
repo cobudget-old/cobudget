@@ -10,6 +10,7 @@ module.exports =
 
     $scope.done = () ->
       if $scope.bucketForm.$valid
-        # temp hack - because, save doesn't set the right request headers
-        $scope.bucket.create().then ->
-          $scope.cancel()
+        $scope.bucket.save().then (data) ->
+          bucketId = data.buckets[0].id
+          $location.path("/groups/#{$scope.bucket.groupId}/projects/#{bucketId}")
+          Toast.show('You launched a project for funding')
