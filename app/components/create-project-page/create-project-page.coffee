@@ -16,4 +16,4 @@ module.exports =
         $scope.bucket.save().then (data) ->
           projectId = data.buckets[0].id
           $location.path("/projects/#{projectId}")
-          Toast.show('You launched a project for funding')
+          Toast.show('You drafted a new project')
