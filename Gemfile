@@ -43,6 +43,9 @@ gem 'sinatra', :require => nil
 # error tracking
 gem 'airbrake'
 
+# using faker to generate fake users for staging app, will put back in group :development, :test when in production
+gem 'faker'
+
 group :development do
   gem 'capistrano', '2.15.5'
   gem "capistrano-rails", '~> 1.0.0'
@@ -50,7 +53,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'faker'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'factory_girl_rails'
