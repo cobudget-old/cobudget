@@ -52,7 +52,6 @@ NODE_ENV=production npm run stage
 
 ```
 npm run set-remote
-npm run set-buildpack
 ```
 
 ```
