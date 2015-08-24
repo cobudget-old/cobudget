@@ -4,11 +4,7 @@ module.exports =
   controller: ($scope, $auth, $location, Records, $rootScope) ->
 
     $rootScope.$on 'auth:validation-success', (event, user) ->
-      $scope.userNotLoggedIn = false
       $location.path('groups/1')
-
-    $rootScope.$on 'auth:validation-error', () ->
-      $scope.userNotLoggedIn = true
 
     $scope.login = (formData) ->
       $scope.formError = ""
