@@ -6,7 +6,9 @@ module.exports =
   template: require('./group-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
 
-    groupId = parseInt($stateParams.groupId) 
+    groupId = parseInt($stateParams.groupId)
+    global.cobudgetApp.currentGroupId = groupId
+    
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
       $scope.currentMembership = group.membershipFor(CurrentUser())
