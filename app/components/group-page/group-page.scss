@@ -1,3 +1,4 @@
+
 // toolbar heading
 
 .group-page__toolbar {
@@ -62,11 +63,6 @@
   top: calc(#{$medium-height} * 2 + #{$large-height});
 }
 
-.group-page__content-toasty {
-  padding-bottom: $large-height;
-}
-
-
 .group-page__subheader-title {
   color: $cobudget-blue;
 }
@@ -129,31 +125,6 @@
   position: fixed;
   right: 10px;
   bottom: 15px;
-}
-
-.group-page__create-project-fab-toasty {
-  bottom: calc(#{$large-height} + 15px);
-}
-
-.group-page__toast {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: $large-height;
-  background: rgba(0,0,0,0.8);
-}
-
-.group-page__toast-text {
-  @include fontSmall;
-  color: white;
-  padding-left: 20px;  
-}
-
-.group-page__toast-button {
-  margin: 0;
-  padding: 0;
-  width: 60px;
-  color: $cobudget-jade;
 }
 
 // funders
