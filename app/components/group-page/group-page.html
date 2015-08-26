@@ -85,11 +85,11 @@
             </md-button>
           </div>
         </div>
-        <md-list-item ng-repeat="project in group.liveBuckets()">
-          <div layout="column" flex class="group-page__project-container" ng-click="showProject(project.id)">
-            <span class="group-page__project-title">{{ project.name | limitTo: 30 }}<span ng-if="project.name.length > 30">...</span></span>
-            <span class="group-page__project-funding">{{ project.amountRemaining() | currency : "$" : 0  }} to go</span>
-            <md-progress-linear md-mode="determinate" value="{{ project.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
+        <md-list-item ng-repeat="liveProject in group.liveBuckets()">
+          <div layout="column" flex class="group-page__live-project-container" ng-click="showProject(liveProject.id)">
+            <span class="group-page__live-project-title">{{ liveProject.name | limitTo: 30 }}<span ng-if="liveProject.name.length > 30">...</span></span>
+            <span class="group-page__live-project-funding">{{ liveProject.amountRemaining() | currency : "$" : 0  }} to go</span>
+            <md-progress-linear md-mode="determinate" value="{{ liveProject.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
           </div>
         </md-list-item>
       </md-list>

@@ -71,17 +71,17 @@
   color: $cobudget-grey;
 }
 
-// projects
+// live projects
 
-.group-page__project-container {
+.group-page__live-project-container {
   padding: 3px 0;
 }
 
-.group-page__project-title {
+.group-page__live-project-title {
   @include fontMedLarge;
 }
 
-.group-page__project-funding {
+.group-page__live-project-funding {
   @include fontSmall;
   color: $grey-on-white;
 }
