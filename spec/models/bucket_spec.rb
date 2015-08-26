@@ -10,4 +10,16 @@ RSpec.describe Bucket, :type => :model do
       expect(bucket.total_contributions).to eq(360)
     end
   end
+
+  describe "num_of_contributors" do
+    it "returns the number of contributions with unique user_id" do
+      bucket = create(:bucket)
+      user1 = create(:user)
+      user2 = create(:user)
+      create(:contribution, bucket: bucket, user: user1)
+      create(:contribution, bucket: bucket, user: user1)
+      create(:contribution, bucket: bucket, user: user2)   
+      expect(bucket.num_of_contributors).to eq(2)
+    end
+  end
 end
