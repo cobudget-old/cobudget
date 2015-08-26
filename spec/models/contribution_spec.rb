@@ -9,7 +9,6 @@ RSpec.describe Contribution, :type => :model do
       contribution2 = create(:contribution, amount: 600, user: user, bucket: bucket)
       contribution3 = create(:contribution, amount: 600, user: user, bucket: bucket)
 
-
       bucket.reload
       contribution1.reload
       contribution2.reload

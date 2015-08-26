@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :bucket do
     name { Faker::Company.name }
     group
