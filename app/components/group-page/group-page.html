@@ -111,6 +111,10 @@
           <div layout="column" flex class="group-page__draft-container">
             <span class="group-page__draft-title">{{ draft.name | limitTo: 30 }}<span ng-if="draft.name.length > 30">...</span></span>
             <span class="group-page__draft-author">created by {{ draft.author().name }} {{ draft.createdAt | timeFromNowInWords }} ago</span>
+            <div layout="column" layout-align="center center" class="group-page__comment-count-container">
+              <i class="material-icons group-page__comment-count-icon">messenger</i>
+              <div class="group-page__comment-count">{{ draft.comments().length }}</div>
+            </div>
           </div>
         </md-list-item>
       </md-list>      

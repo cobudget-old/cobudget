@@ -100,6 +100,10 @@
 
 // drafts
 
+.group-page__draft-container {
+  position: relative;
+}
+
 .group-page__draft-title {
   @include fontMedLarge;
 }
@@ -107,6 +111,23 @@
 .group-page__draft-author {
   @include fontSmall;
   color: $grey-on-white;
+}
+
+.group-page__comment-count-container {
+  position: absolute;
+  top: 0;
+  right: 4px;
+}
+
+.group-page__comment-count-icon {
+  @include fontGrande;
+}
+
+.group-page__comment-count {
+  color: white;
+  position: relative;
+  bottom: 23px;
+  @include fontTiny;
 }
 
 // funded projects

@@ -12,7 +12,9 @@ module.exports =
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
       $scope.currentMembership = group.membershipFor(CurrentUser())
-      Records.buckets.fetchByGroupId(group.id)
+      Records.buckets.fetchByGroupId(group.id).then (data) ->
+        _.each data.buckets, (bucket) ->
+          Records.comments.fetchByBucketId(bucket.id)
       Records.memberships.fetchByGroupId(group.id)
 
     window.scrollHeight = 0;
