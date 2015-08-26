@@ -113,6 +113,17 @@
   color: $grey-on-white;
 }
 
+// funded projects
+
+.group-page__funded-project-title {
+  @include fontMedLarge;
+}
+
+.group-page__funded-project-author {
+  @include fontSmall;
+  color: $grey-on-white;
+}
+
 // fixed-position create project FAB
 
 .group-page__footer {
