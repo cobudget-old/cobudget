@@ -10,6 +10,10 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @hasMany 'buckets'
       @hasMany 'memberships'
 
+    fundedBuckets: ->
+      _.filter @buckets(), (bucket) ->
+        bucket.status == 'funded'
+
     liveBuckets: ->
       _.filter @buckets(), (bucket) ->
         bucket.status == 'live'
