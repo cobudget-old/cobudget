@@ -206,6 +206,10 @@
   margin-left: 0;
 }
 
+.project-page .md-button.md-primary.md-raised:not([disabled]):hover {
+  background-color: $cobudget-lime;
+}
+
 // discussion card
 
 .project-page__discussion-header {
