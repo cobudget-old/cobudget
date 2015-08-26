@@ -61,4 +61,7 @@ module.exports =
     $scope.userCanEditDraft = ->
       $scope.project && $scope.project.status == 'draft' && $scope.userCanStartFunding()
 
+    $scope.fund = ->
+      alert('funding button was clicked!')
+
     return
