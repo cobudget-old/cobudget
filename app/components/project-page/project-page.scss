@@ -182,11 +182,15 @@
 }
 
 .project-page__draft-icon {
-  color: gold;
+  color: $cobudget-gold;
 }
 
 .project-page__live-icon {
   color: $cobudget-lime;
+}
+
+.project-page__funded-icon {
+  color: $cobudget-cyan;
 }
 
 .project-page__status-flagpoint-icon-inactive {
