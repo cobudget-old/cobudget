@@ -47,9 +47,12 @@ module.exports =
       $scope.currentMembership.isAdmin || $scope.project.author().id == $scope.currentMembership.member().id
 
     $scope.openForFunding = ->
-      $scope.project.openForFunding()
-      Toast.showAndRedirect('You launched a project for funding', "/projects/#{projectId}")
-      $scope.back()
+      if $scope.project.target
+        $scope.project.openForFunding()
+        Toast.showAndRedirect('You launched a project for funding', "/projects/#{projectId}")
+        $scope.back()
+      else
+        alert('Estimated funding target must be specified before funding starts')        
 
     $scope.editDraft = ->
       $location.path("/projects/#{projectId}/edit")
