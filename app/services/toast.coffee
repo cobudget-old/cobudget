@@ -18,3 +18,6 @@ global.cobudgetApp.factory 'Toast', ($mdToast, $location) ->
       $mdToast.show(toast).then (res) ->
         if res == 'ok'
           $location.path(path)
+
+    hide: ->
+      jQuery('md-toast').hide()

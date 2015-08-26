@@ -20,6 +20,7 @@ module.exports =
         window.scrollTo(0, 0)
 
     $scope.back = ->
+      Toast.hide()
       $location.path("/groups/#{groupId}")
 
     $scope.showFullDescription = false
