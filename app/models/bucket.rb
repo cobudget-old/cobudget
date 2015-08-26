@@ -23,4 +23,8 @@ class Bucket < ActiveRecord::Base
     # TODO: this should be the number of contributions with unique user_id
     contributions.length
   end
+
+  def funded?
+    total_contributions == target
+  end
 end

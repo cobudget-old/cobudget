@@ -21,4 +21,15 @@ RSpec.describe Contribution, :type => :model do
       expect(contribution3.amount).to eq(0)
     end
   end
+
+  describe "#update_bucket_status_if_funded" do
+    it "updates bucket's status to 'funded' if status is 'live' and target is met" do
+      bucket = create(:bucket, target: 420)
+      create(:contribution, bucket: bucket, amount: 100)
+      create(:contribution, bucket: bucket, amount: 200)
+      create(:contribution, bucket: bucket, amount: 120)
+      bucket.reload
+      expect(bucket.status).to eq('funded')
+    end
+  end
 end
