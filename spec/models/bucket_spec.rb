@@ -9,19 +9,4 @@ RSpec.describe Bucket, :type => :model do
       expect(bucket.total_contributions).to eq(360)
     end
   end
-
-  describe "#publish(target)!" do
-    before do
-      @bucket = create(:draft_bucket)
-      @bucket.publish!(10000)
-    end
-
-    it "sets 'published' to 'true'" do
-      expect(@bucket.published).to eq(true)
-    end
-
-    it "sets target" do
-      expect(@bucket.target).to eq(10000)
-    end
-  end
 end
