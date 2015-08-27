@@ -79,3 +79,6 @@ npm run test-spec
 ```
 npm run test-e2e
 ```
+
+# beta.cobudget.co
+production deploy of Cobudget beta
