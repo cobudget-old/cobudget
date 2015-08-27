@@ -12,7 +12,7 @@ class Group < ActiveRecord::Base
 
   def balance
     allocation_sum = allocations.sum(:amount)
-    contribution_sum = buckets.map { |b| b.total_contributions }.reduce(:+)
+    contribution_sum = buckets.map { |b| b.total_contributions }.reduce(:+) || 0
     allocation_sum - contribution_sum
   end
 end

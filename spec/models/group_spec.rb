@@ -10,16 +10,12 @@ RSpec.describe Group, :type => :model do
 		end
 	end
 
-  describe "#balance_for(user)" do
-    it "returns the difference between total allocations and contributions of a user within the group" do
-      make_user_group_member
-      proposer = create(:user)
-      bucket = create(:bucket, group: group, user: proposer)    
-
-      4.times { create(:allocation, user: user, group: group, amount: 20)} # user allocated $80
-      2.times { create(:contribution, user: user, bucket: bucket, amount: 10) } # user contributes $20
-
-      expect(group.balance_for(user)).to eq(60)
+  describe "#balance" do
+    context "if no allocations or contributions" do
+      it "returns 0" do
+        group = create(:group)
+        expect(group.balance).to eq(0)
+      end
     end
   end
 end
