@@ -10,17 +10,14 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @hasMany 'buckets'
       @hasMany 'memberships'
 
-    fundedBuckets: ->
-      _.filter @buckets(), (bucket) ->
-        bucket.status == 'funded'
+    draftBuckets: ->
+      @getBuckets('draft', 'createdAt')
 
     liveBuckets: ->
-      _.filter @buckets(), (bucket) ->
-        bucket.status == 'live'
+      @getBuckets('live', 'liveAt')
 
-    draftBuckets: ->
-      _.filter @buckets(), (bucket) ->
-        bucket.status == 'draft'
+    fundedBuckets: ->
+      @getBuckets('funded', 'fundedAt')
 
     # hasManyThrough doesn't yet exist quite yet
     members: ->
@@ -30,3 +27,15 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     membershipFor: (member) ->
       _.first _.filter @memberships(), (membership) ->
         membership.memberId == member.id
+
+    # private
+
+    filterBucketsByStatus: (status) ->
+      _.filter @buckets(), (bucket) ->
+        bucket.status == status
+
+    getBuckets: (status, datePropToSortBy) ->
+      filteredBuckets = @filterBucketsByStatus(status)
+      _.sortBy filteredBuckets, (bucket) ->
+        bucket[datePropToSortBy].format()
+      .reverse()
