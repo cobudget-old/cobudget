@@ -27,8 +27,8 @@ puts "generated 18 more fake users"
 groups = []
 2.times do
   group = Group.create!(name: Faker::Company.name)
-  group.memberships.create!(member: admin, is_admin: true)
-  group.memberships.create!(member: non_admin, is_admin: false)
+  group.add_admin(admin)
+  group.add_member(non_admin)
   groups << group
 end
 puts "generated 2 fake groups"
@@ -37,7 +37,7 @@ puts "added admin and user accounts to both groups"
 ### MEMBERSHIPS
 
 users.each do |user|
-  FactoryGirl.create(:membership, group: groups.sample, member: user)
+  groups.sample.add_member(user)
 end
 puts "added users as members to one of the groups"
 
