@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826052006) do
+ActiveRecord::Schema.define(version: 20150830072415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20150826052006) do
     t.integer  "group_id"
     t.string   "status",                                     default: "draft"
     t.datetime "funding_closes_at"
+    t.datetime "funded_at"
+    t.datetime "live_at"
   end
 
   add_index "buckets", ["user_id"], name: "index_buckets_on_user_id", using: :btree
