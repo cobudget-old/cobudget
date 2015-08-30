@@ -10,6 +10,10 @@ class Group < ActiveRecord::Base
     memberships.create!(member: user, is_admin: true)
   end
 
+  def add_member(user)
+    memberships.create!(member: user, is_admin: false)
+  end
+
   def balance
     allocation_sum = allocations.sum(:amount)
     contribution_sum = buckets.map { |b| b.total_contributions }.reduce(:+) || 0
