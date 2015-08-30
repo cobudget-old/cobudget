@@ -31,4 +31,20 @@ RSpec.describe Bucket, :type => :model do
       expect(bucket.num_of_contributors).to eq(2)
     end
   end
+
+  describe "#set_timestamp_if_status_updated" do
+    context "status updated to 'live'" do
+      it "sets live_at" do
+        bucket.update(status: 'live')
+        expect(bucket.live_at).to be_truthy
+      end
+    end
+
+    context "status updated to 'funded'" do
+      it "sets funded_at" do
+        bucket.update(status: 'funded')
+        expect(bucket.funded_at).to be_truthy
+      end
+    end
+  end
 end
