@@ -52,27 +52,6 @@
 
   <md-content class="group-page__content">
     <div class="group-page__projects-content" ng-if="tabSelected === 0">
-      <md-list class="group-page__funded-projects">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">Funded</md-subheader>
-          <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" aria-label="Settings">
-              <div layout="column" layout-align="center center">
-                <i class="material-icons group-page__help-icon">help</i>
-              </div>
-            </md-button>
-          </div>
-        </div>
-
-        <md-list-item ng-repeat="fundedProject in group.fundedBuckets()" ng-click="showProject(fundedProject.id)">
-          <div layout="column" flex class="group-page__funded-project-container">
-            <span class="group-page__funded-project-title">{{ fundedProject.name | limitTo: 30 }}<span ng-if="fundedProject.name.length > 30">...</span></span>
-            <span class="group-page__funded-project-author">created by {{ fundedProject.author().name }} {{ fundedProject.createdAt | timeFromNowInWords }} ago</span>
-          </div>
-        </md-list-item>
-      </md-list>
-
       <md-list class="group-page__live-projects">
         <div layout="row">
           <md-subheader class="group-page__subheader-title">Live Now</md-subheader>
@@ -117,7 +96,28 @@
             </div>
           </div>
         </md-list-item>
-      </md-list>      
+      </md-list>   
+
+      <md-list class="group-page__funded-projects">
+        <div layout="row">
+          <md-subheader class="group-page__subheader-title">Funded</md-subheader>
+          <div flex></div>
+          <div layout="column" layout-align="center center">
+            <md-button class="md-icon-button" aria-label="Settings">
+              <div layout="column" layout-align="center center">
+                <i class="material-icons group-page__help-icon">help</i>
+              </div>
+            </md-button>
+          </div>
+        </div>
+
+        <md-list-item ng-repeat="fundedProject in group.fundedBuckets()" ng-click="showProject(fundedProject.id)">
+          <div layout="column" flex class="group-page__funded-project-container">
+            <span class="group-page__funded-project-title">{{ fundedProject.name | limitTo: 30 }}<span ng-if="fundedProject.name.length > 30">...</span></span>
+            <span class="group-page__funded-project-author">created by {{ fundedProject.author().name }} {{ fundedProject.createdAt | timeFromNowInWords }} ago</span>
+          </div>
+        </md-list-item>
+      </md-list>
     </div>
 
     <div class="group-page__funders-content" ng-if="tabSelected === 1">
