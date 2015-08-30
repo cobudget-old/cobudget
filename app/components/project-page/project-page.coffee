@@ -51,7 +51,7 @@ module.exports =
       if $scope.project.target
         $scope.project.openForFunding().then ->
           $scope.back()
-          Toast.showAndRedirect('You launched a project for funding', "/projects/#{projectId}")
+          Toast.showWithRedirect('You launched a project for funding', "/projects/#{projectId}")
       else
         alert('Estimated funding target must be specified before funding starts')        
 

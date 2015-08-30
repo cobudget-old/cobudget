@@ -9,7 +9,7 @@ global.cobudgetApp.factory 'Toast', ($mdToast, $location) ->
         .content(msg)
       $mdToast.show(toast)
 
-    showAndRedirect: (msg, path) ->
+    showWithRedirect: (msg, path) ->
       toast = $mdToast.simple()
         .content(msg)
         .action('VIEW')
