@@ -20,6 +20,10 @@ class Bucket < ActiveRecord::Base
     update(target: target, status: "live", funding_closes_at: funding_closes_at, live_at: Time.now.utc)
   end
 
+  def fund(user:, amount:)
+    contributions.create(user: user, amount: amount)
+  end
+
   # TODO: eventually bring this stuff onto the client side
   def num_of_contributors
     contributions.map { |c| c.user_id }.uniq.length

@@ -47,4 +47,13 @@ RSpec.describe Bucket, :type => :model do
       end
     end
   end
+
+  describe "#fund(user:, amount:)" do
+    it "creates a contribution for bucket with specified user and amount" do
+      make_user_group_member
+      bucket = create(:bucket, group: group, target: 100)
+      bucket.fund(user: user, amount: 50)
+      expect(bucket.contributions.find_by(user: user, amount: 50)).to be_truthy
+    end
+  end
 end
