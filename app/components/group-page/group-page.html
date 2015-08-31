@@ -16,7 +16,7 @@
     </div>
 
     <div class="md-toolbar-tools group-page__funds-bar">
-      <div flex="50" layout="row" class="group-page__funds-overview" >
+      <div flex="50" layout="row" layout-align="center center" class="group-page__funds-overview" >
         <div layout="column" layout-align="center center">
           <i class="material-icons group-page__funds-icon">person</i>
         </div>
@@ -25,7 +25,7 @@
           <span class="group-page__funds-overview-amount">{{ currentMembership.balance() | currency : "$" : 0 }}</span>
         </div>
       </div>
-      <div flex="50" layout="row" class="group-page__funds-overview" >
+      <div flex="50" layout="row" layout-align="center center" class="group-page__funds-overview" >
         <div layout="column" layout-align="center center">
           <i class="material-icons group-page__funds-icon">group</i>
         </div>
@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <md-tabs class="group-page__tabs" md-stretch-tabs="auto" md-dynamic-height>
+    <md-tabs class="group-page__tabs" md-stretch-tabs="always" md-dynamic-height md-center-tabs>
       <md-tab md-on-select="selectTab(0)">
         <md-tab-label>
           <span class="group-page__tab-label">ALL PROJECTS</span>
