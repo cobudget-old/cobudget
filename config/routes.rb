@@ -32,7 +32,6 @@ Rails.application.routes.draw do
     resources :buckets, only: [:index, :create, :show, :update, :destroy] do
       member do
         post :open_for_funding
-        post :fund
       end
     end
 

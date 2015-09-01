@@ -1,11 +1,8 @@
 class ContributionsController < AuthenticatedController
   api :POST, '/contributions', 'Create new contribution'
   def create
-    contribution = Contribution.new(contribution_params_create)
-    contribution.user = current_user
-    authorize contribution
-    contribution.save
-    respond_with contribution
+    contribution = Contribution.create(contribution_params_create)
+    render json: [contribution]
   end
 
   api :PUT, '/contributions/:id', 'Update contribution'
@@ -20,7 +17,7 @@ class ContributionsController < AuthenticatedController
 
   private
     def contribution_params_create
-      params.require(:contribution).permit(:bucket_id, :amount)
+      params.require(:contribution).permit(:bucket_id, :amount).merge(user_id: current_user.id)
     end
 
     def contribution_params_update
