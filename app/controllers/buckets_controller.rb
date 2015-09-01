@@ -48,12 +48,6 @@ class BucketsController < AuthenticatedController
     render json: [bucket]
   end
 
-  def fund
-    bucket = Bucket.find(params[:id])
-    bucket.fund(user: current_user, amount: params[:amount])
-    render json: [bucket]
-  end
-
   private
     def bucket_params_create
       # TODO: put user_id back in once we have a concept of 'current_user' in the API
