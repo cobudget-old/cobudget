@@ -79,7 +79,16 @@
             <span class="project-page__progress-unit">{{ project.fundingClosesAt | timeToNowUnits }} left</span>
           </div>
         </div>
-        <md-button class="md-raised md-primary" ng-click='fund()'>Fund</md-button>
+        
+        <form class="project-page__fund-form" layout="row" ng-mouseleave="exitFundForm()">
+          <md-input-container class="project-page__fund-form-input-container" ng-show="fundClicked">
+            <label>Amount</label>
+            <input class="project-page__fund-form-amount-input" type="number" ng-model="contribution.amount">
+          </md-input-container>
+
+          <md-button class="md-raised md-primary" ng-click='fund()'>Fund</md-button>
+        </form>
+
       </md-card-content>
     </md-card>
 

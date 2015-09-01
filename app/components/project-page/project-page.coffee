@@ -61,7 +61,17 @@ module.exports =
     $scope.userCanEditDraft = ->
       $scope.project && $scope.project.status == 'draft' && $scope.userCanStartFunding()
 
+    $scope.contribution =
+      userId: global.cobudgetApp.currentUserId
+      bucketId: projectId
+      amount: 0
+
     $scope.fund = ->
-      alert('funding button was clicked!')
+      $scope.fundClicked = true
+      console.log('contribution: ', $scope.contribution)
+
+    $scope.exitFundForm = ->
+      $scope.fundClicked = false
+      console.log('contribution: ', $scope.contribution)
 
     return
