@@ -86,7 +86,8 @@
             <input class="project-page__fund-form-amount-input" type="number" ng-model="contribution.amount" min="0" ng-change="normalizeContributionAmount()">
           </md-input-container>
 
-          <md-button class="md-raised md-primary" ng-click='fund()'>Fund</md-button>
+          <md-button class="md-raised md-primary" ng-click='fund()' ng-hide="fundClicked">Fund</md-button>
+          <md-button class="md-raised md-primary" ng-click='submitContribution()' ng-show="fundClicked">Submit</md-button>
         </form>
 
       </md-card-content>
