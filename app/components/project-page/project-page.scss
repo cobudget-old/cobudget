@@ -120,6 +120,14 @@
   background: $cobudget-orange;
 }
 
+.project-page__progress-bar .md-bar {
+  background: $cobudget-orange;
+}
+
+.project-page__progress-bar-funded {
+  background: $cobudget-lime;
+}
+
 .project-page md-progress-linear:not([md-mode="indeterminate"]) .md-container {
   height: 15px;
 }

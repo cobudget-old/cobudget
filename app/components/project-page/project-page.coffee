@@ -85,4 +85,14 @@ module.exports =
       if $scope.isOverfunded()
         $scope.contribution.amount = $scope.project.amountRemaining()
 
+    $scope.updateProgressBarColor = (contributionAmount) ->
+      if contributionAmount > 0
+        jQuery('.project-page__progress-bar .md-bar').css({'background' : '#00C504'})
+      else
+        jQuery('.project-page__progress-bar .md-bar').css({'background' : '#FF8600'})
+
+    $scope.$watch ((scope) ->
+      scope.contribution.amount
+    ), $scope.updateProgressBarColor
+
     return
