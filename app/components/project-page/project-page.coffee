@@ -95,6 +95,7 @@ module.exports =
     ), $scope.updateProgressBarColor
 
     $scope.submitContribution = ->
-      $scope.contribution.save()
+      $scope.contribution.save().then ->
+        location.reload()
 
     return
