@@ -124,8 +124,8 @@
   background: $cobudget-orange;
 }
 
-.project-page__progress-bar-funded {
-  background: $cobudget-lime;
+.project-page__progress-bar-green {
+  background: $cobudget-lime !important;
 }
 
 .project-page md-progress-linear:not([md-mode="indeterminate"]) .md-container {

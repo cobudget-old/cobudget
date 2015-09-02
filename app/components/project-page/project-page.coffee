@@ -87,9 +87,9 @@ module.exports =
 
     $scope.updateProgressBarColor = (contributionAmount) ->
       if contributionAmount > 0
-        jQuery('.project-page__progress-bar .md-bar').css({'background' : '#00C504'})
+        jQuery('.project-page__progress-bar .md-bar').addClass('project-page__progress-bar-green')
       else
-        jQuery('.project-page__progress-bar .md-bar').css({'background' : '#FF8600'})
+        jQuery('.project-page__progress-bar .md-bar').removeClass('project-page__progress-bar-green')
 
     $scope.$watch ((scope) ->
       scope.contribution.amount
