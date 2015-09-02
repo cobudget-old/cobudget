@@ -77,12 +77,12 @@ module.exports =
     $scope.totalPercentFunded = ->
       $scope.totalAmountFunded() / parseFloat($scope.project.target) * 100
 
-    $scope.isOverfunded = ->
-      $scope.totalAmountFunded() >= parseFloat($scope.project.target)
+    $scope.maxAllowableContribution = ->
+      _.min([$scope.project.amountRemaining, $scope.currentMembership.balance()])
 
     $scope.normalizeContributionAmount = ->
-      if $scope.isOverfunded()
-        $scope.contribution.amount = $scope.project.amountRemaining()
+      if $scope.contribution.amount > $scope.maxAllowableContribution()
+        $scope.contribution.amount = $scope.maxAllowableContribution()
 
     $scope.updateProgressBarColor = (contributionAmount) ->
       if contributionAmount > 0
