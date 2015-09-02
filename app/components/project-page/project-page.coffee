@@ -61,8 +61,7 @@ module.exports =
     $scope.userCanEditDraft = ->
       $scope.project && $scope.project.status == 'draft' && $scope.userCanStartFunding()
 
-    $scope.contribution =
-      userId: global.cobudgetApp.currentUserId
+    $scope.contribution = Records.contributions.build
       bucketId: projectId
       amount: 0
 
@@ -94,5 +93,8 @@ module.exports =
     $scope.$watch ((scope) ->
       scope.contribution.amount
     ), $scope.updateProgressBarColor
+
+    $scope.submitContribution = ->
+      $scope.contribution.save()
 
     return

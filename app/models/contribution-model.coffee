@@ -6,7 +6,7 @@ global.cobudgetApp.factory 'ContributionModel', (BaseModel) ->
     @singular: 'contribution'
     @plural: 'contributions'
     @indices: ['bucketId', 'userId']
-    @serializableAttributes: ['amount']
+    @serializableAttributes: ['amount', 'bucketId']
 
     relationships: ->
       @belongsTo 'bucket'
