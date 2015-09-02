@@ -68,10 +68,21 @@ module.exports =
 
     $scope.fund = ->
       $scope.fundClicked = true
-      console.log('contribution: ', $scope.contribution)
 
     $scope.exitFundForm = ->
       $scope.fundClicked = false
-      console.log('contribution: ', $scope.contribution)
+
+    $scope.totalAmountFunded = ->
+      parseFloat($scope.project.totalContributions) + $scope.contribution.amount
+
+    $scope.totalPercentFunded = ->
+      $scope.totalAmountFunded() / parseFloat($scope.project.target) * 100
+
+    $scope.isOverfunded = ->
+      $scope.totalAmountFunded() >= parseFloat($scope.project.target)
+
+    $scope.normalizeContributionAmount = ->
+      if $scope.isOverfunded()
+        $scope.contribution.amount = $scope.project.amountRemaining()
 
     return
