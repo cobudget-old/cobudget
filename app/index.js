@@ -7,11 +7,11 @@ require('angular-ui-router')
 require('angular-sanitize/angular-sanitize')
 require('angular-cookie')
 require('ng-token-auth')
-
 require('angular-aria')
 require('angular-animate')
 require('angular-material')
 require('angular-messages')
+require('ng-focus-if')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -23,7 +23,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ng-token-auth',
   'ngMaterial',
   'ngMessages',
-  'ipCookie'
+  'ipCookie',
+  'focus-if'
 ])
 .constant('config', require('app/configs/app'))
 
