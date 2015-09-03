@@ -68,9 +68,6 @@ module.exports =
     $scope.fund = ->
       $scope.fundClicked = true
 
-    $scope.exitFundForm = ->
-      $scope.fundClicked = false
-
     $scope.totalAmountFunded = ->
       parseFloat($scope.project.totalContributions) + $scope.contribution.amount
 
