@@ -15,6 +15,7 @@
 
 .group-page__group-name {
   @include fontLarge;
+  @include truncatedText;
 }
 
 @media (min-width: 370px) {
