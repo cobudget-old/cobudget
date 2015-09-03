@@ -60,6 +60,7 @@
     "lodash": "^3.0.0",
     "lokijs": "^1.3.7",
     "moment": "^2.8.4",
+    "ng-focus-if": "^1.0.2",
     "ng-token-auth": "lynndylanhurley/ng-token-auth#ac5a8ba",
     "recase": "^1.0.4"
   },
