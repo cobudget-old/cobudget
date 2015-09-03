@@ -89,6 +89,7 @@
 
 .group-page__live-project-title {
   @include fontMedLarge;
+  @include truncatedText;
 }
 
 .group-page__live-project-funding {
@@ -116,6 +117,8 @@
 
 .group-page__draft-title {
   @include fontMedLarge;
+  @include truncatedText;
+  padding-right: 35px;
 }
 
 .group-page__draft-author {
@@ -144,6 +147,7 @@
 
 .group-page__funded-project-title {
   @include fontMedLarge;
+  @include truncatedText;
 }
 
 .group-page__funded-project-author {

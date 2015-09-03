@@ -66,7 +66,7 @@
         </div>
         <md-list-item ng-repeat="liveProject in group.liveBuckets()">
           <div layout="column" flex class="group-page__live-project-container" ng-click="showProject(liveProject.id)">
-            <span class="group-page__live-project-title">{{ liveProject.name | limitTo: 30 }}<span ng-if="liveProject.name.length > 30">...</span></span>
+            <span class="group-page__live-project-title">{{ liveProject.name }}</span>
             <span class="group-page__live-project-funding">{{ liveProject.amountRemaining() | currency : "$" : 0  }} to go</span>
             <md-progress-linear md-mode="determinate" value="{{ liveProject.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
           </div>
@@ -88,7 +88,7 @@
 
         <md-list-item ng-repeat="draft in group.draftBuckets()" ng-click="showProject(draft.id)">
           <div layout="column" flex class="group-page__draft-container">
-            <span class="group-page__draft-title">{{ draft.name | limitTo: 30 }}<span ng-if="draft.name.length > 30">...</span></span>
+            <span class="group-page__draft-title">{{ draft.name }}</span>
             <span class="group-page__draft-author">created by {{ draft.author().name }} {{ draft.createdAt | timeFromNowInWords }} ago</span>
             <div layout="column" layout-align="center center" class="group-page__comment-count-container">
               <i class="material-icons group-page__comment-count-icon">messenger</i>
@@ -113,7 +113,7 @@
 
         <md-list-item ng-repeat="fundedProject in group.fundedBuckets()" ng-click="showProject(fundedProject.id)">
           <div layout="column" flex class="group-page__funded-project-container">
-            <span class="group-page__funded-project-title">{{ fundedProject.name | limitTo: 30 }}<span ng-if="fundedProject.name.length > 30">...</span></span>
+            <span class="group-page__funded-project-title">{{ fundedProject.name }}</span>
             <span class="group-page__funded-project-author">created by {{ fundedProject.author().name }} {{ fundedProject.createdAt | timeFromNowInWords }} ago</span>
           </div>
         </md-list-item>
