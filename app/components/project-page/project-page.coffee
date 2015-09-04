@@ -68,6 +68,9 @@ module.exports =
     $scope.fund = ->
       $scope.fundClicked = true
 
+    $scope.selectAllText = ->
+      jQuery('.project-page__fund-form-amount-input').select()
+
     $scope.totalAmountFunded = ->
       parseFloat($scope.project.totalContributions) + $scope.contribution.amount
 
