@@ -68,8 +68,11 @@ module.exports =
     $scope.fund = ->
       $scope.fundClicked = true
 
+    # hack to get text highlighting to work on mobile
     $scope.selectAllText = ->
-      jQuery('.project-page__fund-form-amount-input').select()
+      amountInput = jQuery('.project-page__fund-form-amount-input')[0]
+      amountInput.focus();
+      amountInput.setSelectionRange(0, 9999);
 
     $scope.totalAmountFunded = ->
       parseFloat($scope.project.totalContributions) + $scope.contribution.amount
@@ -83,6 +86,8 @@ module.exports =
     $scope.normalizeContributionAmount = ->
       if $scope.contribution.amount > $scope.maxAllowableContribution()
         $scope.contribution.amount = $scope.maxAllowableContribution()
+      if $scope.contribution.amount == undefined
+        $scope.contribution.amount = 0
 
     $scope.updateProgressBarColor = (contributionAmount) ->
       if contributionAmount > 0
