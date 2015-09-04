@@ -171,9 +171,18 @@
 
 // funders
 
-.group-page__funder-name {
-  @include fontMedLarge;  
+.group-page__funders {
   padding-left: 16px;
+}
+
+.group-page__funder-name-container {
+  position: relative;
+}
+
+.group-page__funder-name {
+  width: 100%;
+  @include truncatedText;
+  @include fontMedLarge;  
 }
 
 .group-page__funder-balance {

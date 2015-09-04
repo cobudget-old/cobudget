@@ -124,15 +124,15 @@
       <md-list class="group-page__funders">
         <md-list-item ng-repeat="membership in group.memberships()">
           <div layout="row" flex class="group-page__funder-container">
-            <div layout="column" layout-align="center start" flex="50">
-              <span class="group-page__funder-name">{{ membership.member().name | limitTo: 16 }} <span ng-if="funder.name.length > 16">...</span></span>
+            <div class="group-page__funder-name-container" layout="column" layout-align="center start" flex>
+              <span class="group-page__funder-name">{{ membership.member().name }}</span>
             </div>
 
-            <div flex layout="column" layout-align="center end">
+            <div layout="column" layout-align="center end" flex="20">
               <span class="group-page__funder-balance">{{ membership.balance() | currency : "$" : 0 }}</span>
             </div>
             
-            <md-button class="md-icon-button group-page__funder-more-button" aria-label="More">
+            <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" flex="10">
               <div layout="column" layout-align="center center">
                 <i class="material-icons group-page__funder-more-button-icon">more_vert</i>
               </div>
