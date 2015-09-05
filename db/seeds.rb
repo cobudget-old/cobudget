@@ -92,7 +92,7 @@ groups.each do |group|
       membership = group.memberships.sample
       member = membership.member
       member_balance = membership.total_allocations - membership.total_contributions
-      bucket.contributions.create(user: member, amount: member_balance / 3)
+      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i)
     end
   end
 end
