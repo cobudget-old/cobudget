@@ -1,0 +1,11 @@
+<p>
+  <%= @project.name %>, a project in <%= @group.name %> that you participated in, has a new comment from <%= @commenter.name %>.
+</p>
+
+<p>
+  "<%= @comment.body %>"
+</p>
+
+<p>
+  <%= link_to 'reply', "#{root_url}#/projects/#{@project.id}" %>
+</p>

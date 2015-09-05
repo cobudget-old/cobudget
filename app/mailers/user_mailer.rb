@@ -24,14 +24,18 @@ class UserMailer < ActionMailer::Base
     @author = @project.user
     @commenter = @comment.user
     @group = @project.group
-    mail(
-      to: @author.email,
-      from: "admin@cobudget.co",
-      subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your project." 
-    )
+    mail(to: @author.name_and_email,
+         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your project.")
   end
 
-  def notify_funders_and_commenters_of_new_comment_email
-
+  def notify_user_of_new_comment_email(comment: , user:)
+    @comment = comment
+    @project = @comment.bucket
+    @commenter = @comment.user
+    @group = @project.group
+    mail(to: user.name_and_email,
+         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on #{@project.name}")
   end
 end
