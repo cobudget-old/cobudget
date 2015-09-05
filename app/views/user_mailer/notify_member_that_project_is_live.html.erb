@@ -1,0 +1,19 @@
+<p>
+  A new project in <%= @group.name %> is requesting funding on Cobudget! You have <%= @membership.formatted_balance %> to spend.
+</p>
+
+<p> - - - </p>
+
+<p>
+  <strong><%= @project.name %></strong>
+</p>
+
+<p>
+  "<%= @project.description %>"
+</p>
+
+<p> - - - </p>
+
+<p>
+  <%= link_to 'view', "#{root_url}#/projects/#{@project.id}" %>
+</p>

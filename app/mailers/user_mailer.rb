@@ -58,4 +58,13 @@ class UserMailer < ActionMailer::Base
          from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] Your project has been fully funded!")
   end
+
+  def notify_member_that_project_is_live(project: project, member: member)
+    @project = project
+    @group = @project.group
+    @membership = Membership.find_by(member: member, group: @group)
+    mail(to: member.name_and_email,
+         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         subject: "[Cobudget - #{@group.name}] #{@project.name} is now requesting funding!")
+  end
 end
