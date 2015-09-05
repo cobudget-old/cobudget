@@ -67,7 +67,7 @@ module.exports =
       $scope.totalAmountFunded() / parseFloat($scope.project.target) * 100
 
     $scope.maxAllowableContribution = ->
-      _.min([$scope.project.amountRemaining, $scope.currentMembership.balance()])
+      _.min([$scope.project.amountRemaining(), $scope.currentMembership.balance()])
 
     $scope.normalizeContributionAmount = ->
       if $scope.contribution.amount > $scope.maxAllowableContribution()
