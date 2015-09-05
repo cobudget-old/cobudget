@@ -9,18 +9,15 @@ module.exports =
     groupId = global.cobudgetApp.currentGroupId
     projectId = parseInt $stateParams.projectId
 
-    $scope.fetchRecords = ->
-      Records.groups.findOrFetchById(groupId).then (group) ->
-        $scope.group = group
-        $scope.currentMembership = group.membershipFor(CurrentUser())
+    Records.groups.findOrFetchById(groupId).then (group) ->
+      $scope.group = group
+      $scope.currentMembership = group.membershipFor(CurrentUser())
 
-      Records.buckets.findOrFetchById(projectId).then (project) ->
-        $scope.project = project
-        $scope.status = project.status
-        Records.comments.fetchByBucketId(projectId).then ->
-          window.scrollTo(0, 0)
-
-    $scope.fetchRecords()
+    Records.buckets.findOrFetchById(projectId).then (project) ->
+      $scope.project = project
+      $scope.status = project.status
+      Records.comments.fetchByBucketId(projectId).then ->
+        window.scrollTo(0, 0)
 
     $scope.back = ->
       Toast.hide()
@@ -88,7 +85,7 @@ module.exports =
 
     $scope.submitContribution = ->
       $scope.contribution.save().then ->
-        $scope.contribution.amount = null
-        $scope.fetchRecords()
-
+        $scope.back()
+        Toast.show('You funded a project')
+        
     return
