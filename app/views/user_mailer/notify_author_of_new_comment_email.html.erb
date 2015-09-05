@@ -1,0 +1,11 @@
+<p>
+  <%= @commenter.name %> has commented on <%= @project.name %> in <%= @group.name %> on Cobudget.
+</p>
+
+<p>
+  "<%= @comment.body %>"
+</p>
+
+<p>
+  <%= link_to 'reply', "#{root_url}#/projects/#{@project.id}" %>
+</p>

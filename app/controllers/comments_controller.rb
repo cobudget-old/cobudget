@@ -8,6 +8,7 @@ class CommentsController < AuthenticatedController
   api :POST, '/comments'
   def create
     comment = Comment.create(comment_params)
+    CommentService.send_new_comment_emails(comment: comment)
     render json: [comment]
   end
 

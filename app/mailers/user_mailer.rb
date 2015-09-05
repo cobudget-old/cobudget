@@ -17,4 +17,21 @@ class UserMailer < ActionMailer::Base
         from: inviter.name_and_email,
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
+
+  def notify_author_of_new_comment_email(comment: )
+    @comment = comment
+    @project = @comment.bucket
+    @author = @project.user
+    @commenter = @comment.user
+    @group = @project.group
+    mail(
+      to: @author.email,
+      from: "admin@cobudget.co",
+      subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your project." 
+    )
+  end
+
+  def notify_funders_and_commenters_of_new_comment_email
+
+  end
 end
