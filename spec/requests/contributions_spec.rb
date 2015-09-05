@@ -21,7 +21,15 @@ xdescribe "Contributions" do
     it "sends a 'notify_author_that_project_received_funding' email to the author of the project" do
     end
 
-    context "if the funder is also the author of the project" do
+    context "the project becomes fully funded" do
+      it "sends 'notify_author_that_project_target_met' email to the author of the project" do
+      end
+
+      it "does not send a 'notify_author_that_project_received_funding' email to the author of the project" do
+      end
+    end
+
+    context "the funder is also the author of the project" do
       it "does not send the author an email" do
       end
     end

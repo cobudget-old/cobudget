@@ -49,4 +49,13 @@ class UserMailer < ActionMailer::Base
          from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] #{@funder.name} has funded your project - #{@contribution.formatted_amount}.")
   end
+
+  def notify_author_that_project_target_met(project: project)
+    @project = project
+    @group = @project.group
+    @author = @project.user
+    mail(to: @author.name_and_email,
+         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         subject: "[Cobudget - #{@group.name}] Your project has been fully funded!")
+  end
 end
