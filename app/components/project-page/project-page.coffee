@@ -34,13 +34,6 @@ module.exports =
     $scope.showLess = ->
       $scope.showFullDescription = false
 
-    $scope.statuses = ['draft', 'live', 'funded', 'done']
-    $scope.statusIndex = 0
-    
-    $scope.toggleStatus = ->
-      $scope.statusIndex++
-      $scope.status = $scope.statuses[$scope.statusIndex % $scope.statuses.length]
-
     $scope.newComment = Records.comments.build(bucketId: projectId)
 
     $scope.createComment = ->
