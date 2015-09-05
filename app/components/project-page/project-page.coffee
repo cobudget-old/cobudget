@@ -63,19 +63,12 @@ module.exports =
 
     $scope.contribution = Records.contributions.build
       bucketId: projectId
-      amount: 0
 
     $scope.fund = ->
       $scope.fundClicked = true
 
-    # hack to get text highlighting to work on mobile
-    $scope.selectAllText = ->
-      amountInput = jQuery('.project-page__fund-form-amount-input')[0]
-      amountInput.focus();
-      amountInput.setSelectionRange(0, 9999);
-
     $scope.totalAmountFunded = ->
-      parseFloat($scope.project.totalContributions) + $scope.contribution.amount
+      parseFloat($scope.project.totalContributions) + ($scope.contribution.amount || 0)
 
     $scope.totalPercentFunded = ->
       $scope.totalAmountFunded() / parseFloat($scope.project.target) * 100
@@ -86,8 +79,6 @@ module.exports =
     $scope.normalizeContributionAmount = ->
       if $scope.contribution.amount > $scope.maxAllowableContribution()
         $scope.contribution.amount = $scope.maxAllowableContribution()
-      if $scope.contribution.amount == undefined
-        $scope.contribution.amount = 0
 
     $scope.updateProgressBarColor = (contributionAmount) ->
       if contributionAmount > 0
