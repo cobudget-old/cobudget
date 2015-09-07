@@ -39,7 +39,7 @@ class UserMailer < ActionMailer::Base
          subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on #{@project.name}")
   end
 
-  def notify_author_that_project_received_funding(contribution: )
+  def notify_author_that_project_received_contribution(contribution: )
     @contribution = contribution
     @project = contribution.bucket
     @funder = contribution.user
@@ -50,7 +50,7 @@ class UserMailer < ActionMailer::Base
          subject: "[Cobudget - #{@group.name}] #{@funder.name} has funded your project - #{@contribution.formatted_amount}.")
   end
 
-  def notify_author_that_project_target_met(project: project)
+  def notify_author_that_project_is_funded(project: project)
     @project = project
     @group = @project.group
     @author = @project.user
