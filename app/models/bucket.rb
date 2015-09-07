@@ -15,6 +15,14 @@ class Bucket < ActiveRecord::Base
     contributions.sum(:amount)
   end
 
+  def formatted_total_contributions
+    Money.new(total_contributions * 100, "USD").format
+  end
+
+  def formatted_target
+    Money.new(target * 100, "USD").format
+  end
+
   # funding_closes_at, need to think more about the implications of setting this
   def open_for_funding(target:, funding_closes_at:)
     update(target: target, status: "live", funding_closes_at: funding_closes_at, live_at: Time.now.utc)

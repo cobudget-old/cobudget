@@ -9,6 +9,10 @@ class Contribution < ActiveRecord::Base
   before_save :lower_amount_if_exceeds_target
   after_save :update_bucket_status_if_funded
 
+  def formatted_amount
+    Money.new(amount * 100, "USD").format
+  end
+
   private 
     def lower_amount_if_exceeds_target
       if bucket.total_contributions + self.amount > bucket.target

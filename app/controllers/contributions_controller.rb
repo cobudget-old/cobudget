@@ -2,6 +2,7 @@ class ContributionsController < AuthenticatedController
   api :POST, '/contributions', 'Create new contribution'
   def create
     contribution = Contribution.create(contribution_params_create)
+    ContributionService.send_project_received_contribution_emails(contribution: contribution)
     render json: [contribution]
   end
 

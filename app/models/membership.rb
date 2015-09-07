@@ -13,4 +13,12 @@ class Membership < ActiveRecord::Base
     group_bucket_ids = group.bucket_ids
     Contribution.where(bucket_id: group_bucket_ids, user_id: member_id).sum(:amount)
   end
+
+  def balance
+    total_allocations - total_contributions
+  end
+
+  def formatted_balance
+    Money.new(balance * 100, "USD").format
+  end
 end
