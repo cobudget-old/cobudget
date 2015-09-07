@@ -22,10 +22,16 @@ xdescribe "Contributions" do
     end
 
     context "the project becomes fully funded" do
-      it "sends 'notify_author_that_project_target_met' email to the author of the project" do
+      it "sends a 'notify_author_that_project_received_contribution' email to the author of the project" do
       end
 
-      it "does not send a 'notify_author_that_project_received_funding' email to the author of the project" do
+      it "sends 'notify_author_that_project_is_funded' email to the author of the project" do
+      end
+
+      it "sends 'notify_funder_that_project_is_funded' emails to all unique funders of the project" do
+      end
+
+      it "does not send 'notify_funder_that_project_is_funded' to the author of the project" do
       end
     end
 
