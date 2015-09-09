@@ -1,5 +1,5 @@
 class ContributionService
-  def self.send_project_received_contribution_emails(contribution: contribution)
+  def self.send_project_received_contribution_emails(contribution: )
     funder = contribution.user
     project = contribution.bucket
     project_author = project.user
