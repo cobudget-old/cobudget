@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
     @commenter = @comment.user
     @group = @project.group
     mail(to: @author.name_and_email,
-         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         from: "Cobudget Updates <updates@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your project.")
   end
 
@@ -35,7 +35,7 @@ class UserMailer < ActionMailer::Base
     @commenter = @comment.user
     @group = @project.group
     mail(to: user.name_and_email,
-         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         from: "Cobudget Updates <updates@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on #{@project.name}")
   end
 
@@ -46,7 +46,7 @@ class UserMailer < ActionMailer::Base
     @group = @project.group
     author = @project.user
     mail(to: author.name_and_email,
-         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         from: "Cobudget Updates <updates@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] #{@funder.name} has funded your project - #{@contribution.formatted_amount}.")
   end
 
@@ -55,7 +55,7 @@ class UserMailer < ActionMailer::Base
     @group = @project.group
     @author = @project.user
     mail(to: @author.name_and_email,
-         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         from: "Cobudget Updates <updates@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] Your project has been fully funded!")
   end
 
@@ -64,7 +64,7 @@ class UserMailer < ActionMailer::Base
     @group = @project.group
     @membership = Membership.find_by(member: member, group: @group)
     mail(to: member.name_and_email,
-         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         from: "Cobudget Updates <updates@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] #{@project.name} is now requesting funding!")
   end
 
@@ -74,7 +74,7 @@ class UserMailer < ActionMailer::Base
     funder_contributions = Contribution.where(bucket: project, user: funder)
     @funder_contribution_amount = Money.new(funder_contributions.sum(:amount) * 100, "USD").format
     mail(to: funder.name_and_email,
-         from: "Platonic Mystical Dog <platonic_mystical_dog@cobudget.co>",
+         from: "Cobudget Updates <updates@cobudget.co>",
          subject: "[Cobudget - #{@group.name}] You did it! #{@project.name} has been fully funded!")
   end
 end
