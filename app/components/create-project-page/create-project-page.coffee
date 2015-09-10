@@ -7,6 +7,9 @@ module.exports =
 
     $scope.bucket = Records.buckets.build()
     $scope.bucket.groupId = groupId
+
+    Records.groups.findOrFetchById(groupId).then (group) ->
+      $scope.group = group
       
     $scope.cancel = () ->
       $location.path("/groups/#{groupId}")
