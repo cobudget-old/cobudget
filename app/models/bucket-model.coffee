@@ -9,7 +9,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
     @serializableAttributes: ['description', 'name', 'target', 'groupId']
 
     relationships: ->
-      @hasMany 'comments', sortBy: 'createdAt', sortDesc: true
+      @hasMany 'comments', sortBy: 'createdAt', sortDesc: false
       @belongsTo 'group'
       @belongsTo 'author', from: 'users', by: 'userId'
 
