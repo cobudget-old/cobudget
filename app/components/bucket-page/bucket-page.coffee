@@ -3,7 +3,7 @@ module.exports =
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
   url: '/projects/:projectId'
-  template: require('./project-page.html')
+  template: require('./bucket-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
     
     groupId = global.cobudgetApp.currentGroupId

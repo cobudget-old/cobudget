@@ -1,6 +1,6 @@
 module.exports = 
   url: '/projects/new'
-  template: require('./create-project-page.html')
+  template: require('./create-bucket-page.html')
   controller: ($scope, Records, $location, Toast) ->
 
     groupId = global.cobudgetApp.currentGroupId

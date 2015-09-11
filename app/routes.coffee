@@ -5,6 +5,6 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
   $stateProvider
     .state 'group', require('app/components/group-page/group-page.coffee')
     .state 'welcome', require('app/components/welcome-page/welcome-page.coffee')
-    .state 'create-project', require('app/components/create-project-page/create-project-page.coffee')
-    .state 'project', require('app/components/project-page/project-page.coffee')
-    .state 'edit-project', require('app/components/edit-project-page/edit-project-page.coffee')
+    .state 'create-bucket', require('app/components/create-bucket-page/create-bucket-page.coffee')
+    .state 'bucket', require('app/components/bucket-page/bucket-page.coffee')
+    .state 'edit-bucket', require('app/components/edit-bucket-page/edit-bucket-page.coffee')

@@ -1,6 +1,6 @@
 module.exports = 
   url: '/projects/:projectId/edit'
-  template: require('./edit-project-page.html')
+  template: require('./edit-bucket-page.html')
   controller: ($scope, Records, $stateParams, $location, Toast) ->
     projectId = parseInt $stateParams.projectId
 
