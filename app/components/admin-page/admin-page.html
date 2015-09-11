@@ -1,3 +1,26 @@
 <div class="admin-page">
-  admin page lol
+
+  <md-toolbar class="md-whiteframe-z1 admin-page__toolbar">
+    <div class="md-toolbar-tools" layout="column" layout-align="center center">
+      hi admin
+    </div>
+  </md-toolbar>
+
+  <md-content class="admin-page__content">
+    <form name='groupForm' class="admin-page__form">
+      <md-input-container>
+        <label>name</label>
+        <input required name="name" type="text" ng-model="group.name">
+        <div ng-messages="groupForm.name.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-button class="admin-page__form-submit-btn" ng-click="createGroup()">create group</md-button>
+    </form>
+
+    <md-divider></md-divider>
+
+  </md-content>
+
+
 </div>

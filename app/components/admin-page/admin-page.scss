@@ -1,3 +1,24 @@
-.admin-page {
-  color: red;
+.admin-page__toolbar {
+  background: $cobudget-blue;
+}
+
+.admin-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.admin-page__form {
+  margin-top: 25px;
+}
+
+.admin-page__form .md-button {
+  margin-left: 0;
+  border: 1px solid $cobudget-blue;
+  color: $cobudget-blue;
+}
+
+.admin-page md-divider {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border-color: $cobudget-orange;
 }
