@@ -20,70 +20,70 @@ class UserMailer < ActionMailer::Base
 
   def notify_author_of_new_comment_email(comment: )
     @comment = comment
-    @project = @comment.bucket
-    @author = @project.user
+    @bucket = @comment.bucket
+    @author = @bucket.user
     @commenter = @comment.user
-    @group = @project.group
+    @group = @bucket.group
     mail(to: @author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your project.")
+         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your bucket.")
   end
 
   def notify_user_of_new_comment_email(comment: , user:)
     @comment = comment
-    @project = @comment.bucket
+    @bucket = @comment.bucket
     @commenter = @comment.user
-    @group = @project.group
+    @group = @bucket.group
     mail(to: user.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on #{@project.name}")
+         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on #{@bucket.name}")
   end
 
-  def notify_author_that_project_received_contribution(contribution: )
+  def notify_author_that_bucket_received_contribution(contribution: )
     @contribution = contribution
-    @project = contribution.bucket
+    @bucket = contribution.bucket
     @funder = contribution.user
-    @group = @project.group
-    author = @project.user
+    @group = @bucket.group
+    author = @bucket.user
     mail(to: author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@funder.name} has funded your project - #{@contribution.formatted_amount}.")
+         subject: "[Cobudget - #{@group.name}] #{@funder.name} has funded your bucket - #{@contribution.formatted_amount}.")
   end
 
-  def notify_author_that_project_is_funded(project: )
-    @project = project
-    @group = @project.group
-    @author = @project.user
+  def notify_author_that_bucket_is_funded(bucket: )
+    @bucket = bucket
+    @group = @bucket.group
+    @author = @bucket.user
     mail(to: @author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] Your project has been fully funded!")
+         subject: "[Cobudget - #{@group.name}] Your bucket has been fully funded!")
   end
 
-  def notify_member_with_balance_that_project_is_live(project: , member: )
-    @project = project
-    @group = @project.group
+  def notify_member_with_balance_that_bucket_is_live(bucket: , member: )
+    @bucket = bucket
+    @group = @bucket.group
     @membership = Membership.find_by(member: member, group: @group)
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@project.name} is now requesting funding!")
+         subject: "[Cobudget - #{@group.name}] #{@bucket.name} is now requesting funding!")
   end
 
-  def notify_member_with_zero_balance_that_project_is_live(project: , member: )
-    @project = project
-    @group = @project.group
+  def notify_member_with_zero_balance_that_bucket_is_live(bucket: , member: )
+    @bucket = bucket
+    @group = @bucket.group
     @membership = Membership.find_by(member: member, group: @group)
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@project.name} is now requesting funding!")
+         subject: "[Cobudget - #{@group.name}] #{@bucket.name} is now requesting funding!")
   end
 
-  def notify_funder_that_project_is_funded(project: , funder: )
-    @project = project
-    @group = @project.group
-    funder_contributions = Contribution.where(bucket: project, user: funder)
+  def notify_funder_that_bucket_is_funded(bucket: , funder: )
+    @bucket = bucket
+    @group = @bucket.group
+    funder_contributions = Contribution.where(bucket: bucket, user: funder)
     @funder_contribution_amount = Money.new(funder_contributions.sum(:amount) * 100, "USD").format
     mail(to: funder.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] You did it! #{@project.name} has been fully funded!")
+         subject: "[Cobudget - #{@group.name}] You did it! #{@bucket.name} has been fully funded!")
   end
 end

@@ -1,0 +1,11 @@
+<p>
+  Congratulations! Members of <%= @group.name %> have funded '<%= @bucket.name %>' to its target of <%= @bucket.formatted_target %>. 
+</p>
+
+<p>
+  Keep your funders up to date by posting updates on the bucket as work progresses.
+</p>
+
+<p>
+  <%= link_to 'Update Bucket', "#{root_url}#/buckets/#{@bucket.id}/edit" %>
+</p>

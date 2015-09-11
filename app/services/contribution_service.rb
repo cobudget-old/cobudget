@@ -1,15 +1,15 @@
 class ContributionService
-  def self.send_project_received_contribution_emails(contribution: )
+  def self.send_bucket_received_contribution_emails(contribution: )
     funder = contribution.user
-    project = contribution.bucket
-    project_author = project.user
+    bucket = contribution.bucket
+    bucket_author = bucket.user
 
-    unless funder == project_author
-      UserMailer.notify_author_that_project_received_contribution(contribution: contribution).deliver_later
+    unless funder == bucket_author
+      UserMailer.notify_author_that_bucket_received_contribution(contribution: contribution).deliver_later
     end
 
-    if project.funded?
-      BucketService.send_project_funded_emails(project: project)
+    if bucket.funded?
+      BucketService.send_bucket_funded_emails(bucket: bucket)
     end
   end
 end

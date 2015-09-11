@@ -15,10 +15,10 @@ xdescribe "Buckets" do
     it "sets the live_at attr of bucket to the current time" do
     end
 
-    it "sends 'notify_member_with_balance_that_project_is_live' emails only to members of the group with funds" do
+    it "sends 'notify_member_with_balance_that_bucket_is_live' emails only to members of the group with funds" do
     end
 
-    it "sends 'notify_member_with_zero_balance_that_project_is_live' emails only to members of the group without funds" do
+    it "sends 'notify_member_with_zero_balance_that_bucket_is_live' emails only to members of the group without funds" do
     end
   end
 end
