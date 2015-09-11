@@ -48,11 +48,11 @@ module.exports =
       else
         alert('Estimated funding target must be specified before funding starts')        
 
-    $scope.editDraft = ->
+    $scope.editBucket = ->
       $location.path("/buckets/#{bucketId}/edit")
 
-    $scope.userCanEditDraft = ->
-      $scope.bucket && $scope.bucket.status == 'draft' && $scope.userCanStartFunding()
+    $scope.userCanEditBucket = ->
+      $scope.bucket && $scope.userCanStartFunding()
 
     $scope.contribution = Records.contributions.build
       bucketId: bucketId
