@@ -19,11 +19,11 @@ module.exports =
 
     window.scrollHeight = 0;
 
-    $scope.createProject = ->
-      $location.path("/projects/new")
+    $scope.createBucket = ->
+      $location.path("/buckets/new")
 
-    $scope.showProject = (projectId) ->
-      $location.path("/projects/#{projectId}")
+    $scope.showBucket = (bucketId) ->
+      $location.path("/buckets/#{bucketId}")
 
     $scope.selectTab = (tabNum) ->
       $scope.tabSelected = parseInt tabNum

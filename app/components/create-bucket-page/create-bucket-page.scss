@@ -1,49 +1,49 @@
 // toolbar heading
 
-.create-project-page__toolbar {
+.create-bucket-page__toolbar {
   background: $cobudget-blue;
 }
 
-.create-project-page__cancel-icon {
+.create-bucket-page__cancel-icon {
   @include fontGrande;
 }
 
-.create-project-page__header-text {
+.create-bucket-page__header-text {
   @include fontLarge;
 }
 
-.create-project-page__done-button-text {
+.create-bucket-page__done-button-text {
   margin-right: 5px; 
 }
 
 // content
 
-.create-project-page__content {
+.create-bucket-page__content {
   max-width: 640px;
   margin: 0 auto;
 }
 
 // help text
 
-.create-project-page__subheader-title {
+.create-bucket-page__subheader-title {
   color: $cobudget-blue;
 }
 
-.create-project-page__subheader-text {
+.create-bucket-page__subheader-text {
   @include fontMedium;
 }
 
-.create-project-page__subheader-text .md-subheader-inner {
+.create-bucket-page__subheader-text .md-subheader-inner {
   padding-top: 0;
   padding-bottom: 0;
 }
 
 // form
 
-.create-project-page__form {
+.create-bucket-page__form {
   padding: 10px;
 }
 
-.create-project-page__target-optional-text {
+.create-bucket-page__target-optional-text {
   color: $cobudget-blue;
 }
