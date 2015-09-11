@@ -114,12 +114,12 @@
           <div class="project-page__status-flagpoint">
             <div layout="column" layout-align="center center" ng-show="status === 'live'">
               <i class="material-icons project-page__live-icon">radio_button_on</i>
-              <span class="project-page__status-flagpoint-text-active">Live</span>
+              <span class="project-page__status-flagpoint-text-active">Funding</span>
             </div>
 
             <div layout="column" layout-align="center center" ng-hide="status === 'live'">
               <i class="material-icons project-page__status-icon-inactive">radio_button_off</i>
-              <span class="project-page__status-flagpoint-text-inactive">Live</span>
+              <span class="project-page__status-flagpoint-text-inactive">Funding</span>
             </div>
           </div>
 
@@ -153,16 +153,16 @@
         </div>
 
         <div class="project-page__status-description" ng-show="status === 'draft'">
-          <p><em>This project is still being discussed and designed</em></p>
+          <p><em>This bucket idea is still being discussed and designed</em></p>
 
           <div ng-show='userCanStartFunding()'>
-            <p><em>As an administrator or creator, you can approve this project for funding when it is ready</em></p>
+            <p><em>As an administrator or creator, you can approve this bucket for funding when it is ready</em></p>
             <md-button class="md-raised md-primary" ng-click='openForFunding()'>Start Funding</md-button>
           </div>
         </div>
 
         <div class="project-page__status-description" ng-show="status === 'live'">
-          <p><em>This project has been launched and can be funded.</em></p>
+          <p><em>This bucket has been launched and can be funded.</em></p>
         </div>
       </md-card-content>
     </md-card>
