@@ -17,12 +17,16 @@
   </md-toolbar>
 
   <md-content class="edit-bucket-page__content">
-    <md-subheader class="edit-bucket-page__subheader-title">You're about to edit a {{ bucket.status == 'draft' ? 'bucket idea' : 'bucket' }}</md-subheader>
+    <div>
+      <md-subheader class="edit-bucket-page__subheader-title">You're about to edit a {{ bucket.status == 'draft' ? 'bucket idea' : 'bucket' }}</md-subheader>
+    </div>
 
-    <md-subheader class="edit-bucket-page__subheader-text">
-      You can continue to edit this {{ bucket.status == 'draft' ? 'idea' : 'bucket' }}, propose it to your peers, and get feedback. 
-      <span ng-if="bucket.status == 'draft'">When you're ready, you can request funding.</span>
-    </md-subheader>
+    <div>
+      <md-subheader class="edit-bucket-page__subheader-text">
+        You can continue to edit this {{ bucket.status == 'draft' ? 'idea' : 'bucket' }}, propose it to your peers, and get feedback. 
+        <span ng-if="bucket.status == 'draft'">When you're ready, you can request funding.</span>
+      </md-subheader>
+    </div>
 
     <form name='bucketForm' class="edit-bucket-page__form">
       <md-input-container>
