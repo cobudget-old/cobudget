@@ -1,0 +1,49 @@
+// toolbar heading
+
+.edit-bucket-page__toolbar {
+  background: $cobudget-blue;
+}
+
+.edit-bucket-page__cancel-icon {
+  @include fontGrande;
+}
+
+.edit-bucket-page__header-text {
+  @include fontLarge;
+}
+
+.edit-bucket-page__done-button-text {
+  margin-right: 5px; 
+}
+
+// content
+
+.edit-bucket-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+// help text
+
+.edit-bucket-page__subheader-title {
+  color: $cobudget-blue;
+}
+
+.edit-bucket-page__subheader-text {
+  @include fontMedium;
+}
+
+.edit-bucket-page__subheader-text .md-subheader-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// form
+
+.edit-bucket-page__form {
+  padding: 10px;
+}
+
+.edit-bucket-page__target-optional-text {
+  color: $cobudget-blue;
+}

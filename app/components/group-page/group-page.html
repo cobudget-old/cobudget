@@ -64,11 +64,11 @@
             </md-button>
           </div>
         </div>
-        <md-list-item ng-repeat="liveProject in group.liveBuckets()">
-          <div layout="column" flex class="group-page__live-project-container" ng-click="showProject(liveProject.id)">
-            <span class="group-page__live-project-title">{{ liveProject.name }}</span>
-            <span class="group-page__live-project-funding">{{ liveProject.amountRemaining() | currency : "$" : 0  }} to go</span>
-            <md-progress-linear md-mode="determinate" value="{{ liveProject.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
+        <md-list-item ng-repeat="liveBucket in group.liveBuckets()">
+          <div layout="column" flex class="group-page__live-project-container" ng-click="showBucket(liveBucket.id)">
+            <span class="group-page__live-project-title">{{ liveBucket.name }}</span>
+            <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : "$" : 0  }} to go</span>
+            <md-progress-linear md-mode="determinate" value="{{ liveBucket.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
           </div>
         </md-list-item>
       </md-list>
@@ -86,13 +86,13 @@
           </div>
         </div>
 
-        <md-list-item ng-repeat="draft in group.draftBuckets()" ng-click="showProject(draft.id)">
+        <md-list-item ng-repeat="draftBucket in group.draftBuckets()" ng-click="showBucket(draftBucket.id)">
           <div layout="column" flex class="group-page__draft-container">
-            <span class="group-page__draft-title">{{ draft.name }}</span>
-            <span class="group-page__draft-author">created by {{ draft.author().name }} {{ draft.createdAt | timeFromNowInWords }} ago</span>
+            <span class="group-page__draft-title">{{ draftBucket.name }}</span>
+            <span class="group-page__draft-author">created by {{ draftBucket.author().name }} {{ draftBucket.createdAt | timeFromNowInWords }} ago</span>
             <div layout="column" layout-align="center center" class="group-page__comment-count-container">
               <i class="material-icons group-page__comment-count-icon">messenger</i>
-              <div class="group-page__comment-count">{{ draft.comments().length }}</div>
+              <div class="group-page__comment-count">{{ draftBucket.comments().length }}</div>
             </div>
           </div>
         </md-list-item>
@@ -111,10 +111,10 @@
           </div>
         </div>
 
-        <md-list-item ng-repeat="fundedProject in group.fundedBuckets()" ng-click="showProject(fundedProject.id)">
+        <md-list-item ng-repeat="fundedBucket in group.fundedBuckets()" ng-click="showBucket(fundedBucket.id)">
           <div layout="column" flex class="group-page__funded-project-container">
-            <span class="group-page__funded-project-title">{{ fundedProject.name }}</span>
-            <span class="group-page__funded-project-author">created by {{ fundedProject.author().name }} {{ fundedProject.createdAt | timeFromNowInWords }} ago</span>
+            <span class="group-page__funded-project-title">{{ fundedBucket.name }}</span>
+            <span class="group-page__funded-project-author">created by {{ fundedBucket.author().name }} {{ fundedBucket.createdAt | timeFromNowInWords }} ago</span>
           </div>
         </md-list-item>
       </md-list>
@@ -142,7 +142,7 @@
       </md-list>
     </div>
 
-    <md-button class="md-fab group-page__create-project-fab" ng-click="createProject()">
+    <md-button class="md-fab group-page__create-project-fab" ng-click="createBucket()">
       <div layout="column" layout-align="center center">
         <i class="material-icons">add</i>
       </div>

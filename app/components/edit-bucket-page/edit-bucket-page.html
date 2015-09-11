@@ -1,27 +1,30 @@
-<div class="edit-project-page">
-  <md-toolbar class="md-whiteframe-z1 edit-project-page__toolbar" layout-align="column">
+<div class="edit-bucket-page">
+  <md-toolbar class="md-whiteframe-z1 edit-bucket-page__toolbar" layout-align="column">
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
         <div layout="column" layout-align="center center">
-          <i class="material-icons edit-project-page__cancel-icon">close</i>
+          <i class="material-icons edit-bucket-page__cancel-icon">close</i>
         </div>
       </md-button>
-      <span class="edit-project-page__header-text">Edit Draft</span>
+      <span class="edit-bucket-page__header-text">Edit {{ bucket.status == 'draft' ? 'Idea' : 'Bucket' }}</span>
       <span flex></span>
-      <md-button class="md-icon-button edit-project-page__done-button" aria-label="done" ng-click="done()">
+      <md-button class="md-icon-button edit-bucket-page__done-button" aria-label="done" ng-click="done()">
         <div layout="column" layout-align="center center">
-          <span class="edit-project-page__done-button-text">Done</span>
+          <span class="edit-bucket-page__done-button-text">Done</span>
         </div>
       </md-button>
     </div>
   </md-toolbar>
 
-  <md-content class="edit-project-page__content">
-    <md-subheader class="edit-project-page__subheader-title">You're about to edit a project draft</md-subheader>
+  <md-content class="edit-bucket-page__content">
+    <md-subheader class="edit-bucket-page__subheader-title">You're about to edit a {{ bucket.status == 'draft' ? 'bucket idea' : 'bucket' }}</md-subheader>
 
-    <md-subheader class="edit-project-page__subheader-text">You can continue to edit this draft, propose it to your peers, and get feedback. Once your project gets endorsed, you can request funding.</md-subheader>
+    <md-subheader class="edit-bucket-page__subheader-text">
+      You can continue to edit this {{ bucket.status == 'draft' ? 'idea' : 'bucket' }}, propose it to your peers, and get feedback. 
+      <span ng-if="bucket.status == 'draft'">When you're ready, you can request funding.</span>
+    </md-subheader>
 
-    <form name='bucketForm' class="edit-project-page__form">
+    <form name='bucketForm' class="edit-bucket-page__form">
       <md-input-container>
         <label>Title</label>
         <input required name="name" type="text" ng-model="bucket.name">

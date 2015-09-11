@@ -1,6 +1,6 @@
 module.exports = 
-  url: '/projects/new'
-  template: require('./create-project-page.html')
+  url: '/buckets/new'
+  template: require('./create-bucket-page.html')
   controller: ($scope, Records, $location, Toast) ->
 
     groupId = global.cobudgetApp.currentGroupId
@@ -17,6 +17,6 @@ module.exports =
     $scope.done = () ->
       if $scope.bucketForm.$valid
         $scope.bucket.save().then (data) ->
-          projectId = data.buckets[0].id
-          $location.path("/projects/#{projectId}")
-          Toast.show('You drafted a new project')
+          bucketId = data.buckets[0].id
+          $location.path("/buckets/#{bucketId}")
+          Toast.show('You drafted a new bucket')

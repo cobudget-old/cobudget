@@ -2,21 +2,21 @@ module.exports =
   resolve: 
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-  url: '/projects/:projectId'
-  template: require('./project-page.html')
+  url: '/buckets/:bucketId'
+  template: require('./bucket-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
     
     groupId = global.cobudgetApp.currentGroupId
-    projectId = parseInt $stateParams.projectId
+    bucketId = parseInt $stateParams.bucketId
 
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
       $scope.currentMembership = group.membershipFor(CurrentUser())
 
-    Records.buckets.findOrFetchById(projectId).then (project) ->
-      $scope.project = project
-      $scope.status = project.status
-      Records.comments.fetchByBucketId(projectId).then ->
+    Records.buckets.findOrFetchById(bucketId).then (bucket) ->
+      $scope.bucket = bucket
+      $scope.status = bucket.status
+      Records.comments.fetchByBucketId(bucketId).then ->
         window.scrollTo(0, 0)
 
     $scope.back = ->
@@ -31,43 +31,43 @@ module.exports =
     $scope.showLess = ->
       $scope.showFullDescription = false
 
-    $scope.newComment = Records.comments.build(bucketId: projectId)
+    $scope.newComment = Records.comments.build(bucketId: bucketId)
 
     $scope.createComment = ->
       $scope.newComment.save()
-      $scope.newComment = Records.comments.build(bucketId: projectId)
+      $scope.newComment = Records.comments.build(bucketId: bucketId)
 
     $scope.userCanStartFunding = ->
-      $scope.currentMembership.isAdmin || $scope.project.author().id == $scope.currentMembership.member().id
+      $scope.currentMembership.isAdmin || $scope.bucket.author().id == $scope.currentMembership.member().id
 
     $scope.openForFunding = ->
-      if $scope.project.target
-        $scope.project.openForFunding().then ->
+      if $scope.bucket.target
+        $scope.bucket.openForFunding().then ->
           $scope.back()
-          Toast.showWithRedirect('You launched a project for funding', "/projects/#{projectId}")
+          Toast.showWithRedirect('You launched a bucket for funding', "/buckets/#{bucketId}")
       else
         alert('Estimated funding target must be specified before funding starts')        
 
     $scope.editDraft = ->
-      $location.path("/projects/#{projectId}/edit")
+      $location.path("/buckets/#{bucketId}/edit")
 
     $scope.userCanEditDraft = ->
-      $scope.project && $scope.project.status == 'draft' && $scope.userCanStartFunding()
+      $scope.bucket && $scope.bucket.status == 'draft' && $scope.userCanStartFunding()
 
     $scope.contribution = Records.contributions.build
-      bucketId: projectId
+      bucketId: bucketId
 
     $scope.openFundForm = ->
       $scope.fundFormOpened = true
 
     $scope.totalAmountFunded = ->
-      parseFloat($scope.project.totalContributions) + ($scope.contribution.amount || 0)
+      parseFloat($scope.bucket.totalContributions) + ($scope.contribution.amount || 0)
 
     $scope.totalPercentFunded = ->
-      $scope.totalAmountFunded() / parseFloat($scope.project.target) * 100
+      $scope.totalAmountFunded() / parseFloat($scope.bucket.target) * 100
 
     $scope.maxAllowableContribution = ->
-      _.min([$scope.project.amountRemaining(), $scope.currentMembership.balance()])
+      _.min([$scope.bucket.amountRemaining(), $scope.currentMembership.balance()])
 
     $scope.normalizeContributionAmount = ->
       if $scope.contribution.amount > $scope.maxAllowableContribution()
@@ -75,9 +75,9 @@ module.exports =
 
     $scope.updateProgressBarColor = (contributionAmount) ->
       if contributionAmount > 0
-        jQuery('.project-page__progress-bar .md-bar').addClass('project-page__progress-bar-green')
+        jQuery('.bucket-page__progress-bar .md-bar').addClass('bucket-page__progress-bar-green')
       else
-        jQuery('.project-page__progress-bar .md-bar').removeClass('project-page__progress-bar-green')
+        jQuery('.bucket-page__progress-bar .md-bar').removeClass('bucket-page__progress-bar-green')
 
     $scope.$watch ((scope) ->
       scope.contribution.amount
@@ -86,6 +86,6 @@ module.exports =
     $scope.submitContribution = ->
       $scope.contribution.save().then ->
         $scope.back()
-        Toast.show('You funded a project')
+        Toast.show('You funded a bucket')
         
     return

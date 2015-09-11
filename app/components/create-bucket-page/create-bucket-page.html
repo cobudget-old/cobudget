@@ -1,28 +1,28 @@
-<div class="create-project-page">
+<div class="create-bucket-page">
 
-  <md-toolbar class="md-whiteframe-z1 create-project-page__toolbar" layout-align="column">
+  <md-toolbar class="md-whiteframe-z1 create-bucket-page__toolbar" layout-align="column">
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
         <div layout="column" layout-align="center center">
-          <i class="material-icons create-project-page__cancel-icon">close</i>
+          <i class="material-icons create-bucket-page__cancel-icon">close</i>
         </div>
       </md-button>
-      <span class="create-project-page__header-text">New Idea</span>
+      <span class="create-bucket-page__header-text">New Idea</span>
       <span flex></span>
-      <md-button class="md-icon-button create-project-page__done-button" aria-label="done" ng-click="done()">
+      <md-button class="md-icon-button create-bucket-page__done-button" aria-label="done" ng-click="done()">
         <div layout="column" layout-align="center center">
-          <span class="create-project-page__done-button-text">Done</span>
+          <span class="create-bucket-page__done-button-text">Done</span>
         </div>
       </md-button>
     </div>
   </md-toolbar>
 
-  <md-content class="create-project-page__content">
-    <md-subheader class="create-project-page__subheader-title">You're about to propose an idea to {{ group.name }}</md-subheader>
+  <md-content class="create-bucket-page__content">
+    <md-subheader class="create-bucket-page__subheader-title">You're about to propose an idea to {{ group.name }}</md-subheader>
 
-    <md-subheader class="create-project-page__subheader-text">People in your group can comment on your idea, and when you're ready you can request funding.</md-subheader>
+    <md-subheader class="create-bucket-page__subheader-text">People in your group can comment on your idea, and when you're ready you can request funding.</md-subheader>
 
-    <form name='bucketForm' class="create-project-page__form">
+    <form name='bucketForm' class="create-bucket-page__form">
       <md-input-container>
         <label>Title</label>
         <input required name="name" type="text" ng-model="bucket.name">
