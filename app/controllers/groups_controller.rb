@@ -13,9 +13,8 @@ class GroupsController < AuthenticatedController
 
   api :POST, '/groups', 'Create a group'
   def create
-    group = create_resource(group_params_create, respond: false)
-    group.add_admin(current_user)
-    respond_with group
+    group = Group.create(group_params)
+    render json: [group]
   end
 
   api :GET, '/groups/:id', 'Full details of group'
@@ -25,7 +24,7 @@ class GroupsController < AuthenticatedController
   end
 
 private
-  def group_params_create
+  def group_params
     params.require(:group).permit(:name)
   end
 end
