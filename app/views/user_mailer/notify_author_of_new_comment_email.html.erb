@@ -1,5 +1,5 @@
 <p>
-  <%= @commenter.name %> has commented on <%= @project.name %> in <%= @group.name %> on Cobudget.
+  <%= @commenter.name %> has commented on <%= @bucket.name %> in <%= @group.name %> on Cobudget.
 </p>
 
 <p>
@@ -7,5 +7,5 @@
 </p>
 
 <p>
-  <%= link_to 'reply', "#{root_url}#/projects/#{@project.id}" %>
+  <%= link_to 'reply', "#{root_url}#/buckets/#{@bucket.id}" %>
 </p>

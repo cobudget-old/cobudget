@@ -1,0 +1,19 @@
+<p>
+  A new bucket in <%= @group.name %> is requesting funding on Cobudget!
+</p>
+
+<p> - - - </p>
+
+<p>
+  <strong><%= @bucket.name %></strong>
+</p>
+
+<p>
+  "<%= @bucket.description %>"
+</p>
+
+<p> - - - </p>
+
+<p>
+  <%= link_to 'view', "#{root_url}#/buckets/#{@bucket.id}" %>
+</p>

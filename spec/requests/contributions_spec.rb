@@ -18,24 +18,24 @@ xdescribe "Contributions" do
     it "returns that contribution as json" do
     end
 
-    it "sends a 'notify_author_that_project_received_funding' email to the author of the project" do
+    it "sends a 'notify_author_that_bucket_received_funding' email to the author of the bucket" do
     end
 
-    context "the project becomes fully funded" do
-      it "sends a 'notify_author_that_project_received_contribution' email to the author of the project" do
+    context "the bucket becomes fully funded" do
+      it "sends a 'notify_author_that_bucket_received_contribution' email to the author of the bucket" do
       end
 
-      it "sends 'notify_author_that_project_is_funded' email to the author of the project" do
+      it "sends 'notify_author_that_bucket_is_funded' email to the author of the bucket" do
       end
 
-      it "sends 'notify_funder_that_project_is_funded' emails to all unique funders of the project" do
+      it "sends 'notify_funder_that_bucket_is_funded' emails to all unique funders of the bucket" do
       end
 
-      it "does not send 'notify_funder_that_project_is_funded' to the author of the project" do
+      it "does not send 'notify_funder_that_bucket_is_funded' to the author of the bucket" do
       end
     end
 
-    context "the funder is also the author of the project" do
+    context "the funder is also the author of the bucket" do
       it "does not send the author an email" do
       end
     end
