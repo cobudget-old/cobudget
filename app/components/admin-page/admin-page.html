@@ -42,8 +42,13 @@
             </span>
 
             <span >
-              <div upload-button class="admin-page__upload-btn-container" url="{{ uploadPathForGroup(group.id) }}" param="csv" accept="text/csv">
-                upload members / allocations via csv<br><br>
+              <div upload-button 
+                class="admin-page__upload-btn-container" 
+                url="{{ uploadPathForGroup(group.id) }}" 
+                param="csv" 
+                accept="text/csv"
+                on-success="onCsvUploadSuccess(group.id)"
+              >upload members / allocations via csv<br><br>
               </div>
             </span>
           </div>
