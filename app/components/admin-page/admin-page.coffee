@@ -10,7 +10,9 @@ module.exports =
 
     $scope.createGroup = ->
       if $scope.groupForm.$valid
-        $scope.group.save().then ->
+        $scope.group.save().then (data) ->
+          newGroup = data.groups[0]
+          $scope.groups.push(newGroup)
           $scope.group = Records.groups.build()
           $scope.groupForm.$setUntouched()
 
