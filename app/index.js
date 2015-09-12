@@ -12,6 +12,7 @@ require('angular-animate')
 require('angular-material')
 require('angular-messages')
 require('ng-focus-if')
+require('angular-upload')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -24,7 +25,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ngMaterial',
   'ngMessages',
   'ipCookie',
-  'focus-if'
+  'focus-if',
+  'lr.upload'
 ])
 .constant('config', require('app/configs/app'))
 
