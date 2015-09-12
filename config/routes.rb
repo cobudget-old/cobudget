@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         post :change_password
       end
     end
-
+    
     resources :allocations, only: [:index]
 
     resources :groups, only: [:index, :show, :create]
