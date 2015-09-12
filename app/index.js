@@ -12,6 +12,7 @@ require('angular-animate')
 require('angular-material')
 require('angular-messages')
 require('ng-focus-if')
+require('angular-file-upload')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
