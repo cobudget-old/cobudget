@@ -9,9 +9,4 @@ class MembershipsController < AuthenticatedController
   def my_memberships
     render json: Membership.where(member_id: current_user.id)
   end
-
-private
-  def membership
-    @membership ||= Membership.find(params[:id])
-  end
 end
