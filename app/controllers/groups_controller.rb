@@ -3,12 +3,8 @@ class GroupsController < AuthenticatedController
 
   api :GET, '/groups', 'List groups'
   def index
-    if params[:member_id]
-      @groups = Group.includes('memberships').where(memberships: { member_id: params[:member_id] }).all
-    else
-      @groups = Group.all
-    end
-    respond_with @groups
+    groups = Group.all
+    render json: groups
   end
 
   api :POST, '/groups', 'Create a group'
