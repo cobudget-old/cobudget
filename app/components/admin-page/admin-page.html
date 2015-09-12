@@ -20,6 +20,15 @@
 
     <md-divider></md-divider>
 
+    <md-list class="admin-page__group-list">
+      <md-subheader class="admin-page__group-list-subheader">Groups</md-subheader>
+      <md-list-item ng-repeat="group in groups">
+        {{ group.name }}
+      </md-list-item>
+    </md-list>
+
+
+
   </md-content>
 
 

@@ -9,6 +9,8 @@
 
 .admin-page__form {
   margin-top: 25px;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
 .admin-page__form .md-button {
@@ -20,5 +22,8 @@
 .admin-page md-divider {
   margin-top: 25px;
   margin-bottom: 25px;
-  border-color: $cobudget-orange;
+}
+
+.admin-page__group-list-subheader {
+  color: $cobudget-blue;
 }
