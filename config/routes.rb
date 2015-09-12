@@ -25,10 +25,6 @@ Rails.application.routes.draw do
       end
     end
 
-    # NOTE (JL): Added unsed show route here cause otherwise respond_with doesn't work
-    # on the create action (not sure why??)
-    resources :allocations, only: [:create, :show, :update]
-
     resources :buckets, only: [:index, :create, :show, :update, :destroy] do
       member do
         post :open_for_funding
