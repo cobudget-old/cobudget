@@ -48,6 +48,11 @@
 }
 
 .admin-page__upload-btn-container {
-  border: 1px solid black;
+  border: 1px solid $cobudget-blue;
+  border-radius: 4px;
   padding: 10px;
-}
+  color: $cobudget-blue;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+ }
