@@ -9,9 +9,9 @@ class AllocationsController < AuthenticatedController
 
   api :POST, '/allocations/upload?group_id='
   def upload
-    csv = CSV.read(params[:csv].tempfile)
+    csv = CSV.read(params[:csv].tempfile, row_sep: :auto)
     group = Group.find(params[:group_id])
-    pp csv
-    render json: "fuck lol"
+    AllocationService.create_allocations_from_csv(csv: csv, group: group)
+    render nothing: true, status: 200
   end
 end
