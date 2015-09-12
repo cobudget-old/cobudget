@@ -24,7 +24,7 @@
 
     <md-list class="admin-page__group-list">
 
-      <md-list-item ng-repeat="group in groups">
+      <md-list-item class="admin-page__group-list-item" ng-repeat="group in groups">
         <div>
           <div class="admin-page__group-info" layout="row" layout-align="start center">
             <div class="admin-page__group-photo"></div>
@@ -38,18 +38,19 @@
             </span>
 
             <span>
-              <md-button class="admin-page__group-update-btn">add members / funds (csv)</md-button>
+              <md-button class="admin-page__group-update-btn">set currency</md-button>
             </span>
 
-            <span>
-              <md-button class="admin-page__group-update-btn">set currency</md-button>
+            <span >
+              <div upload-button class="admin-page__upload-btn-container" url="{{ uploadPathForGroup(group.id) }}" param="csv" accept="text/csv">
+                upload members / allocations via csv<br><br>
+              </div>
             </span>
           </div>
         </div>
       </md-list-item>
     </md-list>
 
+
   </md-content>
-
-
 </div>

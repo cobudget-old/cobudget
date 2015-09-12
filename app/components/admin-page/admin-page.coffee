@@ -1,7 +1,7 @@
 module.exports = 
   url: '/admin'
   template: require('./admin-page.html')
-  controller: ($scope, $auth, $location, Records, $rootScope) ->
+  controller: ($scope, $auth, $location, Records, $rootScope, config) ->
 
     $scope.group = Records.groups.build()
 
@@ -13,5 +13,8 @@ module.exports =
         $scope.group.save().then ->
           $scope.group = Records.groups.build()
           $scope.groupForm.$setUntouched()
+
+    $scope.uploadPathForGroup = (groupId) ->
+      "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
 
     return

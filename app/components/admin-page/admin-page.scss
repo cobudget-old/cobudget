@@ -37,8 +37,17 @@
   display: block;
 }
 
+.admin-page__group-list-item {
+  margin-bottom: 20px;
+}
+
 .admin-page__group-list .admin-page__group-update-btn {
   border: 1px solid $cobudget-blue;
   margin-left: 0;
   color: $cobudget-blue;  
+}
+
+.admin-page__upload-btn-container {
+  border: 1px solid black;
+  padding: 10px;
 }
