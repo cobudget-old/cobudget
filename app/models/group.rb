@@ -6,6 +6,8 @@ class Group < ActiveRecord::Base
 
   validates_presence_of :name
 
+  before_save :update_currency_symbol_if_currency_code_changed
+
   def add_admin(user)
     memberships.create!(member: user, is_admin: true)
   end
@@ -19,4 +21,11 @@ class Group < ActiveRecord::Base
     contribution_sum = buckets.map { |b| b.total_contributions }.reduce(:+) || 0
     allocation_sum - contribution_sum
   end
+
+  private 
+    def update_currency_symbol_if_currency_code_changed
+      if self.currency_code
+        self.currency_symbol = Money.new(0, self.currency_code).symbol
+      end      
+    end
 end
