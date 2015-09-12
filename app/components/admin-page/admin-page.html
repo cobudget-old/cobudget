@@ -20,10 +20,32 @@
 
     <md-divider></md-divider>
 
+    <md-subheader class="admin-page__group-list-subheader">Groups</md-subheader>
+
     <md-list class="admin-page__group-list">
-      <md-subheader class="admin-page__group-list-subheader">Groups</md-subheader>
+
       <md-list-item ng-repeat="group in groups">
-        {{ group.name }}
+        <div>
+          <div class="admin-page__group-info" layout="row" layout-align="start center">
+            <div class="admin-page__group-photo"></div>
+            <div class="admin-page__group-name">{{ group.name }}</div>
+            <div class="admin-page__group-balance">{{ group.balance | currency : $ : 0 }}</div>
+          </div>
+
+          <div class="admin-page__group-options">
+            <span>
+              <md-button class="admin-page__group-update-btn">add photo</md-button>
+            </span>
+
+            <span>
+              <md-button class="admin-page__group-update-btn">add members / funds (csv)</md-button>
+            </span>
+
+            <span>
+              <md-button class="admin-page__group-update-btn">set currency</md-button>
+            </span>
+          </div>
+        </div>
       </md-list-item>
     </md-list>
 

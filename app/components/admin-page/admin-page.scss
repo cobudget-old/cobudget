@@ -27,3 +27,18 @@
 .admin-page__group-list-subheader {
   color: $cobudget-blue;
 }
+
+.admin-page__group-list {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.admin-page__group-name {
+  display: block;
+}
+
+.admin-page__group-list .admin-page__group-update-btn {
+  border: 1px solid $cobudget-blue;
+  margin-left: 0;
+  color: $cobudget-blue;  
+}
