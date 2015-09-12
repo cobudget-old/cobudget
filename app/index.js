@@ -24,7 +24,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ngMaterial',
   'ngMessages',
   'ipCookie',
-  'focus-if'
+  'focus-if',
+  'angularFileUpload'
 ])
 .constant('config', require('app/configs/app'))
 
