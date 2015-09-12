@@ -19,6 +19,11 @@ class Membership < ActiveRecord::Base
   end
 
   def formatted_balance
-    Money.new(balance * 100, "USD").format
+    Money.new(balance * 100, currency_code).format
   end
+
+  private
+    def currency_code 
+      group.currency_code
+    end
 end

@@ -10,7 +10,7 @@ class Contribution < ActiveRecord::Base
   after_save :update_bucket_status_if_funded
 
   def formatted_amount
-    Money.new(amount * 100, "USD").format
+    Money.new(amount * 100, currency_code).format
   end
 
   private 
@@ -24,5 +24,9 @@ class Contribution < ActiveRecord::Base
       if bucket.status == 'live' && bucket.funded?
         bucket.update(status: 'funded')
       end
+    end
+
+    def currency_code
+      bucket.group.currency_code
     end
 end
