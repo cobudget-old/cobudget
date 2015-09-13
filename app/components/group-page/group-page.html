@@ -8,6 +8,11 @@
       </md-button>
       <span class="group-page__group-name">{{ group.name }}</span>
       <span flex></span>
+      <md-button class="md-icon-button group-page-menu-button" aria-label="Admin Panel" ng-if="currentMembership.isAdmin" ng-click="openAdminPanel()">
+        <div layout="column" layout-align="center center">
+          <i class="material-icons group-page__menu-icon">local_pizza</i>
+        </div>
+      </md-button>      
       <md-button class="md-icon-button group-page-menu-button" aria-label="More">
         <div layout="column" layout-align="center center">
           <i class="material-icons group-page__menu-icon">more_vert</i>
