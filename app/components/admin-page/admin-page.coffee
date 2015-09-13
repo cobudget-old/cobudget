@@ -7,7 +7,7 @@ module.exports =
       $scope.groups = data.groups
 
     $scope.group = Records.groups.build()
-    
+
     $scope.createGroup = ->
       if $scope.groupForm.$valid
         $scope.group.save().then (data) ->

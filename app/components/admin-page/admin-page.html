@@ -29,7 +29,7 @@
           <div class="admin-page__group-info" layout="row" layout-align="start center">
             <div class="admin-page__group-photo"></div>
             <div class="admin-page__group-name">{{ group.name }}</div>
-            <div class="admin-page__group-balance">{{ group.balance | currency : $ : 0 }}</div>
+            <div class="admin-page__group-balance">{{ group.balance | currency : group.currency_symbol : 0 }}</div>
           </div>
 
           <div class="admin-page__group-options">

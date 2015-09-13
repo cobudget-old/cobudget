@@ -22,7 +22,7 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="group-page__funds-overview-header">Your funds</span>
-          <span class="group-page__funds-overview-amount">{{ currentMembership.balance() | currency : "$" : 0 }}</span>
+          <span class="group-page__funds-overview-amount">{{ currentMembership.balance() | currency : group.currencySymbol : 0 }}</span>
         </div>
       </div>
       <div flex="50" layout="row" layout-align="center center" class="group-page__funds-overview" >
@@ -31,7 +31,7 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="group-page__funds-overview-header">Total funds</span>
-          <span class="group-page__funds-overview-amount">{{ group.balance | currency : "$" : 0  }}</span>
+          <span class="group-page__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
         <md-list-item ng-repeat="liveBucket in group.liveBuckets()">
           <div layout="column" flex class="group-page__live-project-container" ng-click="showBucket(liveBucket.id)">
             <span class="group-page__live-project-title">{{ liveBucket.name }}</span>
-            <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : "$" : 0  }} to go</span>
+            <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
             <md-progress-linear md-mode="determinate" value="{{ liveBucket.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
           </div>
         </md-list-item>
@@ -129,7 +129,7 @@
             </div>
 
             <div layout="column" layout-align="center end" flex="20">
-              <span class="group-page__funder-balance">{{ membership.balance() | currency : "$" : 0 }}</span>
+              <span class="group-page__funder-balance">{{ membership.balance() | currency : group.currencySymbol : 0 }}</span>
             </div>
             
             <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" flex="10">
