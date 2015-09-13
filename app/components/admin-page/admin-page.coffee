@@ -3,6 +3,12 @@ module.exports =
   template: require('./admin-page.html')
   controller: ($scope, $auth, $location, Records, $rootScope, config) ->
 
+    $scope.currencies = [
+      { code: 'USD', symbol: '$' },
+      { code: 'NZD', symbol: '$' },
+      { code: 'EUR', symbol: '€' }
+    ]
+
     Records.groups.getAll().then (groups) ->
       $scope.groups = groups
 

@@ -20,42 +20,41 @@
 
     <md-divider></md-divider>
 
-    <md-subheader class="admin-page__group-list-subheader">Groups</md-subheader>
+    <md-subheader class="admin-page__group-list-subheader">Edit Existing Groups</md-subheader>
 
     <md-list class="admin-page__group-list">
+      <div class="admin-page__group-list-item-container" ng-repeat="group in groups">      
+        <md-list-item class="admin-page__group-list-item">
+          <div>
+            <div class="admin-page__group-info" layout="row" layout-align="start center">
+              <div class="admin-page__group-name">{{ group.name }}</div>
+            </div>
 
-      <md-list-item class="admin-page__group-list-item" ng-repeat="group in groups">
-        <div>
-          <div class="admin-page__group-info" layout="row" layout-align="start center">
-            <div class="admin-page__group-photo"></div>
-            <div class="admin-page__group-name">{{ group.name }}</div>
-            <div class="admin-page__group-balance">{{ group.balance | currency : group.currencySymbol : 0 }}</div>
+            <div class="admin-page__group-options">
+              <span>
+                <md-input-container class='admin-page__currency-code-input'>
+                  <label>Currency</label>
+                  <md-select ng-model="group.currencyCode">
+                    <md-option ng-repeat="currency in currencies" value="{{currency.code}}">{{ currency.code + " - " + currency.symbol }}</md-option>
+                  </md-select>
+                </md-input-container>
+              </span>
+
+              <span >
+                <div upload-button 
+                  class="admin-page__upload-btn-container" 
+                  url="{{ uploadPathForGroup(group.id) }}" 
+                  param="csv" 
+                  accept="text/csv"
+                  on-success="onCsvUploadSuccess(group.id)"
+                >update members + allocations via csv upload<br><br>
+                </div>
+              </span>
+            </div>
           </div>
-
-          <div class="admin-page__group-options">
-            <span>
-              <md-button class="admin-page__group-update-btn">add photo</md-button>
-            </span>
-
-            <span>
-              <md-button class="admin-page__group-update-btn">set currency</md-button>
-            </span>
-
-            <span >
-              <div upload-button 
-                class="admin-page__upload-btn-container" 
-                url="{{ uploadPathForGroup(group.id) }}" 
-                param="csv" 
-                accept="text/csv"
-                on-success="onCsvUploadSuccess(group.id)"
-              >upload members / allocations via csv<br><br>
-              </div>
-            </span>
-          </div>
-        </div>
-      </md-list-item>
+        </md-list-item>
+        <md-divider></md-divider>
+      </div>
     </md-list>
-
-
   </md-content>
 </div>

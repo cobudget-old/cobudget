@@ -30,11 +30,12 @@
 
 .admin-page__group-list {
   padding-right: 16px;
-  padding-left: 16px;
 }
 
 .admin-page__group-name {
   display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .admin-page__group-list-item {
@@ -47,11 +48,14 @@
   color: $cobudget-blue;  
 }
 
+.admin-page__currency-code-input {
+  padding-left: 0;
+}
+
 .admin-page__upload-btn-container {
-  border: 1px solid $cobudget-blue;
+  border: 1px solid $cobudget-grey;
   border-radius: 4px;
   padding: 10px;
-  color: $cobudget-blue;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
