@@ -9,18 +9,17 @@ module.exports =
       { code: 'EUR', symbol: '€' }
     ]
 
-    Records.groups.getAll().then (groups) ->
-      $scope.groups = groups
+    $scope.fetchAllGroups = ->
+      Records.groups.getAll().then (groups) ->
+        $scope.groups = groups
 
+    $scope.fetchAllGroups()
     $scope.group = Records.groups.build()
 
     $scope.createGroup = ->
       if $scope.groupForm.$valid
         $scope.group.save().then (data) ->
-          newGroup = data.groups[0]
-          $scope.groups.push(newGroup)
-          $scope.group = Records.groups.build()
-          $scope.groupForm.$setUntouched()
+          $scope.fetchAllGroups()
 
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
@@ -30,5 +29,14 @@ module.exports =
         updatedGroupIndex = _.findIndex $scope.groups, (group) ->
           group.id == groupId
         $scope.groups[updatedGroupIndex] = updatedGroup
+
+    $scope.updateGroupCurrency = (groupId, currencyCode) ->
+      Records.groups.findOrFetchById(groupId).then (group) ->
+        group.currencyCode = currencyCode
+        group.save().then ->
+          $scope.fetchAllGroups()
+
+    $scope.viewGroup = (groupId) ->
+      $location.path("/groups/#{groupId}")
 
     return

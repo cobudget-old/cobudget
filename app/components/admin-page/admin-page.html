@@ -1,5 +1,4 @@
 <div class="admin-page">
-
   <md-toolbar class="md-whiteframe-z1 admin-page__toolbar">
     <div class="md-toolbar-tools" layout="column" layout-align="center center">
       hi admin
@@ -27,14 +26,17 @@
         <md-list-item class="admin-page__group-list-item">
           <div>
             <div class="admin-page__group-info" layout="row" layout-align="start center">
-              <div class="admin-page__group-name">{{ group.name }}</div>
+              <div class="admin-page__group-name">
+                {{ group.name }} 
+                <md-button ng-click="viewGroup(group.id)">view</md-button>
+              </div>
             </div>
 
             <div class="admin-page__group-options">
               <span>
                 <md-input-container class='admin-page__currency-code-input'>
                   <label>Currency</label>
-                  <md-select ng-model="group.currencyCode">
+                  <md-select ng-model="group.currencyCode" ng-change="updateGroupCurrency(group.id, group.currencyCode)">
                     <md-option ng-repeat="currency in currencies" value="{{currency.code}}">{{ currency.code + " - " + currency.symbol }}</md-option>
                   </md-select>
                 </md-input-container>
@@ -53,6 +55,7 @@
             </div>
           </div>
         </md-list-item>
+
         <md-divider></md-divider>
       </div>
     </md-list>
