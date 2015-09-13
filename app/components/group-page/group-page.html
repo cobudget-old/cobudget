@@ -71,13 +71,6 @@
         <div layout="row">
           <md-subheader class="group-page__subheader-title">Funding Now</md-subheader>
           <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" aria-label="Settings">
-              <div layout="column" layout-align="center center">
-                <i class="material-icons group-page__help-icon">help</i>
-              </div>
-            </md-button>
-          </div>
         </div>
         <md-list-item ng-repeat="liveBucket in group.liveBuckets()">
           <div layout="column" flex class="group-page__live-project-container" ng-click="showBucket(liveBucket.id)">
@@ -92,13 +85,6 @@
         <div layout="row">
           <md-subheader class="group-page__subheader-title">Ideas</md-subheader>
           <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" aria-label="Settings">
-              <div layout="column" layout-align="center center">
-                <i class="material-icons group-page__help-icon">help</i>
-              </div>
-            </md-button>
-          </div>
         </div>
 
         <md-list-item ng-repeat="draftBucket in group.draftBuckets()" ng-click="showBucket(draftBucket.id)">
@@ -117,13 +103,6 @@
         <div layout="row">
           <md-subheader class="group-page__subheader-title">Funded</md-subheader>
           <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" aria-label="Settings">
-              <div layout="column" layout-align="center center">
-                <i class="material-icons group-page__help-icon">help</i>
-              </div>
-            </md-button>
-          </div>
         </div>
 
         <md-list-item ng-repeat="fundedBucket in group.fundedBuckets()" ng-click="showBucket(fundedBucket.id)">
