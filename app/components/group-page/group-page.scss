@@ -18,14 +18,6 @@
   @include truncatedText;
 }
 
-@media (min-width: 370px) {
-  .group-page__group-name {
-    letter-spacing: 3px;
-    text-align: center;
-    width: 100%;
-  }
-}
-
 // toolbar funds 
 
 .group-page__funds-bar {
