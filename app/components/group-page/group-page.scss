@@ -84,11 +84,16 @@
 }
 
 .group-page__subheader-title {
-  color: $cobudget-blue;
+  color: $grey-on-white;
 }
 
 .group-page__help-icon {
   color: $cobudget-grey;
+}
+
+.group-page md-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 // live projects

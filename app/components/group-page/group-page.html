@@ -68,10 +68,12 @@
   <md-content class="group-page__content">
     <div class="group-page__projects-content" ng-if="tabSelected === 0">
       <md-list class="group-page__live-projects">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">Funding Now</md-subheader>
-          <div flex></div>
+        <div layout="row" layout-align="center center">
+          <md-subheader class="group-page__subheader-title">FUNDING NOW</md-subheader>
         </div>
+
+        <md-divider></md-divider>
+
         <md-list-item ng-repeat="liveBucket in group.liveBuckets()">
           <div layout="column" flex class="group-page__live-project-container" ng-click="showBucket(liveBucket.id)">
             <span class="group-page__live-project-title">{{ liveBucket.name }}</span>
@@ -82,10 +84,11 @@
       </md-list>
 
       <md-list class="group-page__drafts">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">Ideas</md-subheader>
-          <div flex></div>
+        <div layout="row" layout-align="center center">
+          <md-subheader class="group-page__subheader-title">IDEAS</md-subheader>
         </div>
+
+        <md-divider></md-divider>
 
         <md-list-item ng-repeat="draftBucket in group.draftBuckets()" ng-click="showBucket(draftBucket.id)">
           <div layout="column" flex class="group-page__draft-container">
@@ -100,10 +103,11 @@
       </md-list>   
 
       <md-list class="group-page__funded-projects">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">Funded</md-subheader>
-          <div flex></div>
+        <div layout="row" layout-align="center center">
+          <md-subheader class="group-page__subheader-title">FUNDED</md-subheader>
         </div>
+
+        <md-divider></md-divider>
 
         <md-list-item ng-repeat="fundedBucket in group.fundedBuckets()" ng-click="showBucket(fundedBucket.id)">
           <div layout="column" flex class="group-page__funded-project-container">
