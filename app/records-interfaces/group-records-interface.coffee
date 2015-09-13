@@ -9,4 +9,5 @@ global.cobudgetApp.factory 'GroupRecordsInterface', (config, BaseRecordsInterfac
       @remote.apiPrefix = config.apiPrefix 
 
     getAll: ->
-      @remote.getCollection()
+      @remote.getCollection().then (data) ->
+        camelize(data.groups)

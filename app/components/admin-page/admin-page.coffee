@@ -3,8 +3,8 @@ module.exports =
   template: require('./admin-page.html')
   controller: ($scope, $auth, $location, Records, $rootScope, config) ->
 
-    Records.groups.getAll().then (data) ->
-      $scope.groups = data.groups
+    Records.groups.getAll().then (groups) ->
+      $scope.groups = groups
 
     $scope.group = Records.groups.build()
 
