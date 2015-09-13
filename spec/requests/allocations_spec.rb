@@ -1,72 +1,32 @@
 require 'rails_helper'
 
 describe "Allocations" do
-  describe "POST /allocations" do
-    let(:allocation_params) { {
-      allocation: {
-        group_id: group.id,
-        user_id: user.id,
-        amount: "25"
-      }
-    }.to_json }
 
-    context 'admin' do
-      before { make_user_group_admin }
+  xdescribe "POST '/allocations/upload?group_id=" do
+    it "uses the email addresses / amounts in the csv to generates allocations for users within specified group" do
+    end
 
-      it "creates an allocation" do
-        post "/allocations", allocation_params, request_headers
-        expect(response.status).to eq created
-        expect(Allocation.find_by(group: group, user: user, amount: 25)).to be_truthy
+    context "allocation amount associated with an email address is zero" do
+      it "does not generate an allocation for user with that email address" do
       end
     end
 
-    context 'user' do
-      before { make_user_group_member }
-
-      it "cannot create allocations" do
-        post "/allocations", allocation_params, request_headers
-        expect(response.status).to eq forbidden
-        expect(Allocation.find_by(group: group, user: user, amount: 25)).to be_nil
-      end
-    end
-  end
-
-  describe "PUT /allocations/:allocation_id" do
-    let(:evil_group) { create(:group) }
-    let(:allocation_params) { {
-      allocation: {
-        amount: "15",
-        group_id: evil_group.id 
-      }
-    }.to_json }
-    let(:allocation) { create(:allocation, amount: 2, group: group) }
-
-    context 'admin' do
-      before do
-        make_user_group_admin
-        put "/allocations/#{allocation.id}", allocation_params, request_headers
-        allocation.reload
+    context "csv contains email addresses of people not yet users of cobudget" do
+      it "creates a new user with that email address + a temporary name" do
       end
 
-      it "updates an allocation" do
-        expect(response.status).to eq updated
-        expect(allocation.amount).to eq 15
+      it "creates a membership between the new user and the specified group" do
       end
 
-      it "cannot update group_id" do
-        expect(response.status).to eq updated
-        expect(allocation.group_id).not_to eq evil_group.id
+      it "generates an allocation for the new member" do
       end
     end
 
-    context 'user' do
-      before { make_user_group_member }
+    context "csv contains emails addresses of users not yet a part of the group" do
+      it "creates a membership between the new user and the specified group" do
+      end
 
-      it "cannot update an allocation" do
-        put "/allocations/#{allocation.id}", allocation_params, request_headers
-        allocation.reload
-        expect(response.status).to eq forbidden
-        expect(allocation.amount).not_to eq 15
+      it "generates an allocation for the new member" do
       end
     end
   end

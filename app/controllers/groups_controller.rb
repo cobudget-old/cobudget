@@ -3,7 +3,7 @@ class GroupsController < AuthenticatedController
 
   api :GET, '/groups', 'List groups'
   def index
-    groups = Group.all
+    groups = Group.all.order(id: :desc)
     render json: groups
   end
 
@@ -15,12 +15,19 @@ class GroupsController < AuthenticatedController
 
   api :GET, '/groups/:id', 'Full details of group'
   def show
-    @group = Group.find(params[:id])
-    render json: [@group]
+    group = Group.find(params[:id])
+    render json: [group]
   end
 
-private
-  def group_params
-    params.require(:group).permit(:name)
+  api :PATCH, '/groups/:id', 'Update a group'
+  def update
+    group = Group.find(params[:id])
+    group.update(group_params)
+    render json: [group]
   end
+
+  private
+    def group_params
+      params.require(:group).permit(:name, :currency_code)
+    end
 end

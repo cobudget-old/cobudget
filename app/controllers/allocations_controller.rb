@@ -1,3 +1,5 @@
+require 'csv'
+
 class AllocationsController < AuthenticatedController
   api :GET, '/allocations?group_id=', 'Get allocations for a particular group'
   def index
@@ -5,26 +7,11 @@ class AllocationsController < AuthenticatedController
     render json: group.allocations
   end
 
-  api :POST, '/allocations/', 'Create allocation'
-  def create
-    create_resource(allocation_params_create)
+  api :POST, '/allocations/upload?group_id='
+  def upload
+    csv = CSV.read(params[:csv].tempfile, row_sep: :auto)
+    group = Group.find(params[:group_id])
+    AllocationService.create_allocations_from_csv(csv: csv, group: group)
+    render nothing: true, status: 200
   end
-
-  api :PUT, '/allocations/:allocation_id', 'Update allocation'
-  def update
-    update_resource(allocation_params_update)
-  end
-
-  private
-    def allocation
-      @allocation ||= Allocation.find(params[:id])
-    end
-
-    def allocation_params_create
-      params.require(:allocation).permit(:user_id, :group_id, :amount)
-    end
-
-    def allocation_params_update
-      params.require(:allocation).permit(:amount)
-    end
 end

@@ -16,11 +16,11 @@ class Bucket < ActiveRecord::Base
   end
 
   def formatted_total_contributions
-    Money.new(total_contributions * 100, "USD").format
+    Money.new(total_contributions * 100, currency_code).format
   end
 
   def formatted_target
-    Money.new(target * 100, "USD").format
+    Money.new(target * 100, currency_code).format
   end
 
   # funding_closes_at, need to think more about the implications of setting this
@@ -43,5 +43,9 @@ class Bucket < ActiveRecord::Base
         when "live" then self.live_at = Time.now.utc
         when "funded" then self.funded_at = Time.now.utc
       end
+    end
+
+    def currency_code
+      group.currency_code
     end
 end
