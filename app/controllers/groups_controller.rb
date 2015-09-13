@@ -3,7 +3,7 @@ class GroupsController < AuthenticatedController
 
   api :GET, '/groups', 'List groups'
   def index
-    groups = Group.all.order(:id)
+    groups = Group.all.order(id: :desc)
     render json: groups
   end
 
