@@ -25,7 +25,13 @@
 }
 
 .group-page__funds-overview-container {
-  margin: 0 auto;
+  margin-left: 35px;
+}
+
+@media (min-width: 330px) {
+  .group-page__funds-overview-container {
+    margin-left: 41px;
+  }  
 }
 
 .group-page__funds-overview-header {
