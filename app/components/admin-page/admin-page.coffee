@@ -30,6 +30,9 @@ module.exports =
           group.id == groupId
         $scope.groups[updatedGroupIndex] = updatedGroup
 
+    $scope.onCsvUploadCompletion = ->
+      alert('upload complete')
+
     $scope.updateGroupCurrency = (groupId, currencyCode) ->
       Records.groups.findOrFetchById(groupId).then (group) ->
         group.currencyCode = currencyCode
