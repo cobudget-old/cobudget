@@ -32,8 +32,18 @@
   height: $medium-height;
 }
 
+.group-page__funds-overview-container {
+  margin: 0 auto;
+}
+
 .group-page__funds-overview-header {
   @include fontTiny;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.group-page__personal-funds-container {
+  margin-right: 20px;
 }
 
 .group-page__funds-icon {

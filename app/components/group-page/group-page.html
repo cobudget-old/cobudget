@@ -21,22 +21,26 @@
     </div>
 
     <div class="md-toolbar-tools group-page__funds-bar">
-      <div flex="50" layout="row" layout-align="center center" class="group-page__funds-overview" >
-        <div layout="column" layout-align="center center">
-          <i class="material-icons group-page__funds-icon">person</i>
-        </div>
-        <div layout="column" layout-align="center center">
-          <span class="group-page__funds-overview-header">Your funds</span>
-          <span class="group-page__funds-overview-amount">{{ currentMembership.balance() | currency : group.currencySymbol : 0 }}</span>
-        </div>
-      </div>
-      <div flex="50" layout="row" layout-align="center center" class="group-page__funds-overview" >
-        <div layout="column" layout-align="center center">
-          <i class="material-icons group-page__funds-icon">group</i>
-        </div>
-        <div layout="column" layout-align="center center">
-          <span class="group-page__funds-overview-header">Total funds</span>
-          <span class="group-page__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
+      <div layout="column" layout-align="center start" class="group-page__funds-overview-container">
+        <div class="group-page__funds-overview-header">Funds left</div>
+        <div layout="row" layout-align="center center" class="group-page__funds-overview-content" >
+          <div layout="row" class="group-page__personal-funds-container">
+            <div layout="column" layout-align="center center">
+              <i class="material-icons group-page__funds-icon">person</i>
+            </div>
+            <div layout="column" layout-align="center center">
+              <span class="group-page__funds-overview-amount">{{ currentMembership.balance() | currency : group.currencySymbol : 0 }}</span>
+            </div>
+          </div>
+          
+          <div layout="row" class="group-page__group-funds-container">
+            <div layout="column" layout-align="center center">
+              <i class="material-icons group-page__funds-icon">group</i>
+            </div>
+            <div layout="column" layout-align="center center">
+              <span class="group-page__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
