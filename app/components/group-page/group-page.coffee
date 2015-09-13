@@ -28,4 +28,7 @@ module.exports =
     $scope.selectTab = (tabNum) ->
       $scope.tabSelected = parseInt tabNum
 
+    $scope.openAdminPanel = ->
+      $location.path("/admin")
+
     return

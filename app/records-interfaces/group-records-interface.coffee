@@ -7,3 +7,7 @@ global.cobudgetApp.factory 'GroupRecordsInterface', (config, BaseRecordsInterfac
     constructor: (recordStore) ->
       @baseConstructor recordStore
       @remote.apiPrefix = config.apiPrefix 
+
+    getAll: ->
+      @remote.getCollection().then (data) ->
+        camelize(data.groups)

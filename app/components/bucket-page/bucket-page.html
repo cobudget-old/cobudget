@@ -13,7 +13,7 @@
         </div>
         <div layout="column" layout-align="center center">
           <span class="bucket-page__funds-overview-header">Your funds</span>
-          <span class="bucket-page__funds-overview-amount">{{ currentMembership.balance() - contribution.amount | currency : "$" : 0 }}</span>
+          <span class="bucket-page__funds-overview-amount">{{ currentMembership.balance() - contribution.amount | currency : group.currencySymbol : 0 }}</span>
         </div>
       </span>
 
@@ -42,7 +42,7 @@
         <div layout="row" ng-if="bucket.target > 0">
           <span class="bucket-page__description-header">Funding Target</span>
           <span flex="10"></span>
-          <span class="bucket-page__description-header" flex>{{ bucket.target | currency : "$" : 0  }}</span>
+          <span class="bucket-page__description-header" flex>{{ bucket.target | currency : group.currencySymbol : 0  }}</span>
         </div>
 
         <div ng-hide="showFullDescription">
@@ -70,8 +70,8 @@
           </div>
 
           <div flex>
-            <span class="bucket-page__progress-amount">{{ totalAmountFunded() | currency : "$" : 0 }}</span>
-            <span class="bucket-page__progress-unit">pledged of {{ bucket.target | currency : "$" : 0 }}</span>
+            <span class="bucket-page__progress-amount">{{ totalAmountFunded() | currency : group.currencySymbol : 0 }}</span>
+            <span class="bucket-page__progress-unit">pledged of {{ bucket.target | currency : group.currencySymbol : 0 }}</span>
           </div>
 
           <div flex="25" ng-show="bucket.fundingClosesAt">

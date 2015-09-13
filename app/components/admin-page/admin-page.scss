@@ -1,0 +1,62 @@
+.admin-page__toolbar {
+  background: $cobudget-blue;
+}
+
+.admin-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.admin-page__form {
+  margin-top: 25px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.admin-page__form .md-button {
+  margin-left: 0;
+  border: 1px solid $cobudget-blue;
+  color: $cobudget-blue;
+}
+
+.admin-page md-divider {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.admin-page__group-list-subheader {
+  color: $cobudget-blue;
+}
+
+.admin-page__group-list {
+  padding-right: 16px;
+}
+
+.admin-page__group-name {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.admin-page__group-list-item {
+  margin-bottom: 20px;
+}
+
+.admin-page__group-list .admin-page__group-update-btn {
+  border: 1px solid $cobudget-blue;
+  margin-left: 0;
+  color: $cobudget-blue;  
+}
+
+.admin-page__currency-code-input {
+  padding-left: 0;
+}
+
+.admin-page__upload-btn-container {
+  border: 1px solid $cobudget-grey;
+  border-radius: 4px;
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+ }
