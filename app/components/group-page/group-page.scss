@@ -1,8 +1,8 @@
 // toolbar heading
 
 .group-page__toolbar {
-  background: $cobudget-blue;
-  position: fixed;
+  position: relative;
+  background: linear-gradient(0deg, rgba(0,0,0,0.9), rgba(0,0,0,0.8));
 }
 
 .group-page__menu-bar {
