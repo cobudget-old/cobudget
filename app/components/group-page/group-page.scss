@@ -152,12 +152,17 @@
 
 .group-page__comment-count-container {
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 4px;
 }
 
 .group-page__comment-count-icon {
   @include fontGrande;
+}
+
+.group-page__comment-count-icon-inactive {
+  @include fontGrande;
+  color: $cobudget-grey;
 }
 
 .group-page__comment-count {

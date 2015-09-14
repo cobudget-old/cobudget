@@ -95,8 +95,8 @@
             <span class="group-page__draft-title">{{ draftBucket.name }}</span>
             <span class="group-page__draft-author">created by {{ draftBucket.author().name }} {{ draftBucket.createdAt | timeFromNowInWords }} ago</span>
             <div layout="column" layout-align="center center" class="group-page__comment-count-container">
-              <i class="material-icons group-page__comment-count-icon">messenger</i>
-              <div class="group-page__comment-count">{{ draftBucket.comments().length }}</div>
+              <i ng-class="draftBucket.hasComments() ? 'material-icons group-page__comment-count-icon' : 'material-icons group-page__comment-count-icon-inactive'">messenger</i>
+              <div class="group-page__comment-count" ng-if="draftBucket.hasComments()">{{ draftBucket.comments().length }}</div>
             </div>
           </div>
         </md-list-item>
