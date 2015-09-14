@@ -1,0 +1,11 @@
+<p>
+  <% if @member_contribution_amount > 0 %>
+    A bucket you helped fund has reached its goal on Cobudget! <%= @bucket.name %> in <%= @group.name %> has been funded <%= @bucket.formatted_target %>. You contributed <%= @formatted_member_contribution_amount %>.
+  <% else %>    
+    <%= @bucket.name %> in <%= @group.name %> has reached its funding target of <%= @bucket.formatted_target %>. 
+  <% end %>
+</p>
+
+<p>
+  <%= link_to 'view', "#{root_url}#/buckets/#{@bucket.id}" %>
+</p>

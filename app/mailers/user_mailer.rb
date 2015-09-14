@@ -77,13 +77,19 @@ class UserMailer < ActionMailer::Base
          subject: "[Cobudget - #{@group.name}] #{@bucket.name} is now requesting funding!")
   end
 
-  def notify_funder_that_bucket_is_funded(bucket: , funder: )
+  def notify_member_that_bucket_is_funded(bucket: , member: )
     @bucket = bucket
     @group = @bucket.group
-    funder_contributions = Contribution.where(bucket: bucket, user: funder)
-    @funder_contribution_amount = Money.new(funder_contributions.sum(:amount) * 100, "USD").format
-    mail(to: funder.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] You did it! #{@bucket.name} has been fully funded!")
+    @member_contribution_amount = Contribution.where(bucket: bucket, user: member).sum(:amount)
+    @formatted_member_contribution_amount = Money.new(@member_contribution_amount * 100, "USD").format
+    if @member_contribution_amount > 0
+      mail(to: member.name_and_email,
+           from: "Cobudget Updates <updates@cobudget.co>",
+           subject: "[Cobudget - #{@group.name}] You did it! #{@bucket.name} has been fully funded!")
+    else 
+      mail(to: member.name_and_email,
+           from: "Cobudget Updates <updates@cobudget.co>",
+           subject: "[Cobudget - #{@group.name}] #{@bucket.name} has been fully funded!")      
+    end
   end
 end

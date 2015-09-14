@@ -34,10 +34,10 @@ xdescribe "Contributions" do
       it "sends 'notify_author_that_bucket_is_funded' email to the author of the bucket" do
       end
 
-      it "sends 'notify_funder_that_bucket_is_funded' emails to all unique funders of the bucket" do
+      it "sends 'notify_member_that_bucket_is_funded' emails to all members of the group" do
       end
 
-      it "does not send 'notify_funder_that_bucket_is_funded' to the author of the bucket" do
+      it "does not send 'notify_member_that_bucket_is_funded' to the author of the bucket" do
       end
     end
 

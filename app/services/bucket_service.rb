@@ -13,11 +13,9 @@ class BucketService
   def self.send_bucket_funded_emails(bucket: )
     UserMailer.notify_author_that_bucket_is_funded(bucket: bucket).deliver_later
     bucket_author = bucket.user
-    funders = bucket.contributions.to_a.uniq   { |c| c.user_id }
-                                       .map    { |c| c.user }
-                                       .reject { |funder| funder == bucket_author }
-    funders.each do |funder|
-      UserMailer.notify_funder_that_bucket_is_funded(bucket: bucket, funder: funder).deliver_later
+    members = bucket.group.members.reject { |member| member == bucket_author }
+    members.each do |member|
+      UserMailer.notify_member_that_bucket_is_funded(bucket: bucket, member: member).deliver_later
     end
   end
 end
