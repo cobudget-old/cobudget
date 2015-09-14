@@ -77,13 +77,19 @@
         <md-list-item ng-repeat="liveBucket in group.liveBuckets()">
           <div layout="column" flex class="group-page__live-project-container" ng-click="showBucket(liveBucket.id)">
             <span class="group-page__live-project-title">{{ liveBucket.name }}</span>
-            <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
+
+            <div layout="row" layout-align="space-between center">
+              <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
+              
+              <span ng-show="liveBucket.amountContributedByUser(currentUserId) > 0" class="group-page__live-project-personal-contribution">
+                You gave {{ liveBucket.amountContributedByUser(currentUserId) | currency : group.currencySymbol : 0 }}               
+              </span>
+            </div>
 
             <div class="group-page__progress-bar-container">
               <div class="group-page__progress-bar-primary" style="width: {{ liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
               <div class="group-page__progress-bar-secondary" style="width: {{ liveBucket.percentContributedByUser(currentUserId) + liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
             </div>
-
           </div>
         </md-list-item>
       </md-list>

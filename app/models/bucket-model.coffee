@@ -37,14 +37,22 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
         contribution.userId != userId
       @sumContributionPercentages(contributions)
 
+    amountContributedByUser: (userId) ->
+      contributions = _.select @contributions(), (contribution) ->
+        contribution.userId == userId      
+      parseInt(@sumContributionAmounts(contributions))
+
     ### private methods ###
     
     sumContributionPercentages: (contributions) ->
+        @sumContributionAmounts(contributions) / @target * 100
+
+    sumContributionAmounts: (contributions) ->
       contributionAmounts = contributions.map (contribution) ->
         parseInt(contribution.amount)
       if contributionAmounts.length > 0
         totalAmountContributed = contributionAmounts.reduce (prev, curr) ->
           prev + curr
-        totalAmountContributed / @target * 100
+        totalAmountContributed
       else 
         0

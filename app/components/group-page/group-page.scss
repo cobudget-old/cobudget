@@ -122,6 +122,11 @@
   color: $grey-on-white;
 }
 
+.group-page__live-project-personal-contribution {
+  @include fontSmall;
+  color: $cobudget-green;
+}
+
 .group-page__progress-bar-container {
   position: relative;
   height: 5px;
