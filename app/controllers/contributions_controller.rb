@@ -1,4 +1,10 @@
 class ContributionsController < AuthenticatedController
+  api :GET, '/contributions?bucket_id='
+  def index
+    contributions = Contribution.where(bucket_id: params[:bucket_id])
+    render json: contributions
+  end
+
   api :POST, '/contributions', 'Create new contribution'
   def create
     contribution = Contribution.create(contribution_params)

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :contributions, only: [:create]
+    resources :contributions, only: [:index, :create]
   end
   
   root to: redirect('/docs')

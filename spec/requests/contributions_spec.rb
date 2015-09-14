@@ -3,6 +3,12 @@ require 'rails_helper'
 xdescribe "Contributions" do
   # let(:contribution_user) { user }
 
+  describe "GET '/contributions?bucket_id='" do
+
+    it "returns all contributions for specified bucket" do
+    end
+  end
+
   describe "POST /contributions" do
     # let(:contribution_params) { {
     #   contribution: {
