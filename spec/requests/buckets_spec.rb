@@ -20,5 +20,8 @@ xdescribe "Buckets" do
 
     it "sends 'notify_member_with_zero_balance_that_bucket_is_live' emails only to members of the group without funds" do
     end
+
+    it "does not send any emails to the person who updated the bucket's status to live" do
+    end
   end
 end

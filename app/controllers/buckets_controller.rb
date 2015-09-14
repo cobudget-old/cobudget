@@ -43,9 +43,8 @@ class BucketsController < AuthenticatedController
 
   def open_for_funding
     bucket = Bucket.find(params[:id])
-    # TODO: abstract to service once background jobs and other things become necessary
     bucket.open_for_funding(target: params[:target], funding_closes_at: params[:funding_closes_at])
-    BucketService.send_bucket_live_emails(bucket: bucket)
+    BucketService.send_bucket_live_emails(bucket: bucket, current_user: current_user)
     render json: [bucket]
   end
 

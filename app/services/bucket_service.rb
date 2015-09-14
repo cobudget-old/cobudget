@@ -1,6 +1,7 @@
 class BucketService
-  def self.send_bucket_live_emails(bucket: )
-    bucket.group.memberships.each do |membership|
+  def self.send_bucket_live_emails(bucket: , current_user: )
+    memberships = bucket.group.memberships.reject { |membership| membership.member == current_user }
+    memberships.each do |membership|
       member = membership.member
       if membership.balance > 0
         UserMailer.notify_member_with_balance_that_bucket_is_live(bucket: bucket, member: member).deliver_later
