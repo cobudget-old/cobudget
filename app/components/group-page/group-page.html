@@ -78,7 +78,12 @@
           <div layout="column" flex class="group-page__live-project-container" ng-click="showBucket(liveBucket.id)">
             <span class="group-page__live-project-title">{{ liveBucket.name }}</span>
             <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
-            <md-progress-linear md-mode="determinate" value="{{ liveBucket.percentFunded() }}" class="group-page__progress-bar"></md-progress-linear>
+
+            <div class="group-page__progress-bar-container">
+              <div class="group-page__progress-bar-primary" style="width: {{ liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
+              <div class="group-page__progress-bar-secondary" style="width: {{ liveBucket.percentContributedByUser(currentUserId) + liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
+            </div>
+
           </div>
         </md-list-item>
       </md-list>
