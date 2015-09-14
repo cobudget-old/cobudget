@@ -62,8 +62,8 @@
         <span class="bucket-page__progress-header">Progress</span>
 
         <div class="bucket-page__progress-bar-container">
-          <div class="bucket-page__progress-bar-primary" style="width: {{ bucket.percentFunded() }}%"></div>
-          <div class="bucket-page__progress-bar-secondary" style="width: {{ totalPercentFunded() }}%"></div>
+          <div class="bucket-page__progress-bar-primary" style="width: {{ percentNotContributedByUser }}%"></div>
+          <div class="bucket-page__progress-bar-secondary" style="width: {{ percentContributedByUser + percentNotContributedByUser + percentContributed() }}%"></div>
         </div>
 
         <div layout="row" class="bucket-page__progress-info">
