@@ -61,7 +61,10 @@
       <md-card-content class="bucket-page__progress-card-content">
         <span class="bucket-page__progress-header">Progress</span>
 
-        <md-progress-linear md-mode="determinate" value="{{ totalPercentFunded() }}" class="bucket-page__progress-bar"></md-progress-linear>
+        <div class="bucket-page__progress-bar-container">
+          <div class="bucket-page__progress-bar-primary" style="width: {{ percentNotContributedByUser }}%"></div>
+          <div class="bucket-page__progress-bar-secondary" style="width: {{ percentContributedByUser + percentNotContributedByUser + percentContributed() }}%"></div>
+        </div>
 
         <div layout="row" class="bucket-page__progress-info">
           <div flex="25">

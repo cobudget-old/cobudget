@@ -122,16 +122,38 @@
   color: $grey-on-white;
 }
 
-.group-page__progress-bar {
-  margin-bottom: 10px;
+.group-page__live-project-personal-contribution {
+  @include fontSmall;
+  color: $cobudget-green;
 }
 
-.group-page__progress-bar .md-container {
+.group-page__progress-bar-container {
+  position: relative;
+  height: 5px;
   background: $cobudget-grey;
+  z-index: 0;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.group-page__progress-bar .md-bar {
+.group-page__progress-bar-primary {
+  position: absolute;
+  height: 100%;
+  left: 0;
   background: $cobudget-orange;
+  z-index: 2;
+  width: 0%;
+  transition: 0.5s;
+}
+
+.group-page__progress-bar-secondary {
+  position: absolute;
+  height: 100%; 
+  left: 0;
+  background: $cobudget-green;
+  z-index: 1;
+  transition: 0.5s;
 }
 
 // drafts

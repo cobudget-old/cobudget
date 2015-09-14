@@ -5,7 +5,6 @@ module.exports =
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
-    
     groupId = global.cobudgetApp.currentGroupId
     bucketId = parseInt $stateParams.bucketId
 
@@ -16,6 +15,9 @@ module.exports =
     Records.buckets.findOrFetchById(bucketId).then (bucket) ->
       $scope.bucket = bucket
       $scope.status = bucket.status
+      Records.contributions.fetchByBucketId(bucketId).then ->
+        $scope.percentContributedByUser = bucket.percentContributedByUser(CurrentUser().id)
+        $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(CurrentUser().id)
       Records.comments.fetchByBucketId(bucketId).then ->
         window.scrollTo(0, 0)
 
@@ -63,8 +65,8 @@ module.exports =
     $scope.totalAmountFunded = ->
       parseFloat($scope.bucket.totalContributions) + ($scope.contribution.amount || 0)
 
-    $scope.totalPercentFunded = ->
-      $scope.totalAmountFunded() / parseFloat($scope.bucket.target) * 100
+    $scope.percentContributed = ->
+      ($scope.contribution.amount || 0) / $scope.bucket.target * 100
 
     $scope.maxAllowableContribution = ->
       _.min([$scope.bucket.amountRemaining(), $scope.currentMembership.balance()])
@@ -72,16 +74,6 @@ module.exports =
     $scope.normalizeContributionAmount = ->
       if $scope.contribution.amount > $scope.maxAllowableContribution()
         $scope.contribution.amount = $scope.maxAllowableContribution()
-
-    $scope.updateProgressBarColor = (contributionAmount) ->
-      if contributionAmount > 0
-        jQuery('.bucket-page__progress-bar .md-bar').addClass('bucket-page__progress-bar-green')
-      else
-        jQuery('.bucket-page__progress-bar .md-bar').removeClass('bucket-page__progress-bar-green')
-
-    $scope.$watch ((scope) ->
-      scope.contribution.amount
-    ), $scope.updateProgressBarColor
 
     $scope.submitContribution = ->
       $scope.contribution.save().then ->

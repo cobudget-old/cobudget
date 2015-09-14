@@ -8,12 +8,14 @@ module.exports =
 
     groupId = parseInt($stateParams.groupId)
     global.cobudgetApp.currentGroupId = groupId
+    $scope.currentUserId = CurrentUser().id
     
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
       $scope.currentMembership = group.membershipFor(CurrentUser())
       Records.buckets.fetchByGroupId(group.id).then (data) ->
         _.each data.buckets, (bucket) ->
+          Records.contributions.fetchByBucketId(bucket.id)
           Records.comments.fetchByBucketId(bucket.id)
       Records.memberships.fetchByGroupId(group.id)
 
