@@ -10,6 +10,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     relationships: ->
       @hasMany 'comments', sortBy: 'createdAt', sortDesc: false
+      @hasMany 'contributions', sortBy: 'createdAt', sortDesc: false
       @belongsTo 'group'
       @belongsTo 'author', from: 'users', by: 'userId'
 

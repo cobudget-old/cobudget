@@ -15,6 +15,8 @@ module.exports =
 
     Records.buckets.findOrFetchById(bucketId).then (bucket) ->
       $scope.bucket = bucket
+      Records.contributions.fetchByBucketId(bucketId).then (data) ->
+        console.log('bucket.contributions(): ', bucket.contributions())
       $scope.status = bucket.status
       Records.comments.fetchByBucketId(bucketId).then ->
         window.scrollTo(0, 0)

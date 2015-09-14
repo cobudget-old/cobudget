@@ -7,3 +7,8 @@ global.cobudgetApp.factory 'ContributionRecordsInterface', (config, BaseRecordsI
     constructor: (recordStore) ->
       @baseConstructor recordStore
       @remote.apiPrefix = config.apiPrefix 
+
+    fetchByBucketId: (bucketId) ->
+      @fetch
+        params:
+          bucket_id: bucketId
