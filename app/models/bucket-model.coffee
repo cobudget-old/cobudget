@@ -21,4 +21,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     openForFunding: ->
       @remote.postMember(@id,'open_for_funding', {target: @target, fundingClosesAt: @fundingClosesAt})
+
+    hasComments: ->
+      @comments().length > 0
   

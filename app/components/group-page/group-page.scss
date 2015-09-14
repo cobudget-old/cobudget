@@ -1,12 +1,15 @@
 // toolbar heading
 
 .group-page__toolbar {
-  background: $cobudget-blue;
-  position: fixed;
+  position: relative;
+  background: linear-gradient(0deg, rgba(0,0,0,0.9), rgba(0,0,0,0.8));
+  color: white;
+  margin-bottom: 20px;
 }
 
 .group-page__menu-bar {
   height: $large-height;
+  margin-bottom: 10px;
 }
 
 .group-page__menu-icon {
@@ -18,22 +21,21 @@
   @include truncatedText;
 }
 
-@media (min-width: 370px) {
-  .group-page__group-name {
-    letter-spacing: 3px;
-    text-align: center;
-    width: 100%;
-  }
-}
-
 // toolbar funds 
 
 .group-page__funds-bar {
   height: $medium-height;
+  margin-bottom: 20px;
 }
 
 .group-page__funds-overview-container {
-  margin: 0 auto;
+  margin-left: 35px;
+}
+
+@media (min-width: 330px) {
+  .group-page__funds-overview-container {
+    margin-left: 41px;
+  }  
 }
 
 .group-page__funds-overview-header {
@@ -57,21 +59,30 @@
 
 .group-page__tabs {
   @include fontMedium;
-  background: $cobudget-blue;
+  background: rgba(0,0,0,0);
   height: $medium-height;
 }
 
 .group-page__tabs md-tabs-wrapper {
-  background: $cobudget-blue;
+  background: rgba(0,0,0,0);
 }
 
 .group-page__tab-label {
   @include fontMedium;
   color: white;
+  text-transform: none;
 }
 
 .group-page md-ink-bar {
-  background: white;
+  background: $cobudget-red;
+}
+
+// create-bucket-fab
+
+.group-page__create-bucket-fab {
+  position: absolute;
+  right: 10px;
+  bottom: -30px;
 }
 
 // content
@@ -80,15 +91,19 @@
   max-width: 640px;
   margin: 0 auto;
   padding-bottom: 10px;
-  top: calc(#{$medium-height} * 2 + #{$large-height});
 }
 
 .group-page__subheader-title {
-  color: $cobudget-blue;
+  color: $grey-on-white;
 }
 
 .group-page__help-icon {
   color: $cobudget-grey;
+}
+
+.group-page md-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 // live projects
@@ -138,12 +153,17 @@
 
 .group-page__comment-count-container {
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 4px;
 }
 
 .group-page__comment-count-icon {
   @include fontGrande;
+}
+
+.group-page__comment-count-icon-inactive {
+  @include fontGrande;
+  color: $cobudget-grey;
 }
 
 .group-page__comment-count {
@@ -163,20 +183,6 @@
 .group-page__funded-project-author {
   @include fontSmall;
   color: $grey-on-white;
-}
-
-// fixed-position create project FAB
-
-.group-page__footer {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
-
-.group-page__create-project-fab {
-  position: fixed;
-  right: 10px;
-  bottom: 15px;
 }
 
 // funders

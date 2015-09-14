@@ -45,34 +45,35 @@
       </div>
     </div>
 
-    <md-tabs class="group-page__tabs" md-stretch-tabs="always" md-dynamic-height md-center-tabs>
+    <md-tabs class="group-page__tabs" md-stretch-tabs="never" md-dynamic-height>
       <md-tab md-on-select="selectTab(0)">
         <md-tab-label>
-          <span class="group-page__tab-label">ALL BUCKETS</span>
+          <span class="group-page__tab-label">All Buckets</span>
         </md-tab-label>
       </md-tab>
       <md-tab md-on-select="selectTab(1)">
         <md-tab-label>
-          <span class="group-page__tab-label">FUNDERS</span>
+          <span class="group-page__tab-label">Funders</span>
         </md-tab-label>
       </md-tab>
     </md-tabs>
+
+    <md-button class="md-fab group-page__create-bucket-fab" ng-click="createBucket()">
+      <div layout="column" layout-align="center center">
+        <i class="material-icons">add</i>
+      </div>
+    </md-button>
   </md-toolbar>
 
   <md-content class="group-page__content">
     <div class="group-page__projects-content" ng-if="tabSelected === 0">
       <md-list class="group-page__live-projects">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">Funding Now</md-subheader>
-          <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" aria-label="Settings">
-              <div layout="column" layout-align="center center">
-                <i class="material-icons group-page__help-icon">help</i>
-              </div>
-            </md-button>
-          </div>
+        <div layout="row" layout-align="center center">
+          <md-subheader class="group-page__subheader-title">FUNDING NOW</md-subheader>
         </div>
+
+        <md-divider></md-divider>
+
         <md-list-item ng-repeat="liveBucket in group.liveBuckets()">
           <div layout="column" flex class="group-page__live-project-container" ng-click="showBucket(liveBucket.id)">
             <span class="group-page__live-project-title">{{ liveBucket.name }}</span>
@@ -83,42 +84,30 @@
       </md-list>
 
       <md-list class="group-page__drafts">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">Ideas</md-subheader>
-          <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" aria-label="Settings">
-              <div layout="column" layout-align="center center">
-                <i class="material-icons group-page__help-icon">help</i>
-              </div>
-            </md-button>
-          </div>
+        <div layout="row" layout-align="center center">
+          <md-subheader class="group-page__subheader-title">IDEAS</md-subheader>
         </div>
+
+        <md-divider></md-divider>
 
         <md-list-item ng-repeat="draftBucket in group.draftBuckets()" ng-click="showBucket(draftBucket.id)">
           <div layout="column" flex class="group-page__draft-container">
             <span class="group-page__draft-title">{{ draftBucket.name }}</span>
             <span class="group-page__draft-author">created by {{ draftBucket.author().name }} {{ draftBucket.createdAt | timeFromNowInWords }} ago</span>
             <div layout="column" layout-align="center center" class="group-page__comment-count-container">
-              <i class="material-icons group-page__comment-count-icon">messenger</i>
-              <div class="group-page__comment-count">{{ draftBucket.comments().length }}</div>
+              <i ng-class="draftBucket.hasComments() ? 'material-icons group-page__comment-count-icon' : 'material-icons group-page__comment-count-icon-inactive'">messenger</i>
+              <div class="group-page__comment-count" ng-if="draftBucket.hasComments()">{{ draftBucket.comments().length }}</div>
             </div>
           </div>
         </md-list-item>
       </md-list>   
 
       <md-list class="group-page__funded-projects">
-        <div layout="row">
-          <md-subheader class="group-page__subheader-title">Funded</md-subheader>
-          <div flex></div>
-          <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" aria-label="Settings">
-              <div layout="column" layout-align="center center">
-                <i class="material-icons group-page__help-icon">help</i>
-              </div>
-            </md-button>
-          </div>
+        <div layout="row" layout-align="center center">
+          <md-subheader class="group-page__subheader-title">FUNDED</md-subheader>
         </div>
+
+        <md-divider></md-divider>
 
         <md-list-item ng-repeat="fundedBucket in group.fundedBuckets()" ng-click="showBucket(fundedBucket.id)">
           <div layout="column" flex class="group-page__funded-project-container">
@@ -150,11 +139,5 @@
         </md-list-item>
       </md-list>
     </div>
-
-    <md-button class="md-fab group-page__create-project-fab" ng-click="createBucket()">
-      <div layout="column" layout-align="center center">
-        <i class="material-icons">add</i>
-      </div>
-    </md-button>
   </md-content>
 </div>
