@@ -2,15 +2,19 @@
   <md-toolbar class="bucket-page__toolbar">
     <div class="md-toolbar-tools bucket-page__menu-bar">
       <md-button class="md-icon-button" aria-label="Settings" ng-click="back()">
-        <div layout="column" layout-align="center center">
-          <i class="material-icons bucket-page__menu-icon">arrow_back</i>
-        </div>
+        <ng-md-icon icon="arrow_back"
+          layout="column"
+          layout-align="center center"
+          class="bucket-page__menu-icon"
+        ></ng-md-icon>
       </md-button>
 
       <span class="bucket-page__personal-funds" layout="row" layout-align="start center" ng-if="status == 'live'">
-        <div layout="column" layout-align="center center">
-          <i class="material-icons bucket-page__funds-icon">person</i>
-        </div>
+        <ng-md-icon icon="person"
+          layout="column"
+          layout-align="center center"
+          class="bucket-page__funds-icon"
+        ></ng-md-icon>
         <div layout="column" layout-align="center center">
           <span class="bucket-page__funds-overview-header">Your funds</span>
           <span class="bucket-page__funds-overview-amount">{{ currentMembership.balance() - contribution.amount | currency : group.currencySymbol : 0 }}</span>
@@ -24,9 +28,11 @@
       </span>
 
       <md-button class="md-icon-button bucket-page-menu-button" aria-label="More" ng-click="toggleStatus()">
-        <div layout="column" layout-align="center center">
-          <i class="material-icons bucket-page__menu-icon">more_vert</i>
-        </div>
+        <ng-md-icon icon="more_vert"
+          layout="column"
+          layout-align="center center"
+          class="bucket-page__menu-icon"
+        ></ng-md-icon>
       </md-button>
     </div>
   </md-toolbar> 
@@ -102,12 +108,20 @@
         <div class="bucket-page__status-flagpoints" layout="row" layout-align="space-between center">
           <div class="bucket-page__status-flagpoint">
             <div layout="column" layout-align="center center" ng-show="status === 'draft'">
-              <i class="material-icons bucket-page__draft-icon">radio_button_on</i>
+              <ng-md-icon icon="radio_button_on"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__draft-icon"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-active">Idea</span>
             </div>
 
             <div layout="column" layout-align="center center" ng-hide="status === 'draft'">
-              <i class="material-icons bucket-page__status-icon-inactive">radio_button_off</i>
+              <ng-md-icon icon="radio_button_off"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__status-icon-inactive"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-inactive">Idea</span>
             </div>
           </div>
@@ -116,12 +130,20 @@
 
           <div class="bucket-page__status-flagpoint">
             <div layout="column" layout-align="center center" ng-show="status === 'live'">
-              <i class="material-icons bucket-page__live-icon">radio_button_on</i>
+              <ng-md-icon icon="radio_button_on"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__live-icon"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-active">Funding</span>
             </div>
 
             <div layout="column" layout-align="center center" ng-hide="status === 'live'">
-              <i class="material-icons bucket-page__status-icon-inactive">radio_button_off</i>
+              <ng-md-icon icon="radio_button_off"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__status-icon-inactive"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-inactive">Funding</span>
             </div>
           </div>
@@ -130,12 +152,20 @@
 
           <div class="bucket-page__status-flagpoint">
             <div layout="column" layout-align="center center" ng-show="status === 'funded'">
-              <i class="material-icons bucket-page__funded-icon">radio_button_on</i>
+              <ng-md-icon icon="radio_button_on"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__funded-icon"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-active">Funded</span>
             </div>
 
             <div layout="column" layout-align="center center" ng-hide="status === 'funded'">
-              <i class="material-icons bucket-page__status-icon-inactive">radio_button_off</i>
+              <ng-md-icon icon="radio_button_off"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__status-icon-inactive"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-inactive">Funded</span>
             </div>
           </div>
@@ -144,13 +174,22 @@
 
           <div class="bucket-page__status-flagpoint">
             <div layout="column" layout-align="center center" ng-show="status === 'done'">
-              <i class="material-icons bucket-page__done-icon">radio_button_on</i>
+              <ng-md-icon icon="radio_button_on"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__done-icon"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-active">Done</span>
             </div>
 
             <div layout="column" layout-align="center center" ng-hide="status === 'done'">
-              <i class="material-icons bucket-page__status-icon-inactive">radio_button_off</i>
+              <ng-md-icon icon="radio_button_off"
+                layout="column"
+                layout-align="center center"
+                class="bucket-page__status-icon-inactive"
+              ></ng-md-icon>
               <span class="bucket-page__status-flagpoint-text-inactive">Done</span>
+
             </div>
           </div>
         </div>
@@ -180,10 +219,12 @@
           </span>
           <span flex></span>
           <span>
-            <div layout="column" layout-align="center center">
-              <i class="material-icons bucket-page__comment-count-icon">messenger</i>
-              <div class="bucket-page__comment-count">{{ bucket.comments().length }}</div>
-            </div>
+            <ng-md-icon icon="messenger"
+              layout="column"
+              layout-align="center center"
+              class="bucket-page__comment-count-icon"
+            ></ng-md-icon>
+            <div class="bucket-page__comment-count">{{ bucket.comments().length }}</div>
           </span>
         </div>
 
