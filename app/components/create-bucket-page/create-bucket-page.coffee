@@ -1,6 +1,9 @@
 module.exports = 
   url: '/buckets/new'
   template: require('./create-bucket-page.html')
+  resolve: 
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   controller: ($scope, Records, $location, Toast) ->
 
     groupId = global.cobudgetApp.currentGroupId
