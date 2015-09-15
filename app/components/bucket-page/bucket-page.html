@@ -222,9 +222,10 @@
             <ng-md-icon icon="messenger"
               layout="column"
               layout-align="center center"
-              class="bucket-page__comment-count-icon"
+              ng-class="bucket.hasComments() ? 'bucket-page__comment-icon-active' : 'bucket-page__comment-icon-inactive'"
+
             ></ng-md-icon>
-            <div class="bucket-page__comment-count">{{ bucket.comments().length }}</div>
+            <div class="bucket-page__comment-count" ng-if="bucket.hasComments()">{{ bucket.comments().length }}</div>
           </span>
         </div>
 

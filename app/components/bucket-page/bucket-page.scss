@@ -243,9 +243,15 @@
   bottom: 22px;
 }
 
-.bucket-page__comment-count-icon {
+.bucket-page__comment-icon-active {
   @include fontGrande;
 }
+
+.bucket-page__comment-icon-inactive {
+  @include fontGrande;
+  fill: $cobudget-grey;
+}
+
 
 .bucket-page md-input-container {
   padding: 0;
