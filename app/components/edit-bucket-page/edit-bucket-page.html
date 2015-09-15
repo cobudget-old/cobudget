@@ -2,9 +2,11 @@
   <md-toolbar class="md-whiteframe-z1 edit-bucket-page__toolbar" layout-align="column">
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
-        <div layout="column" layout-align="center center">
-          <i class="material-icons edit-bucket-page__cancel-icon">close</i>
-        </div>
+        <ng-md-icon icon="close"
+          class="edit-bucket-page__cancel-icon"
+          layout="column" 
+          layout-align="center center"
+        ></ng-md-icon>
       </md-button>
       <span class="edit-bucket-page__header-text">Edit {{ bucket.status == 'draft' ? 'Idea' : 'Bucket' }}</span>
       <span flex></span>
