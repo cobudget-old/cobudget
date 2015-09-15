@@ -14,6 +14,7 @@
 
 .group-page__menu-icon {
   @include fontGrande;
+  fill: white;
 }
 
 .group-page__group-name {
@@ -51,6 +52,7 @@
 .group-page__funds-icon {
   @include fontGrande;
   margin-right: 10px;
+  fill: white;
 }
 
 .group-page__funds-overview-amount {
@@ -83,6 +85,10 @@
   position: absolute;
   right: 10px;
   bottom: -30px;
+}
+
+.group-page__create-bucket-fab-icon {
+  fill: white;  
 }
 
 // content
@@ -179,20 +185,21 @@
   right: 4px;
 }
 
-.group-page__comment-count-icon {
+.group-page__comment-icon-active {
   @include fontGrande;
 }
 
-.group-page__comment-count-icon-inactive {
+.group-page__comment-icon-inactive {
   @include fontGrande;
-  color: $cobudget-grey;
+  fill: $cobudget-grey;
 }
 
 .group-page__comment-count {
-  color: white;
-  position: relative;
-  bottom: 23px;
   @include fontTiny;
+  position: relative;
+  color: white;
+  left: 8px;
+  bottom: 21px;  
 }
 
 // funded projects
