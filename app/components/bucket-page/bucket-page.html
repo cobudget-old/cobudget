@@ -1,3 +1,11 @@
+<div 
+  class="loading-bar" 
+  layout="column" 
+  layout-align="center center" 
+  ng-hide="groupLoaded && contributionsLoaded && commentsLoaded">
+  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
 <div class="bucket-page" ng-show="groupLoaded && contributionsLoaded && commentsLoaded">
   <md-toolbar class="bucket-page__toolbar">
     <div class="md-toolbar-tools bucket-page__menu-bar">
