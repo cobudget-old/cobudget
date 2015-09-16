@@ -5,6 +5,9 @@ module.exports =
   url: '/groups/:groupId'
   template: require('./group-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
+    $scope.contributionsLoaded = false
+    $scope.commentsLoaded = false
+    $scope.membershipsLoaded = false
 
     groupId = parseInt($stateParams.groupId)
     global.cobudgetApp.currentGroupId = groupId
@@ -15,11 +18,12 @@ module.exports =
       $scope.currentMembership = group.membershipFor(CurrentUser())
       Records.buckets.fetchByGroupId(group.id).then (data) ->
         _.each data.buckets, (bucket) ->
-          Records.contributions.fetchByBucketId(bucket.id)
-          Records.comments.fetchByBucketId(bucket.id)
-      Records.memberships.fetchByGroupId(group.id)
-
-    window.scrollHeight = 0;
+          Records.contributions.fetchByBucketId(bucket.id).then ->
+            $scope.contributionsLoaded = true
+          Records.comments.fetchByBucketId(bucket.id).then ->
+            $scope.commentsLoaded = true
+      Records.memberships.fetchByGroupId(group.id).then ->
+        $scope.membershipsLoaded = true
 
     $scope.createBucket = ->
       $location.path("/buckets/new")

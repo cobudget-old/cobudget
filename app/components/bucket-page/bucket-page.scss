@@ -7,6 +7,7 @@
 .bucket-page__toolbar {
   background: $cobudget-gunmetal;
   position: fixed;
+  top: 0;
   color: white;
 }
 
@@ -16,6 +17,7 @@
 
 .bucket-page__menu-icon {
   @include fontGrande;
+  fill: white;
 }
 
 .bucket-page__personal-funds {
@@ -29,6 +31,7 @@
 .bucket-page__funds-icon {
   @include fontGrande;
   margin-right: 10px;
+  fill: white;
 }
 
 .bucket-page__edit-button {
@@ -198,23 +201,19 @@
 }
 
 .bucket-page__status-icon-inactive {
-  color: $grey-on-white;
+  fill: $grey-on-white;
 }
 
 .bucket-page__draft-icon {
-  color: $cobudget-gold;
+  fill: $cobudget-gold;
 }
 
 .bucket-page__live-icon {
-  color: $cobudget-lime;
+  fill: $cobudget-lime;
 }
 
 .bucket-page__funded-icon {
-  color: $cobudget-cyan;
-}
-
-.bucket-page__status-flagpoint-icon-inactive {
-  color: $grey-on-white;
+  fill: $cobudget-cyan;
 }
 
 .bucket-page__status-description {
@@ -240,19 +239,27 @@
 .bucket-page__comment-count {
   color: white;
   position: relative;
-  bottom: 23px;
   @include fontSmall;
+  text-align: center;
+  bottom: 22px;
 }
 
-.bucket-page__comment-count-icon {
+.bucket-page__comment-icon-active {
   @include fontGrande;
 }
+
+.bucket-page__comment-icon-inactive {
+  @include fontGrande;
+  fill: $cobudget-grey;
+}
+
 
 .bucket-page md-input-container {
   padding: 0;
 }
 
 .bucket-page__comment {
+  @include wordWrap;
   background: $cobudget-light-grey;
 }
 

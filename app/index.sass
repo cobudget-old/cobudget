@@ -2,9 +2,6 @@
 // and any config relating to the build.
 // app config (like bootstrap variables) are also here, before anything else.
 
-// feedback form
-// NOTE where should this code be?
-
 // ask mikey how to mass import shit
 @import './components/mixins.scss';
 @import './components/utilities.scss';
@@ -15,3 +12,25 @@
 @import './components/edit-bucket-page/edit-bucket-page.scss';
 @import './components/admin-page/admin-page.scss';
 @import './components/ng-material-customs.scss';
+
+// loading-bar
+
+.loading-bar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.loading-bar md-progress-circular .md-inner .md-left .md-half-circle {
+  border-left-color: $cobudget-orange;
+}
+
+.loading-bar md-progress-circular .md-inner .md-right .md-half-circle {
+  border-right-color: $cobudget-green;
+}
+
+.loading-bar md-progress-circular .md-inner .md-left .md-half-circle, 
+.loading-bar md-progress-circular .md-inner .md-right .md-half-circle {
+  border-top-color: $cobudget-orange;
+}

@@ -48,6 +48,7 @@
     "angular-autoselect": "^0.3.2",
     "angular-cookie": "ivpusic/angular-cookie#v4.0.9",
     "angular-material": "^0.10.0",
+    "angular-material-icons": "^0.6.0",
     "angular-messages": "^1.4.3",
     "angular-sanitize": "^1.3.8",
     "angular-ui-router": "^0.2.11",

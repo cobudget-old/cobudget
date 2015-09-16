@@ -1,10 +1,20 @@
-<div class="create-bucket-page">
+<div 
+  class="loading-bar" 
+  layout="column" 
+  layout-align="center center" 
+  ng-hide="groupLoaded">
+  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+<div class="create-bucket-page" ng-show="groupLoaded">
   <md-toolbar class="md-whiteframe-z1 create-bucket-page__toolbar" layout-align="column">
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
-        <div layout="column" layout-align="center center">
-          <i class="material-icons create-bucket-page__cancel-icon">close</i>
-        </div>
+        <ng-md-icon icon="close"
+          class="create-bucket-page__cancel-icon" 
+          layout="column" 
+          layout-align="center center"
+        ></ng-md-icon>
       </md-button>
       <span class="create-bucket-page__header-text">New Idea</span>
       <span flex></span>

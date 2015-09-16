@@ -5,11 +5,16 @@ module.exports =
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
   controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
+    $scope.groupLoaded = false
+    $scope.contributionsLoaded = false
+    $scope.commentsLoaded = false
+
     groupId = global.cobudgetApp.currentGroupId
     bucketId = parseInt $stateParams.bucketId
 
     Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
+      $scope.groupLoaded = true
       $scope.currentMembership = group.membershipFor(CurrentUser())
 
     Records.buckets.findOrFetchById(bucketId).then (bucket) ->
@@ -18,8 +23,9 @@ module.exports =
       Records.contributions.fetchByBucketId(bucketId).then ->
         $scope.percentContributedByUser = bucket.percentContributedByUser(CurrentUser().id)
         $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(CurrentUser().id)
+        $scope.contributionsLoaded = true
       Records.comments.fetchByBucketId(bucketId).then ->
-        window.scrollTo(0, 0)
+        $scope.commentsLoaded = true
 
     $scope.back = ->
       Toast.hide()
