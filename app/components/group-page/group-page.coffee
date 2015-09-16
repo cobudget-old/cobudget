@@ -4,7 +4,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, $window) ->
     $scope.contributionsLoaded = false
     $scope.commentsLoaded = false
     $scope.membershipsLoaded = false
@@ -36,5 +36,8 @@ module.exports =
 
     $scope.openAdminPanel = ->
       $location.path("/admin")
+
+    $scope.openFeedbackForm = ->
+      $window.location.href = 'https://docs.google.com/forms/d/1-_zDQzdMmq_WndQn2bPUEW2DZQSvjl7nIJ6YkvUcp0I/viewform?usp=send_form';
 
     return

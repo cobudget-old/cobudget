@@ -18,6 +18,13 @@
       </md-button>
       <span class="group-page__group-name">{{ group.name }}</span>
       <span flex></span>
+      <md-button class="md-icon-button group-page-menu-button" aria-label="Give Feedback" ng-click="openFeedbackForm()">
+        <ng-md-icon icon="live_help" 
+          class="group-page__menu-icon" 
+          layout="column" 
+          layout-align="center center"
+        ></ng-md-icon>
+      </md-button>      
       <md-button class="md-icon-button group-page-menu-button" aria-label="Admin Panel" ng-if="currentMembership.isAdmin" ng-click="openAdminPanel()">
         <ng-md-icon icon="local_pizza" 
           class="group-page__menu-icon" 
