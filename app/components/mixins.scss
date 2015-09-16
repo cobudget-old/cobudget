@@ -228,3 +228,10 @@ $large-height: 60px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin wordWrap {
+  word-break:     break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens:    auto;
+  hyphens:         auto;
+}

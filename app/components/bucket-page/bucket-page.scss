@@ -258,6 +258,7 @@
 }
 
 .bucket-page__comment {
+  @include wordWrap;
   background: $cobudget-light-grey;
 }
 
