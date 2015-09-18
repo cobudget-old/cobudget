@@ -1,11 +1,11 @@
 module.exports = 
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, ipCookie) ->
     $scope.groupLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = false
 
     $scope.fetchData = ->
-      $scope.groupId = global.cobudgetApp.currentGroupId
+      $scope.groupId = ipCookie('currentGroupId')
       $scope.bucketId = parseInt $stateParams.bucketId
 
       Records.groups.findOrFetchById($scope.groupId).then (group) ->
@@ -26,23 +26,14 @@ module.exports =
       $scope.newComment = Records.comments.build(bucketId: $scope.bucketId)
       $scope.contribution = Records.contributions.build(bucketId: $scope.bucketId)
 
-    if global.cobudgetApp.currentUserId
-      console.log('[bucket-page] CurrentUser() exists!')
+    if ipCookie('currentUserId')
       Records.memberships.fetchMyMemberships().then (data) ->
-        if !global.cobudgetApp.currentGroupId
-          console.log('[bucket-page] global.cobudgetApp.currentGroupId not set')
-          global.cobudgetApp.currentGroupId = data.groups[0].id
-          console.log('[bucket-page] global.cobudgetApp.currentGroupId set to: ', global.cobudgetApp.currentGroupId)
-
-        console.log('[bucket-page] memberships being fetched!')
+        if !ipCookie('currentGroupId')
+          ipCookie('currentGroupId', data.groups[0].id)
         $scope.fetchData()
-        console.log('[bucket-page] data is being fetched, and the page is loading')
     else
-      console.log('[bucket-page] CurrentUser() not found')
-      global.cobudgetApp.initialRequestPath = $location.path()
-      console.log('[bucket-page] global.cobudgetApp.initialRequestPath set to: ', global.cobudgetApp.initialRequestPath)
+      ipCookie('initialRequestPath', $location.path())
       Toast.show('You must sign in to continue')
-      console.log('[bucket-page] redirecting to "/"')
       $location.path('/')
 
     $scope.back = ->
