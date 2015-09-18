@@ -1,7 +1,7 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, $window, ipCookie) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, $window, ipCookie, AuthenticateUser) ->
 
     $scope.fetchData = ->
       $scope.contributionsLoaded = $scope.commentsLoaded = $scope.membershipsLoaded = false
@@ -22,13 +22,7 @@ module.exports =
         Records.memberships.fetchByGroupId(group.id).then ->
           $scope.membershipsLoaded = true
 
-    if ipCookie('currentUserId')
-      Records.memberships.fetchMyMemberships().then ->
-        $scope.fetchData()
-    else
-      ipCookie('initialRequestPath', $location.path())
-      Toast.show('You must sign in to continue')
-      $location.path('/')
+    AuthenticateUser($scope.fetchData)
 
     $scope.createBucket = ->
       $location.path("/buckets/new")
