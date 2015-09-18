@@ -2,10 +2,9 @@ module.exports =
   url: '/buckets/new'
   template: require('./create-bucket-page.html')
   controller: ($scope, Records, $location, Toast, ipCookie) ->
+    
     $scope.groupLoaded = false
-
     groupId = ipCookie('currentGroupId')
-
     $scope.bucket = Records.buckets.build(groupId: groupId)
 
     Records.groups.findOrFetchById(groupId).then (group) ->
