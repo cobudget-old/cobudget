@@ -1,9 +1,7 @@
 module.exports = 
   url: '/'
   template: require('./welcome-page.html')
-  controller: ($scope, $auth, $location, Records, $rootScope) ->
-    
-    console.log('[welcome-page] is loaded')
+  controller: ($scope, $auth, $location, Records, $rootScope, ipCookie) ->
 
     $scope.login = (formData) ->
       $scope.formError = ""
@@ -12,15 +10,14 @@ module.exports =
         password: formData.password
 
     $scope.$on 'auth:login-success', (event, user) ->
-      global.cobudgetApp.currentUserId = user.id
-
-      if global.cobudgetApp.initialRequestPath == undefined || global.cobudgetApp.initialRequestPath == '/'
+      ipCookie('currentUserId', user.id)
+      if ipCookie('initialRequestPath') == undefined || ipCookie('initialRequestPath') == '/'
         Records.memberships.fetchMyMemberships().then (data) ->
-          if !global.cobudgetApp.currentGroupId
-            global.cobudgetApp.currentGroupId = data.groups[0].id
-          $location.path("/groups/#{global.cobudgetApp.currentGroupId}")
+          if !ipCookie('currentGroupId')
+            ipCookie('currentGroupId', data.groups[0].id)
+          $location.path("/groups/#{ipCookie('currentGroupId')}")
       else
-        $location.path(global.cobudgetApp.initialRequestPath)
+        $location.path(ipCookie('initialRequestPath'))
 
     $scope.$on 'auth:login-error', () ->
       $scope.formError = "Invalid Credentials"

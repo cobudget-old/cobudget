@@ -1,13 +1,13 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, $window) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, $window, ipCookie) ->
 
     $scope.fetchData = ->
       $scope.contributionsLoaded = $scope.commentsLoaded = $scope.membershipsLoaded = false
 
       groupId = parseInt($stateParams.groupId)
-      global.cobudgetApp.currentGroupId = groupId
+      ipCookie('currentGroupId', groupId)
       $scope.currentUserId = CurrentUser().id
       
       Records.groups.findOrFetchById(groupId).then (group) ->
@@ -22,11 +22,11 @@ module.exports =
         Records.memberships.fetchByGroupId(group.id).then ->
           $scope.membershipsLoaded = true
 
-    if global.cobudgetApp.currentUserId
+    if ipCookie('currentUserId')
       Records.memberships.fetchMyMemberships().then ->
         $scope.fetchData()
     else
-      global.cobudgetApp.initialRequestPath = $location.path()
+      ipCookie('initialRequestPath', $location.path())
       Toast.show('You must sign in to continue')
       $location.path('/')
 
