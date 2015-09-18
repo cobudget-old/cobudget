@@ -23,17 +23,11 @@ module.exports =
           $scope.membershipsLoaded = true
 
     if global.cobudgetApp.currentUserId
-      console.log('[group-page] CurrentUser() exists!')
       Records.memberships.fetchMyMemberships().then ->
-        console.log('[group-page] memberships being fetched!')
         $scope.fetchData()
-        console.log('[group-page] data is being fetched, and the page is loading')
     else
-      console.log('[group-page] CurrentUser() not found')
       global.cobudgetApp.initialRequestPath = $location.path()
-      console.log('[group-page] global.cobudgetApp.initialRequestPath set to: ', global.cobudgetApp.initialRequestPath)
       Toast.show('You must sign in to continue')
-      console.log('[group-page] redirecting to "/"')
       $location.path('/')
 
     $scope.createBucket = ->
