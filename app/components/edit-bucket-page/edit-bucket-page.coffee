@@ -1,9 +1,6 @@
 module.exports = 
   url: '/buckets/:bucketId/edit'
   template: require('./edit-bucket-page.html')
-  resolve: 
-    membershipsLoaded: ->
-      global.cobudgetApp.membershipsLoaded
   controller: ($scope, Records, $stateParams, $location, Toast) ->
     $scope.bucketLoaded = false
 
