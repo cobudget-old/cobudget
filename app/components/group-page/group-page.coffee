@@ -22,7 +22,8 @@ module.exports =
         Records.memberships.fetchByGroupId(group.id).then ->
           $scope.membershipsLoaded = true
 
-    AuthenticateUser($scope.fetchData)
+    AuthenticateUser().then ->
+      $scope.fetchData()
 
     $scope.createBucket = ->
       $location.path("/buckets/new")
