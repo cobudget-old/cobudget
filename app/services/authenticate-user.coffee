@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'AuthenticateUser', (Records, ipCookie, Toast, $location, $q) ->
+global.cobudgetApp.factory 'AuthenticateUser', (Records, ipCookie, Toast, $location) ->
   ->
     if ipCookie('currentUserId')
       Records.memberships.fetchMyMemberships()

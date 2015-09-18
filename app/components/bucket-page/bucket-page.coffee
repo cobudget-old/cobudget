@@ -1,10 +1,10 @@
 module.exports = 
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, ipCookie) ->
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, ipCookie, AuthenticateUser) ->
     $scope.groupLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = false
 
-    $scope.fetchData = ->
+    AuthenticateUser().then ->
       $scope.groupId = ipCookie('currentGroupId')
       $scope.bucketId = parseInt $stateParams.bucketId
 
@@ -25,17 +25,7 @@ module.exports =
 
       $scope.newComment = Records.comments.build(bucketId: $scope.bucketId)
       $scope.contribution = Records.contributions.build(bucketId: $scope.bucketId)
-
-    if ipCookie('currentUserId')
-      Records.memberships.fetchMyMemberships().then (data) ->
-        if !ipCookie('currentGroupId')
-          ipCookie('currentGroupId', data.groups[0].id)
-        $scope.fetchData()
-    else
-      ipCookie('initialRequestPath', $location.path())
-      Toast.show('You must sign in to continue')
-      $location.path('/')
-
+      
     $scope.back = ->
       Toast.hide()
       $location.path("/groups/#{$scope.groupId}")
