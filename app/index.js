@@ -44,5 +44,3 @@ concatenify('./records-interfaces/*.{js,coffee}')
 concatenify('./models/*.{js,coffee}')
 concatenify('./filters/*.{js,coffee}')
 concatenify('./services/*.{js,coffee}')
-
-require('./boot.coffee')

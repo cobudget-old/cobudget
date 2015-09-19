@@ -1,35 +1,34 @@
 module.exports = 
-  resolve: 
-    membershipsLoaded: ->
-      global.cobudgetApp.membershipsLoaded
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast) ->
-    $scope.groupLoaded = false
-    $scope.contributionsLoaded = false
-    $scope.commentsLoaded = false
+  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, ipCookie, AuthenticateUser) ->
+    $scope.groupLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = false
 
-    groupId = global.cobudgetApp.currentGroupId
-    bucketId = parseInt $stateParams.bucketId
+    AuthenticateUser().then ->
+      $scope.groupId = ipCookie('currentGroupId')
+      $scope.bucketId = parseInt $stateParams.bucketId
 
-    Records.groups.findOrFetchById(groupId).then (group) ->
-      $scope.group = group
-      $scope.groupLoaded = true
-      $scope.currentMembership = group.membershipFor(CurrentUser())
+      Records.groups.findOrFetchById($scope.groupId).then (group) ->
+        $scope.group = group
+        $scope.groupLoaded = true
+        $scope.currentMembership = group.membershipFor(CurrentUser())
 
-    Records.buckets.findOrFetchById(bucketId).then (bucket) ->
-      $scope.bucket = bucket
-      $scope.status = bucket.status
-      Records.contributions.fetchByBucketId(bucketId).then ->
-        $scope.percentContributedByUser = bucket.percentContributedByUser(CurrentUser().id)
-        $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(CurrentUser().id)
-        $scope.contributionsLoaded = true
-      Records.comments.fetchByBucketId(bucketId).then ->
-        $scope.commentsLoaded = true
+      Records.buckets.findOrFetchById($scope.bucketId).then (bucket) ->
+        $scope.bucket = bucket
+        $scope.status = bucket.status
+        Records.contributions.fetchByBucketId($scope.bucketId).then ->
+          $scope.percentContributedByUser = bucket.percentContributedByUser(CurrentUser().id)
+          $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(CurrentUser().id)
+          $scope.contributionsLoaded = true
+        Records.comments.fetchByBucketId($scope.bucketId).then ->
+          $scope.commentsLoaded = true
 
+      $scope.newComment = Records.comments.build(bucketId: $scope.bucketId)
+      $scope.contribution = Records.contributions.build(bucketId: $scope.bucketId)
+      
     $scope.back = ->
       Toast.hide()
-      $location.path("/groups/#{groupId}")
+      $location.path("/groups/#{$scope.groupId}")
 
     $scope.showFullDescription = false
 
@@ -39,11 +38,9 @@ module.exports =
     $scope.showLess = ->
       $scope.showFullDescription = false
 
-    $scope.newComment = Records.comments.build(bucketId: bucketId)
-
     $scope.createComment = ->
       $scope.newComment.save()
-      $scope.newComment = Records.comments.build(bucketId: bucketId)
+      $scope.newComment = Records.comments.build(bucketId: $scope.bucketId)
 
     $scope.userCanStartFunding = ->
       $scope.currentMembership.isAdmin || $scope.bucket.author().id == $scope.currentMembership.member().id
@@ -52,18 +49,15 @@ module.exports =
       if $scope.bucket.target
         $scope.bucket.openForFunding().then ->
           $scope.back()
-          Toast.showWithRedirect('You launched a bucket for funding', "/buckets/#{bucketId}")
+          Toast.showWithRedirect('You launched a bucket for funding', "/buckets/#{$scope.bucketId}")
       else
         alert('Estimated funding target must be specified before funding starts')        
 
     $scope.editBucket = ->
-      $location.path("/buckets/#{bucketId}/edit")
+      $location.path("/buckets/#{$scope.bucketId}/edit")
 
     $scope.userCanEditBucket = ->
       $scope.bucket && $scope.userCanStartFunding()
-
-    $scope.contribution = Records.contributions.build
-      bucketId: bucketId
 
     $scope.openFundForm = ->
       $scope.fundFormOpened = true

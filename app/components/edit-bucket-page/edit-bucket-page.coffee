@@ -1,12 +1,9 @@
 module.exports = 
   url: '/buckets/:bucketId/edit'
   template: require('./edit-bucket-page.html')
-  resolve: 
-    membershipsLoaded: ->
-      global.cobudgetApp.membershipsLoaded
   controller: ($scope, Records, $stateParams, $location, Toast) ->
+    
     $scope.bucketLoaded = false
-
     bucketId = parseInt $stateParams.bucketId
 
     Records.buckets.findOrFetchById(bucketId).then (bucket) ->
@@ -14,7 +11,7 @@ module.exports =
       $scope.bucketLoaded = true
       # temp hack to get around target form number validation
       $scope.bucket.target = parseInt $scope.bucket.target
-            
+          
     $scope.cancel = () ->
       $location.path("/buckets/#{bucketId}")
 
