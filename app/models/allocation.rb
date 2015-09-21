@@ -4,7 +4,7 @@ class Allocation < ActiveRecord::Base
 
   validates :group_id, presence: true
   validates :user_id, presence: true
-  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :amount, presence: true
 
   def formatted_amount
     Money.new(amount.to_f * 100, currency_code).format
