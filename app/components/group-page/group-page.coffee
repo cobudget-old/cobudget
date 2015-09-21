@@ -1,7 +1,7 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser) ->
+  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser, $auth, Toast) ->
     $scope.contributionsLoaded = $scope.commentsLoaded = $scope.membershipsLoaded = false
 
     AuthenticateUser().then (currentUser) ->
@@ -38,5 +38,12 @@ module.exports =
 
     $scope.openFeedbackForm = ->
       $window.location.href = 'https://docs.google.com/forms/d/1-_zDQzdMmq_WndQn2bPUEW2DZQSvjl7nIJ6YkvUcp0I/viewform?usp=send_form';
+
+    $scope.signOut = ->
+       $auth.signOut().then ->
+          Toast.show("You've been signed out")
+          ipCookie.remove('currentGroupId')
+          ipCookie.remove('currentUserId')
+          $location.path('/')
 
     return
