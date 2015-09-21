@@ -1,17 +1,17 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, $window, ipCookie, AuthenticateUser) ->
+  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser) ->
     $scope.contributionsLoaded = $scope.commentsLoaded = $scope.membershipsLoaded = false
 
-    AuthenticateUser().then ->
+    AuthenticateUser().then (currentUser) ->
       groupId = parseInt($stateParams.groupId)
       ipCookie('currentGroupId', groupId)
-      $scope.currentUserId = CurrentUser().id
+      $scope.currentUserId = currentUser.id
       
       Records.groups.findOrFetchById(groupId).then (group) ->
         $scope.group = group
-        $scope.currentMembership = group.membershipFor(CurrentUser())
+        $scope.currentMembership = group.membershipFor(currentUser)
         Records.buckets.fetchByGroupId(group.id).then (data) ->
           if data.buckets.length > 0
             _.each data.buckets, (bucket) ->

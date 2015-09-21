@@ -1,24 +1,24 @@
 module.exports = 
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, Records, $stateParams, $location, CurrentUser, Toast, ipCookie, AuthenticateUser) ->
+  controller: ($scope, Records, $stateParams, $location, Toast, ipCookie, AuthenticateUser) ->
     $scope.groupLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = false
 
-    AuthenticateUser().then ->
+    AuthenticateUser().then (currentUser) ->
       $scope.groupId = ipCookie('currentGroupId')
       $scope.bucketId = parseInt $stateParams.bucketId
 
       Records.groups.findOrFetchById($scope.groupId).then (group) ->
         $scope.group = group
         $scope.groupLoaded = true
-        $scope.currentMembership = group.membershipFor(CurrentUser())
+        $scope.currentMembership = group.membershipFor(currentUser)
 
       Records.buckets.findOrFetchById($scope.bucketId).then (bucket) ->
         $scope.bucket = bucket
         $scope.status = bucket.status
         Records.contributions.fetchByBucketId($scope.bucketId).then ->
-          $scope.percentContributedByUser = bucket.percentContributedByUser(CurrentUser().id)
-          $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(CurrentUser().id)
+          $scope.percentContributedByUser = bucket.percentContributedByUser(currentUser.id)
+          $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(currentUser.id)
           $scope.contributionsLoaded = true
         Records.comments.fetchByBucketId($scope.bucketId).then ->
           $scope.commentsLoaded = true
