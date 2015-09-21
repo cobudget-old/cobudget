@@ -20,7 +20,7 @@ module.exports =
               Records.comments.fetchByBucketId(bucket.id).then ->
                 $scope.commentsLoaded = true
           else 
-            $scope.contributionsLoaded = $scope.commentLoaded = true
+            $scope.contributionsLoaded = $scope.commentsLoaded = true
         Records.memberships.fetchByGroupId(group.id).then ->
           $scope.membershipsLoaded = true
 
