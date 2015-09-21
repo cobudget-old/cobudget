@@ -44,6 +44,7 @@ module.exports =
           Toast.show("You've been signed out")
           ipCookie.remove('currentGroupId')
           ipCookie.remove('currentUserId')
+          ipCookie.remove('initialRequestPath')
           $location.path('/')
 
     return
