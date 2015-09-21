@@ -13,11 +13,14 @@ module.exports =
         $scope.group = group
         $scope.currentMembership = group.membershipFor(CurrentUser())
         Records.buckets.fetchByGroupId(group.id).then (data) ->
-          _.each data.buckets, (bucket) ->
-            Records.contributions.fetchByBucketId(bucket.id).then ->
-              $scope.contributionsLoaded = true
-            Records.comments.fetchByBucketId(bucket.id).then ->
-              $scope.commentsLoaded = true
+          if data.buckets.length > 0
+            _.each data.buckets, (bucket) ->
+              Records.contributions.fetchByBucketId(bucket.id).then ->
+                $scope.contributionsLoaded = true
+              Records.comments.fetchByBucketId(bucket.id).then ->
+                $scope.commentsLoaded = true
+          else 
+            $scope.contributionsLoaded = $scope.commentLoaded = true
         Records.memberships.fetchByGroupId(group.id).then ->
           $scope.membershipsLoaded = true
 
