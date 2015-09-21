@@ -13,14 +13,13 @@ module.exports =
       ipCookie('currentUserId', user.id)
       if ipCookie('initialRequestPath') == undefined || ipCookie('initialRequestPath') == '/'
         Records.memberships.fetchMyMemberships().then (data) ->
-          if !ipCookie('currentGroupId')
-            ipCookie('currentGroupId', data.groups[0].id)
+          ipCookie('currentGroupId', data.groups[0].id)
           $location.path("/groups/#{ipCookie('currentGroupId')}")
       else
         $location.path(ipCookie('initialRequestPath'))
 
     $scope.$on 'auth:validation-success', (event, user) ->
-      $scope.redirectToGroupPage(user)
+      $scope.redirectToGroupPage(user) 
 
     $scope.$on 'auth:login-success', (event, user) ->
       $scope.redirectToGroupPage(user)
