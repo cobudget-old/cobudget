@@ -26,6 +26,9 @@ global.cobudgetApp.factory 'AuthenticateUser', (Records, ipCookie, Toast, $locat
           deferred.resolve(CurrentUser())
         .catch (data) ->
           Toast.show('Please log in to continue')
+          ipCookie.remove('currentUserId')
+          ipCookie.remove('currentGroupId')
+          ipCookie.remove('initialRequestPath')
           $location.path('/')
           deferred.reject()
     else
