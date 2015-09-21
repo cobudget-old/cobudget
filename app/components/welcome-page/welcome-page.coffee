@@ -9,7 +9,7 @@ module.exports =
         email: formData.email
         password: formData.password
 
-    $scope.$on 'auth:login-success', (event, user) ->
+    $scope.redirectToGroupPage = (user) ->
       ipCookie('currentUserId', user.id)
       if ipCookie('initialRequestPath') == undefined || ipCookie('initialRequestPath') == '/'
         Records.memberships.fetchMyMemberships().then (data) ->
@@ -18,6 +18,12 @@ module.exports =
           $location.path("/groups/#{ipCookie('currentGroupId')}")
       else
         $location.path(ipCookie('initialRequestPath'))
+
+    $scope.$on 'auth:validation-success', (event, user) ->
+      $scope.redirectToGroupPage(user)
+
+    $scope.$on 'auth:login-success', (event, user) ->
+      $scope.redirectToGroupPage(user)
 
     $scope.$on 'auth:login-error', () ->
       $scope.formError = "Invalid Credentials"
