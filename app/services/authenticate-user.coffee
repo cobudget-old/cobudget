@@ -10,7 +10,7 @@ global.cobudgetApp.factory 'AuthenticateUser', (Records, ipCookie, Toast, $locat
         .then (data) ->
           if groupId = parseInt($stateParams.groupId)
             if !(_.find data.groups, (group) -> group.id == groupId) 
-              Toast.show('The group you were trying to access is private')
+              Toast.show('The group you were trying to access is private, please sign in to continue')
               ipCookie.remove('initialRequestPath')
               $location.path('/')
               deferred.reject()
@@ -19,7 +19,7 @@ global.cobudgetApp.factory 'AuthenticateUser', (Records, ipCookie, Toast, $locat
               userIsMemberOfBucketGroup = _.find data.groups, (group) ->
                 group.id == bucket.groupId
               if !userIsMemberOfBucketGroup
-                Toast.show('The bucket you were trying to access is private')
+                Toast.show('The bucket you were trying to access is private, please sign in to continue')
                 ipCookie.remove('initialRequestPath')
                 $location.path('/')
                 deferred.reject()
