@@ -56,6 +56,25 @@
   font-weight: bold;
 }
 
+.group-page__sidenav-content {
+  padding-top: 20px;
+}
+
+.group-page__sidenav-option {
+  margin-bottom: 20px;
+  padding-left: 15px;
+}
+
+.group-page__sidenav-option-icon {
+  fill: $grey-on-white;
+}
+
+.group-page__sidenav-option-subheader {
+  margin-left: 30px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 // toolbar funds 
 
 .group-page__funds-bar {
