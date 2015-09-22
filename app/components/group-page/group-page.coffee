@@ -50,7 +50,4 @@ module.exports =
     $scope.openSidenav = ->
       $mdSidenav('left').open()
 
-    $scope.closeSidenav = ->
-      $mdSidenav('left').close()
-
     return
