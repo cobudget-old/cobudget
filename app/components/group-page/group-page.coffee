@@ -7,7 +7,7 @@ module.exports =
     AuthenticateUser().then (currentUser) ->
       groupId = parseInt($stateParams.groupId)
       ipCookie('currentGroupId', groupId)
-      $scope.currentUserId = currentUser.id
+      $scope.currentUser = currentUser
       
       Records.groups.findOrFetchById(groupId).then (group) ->
         $scope.group = group

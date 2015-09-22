@@ -29,6 +29,26 @@
   min-width: 256px;
 }
 
+.group-page__sidenav-toolbar {
+  height: 150px;
+  min-height: 150px;  
+  background: $cobudget-happy-blue;
+  color: white;
+}
+
+.group-page__user-avatar-container {
+  padding: 10px;
+}
+
+.group-page__user-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: white;
+  color: black;
+  font-size: 40px;
+}
+
 // toolbar funds 
 
 .group-page__funds-bar {

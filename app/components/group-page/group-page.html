@@ -9,8 +9,12 @@
 <div class="group-page" ng-if="contributionsLoaded && commentsLoaded && membershipsLoaded">
 
   <md-sidenav class="md-sidenav-left md-whiteframe-z2 group-page__sidenav" md-component-id="left">
-    <md-toolbar class="">
-      <h1 class="md-toolbar-tools">Sidenav Left</h1>
+    <md-toolbar class="group-page__sidenav-toolbar">
+      <div layout="row" layout-align="start center" class="group-page__user-avatar-container">
+        <div class="group-page__user-avatar" layout="column" layout-align="center center">
+          <div>{{ currentUser.name[0].toUpperCase() }}</div>
+        </div>
+      </div>
     </md-toolbar>
     <md-content layout-padding>
     </md-content>
@@ -131,14 +135,14 @@
             <div layout="row" layout-align="space-between center">
               <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
               
-              <span ng-show="liveBucket.amountContributedByUser(currentUserId) > 0" class="group-page__live-project-personal-contribution">
-                You gave {{ liveBucket.amountContributedByUser(currentUserId) | currency : group.currencySymbol : 0 }}               
+              <span ng-show="liveBucket.amountContributedByUser(currentUser.id) > 0" class="group-page__live-project-personal-contribution">
+                You gave {{ liveBucket.amountContributedByUser(currentUser.id) | currency : group.currencySymbol : 0 }}               
               </span>
             </div>
 
             <div class="group-page__progress-bar-container">
-              <div class="group-page__progress-bar-primary" style="width: {{ liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
-              <div class="group-page__progress-bar-secondary" style="width: {{ liveBucket.percentContributedByUser(currentUserId) + liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
+              <div class="group-page__progress-bar-primary" style="width: {{ liveBucket.percentNotContributedByUser(currentUser.id) }}%"></div>
+              <div class="group-page__progress-bar-secondary" style="width: {{ liveBucket.percentContributedByUser(currentUser.id) + liveBucket.percentNotContributedByUser(currentUser.id) }}%"></div>
             </div>
           </div>
         </md-list-item>
