@@ -10,10 +10,12 @@
 
   <md-sidenav class="md-sidenav-left md-whiteframe-z2 group-page__sidenav" md-component-id="left">
     <md-toolbar class="group-page__sidenav-toolbar">
-      <div layout="row" layout-align="start center" class="group-page__user-avatar-container">
+
+      <div layout="column" layout-align="space-between start" class="group-page__user-avatar-container">
         <div class="group-page__user-avatar" layout="column" layout-align="center center">
           <div>{{ currentUser.name[0].toUpperCase() }}</div>
         </div>
+        <div class="group-page__user-email">{{ currentUser.email }}</div>  
       </div>
     </md-toolbar>
     <md-content layout-padding>

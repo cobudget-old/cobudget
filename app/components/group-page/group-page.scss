@@ -30,14 +30,13 @@
 }
 
 .group-page__sidenav-toolbar {
-  height: 150px;
-  min-height: 150px;  
   background: $cobudget-happy-blue;
   color: white;
 }
 
 .group-page__user-avatar-container {
-  padding: 10px;
+  padding-left: 15px;
+  padding-top: 15px;
 }
 
 .group-page__user-avatar {
@@ -47,6 +46,14 @@
   background: white;
   color: black;
   font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.group-page__user-email {
+  @include fontMedium;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-weight: bold;
 }
 
 // toolbar funds 
