@@ -7,12 +7,25 @@
 </div>
 
 <div class="group-page" ng-if="contributionsLoaded && commentsLoaded && membershipsLoaded">
+
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+    <md-toolbar class="">
+      <h1 class="md-toolbar-tools">Sidenav Left</h1>
+    </md-toolbar>
+    <md-content layout-padding>
+      <md-button ng-click="closeSidenav()" class="md-primary" hide-gt-md>
+        Close
+      </md-button>
+    </md-content>
+  </md-sidenav>
+
+
   <md-toolbar class="group-page__toolbar">
     <div class="md-toolbar-tools group-page__menu-bar">
-      <md-button class="md-icon-button" aria-label="Settings">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="openSidenav()">
         <ng-md-icon icon="menu" 
           class="group-page__menu-icon" 
-          layout="column" 
+          layout="column"
           layout-align="center center"
         ></ng-md-icon>
       </md-button>

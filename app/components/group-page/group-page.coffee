@@ -1,7 +1,7 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser, $auth, Toast) ->
+  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser, $auth, Toast, $mdSidenav) ->
     $scope.contributionsLoaded = $scope.commentsLoaded = $scope.membershipsLoaded = false
 
     AuthenticateUser().then (currentUser) ->
@@ -46,5 +46,11 @@ module.exports =
           ipCookie.remove('currentUserId')
           ipCookie.remove('initialRequestPath')
           $location.path('/')
+
+    $scope.openSidenav = ->
+      $mdSidenav('left').open()
+
+    $scope.closeSidenav = ->
+      $mdSidenav('left').close()
 
     return
