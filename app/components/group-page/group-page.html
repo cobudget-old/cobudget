@@ -6,13 +6,75 @@
   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 
-<div class="group-page" ng-if="contributionsLoaded && commentsLoaded && membershipsLoaded">
+<div class="group-page" ng-if="contributionsLoaded && commentsLoaded && membershipsLoaded && accessibleGroupsLoaded">
+
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2 group-page__sidenav" md-component-id="left">
+    <md-toolbar class="group-page__sidenav-toolbar">
+
+      <div layout="column" layout-align="space-between start" class="group-page__user-avatar-container">
+        <div class="group-page__user-avatar" layout="column" layout-align="center center">
+          <div>{{ currentUser.name[0] | uppercase }}</div>
+        </div>
+        <div class="group-page__user-email">{{ currentUser.email }}</div>  
+      </div>
+    </md-toolbar>
+
+    <md-content class="group-page__sidenav-content">
+
+<!--       <div layout="row" layout-align="start center" class="group-page__sidenav-option">
+        <ng-md-icon icon="flag" 
+          class="group-page__sidenav-option-icon" 
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        <div class="group-page__sidenav-option-subheader">Updates</div>        
+      </div>
+
+      <div layout="row" layout-align="start center" class="group-page__sidenav-option">
+        <ng-md-icon icon="inbox" 
+          class="group-page__sidenav-option-icon" 
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        <div class="group-page__sidenav-option-subheader">My Buckets</div>        
+      </div>
+ -->
+      <div layout="row" layout-align="start center" class="group-page__sidenav-option">
+        <ng-md-icon icon="group" 
+          class="group-page__sidenav-option-icon" 
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+
+        <div class="group-page__sidenav-option-subheader">My Groups</div>
+
+        <ng-md-icon icon="arrow_drop_down" 
+          class="group-page__sidenav-option-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+      </div>
+
+      <md-divider></md-divider>
+
+      <div class="group-page__sidenav-expanded-content">
+        <md-list-item ng-repeat="group in accessibleGroups" ng-click="redirectToGroupPage(group.id)">
+          <div layout="row" layout-align="start center">
+            <div class="group-page__sidenav-group-name">{{ group.name }}</div>
+          </div>
+        </md-list-item>
+      </div>
+
+    </md-content>
+  </md-sidenav>
+
+
   <md-toolbar class="group-page__toolbar">
     <div class="md-toolbar-tools group-page__menu-bar">
-      <md-button class="md-icon-button" aria-label="Settings">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="openSidenav()">
         <ng-md-icon icon="menu" 
           class="group-page__menu-icon" 
-          layout="column" 
+          layout="column"
           layout-align="center center"
         ></ng-md-icon>
       </md-button>
@@ -121,14 +183,14 @@
             <div layout="row" layout-align="space-between center">
               <span class="group-page__live-project-funding">{{ liveBucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
               
-              <span ng-show="liveBucket.amountContributedByUser(currentUserId) > 0" class="group-page__live-project-personal-contribution">
-                You gave {{ liveBucket.amountContributedByUser(currentUserId) | currency : group.currencySymbol : 0 }}               
+              <span ng-show="liveBucket.amountContributedByUser(currentUser.id) > 0" class="group-page__live-project-personal-contribution">
+                You gave {{ liveBucket.amountContributedByUser(currentUser.id) | currency : group.currencySymbol : 0 }}               
               </span>
             </div>
 
             <div class="group-page__progress-bar-container">
-              <div class="group-page__progress-bar-primary" style="width: {{ liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
-              <div class="group-page__progress-bar-secondary" style="width: {{ liveBucket.percentContributedByUser(currentUserId) + liveBucket.percentNotContributedByUser(currentUserId) }}%"></div>
+              <div class="group-page__progress-bar-primary" style="width: {{ liveBucket.percentNotContributedByUser(currentUser.id) }}%"></div>
+              <div class="group-page__progress-bar-secondary" style="width: {{ liveBucket.percentContributedByUser(currentUser.id) + liveBucket.percentNotContributedByUser(currentUser.id) }}%"></div>
             </div>
           </div>
         </md-list-item>
