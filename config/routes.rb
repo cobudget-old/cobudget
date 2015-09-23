@@ -7,9 +7,9 @@ Rails.application.routes.draw do
       password: 'reset_password'
     }
 
-    resources :users, only: [:update], defaults: { format: :json } do
-      member do
-        post :change_password
+    resources :users, defaults: { format: :json } do
+      collection do
+        post :confirm_account
       end
     end
 

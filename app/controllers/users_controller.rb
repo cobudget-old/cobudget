@@ -1,4 +1,13 @@
 class UsersController < AuthenticatedController
+
+  api :POST, '/users/confirm_account'
+  def confirm_account
+    user = User.find_by_confirmation_token(params[:confirmation_token])
+    user.update(name: params[:name], password: params[:password])
+    render json: [user]
+  end
+
+  # (EL) probably remove soon
   def update
     authorize user
     initialize_user_update_params
@@ -7,6 +16,9 @@ class UsersController < AuthenticatedController
     respond_with user
   end
 
+
+
+  # (EL) probably remove soon
   api :POST, '/users/:user_id/change_password', "Change the user's password"
   def change_password
     user = User.find(params[:id])
