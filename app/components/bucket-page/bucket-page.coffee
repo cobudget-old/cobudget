@@ -1,7 +1,7 @@
 module.exports = 
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, Records, $stateParams, $location, Toast, ipCookie, AuthenticateUser) ->
+  controller: ($scope, $state, Records, $stateParams, $location, Toast, ipCookie, AuthenticateUser) ->
     $scope.groupLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = false
 
     AuthenticateUser().then (currentUser) ->
@@ -77,6 +77,7 @@ module.exports =
 
     $scope.submitContribution = ->
       $scope.contribution.save().then ->
+        $state.reload()
         $scope.back()
         Toast.show('You funded a bucket')
         
