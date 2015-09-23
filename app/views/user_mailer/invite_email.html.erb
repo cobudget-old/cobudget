@@ -1,5 +1,5 @@
 <p>Hi there!</p>
 
-<p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at <%= @group.name %>.</p>
+<p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at "<%= @group.name %>".</p>
 
 <p>To confirm your acccount, please visit <%= link_to 'this link', "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}" %>
