@@ -16,6 +16,12 @@ module.exports =
         name: formData.name        
         password: formData.password
         confirmation_token: $scope.confirmationToken        
-      Records.users.confirmAccount(params).then ->
-        Toast.show('Your account is set up! Please log in to continue.')
-        $location.path('/')
+      Records.users.confirmAccount(params)
+        .then ->
+          Toast.show('Your account is set up! Please log in to continue.')
+          $location.search('confirmation_token', null)
+          $location.path('/')
+        .catch ->
+          Toast.show('This token has expired. Please log in to continue')
+          $location.search('confirmation_token', null)
+          $location.path('/')
