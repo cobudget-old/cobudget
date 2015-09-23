@@ -15,6 +15,7 @@ require('angular-messages')
 require('ng-focus-if')
 require('angular-upload')
 require('angular-material-icons')
+require('ng-sanitize')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -29,7 +30,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ipCookie',
   'focus-if',
   'lr.upload',
-  'ngMdIcons'
+  'ngMdIcons',
+  'ngSanitize'
 ])
 .constant('config', require('app/configs/app'))
 
