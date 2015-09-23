@@ -1,7 +1,7 @@
 module.exports = 
   url: '/'
   template: require('./welcome-page.html')
-  controller: ($scope, $auth, $location, Records, $rootScope, ipCookie) ->
+  controller: ($scope, $auth, $location, Records, ipCookie) ->
 
     $scope.userSigningIn = false
 

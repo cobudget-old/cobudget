@@ -1,0 +1,36 @@
+<div 
+  class="loading-bar" 
+  layout="column" 
+  layout-align="center center" 
+  ng-show="userConfirmingAccount">
+  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+
+<div class="confirm-account-page" ng-hide="userConfirmingAccount">
+  <md-toolbar class="md-primary confirm-account-page__toolbar">
+    <h1 class="md-toolbar-tools confirm-account-page__heading" layout-align="center">Confirm your Account</h1>
+  </md-toolbar>
+
+  <md-content layout-padding class="confirm-account-page__content">
+    <form name="newUserForm" ng-submit="confirmAccount(formData)">
+      <md-input-container>
+        <label>name</label>
+        <input required name="name" type="text" ng-model="formData.name">
+        <div ng-messages="newUserForm.name.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>new password</label>
+        <input minlength="8" required name="password" type="password" ng-model="formData.password">
+        <div ng-messages="newUserForm.password.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="minlength">Password must be at least 8 characters long.</div>
+        </div>
+      </md-input-container>
+
+      <input type="submit" value="submit">
+    </form>
+  </md-content>
+</div>

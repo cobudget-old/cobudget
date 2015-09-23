@@ -1,0 +1,13 @@
+.confirm-account-page__toolbar {
+  background: $cobudget-gunmetal;
+  color: white;
+}
+
+.confirm-account-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.confirm-account-page__heading {
+  @include fontGrande;
+}
