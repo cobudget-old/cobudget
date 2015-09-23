@@ -86,6 +86,7 @@
   @include fontSmall;
   margin-top: 10px;
   margin-bottom: 10px;
+  @include wordWrap;
 }
 
 .bucket-page__more-button {

@@ -60,12 +60,12 @@
         </div>
 
         <div ng-hide="showFullDescription">
-          <p class="bucket-page__description-text">{{ bucket.description | limitTo:100 }} <span ng-if="bucket.description.length > 100">...</span></p>
+          <p class="bucket-page__description-text" ng-bind-html="bucket.description | characters:100:false | linky:'_blank' "></p>
           <md-button md-no-ink class="md-primary bucket-page__more-button" ng-click="readMore()">Read More</md-button>          
         </div>
 
         <div ng-show="showFullDescription">
-          <p class="bucket-page__description-text">{{ bucket.description }}</p>
+          <p class="bucket-page__description-text" ng-bind-html="bucket.description | linky:'_blank'"></p>
           <md-button md-no-ink class="md-primary bucket-page__more-button" ng-click="showLess()">Show Less</md-button>
         </div>
       </md-card-content>
@@ -253,7 +253,7 @@
         <md-list-item class="bucket-page__comment" ng-repeat="comment in bucket.comments()" layout="column" layout-align="center start">
           <md-divider></md-divider>
           <div class="bucket-page__comment-author-name">{{ comment.author().name }}</div>
-          <div class="bucket-page__comment-body">{{ comment.body }}</div>
+          <div class="bucket-page__comment-body" ng-bind-html="comment.body | linky:'_blank'"></div>
         </md-list-item>
       </md-list>
     </md-card>
