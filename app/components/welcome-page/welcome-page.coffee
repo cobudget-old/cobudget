@@ -3,8 +3,11 @@ module.exports =
   template: require('./welcome-page.html')
   controller: ($scope, $auth, $location, Records, $rootScope, ipCookie) ->
 
+    $scope.userSigningIn = false
+
     $scope.login = (formData) ->
       $scope.formError = ""
+      $scope.userSigningIn = true
       $auth.submitLogin
         email: formData.email
         password: formData.password
@@ -26,5 +29,6 @@ module.exports =
 
     $scope.$on 'auth:login-error', () ->
       $scope.formError = "Invalid Credentials"
+      $scope.userSigningIn = false
 
     return
