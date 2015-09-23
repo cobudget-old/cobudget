@@ -16,6 +16,7 @@ require('ng-focus-if')
 require('angular-upload')
 require('angular-material-icons')
 require('ng-sanitize')
+require('angular-truncate-2')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -31,7 +32,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'focus-if',
   'lr.upload',
   'ngMdIcons',
-  'ngSanitize'
+  'ngSanitize',
+  'truncate'
 ])
 .constant('config', require('app/configs/app'))
 
