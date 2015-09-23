@@ -2,9 +2,12 @@ class UsersController < AuthenticatedController
 
   api :POST, '/users/confirm_account'
   def confirm_account
-    user = User.find_by_confirmation_token(params[:confirmation_token])
-    user.update(name: params[:name], password: params[:password])
-    render json: [user]
+    if user = User.find_by_confirmation_token(params[:confirmation_token])
+      user.update(name: params[:name], password: params[:password], confirmation_token: nil)
+      render json: [user]
+    else
+      render status: 401
+    end
   end
 
   # (EL) probably remove soon
