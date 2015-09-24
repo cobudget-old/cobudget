@@ -23,12 +23,13 @@ module.exports =
         ipCookie.remove('initialRequestPath')
 
     $scope.$on 'auth:validation-success', (event, user) ->
-      $scope.redirectToGroupPage(user) 
+      $scope.userSigningIn = true 
+      $scope.redirectToGroupPage(user)
 
     $scope.$on 'auth:login-success', (event, user) ->
       $scope.redirectToGroupPage(user)
 
-    $scope.$on 'auth:login-error', () ->
+    $scope.$on 'auth:login-error', ->
       $scope.formError = "Invalid Credentials"
       $scope.userSigningIn = false
 
