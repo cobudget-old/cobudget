@@ -6,7 +6,7 @@
   </md-toolbar>
 
   <md-content class="admin-page__content">
-    <form name='groupForm' class="admin-page__form">
+    <form name='groupForm' class="admin-page__form" ng-submit="createGroup()">
       <md-input-container>
         <label>name</label>
         <input required name="name" type="text" ng-model="group.name">
@@ -14,7 +14,7 @@
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
-      <md-button class="admin-page__form-submit-btn" ng-click="createGroup()">create group</md-button>
+      <md-button class="admin-page__form-submit-btn">create group</md-button>
     </form>
 
     <md-divider></md-divider>

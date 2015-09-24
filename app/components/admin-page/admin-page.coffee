@@ -17,9 +17,9 @@ module.exports =
     $scope.group = Records.groups.build()
 
     $scope.createGroup = ->
-      if $scope.groupForm.$valid
-        $scope.group.save().then (data) ->
-          $scope.fetchAllGroups()
+      $scope.group.save().then (data) ->
+        $scope.group = Records.groups.build()
+        $scope.fetchAllGroups()
 
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
