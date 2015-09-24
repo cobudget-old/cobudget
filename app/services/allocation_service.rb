@@ -1,4 +1,3 @@
-
 class AllocationService
   def self.create_allocations_from_csv(csv: , group: , current_user:)
     csv.each do |email, amount|
