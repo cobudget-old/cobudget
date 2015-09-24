@@ -1,7 +1,7 @@
 module.exports =
   url: '/confirm_account?confirmation_token'
   template: require('./confirm-account-page.html')
-  controller: ($scope, $location, $stateParams, Records, ipCookie, Toast) ->
+  controller: ($scope, $auth, $location, $stateParams, Records, ipCookie, Toast) ->
 
     $scope.userConfirmingAccount = false
     $scope.confirmationToken = $stateParams.confirmation_token
@@ -9,7 +9,8 @@ module.exports =
     $scope.redirectToLogin = () ->
       $location.search('confirmation_token', null)
       ipCookie.remove('currentUserId')
-      $location.path('/')
+      $auth.signOut().then ->
+        $location.path('/')
 
     $scope.confirmAccount = (formData) ->
       params = 
