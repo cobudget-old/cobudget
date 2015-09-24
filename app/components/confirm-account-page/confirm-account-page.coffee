@@ -4,12 +4,12 @@ module.exports =
   controller: ($scope, $location, $stateParams, Records, ipCookie, Toast) ->
 
     $scope.userConfirmingAccount = false
-
-    ipCookie.remove('currentGroupId')
-    ipCookie.remove('currentUserId')
-    ipCookie.remove('initialRequestPath')
-
     $scope.confirmationToken = $stateParams.confirmation_token
+
+    $scope.redirectToLogin = () ->
+      $location.search('confirmation_token', null)
+      ipCookie.remove('currentUserId')
+      $location.path('/')
 
     $scope.confirmAccount = (formData) ->
       params = 
@@ -19,9 +19,7 @@ module.exports =
       Records.users.confirmAccount(params)
         .then ->
           Toast.show('Your account is set up! Please log in to continue.')
-          $location.search('confirmation_token', null)
-          $location.path('/')
+          $scope.redirectToLogin()
         .catch ->
           Toast.show('This token has expired. Please log in to continue')
-          $location.search('confirmation_token', null)
-          $location.path('/')
+          $scope.redirectToLogin()
