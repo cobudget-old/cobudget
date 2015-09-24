@@ -20,6 +20,7 @@ module.exports =
           $location.path("/groups/#{ipCookie('currentGroupId')}")
       else
         $location.path(ipCookie('initialRequestPath'))
+        ipCookie.remove('initialRequestPath')
 
     $scope.$on 'auth:validation-success', (event, user) ->
       $scope.redirectToGroupPage(user) 
