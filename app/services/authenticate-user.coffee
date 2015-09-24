@@ -5,9 +5,9 @@ global.cobudgetApp.factory 'AuthenticateUser', (Records, ipCookie, Toast, $locat
   () ->
     deferred = $q.defer()
 
-    if ipCookie('currentUserId')
+    if ipCookie('currentUserId') # if currentUserId still in session
       Records.memberships.fetchMyMemberships()
-        .then (data) ->
+        .then (data) -> # user logged in
           if groupId = parseInt($stateParams.groupId)
             if !(_.find data.groups, (group) -> group.id == groupId) 
               Toast.show('The group you were trying to access is private, please sign in to continue')
@@ -24,14 +24,13 @@ global.cobudgetApp.factory 'AuthenticateUser', (Records, ipCookie, Toast, $locat
                 $location.path('/')
                 deferred.reject()
           deferred.resolve(CurrentUser())
-        .catch (data) ->
+        .catch (data) -> # user not logged in
           Toast.show('Please log in to continue')
           ipCookie.remove('currentUserId')
           ipCookie.remove('currentGroupId')
-          ipCookie.remove('initialRequestPath')
           $location.path('/')
           deferred.reject()
-    else
+    else # if currentUserId not in session
       ipCookie('initialRequestPath', $location.path())
       Toast.show('You must sign in to continue')
       $location.path('/')

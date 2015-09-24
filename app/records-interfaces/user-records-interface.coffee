@@ -4,6 +4,6 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
     constructor: (recordStore) ->
       @baseConstructor recordStore
       @remote.apiPrefix = config.apiPrefix
-    fetchMe: ->
-      @fetch
-        path: 'me'
+
+    confirmAccount: (params)->
+      @remote.post('confirm_account', params)

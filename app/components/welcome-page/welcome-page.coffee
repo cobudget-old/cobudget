@@ -1,7 +1,7 @@
 module.exports = 
   url: '/'
   template: require('./welcome-page.html')
-  controller: ($scope, $auth, $location, Records, $rootScope, ipCookie) ->
+  controller: ($scope, $auth, $location, Records, ipCookie) ->
 
     $scope.userSigningIn = false
 
@@ -20,6 +20,7 @@ module.exports =
           $location.path("/groups/#{ipCookie('currentGroupId')}")
       else
         $location.path(ipCookie('initialRequestPath'))
+        ipCookie.remove('initialRequestPath')
 
     $scope.$on 'auth:validation-success', (event, user) ->
       $scope.redirectToGroupPage(user) 
