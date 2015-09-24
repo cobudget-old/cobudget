@@ -31,4 +31,21 @@ RSpec.describe User, :type => :model do
 			expect(user.is_member_of?(group)).to eq(false)
 		end
 	end
+
+	describe "#destroy" do
+    it "when a user is destroyed, so are all of their memberships" do
+      user = create(:user)
+      group1 = create(:group)
+      group2 = create(:group)
+      group3 = create(:group)
+      membership1 = create(:membership, group: group1, member: user)
+      membership2 = create(:membership, group: group2, member: user)
+      membership3 = create(:membership, group: group3, member: user)
+      user.destroy
+
+      expect(Membership.find_by_id(membership1.id)).to be_nil
+      expect(Membership.find_by_id(membership2.id)).to be_nil
+      expect(Membership.find_by_id(membership3.id)).to be_nil
+    end
+  end
 end
