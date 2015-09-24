@@ -12,13 +12,16 @@ describe "Allocations" do
     end
 
     context "csv contains email addresses of people not yet users of cobudget" do
-      it "creates a new user with that email address + a temporary name" do
+      it "creates a new user with that email address + a temporary name, password, and confirmation_token" do
       end
 
       it "creates a membership between the new user and the specified group" do
       end
 
       it "generates an allocation for the new member" do
+      end
+
+      it "sends an 'invite_email' to the member with a link to an account confirmation page" do
       end
     end
 
@@ -27,6 +30,9 @@ describe "Allocations" do
       end
 
       it "generates an allocation for the new member" do
+      end
+
+      it "sends them an 'invite_to_group' email with a link to the group" do
       end
     end
   end

@@ -1,5 +1,5 @@
 <p>Hi there!</p>
 
-<p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at <%= @group.name %>.</p>
+<p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at "<%= @group.name %>".</p>
 
 <p>You can visit the group by clicking <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}" %></p>

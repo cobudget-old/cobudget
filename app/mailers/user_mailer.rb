@@ -1,20 +1,19 @@
 class UserMailer < ActionMailer::Base
-  def invite_email(user, inviter, group, tmp_password)
+  def invite_email(user: , group:, inviter:)
     @user = user
-    @inviter = inviter
-    @tmp_password = tmp_password
     @group = group
-    mail(to: user.name_and_email,
-        from: inviter.name_and_email,
+    @inviter = inviter
+    mail(to: @user.name_and_email,
+        from: "Cobudget Accounts <accounts@cobudget.co>",
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
-  def invite_to_group_email(user, inviter, group)
+  def invite_to_group_email(user: , inviter: , group: )
     @user = user
     @inviter = inviter
     @group = group
-    mail(to: user.name_and_email,
-        from: inviter.name_and_email,
+    mail(to: @user.name_and_email,
+        from: "Cobudget Accounts <accounts@cobudget.co>",
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
