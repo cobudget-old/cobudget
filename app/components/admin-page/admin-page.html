@@ -6,7 +6,7 @@
   </md-toolbar>
 
   <md-content class="admin-page__content">
-    <form name='groupForm' class="admin-page__form" ng-submit="createGroup()">
+    <form name='groupForm' class="admin-page__form" ng-submit="createGroup(); groupForm.$setUntouched()">
       <md-input-container>
         <label>name</label>
         <input required name="name" type="text" ng-model="group.name">
