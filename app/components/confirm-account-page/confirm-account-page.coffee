@@ -13,6 +13,7 @@ module.exports =
         $location.path('/')
 
     $scope.confirmAccount = (formData) ->
+      $scope.userConfirmingAccount = true
       params = 
         name: formData.name        
         password: formData.password
