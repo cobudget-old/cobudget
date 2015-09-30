@@ -2,11 +2,19 @@
   class="loading-bar" 
   layout="column" 
   layout-align="center center" 
-  ng-hide="contributionsLoaded && commentsLoaded && membershipsLoaded">
+  ng-hide="unauthorized || (accessibleGroupsLoaded && contributionsLoaded && commentsLoaded && membershipsLoaded)">
   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 
-<div class="group-page" ng-if="contributionsLoaded && commentsLoaded && membershipsLoaded && accessibleGroupsLoaded">
+<div 
+  class="page-not-found" 
+  layout="column" 
+  layout-align="center center" 
+  ng-if="unauthorized">
+  <div>404</div>
+</div>
+
+<div class="group-page" ng-if="accessibleGroupsLoaded && contributionsLoaded && commentsLoaded && membershipsLoaded">
 
   <md-sidenav class="md-sidenav-left md-whiteframe-z2 group-page__sidenav" md-component-id="left">
     <md-toolbar class="group-page__sidenav-toolbar">

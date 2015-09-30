@@ -1,21 +1,33 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser, $auth, Toast, $mdSidenav) ->
+  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser, $auth, Toast, $mdSidenav, VerifyUserPermissions) ->
     $scope.accessibleGroupsLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = $scope.membershipsLoaded = false
 
     AuthenticateUser().then (currentUser) ->
       groupId = parseInt($stateParams.groupId)
-      ipCookie('currentGroupId', groupId)
       $scope.currentUser = currentUser
+
+      VerifyUserPermissions.forGroup(groupId)
+        .then (group) ->
+          $scope.group = group
+          $scope.fetchRecords()
+        .catch ->
+          $scope.unauthorized = true
+
+    $scope.fetchRecords = ->
+      # 1. get accessible groups
       Records.memberships.fetchMyMemberships().then (data) ->
         $scope.accessibleGroupsLoaded = true
         $scope.accessibleGroups = data.groups
-      Records.groups.findOrFetchById(groupId).then (group) ->
-        $scope.group = group
-        $scope.currentMembership = group.membershipFor(currentUser)
-        Records.buckets.fetchByGroupId(group.id).then (data) ->
+
+        # 2. get current membership
+        $scope.currentMembership = $scope.group.membershipFor($scope.currentUser)
+
+        # 3. get buckets
+        Records.buckets.fetchByGroupId($scope.group.id).then (data) ->
           if data.buckets.length > 0
+            # 4. get comments and contributions for buckets if they exist
             _.each data.buckets, (bucket) ->
               Records.contributions.fetchByBucketId(bucket.id).then ->
                 $scope.contributionsLoaded = true
@@ -23,7 +35,9 @@ module.exports =
                 $scope.commentsLoaded = true
           else 
             $scope.contributionsLoaded = $scope.commentsLoaded = true
-        Records.memberships.fetchByGroupId(group.id).then ->
+
+        # 5. get funders
+        Records.memberships.fetchByGroupId($scope.group.id).then ->
           $scope.membershipsLoaded = true
 
     $scope.createBucket = ->
