@@ -15,7 +15,6 @@ module.exports =
 
       Records.buckets.findOrFetchById($scope.bucketId).then (bucket) ->
         $scope.bucket = bucket
-        $scope.status = bucket.status
         Records.contributions.fetchByBucketId($scope.bucketId).then ->
           $scope.percentContributedByUser = bucket.percentContributedByUser(currentUser.id)
           $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(currentUser.id)
@@ -78,7 +77,6 @@ module.exports =
     $scope.submitContribution = ->
       $scope.contribution.save().then ->
         $state.reload()
-        $scope.back()
         Toast.show('You funded a bucket')
         
     return

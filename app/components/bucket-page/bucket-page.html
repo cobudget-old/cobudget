@@ -17,7 +17,7 @@
         ></ng-md-icon>
       </md-button>
 
-      <span class="bucket-page__personal-funds" layout="row" layout-align="start center" ng-if="status == 'live'">
+      <span class="bucket-page__personal-funds" layout="row" layout-align="start center" ng-if="bucket.status == 'live'">
         <ng-md-icon icon="person"
           layout="column"
           layout-align="center center"
@@ -71,7 +71,7 @@
       </md-card-content>
     </md-card>
 
-    <md-card class="draft-page__progress-card" ng-if="status == 'live'">
+    <md-card class="draft-page__progress-card" ng-if="bucket.status == 'live'">
       <md-card-content class="bucket-page__progress-card-content">
         <span class="bucket-page__progress-header">Progress</span>
 
@@ -115,7 +115,7 @@
         <div class="bucket-page__status-header">Status</div>
         <div class="bucket-page__status-flagpoints" layout="row" layout-align="space-between center">
           <div class="bucket-page__status-flagpoint">
-            <div layout="column" layout-align="center center" ng-show="status === 'draft'">
+            <div layout="column" layout-align="center center" ng-show="bucket.status == 'draft'">
               <ng-md-icon icon="radio_button_on"
                 layout="column"
                 layout-align="center center"
@@ -124,7 +124,7 @@
               <span class="bucket-page__status-flagpoint-text-active">Idea</span>
             </div>
 
-            <div layout="column" layout-align="center center" ng-hide="status === 'draft'">
+            <div layout="column" layout-align="center center" ng-hide="bucket.status == 'draft'">
               <ng-md-icon icon="radio_button_off"
                 layout="column"
                 layout-align="center center"
@@ -137,7 +137,7 @@
           <div class="bucket-page__status-flagpoint-divider" flex></div>
 
           <div class="bucket-page__status-flagpoint">
-            <div layout="column" layout-align="center center" ng-show="status === 'live'">
+            <div layout="column" layout-align="center center" ng-show="bucket.status == 'live'">
               <ng-md-icon icon="radio_button_on"
                 layout="column"
                 layout-align="center center"
@@ -146,7 +146,7 @@
               <span class="bucket-page__status-flagpoint-text-active">Funding</span>
             </div>
 
-            <div layout="column" layout-align="center center" ng-hide="status === 'live'">
+            <div layout="column" layout-align="center center" ng-hide="bucket.status == 'live'">
               <ng-md-icon icon="radio_button_off"
                 layout="column"
                 layout-align="center center"
@@ -159,7 +159,7 @@
           <div class="bucket-page__status-flagpoint-divider" flex></div>
 
           <div class="bucket-page__status-flagpoint">
-            <div layout="column" layout-align="center center" ng-show="status === 'funded'">
+            <div layout="column" layout-align="center center" ng-show="bucket.status == 'funded'">
               <ng-md-icon icon="radio_button_on"
                 layout="column"
                 layout-align="center center"
@@ -168,7 +168,7 @@
               <span class="bucket-page__status-flagpoint-text-active">Funded</span>
             </div>
 
-            <div layout="column" layout-align="center center" ng-hide="status === 'funded'">
+            <div layout="column" layout-align="center center" ng-hide="bucket.status == 'funded'">
               <ng-md-icon icon="radio_button_off"
                 layout="column"
                 layout-align="center center"
@@ -181,7 +181,7 @@
           <div class="bucket-page__status-flagpoint-divider" flex></div>
 
           <div class="bucket-page__status-flagpoint">
-            <div layout="column" layout-align="center center" ng-show="status === 'done'">
+            <div layout="column" layout-align="center center" ng-show="bucket.status == 'done'">
               <ng-md-icon icon="radio_button_on"
                 layout="column"
                 layout-align="center center"
@@ -190,7 +190,7 @@
               <span class="bucket-page__status-flagpoint-text-active">Done</span>
             </div>
 
-            <div layout="column" layout-align="center center" ng-hide="status === 'done'">
+            <div layout="column" layout-align="center center" ng-hide="bucket.status == 'done'">
               <ng-md-icon icon="radio_button_off"
                 layout="column"
                 layout-align="center center"
@@ -202,7 +202,7 @@
           </div>
         </div>
 
-        <div class="bucket-page__status-description" ng-show="status === 'draft'">
+        <div class="bucket-page__status-description" ng-show="bucket.status == 'draft'">
           <p><em>This bucket idea is still being discussed and designed</em></p>
 
           <div ng-show='userCanStartFunding()'>
@@ -211,7 +211,7 @@
           </div>
         </div>
 
-        <div class="bucket-page__status-description" ng-show="status === 'live'">
+        <div class="bucket-page__status-description" ng-show="bucket.status == 'live'">
           <p><em>This bucket has been launched and can be funded.</em></p>
         </div>
       </md-card-content>
