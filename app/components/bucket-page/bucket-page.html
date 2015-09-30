@@ -60,7 +60,7 @@
         </div>
 
         <div ng-hide="showFullDescription">
-          <p class="bucket-page__description-text" ng-bind-html="bucket.description | characters:100:false | linky:'_blank' "></p>
+          <p class="bucket-page__description-text" ng-bind-html="bucket.description | characters:200:false | linky:'_blank' "></p>
           <md-button md-no-ink class="md-primary bucket-page__more-button" ng-click="readMore()">Read More</md-button>          
         </div>
 
