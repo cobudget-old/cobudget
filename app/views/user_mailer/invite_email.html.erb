@@ -1,5 +1,7 @@
-<p>Hi there!</p>
+<p>Welcome to Cobudget!</p>
 
-<p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at "<%= @group.name %>".</p>
+<p>You have been invited by <%= @inviter.name %> to collaboratively fund with "<%= @group.name %>".</p>
 
-<p>To confirm your acccount, please visit <%= link_to 'this link', "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}" %>
+<p>With Cobudget, you can put money in the middle and decide together how to spend it. Check out this <%= link_to "welcome slidedeck", "https://docs.google.com/presentation/d/1ZQYKxhHwKuQGmOMPpoE8Eo0XMuw1yn55Bjgsh6-D0eQ/edit?usp=sharing" %> to see how it works.</p>
+
+<p>Click on this link to get started: <%= link_to "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}", "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}"%></p>
