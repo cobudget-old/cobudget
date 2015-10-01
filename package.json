@@ -14,10 +14,10 @@
     "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
     "build": "gulp build",
     "develop": "gulp develop",
-    "stage-cname": "echo 'staging.cobudget.co' > app/assets/CNAME",
+    "stage-cname": "cp app/assets/CNAME.stage app/assets/CNAME",
     "stage": "(export NODE_ENV=staging; npm run stage-cname && gulp branch && git push origin gh-pages -f)",
     "set-remote": "git remote add deploy-beta git@github.com:cobudget/beta.cobudget.co",
-    "deploy-cname": "echo 'beta.cobudget.co' > app/assets/CNAME",
+    "deploy-cname": "cp app/assets/CNAME.deploy app/assets/CNAME",
     "deploy-push": "git push deploy-beta gh-pages -f",
     "deploy": "(export NODE_ENV=production; npm run deploy-cname && gulp branch && npm run deploy-push)"
   },
