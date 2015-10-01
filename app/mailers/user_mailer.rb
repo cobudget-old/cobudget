@@ -91,4 +91,11 @@ class UserMailer < ActionMailer::Base
            subject: "#{@bucket.name} has been fully funded!")      
     end
   end
+
+  def notify_member_that_bucket_was_created(bucket: , member:)
+    @bucket = bucket
+    mail(to: member.name_and_email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "#{bucket.user.name} has created a new bucket idea: #{@bucket.name}")      
+  end
 end
