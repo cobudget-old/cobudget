@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
     @group = @bucket.group
     mail(to: @author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your bucket.")
+         subject: "#{@commenter.name} has commented on your bucket.")
   end
 
   def notify_user_of_new_comment_email(comment: , user:)
@@ -35,7 +35,7 @@ class UserMailer < ActionMailer::Base
     @group = @bucket.group
     mail(to: user.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on #{@bucket.name}")
+         subject: "#{@commenter.name} has commented on #{@bucket.name}")
   end
 
   def notify_author_that_bucket_received_contribution(contribution: )
@@ -46,7 +46,7 @@ class UserMailer < ActionMailer::Base
     author = @bucket.user
     mail(to: author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@funder.name} has funded your bucket - #{@contribution.formatted_amount}.")
+         subject: "#{@funder.name} has funded your bucket - #{@contribution.formatted_amount}.")
   end
 
   def notify_author_that_bucket_is_funded(bucket: )
@@ -55,7 +55,7 @@ class UserMailer < ActionMailer::Base
     @author = @bucket.user
     mail(to: @author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] Your bucket has been fully funded!")
+         subject: "Your bucket has been fully funded!")
   end
 
   def notify_member_with_balance_that_bucket_is_live(bucket: , member: )
@@ -64,7 +64,7 @@ class UserMailer < ActionMailer::Base
     @membership = Membership.find_by(member: member, group: @group)
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@bucket.name} is now requesting funding!")
+         subject: "#{@bucket.name} is now requesting funding!")
   end
 
   def notify_member_with_zero_balance_that_bucket_is_live(bucket: , member: )
@@ -73,7 +73,7 @@ class UserMailer < ActionMailer::Base
     @membership = Membership.find_by(member: member, group: @group)
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@bucket.name} is now requesting funding!")
+         subject: "#{@bucket.name} is now requesting funding!")
   end
 
   def notify_member_that_bucket_is_funded(bucket: , member: )
@@ -84,11 +84,11 @@ class UserMailer < ActionMailer::Base
     if @member_contribution_amount > 0
       mail(to: member.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "[Cobudget - #{@group.name}] You did it! #{@bucket.name} has been fully funded!")
+           subject: "You did it! #{@bucket.name} has been fully funded!")
     else 
       mail(to: member.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "[Cobudget - #{@group.name}] #{@bucket.name} has been fully funded!")      
+           subject: "#{@bucket.name} has been fully funded!")      
     end
   end
 end
