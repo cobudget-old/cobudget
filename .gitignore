@@ -9,3 +9,4 @@ phantomjsdriver.log
 *.log
 *.swp
 /config
+/app/assets/CNAME
