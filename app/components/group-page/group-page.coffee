@@ -58,4 +58,11 @@ module.exports =
       else
         $location.path("/groups/#{groupId}")
 
+    $scope.makeMemberAdmin = (membership) ->
+      alert("makeMemberAdmin has been called")
+
+    $scope.undoMemberAdmin = (membership) ->
+      alert("undoMemberAdmin has been called")
+
+
     return

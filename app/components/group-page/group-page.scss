@@ -281,6 +281,7 @@
 
 .group-page__funders {
   padding-left: 16px;
+  padding-right: 16px;
 }
 
 .group-page__funder-name-container {
@@ -296,4 +297,13 @@
 .group-page__funder-balance {
   @include fontLarge;
   color: $cobudget-green;
+}
+
+.group-page__funder-more-button {
+  width: 15px !important;  
+  margin-left: 14px !important;
+}
+
+.group-page__funder-more-button-icon {
+  width: 15px;  
 }
