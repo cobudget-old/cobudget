@@ -1,17 +1,21 @@
 class UserMailer < ActionMailer::Base
-  def invite_email(user: , group:, inviter:)
+  def invite_email(user: , group: , inviter: , initial_allocation_amount:)
     @user = user
     @group = group
     @inviter = inviter
+    @initial_allocation_amount = initial_allocation_amount
+    @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
     mail(to: @user.name_and_email,
         from: "Cobudget Accounts <accounts@cobudget.co>",
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
-  def invite_to_group_email(user: , inviter: , group: )
+  def invite_to_group_email(user: , inviter: , group: , initial_allocation_amount:)
     @user = user
     @inviter = inviter
     @group = group
+    @initial_allocation_amount = initial_allocation_amount
+    @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
     mail(to: @user.name_and_email,
         from: "Cobudget Accounts <accounts@cobudget.co>",
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")

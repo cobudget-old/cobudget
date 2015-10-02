@@ -1,6 +1,12 @@
-<p>
-  Welcome to Cobudget! <%= @inviter.name %> has invited you to collaboratively fund projects with <%= @group.name %>.
-</p>
+<% if @initial_allocation_amount > 0 %>
+  <p>
+    Welcome to Cobudget! <%= @inviter.name %> has invited you to collaboratively fund projects with <%= @group.name %>. You've got <%= @initial_allocation_amount_formatted %> to spend!
+  </p>
+<% else %>
+  <p>
+    Welcome to Cobudget! <%= @inviter.name %> has invited you to collaboratively fund projects with <%= @group.name %>.
+  </p>
+<% end %>
 
 <p>
   Cobudget is like internal crowdfunding, using shared resources. Group members propose projects, and you decide how to spend your portion of the collective budget by funding the projects you want to support. Check out this <%= link_to "welcome slidedeck", "https://docs.google.com/presentation/d/1ZQYKxhHwKuQGmOMPpoE8Eo0XMuw1yn55Bjgsh6-D0eQ/edit?usp=sharing" %> to see how it works.

@@ -1,5 +1,9 @@
 <p>Hi there!</p>
 
-<p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at "<%= @group.name %>".</p>
+<% if @initial_allocation_amount > 0 %>
+  <p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at <%= @group.name %>. You've got <%= @initial_allocation_amount_formatted %> to spend!</p>
+<% else %>
+  <p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at <%= @group.name %>.</p>
+<% end %>
 
 <p>You can visit the group by clicking <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}" %></p>
