@@ -244,6 +244,9 @@
         <md-list-item ng-repeat="membership in group.memberships()">
           <div layout="row" flex class="group-page__funder-container">
             <div class="group-page__funder-name-container" layout="row" layout-align="start center" flex>
+              <div class="group-page__funder-avatar" layout="column" layout-align="center center">
+                <div>{{ membership.member().name[0] | uppercase }}</div>
+              </div>
               <span class="group-page__funder-name">{{ membership.member().name }}</span>
               <span class="group-page__funder-admin-label" ng-if="membership.isAdmin">(admin)</span>
             </div>

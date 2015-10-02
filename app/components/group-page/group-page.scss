@@ -284,8 +284,14 @@
   padding-right: 16px;
 }
 
-.group-page__funder-name-container {
-  position: relative;
+.group-page__funder-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: black;
+  color: white;
+  font-size: 16px;
+  margin-right: 10px;
 }
 
 .group-page__funder-name {
@@ -318,3 +324,4 @@
 .group-page__funder-more-button-icon {
   width: 15px;  
 }
+
