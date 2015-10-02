@@ -9,4 +9,15 @@ class MembershipsController < AuthenticatedController
   def my_memberships
     render json: Membership.where(member_id: current_user.id)
   end
+
+  def update
+    membership = Membership.find(params[:id])
+    membership.update(membership_params)
+    render json: [membership]
+  end
+
+  private
+    def membership_params
+      params.require(:membership).permit(:is_admin)
+    end
 end
