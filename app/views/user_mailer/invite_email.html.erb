@@ -1,7 +1,11 @@
-<p>Welcome to Cobudget!</p>
+<p>
+  Welcome to Cobudget! <%= @inviter.name %> has invited you to collaboratively fund projects with <%= @group.name %>.
+</p>
 
-<p>You have been invited by <%= @inviter.name %> to collaboratively fund with "<%= @group.name %>".</p>
+<p>
+  Cobudget is like internal crowdfunding, using shared resources. Group members propose projects, and you decide how to spend your portion of the collective budget by funding the projects you want to support. Check out this <%= link_to "welcome slidedeck", "https://docs.google.com/presentation/d/1ZQYKxhHwKuQGmOMPpoE8Eo0XMuw1yn55Bjgsh6-D0eQ/edit?usp=sharing" %> to see how it works.
+</p>
 
-<p>With Cobudget, you can put money in the middle and decide together how to spend it. Check out this <%= link_to "welcome slidedeck", "https://docs.google.com/presentation/d/1ZQYKxhHwKuQGmOMPpoE8Eo0XMuw1yn55Bjgsh6-D0eQ/edit?usp=sharing" %> to see how it works.</p>
-
-<p>Click on this link to get started: <%= link_to "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}", "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}"%></p>
+<p>
+  <%= link_to "Get Started", "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}"%>
+</p>
