@@ -84,7 +84,7 @@ class UserMailer < ActionMailer::Base
     @bucket = bucket
     @group = @bucket.group
     @member_contribution_amount = Contribution.where(bucket: bucket, user: member).sum(:amount)
-    @formatted_member_contribution_amount = Money.new(@member_contribution_amount * 100, "USD").format
+    @formatted_member_contribution_amount = Money.new(@member_contribution_amount * 100, @group.currency_code).format
     if @member_contribution_amount > 0
       mail(to: member.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
@@ -101,5 +101,14 @@ class UserMailer < ActionMailer::Base
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "#{bucket.user.name} has created a new bucket idea: #{@bucket.name}")      
+  end
+
+  def notify_member_that_they_received_allocation(admin: , member: , group: , amount:)
+    @member = member
+    @group = group
+    @formatted_amount = Money.new(amount * 100, @group.currency_code).format
+    mail(to: @member.name_and_email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "#{admin.name} gave you funds to spend in #{@group.name}")
   end
 end

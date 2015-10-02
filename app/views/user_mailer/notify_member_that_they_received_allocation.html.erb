@@ -1,0 +1,7 @@
+<p>
+  You’ve received <%= @formatted_amount %> to fund projects with <%= @group.name %> in Cobudget!
+</p>
+
+<p>
+  <%= link_to 'Fund Projects Now', "#{root_url}#/groups/#{@group.id}" %>
+ </p>
