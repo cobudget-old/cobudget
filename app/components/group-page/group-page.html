@@ -243,15 +243,16 @@
       <md-list class="group-page__funders">
         <md-list-item ng-repeat="membership in group.memberships()">
           <div layout="row" flex class="group-page__funder-container">
-            <div class="group-page__funder-name-container" layout="column" layout-align="center start" flex>
+            <div class="group-page__funder-name-container" layout="row" layout-align="start center" flex>
               <span class="group-page__funder-name">{{ membership.member().name }}</span>
+              <span class="group-page__funder-admin-label" ng-if="membership.isAdmin">(admin)</span>
             </div>
 
             <div layout="column" layout-align="center end" flex="20">
               <span class="group-page__funder-balance">{{ membership.balance() | currency : group.currencySymbol : 0 }}</span>
             </div>
 
-            <md-menu md-offset="0 -7" ng-if="currentMembership.isAdmin">
+            <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="currentMembership.isAdmin">
               <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
                 <ng-md-icon 
                   icon="more_vert" 

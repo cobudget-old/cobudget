@@ -289,7 +289,6 @@
 }
 
 .group-page__funder-name {
-  width: 100%;
   @include truncatedText;
   @include fontMedLarge;  
 }
@@ -297,6 +296,18 @@
 .group-page__funder-balance {
   @include fontLarge;
   color: $cobudget-green;
+}
+
+.group-page__funder-admin-label {
+  color: $grey-on-white;
+  font-size: 12px;
+  margin-left: 5px;
+  top: 1px;
+  position: relative;
+}
+
+.group-page__funder-more-menu {
+  padding: 0;
 }
 
 .group-page__funder-more-button {
