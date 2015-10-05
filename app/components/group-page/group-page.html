@@ -2,7 +2,7 @@
   class="loading-bar" 
   layout="column" 
   layout-align="center center" 
-  ng-hide="unauthorized || (accessibleGroupsLoaded && contributionsLoaded && commentsLoaded && membershipsLoaded)">
+  ng-hide="unauthorized || recordsLoaded">
   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 
@@ -14,7 +14,7 @@
   <div>404</div>
 </div>
 
-<div class="group-page" ng-if="accessibleGroupsLoaded && contributionsLoaded && commentsLoaded && membershipsLoaded">
+<div class="group-page" ng-if="recordsLoaded">
 
   <md-sidenav class="md-sidenav-left md-whiteframe-z2 group-page__sidenav" md-component-id="left">
     <md-toolbar class="group-page__sidenav-toolbar">

@@ -1,44 +1,20 @@
 module.exports = 
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, Records, $stateParams, $location, $window, ipCookie, AuthenticateUser, $auth, Toast, $mdSidenav, VerifyUserPermissions) ->
-    $scope.accessibleGroupsLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = $scope.membershipsLoaded = false
+  controller: ($scope, $stateParams, $location, $window, $auth, Toast, $mdSidenav, UserCan, FetchRecordsFor) ->
 
-    AuthenticateUser().then (currentUser) ->
-      groupId = parseInt($stateParams.groupId)
-      $scope.currentUser = currentUser
+    groupId = parseInt($stateParams.groupId)
 
-      VerifyUserPermissions.forGroup(groupId)
-        .then (group) ->
-          $scope.group = group
-          $scope.fetchRecords()
-        .catch ->
-          $scope.unauthorized = true
-
-    $scope.fetchRecords = ->
-      # 1. get accessible groups
-      Records.memberships.fetchMyMemberships().then (data) ->
-        $scope.accessibleGroupsLoaded = true
-        $scope.accessibleGroups = data.groups
-
-        # 2. get current membership
-        $scope.currentMembership = $scope.group.membershipFor($scope.currentUser)
-
-        # 3. get buckets
-        Records.buckets.fetchByGroupId($scope.group.id).then (data) ->
-          if data.buckets.length > 0
-            # 4. get comments and contributions for buckets if they exist
-            _.each data.buckets, (bucket) ->
-              Records.contributions.fetchByBucketId(bucket.id).then ->
-                $scope.contributionsLoaded = true
-              Records.comments.fetchByBucketId(bucket.id).then ->
-                $scope.commentsLoaded = true
-          else 
-            $scope.contributionsLoaded = $scope.commentsLoaded = true
-
-        # 5. get funders
-        Records.memberships.fetchByGroupId($scope.group.id).then ->
-          $scope.membershipsLoaded = true
+    UserCan.viewGroup(groupId)
+      .then ->
+        FetchRecordsFor.groupPage(groupId).then (data) ->
+          $scope.accessibleGroups = data.accessibleGroups
+          $scope.group = data.group
+          $scope.currentMembership = data.currentMembership
+          $scope.currentUser = data.currentUser
+          $scope.recordsLoaded = true
+      .catch ->
+        $scope.unauthorized = true
 
     $scope.createBucket = ->
       $location.path("/buckets/new")
@@ -58,9 +34,7 @@ module.exports =
     $scope.signOut = ->
        $auth.signOut().then ->
           Toast.show("You've been signed out")
-          ipCookie.remove('currentGroupId')
-          ipCookie.remove('currentUserId')
-          ipCookie.remove('initialRequestPath')
+          global.cobudgetApp.currentUserId = null
           $location.path('/')
 
     $scope.openSidenav = ->
