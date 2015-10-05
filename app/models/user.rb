@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_many :allocations
   has_many :memberships, dependent: :destroy, foreign_key: "member_id"
+  has_many :groups, through: :memberships
 
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
