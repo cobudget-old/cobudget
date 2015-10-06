@@ -12,8 +12,7 @@ global.cobudgetApp.factory 'FetchRecordsFor', (Toast, $q, Records, CurrentUser) 
       records.currentUser = CurrentUser()
 
       # 1. get accessible groups
-      accessibleGroupsFetched = Records.memberships.fetchMyMemberships().then (data) ->
-        records.accessibleGroups = data.groups
+      records.accessibleGroups = Records.memberships.find(groupId: groupId)
 
       # 2. get current group
       Records.groups.findOrFetchById(groupId).then (group) ->
@@ -32,7 +31,11 @@ global.cobudgetApp.factory 'FetchRecordsFor', (Toast, $q, Records, CurrentUser) 
             _.each buckets, (bucket) ->
               contributionsFetched = Records.contributions.fetchByBucketId(bucket.id)
               commentsFetched = Records.comments.fetchByBucketId(bucket.id)
-              $q.all([accessibleGroupsFetched, contributionsFetched, commentsFetched, membershipsFetched]).then ->
+              $q.all([contributionsFetched, commentsFetched, membershipsFetched]).then ->
                 recordsFetched.resolve(records)
 
       recordsFetched.promise
+
+    # bucketPage: (bucketId) ->
+
+

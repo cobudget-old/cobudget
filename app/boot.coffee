@@ -1,19 +1,36 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.run ($rootScope, Records, $q, $location) ->
+global.cobudgetApp.run ($rootScope, Records, $q, $location, AuthenticateUser, $auth) ->
 
-  # userValidatedDeferred = $q.defer()
+  console.log('boot.coffee has loaded')
 
-  # global.cobudgetApp.userValidated = userValidatedDeferred.promise
+  userValidatedDeferred = $q.defer()
+  global.cobudgetApp.userValidated = userValidatedDeferred.promise
 
-  # $rootScope.$on 'auth:validation-success', (user) ->
-  #   console.log('validation-success')
-  #   global.cobudgetApp.currentUserId = user.id
-  #   userValidatedDeferred.resolve()
+  membershipsLoadedDeferred = $q.defer()
+  global.cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise
 
-  # $rootScope.$on 'auth:validation-error', () ->
-  #   console.log('validation-error')
-  #   $location.path('/')
-  #   Toast.show('Please log in to continue')
-  #   userValidatedDeferred.reject()
+  work = (user) ->
+    global.cobudgetApp.currentUserId = user.id
+    userValidatedDeferred.resolve()
+    Records.memberships.fetchMyMemberships().then (data) ->
+      console.log('memberships loaded!')
+      membershipsLoadedDeferred.resolve()
+
+  $auth.validateUser()
+
+  $rootScope.$on 'auth:validation-success', (ev, user) ->
+    console.log('validation success!')
+    work(user)
+
+  $rootScope.$on 'auth:login-success', (ev, user) ->
+    console.log('login success!')
+    work(user)
+
+  $rootScope.$on 'auth:validation-error', () ->
+    console.log('validation-error')
+    $location.path('/')
+    Toast.show('Please log in to continue')
+    userValidatedDeferred.reject()
+    membershipsLoadedDeferred.reject()

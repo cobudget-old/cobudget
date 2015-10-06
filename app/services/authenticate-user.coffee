@@ -13,4 +13,5 @@ global.cobudgetApp.factory 'AuthenticateUser', (Toast, $location, $q, $auth) ->
         $location.path('/')
         Toast.show('Please log in to continue')
         deferred.reject()
+        
     return deferred.promise
