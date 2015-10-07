@@ -1,12 +1,4 @@
-<div 
-  class="loading-bar" 
-  layout="column" 
-  layout-align="center center" 
-  ng-hide="groupLoaded && contributionsLoaded && commentsLoaded">
-  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>
-
-<div class="bucket-page" ng-if="groupLoaded && contributionsLoaded && commentsLoaded">
+<div class="bucket-page">
   <md-toolbar class="bucket-page__toolbar">
     <div class="md-toolbar-tools bucket-page__menu-bar">
       <md-button class="md-icon-button" aria-label="Settings" ng-click="back()">
@@ -25,7 +17,7 @@
         ></ng-md-icon>
         <div layout="column" layout-align="center center">
           <span class="bucket-page__funds-overview-header">Your funds</span>
-          <span class="bucket-page__funds-overview-amount">{{ currentMembership.balance() - contribution.amount | currency : group.currencySymbol : 0 }}</span>
+          <span class="bucket-page__funds-overview-amount">{{ membership.balance() - contribution.amount | currency : group.currencySymbol : 0 }}</span>
         </div>
       </span>
 
@@ -76,8 +68,8 @@
         <span class="bucket-page__progress-header">Progress</span>
 
         <div class="bucket-page__progress-bar-container">
-          <div class="bucket-page__progress-bar-primary" style="width: {{ percentNotContributedByUser }}%"></div>
-          <div class="bucket-page__progress-bar-secondary" style="width: {{ percentContributedByUser + percentNotContributedByUser + percentContributed() }}%"></div>
+          <div class="bucket-page__progress-bar-primary" style="width: {{ bucket.percentContributedByOthers(currentUser) }}%"></div>
+          <div class="bucket-page__progress-bar-secondary" style="width: {{ bucket.percentContributedByOthers(currentUser) + bucket.percentContributedByUser(currentUser) + percentContributed() }}%"></div>
         </div>
 
         <div layout="row" class="bucket-page__progress-info">
@@ -100,7 +92,7 @@
         <form class="bucket-page__fund-form" layout="row">
           <md-input-container class="bucket-page__fund-form-input-container" ng-if="fundFormOpened">
             <label>Amount</label>
-            <input class="bucket-page__fund-form-amount-input" type="number" step="any" min="0" pattern="[0-9]*" ng-model="contribution.amount" ng-change="normalizeContributionAmount()" ng-keypress="normalizeContributionAmount()" focus-if>
+            <input class="bucket-page__fund-form-amount-input" type="number" step="any" min="0" pattern="[0-9]*" ng-model="newContribution.amount" ng-change="normalizeContributionAmount()" ng-keypress="normalizeContributionAmount()" focus-if>
           </md-input-container>
 
           <md-button class="md-raised md-primary" ng-click='openFundForm()' ng-hide="fundFormOpened">Fund</md-button>

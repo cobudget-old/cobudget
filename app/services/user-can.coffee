@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'UserCan', (Toast, $location, $q, Records, ipCookie, AuthenticateUser) ->
+global.cobudgetApp.factory 'UserCan', (Toast, $location, $q, Records) ->
   new class UserCan
 
     viewGroup: (groupId) ->
@@ -10,3 +10,9 @@ global.cobudgetApp.factory 'UserCan', (Toast, $location, $q, Records, ipCookie, 
         memberId: global.cobudgetApp.currentUserId
       })
       validMemberships.length == 1
+
+    viewBucket: (bucketId) ->
+      bucket = Records.buckets.find({
+        id: bucketId  
+      })[0]
+      @viewGroup(bucket.groupId)

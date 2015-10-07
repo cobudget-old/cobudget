@@ -34,7 +34,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
         contribution.amount
     
     amountContributedByOthers: (user) ->
-      parseFloat(@totalContributions) - @amountContributedByUser(user)
+      @totalContributions - @amountContributedByUser(user)
 
     percentContributedByOthers: (user) ->
       @amountContributedByOthers(user) / @target * 100

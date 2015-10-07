@@ -15,8 +15,7 @@ module.exports =
       Records.groups.findOrFetchById(groupId).then (group) ->
         $scope.group = group
         Records.memberships.fetchByGroupId(groupId)
-        Records.buckets.fetchByGroupId(groupId).then ->
-          console.log($scope.group.buckets())
+        Records.buckets.fetchByGroupId(groupId)
         Records.contributions.fetchByGroupId(groupId)
 
     $scope.accessibleGroups = ->
