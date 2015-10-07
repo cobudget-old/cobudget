@@ -1,7 +1,14 @@
 class ContributionsController < AuthenticatedController
-  api :GET, '/contributions?bucket_id='
+  api :GET, '/contributions?bucket_id= &group_id='
   def index
-    contributions = Contribution.where(bucket_id: params[:bucket_id])
+    contributions = 
+      if params[:group_id]
+        Contribution.joins(:bucket)
+                    .where(user_id: current_user.id)
+                    .where("buckets.group_id = ?", params[:group_id])
+      else
+        Contribution.where(bucket_id: params[:bucket_id])
+      end
     render json: contributions
   end
 
