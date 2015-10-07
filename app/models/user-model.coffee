@@ -7,5 +7,9 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
     @plural: 'users'
 
     relationships: ->
-      @hasMany 'groups'
-      @hasMany 'memberships'
+      @hasMany 'memberships', with: 'memberId'
+
+    groups: ->
+      groupIds = _.map @memberships(), (membership) ->
+        membership.groupId
+      @recordStore.groups.find(groupIds)

@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.run ($rootScope, Records, $q, $location, AuthenticateUser, $auth) ->
+global.cobudgetApp.run ($rootScope, Records, $q, $location, AuthenticateUser, $auth, Toast) ->
 
   console.log('boot.coffee has loaded')
 
@@ -17,8 +17,6 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location, AuthenticateUser, $a
     Records.memberships.fetchMyMemberships().then (data) ->
       console.log('memberships loaded!')
       membershipsLoadedDeferred.resolve()
-
-  $auth.validateUser()
 
   $rootScope.$on 'auth:validation-success', (ev, user) ->
     console.log('validation success!')

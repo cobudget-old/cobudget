@@ -15,7 +15,6 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
       @belongsTo 'author', from: 'users', by: 'userId'
 
     amountRemaining: ->
-      # TODO: move totalContribution from server to client
       @target - @totalContributions
 
     percentFunded: ->
@@ -25,34 +24,20 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
       @remote.postMember(@id,'open_for_funding', {target: @target, fundingClosesAt: @fundingClosesAt})
 
     hasComments: ->
-      @comments().length > 0
+      @numOfComments > 0
+
+    contributionsByUser: (user) ->
+      @recordStore.contributions.find(bucketId: @id, userId: user.id)
+
+    amountContributedByUser: (user) ->
+      _.sum @contributionsByUser(user), (contribution) ->
+        contribution.amount
     
-    percentContributedByUser: (userId) ->
-      contributions = _.select @contributions(), (contribution) ->
-        contribution.userId == userId
-      @sumContributionPercentages(contributions)
+    amountContributedByOthers: (user) ->
+      parseFloat(@totalContributions) - @amountContributedByUser(user)
 
-    percentNotContributedByUser: (userId) ->
-      contributions = _.select @contributions(), (contribution) ->
-        contribution.userId != userId
-      @sumContributionPercentages(contributions)
+    percentContributedByOthers: (user) ->
+      @amountContributedByOthers(user) / @target * 100
 
-    amountContributedByUser: (userId) ->
-      contributions = _.select @contributions(), (contribution) ->
-        contribution.userId == userId      
-      parseInt(@sumContributionAmounts(contributions))
-
-    ### private methods ###
-    
-    sumContributionPercentages: (contributions) ->
-        @sumContributionAmounts(contributions) / @target * 100
-
-    sumContributionAmounts: (contributions) ->
-      contributionAmounts = contributions.map (contribution) ->
-        parseInt(contribution.amount)
-      if contributionAmounts.length > 0
-        totalAmountContributed = contributionAmounts.reduce (prev, curr) ->
-          prev + curr
-        totalAmountContributed
-      else 
-        0
+    percentContributedByUser: (user) ->
+      @amountContributedByUser(user) / @target * 100

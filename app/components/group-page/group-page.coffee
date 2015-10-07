@@ -4,26 +4,23 @@ module.exports =
       global.cobudgetApp.userValidated
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, $stateParams, $location, $window, $auth, Toast, $mdSidenav, UserCan, FetchRecordsFor) ->
+  controller: ($scope, $stateParams, $location, Records, $window, $auth, Toast, $mdSidenav, UserCan, CurrentUser) ->
 
     groupId = parseInt($stateParams.groupId)
-
-    console.log("i've loaded!!!!!!!!")
-
     if UserCan.viewGroup(groupId)
-      console.log("user CAN view group")
-      FetchRecordsFor.groupPage(groupId).then (data) ->
-        $scope.accessibleGroups = data.accessibleGroups
-        $scope.group = data.group
-        $scope.currentMembership = data.currentMembership
-        $scope.currentUser = data.currentUser
-        $scope.recordsLoaded = true
-    else
-      console.log("user CANNOT view group")
-      $scope.unauthorized = true
+      $scope.currentUser = CurrentUser()
+      $scope.membership = Records.memberships.find({groupId: groupId, memberId: CurrentUser().id})[0]
+      Records.groups.findOrFetchById(groupId).then (group) ->
+        $scope.group = group
+        Records.memberships.fetchByGroupId(groupId)
+        Records.buckets.fetchByGroupId(groupId).then ->
+          console.log($scope.group.buckets())
+        Records.contributions.fetchByGroupId(groupId)
+
+    $scope.accessibleGroups = ->
+      CurrentUser().groups()
 
     $scope.createBucket = ->
       $location.path("/buckets/new")
