@@ -2,11 +2,11 @@
   class="loading-bar" 
   layout="column" 
   layout-align="center center" 
-  ng-show="validatingUser">
+  ng-if="loading">
   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>
 
-<div class="welcome-page" ng-hide="validatingUser">
+<div class="welcome-page" ng-hide="loading">
   <md-toolbar class="md-primary welcome-page__toolbar">
     <h1 class="md-toolbar-tools welcome-page__heading" layout-align="center">Welcome to Cobudget!</h1>
   </md-toolbar>
