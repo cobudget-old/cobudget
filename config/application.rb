@@ -42,5 +42,7 @@ module CobudgetApi
     config.active_job.queue_adapter = :delayed_job
 
     config.eager_load_paths += %W( #{config.root}/services )
+
+    ActiveSupport.encode_big_decimal_as_string = false
   end
 end

@@ -15,6 +15,7 @@ gem 'foreigner'
 
 gem 'apipie-rails'
 gem 'active_model_serializers', '~> 0.8.0'
+gem 'activesupport-json_encoder'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'responders', '~> 2.0'
 
