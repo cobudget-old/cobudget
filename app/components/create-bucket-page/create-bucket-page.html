@@ -1,12 +1,4 @@
-<div 
-  class="loading-bar" 
-  layout="column" 
-  layout-align="center center" 
-  ng-hide="groupLoaded">
-  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>
-
-<div class="create-bucket-page" ng-show="groupLoaded">
+<div class="create-bucket-page">
   <md-toolbar class="md-whiteframe-z1 create-bucket-page__toolbar" layout-align="column">
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
@@ -28,7 +20,7 @@
 
   <md-content class="create-bucket-page__content">
     <div>
-      <md-subheader class="create-bucket-page__subheader-title">You're about to propose an idea to {{ group.name }}</md-subheader>
+      <md-subheader class="create-bucket-page__subheader-title">You're about to propose an idea</md-subheader>
     </div>
     
     <div>
@@ -47,6 +39,18 @@
       <md-input-container>
         <label>Description</label>
         <textarea required name="description" ng-model="bucket.description"></textarea>
+        <div ng-messages="bucketForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Group</label>
+        <md-select ng-model="bucket.groupId">
+          <md-option required ng-repeat="group in accessibleGroups" value="{{group.id}}">
+            {{group.name}}
+          </md-option>
+        </md-select>
         <div ng-messages="bucketForm.description.$error">
           <div ng-message="required">This is required.</div>
         </div>
