@@ -9,14 +9,16 @@ module.exports =
   controller: ($scope, $stateParams, $location, Records, $window, $auth, Toast, $mdSidenav, UserCan, CurrentUser) ->
 
     groupId = parseInt($stateParams.groupId)
-    if UserCan.viewGroup(groupId)
-      $scope.currentUser = CurrentUser()
-      $scope.membership = Records.memberships.find({groupId: groupId, memberId: CurrentUser().id})[0]
-      Records.groups.findOrFetchById(groupId).then (group) ->
-        $scope.group = group
+    group = Records.groups.findOrFetchById(groupId).then (group) ->
+      $scope.group = group
+      if UserCan.viewGroup(group)
+        $scope.currentUser = CurrentUser()
+        $scope.membership = group.membershipFor(CurrentUser())
         Records.memberships.fetchByGroupId(groupId)
         Records.buckets.fetchByGroupId(groupId)
         Records.contributions.fetchByGroupId(groupId)
+      else
+        alert('NONONOONO')
 
     $scope.accessibleGroups = ->
       CurrentUser().groups()

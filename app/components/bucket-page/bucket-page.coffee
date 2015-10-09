@@ -10,7 +10,8 @@ module.exports =
 
     bucketId = parseInt $stateParams.bucketId
     Records.buckets.findOrFetchById(bucketId).then (bucket) -> 
-      if UserCan.viewBucket(bucketId)
+      if UserCan.viewBucket(bucket)
+        console.log('CAN view bucket')
         $scope.currentUser = CurrentUser()
         $scope.bucket = bucket
         $scope.group = bucket.group()
@@ -18,6 +19,8 @@ module.exports =
         Records.contributions.fetchByBucketId(bucketId)
         Records.comments.fetchByBucketId(bucketId)
         $scope.recordsLoaded = true
+      else
+        console.log('can not view bucket')
 
     $scope.newComment = Records.comments.build(bucketId: bucketId)
     $scope.newContribution = Records.contributions.build(bucketId: bucketId)

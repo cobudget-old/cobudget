@@ -4,15 +4,12 @@ null
 global.cobudgetApp.factory 'UserCan', (Toast, $location, $q, Records) ->
   new class UserCan
 
-    viewGroup: (groupId) ->
+    viewGroup: (group) ->
       validMemberships = Records.memberships.find({
-        groupId: groupId,
+        groupId: group.id,
         memberId: global.cobudgetApp.currentUserId
       })
       validMemberships.length == 1
 
-    viewBucket: (bucketId) ->
-      bucket = Records.buckets.find({
-        id: bucketId  
-      })[0]
-      @viewGroup(bucket.groupId)
+    viewBucket: (bucket) ->
+      @viewGroup(bucket.group())
