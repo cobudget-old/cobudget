@@ -7,20 +7,24 @@ module.exports =
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
   controller: ($scope, $state, Records, $stateParams, $location, Toast, UserCan, CurrentUser) ->
+    console.log('bucket page loaded')
 
     bucketId = parseInt $stateParams.bucketId
-    Records.buckets.findOrFetchById(bucketId).then (bucket) -> 
-      if UserCan.viewBucket(bucket)
-        console.log('user can view bucket')
-        $scope.currentUser = CurrentUser()
-        $scope.bucket = bucket
-        $scope.group = bucket.group()
-        $scope.membership = Records.memberships.find(groupId: $scope.group.id, memberId: CurrentUser().id)[0]
-        Records.contributions.fetchByBucketId(bucketId)
-        Records.comments.fetchByBucketId(bucketId)
-        $scope.recordsLoaded = true
-      else
-        console.log('user can not view bucket')
+    Records.buckets.findOrFetchById(bucketId)
+      .then (bucket) -> 
+        if UserCan.viewBucket(bucket)
+          console.log('user can view bucket')
+          $scope.currentUser = CurrentUser()
+          $scope.bucket = bucket
+          $scope.group = bucket.group()
+          $scope.membership = Records.memberships.find(groupId: $scope.group.id, memberId: CurrentUser().id)[0]
+          Records.contributions.fetchByBucketId(bucketId)
+          Records.comments.fetchByBucketId(bucketId)
+          $scope.recordsLoaded = true
+        else
+          console.log('user can not view bucket')
+      .catch ->
+        console.log('bucket does not exist')
 
     $scope.newComment = Records.comments.build(bucketId: bucketId)
     $scope.newContribution = Records.contributions.build(bucketId: bucketId)

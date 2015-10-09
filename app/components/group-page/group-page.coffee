@@ -7,19 +7,23 @@ module.exports =
   url: '/groups/:groupId'
   template: require('./group-page.html')
   controller: ($scope, $stateParams, $location, Records, $window, $auth, Toast, $mdSidenav, UserCan, CurrentUser) ->
+    console.log('group page loaded')
 
     groupId = parseInt($stateParams.groupId)
-    group = Records.groups.findOrFetchById(groupId).then (group) ->
-      if UserCan.viewGroup(group)
-        console.log('user can view group')
-        $scope.group = group
-        $scope.currentUser = CurrentUser()
-        $scope.membership = group.membershipFor(CurrentUser())
-        Records.memberships.fetchByGroupId(groupId)
-        Records.buckets.fetchByGroupId(groupId)
-        Records.contributions.fetchByGroupId(groupId)
-      else
-        console.log('user can not view group')
+    Records.groups.findOrFetchById(groupId)
+      .then (group) ->
+        if UserCan.viewGroup(group)
+          console.log('user can view group')
+          $scope.group = group
+          $scope.currentUser = CurrentUser()
+          $scope.membership = group.membershipFor(CurrentUser())
+          Records.memberships.fetchByGroupId(groupId)
+          Records.buckets.fetchByGroupId(groupId)
+          Records.contributions.fetchByGroupId(groupId)
+        else
+          console.log('user can not view group')
+      .catch ->
+        console.log('group does not exist')
 
     $scope.accessibleGroups = ->
       CurrentUser().groups()

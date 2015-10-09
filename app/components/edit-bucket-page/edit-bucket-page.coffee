@@ -10,13 +10,16 @@ module.exports =
     
     bucketId = parseInt $stateParams.bucketId
 
-    Records.buckets.findOrFetchById(bucketId).then (bucket) ->
-      if UserCan.viewBucket(bucket)
-        console.log('user can view bucket')
-        $scope.bucket = bucket
-      else
-        console.log('user can not view bucket')
-
+    Records.buckets.findOrFetchById(bucketId)
+      .then (bucket) ->
+        if UserCan.viewBucket(bucket)
+          console.log('user can view bucket')
+          $scope.bucket = bucket
+        else
+          console.log('user can not view bucket')
+      .catch ->
+        console.log('bucket does not exist')
+        
     $scope.cancel = () ->
       $location.path("/buckets/#{bucketId}")
 
