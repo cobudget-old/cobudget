@@ -10,9 +10,9 @@ module.exports =
 
     groupId = parseInt($stateParams.groupId)
     group = Records.groups.findOrFetchById(groupId).then (group) ->
-      $scope.group = group
       if UserCan.viewGroup(group)
         console.log('user can view group')
+        $scope.group = group
         $scope.currentUser = CurrentUser()
         $scope.membership = group.membershipFor(CurrentUser())
         Records.memberships.fetchByGroupId(groupId)
