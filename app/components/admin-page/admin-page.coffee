@@ -1,7 +1,12 @@
 module.exports = 
+  resolve:
+    userValidated: ->
+      global.cobudgetApp.userValidated
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/admin'
   template: require('./admin-page.html')
-  controller: ($scope, $auth, $location, Records, $rootScope, config) ->
+  controller: ($scope, $auth, $location, Records, $rootScope, config, CurrentUser, UserCan, $state) ->
 
     $scope.currencies = [
       { code: 'USD', symbol: '$' },
@@ -9,26 +14,23 @@ module.exports =
       { code: 'EUR', symbol: '€' }
     ]
 
-    $scope.fetchAllGroups = ->
-      Records.groups.getAll().then (groups) ->
-        $scope.groups = groups
+    if UserCan.viewAdminPanel()
+      $scope.accessibleGroups = CurrentUser().groups()
 
-    $scope.fetchAllGroups()
-    $scope.group = Records.groups.build()
+    $scope.newGroup = Records.groups.build()
 
     $scope.createGroup = ->
-      $scope.group.save().then (data) ->
-        $scope.group = Records.groups.build()
-        $scope.fetchAllGroups()
+      $scope.newGroup.save().then (data) ->
+        newGroupId = data.groups[0].id
+        Records.memberships.fetchMyMemberships().then (data) ->
+          $scope.accessibleGroups = CurrentUser().groups()
+        $scope.newGroup = Records.groups.build()
 
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
 
     $scope.onCsvUploadSuccess = (groupId) ->
-      Records.groups.findOrFetchById(groupId).then (updatedGroup) ->
-        updatedGroupIndex = _.findIndex $scope.groups, (group) ->
-          group.id == groupId
-        $scope.groups[updatedGroupIndex] = updatedGroup
+      Records.groups.findOrFetchById(groupId)
 
     $scope.onCsvUploadCompletion = ->
       alert('upload complete')
@@ -36,8 +38,7 @@ module.exports =
     $scope.updateGroupCurrency = (groupId, currencyCode) ->
       Records.groups.findOrFetchById(groupId).then (group) ->
         group.currencyCode = currencyCode
-        group.save().then ->
-          $scope.fetchAllGroups()
+        group.save()
 
     $scope.viewGroup = (groupId) ->
       $location.path("/groups/#{groupId}")

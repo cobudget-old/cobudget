@@ -6,11 +6,11 @@
   </md-toolbar>
 
   <md-content class="admin-page__content">
-    <form name='groupForm' class="admin-page__form" ng-submit="createGroup(); groupForm.$setUntouched()">
+    <form name='newGroupForm' class="admin-page__form" ng-submit="createGroup(); newGroupForm.$setUntouched()">
       <md-input-container>
         <label>name</label>
-        <input required name="name" type="text" ng-model="group.name">
-        <div ng-messages="groupForm.name.$error">
+        <input required name="name" type="text" ng-model="newGroup.name">
+        <div ng-messages="newGroupForm.name.$error">
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
@@ -22,7 +22,7 @@
     <md-subheader class="admin-page__group-list-subheader">Edit Existing Groups</md-subheader>
 
     <md-list class="admin-page__group-list">
-      <div class="admin-page__group-list-item-container" ng-repeat="group in groups">      
+      <div class="admin-page__group-list-item-container" ng-repeat="group in accessibleGroups">      
         <md-list-item class="admin-page__group-list-item">
           <div>
             <div class="admin-page__group-info" layout="row" layout-align="start center">
