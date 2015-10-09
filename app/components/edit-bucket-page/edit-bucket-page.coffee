@@ -1,15 +1,22 @@
 module.exports = 
+  resolve:
+    userValidated: ->
+      global.cobudgetApp.userValidated
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/buckets/:bucketId/edit'
   template: require('./edit-bucket-page.html')
-  controller: ($scope, Records, $stateParams, $location, Toast) ->
+  controller: ($scope, Records, $stateParams, $location, Toast, UserCan) ->
     
-    $scope.bucketLoaded = false
     bucketId = parseInt $stateParams.bucketId
 
     Records.buckets.findOrFetchById(bucketId).then (bucket) ->
-      $scope.bucket = bucket
-      $scope.bucketLoaded = true
-          
+      if UserCan.viewBucket(bucket)
+        console.log('user can view bucket')
+        $scope.bucket = bucket
+      else
+        console.log('user can not view bucket')
+
     $scope.cancel = () ->
       $location.path("/buckets/#{bucketId}")
 
