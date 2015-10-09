@@ -9,8 +9,6 @@ module.exports =
     Records.buckets.findOrFetchById(bucketId).then (bucket) ->
       $scope.bucket = bucket
       $scope.bucketLoaded = true
-      # temp hack to get around target form number validation
-      $scope.bucket.target = parseInt $scope.bucket.target
           
     $scope.cancel = () ->
       $location.path("/buckets/#{bucketId}")
