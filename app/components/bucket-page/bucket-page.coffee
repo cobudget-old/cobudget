@@ -18,6 +18,7 @@ module.exports =
         $scope.membership = Records.memberships.find(groupId: $scope.group.id, memberId: CurrentUser().id)[0]
         Records.contributions.fetchByBucketId(bucketId)
         Records.comments.fetchByBucketId(bucketId)
+        $scope.recordsLoaded = true
       else
         console.log('user can not view bucket')
 
