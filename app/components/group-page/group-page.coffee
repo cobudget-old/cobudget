@@ -12,13 +12,14 @@ module.exports =
     group = Records.groups.findOrFetchById(groupId).then (group) ->
       $scope.group = group
       if UserCan.viewGroup(group)
+        console.log('user can view group')
         $scope.currentUser = CurrentUser()
         $scope.membership = group.membershipFor(CurrentUser())
         Records.memberships.fetchByGroupId(groupId)
         Records.buckets.fetchByGroupId(groupId)
         Records.contributions.fetchByGroupId(groupId)
       else
-        alert('NONONOONO')
+        console.log('user can not view group')
 
     $scope.accessibleGroups = ->
       CurrentUser().groups()
