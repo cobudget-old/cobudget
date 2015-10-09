@@ -27,8 +27,9 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location, AuthenticateUser, $a
     work(user)
 
   $rootScope.$on 'auth:validation-error', () ->
+    userValidatedDeferred.reject()
+    membershipsLoadedDeferred.reject()
+    global.cobudgetApp.currentUserId = null
     console.log('validation-error')
     $location.path('/')
     Toast.show('Please log in to continue')
-    userValidatedDeferred.reject()
-    membershipsLoadedDeferred.reject()
