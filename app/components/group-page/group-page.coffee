@@ -39,7 +39,6 @@ module.exports =
       $location.path("/admin")
 
     $scope.openSidenav = ->
-      console.log('openSidenav has been called')
       $rootScope.$broadcast('open sidenav')
 
     $scope.openFeedbackForm = ->

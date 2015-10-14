@@ -1,9 +1,9 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.directive 'sidebar', () ->
+global.cobudgetApp.directive 'sidenav', () ->
     restrict: 'E'
-    template: require('./sidebar.html')
+    template: require('./sidenav.html')
     replace: true
     controller: ($scope, CurrentUser, $mdSidenav, $location) ->
 
