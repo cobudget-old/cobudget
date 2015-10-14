@@ -49,4 +49,12 @@ module.exports =
           global.cobudgetApp.currentUserId = null
           $location.path('/')
 
+    $scope.makeMemberAdmin = (membership) ->
+      membership.isAdmin = true
+      membership.save()
+
+    $scope.undoMemberAdmin = (membership) ->
+      membership.isAdmin = false
+      membership.save()
+
     return
