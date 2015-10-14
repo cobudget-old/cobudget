@@ -13,9 +13,11 @@ module.exports =
     Records.buckets.findOrFetchById(bucketId)
       .then (bucket) ->
         if UserCan.viewBucket(bucket)
+          $scope.authorized = true
           Error.clear()
           $scope.bucket = bucket
         else
+          $scope.authorized = false
           Error.set('cannot view bucket')
       .catch ->
         Error.set('bucket not found')

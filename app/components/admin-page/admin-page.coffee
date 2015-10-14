@@ -15,10 +15,12 @@ module.exports =
     ]
 
     if UserCan.viewAdminPanel()
+      $scope.authorized = true
       Error.clear()
       $scope.accessibleGroups = CurrentUser().groups()
     else
-      Error.set('you do not have access to this page')
+      $scope.authorized = false
+      Error.set("you can't view this page")
 
     $scope.newGroup = Records.groups.build()
 
