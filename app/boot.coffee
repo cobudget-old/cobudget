@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.run ($rootScope, Records, $q, $location, AuthenticateUser, $auth, Toast) ->
+global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast) ->
 
   console.log('boot.coffee has loaded')
 
