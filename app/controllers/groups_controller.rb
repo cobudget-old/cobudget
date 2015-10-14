@@ -3,7 +3,7 @@ class GroupsController < AuthenticatedController
 
   api :GET, '/groups', 'List groups'
   def index
-    groups = Group.all.order(id: :desc)
+    groups = current_user.memberships.map { |m| m.group }
     render json: groups
   end
 

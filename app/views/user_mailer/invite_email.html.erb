@@ -1,5 +1,19 @@
-<p>Hi there!</p>
+<% if @initial_allocation_amount > 0 %>
+  <p>
+    You have been invited by <%= @inviter.name %> to collaboratively fund with <%= @group.name %> on Cobudget. You've got <%= @initial_allocation_amount_formatted %> to spend!
+  </p>
+<% else %>
+  <p>
+    You have been invited by <%= @inviter.name %> to collaboratively fund with <%= @group.name %> on Cobudget.
+  </p>
+<% end %>
 
-<p><%= @inviter.name %> has invited you to collaboratively budget with everyone else at "<%= @group.name %>".</p>
+<p>
+  Cobudget helps crowds with purpose create more together.
+</p>
 
-<p>To confirm your acccount, please visit <%= link_to 'this link', "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}" %>
+<p>
+  <%= link_to "See how it works", "https://docs.google.com/presentation/d/1ZQYKxhHwKuQGmOMPpoE8Eo0XMuw1yn55Bjgsh6-D0eQ/present?slide=id.p" %> and <%= link_to "get started", "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}"%>.
+</p>
+
+  

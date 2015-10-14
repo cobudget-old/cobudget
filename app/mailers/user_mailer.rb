@@ -1,17 +1,21 @@
 class UserMailer < ActionMailer::Base
-  def invite_email(user: , group:, inviter:)
+  def invite_email(user: , group: , inviter: , initial_allocation_amount:)
     @user = user
     @group = group
     @inviter = inviter
+    @initial_allocation_amount = initial_allocation_amount
+    @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
     mail(to: @user.name_and_email,
         from: "Cobudget Accounts <accounts@cobudget.co>",
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
-  def invite_to_group_email(user: , inviter: , group: )
+  def invite_to_group_email(user: , inviter: , group: , initial_allocation_amount:)
     @user = user
     @inviter = inviter
     @group = group
+    @initial_allocation_amount = initial_allocation_amount
+    @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
     mail(to: @user.name_and_email,
         from: "Cobudget Accounts <accounts@cobudget.co>",
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
@@ -25,7 +29,7 @@ class UserMailer < ActionMailer::Base
     @group = @bucket.group
     mail(to: @author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on your bucket.")
+         subject: "#{@commenter.name} has commented on your bucket.")
   end
 
   def notify_user_of_new_comment_email(comment: , user:)
@@ -35,7 +39,7 @@ class UserMailer < ActionMailer::Base
     @group = @bucket.group
     mail(to: user.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@commenter.name} has commented on #{@bucket.name}")
+         subject: "#{@commenter.name} has commented on #{@bucket.name}")
   end
 
   def notify_author_that_bucket_received_contribution(contribution: )
@@ -46,7 +50,7 @@ class UserMailer < ActionMailer::Base
     author = @bucket.user
     mail(to: author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@funder.name} has funded your bucket - #{@contribution.formatted_amount}.")
+         subject: "#{@funder.name} has funded your bucket - #{@contribution.formatted_amount}.")
   end
 
   def notify_author_that_bucket_is_funded(bucket: )
@@ -55,7 +59,7 @@ class UserMailer < ActionMailer::Base
     @author = @bucket.user
     mail(to: @author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] Your bucket has been fully funded!")
+         subject: "Your bucket has been fully funded!")
   end
 
   def notify_member_with_balance_that_bucket_is_live(bucket: , member: )
@@ -64,7 +68,7 @@ class UserMailer < ActionMailer::Base
     @membership = Membership.find_by(member: member, group: @group)
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@bucket.name} is now requesting funding!")
+         subject: "#{@bucket.name} is now requesting funding!")
   end
 
   def notify_member_with_zero_balance_that_bucket_is_live(bucket: , member: )
@@ -73,22 +77,38 @@ class UserMailer < ActionMailer::Base
     @membership = Membership.find_by(member: member, group: @group)
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "[Cobudget - #{@group.name}] #{@bucket.name} is now requesting funding!")
+         subject: "#{@bucket.name} is now requesting funding!")
   end
 
   def notify_member_that_bucket_is_funded(bucket: , member: )
     @bucket = bucket
     @group = @bucket.group
     @member_contribution_amount = Contribution.where(bucket: bucket, user: member).sum(:amount)
-    @formatted_member_contribution_amount = Money.new(@member_contribution_amount * 100, "USD").format
+    @formatted_member_contribution_amount = Money.new(@member_contribution_amount * 100, @group.currency_code).format
     if @member_contribution_amount > 0
       mail(to: member.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "[Cobudget - #{@group.name}] You did it! #{@bucket.name} has been fully funded!")
+           subject: "You did it! #{@bucket.name} has been fully funded!")
     else 
       mail(to: member.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "[Cobudget - #{@group.name}] #{@bucket.name} has been fully funded!")      
+           subject: "#{@bucket.name} has been fully funded!")      
     end
+  end
+
+  def notify_member_that_bucket_was_created(bucket: , member:)
+    @bucket = bucket
+    mail(to: member.name_and_email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "#{bucket.user.name} has created a new bucket idea: #{@bucket.name}")      
+  end
+
+  def notify_member_that_they_received_allocation(admin: , member: , group: , amount:)
+    @member = member
+    @group = group
+    @formatted_amount = Money.new(amount * 100, @group.currency_code).format
+    mail(to: @member.name_and_email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "#{admin.name} gave you funds to spend in #{@group.name}")
   end
 end

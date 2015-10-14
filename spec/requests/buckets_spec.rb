@@ -5,6 +5,14 @@ xdescribe "Buckets" do
   describe "GET '/buckets?group_id='" do
   end
 
+  describe "POST '/buckets'" do
+    it "creates a new bucket with specified params" do
+    end
+
+    it "sends 'notify_member_that_bucket_is_funded' emails to all members in the group except the bucket creator" do
+    end
+  end
+
   describe "PATCH '/buckets/:id'" do
   end
 

@@ -1,0 +1,13 @@
+<p><%= @bucket.user.name %> has created a new bucket idea in <%= @bucket.group.name %> on Cobudget.</p>
+
+<p> - - - </p>
+
+<p><strong><%= @bucket.name %></strong></p>
+
+<p>"<%= @bucket.description %>"</p>
+
+<p> - - - </p>
+
+<p>Now is your chance to help <%= @bucket.user.name %> make this idea better, or to offer your skills to help them achieve their goal!</p>
+
+<p><%= link_to "Let's go!", "#{root_url}#/buckets/#{@bucket.id}" %></p>
