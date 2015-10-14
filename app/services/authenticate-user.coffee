@@ -2,6 +2,7 @@ null
 
 ### @ngInject ###
 global.cobudgetApp.factory 'AuthenticateUser', (Toast, $location, $q, $auth) ->
+  # maybe remove later?
   () ->
     deferred = $q.defer()
     $auth.validateUser()
