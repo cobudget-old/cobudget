@@ -6,13 +6,14 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($scope, $stateParams, $location, Records, $window, $auth, Toast, $mdSidenav, UserCan, CurrentUser) ->
+  controller: ($rootScope, $scope, $stateParams, $location, Records, $window, $auth, Toast, UserCan, CurrentUser, Error) ->
     console.log('group page loaded')
 
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
       .then (group) ->
         if UserCan.viewGroup(group)
+          Error.clear()
           console.log('user can view group')
           $scope.group = group
           $scope.currentUser = CurrentUser()
@@ -21,12 +22,9 @@ module.exports =
           Records.buckets.fetchByGroupId(groupId)
           Records.contributions.fetchByGroupId(groupId)
         else
-          console.log('user can not view group')
+          Error.set('cannot view group')
       .catch ->
-        console.log('group does not exist')
-
-    $scope.accessibleGroups = ->
-      CurrentUser().groups()
+        Error.set('group not found')
 
     $scope.createBucket = ->
       $location.path("/buckets/new")
