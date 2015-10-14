@@ -1,0 +1,16 @@
+.error-page {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+
+.error-page__shrug {
+  font-size: 40px;
+}
+
+.error-page__message {
+  font-size: 20px;
+}

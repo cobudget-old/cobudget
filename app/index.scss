@@ -5,6 +5,7 @@
 // ask mikey how to mass import shit
 @import './components/mixins.scss';
 @import './components/utilities.scss';
+
 @import './components/welcome-page/welcome-page.scss';
 @import './components/group-page/group-page.scss';
 @import './components/create-bucket-page/create-bucket-page.scss';
@@ -12,6 +13,9 @@
 @import './components/edit-bucket-page/edit-bucket-page.scss';
 @import './components/admin-page/admin-page.scss';
 @import './components/confirm-account-page/confirm-account-page.scss';
+
+@import './directives/error-page/error-page.scss';
+
 @import './components/ng-material-customs.scss';
 
 // loading-bar
@@ -34,12 +38,4 @@
 .loading-bar md-progress-circular .md-inner .md-left .md-half-circle, 
 .loading-bar md-progress-circular .md-inner .md-right .md-half-circle {
   border-top-color: $cobudget-orange;
-}
-
-.page-not-found {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  font-size: 140px;
-  transform: translate(-50%,-50%);
 }
