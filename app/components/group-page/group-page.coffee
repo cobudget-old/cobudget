@@ -12,6 +12,7 @@ module.exports =
     Records.groups.findOrFetchById(groupId)
       .then (group) ->
         if UserCan.viewGroup(group)
+          $scope.authorized = true
           Error.clear()
           $scope.group = group
           $scope.currentUser = CurrentUser()
@@ -20,6 +21,7 @@ module.exports =
           Records.buckets.fetchByGroupId(groupId)
           Records.contributions.fetchByGroupId(groupId)
         else
+          $scope.authorized = false
           Error.set('cannot view group')
       .catch ->
         Error.set('group not found')
