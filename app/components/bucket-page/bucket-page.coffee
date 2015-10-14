@@ -6,14 +6,13 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, $state, Records, $stateParams, $location, Toast, UserCan, CurrentUser) ->
-    console.log('bucket page loaded')
+  controller: ($scope, $state, Records, $stateParams, $location, Toast, UserCan, CurrentUser, Error, $window) ->
 
     bucketId = parseInt $stateParams.bucketId
     Records.buckets.findOrFetchById(bucketId)
       .then (bucket) -> 
         if UserCan.viewBucket(bucket)
-          console.log('user can view bucket')
+          Error.clear()
           $scope.currentUser = CurrentUser()
           $scope.bucket = bucket
           $scope.group = bucket.group()
@@ -22,9 +21,9 @@ module.exports =
           Records.comments.fetchByBucketId(bucketId)
           $scope.recordsLoaded = true
         else
-          console.log('user can not view bucket')
+          Error.set('cannot view bucket')
       .catch ->
-        console.log('bucket does not exist')
+        Error.set('bucket not found')
 
     $scope.newComment = Records.comments.build(bucketId: bucketId)
     $scope.newContribution = Records.contributions.build(bucketId: bucketId)
@@ -34,7 +33,6 @@ module.exports =
       $location.path("/groups/#{$scope.group.id}")
 
     $scope.showFullDescription = false
-
     $scope.readMore = ->
       $scope.showFullDescription = true
 
