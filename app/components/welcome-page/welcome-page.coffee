@@ -1,14 +1,12 @@
 module.exports = 
   url: '/'
   template: require('./welcome-page.html')
-  controller: ($scope, $auth, $location, Records) ->
+  controller: ($scope, $auth, $location, Records, Error, CurrentUser) ->
 
-    $scope.loading = true
-    $auth.validateUser()
-      .then ->
-        $scope.redirectToGroupPage()
-      .catch ->
-        $scope.loading = false
+    Error.clear()
+    
+    $scope.$on 'auth:validation-success', (ev, user) ->
+      $scope.redirectToGroupPage()
 
     $scope.login = (formData) ->
       $scope.formError = ""
