@@ -1,65 +1,6 @@
 <div class="group-page">
 
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2 group-page__sidenav" md-component-id="left">
-    <md-toolbar class="group-page__sidenav-toolbar">
-
-      <div layout="column" layout-align="space-between start" class="group-page__user-avatar-container">
-        <div class="group-page__user-avatar" layout="column" layout-align="center center">
-          <div>{{ currentUser.name[0] | uppercase }}</div>
-        </div>
-        <div class="group-page__user-email">{{ currentUser.email }}</div>  
-      </div>
-    </md-toolbar>
-
-    <md-content class="group-page__sidenav-content">
-
-<!--       <div layout="row" layout-align="start center" class="group-page__sidenav-option">
-        <ng-md-icon icon="flag" 
-          class="group-page__sidenav-option-icon" 
-          layout="column"
-          layout-align="center center"
-        ></ng-md-icon>
-        <div class="group-page__sidenav-option-subheader">Updates</div>        
-      </div>
-
-      <div layout="row" layout-align="start center" class="group-page__sidenav-option">
-        <ng-md-icon icon="inbox" 
-          class="group-page__sidenav-option-icon" 
-          layout="column"
-          layout-align="center center"
-        ></ng-md-icon>
-        <div class="group-page__sidenav-option-subheader">My Buckets</div>        
-      </div>
- -->
-      <div layout="row" layout-align="start center" class="group-page__sidenav-option">
-        <ng-md-icon icon="group" 
-          class="group-page__sidenav-option-icon" 
-          layout="column"
-          layout-align="center center"
-        ></ng-md-icon>
-
-        <div class="group-page__sidenav-option-subheader">My Groups</div>
-
-        <ng-md-icon icon="arrow_drop_down" 
-          class="group-page__sidenav-option-icon"
-          layout="column"
-          layout-align="center center"
-        ></ng-md-icon>
-      </div>
-
-      <md-divider></md-divider>
-
-      <div class="group-page__sidenav-expanded-content">
-        <md-list-item ng-repeat="group in accessibleGroups()" ng-click="redirectToGroupPage(group.id)">
-          <div layout="row" layout-align="start center">
-            <div class="group-page__sidenav-group-name">{{ group.name }}</div>
-          </div>
-        </md-list-item>
-      </div>
-
-    </md-content>
-  </md-sidenav>
-
+  <sidebar></sidebar>
 
   <md-toolbar class="group-page__toolbar">
     <div class="md-toolbar-tools group-page__menu-bar">

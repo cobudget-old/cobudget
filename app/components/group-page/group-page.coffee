@@ -38,6 +38,10 @@ module.exports =
     $scope.openAdminPanel = ->
       $location.path("/admin")
 
+    $scope.openSidenav = ->
+      console.log('openSidenav has been called')
+      $rootScope.$broadcast('open sidenav')
+
     $scope.openFeedbackForm = ->
       $window.location.href = 'https://docs.google.com/forms/d/1-_zDQzdMmq_WndQn2bPUEW2DZQSvjl7nIJ6YkvUcp0I/viewform?usp=send_form';
 
@@ -46,14 +50,5 @@ module.exports =
           Toast.show("You've been signed out")
           global.cobudgetApp.currentUserId = null
           $location.path('/')
-
-    $scope.openSidenav = ->
-      $mdSidenav('left').open()
-
-    $scope.redirectToGroupPage = (groupId) ->
-      if $scope.group.id == parseInt(groupId)
-        $mdSidenav('left').close()
-      else
-        $location.path("/groups/#{groupId}")
 
     return
