@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/admin'
   template: require('./admin-page.html')
-  controller: ($scope, $auth, $location, Records, $rootScope, config, CurrentUser, UserCan, $state) ->
+  controller: ($scope, $location, Records, config, CurrentUser, UserCan, Error) ->
 
     $scope.currencies = [
       { code: 'USD', symbol: '$' },
@@ -15,7 +15,10 @@ module.exports =
     ]
 
     if UserCan.viewAdminPanel()
+      Error.clear()
       $scope.accessibleGroups = CurrentUser().groups()
+    else
+      Error.set('you do not have access to this page')
 
     $scope.newGroup = Records.groups.build()
 
