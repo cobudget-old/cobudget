@@ -7,14 +7,12 @@ module.exports =
   url: '/groups/:groupId'
   template: require('./group-page.html')
   controller: ($rootScope, $scope, $stateParams, $location, Records, $window, $auth, Toast, UserCan, CurrentUser, Error) ->
-    console.log('group page loaded')
 
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
       .then (group) ->
         if UserCan.viewGroup(group)
           Error.clear()
-          console.log('user can view group')
           $scope.group = group
           $scope.currentUser = CurrentUser()
           $scope.membership = group.membershipFor(CurrentUser())
