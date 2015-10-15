@@ -68,7 +68,7 @@
     "napa": "^1.2.0",
     "ng-focus-if": "^1.0.2",
     "ng-sanitize": "0.0.2",
-    "ng-token-auth": "lynndylanhurley/ng-token-auth#ac5a8ba",
+    "ng-token-auth": "lynndylanhurley/ng-token-auth#v0.0.29-beta1",
     "node-sass": "^3.3.3",
     "recase": "^1.0.4",
     "xtend": "^4.0.0"
