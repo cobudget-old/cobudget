@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: ($rootScope, $scope, $stateParams, $location, Records, $window, $auth, Toast, UserCan, CurrentUser, Error) ->
+  controller: (CurrentUser, Error, $location, Records, $rootScope, $scope, $stateParams, UserCan, $window) ->
 
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
@@ -43,12 +43,6 @@ module.exports =
 
     $scope.openFeedbackForm = ->
       $window.location.href = 'https://docs.google.com/forms/d/1-_zDQzdMmq_WndQn2bPUEW2DZQSvjl7nIJ6YkvUcp0I/viewform?usp=send_form';
-
-    $scope.signOut = ->
-       $auth.signOut().then ->
-          global.cobudgetApp.currentUserId = null
-          $location.path('/')
-          Toast.show("You've been signed out")
 
     $scope.makeMemberAdmin = (membership) ->
       membership.isAdmin = true
