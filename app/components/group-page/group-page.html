@@ -79,49 +79,7 @@
       </md-list>
     </div>
 
-    <div class="group-page__funders-content" ng-if="tabSelected === 1">
-      <md-list class="group-page__funders">
-        <md-list-item ng-repeat="funderMembership in group.memberships()">
-          <div layout="row" flex class="group-page__funder-container">
-            <div class="group-page__funder-name-container" layout="row" layout-align="start center" flex>
-              <div class="group-page__funder-avatar" layout="column" layout-align="center center">
-                <div>{{ funderMembership.member().name[0] | uppercase }}</div>
-              </div>
-              <span class="group-page__funder-name">{{ funderMembership.member().name }}</span>
-              <span class="group-page__funder-admin-label" ng-if="funderMembership.isAdmin">(admin)</span>
-            </div>
+    <group-page-funders></group-page-funders>
 
-            <div layout="column" layout-align="center end" flex="20">
-              <span class="group-page__funder-balance">{{ funderMembership.balance() | currency : group.currencySymbol : 0 }}</span>
-            </div>
-
-            <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
-              <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
-                <ng-md-icon 
-                  icon="more_vert" 
-                  layout="column" 
-                  layout-align="center center" 
-                  class="group-page__funder-more-button-icon"
-                ></ng-md-icon>
-              </md-button>
-            
-              <md-menu-content width="2">
-                <md-menu-item ng-if="!funderMembership.isAdmin">
-                  <md-button ng-click="makeMemberAdmin(funderMembership)">
-                    <span md-menu-align-target>Make administrator</span>
-                  </md-button>
-                </md-menu-item>
-
-                <md-menu-item ng-if="funderMembership.isAdmin">
-                  <md-button ng-click="undoMemberAdmin(funderMembership)">
-                    <span md-menu-align-target>Undo administrator</span>
-                  </md-button>
-                </md-menu-item>
-              </md-menu-content>
-            </md-menu>
-          </div>
-        </md-list-item>
-      </md-list>
-    </div>
   </md-content>
 </div>

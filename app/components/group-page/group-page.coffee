@@ -29,12 +29,4 @@ module.exports =
     $scope.showBucket = (bucketId) ->
       $location.path("/buckets/#{bucketId}")
 
-    $scope.makeMemberAdmin = (membership) ->
-      membership.isAdmin = true
-      membership.save()
-
-    $scope.undoMemberAdmin = (membership) ->
-      membership.isAdmin = false
-      membership.save()
-
     return
