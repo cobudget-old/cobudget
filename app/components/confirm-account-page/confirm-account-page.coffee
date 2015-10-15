@@ -23,10 +23,6 @@ module.exports =
           global.cobudgetApp.currentUserId = user.id
           loginParams = { email: user.email, password: formData.password }
           $auth.submitLogin(loginParams)
-            .then ->
-              Toast.show('Your account is set up! Welcome to Cobudget!')
-              group = data.groups[0]
-              $location.path("/groups/#{group.id}")
             .catch ->
               Toast.show('Sorry, that confirmation token has expired.')
               $location.path('/')

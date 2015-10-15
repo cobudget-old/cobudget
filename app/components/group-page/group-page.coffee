@@ -1,7 +1,7 @@
 module.exports =
   resolve:
-    userValidated: ->
-      global.cobudgetApp.userValidated
+    userValidated: ($auth) ->
+      $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId'
