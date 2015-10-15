@@ -46,9 +46,9 @@ module.exports =
 
     $scope.signOut = ->
        $auth.signOut().then ->
-          Toast.show("You've been signed out")
           global.cobudgetApp.currentUserId = null
           $location.path('/')
+          Toast.show("You've been signed out")
 
     $scope.makeMemberAdmin = (membership) ->
       membership.isAdmin = true
