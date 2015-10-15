@@ -1,9 +1,9 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.directive 'sidenav', () ->
+global.cobudgetApp.directive 'groupPageSidenav', () ->
     restrict: 'E'
-    template: require('./sidenav.html')
+    template: require('./group-page-sidenav.html')
     replace: true
     controller: ($scope, CurrentUser, $mdSidenav, $location, $auth, Toast) ->
 
