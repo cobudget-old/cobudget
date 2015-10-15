@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: (CurrentUser, Error, $location, Records, $scope, $stateParams, UserCan) ->
+  controller: (CurrentUser, Error, Records, $scope, $stateParams, UserCan) ->
 
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
@@ -25,8 +25,5 @@ module.exports =
           Error.set('cannot view group')
       .catch ->
         Error.set('group not found')
-
-    $scope.showBucket = (bucketId) ->
-      $location.path("/buckets/#{bucketId}")
 
     return

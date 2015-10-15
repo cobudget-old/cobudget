@@ -1,0 +1,113 @@
+// buckets
+
+.group-page md-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.group-page__subheader-title {
+  color: $grey-on-white;
+}
+
+// live buckets
+
+.group-page__live-bucket-container {
+  padding: 3px 0;
+}
+
+.group-page__live-bucket-title {
+  @include fontMedLarge;
+  @include truncatedText;
+}
+
+.group-page__live-bucket-funding {
+  @include fontSmall;
+  color: $grey-on-white;
+}
+
+.group-page__live-bucket-personal-contribution {
+  @include fontSmall;
+  color: $cobudget-green;
+}
+
+.group-page__progress-bar-container {
+  position: relative;
+  height: 5px;
+  background: $cobudget-grey;
+  z-index: 0;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.group-page__progress-bar-primary {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  background: $cobudget-orange;
+  z-index: 2;
+  width: 0%;
+  transition: 0.5s;
+}
+
+.group-page__progress-bar-secondary {
+  position: absolute;
+  height: 100%; 
+  left: 0;
+  background: $cobudget-green;
+  z-index: 1;
+  width: 0%;
+  transition: 0.5s;
+}
+
+// drafts
+
+.group-page__draft-container {
+  position: relative;
+}
+
+.group-page__draft-title {
+  @include fontMedLarge;
+  @include truncatedText;
+  padding-right: 35px;
+}
+
+.group-page__draft-author {
+  @include fontSmall;
+  color: $grey-on-white;
+}
+
+.group-page__comment-count-container {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+}
+
+.group-page__comment-icon-active {
+  @include fontGrande;
+}
+
+.group-page__comment-icon-inactive {
+  @include fontGrande;
+  fill: $cobudget-grey;
+}
+
+.group-page__comment-count {
+  @include fontTiny;
+  position: relative;
+  color: white;
+  bottom: 21px;
+  text-align: center;
+}
+
+// funded buckets
+
+.group-page__funded-bucket-title {
+  @include fontMedLarge;
+  @include truncatedText;
+}
+
+.group-page__funded-bucket-author {
+  @include fontSmall;
+  color: $grey-on-white;
+}
