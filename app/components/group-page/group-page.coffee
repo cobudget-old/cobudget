@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId'
   template: require('./group-page.html')
-  controller: (CurrentUser, Error, $location, Records, $rootScope, $scope, $stateParams, UserCan, $window) ->
+  controller: (CurrentUser, Error, $location, Records, $scope, $stateParams, UserCan) ->
 
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
@@ -26,23 +26,8 @@ module.exports =
       .catch ->
         Error.set('group not found')
 
-    $scope.createBucket = ->
-      $location.path("/buckets/new")
-
     $scope.showBucket = (bucketId) ->
       $location.path("/buckets/#{bucketId}")
-
-    $scope.selectTab = (tabNum) ->
-      $scope.tabSelected = parseInt tabNum
-
-    $scope.openAdminPanel = ->
-      $location.path("/admin")
-
-    $scope.openSidenav = ->
-      $rootScope.$broadcast('open sidenav')
-
-    $scope.openFeedbackForm = ->
-      $window.location.href = 'https://docs.google.com/forms/d/1-_zDQzdMmq_WndQn2bPUEW2DZQSvjl7nIJ6YkvUcp0I/viewform?usp=send_form';
 
     $scope.makeMemberAdmin = (membership) ->
       membership.isAdmin = true
