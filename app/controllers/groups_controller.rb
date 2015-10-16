@@ -18,9 +18,10 @@ class GroupsController < AuthenticatedController
   def show
     group = Group.find(params[:id])
     if current_user.is_member_of?(group)
+      puts "meow"
       render json: [group]
     else
-      render status: 401
+      render status: 401, nothing: true
     end
   end
 
