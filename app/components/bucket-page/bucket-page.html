@@ -1,32 +1,8 @@
 <div class="bucket-page" ng-if="authorized">
-
   <bucket-page-toolbar></bucket-page-toolbar>
 
   <md-content class="bucket-page__content">
-    <md-card class="bucket-page__header-card">
-      <md-card-content class="bucket-page__header-card-content">
-        <div class="bucket-page__title">{{ bucket.name }}</div>
-        <div class="bucket-page__author">created by {{ bucket.author().name }} {{ bucket.createdAt | timeFromNowInWords }} ago</div>
-      </md-card-content>
-
-      <md-card-content class="bucket-page__description-card">
-        <div layout="row" ng-if="bucket.target > 0">
-          <span class="bucket-page__description-header">Funding Target</span>
-          <span flex="10"></span>
-          <span class="bucket-page__description-header" flex>{{ bucket.target | currency : group.currencySymbol : 0  }}</span>
-        </div>
-
-        <div ng-hide="showFullDescription">
-          <p class="bucket-page__description-text" ng-bind-html="bucket.description | characters:200:false | linky:'_blank' "></p>
-          <md-button md-no-ink class="md-primary bucket-page__more-button" ng-click="readMore()">Read More</md-button>          
-        </div>
-
-        <div ng-show="showFullDescription">
-          <p class="bucket-page__description-text" ng-bind-html="bucket.description | linky:'_blank'"></p>
-          <md-button md-no-ink class="md-primary bucket-page__more-button" ng-click="showLess()">Show Less</md-button>
-        </div>
-      </md-card-content>
-    </md-card>
+    <bucket-page-header-card></bucket-page-header-card>
 
     <md-card class="draft-page__progress-card" ng-if="bucket.status == 'live'">
       <md-card-content class="bucket-page__progress-card-content">

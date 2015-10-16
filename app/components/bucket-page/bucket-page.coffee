@@ -30,12 +30,6 @@ module.exports =
     $scope.newComment = Records.comments.build(bucketId: bucketId)
     $scope.newContribution = Records.contributions.build(bucketId: bucketId)
       
-    $scope.showFullDescription = false
-    $scope.readMore = ->
-      $scope.showFullDescription = true
-
-    $scope.showLess = ->
-      $scope.showFullDescription = false
 
     $scope.createComment = ->
       $scope.newComment.save()
@@ -51,9 +45,6 @@ module.exports =
           Toast.showWithRedirect('You launched a bucket for funding', "/buckets/#{bucketId}")
       else
         alert('Estimated funding target must be specified before funding starts')        
-
-
-    
 
     $scope.openFundForm = ->
       $scope.fundFormOpened = true
