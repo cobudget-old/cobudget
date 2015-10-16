@@ -23,5 +23,6 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast) ->
     if error.reason == "unauthorized" && error.errors[0] == "No credentials"
       e.preventDefault()
       global.cobudgetApp.currentUserId = null
+      membershipsLoadedDeferred.reject()
       Toast.show('Please log in to continue')
       $location.path('/')

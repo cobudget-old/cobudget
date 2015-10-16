@@ -27,27 +27,7 @@
 @import './directives/bucket-page-activity-card/bucket-page-activity-card.scss';
 
 @import './directives/error-page/error-page.scss';
+@import './directives/loading-page/loading-page.scss';
+
 
 @import './components/ng-material-customs.scss';
-
-// loading-bar
-
-.loading-bar {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-
-.loading-bar md-progress-circular .md-inner .md-left .md-half-circle {
-  border-left-color: $cobudget-orange;
-}
-
-.loading-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-right-color: $cobudget-green;
-}
-
-.loading-bar md-progress-circular .md-inner .md-left .md-half-circle, 
-.loading-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-top-color: $cobudget-orange;
-}
