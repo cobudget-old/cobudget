@@ -9,7 +9,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
 
     relationships: ->
       @hasMany 'buckets'
-      @hasMany 'memberships'
+      @hasMany 'memberships', sortBy: 'createdAt', sortDesc: false
 
     draftBuckets: ->
       @getBuckets('draft', 'createdAt')
