@@ -1,0 +1,42 @@
+// toolbar heading
+
+.bucket-page md-toolbar {
+  min-height: 0;
+}
+
+.bucket-page__toolbar {
+  background: $cobudget-gunmetal;
+  position: fixed;
+  top: 0;
+  color: white;
+}
+
+.bucket-page__menu-bar {
+  height: $large-height;
+}
+
+.bucket-page__menu-icon {
+  @include fontGrande;
+  fill: white;
+}
+
+.bucket-page__personal-funds {
+  @include fontLarge;
+}
+
+.bucket-page__funds-overview-header {
+  @include fontTiny;
+}
+
+.bucket-page__funds-icon {
+  @include fontGrande;
+  margin-right: 10px;
+  fill: white;
+}
+
+.bucket-page__edit-button {
+  margin: 0;
+  padding: 0;
+  // doesn't work for some reason?
+  width: 60px;
+}

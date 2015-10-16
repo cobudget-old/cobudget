@@ -25,8 +25,8 @@ module.exports =
     $scope.cancel = () ->
       $location.path("/buckets/#{bucketId}")
 
-    $scope.done = () ->
-      if $scope.bucketForm.$valid
+    $scope.done = (bucketForm) ->
+      if bucketForm.$valid
         $scope.bucket.save()
         Toast.show('Your edits have been saved')
         $scope.cancel()

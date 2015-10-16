@@ -1,0 +1,77 @@
+<md-toolbar class="group-page__toolbar">
+  <div class="md-toolbar-tools group-page__menu-bar">
+    <md-button class="md-icon-button" aria-label="Settings" ng-click="openSidenav()">
+      <ng-md-icon icon="menu" 
+        class="group-page__menu-icon"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+    </md-button>
+    <span class="group-page__group-name">{{ group.name }}</span>
+    <span flex></span>
+    <md-button class="md-icon-button group-page-menu-button" aria-label="Give Feedback" ng-click="openFeedbackForm()">
+      <ng-md-icon icon="live_help" 
+        class="group-page__menu-icon" 
+        layout="column" 
+        layout-align="center center"
+      ></ng-md-icon>
+    </md-button>      
+    <md-button class="md-icon-button group-page-menu-button" aria-label="Admin Panel" ng-if="membership.isAdmin" ng-click="openAdminPanel()">
+      <ng-md-icon icon="local_pizza" 
+        class="group-page__menu-icon" 
+        layout="column" 
+        layout-align="center center"
+      ></ng-md-icon>
+    </md-button>      
+  </div>
+
+  <div class="md-toolbar-tools group-page__funds-bar">
+    <div layout="column" layout-align="center start" class="group-page__funds-overview-container">
+      <div class="group-page__funds-overview-header">Funds left</div>
+      <div layout="row" layout-align="center center" class="group-page__funds-overview-content" >
+        <div layout="row" class="group-page__personal-funds-container">
+          <ng-md-icon icon="person" 
+            class="group-page__funds-icon" 
+            layout="column" 
+            layout-align="center center"
+          ></ng-md-icon>
+          <div layout="column" layout-align="center center">
+            <span class="group-page__funds-overview-amount">{{ membership.balance() | currency : group.currencySymbol : 0 }}</span>
+          </div>
+        </div>
+        
+        <div layout="row" class="group-page__group-funds-container">
+          <ng-md-icon icon="group" 
+            class="group-page__funds-icon" 
+            layout="column" 
+            layout-align="center center"
+          ></ng-md-icon>
+          <div layout="column" layout-align="center center">
+            <span class="group-page__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <md-tabs class="group-page__tabs" md-stretch-tabs="never" md-dynamic-height>
+    <md-tab md-on-select="selectTab(0)">
+      <md-tab-label>
+        <span class="group-page__tab-label">All Buckets</span>
+      </md-tab-label>
+    </md-tab>
+    <md-tab md-on-select="selectTab(1)">
+      <md-tab-label>
+        <span class="group-page__tab-label">Funders</span>
+      </md-tab-label>
+    </md-tab>
+  </md-tabs>
+
+  <md-button class="md-fab group-page__create-bucket-fab" aria-label= "create" ng-click="createBucket()">
+    <ng-md-icon icon="add" 
+      class="group-page__create-bucket-fab-icon" 
+      layout="column" 
+      layout-align="center center"
+    ></ng-md-icon>
+  </md-button>
+</md-toolbar>
