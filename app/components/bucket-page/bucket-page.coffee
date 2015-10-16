@@ -30,10 +30,6 @@ module.exports =
     $scope.newComment = Records.comments.build(bucketId: bucketId)
     $scope.newContribution = Records.contributions.build(bucketId: bucketId)
       
-    $scope.back = ->
-      Toast.hide()
-      $location.path("/groups/#{$scope.group.id}")
-
     $scope.showFullDescription = false
     $scope.readMore = ->
       $scope.showFullDescription = true
@@ -56,11 +52,8 @@ module.exports =
       else
         alert('Estimated funding target must be specified before funding starts')        
 
-    $scope.editBucket = ->
-      $location.path("/buckets/#{bucketId}/edit")
 
-    $scope.userCanEditBucket = ->
-      $scope.bucket && $scope.userCanStartFunding()
+    
 
     $scope.openFundForm = ->
       $scope.fundFormOpened = true
