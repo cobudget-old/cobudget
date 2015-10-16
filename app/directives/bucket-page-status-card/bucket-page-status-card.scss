@@ -1,0 +1,34 @@
+// status card
+
+.bucket-page__status-card {
+  background: $cobudget-light-grey;
+}
+
+.bucket-page__status-header {
+  @include fontLarge;
+  margin-bottom: 20px;
+}
+
+.bucket-page__status-flagpoints {
+  margin-bottom: 20px;
+}
+
+.bucket-page__status-flagpoint-divider {
+  position: relative;
+  height: 3px;
+  background: $cobudget-grey;
+  bottom: 10px;
+}
+
+.bucket-page__status-description {
+  @include fontTiny;
+}
+
+.bucket-page .md-button.md-primary.md-raised {
+  background-color: $cobudget-lime;
+  margin-left: 0;
+}
+
+.bucket-page .md-button.md-primary.md-raised:not([disabled]):hover {
+  background-color: $cobudget-lime;
+}

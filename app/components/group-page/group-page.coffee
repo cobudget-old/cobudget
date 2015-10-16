@@ -7,7 +7,7 @@ module.exports =
   url: '/groups/:groupId'
   template: require('./group-page.html')
   controller: (CurrentUser, Error, Records, $scope, $stateParams, UserCan) ->
-
+    
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
       .then (group) ->
