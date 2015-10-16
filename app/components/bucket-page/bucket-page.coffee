@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, Toast, UserCan) ->
+  controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, Toast, UserCan, $window) ->
 
     LoadBar.start()
     bucketId = parseInt $stateParams.bucketId
@@ -20,6 +20,7 @@ module.exports =
           $scope.group = bucket.group()
           $scope.membership = $scope.group.membershipFor(CurrentUser())
           Records.contributions.fetchByBucketId(bucketId).then ->
+            $window.scrollTo(0,0)
             LoadBar.stop()
           Records.comments.fetchByBucketId(bucketId)
         else
