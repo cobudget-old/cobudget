@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, $state, Records, $stateParams, $location, Toast, UserCan, CurrentUser, Error, $window) ->
+  controller: ($scope, Records, $stateParams, $location, Toast, UserCan, CurrentUser, Error, $window) ->
 
     bucketId = parseInt $stateParams.bucketId
     Records.buckets.findOrFetchById(bucketId)
@@ -29,7 +29,6 @@ module.exports =
 
     $scope.newComment = Records.comments.build(bucketId: bucketId)
     $scope.newContribution = Records.contributions.build(bucketId: bucketId)
-      
 
     $scope.createComment = ->
       $scope.newComment.save()
@@ -45,26 +44,5 @@ module.exports =
           Toast.showWithRedirect('You launched a bucket for funding', "/buckets/#{bucketId}")
       else
         alert('Estimated funding target must be specified before funding starts')        
-
-    $scope.openFundForm = ->
-      $scope.fundFormOpened = true
-
-    $scope.totalAmountFunded = ->
-      parseFloat($scope.bucket.totalContributions) + ($scope.newContribution.amount || 0)
-
-    $scope.percentContributed = ->
-      ($scope.newContribution.amount || 0) / $scope.bucket.target * 100
-
-    $scope.maxAllowableContribution = ->
-      _.min([$scope.bucket.amountRemaining(), $scope.membership.balance()])
-
-    $scope.normalizeContributionAmount = ->
-      if $scope.newContribution.amount > $scope.maxAllowableContribution()
-        $scope.newContribution.amount = $scope.maxAllowableContribution()
-
-    $scope.submitContribution = ->
-      $scope.newContribution.save().then ->
-        $state.reload()
-        Toast.show('You funded a bucket')
         
     return
