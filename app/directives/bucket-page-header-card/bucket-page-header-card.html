@@ -13,7 +13,12 @@
 
     <div>
       <p class="bucket-page__description-text">{{ filteredBucketDescription() }}</p>
-      <md-button md-no-ink class="md-primary bucket-page__more-button" ng-click="toggleMore()">{{ moreButtonText() }}</md-button>          
+      <md-button 
+        md-no-ink 
+        ng-if="bucket.description.length > 200"
+        class="md-primary bucket-page__more-button" 
+        ng-click="toggleMore()"
+      >{{ moreButtonText() }}</md-button>          
     </div>
   </md-card-content>
 </md-card>
