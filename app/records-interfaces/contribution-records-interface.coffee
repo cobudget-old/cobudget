@@ -12,3 +12,9 @@ global.cobudgetApp.factory 'ContributionRecordsInterface', (config, BaseRecordsI
       @fetch
         params:
           bucket_id: bucketId
+
+    fetchByGroupId: (groupid) ->
+      @fetch
+        params:
+          group_id: groupid
+    

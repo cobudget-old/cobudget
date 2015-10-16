@@ -1,0 +1,29 @@
+<md-toolbar class="bucket-page__toolbar">
+  <div class="md-toolbar-tools bucket-page__menu-bar">
+    <md-button class="md-icon-button" aria-label="Settings" ng-click="back()">
+      <ng-md-icon icon="arrow_back"
+        layout="column"
+        layout-align="center center"
+        class="bucket-page__menu-icon"
+      ></ng-md-icon>
+    </md-button>
+
+    <span class="bucket-page__personal-funds" layout="row" layout-align="start center" ng-if="bucket.status == 'live'">
+      <ng-md-icon icon="person"
+        layout="column"
+        layout-align="center center"
+        class="bucket-page__funds-icon"
+      ></ng-md-icon>
+      <div layout="column" layout-align="center center">
+        <span class="bucket-page__funds-overview-header">Your funds</span>
+        <span class="bucket-page__funds-overview-amount">{{ membership.balance() - newContribution.amount | currency : group.currencySymbol : 0 }}</span>
+      </div>
+    </span>
+
+    <span flex></span>
+
+    <span ng-show="userCanEditBucket()">
+      <md-button class="bucket-page__edit-button" ng-click="editBucket()">Edit</md-button>
+    </span>
+  </div>
+</md-toolbar> 

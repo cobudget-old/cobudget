@@ -1,0 +1,47 @@
+// activity card
+
+.bucket-page__activity-header {
+  @include fontLarge;
+  height: 25px;
+}
+
+.bucket-page__comment-count {
+  color: white;
+  position: relative;
+  @include fontSmall;
+  text-align: center;
+  bottom: 22px;
+}
+
+.bucket-page__comment-icon-active {
+  @include fontGrande;
+}
+
+.bucket-page__comment-icon-inactive {
+  @include fontGrande;
+  fill: $cobudget-grey;
+}
+
+.bucket-page md-input-container {
+  padding: 0;
+}
+
+.bucket-page__comment {
+  @include wordWrap;
+  background: $cobudget-light-grey;
+}
+
+.bucket-page__comment-author-name {
+  @include fontMedLarge;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+.bucket-page__comment-body {
+  @include fontMedium;
+  margin-bottom: 10px;
+}
+
+.bucket-page md-list {
+  padding-bottom: 0;
+}

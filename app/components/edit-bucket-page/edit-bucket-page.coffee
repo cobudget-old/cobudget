@@ -1,22 +1,32 @@
 module.exports = 
+  resolve:
+    userValidated: ($auth) ->
+      $auth.validateUser()
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/buckets/:bucketId/edit'
   template: require('./edit-bucket-page.html')
-  controller: ($scope, Records, $stateParams, $location, Toast) ->
+  controller: ($scope, Records, $stateParams, $location, Toast, UserCan, Error) ->
     
-    $scope.bucketLoaded = false
     bucketId = parseInt $stateParams.bucketId
 
-    Records.buckets.findOrFetchById(bucketId).then (bucket) ->
-      $scope.bucket = bucket
-      $scope.bucketLoaded = true
-      # temp hack to get around target form number validation
-      $scope.bucket.target = parseInt $scope.bucket.target
-          
+    Records.buckets.findOrFetchById(bucketId)
+      .then (bucket) ->
+        if UserCan.viewBucket(bucket)
+          $scope.authorized = true
+          Error.clear()
+          $scope.bucket = bucket
+        else
+          $scope.authorized = false
+          Error.set('cannot view bucket')
+      .catch ->
+        Error.set('bucket not found')
+        
     $scope.cancel = () ->
       $location.path("/buckets/#{bucketId}")
 
-    $scope.done = () ->
-      if $scope.bucketForm.$valid
+    $scope.done = (bucketForm) ->
+      if bucketForm.$valid
         $scope.bucket.save()
         Toast.show('Your edits have been saved')
         $scope.cancel()

@@ -1,0 +1,60 @@
+.group-page__sidenav {
+  width: 256px;
+  min-width: 256px;
+  position: fixed;
+}
+
+.group-page .md-sidenav-backdrop {
+  position: fixed;
+}
+
+.group-page__sidenav-toolbar {
+  background: $cobudget-happy-blue;
+  color: white;
+}
+
+.group-page__user-avatar-container {
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+.group-page__user-avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: white;
+  color: black;
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.group-page__user-email {
+  @include fontMedium;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-weight: bold;
+}
+
+.group-page__sidenav-content {
+  padding-top: 20px;
+}
+
+.group-page__account-options-menu {
+  margin: 0 !important;
+  padding: 0;
+}
+
+.group-page__sidenav-option {
+  margin-bottom: 20px;
+  padding-left: 15px;
+}
+
+.group-page__sidenav-option-icon {
+  fill: $grey-on-white;
+}
+
+.group-page__sidenav-option-subheader {
+  margin-left: 30px;
+  font-size: 14px;
+  font-weight: 500;
+}

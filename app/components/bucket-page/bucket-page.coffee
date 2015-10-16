@@ -1,82 +1,39 @@
 module.exports = 
+  resolve:
+    userValidated: ($auth) ->
+      $auth.validateUser()
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/buckets/:bucketId'
   template: require('./bucket-page.html')
-  controller: ($scope, $state, Records, $stateParams, $location, Toast, ipCookie, AuthenticateUser) ->
-    $scope.groupLoaded = $scope.contributionsLoaded = $scope.commentsLoaded = false
+  controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, Toast, UserCan) ->
 
-    AuthenticateUser().then (currentUser) ->
-      $scope.groupId = ipCookie('currentGroupId')
-      $scope.bucketId = parseInt $stateParams.bucketId
+    LoadBar.start()
+    bucketId = parseInt $stateParams.bucketId
+    Records.buckets.findOrFetchById(bucketId)
+      .then (bucket) ->
+        if UserCan.viewBucket(bucket)
+          $scope.authorized = true
+          Error.clear()
+          $scope.currentUser = CurrentUser()
+          $scope.bucket = bucket
+          $scope.group = bucket.group()
+          $scope.membership = $scope.group.membershipFor(CurrentUser())
+          Records.contributions.fetchByBucketId(bucketId).then ->
+            LoadBar.stop()
+          Records.comments.fetchByBucketId(bucketId)
+        else
+          $scope.authorized = false
+          LoadBar.stop()
+          Error.set('cannot view bucket')
+      .catch ->
+        LoadBar.stop()
+        Error.set('bucket not found')
 
-      Records.groups.findOrFetchById($scope.groupId).then (group) ->
-        $scope.group = group
-        $scope.groupLoaded = true
-        $scope.currentMembership = group.membershipFor(currentUser)
+    $scope.newContribution = Records.contributions.build(bucketId: bucketId)
 
-      Records.buckets.findOrFetchById($scope.bucketId).then (bucket) ->
-        $scope.bucket = bucket
-        Records.contributions.fetchByBucketId($scope.bucketId).then ->
-          $scope.percentContributedByUser = bucket.percentContributedByUser(currentUser.id)
-          $scope.percentNotContributedByUser = bucket.percentNotContributedByUser(currentUser.id)
-          $scope.contributionsLoaded = true
-        Records.comments.fetchByBucketId($scope.bucketId).then ->
-          $scope.commentsLoaded = true
-
-      $scope.newComment = Records.comments.build(bucketId: $scope.bucketId)
-      $scope.contribution = Records.contributions.build(bucketId: $scope.bucketId)
-      
     $scope.back = ->
       Toast.hide()
-      $location.path("/groups/#{$scope.groupId}")
+      $location.path("/groups/#{$scope.group.id}")
 
-    $scope.showFullDescription = false
-
-    $scope.readMore = ->
-      $scope.showFullDescription = true
-
-    $scope.showLess = ->
-      $scope.showFullDescription = false
-
-    $scope.createComment = ->
-      $scope.newComment.save()
-      $scope.newComment = Records.comments.build(bucketId: $scope.bucketId)
-
-    $scope.userCanStartFunding = ->
-      $scope.currentMembership.isAdmin || $scope.bucket.author().id == $scope.currentMembership.member().id
-
-    $scope.openForFunding = ->
-      if $scope.bucket.target
-        $scope.bucket.openForFunding().then ->
-          $scope.back()
-          Toast.showWithRedirect('You launched a bucket for funding', "/buckets/#{$scope.bucketId}")
-      else
-        alert('Estimated funding target must be specified before funding starts')        
-
-    $scope.editBucket = ->
-      $location.path("/buckets/#{$scope.bucketId}/edit")
-
-    $scope.userCanEditBucket = ->
-      $scope.bucket && $scope.userCanStartFunding()
-
-    $scope.openFundForm = ->
-      $scope.fundFormOpened = true
-
-    $scope.totalAmountFunded = ->
-      parseFloat($scope.bucket.totalContributions) + ($scope.contribution.amount || 0)
-
-    $scope.percentContributed = ->
-      ($scope.contribution.amount || 0) / $scope.bucket.target * 100
-
-    $scope.maxAllowableContribution = ->
-      _.min([$scope.bucket.amountRemaining(), $scope.currentMembership.balance()])
-
-    $scope.normalizeContributionAmount = ->
-      if $scope.contribution.amount > $scope.maxAllowableContribution()
-        $scope.contribution.amount = $scope.maxAllowableContribution()
-
-    $scope.submitContribution = ->
-      $scope.contribution.save().then ->
-        $state.reload()
-        Toast.show('You funded a bucket')
-        
     return

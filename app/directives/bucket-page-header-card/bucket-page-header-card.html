@@ -1,0 +1,19 @@
+<md-card class="bucket-page__header-card">
+  <md-card-content class="bucket-page__meta">
+    <div class="bucket-page__title">{{ bucket.name }}</div>
+    <div class="bucket-page__author">created by {{ bucket.author().name }} {{ bucket.createdAt | timeFromNowInWords }} ago</div>
+  </md-card-content>
+
+  <md-card-content class="bucket-page__description">
+    <div layout="row" ng-if="bucket.target > 0">
+      <span class="bucket-page__description-header">Funding Target</span>
+      <span flex="10"></span>
+      <span class="bucket-page__description-header" flex>{{ bucket.target | currency : group.currencySymbol : 0  }}</span>
+    </div>
+
+    <div>
+      <p class="bucket-page__description-text">{{ filteredBucketDescription() }}</p>
+      <md-button md-no-ink class="md-primary bucket-page__more-button" ng-click="toggleMore()">{{ moreButtonText() }}</md-button>          
+    </div>
+  </md-card-content>
+</md-card>

@@ -1,0 +1,47 @@
+// funders
+
+.group-page__funders {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.group-page__funder-avatar {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.27);
+  color: white;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.group-page__funder-name {
+  @include truncatedText;
+  @include fontMedLarge;  
+}
+
+.group-page__funder-balance {
+  @include fontLarge;
+  color: $cobudget-green;
+}
+
+.group-page__funder-admin-label {
+  color: $grey-on-white;
+  font-size: 12px;
+  margin-left: 5px;
+  top: 1px;
+  position: relative;
+}
+
+.group-page__funder-more-menu {
+  padding: 0;
+}
+
+.group-page__funder-more-button {
+  width: 15px !important;  
+  margin-left: 14px !important;
+}
+
+.group-page__funder-more-button-icon {
+  width: 15px;  
+}

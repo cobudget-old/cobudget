@@ -71,6 +71,7 @@ gulp.task 'styles-build', styles
 gulp.task 'styles-watch', ['styles-build'], ->
   gulp.watch('app/**/*.sass', ['styles-build'])
   gulp.watch('app/components/**/*.scss', ['styles-build'])
+  gulp.watch('app/directives/**/*.scss', ['styles-build'])
 
 #
 # scripts
