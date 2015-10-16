@@ -38,6 +38,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    activesupport-json_encoder (1.1.0)
+      activesupport (>= 4.1.0, < 5.0)
     airbrake (4.3.0)
       builder
       multi_json
@@ -228,6 +230,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.8.0)
+  activesupport-json_encoder
   airbrake
   apipie-rails
   capistrano (= 2.15.5)

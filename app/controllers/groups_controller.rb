@@ -17,7 +17,11 @@ class GroupsController < AuthenticatedController
   api :GET, '/groups/:id', 'Full details of group'
   def show
     group = Group.find(params[:id])
-    render json: [group]
+    if current_user.is_member_of?(group)
+      render json: [group]
+    else
+      render status: 403, nothing: true
+    end
   end
 
   api :PATCH, '/groups/:id', 'Update a group'

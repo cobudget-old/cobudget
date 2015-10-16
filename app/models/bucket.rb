@@ -37,6 +37,10 @@ class Bucket < ActiveRecord::Base
     total_contributions == target
   end
 
+  def num_of_comments
+    comments.length
+  end
+
   private
     def set_timestamp_if_status_updated
       case self.status
