@@ -17,7 +17,7 @@ module.exports =
           $scope.currentUser = CurrentUser()
           $scope.bucket = bucket
           $scope.group = bucket.group()
-          $scope.membership = Records.memberships.find(groupId: $scope.group.id, memberId: CurrentUser().id)[0]
+          $scope.membership = $scope.group.membershipFor(CurrentUser())
           Records.contributions.fetchByBucketId(bucketId)
           Records.comments.fetchByBucketId(bucketId)
         else
