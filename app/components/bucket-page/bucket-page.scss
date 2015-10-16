@@ -1,28 +1,3 @@
-// description card
-
-.bucket-page__description-card {
-  background: $cobudget-light-grey;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.bucket-page__description-header {
-  @include fontMedLarge;
-}
-
-.bucket-page__description-text {
-  @include fontSmall;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  @include wordWrap;
-}
-
-.bucket-page__more-button {
-  @include fontMedium;
-  margin: 0;
-  padding: 0;
-}
-
 // progress card
 
 .bucket-page__progress-card {
