@@ -50,7 +50,7 @@
     <div class="group-page__sidenav-expanded-content">
       <md-list-item ng-repeat="group in accessibleGroups()" ng-click="redirectToGroupPage(group.id)">
         <div layout="row" layout-align="start center">
-          <div class="group-page__sidenav-group-name">{{ group.name | characters:30:false }}</div>
+          <div class="group-page__sidenav-group-name">{{ group.name | characters:25:false }}</div>
         </div>
       </md-list-item>
     </div>
