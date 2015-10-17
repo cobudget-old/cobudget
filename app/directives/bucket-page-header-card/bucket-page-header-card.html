@@ -12,7 +12,7 @@
     </div>
 
     <div>
-      <p class="bucket-page__description-text">{{ filteredBucketDescription() }}</p>
+      <p class="bucket-page__description-text" ng-bind-html="filteredBucketDescription()"></p>
       <md-button 
         md-no-ink 
         ng-if="bucket.description.length > 200"
