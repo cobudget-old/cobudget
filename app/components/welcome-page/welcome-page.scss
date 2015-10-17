@@ -11,3 +11,10 @@
 .welcome-page__heading {
   @include fontGrande;
 }
+
+.welcome-page__login-button {
+  margin: 0;
+  border: 1px solid $cobudget-gunmetal;
+  width: 100%;
+  margin-top: 10px;
+}

@@ -1,11 +1,3 @@
-<div 
-  class="loading-bar" 
-  layout="column" 
-  layout-align="center center" 
-  ng-if="loading">
-  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>
-
 <div class="welcome-page" ng-hide="loading">
   <md-toolbar class="md-primary welcome-page__toolbar">
     <h1 class="md-toolbar-tools welcome-page__heading" layout-align="center">Welcome to Cobudget!</h1>
@@ -24,8 +16,8 @@
         <label>password</label>
         <input name="password" type="password" ng-model="formData.password">
       </md-input-container>
-  
-      <input type="submit" value="log in">
+
+      <md-button class="welcome-page__login-button">Log In</md-button>
     </form>
   </md-content>
 </div>
