@@ -14,7 +14,9 @@ global.cobudgetApp.directive 'bucketPageHeaderCard', () ->
         if $scope.showMore then "Show Less" else "Read More"
         
       $scope.filteredBucketDescription = ->
-        linkedText = $filter('linky')($scope.bucket.description, '_blank')
-        if $scope.showMore then linkedText else $filter('characters')(linkedText, 200, false)
+        if $scope.showMore 
+          $scope.bucket.description
+        else
+          $filter('characters')($scope.bucket.description, 200, false)
 
       return
