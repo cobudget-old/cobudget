@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/admin'
   template: require('./admin-page.html')
-  controller: ($scope, $location, Records, config, CurrentUser, UserCan, Error) ->
+  controller: (config, CurrentUser, Dialog, Error, $location, Records, $scope, UserCan) ->
 
     $scope.currencies = [
       { code: 'USD', symbol: '$' },
@@ -38,7 +38,7 @@ module.exports =
       Records.groups.findOrFetchById(groupId)
 
     $scope.onCsvUploadCompletion = ->
-      alert('upload complete')
+      Dialog.alert(title: 'upload complete!')
 
     $scope.updateGroupCurrency = (groupId, currencyCode) ->
       Records.groups.findOrFetchById(groupId).then (group) ->
