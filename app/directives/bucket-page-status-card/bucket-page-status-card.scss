@@ -23,12 +23,3 @@
 .bucket-page__status-description {
   @include fontTiny;
 }
-
-.bucket-page .md-button.md-primary.md-raised {
-  background-color: $cobudget-lime;
-  margin-left: 0;
-}
-
-.bucket-page .md-button.md-primary.md-raised:not([disabled]):hover {
-  background-color: $cobudget-lime;
-}

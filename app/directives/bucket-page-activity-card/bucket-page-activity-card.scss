@@ -22,8 +22,9 @@
   fill: $cobudget-grey;
 }
 
-.bucket-page md-input-container {
-  padding: 0;
+.bucket-page__comment-list {
+  padding-top: 0;  
+  padding-bottom: 0;  
 }
 
 .bucket-page__comment {
@@ -42,6 +43,33 @@
   margin-bottom: 10px;
 }
 
-.bucket-page md-list {
-  padding-bottom: 0;
+.bucket-page__comment-form-card {
+  background: $cobudget-light-grey;
+  padding: 10px;
+}
+
+.bucket-page__comment-form {
+}
+
+.bucket-page__comment-input-container {
+  padding: 0;
+}
+
+.bucket-page__comment-input {
+  background: white !important;
+  border: 0px !important;
+  padding-right: 7px !important;
+  padding-left: 7px !important;
+}
+
+.bucket-page__submit-comment-btn {
+  margin: 0;
+  margin-top: 10px;
+  background: $cobudget-lime !important;
+  color: white !important;
+}
+
+.bucket-page__submit-comment-btn-container {
+  padding: 0 !important;
+  float: right !important;
 }

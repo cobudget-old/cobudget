@@ -60,8 +60,18 @@
   color: $grey-on-white;
 }
 
+.bucket-page__fund-btn {
+  background-color: $cobudget-lime !important;
+  margin-left: 0 !important;
+}
+
+.bucket-page__fund-btn:not([disabled]):hover {
+  background-color: $cobudget-lime;
+}
+
 .bucket-page__fund-form-input-container {
   margin-right: 8px;
+  padding-bottom: 0;
 }
 
 .bucket-page input[type=number]::-webkit-inner-spin-button, 
