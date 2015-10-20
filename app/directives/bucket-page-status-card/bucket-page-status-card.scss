@@ -23,3 +23,12 @@
 .bucket-page__status-description {
   @include fontTiny;
 }
+
+.bucket-page__start-funding-btn {
+  background-color: $cobudget-lime !important;
+  margin-left: 0 !important;
+}
+
+.bucket-page__start-funding-btn:not([disabled]):hover {
+  background-color: $cobudget-lime;
+}
