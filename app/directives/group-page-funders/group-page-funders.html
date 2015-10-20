@@ -25,17 +25,13 @@
           </md-button>
         
           <md-menu-content width="2">
-            <md-menu-item ng-if="!funderMembership.isAdmin">
-              <md-button ng-click="makeMemberAdmin(funderMembership)">
-                <span md-menu-align-target>Make administrator</span>
+
+            <md-menu-item>
+              <md-button ng-click="toggleMemberAdmin(funderMembership)">
+                <span md-menu-align-target>{{ funderMembership.isAdmin ? "Undo" : "Make" }} administrator</span>
               </md-button>
             </md-menu-item>
 
-            <md-menu-item ng-if="funderMembership.isAdmin">
-              <md-button ng-click="undoMemberAdmin(funderMembership)">
-                <span md-menu-align-target>Undo administrator</span>
-              </md-button>
-            </md-menu-item>
           </md-menu-content>
         </md-menu>
       </div>

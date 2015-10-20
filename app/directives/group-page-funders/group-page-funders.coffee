@@ -7,12 +7,8 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
     replace: true
     controller: ($scope) ->
 
-      $scope.makeMemberAdmin = (membership) ->
-        membership.isAdmin = true
-        membership.save()
-
-      $scope.undoMemberAdmin = (membership) ->
-        membership.isAdmin = false
+      $scope.toggleMemberAdmin = (membership) ->
+        membership.isAdmin = !membership.isAdmin
         membership.save()
 
       return
