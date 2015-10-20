@@ -3,10 +3,12 @@ class ContributionsController < AuthenticatedController
   def index
     contributions = 
       if params[:group_id]
+        # all contributions for group for current_user
         Contribution.joins(:bucket)
                     .where(user_id: current_user.id)
                     .where("buckets.group_id = ?", params[:group_id])
       else
+        # all contributions for bucket
         Contribution.where(bucket_id: params[:bucket_id])
       end
     render json: contributions
