@@ -19,4 +19,4 @@ global.cobudgetApp.directive 'bucketPageStatusCard', () ->
           Dialog.alert
             title: 'hi friend ~~'
             content: 'an estimated funding target must be specified before funding starts'
-            buttonText: 'oh, ok!'
+            ok: 'oh, ok!'
