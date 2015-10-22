@@ -2,9 +2,7 @@
   <%= @bucket.name %>, a bucket in <%= @group.name %> that you participated in, has a new comment from <%= @commenter.name %>.
 </p>
 
-<p>
-  "<%= @comment.body %>"
-</p>
+<%= @comment.body_as_markdown %> 
 
 <p>
   <%= link_to 'reply', "#{root_url}#/buckets/#{@bucket.id}" %>
