@@ -35,12 +35,11 @@
 .bucket-page__comment-author-name {
   @include fontMedLarge;
   margin-top: 10px;
-  margin-bottom: 3px;
 }
 
 .bucket-page__comment-body {
   @include fontMedium;
-  margin-bottom: 10px;
+  @include markdown;
 }
 
 .bucket-page__comment-form-card {
