@@ -11,14 +11,18 @@
       <span class="bucket-page__description-header" flex>{{ bucket.target | currency : group.currencySymbol : 0  }}</span>
     </div>
 
-    <div>
-      <p class="bucket-page__description-text" ng-bind-html="filteredBucketDescription() | linky:'_blank'"></p>
-      <md-button 
-        md-no-ink 
-        ng-if="bucket.description.length > 200"
-        class="md-primary bucket-page__more-button" 
-        ng-click="toggleMore()"
-      >{{ moreButtonText() }}</md-button>          
+    <div class="bucket-page__description-text-container">
+      <p class="bucket-page__description-text" ng-bind-html="filteredBucketDescription()"></p>
+      <!-- <div class="bucket-page__description-text-overlay"></div> -->
     </div>
+
+   <!--  <md-button 
+      md-no-ink 
+      ng-if="bucket.description.length > 200"
+      class="md-primary bucket-page__more-button" 
+      ng-click="toggleMore()"
+    >{{ moreButtonText() }}</md-button>           -->
+
   </md-card-content>
+
 </md-card>

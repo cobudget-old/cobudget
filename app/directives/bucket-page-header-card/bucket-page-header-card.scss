@@ -40,11 +40,26 @@
 }
 
 .bucket-page__description-text {
+  // max-height: 150px;
   @include fontSmall;
   margin-top: 10px;
   margin-bottom: 10px;
   @include wordWrap;
+  @include markdown;
+  // overflow: hidden;
 }
+
+// .bucket-page__description-text-container {
+//   position: relative;
+// }
+
+// .bucket-page__description-text-overlay {
+//   position: absolute;
+//   width: 100%;
+//   height: 100px;
+//   bottom: 0;
+//   background: linear-gradient(transparent, $cobudget-light-grey);
+// }
 
 .bucket-page__more-button {
   @include fontMedium;
