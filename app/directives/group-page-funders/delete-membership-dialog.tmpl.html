@@ -1,0 +1,18 @@
+<md-dialog aria-label="delete user dialog">
+  <md-dialog-content class="sticky-container">
+    <md-subheader class="md-sticky-no-effect">
+      Are you sure you want to delete {{ member.name }} with email address {{ member.email }} from {{ group.name }}?
+    </md-subheader>
+    <div class="group-page__delete-user-dialog-list-header">This will cause: </div>
+    <ul class="group-page__delete-user-dialog-list">
+      <li>All of their funds to be deleted from currently funding projects</li>
+      <li>All of their funds to be removed from the group</li>
+      <li>All of their ideas to be deleted from the group</li>
+      <li>All of their comments to be deleted from the group</li>
+    </ul>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <md-button ng-click="cancel()">no</md-button>
+    <md-button ng-click="proceed()">yes</md-button>
+  </div>
+</md-dialog>

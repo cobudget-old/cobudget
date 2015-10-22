@@ -46,3 +46,20 @@
 .group-page__funder-more-button-icon {
   width: 15px;  
 }
+
+// delete user modal
+
+.group-page__delete-user-dialog-list-header {
+  padding-left: 15px !important;
+  padding-bottom: 0 !important;
+  font-size: 14px;
+}
+
+.group-page__delete-user-dialog-list {
+  padding-left: 30px;
+  font-size: 12px;
+}
+
+.group-page__delete-user-dialog-list > li {
+  margin-bottom: 5px;
+}
