@@ -16,6 +16,12 @@ class MembershipsController < AuthenticatedController
     render json: [membership]
   end
 
+  def destroy
+    membership = Membership.find(params[:id])
+    membership.destroy
+    render nothing: true
+  end
+
   private
     def membership_params
       params.require(:membership).permit(:is_admin)

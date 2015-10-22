@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
     resources :comments, only: [:index, :create]
 
-    resources :memberships, only: [:index, :update] do
+    resources :memberships, only: [:index, :update, :destroy] do
       collection do
         get :my_memberships
       end
