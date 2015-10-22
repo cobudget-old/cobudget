@@ -41,6 +41,12 @@ class Bucket < ActiveRecord::Base
     comments.length
   end
 
+  def description_as_markdown
+    renderer = Redcarpet::Render::HTML.new 
+    markdown = Redcarpet::Markdown.new(renderer, extensions = {})
+    markdown.render(description).html_safe
+  end
+
   private
     def set_timestamp_if_status_updated
       case self.status
