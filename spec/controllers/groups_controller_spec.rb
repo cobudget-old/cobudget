@@ -3,13 +3,12 @@ require 'rails_helper'
 describe GroupsController, :type => :controller do
   describe "#index" do
     before do
-      @user = create(:user)
       2.times do
         group = create(:group)
-        create(:membership, group: group, member: @user)
+        create(:membership, group: group, member: user)
       end
       5.times { create(:membership) }
-      request.headers.merge!(@user.create_new_auth_token)
+      request.headers.merge!(user.create_new_auth_token)
     end
 
     it "returns a list of groups that the current_user is a member of, as json" do
