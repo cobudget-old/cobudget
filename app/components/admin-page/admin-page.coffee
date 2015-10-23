@@ -46,7 +46,7 @@ module.exports =
               </md-dialog-content>
             </md-dialog>
           """
-          
+
     $scope.createGroup = ->
       $scope.newGroup.save().then (data) ->
         newGroupId = data.groups[0].id
@@ -54,6 +54,35 @@ module.exports =
           $scope.accessibleGroups = CurrentUser().groups()
         $scope.newGroup = Records.groups.build()
 
+    $scope.openInviteGroupDialog = ->
+      Dialog.custom
+        clickOutsideToClose: true
+        scope: $scope
+        preserveScope: true
+        template: 
+          """
+            <md-dialog aria-label="invite group">
+              <md-dialog-content class="sticky-container">
+                <form name='inviteGroupForm' class="admin-page__form" ng-submit="inviteGroup()"; inviteGroupForm.$setUntouched()">
+                  <md-input-container>
+                    <label>email</label>
+                    <input required name="email" type="text" ng-model="newGroupAdmin.email">
+                    <div ng-messages="inviteGroupForm.email.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                  <md-button class="admin-page__form-submit-btn">invite group</md-button>
+                </form>
+              </md-dialog-content>
+            </md-dialog>
+          """
+
+    $scope.newGroupAdmin = Records.users.build()
+    $scope.inviteGroup = ->
+      $scope.newGroupAdmin.save().then ->
+        Dialog.alert
+          title: 'Invite sent!'
+      
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
 
