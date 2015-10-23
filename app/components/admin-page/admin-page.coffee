@@ -24,6 +24,29 @@ module.exports =
 
     $scope.newGroup = Records.groups.build()
 
+    $scope.openCreateGroupDialog = ->      
+      Dialog.custom
+        clickOutsideToClose: true
+        scope: $scope
+        preserveScope: true
+        template: 
+          """
+            <md-dialog aria-label="create group">
+              <md-dialog-content class="sticky-container">
+                <form name='newGroupForm' class="admin-page__form" ng-submit="createGroup(); newGroupForm.$setUntouched()">
+                  <md-input-container>
+                    <label>name</label>
+                    <input required name="name" type="text" ng-model="newGroup.name">
+                    <div ng-messages="newGroupForm.name.$error">
+                      <div ng-message="required">This is required.</div>
+                    </div>
+                  </md-input-container>
+                  <md-button class="admin-page__form-submit-btn">create group</md-button>
+                </form>
+              </md-dialog-content>
+            </md-dialog>
+          """
+          
     $scope.createGroup = ->
       $scope.newGroup.save().then (data) ->
         newGroupId = data.groups[0].id
