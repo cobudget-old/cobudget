@@ -25,3 +25,6 @@ global.cobudgetApp.factory 'Dialog', ($mdDialog) ->
         preserveScope: true
       custom = _.merge(defaults, args)
       $mdDialog.show(custom)
+
+    close: ->
+      $mdDialog.cancel()

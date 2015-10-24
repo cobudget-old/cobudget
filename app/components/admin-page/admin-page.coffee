@@ -58,6 +58,9 @@ module.exports =
             content: 'Email invalid or already taken.'
       $scope.newGroupAdmin = Records.users.build()
 
+    $scope.closeDialog = ->
+      Dialog.close()
+
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
 
