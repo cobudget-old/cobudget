@@ -1,18 +1,38 @@
 <md-dialog aria-label="delete user dialog">
   <md-dialog-content class="sticky-container">
-    <md-subheader class="md-sticky-no-effect">
-      Are you sure you want to delete {{ member.name }} with email address {{ member.email }} from {{ group.name }}?
-    </md-subheader>
-    <div class="group-page__delete-user-dialog-list-header">This will cause: </div>
-    <ul class="group-page__delete-user-dialog-list">
-      <li>All of their funds to be deleted from currently funding projects</li>
-      <li>All of their funds to be removed from the group</li>
-      <li>All of their ideas to be deleted from the group</li>
-      <li>All of their comments to be deleted from the group</li>
-    </ul>
+
+    <div class="group-page__delete-user-dialog-header" layout="column" layout-align="center center">
+      <ng-md-icon icon="warning"
+        layout="column"
+        layout-align="center center"
+        class="group-page__delete-user-dialog-warning-icon"
+        size="35"
+      ></ng-md-icon>
+      <div class="group-page__delete-user-dialog-header-text">
+        Delete {{ member.name }} from {{ group.name }}
+      </div>
+    </div>
+    <md-divider></md-divider>
+
+    <div class="group-page__delete-user-dialog-list-container">
+      <div class="group-page__delete-user-dialog-list-header">
+        Warning: This cannot be undone
+      </div>
+      <ul class="group-page__delete-user-dialog-list">
+        <li class="group-page__delete-user-dialog-list-item" ng-repeat="warning in warnings" layout="row" layout-align="center start">
+          <ng-md-icon icon="check_box"
+            layout="column"
+            layout-align="center center"
+            class="group-page__delete-user-dialog-checkbox-icon"
+            size="20"
+          ></ng-md-icon>
+          <div class="group-page__delete-user-dialog-warning-text">{{ warning }}</div>
+        </li>
+      </ul>
+    </div>
   </md-dialog-content>
   <div class="md-actions" layout="row">
-    <md-button ng-click="cancel()">no</md-button>
-    <md-button ng-click="proceed()">yes</md-button>
+    <md-button class="md-raised group-page__delete-user-dialog-delete-btn" ng-click="proceed()">delete</md-button>
+    <md-button class="group-page__delete-user-dialog-cancel-btn" ng-click="cancel()">cancel</md-button>
   </div>
 </md-dialog>

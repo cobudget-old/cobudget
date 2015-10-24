@@ -17,6 +17,12 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
           scope: $scope
           controller: ($scope, $mdDialog, Records) ->
             $scope.member = membership.member()
+            $scope.warnings = [
+              "All of their funds will be deleted from currently funding buckets",
+              "All of their funds will be removed from the group",
+              "All of their ideas will be deleted from the group",
+              "All of their comments will be deleted from the group"
+            ]
             $scope.cancel = ->
               $mdDialog.cancel()
             $scope.proceed = ->
