@@ -4,11 +4,13 @@ module.exports =
   controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Toast) ->
 
     $scope.confirmationToken = $stateParams.confirmation_token
+    $scope.createGroup = $stateParams.create_group
 
     $scope.confirmAccount = (formData) ->
       LoadBar.start()
       $location.search('confirmation_token', null)
-
+      $location.search('create_group', null)
+      
       params = 
         name: formData.name        
         password: formData.password
@@ -19,7 +21,8 @@ module.exports =
           user = data.users[0]
           global.cobudgetApp.currentUserId = user.id
           loginParams = { email: user.email, password: formData.password }
-          $auth.submitLogin(loginParams)
+          $auth.submitLogin(loginParams).then (ev, user) ->
+            $location.path('/setup_group')
         .catch ->
           Toast.show('Sorry, that confirmation token has expired.')
           $location.path('/')

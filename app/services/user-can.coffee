@@ -14,9 +14,15 @@ global.cobudgetApp.factory 'UserCan', (Toast, $location, $q, Records) ->
     viewBucket: (bucket) ->
       @viewGroup(bucket.group())
 
-    viewAdminPanel: () ->
+    viewAdminPanel: ->
       validMemberships = Records.memberships.find({
         memberId: global.cobudgetApp.currentUserId,
         isAdmin: true
       })
       validMemberships.length > 0
+
+    viewGroupSetupPage: ->
+      validMemberships = Records.memberships.find({
+        memberId: global.cobudgetApp.currentUserId
+      })
+      validMemberships.length == 0

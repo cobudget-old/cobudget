@@ -10,3 +10,4 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'edit-bucket', require('app/components/edit-bucket-page/edit-bucket-page.coffee')
     .state 'admin', require('app/components/admin-page/admin-page.coffee')
     .state 'confirm-account', require('app/components/confirm-account-page/confirm-account-page.coffee')
+    .state 'group-setup', require('app/components/group-setup-page/group-setup-page.coffee')

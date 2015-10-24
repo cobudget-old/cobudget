@@ -1,18 +1,18 @@
-.confirm-account-page__toolbar {
+.group-setup-page__toolbar {
   background: $cobudget-gunmetal;
   color: white;
 }
 
-.confirm-account-page__content {
+.group-setup-page__content {
   max-width: 640px;
   margin: 0 auto;
 }
 
-.confirm-account-page__heading {
+.group-setup-page__heading {
   @include fontGrande;
 }
 
-.confirm-account-page__submit-btn {
+.group-setup-page__submit-btn {
   margin: 0;
   border: 1px solid $cobudget-gunmetal;
   width: 100%;
