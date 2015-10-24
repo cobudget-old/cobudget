@@ -79,9 +79,16 @@ module.exports =
 
     $scope.newGroupAdmin = Records.users.build()
     $scope.inviteGroup = ->
-      $scope.newGroupAdmin.save().then ->
-        Dialog.alert
-          title: 'Invite sent!'
+      $scope.newGroupAdmin.save()
+        .then ->
+          Dialog.alert
+            title: 'Success!'
+            content: "Your invite was sent."
+        .catch ->
+          Dialog.alert
+            title: 'Error!'
+            content: 'That email is already taken.'
+      $scope.newGroupAdmin = Records.users.build()
       
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
