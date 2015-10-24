@@ -24,12 +24,43 @@ module.exports =
 
     $scope.newGroup = Records.groups.build()
 
+    $scope.openCreateGroupDialog = ->      
+      Dialog.custom
+        scope: $scope
+        template: require('./create-group-dialog-content.tmpl.html')
+
     $scope.createGroup = ->
-      $scope.newGroup.save().then (data) ->
-        newGroupId = data.groups[0].id
-        Records.memberships.fetchMyMemberships().then (data) ->
-          $scope.accessibleGroups = CurrentUser().groups()
-        $scope.newGroup = Records.groups.build()
+      $scope.newGroup.save()
+        .then (data) ->
+          Dialog.alert
+            title: 'Success!'
+            content: 'Group created.'
+          newGroupId = data.groups[0].id
+          Records.memberships.fetchMyMemberships().then (data) ->
+            $scope.accessibleGroups = CurrentUser().groups()
+          $scope.newGroup = Records.groups.build()
+
+    $scope.openInviteGroupDialog = ->
+      Dialog.custom
+        scope: $scope
+        template: require('./invite-group-dialog-content.tmpl.html')
+
+    $scope.newGroupAdmin = Records.users.build()
+    $scope.inviteGroup = ->
+      $scope.newGroupAdmin.save()
+        .then ->
+          Dialog.alert
+            title: 'Success!'
+            content: "Your invite was sent."
+        .catch ->
+          Dialog.alert
+            title: 'Error!'
+            content: 'Email invalid or already taken.'
+        .finally ->
+          $scope.newGroupAdmin = Records.users.build()
+
+    $scope.closeDialog = ->
+      Dialog.close()
 
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"

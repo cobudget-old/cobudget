@@ -12,12 +12,15 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast) ->
       membershipsLoadedDeferred.resolve()
 
   $rootScope.$on 'auth:login-success', (ev, user) ->
-    global.cobudgetApp.currentUserId = user.id    
+    global.cobudgetApp.currentUserId = user.id
     Records.memberships.fetchMyMemberships().then (data) ->
+      # during invite new group flow, user created and logged in without having a group yet
+      # so we perform this quick check
       membershipsLoadedDeferred.resolve()
-      groupId = data.groups[0].id
-      $location.path("/groups/#{groupId}")
-      Toast.show('Welcome to Cobudget!')
+      if data.groups
+        groupId = data.groups[0].id
+        $location.path("/groups/#{groupId}")
+        Toast.show('Welcome to Cobudget!')
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     if error.reason == "unauthorized" && error.errors[0] == "No credentials"

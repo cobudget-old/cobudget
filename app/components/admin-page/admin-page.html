@@ -6,16 +6,8 @@
   </md-toolbar>
 
   <md-content class="admin-page__content">
-    <form name='newGroupForm' class="admin-page__form" ng-submit="createGroup(); newGroupForm.$setUntouched()">
-      <md-input-container>
-        <label>name</label>
-        <input required name="name" type="text" ng-model="newGroup.name">
-        <div ng-messages="newGroupForm.name.$error">
-          <div ng-message="required">This is required.</div>
-        </div>
-      </md-input-container>
-      <md-button class="admin-page__form-submit-btn">create group</md-button>
-    </form>
+    <md-button class="admin-page__form-submit-btn" ng-click="openCreateGroupDialog()">create group</md-button>
+    <md-button class="admin-page__form-submit-btn" ng-click="openInviteGroupDialog()">invite group</md-button>
 
     <md-divider></md-divider>
 

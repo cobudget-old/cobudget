@@ -1,11 +1,3 @@
-<div 
-  class="loading-bar" 
-  layout="column" 
-  layout-align="center center" 
-  ng-show="userConfirmingAccount">
-  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>
-
 <div class="confirm-account-page" ng-hide="userConfirmingAccount">
   <md-toolbar class="md-primary confirm-account-page__toolbar">
     <h1 class="md-toolbar-tools confirm-account-page__heading" layout-align="center">Confirm your Account</h1>
@@ -30,7 +22,7 @@
         </div>
       </md-input-container>
 
-      <input type="submit" value="submit">
+      <md-button class="confirm-account-page__submit-btn">submit</md-button>
     </form>
   </md-content>
 </div>
