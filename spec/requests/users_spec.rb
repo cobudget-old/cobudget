@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Users" do
+xdescribe "Users" do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
 
