@@ -38,7 +38,7 @@ module.exports =
           newGroupId = data.groups[0].id
           Records.memberships.fetchMyMemberships().then (data) ->
             $scope.accessibleGroups = CurrentUser().groups()
-        $scope.newGroup = Records.groups.build()
+          $scope.newGroup = Records.groups.build()
 
     $scope.openInviteGroupDialog = ->
       Dialog.custom
@@ -56,7 +56,8 @@ module.exports =
           Dialog.alert
             title: 'Error!'
             content: 'Email invalid or already taken.'
-      $scope.newGroupAdmin = Records.users.build()
+        .finally ->
+          $scope.newGroupAdmin = Records.users.build()
 
     $scope.closeDialog = ->
       Dialog.close()
