@@ -33,7 +33,7 @@ class Membership < ActiveRecord::Base
       Allocation.where(user_id: member_id, group_id: group_id).destroy_all
       Bucket.where(user_id: member_id, group_id: group_id).destroy_all
       Comment.joins(:bucket).where(user_id: member_id, buckets: {group_id: group_id}).destroy_all
-      Contribution.joins(:bucket).where(user_id: member_id, buckets: {group_id: group_id}).destroy_all
-      member.destroy if member.memberships.length == 0      
+      Contribution.joins(:bucket).where(user_id: member_id, buckets: {group_id: group_id, status: 'live'}).destroy_all
+      member.destroy if member && member.memberships.length == 0
     end
 end

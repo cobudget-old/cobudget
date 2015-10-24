@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   # include TokenAuthenticable
 
   has_many :allocations
-  has_many :memberships, dependent: :destroy, foreign_key: "member_id"
+  has_many :memberships, foreign_key: "member_id"
   has_many :groups, through: :memberships
 
   validates :name, presence: true

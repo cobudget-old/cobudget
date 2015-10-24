@@ -15,8 +15,8 @@ describe MembershipsController, :type => :controller do
         @other_group = create(:group)
         @other_membership = create(:membership, member: @other_user, group: @other_group)
 
-        @group_bucket = create(:bucket, group: group)
-        @other_group_bucket = create(:bucket, group: @other_group)
+        @group_bucket = create(:bucket, group: group, status: 'live')
+        @other_group_bucket = create(:bucket, group: @other_group, status: 'live')
       end
 
       it "destroys membership" do
@@ -56,11 +56,15 @@ describe MembershipsController, :type => :controller do
         expect(@other_group_bucket.comments.length).to eq(7)
       end
 
-      it "destroys member's contributions within membership's group" do
+      it "destroys member's contributions on live buckets within membership's group" do
+        funded_group_bucket = create(:bucket, group: group, status: 'funded')
         create_list(:contribution, 3, user: @other_user, bucket: @group_bucket)
+        create_list(:contribution, 2, bucket: funded_group_bucket, user: @other_user)
         create_list(:contribution, 2, user: user, bucket: @group_bucket)
+
         create_list(:contribution, 2, user: @other_user, bucket: @other_group_bucket)
         create_list(:contribution, 1, user: user, bucket: @other_group_bucket)
+
         delete :destroy, {id: @membership.id}
 
         expect(@group_bucket.contributions.length).to eq(2)
