@@ -1,5 +1,5 @@
 module.exports =
-  url: '/confirm_account?confirmation_token'
+  url: '/confirm_account?confirmation_token&create_group'
   template: require('./confirm-account-page.html')
   controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Toast) ->
 
@@ -21,8 +21,10 @@ module.exports =
           user = data.users[0]
           global.cobudgetApp.currentUserId = user.id
           loginParams = { email: user.email, password: formData.password }
-          $auth.submitLogin(loginParams).then (ev, user) ->
-            $location.path('/setup_group')
+          $auth.submitLogin(loginParams)
+            .then (ev, user) ->
+              if $scope.createGroup
+                $location.path('/setup_group')
         .catch ->
           Toast.show('Sorry, that confirmation token has expired.')
           $location.path('/')
