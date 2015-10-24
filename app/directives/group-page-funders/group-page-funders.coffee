@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
     restrict: 'E'
     template: require('./group-page-funders.html')
     replace: true
-    controller: ($scope, Dialog) ->
+    controller: (Dialog, $scope, $window) ->
 
       $scope.toggleMemberAdmin = (membership) ->
         membership.isAdmin = !membership.isAdmin
@@ -27,6 +27,9 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               $mdDialog.cancel()
             $scope.proceed = ->
               membership.destroy().then ->
+                # temporary hack, until i figure out what to return from 
+                # memberships#destroy to properly reload records on page
+                $window.location.reload()
                 $mdDialog.hide()
 
       return
