@@ -8,7 +8,7 @@ class UsersController < AuthenticatedController
       user.update(name: params[:name], password: params[:password], confirmation_token: nil)
       render json: [user]
     else
-      render nothing: true, status: 401
+      render status: 403, nothing: true
     end
   end
 

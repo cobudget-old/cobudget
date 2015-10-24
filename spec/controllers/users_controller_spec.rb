@@ -1,6 +1,53 @@
 require 'rails_helper'
 
 describe UsersController, :type => :controller do
+  describe "#confirm_account" do
+    context "active confirmation token" do
+      before do
+        @user = User.create_with_confirmation_token(email: Faker::Internet.email)
+        request_params = {
+          name: "new name",
+          password: "password",
+          confirmation_token: @user.confirmation_token
+        }
+        post :confirm_account, request_params
+        @parsed_response = JSON.parse(response.body)
+        @user.reload
+      end
+
+      it "updates user with specified name, and password, and clears confirmation token" do
+        expect(@user.name).to eq("new name")
+        expect(@user.confirmation_token).to be_nil
+      end
+
+      it "returns user as json" do
+        expect(@parsed_response["users"][0]["id"]).to eq(@user.id)
+      end
+    end
+
+    context "stale confirmation token" do
+      before do
+        @user = User.create_with_confirmation_token(email: Faker::Internet.email)
+        confirmation_token = @user.confirmation_token
+        @user.update(confirmation_token: nil)
+        request_params = {
+          name: "new name",
+          password: "password",
+          confirmation_token: confirmation_token
+        }
+        post :confirm_account, request_params
+      end
+
+      it "returns http status forbidden" do
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      it "does not update user" do
+        expect(@user.name).not_to eq("new name")
+      end
+    end
+  end
+
   describe "#create" do
     before do
       make_user_group_admin
