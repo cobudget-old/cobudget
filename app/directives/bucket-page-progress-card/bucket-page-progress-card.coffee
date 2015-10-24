@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
     restrict: 'E'
     template: require('./bucket-page-progress-card.html')
     replace: true
-    controller: ($scope, $state, Toast) ->
+    controller: ($scope, $state, Records, Toast) ->
 
       maxAllowableContribution = _.min([$scope.bucket.amountRemaining(), $scope.membership.balance()])
 
@@ -24,7 +24,9 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
 
       $scope.submitContribution = ->
         $scope.newContribution.save().then ->
-          $state.reload()
-          Toast.show('You funded a bucket')
+          # hack, to get records to properly update
+          Records.memberships.fetchMyMemberships().then ->
+            $state.reload()
+            Toast.show('You funded a bucket')
 
       return
