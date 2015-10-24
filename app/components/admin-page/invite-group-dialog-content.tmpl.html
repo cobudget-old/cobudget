@@ -1,0 +1,14 @@
+<md-dialog aria-label="invite group">
+  <md-dialog-content class="sticky-container">
+    <form name='inviteGroupForm' class="admin-page__form" ng-submit="inviteGroup(); inviteGroupForm.$setUntouched()">
+      <md-input-container>
+        <label>email</label>
+        <input required name="email" type="text" ng-model="newGroupAdmin.email">
+        <div ng-messages="inviteGroupForm.email.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-button class="admin-page__form-submit-btn">invite group</md-button>
+    </form>
+  </md-dialog-content>
+</md-dialog>

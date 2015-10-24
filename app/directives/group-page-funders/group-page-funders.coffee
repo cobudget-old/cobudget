@@ -13,10 +13,8 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
 
       $scope.deleteMembership = (membership) ->
         Dialog.custom
-          clickOutsideToClose: true
           template: require('./delete-membership-dialog.tmpl.html')
           scope: $scope
-          preserveScope: true
           controller: ($scope, $mdDialog, Records) ->
             $scope.member = membership.member()
             $scope.cancel = ->

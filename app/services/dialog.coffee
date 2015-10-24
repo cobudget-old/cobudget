@@ -20,4 +20,8 @@ global.cobudgetApp.factory 'Dialog', ($mdDialog) ->
       $mdDialog.show(confirm)
 
     custom: (args = {}) ->
-      $mdDialog.show(args)
+      defaults =
+        clickOutsideToClose: true
+        preserveScope: true
+      custom = _.merge(defaults, args)
+      $mdDialog.show(custom)

@@ -26,56 +26,24 @@ module.exports =
 
     $scope.openCreateGroupDialog = ->      
       Dialog.custom
-        clickOutsideToClose: true
         scope: $scope
-        preserveScope: true
-        template: 
-          """
-            <md-dialog aria-label="create group">
-              <md-dialog-content class="sticky-container">
-                <form name='newGroupForm' class="admin-page__form" ng-submit="createGroup(); newGroupForm.$setUntouched()">
-                  <md-input-container>
-                    <label>name</label>
-                    <input required name="name" type="text" ng-model="newGroup.name">
-                    <div ng-messages="newGroupForm.name.$error">
-                      <div ng-message="required">This is required.</div>
-                    </div>
-                  </md-input-container>
-                  <md-button class="admin-page__form-submit-btn">create group</md-button>
-                </form>
-              </md-dialog-content>
-            </md-dialog>
-          """
+        template: require('./create-group-dialog-content.tmpl.html')
 
     $scope.createGroup = ->
-      $scope.newGroup.save().then (data) ->
-        newGroupId = data.groups[0].id
-        Records.memberships.fetchMyMemberships().then (data) ->
-          $scope.accessibleGroups = CurrentUser().groups()
+      $scope.newGroup.save()
+        .then (data) ->
+          Dialog.alert
+            title: 'Success!'
+            content: 'Group created.'
+          newGroupId = data.groups[0].id
+          Records.memberships.fetchMyMemberships().then (data) ->
+            $scope.accessibleGroups = CurrentUser().groups()
         $scope.newGroup = Records.groups.build()
 
     $scope.openInviteGroupDialog = ->
       Dialog.custom
-        clickOutsideToClose: true
         scope: $scope
-        preserveScope: true
-        template: 
-          """
-            <md-dialog aria-label="invite group">
-              <md-dialog-content class="sticky-container">
-                <form name='inviteGroupForm' class="admin-page__form" ng-submit="inviteGroup()"; inviteGroupForm.$setUntouched()">
-                  <md-input-container>
-                    <label>email</label>
-                    <input required name="email" type="text" ng-model="newGroupAdmin.email">
-                    <div ng-messages="inviteGroupForm.email.$error">
-                      <div ng-message="required">This is required.</div>
-                    </div>
-                  </md-input-container>
-                  <md-button class="admin-page__form-submit-btn">invite group</md-button>
-                </form>
-              </md-dialog-content>
-            </md-dialog>
-          """
+        template: require('./invite-group-dialog-content.tmpl.html')
 
     $scope.newGroupAdmin = Records.users.build()
     $scope.inviteGroup = ->
@@ -87,9 +55,9 @@ module.exports =
         .catch ->
           Dialog.alert
             title: 'Error!'
-            content: 'That email is already taken.'
+            content: 'Email invalid or already taken.'
       $scope.newGroupAdmin = Records.users.build()
-      
+
     $scope.uploadPathForGroup = (groupId) ->
       "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
 
