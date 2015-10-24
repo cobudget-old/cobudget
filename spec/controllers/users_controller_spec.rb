@@ -77,5 +77,23 @@ describe UsersController, :type => :controller do
         expect(@sent_email.body.to_s).to include(expected_url)
       end
     end
+
+    context "user email not unique" do
+      before do
+        make_user_group_admin
+        request.headers.merge!(user.create_new_auth_token)
+        create(:user, email: "meow@meow.com")
+        @user_params = {email: "meow@meow.com"}
+        post :create, {user: @user_params}
+      end
+
+      it "does not create user" do
+        expect(User.where(@user_params).length).to eq(1)
+      end
+
+      it "returns http status conflict" do
+        expect(response).to have_http_status(:conflict)
+      end
+    end
   end  
 end

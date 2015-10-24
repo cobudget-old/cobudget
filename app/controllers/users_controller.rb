@@ -15,8 +15,12 @@ class UsersController < AuthenticatedController
   api :POST, '/users?invite_group='
   def create
     user = User.create_with_confirmation_token(email: user_params[:email])
-    UserMailer.invite_new_group_email(user: user, inviter: current_user).deliver_later
-    render nothing: true
+    if user.valid?
+      UserMailer.invite_new_group_email(user: user, inviter: current_user).deliver_later
+      render nothing: true
+    else
+      render status: 409, nothing: true
+    end
   end
 
   private 

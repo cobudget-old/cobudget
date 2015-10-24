@@ -19,6 +19,7 @@ module MyLetDeclarations
   let(:created) { 201 }
   let(:updated) { 204 }
   let(:forbidden) { 403 }
+  let(:conflict) { 409 }
   let(:unprocessable) { 422 }
 
 end
