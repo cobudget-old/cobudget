@@ -30,4 +30,30 @@ describe GroupsController, :type => :controller do
       expect(res["groups"][0]["name"]).to eq(group.name)
     end
   end
+
+  describe "#create" do
+    before do
+      make_user_group_admin
+      request.headers.merge!(user.create_new_auth_token)      
+      group_params = {
+        name: 'test',
+        currency_code: 'NZD'
+      }
+      post :create, {group: group_params}
+      @new_group = Group.find_by(group_params)
+      @parsed_response = JSON.parse(response.body)
+    end
+
+    it "creates a new group with specified params" do
+      expect(@new_group).to be_truthy
+    end
+
+    it "adds current_user as admin to that group" do
+      expect(Membership.find_by(group: @new_group, member: user, is_admin: true)).to be_truthy
+    end
+
+    it "returns new group, as json" do
+      expect(@parsed_response["groups"][0]["id"]).to eq(@new_group.id)
+    end
+  end
 end

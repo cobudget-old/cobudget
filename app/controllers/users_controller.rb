@@ -8,8 +8,23 @@ class UsersController < AuthenticatedController
       user.update(name: params[:name], password: params[:password], confirmation_token: nil)
       render json: [user]
     else
-      render nothing: true, status: 401
+      render status: 403, nothing: true
     end
   end
 
+  api :POST, '/users?invite_group='
+  def create
+    user = User.create_with_confirmation_token(email: user_params[:email])
+    if user.valid?
+      UserMailer.invite_new_group_email(user: user, inviter: current_user).deliver_later
+      render nothing: true
+    else
+      render status: 409, nothing: true
+    end
+  end
+
+  private 
+    def user_params
+      params.require(:user).permit(:email)
+    end
 end
