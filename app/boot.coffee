@@ -23,8 +23,9 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast) ->
         Toast.show('Welcome to Cobudget!')
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
-    e.preventDefault()
-    global.cobudgetApp.currentUserId = null
-    membershipsLoadedDeferred.reject()
-    Toast.show('Please log in to continue')
-    $location.path('/')
+    if error
+      e.preventDefault()
+      global.cobudgetApp.currentUserId = null
+      membershipsLoadedDeferred.reject()
+      Toast.show('Please log in to continue')
+      $location.path('/')
