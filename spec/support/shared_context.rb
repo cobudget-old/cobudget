@@ -11,8 +11,7 @@ module MyLetDeclarations
 
   # Convenience methods for testing permissions
   let(:make_user_group_member) { create(:membership, group: group, member: user) }
-  let(:make_user_group_admin) { create(:membership,
-                           group: group, member: user, is_admin: true) }
+  let(:make_user_group_admin) { create(:membership, group: group, member: user, is_admin: true) }
 
   # HTTP status codes
   let(:success) { 200 }
@@ -21,6 +20,6 @@ module MyLetDeclarations
   let(:forbidden) { 403 }
   let(:conflict) { 409 }
   let(:unprocessable) { 422 }
-
 end
+
 RSpec.configure { |c| c.include MyLetDeclarations }

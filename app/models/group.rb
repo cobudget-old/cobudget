@@ -9,7 +9,11 @@ class Group < ActiveRecord::Base
   before_save :update_currency_symbol_if_currency_code_changed
 
   def add_admin(user)
-    memberships.create!(member: user, is_admin: true)
+    if members.include?(user)
+      memberships.find_by(member: user).update(is_admin: true)
+    else
+      memberships.create(member: user, is_admin: true)
+    end
   end
 
   def add_member(user)

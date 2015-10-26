@@ -18,8 +18,12 @@ class MembershipsController < AuthenticatedController
 
   def destroy
     membership = Membership.find(params[:id])
-    membership.destroy
-    render nothing: true
+    if current_user.is_admin_for?(membership.group)
+      MembershipService.delete_membership(membership: membership)
+      render nothing: true, status: 200
+    else
+      render nothing: true, status: 403
+    end
   end
 
   private

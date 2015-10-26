@@ -1,83 +1,28 @@
 require 'rails_helper'
 
 describe MembershipsController, :type => :controller do
-  context "admin" do
+  describe "#destroy" do
     before do
-      make_user_group_admin
+      make_user_group_member
       request.headers.merge!(user.create_new_auth_token)
+      @membership = create(:membership, group: group)
     end
 
-    describe "#destroy" do
+    context "group admin" do
       before do
-        @other_user = create(:user)
-        @membership = create(:membership, member: @other_user, group: group)
-
-        @other_group = create(:group)
-        @other_membership = create(:membership, member: @other_user, group: @other_group)
-
-        @group_bucket = create(:bucket, group: group, status: 'live')
-        @other_group_bucket = create(:bucket, group: @other_group, status: 'live')
+        group.add_admin(user)
       end
 
-      it "destroys membership" do
+      it "returns http status ok" do
         delete :destroy, {id: @membership.id}
-
-        expect(Membership.find_by_id(@membership.id)).to be_nil
+        expect(response).to have_http_status(:ok)
       end
+    end
 
-      it "destroys member's allocations within membership's group" do
-        create_list(:allocation, 3, group: group, user: @other_user)
-        create_list(:allocation, 2, group: @other_group, user: @other_user)
+    context "not group admin" do
+      it "returns http status forbidden" do
         delete :destroy, {id: @membership.id}
-
-        expect(Allocation.where(user: @other_user, group: group).length).to eq(0)
-        expect(Allocation.where(user: @other_user, group: @other_group).length).to eq(2)
-      end
-
-      it "destroys all member's buckets within the membership's group" do
-        create_list(:bucket, 4, group: group, user: user)
-        create_list(:bucket, 2, group: group, user: @other_user)
-        create_list(:bucket, 5, group: @other_group, user: user)
-        create_list(:bucket, 3, group: @other_group, user: @other_user)
-        delete :destroy, {id: @membership.id}
-
-        expect(Bucket.where(group: group, user: @other_user).length).to eq(0)
-        expect(Bucket.where(group: @other_group, user: @other_user).length).to eq(3)
-      end
-
-      it "destroys member's comments within membership's group" do
-        create_list(:comment, 3, user: @other_user, bucket: @group_bucket)
-        create_list(:comment, 2, user: user, bucket: @group_bucket)
-        create_list(:comment, 4, user: @other_user, bucket: @other_group_bucket)
-        create_list(:comment, 3, user: user, bucket: @other_group_bucket)
-        delete :destroy, {id: @membership.id}
-
-        expect(@group_bucket.comments.length).to eq(2)
-        expect(@other_group_bucket.comments.length).to eq(7)
-      end
-
-      it "destroys member's contributions on live buckets within membership's group" do
-        funded_group_bucket = create(:bucket, group: group, status: 'funded')
-        create_list(:contribution, 3, user: @other_user, bucket: @group_bucket)
-        create_list(:contribution, 2, bucket: funded_group_bucket, user: @other_user)
-        create_list(:contribution, 2, user: user, bucket: @group_bucket)
-
-        create_list(:contribution, 2, user: @other_user, bucket: @other_group_bucket)
-        create_list(:contribution, 1, user: user, bucket: @other_group_bucket)
-
-        delete :destroy, {id: @membership.id}
-
-        expect(@group_bucket.contributions.length).to eq(2)
-        expect(@other_group_bucket.contributions.length).to eq(3)
-      end
-
-      context "user has only one membership" do
-        it "also destroys member" do
-          @other_membership.destroy
-          delete :destroy, {id: @membership.id}
-
-          expect(User.find_by_id(@other_user.id)).to be_nil
-        end
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end

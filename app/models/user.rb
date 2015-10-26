@@ -29,12 +29,10 @@ class User < ActiveRecord::Base
     self.create(name: tmp_name, email: email, password: tmp_password, confirmation_token: confirmation_token)
   end
 
-  # (EL) I dont think this is necessary anymore
   def is_admin_for?(group)
-    group.memberships.where(is_admin: true).where(member_id: id).exists?
+    Membership.where(group: group, member: self, is_admin: true).length > 0
   end
 
-  # (EL) I dont think this is necessary anymore
   def is_member_of?(group)
     group.members.include?(self)
   end
