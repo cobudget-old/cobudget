@@ -27,9 +27,8 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               $mdDialog.cancel()
             $scope.proceed = ->
               membership.destroy().then ->
-                # temporary hack, until i figure out what to return from 
-                # memberships#destroy to properly reload records on page
-                $window.location.reload()
                 $mdDialog.hide()
+                Dialog.alert(title: 'Success!', content: 'Member deleted.').then ->
+                  $window.location.reload()
 
       return

@@ -8,7 +8,7 @@ global.cobudgetApp.factory 'Dialog', ($mdDialog) ->
       alert = $mdDialog.alert
         title: args.title
         content: args.content
-        ok: args.ok || 'close'
+        ok: args.ok
       $mdDialog.show(alert)
 
     confirm: (args = {}) ->
