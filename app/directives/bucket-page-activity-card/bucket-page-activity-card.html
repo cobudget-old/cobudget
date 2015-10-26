@@ -22,7 +22,7 @@
     <md-list class="bucket-page__comment-list">
       <md-list-item class="bucket-page__comment" ng-repeat="comment in bucket.comments()" layout="column" layout-align="center start">
         <md-divider></md-divider>
-        <div class="bucket-page__comment-author-name">{{ comment.author().name }}</div>
+        <div class="bucket-page__comment-author-name">{{ comment.author().name || '[deleted user]' }}</div>
         <div class="bucket-page__comment-body" marked="comment.body"></div>
       </md-list-item>
     </md-list>

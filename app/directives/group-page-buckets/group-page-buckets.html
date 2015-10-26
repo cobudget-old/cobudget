@@ -66,7 +66,7 @@
     <md-list-item ng-repeat="fundedBucket in group.fundedBuckets()" ng-click="showBucket(fundedBucket.id)">
       <div layout="column" flex class="group-page__funded-bucket-container">
         <span class="group-page__funded-bucket-title">{{ fundedBucket.name }}</span>
-        <span class="group-page__funded-bucket-author">created by {{ fundedBucket.author().name }} {{ fundedBucket.createdAt | timeFromNowInWords }} ago</span>
+        <span class="group-page__funded-bucket-author">created by {{ fundedBucket.author().name || '[deleted user]' }} {{ fundedBucket.createdAt | timeFromNowInWords }} ago</span>
       </div>
     </md-list-item>
   </md-list>

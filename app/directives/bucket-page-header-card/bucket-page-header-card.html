@@ -1,7 +1,7 @@
 <md-card class="bucket-page__header-card">
   <md-card-content class="bucket-page__meta">
     <div class="bucket-page__title">{{ bucket.name }}</div>
-    <div class="bucket-page__author">created by {{ bucket.author().name }} {{ bucket.createdAt | timeFromNowInWords }} ago</div>
+    <div class="bucket-page__author">created by {{ bucket.author().name || '[deleted user]'}} {{ bucket.createdAt | timeFromNowInWords }} ago</div>
   </md-card-content>
 
   <md-card-content class="bucket-page__description">
