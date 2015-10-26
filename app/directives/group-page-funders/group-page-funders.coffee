@@ -21,7 +21,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               "All of their funds will be deleted from currently funding buckets",
               "All of their funds will be removed from the group",
               "All of their ideas will be deleted from the group",
-              "All of their comments will be deleted from the group"
+              "All of their funding buckets will be deleted from the group and money will be refunded"
             ]
             $scope.cancel = ->
               $mdDialog.cancel()
