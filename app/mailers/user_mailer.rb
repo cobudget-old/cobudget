@@ -120,4 +120,14 @@ class UserMailer < ActionMailer::Base
          from: "Cobudget Accounts <accounts@cobudget.co>",
          subject: "#{inviter.name} invited you to create a new group on Cobudget")
   end
+
+  def notify_funder_that_bucket_was_deleted(funder: , bucket: )
+    @bucket = bucket
+    @group = @bucket.group
+    refund_amount = @bucket.contributions.where(user: funder).sum(:amount)
+    @formatted_refund_amount = Money.new(refund_amount * 100, @group.currency_code).format
+    mail(to: funder.name_and_email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "#{@bucket.name} was deleted")
+  end
 end
