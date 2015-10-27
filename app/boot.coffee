@@ -23,6 +23,14 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast) ->
         Toast.show('Welcome to Cobudget!')
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
+    console.log('$stateChangeError signal fired!')
+    console.log('e: ', e)
+    console.log('toState: ', toState)
+    console.log('toParams: ', toParams)
+    console.log('fromState: ', fromState)
+    console.log('fromParams: ', fromParams)
+    console.log('error: ', error)
+
     if error
       e.preventDefault()
       global.cobudgetApp.currentUserId = null
