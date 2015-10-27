@@ -36,13 +36,16 @@
         </div>
       </md-input-container>
 
-      <md-input-container>
-        <label>Description</label>
-        <textarea required name="description" ng-model="bucket.description"></textarea>
-        <div ng-messages="bucketForm.description.$error">
-          <div ng-message="required">This is required.</div>
-        </div>
-      </md-input-container>
+      <div class="create-bucket-page__description-container">
+        <md-input-container>
+          <label>Description</label>
+          <textarea required name="description" ng-model="bucket.description"></textarea>
+          <div ng-messages="bucketForm.description.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <a class="create-bucket-page__markdown-link" href="https://www.loomio.org/markdown" target="_blank">markdown supported</a>
+      </div>
 
       <md-input-container>
         <label>Group</label>

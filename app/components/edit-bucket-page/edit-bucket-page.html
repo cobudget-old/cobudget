@@ -25,7 +25,7 @@
 
     <div>
       <md-subheader class="edit-bucket-page__subheader-text">
-        You can continue to edit this {{ bucket.status == 'draft' ? 'idea' : 'bucket' }}, propose it to your peers, and get feedback. 
+        You can continue to edit this {{ bucket.status == 'draft' ? 'idea' : 'bucket' }}, propose it to your peers, and get feedback.
         <span ng-if="bucket.status == 'draft'">When you're ready, you can request funding.</span>
       </md-subheader>
     </div>
@@ -39,13 +39,17 @@
         </div>
       </md-input-container>
 
-      <md-input-container>
-        <label>Description</label>
-        <textarea required name="description" ng-model="bucket.description"></textarea>
-        <div ng-messages="bucketForm.description.$error">
-          <div ng-message="required">This is required.</div>
-        </div>
-      </md-input-container>
+      <div class="edit-bucket-page__description-container">
+        <md-input-container>
+          <label>Description</label>
+          <textarea required name="description" ng-model="bucket.description"></textarea>
+          <div ng-messages="bucketForm.description.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <a class="edit-bucket-page__markdown-link" href="https://www.loomio.org/markdown" target="_blank">markdown supported</a>
+      </div>
+
 
       <md-input-container>
         <label>Funding Target (required for funding)</label>

@@ -49,3 +49,14 @@
 .edit-bucket-page__target-optional-text {
   color: $cobudget-blue;
 }
+
+.edit-bucket-page__description-container {
+  position: relative;
+}
+
+.edit-bucket-page__markdown-link {
+  position: absolute;
+  right: 0px;
+  bottom: 8px;
+  font-size: 12px;
+}
