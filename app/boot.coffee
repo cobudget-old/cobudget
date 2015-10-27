@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast) ->
+global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast, $window) ->
 
   membershipsLoadedDeferred = $q.defer()
   global.cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise
@@ -37,3 +37,5 @@ global.cobudgetApp.run ($rootScope, Records, $q, $location, $auth, Toast) ->
       membershipsLoadedDeferred.reject()
       Toast.show('Please log in to continue')
       $location.path('/')
+    else
+      $window.location.reload()
