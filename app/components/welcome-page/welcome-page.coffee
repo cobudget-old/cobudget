@@ -15,9 +15,11 @@ module.exports =
         LoadBar.stop()
           
     $scope.login = (formData) ->
+      LoadBar.start()
       $scope.formError = ""
       $auth.submitLogin(formData) 
         .catch ->
           $scope.formError = "Invalid Credentials"
+          LoadBar.stop()
 
     return
