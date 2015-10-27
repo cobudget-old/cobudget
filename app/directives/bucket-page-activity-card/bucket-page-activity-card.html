@@ -34,9 +34,14 @@
         <textarea type="text" class="bucket-page__comment-input" placeholder="Add a comment, question, or offer of support" ng-model="newComment.body" />
       </md-input-container>
 
-      <md-input-container class="bucket-page__submit-comment-btn-container">
-        <md-button class="md-primary bucket-page__submit-comment-btn">submit</md-button>
-      </md-input-container>
+      <div layout="row" layout-align="center center">
+        <span flex></span>
+        <a class="bucket-page__comment-form-markdown-link" href="https://www.loomio.org/markdown" target="_blank">markdown supported</a>
+        <md-input-container class="bucket-page__submit-comment-btn-container">
+          <md-button class="md-primary bucket-page__submit-comment-btn">submit</md-button>
+        </md-input-container>
+      </div>
+
     </form>
   </md-card>
 </div>

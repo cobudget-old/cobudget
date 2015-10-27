@@ -72,3 +72,10 @@
   padding: 0 !important;
   float: right !important;
 }
+
+.bucket-page__comment-form-markdown-link {
+  @include fontMedium;
+  padding-right: 20px;
+  position: relative;
+  top: 3px;
+}
