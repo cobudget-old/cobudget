@@ -3,11 +3,18 @@ class CommentService
     bucket = comment.bucket
     bucket_author = bucket.user
     comment_author = comment.user
-    UserMailer.notify_author_of_new_comment_email(comment: comment).deliver_later unless bucket_author == comment_author
 
-    commenters = bucket.comments.map { |comment| comment.user }
-    funders = bucket.contributions.map { |contribution| contribution.user }
-    users_to_notify = (commenters + funders).uniq { |member| member.id }.reject { |member| member == comment_author || member == bucket_author }
+    # in case bucket_author was deleted
+    if bucket_author && bucket_author != comment_author
+      UserMailer.notify_author_of_new_comment_email(comment: comment).deliver_later
+    end
+
+    commenters = User.joins(:comments).where(comments: {bucket_id: bucket.id}).uniq
+
+    funders =  User.joins(:contributions).where(contributions: {bucket_id: bucket.id}).uniq
+
+    users_to_notify = (commenters + funders).uniq.reject { |member| member == comment_author || member == bucket_author }
+
     users_to_notify.each { |user| UserMailer.notify_user_of_new_comment_email(comment: comment, user: user).deliver_later } 
   end
 end
