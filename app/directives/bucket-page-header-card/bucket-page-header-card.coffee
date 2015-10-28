@@ -19,4 +19,14 @@ global.cobudgetApp.directive 'bucketPageHeaderCard', () ->
         # else
         #   $filter('characters')($scope.bucket.description, 200, false)
 
+      # if container.height() == 200
+      #   container.css({overflow: "hidden"})
+      # find the text container and see what height it is.
+      # if it's 200px
+        # add overflow hidden
+        # add text overlay
+        # add read more button
+
+      $scope.textTruncated = ->
+
       return
