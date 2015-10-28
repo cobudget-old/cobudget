@@ -61,11 +61,16 @@
   min-height: 60px !important;
 }
 
-.bucket-page__submit-comment-btn {
-  margin: 0;
-  margin-top: 10px;
-  background: $cobudget-lime !important;
-  color: white !important;
+.bucket-page__submit-comment-container {
+  position: relative;
+}
+
+.bucket-page__comment-form-markdown-link {
+  position: relative;
+  font-size: 12px;
+  top: 2px;
+  left: 2px;
+  color: rgba(0,0,0,0.35);
 }
 
 .bucket-page__submit-comment-btn-container {
@@ -73,9 +78,10 @@
   float: right !important;
 }
 
-.bucket-page__comment-form-markdown-link {
-  @include fontMedium;
-  padding-right: 20px;
-  position: relative;
-  top: 3px;
+.bucket-page__submit-comment-btn {
+  margin: 0;
+  margin-top: 10px;
+  background: $cobudget-lime !important;
+  color: white !important;
 }
+
