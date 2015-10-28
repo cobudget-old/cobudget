@@ -28,7 +28,10 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
             $scope.proceed = ->
               membership.destroy().then ->
                 $mdDialog.hide()
-                Dialog.alert(title: 'Success!', content: 'Member deleted.').then ->
+                Dialog.alert(
+                  title: 'Success!' 
+                  content: "#{$scope.member.name} was deleted from #{$scope.group.name}"
+                ).then ->
                   $window.location.reload()
 
       return
