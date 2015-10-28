@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   validates :user_id, presence: true
   validates :bucket_id, presence: true
 
+  # add helper method to the UserMailer, takes an argument (text) returns rendered text
   def body_as_markdown
     renderer = Redcarpet::Render::HTML.new 
     markdown = Redcarpet::Markdown.new(renderer, extensions = {})
