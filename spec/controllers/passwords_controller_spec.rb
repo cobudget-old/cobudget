@@ -63,4 +63,57 @@ RSpec.describe Overrides::PasswordsController, :type => :controller do
       end
     end
   end
+
+  describe "#update" do
+    context "reset_password_token present in request" do
+      context "reset_password_token matches user" do
+        before do
+          require 'securerandom'
+          reset_password_token = SecureRandom.urlsafe_base64.to_s
+          user.update(reset_password_token: reset_password_token)
+          @old_encrypted_password = user.encrypted_password
+          patch :update, {reset_password_token: reset_password_token, password: "password", confirm_password: "password"}
+          user.reload
+        end
+
+        it "returns http status updated" do
+          expect(response).to have_http_status(204)
+        end
+
+        it "updates user's password" do
+          expect(user.encrypted_password).not_to eq(@old_encrypted_password)
+        end
+
+        it "removes reset_password_token from user" do
+          expect(user.reset_password_token).to be_nil
+        end
+      end
+
+      context "passwords don't match" do
+        before do
+          reset_password_token = SecureRandom.urlsafe_base64.to_s
+          user.update(reset_password_token: reset_password_token)
+          patch :update, {reset_password_token: reset_password_token, password: "password", confirm_password: "potato"}
+        end
+
+        it "returns http status unprocessable" do
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "reset_password_token does not match user" do
+        it "returns http status forbidden" do
+          patch :update, {reset_password_token: "meow", password: "password", confirm_password: "password"}
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
+    end
+
+    context "reset_password_token not present in request" do
+      it "returns http status unprocessable" do
+        patch :update
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
 end

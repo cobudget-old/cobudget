@@ -14,8 +14,17 @@ module Overrides
     end
 
     def update
-      pp params
-      render nothing: true, status: 200
+      if params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
+        if user = User.find_by_reset_password_token(params[:reset_password_token])
+          user.update(password: params[:password], reset_password_token: nil)
+          render nothing: true, status: 204
+        else
+          render nothing: true, status: 403
+        end
+      else
+        render nothing: true, status: 422
+      end
     end
+
   end
 end
