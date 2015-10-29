@@ -130,4 +130,11 @@ class UserMailer < ActionMailer::Base
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "#{@bucket.name} was deleted")
   end
+
+  def reset_password_email(user:)
+    @user = user
+    mail(to: user.name_and_email,
+         from: "Cobudget Accounts <accounts@cobudget.co>",
+         subject: "Reset Password Instructions")
+  end
 end
