@@ -12,4 +12,5 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'confirm-account', require('app/components/confirm-account-page/confirm-account-page.coffee')
     .state 'group-setup', require('app/components/group-setup-page/group-setup-page.coffee')
     .state 'forgot-password', require('app/components/forgot-password-page/forgot-password-page.coffee')
+    .state 'reset-password', require('app/components/reset-password-page/reset-password-page.coffee')
     
