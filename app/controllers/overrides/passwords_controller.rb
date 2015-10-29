@@ -12,5 +12,10 @@ module Overrides
         render nothing: true, status: 400
       end
     end
+
+    def update
+      pp params
+      render nothing: true, status: 200
+    end
   end
 end
