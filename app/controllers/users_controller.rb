@@ -1,6 +1,6 @@
 class UsersController < AuthenticatedController
 
-  skip_before_action :authenticate_user!, only: :confirm_account
+  skip_before_action :authenticate_user!, except: :create
 
   api :POST, '/users/confirm_account'
   def confirm_account
@@ -20,6 +20,31 @@ class UsersController < AuthenticatedController
       render nothing: true
     else
       render status: 409, nothing: true
+    end
+  end
+
+  def request_password_reset
+    if user = User.find_by_email(params[:email])
+      if user.has_set_up_account?
+        user.update(reset_password_token: SecureRandom.urlsafe_base64.to_s)
+      end
+      UserMailer.reset_password_email(user: user).deliver_later
+      render nothing: true, status: 200
+    else
+      render nothing: true, status: 400
+    end
+  end
+
+  def reset_password
+    if params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
+      if user = User.find_by_reset_password_token(params[:reset_password_token])
+        user.update(password: params[:password], reset_password_token: nil)
+        render json: [user], status: 204
+      else
+        render nothing: true, status: 403
+      end
+    else
+      render nothing: true, status: 422
     end
   end
 
