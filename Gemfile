@@ -28,7 +28,6 @@ gem 'omniauth'
 gem 'puma'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'airbrake'
 gem 'sinatra', :require => nil
 
 # error tracking
