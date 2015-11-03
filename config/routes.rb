@@ -2,14 +2,13 @@ Rails.application.routes.draw do
   apipie
 
   scope path: 'api/v1', defaults: { format: :json } do
-    mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
-    devise_for :users, defaults: {format: :json}, skip: [:sessions, :registrations], path_names: {
-      password: 'reset_password'
-    }
+    mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks, :passwords, :registrations]
 
     resources :users, defaults: { format: :json } do
       collection do
         post :confirm_account
+        post :request_password_reset
+        post :reset_password
       end
     end
 

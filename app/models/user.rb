@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     group.members.include?(self)
   end
 
+  def has_set_up_account?
+    confirmation_token.nil?
+  end
+
   private
     def assign_uid_and_provider
       self.uid = self.email
