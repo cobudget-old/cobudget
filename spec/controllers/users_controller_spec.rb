@@ -172,8 +172,8 @@ describe UsersController, :type => :controller do
           user.reload
         end
 
-        it "returns http status updated" do
-          expect(response).to have_http_status(204)
+        it "returns http status ok" do
+          expect(response).to have_http_status(:ok)
         end
 
         it "updates user's password" do

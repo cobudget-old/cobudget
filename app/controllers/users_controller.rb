@@ -41,7 +41,7 @@ class UsersController < AuthenticatedController
     if params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
       if user = User.find_by_reset_password_token(params[:reset_password_token])
         user.update(password: params[:password], reset_password_token: nil)
-        render json: [user], status: 204
+        render json: [user]
       else
         render nothing: true, status: 403
       end
