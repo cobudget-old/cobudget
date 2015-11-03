@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       collection do
         post :confirm_account
         post :request_password_reset
-        patch :reset_password
+        post :reset_password
       end
     end
 

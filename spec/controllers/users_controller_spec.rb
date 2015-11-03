@@ -168,7 +168,7 @@ describe UsersController, :type => :controller do
           reset_password_token = SecureRandom.urlsafe_base64.to_s
           user.update(reset_password_token: reset_password_token)
           @old_encrypted_password = user.encrypted_password
-          patch :reset_password, {reset_password_token: reset_password_token, password: "password", confirm_password: "password"}
+          post :reset_password, {reset_password_token: reset_password_token, password: "password", confirm_password: "password"}
           user.reload
         end
 
@@ -194,7 +194,7 @@ describe UsersController, :type => :controller do
         before do
           reset_password_token = SecureRandom.urlsafe_base64.to_s
           user.update(reset_password_token: reset_password_token)
-          patch :reset_password, {reset_password_token: reset_password_token, password: "password", confirm_password: "potato"}
+          post :reset_password, {reset_password_token: reset_password_token, password: "password", confirm_password: "potato"}
         end
 
         it "returns http status unprocessable" do
@@ -204,7 +204,7 @@ describe UsersController, :type => :controller do
 
       context "reset_password_token does not match user" do
         it "returns http status forbidden" do
-          patch :reset_password, {reset_password_token: "meow", password: "password", confirm_password: "password"}
+          post :reset_password, {reset_password_token: "meow", password: "password", confirm_password: "password"}
           expect(response).to have_http_status(:forbidden)
         end
       end
@@ -212,7 +212,7 @@ describe UsersController, :type => :controller do
 
     context "reset_password_token not present in request" do
       it "returns http status unprocessable" do
-        patch :reset_password
+        post :reset_password
         expect(response).to have_http_status(422)
       end
     end
