@@ -1,12 +1,13 @@
 module.exports =
   url: '/reset_password?reset_password_token'
   template: require('./reset-password-page.html')
-  controller: ($auth, Dialog, $location, Records, $scope, $stateParams, Toast) ->
+  controller: ($auth, Dialog, LoadBar, $location, Records, $scope, $stateParams, Toast) ->
 
     $scope.formData = {}
     resetPasswordToken = $stateParams.reset_password_token
 
     $scope.resetPassword = ->
+      LoadBar.start()
       password = $scope.formData.password
       confirmPassword = $scope.formData.confirmPassword
       $scope.formData = {}
@@ -26,5 +27,7 @@ module.exports =
           .catch (err) ->
             Toast.show('Your reset password token has expired, please request another')
             $location.path('/forgot_password')
+            LoadBar.stop()
       else
+        LoadBar.stop()
         Dialog.alert(title: 'Error!', content: 'Passwords must match.')
