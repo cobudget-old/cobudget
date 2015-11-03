@@ -12,7 +12,7 @@ class UsersController < AuthenticatedController
     end
   end
 
-  api :POST, '/users?invite_group='
+  api :POST, '/users?invite_group'
   def create
     user = User.create_with_confirmation_token(email: user_params[:email])
     if user.valid?
@@ -23,6 +23,7 @@ class UsersController < AuthenticatedController
     end
   end
 
+  api :POST, '/users/request_password_reset?email'
   def request_password_reset
     if user = User.find_by_email(params[:email])
       if user.has_set_up_account?
@@ -35,6 +36,7 @@ class UsersController < AuthenticatedController
     end
   end
 
+  api :POST, '/users/reset_password?password&confirm_password&reset_password_token'
   def reset_password
     if params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
       if user = User.find_by_reset_password_token(params[:reset_password_token])
@@ -48,7 +50,7 @@ class UsersController < AuthenticatedController
     end
   end
 
-  private 
+  private
     def user_params
       params.require(:user).permit(:email)
     end
