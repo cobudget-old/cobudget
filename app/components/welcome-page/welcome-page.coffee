@@ -22,4 +22,7 @@ module.exports =
           $scope.formError = "Invalid Credentials"
           LoadBar.stop()
 
+    $scope.visitForgotPasswordPage = ->
+      $location.path('/forgot_password')
+
     return
