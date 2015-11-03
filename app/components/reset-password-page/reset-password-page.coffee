@@ -1,33 +1,30 @@
 module.exports =
   url: '/reset_password?reset_password_token'
   template: require('./reset-password-page.html')
-  controller: ($auth, Dialog, $location, Records, $scope, $stateParams) ->
-    console.log('i loaded')
+  controller: ($auth, Dialog, $location, Records, $scope, $stateParams, Toast) ->
 
-    $scope.formData = 
-      reset_password_token: $stateParams.reset_password_token
+    $scope.formData = {}
+    resetPasswordToken = $stateParams.reset_password_token
 
     $scope.resetPassword = ->
-      console.log('$scope.formData: ', $scope.formData)
-      if $scope.formData.password == $scope.formData.confirm_password
+      password = $scope.formData.password
+      confirmPassword = $scope.formData.confirmPassword
+      $scope.formData = {}
+      if password == confirmPassword
         $location.search('reset_password_token', null)
-
-        $auth.updatePassword($scope.formData)
+        requestParams = 
+          password: password
+          confirm_password: confirmPassword
+          reset_password_token: resetPasswordToken
+        Records.users.resetPassword(requestParams)
           .then (res) ->
-            console.log('res: ', res)
-            # validate user and redirect to welcome page with toast
+            user = res.users[0]
+            loginParams =
+              email: user.email
+              password: password
+            $auth.submitLogin(loginParams)
           .catch (err) ->
-            console.log('err: ', err)
-            # clear form
-            # toast token expired
-
-        # $auth.requestPasswordReset($scope.formData)
-        #   .then (res) ->
-        #     console.log('res: ', res)
-        #   .catch (err) ->
-        #     console.log('err: ', err)
+            Toast.show('Your reset password token has expired, please request another')
+            $location.path('/forgot_password')
       else
         Dialog.alert(title: 'Error!', content: 'Passwords must match.')
-
-        
-

@@ -1,18 +1,13 @@
 module.exports =
   url: '/forgot_password'
   template: require('./forgot-password-page.html')
-  controller: ($auth, Dialog, $location, Records, $scope) ->
-    console.log('i loaded')
+  controller: (Dialog, $location, Records, $scope) ->
 
     $scope.formData = {}
     $scope.requestPassword = ->
-      console.log('i have been called')
-      $auth.requestPasswordReset($scope.formData)
+      Records.users.requestPasswordReset($scope.formData)
         .then (res) ->
-          console.log('res: ', res)
           Dialog.alert(title: 'Help is on the way!', content: 'Go check your email to reset your account.').then ->
             $location.path('/')
         .catch (err) ->
-          console.log('err: ', err)
           Dialog.alert(title: 'Error', content: 'That email does not exist.')
-
