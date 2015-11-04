@@ -122,6 +122,7 @@ describe UsersController, :type => :controller do
         post :request_password_reset, {email: user.email}
         @sent_email = ActionMailer::Base.deliveries.first
         expect(@sent_email.to).to eq([user.email])
+        expect(@sent_email.subject).to eq("Reset Password Instructions")
         expected_url = "/#/reset_password?reset_password_token=#{user.reset_password_token}"
         expect(@sent_email.body.to_s).to include(expected_url)
       end
@@ -143,6 +144,7 @@ describe UsersController, :type => :controller do
         post :request_password_reset, {email: user.email}
         @sent_email = ActionMailer::Base.deliveries.first
         expect(@sent_email.to).to eq([user.email])
+        expect(@sent_email.subject).to eq("Set up your Cobudget Account")
         expected_url = "/#/confirm_account?confirmation_token=#{user.confirmation_token}"
         expect(@sent_email.body.to_s).to include(expected_url)
         ActionMailer::Base.deliveries.clear

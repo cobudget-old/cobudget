@@ -133,8 +133,9 @@ class UserMailer < ActionMailer::Base
 
   def reset_password_email(user:)
     @user = user
+    subject = @user.has_set_up_account? ? "Reset Password Instructions" : "Set up your Cobudget Account"
     mail(to: user.name_and_email,
          from: "Cobudget Accounts <accounts@cobudget.co>",
-         subject: "Reset Password Instructions")
+         subject: subject)
   end
 end
