@@ -10,6 +10,8 @@ global.cobudgetApp.factory 'MembershipRecordsInterface', (config, BaseRecordsInt
     fetchMyMemberships: ->
       @fetch
         path: 'my_memberships'
+        params:
+          utc_offset: moment().utcOffset()
     fetchByGroupId: (groupId) ->
       @fetch
         params:
