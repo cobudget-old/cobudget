@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         post :confirm_account
         post :request_password_reset
         post :reset_password
+        post :update_profile
       end
     end
 

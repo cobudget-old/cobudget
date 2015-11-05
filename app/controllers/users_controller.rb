@@ -1,6 +1,6 @@
 class UsersController < AuthenticatedController
 
-  skip_before_action :authenticate_user!, except: :create
+  skip_before_action :authenticate_user!, except: [:create, :update_profile]
 
   api :POST, '/users/confirm_account'
   def confirm_account
@@ -22,6 +22,12 @@ class UsersController < AuthenticatedController
     else
       render status: 409, nothing: true
     end
+  end
+
+  api :POST, '/users/update_profile'
+  def update_profile
+    current_user.update(user_params)
+    render json: [current_user]
   end
 
   api :POST, '/users/request_password_reset?email'
@@ -53,6 +59,6 @@ class UsersController < AuthenticatedController
 
   private
     def user_params
-      params.require(:user).permit(:email)
+      params.require(:user).permit(:email, :utc_offset)
     end
 end

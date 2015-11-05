@@ -16,7 +16,7 @@ module MyLetDeclarations
   # HTTP status codes
   let(:success) { 200 }
   let(:created) { 201 }
-  let(:updated) { 204 }
+  let(:unauthorized) { 401 }
   let(:forbidden) { 403 }
   let(:conflict) { 409 }
   let(:unprocessable) { 422 }

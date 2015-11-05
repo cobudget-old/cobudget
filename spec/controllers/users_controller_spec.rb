@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe UsersController, :type => :controller do
+  before do
+    request.env["devise.mapping"] = Devise.mappings[:user]
+  end
+
+  after do
+    ActionMailer::Base.deliveries.clear    
+  end
+
   describe "#confirm_account" do
     context "active confirmation token" do
       before do
@@ -97,12 +105,41 @@ describe UsersController, :type => :controller do
     end
   end
 
-  before do
-    request.env["devise.mapping"] = Devise.mappings[:user]
-  end
+  describe "#update_profile" do
+    context "user signed in" do
+      before do
+        make_user_group_member
+        request.headers.merge!(user.create_new_auth_token)
+        user_params = {
+          utc_offset: -480
+        }
+        post :update_profile, {user: user_params}
+        user.reload
+      end
 
-  after do
-    ActionMailer::Base.deliveries.clear    
+      it "updates the user with specified params" do
+        expect(user.utc_offset).to eq(-480)
+      end
+
+      it "returns http status ok" do
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "returns the updated user as json" do
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response["users"][0]["id"]).to eq(user.id)
+      end
+    end
+
+    context "user not signed in" do
+      before do 
+        post :update_profile
+      end
+
+      it "returns http status unauthorized" do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
   end
 
   describe "#request_password_reset" do
