@@ -14,6 +14,7 @@ class UsersController < AuthenticatedController
 
   api :POST, '/users?invite_group'
   def create
+    # TODO: only an admin should be able to create a user
     user = User.create_with_confirmation_token(email: user_params[:email])
     if user.valid?
       UserMailer.invite_new_group_email(user: user, inviter: current_user).deliver_later
