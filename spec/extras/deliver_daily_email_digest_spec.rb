@@ -34,7 +34,7 @@ describe "DeliverDailyEmailDigest" do
 
     xcontext "user does not have a utc_offset specified yet" do
       it "does not send any emails" do
-        
+
       end
     end
 

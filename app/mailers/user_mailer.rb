@@ -142,6 +142,7 @@ class UserMailer < ActionMailer::Base
   def daily_email_digest(user: , recent_activity:)
     @user = user 
     @recent_activity = recent_activity
+    @formatted_date_today = DateTime.now.in_time_zone(user.utc_offset / 60).strftime("%A, %B %d")
     mail(to: user.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "its an email digest")

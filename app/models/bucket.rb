@@ -37,6 +37,10 @@ class Bucket < ActiveRecord::Base
     total_contributions == target
   end
 
+  def formatted_percent_funded
+    "#{(total_contributions / target.to_f).to_i * 100}%"
+  end
+
   def num_of_comments
     comments.length
   end

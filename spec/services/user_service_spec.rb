@@ -4,7 +4,7 @@ describe "UserService" do
   describe "#fetch_recent_activity_for" do
     context "user has one membership" do
       before do
-        make_user_group_member
+        @membership = make_user_group_member
         user.update(utc_offset: -480) # user is in oakland
         utc_offset_in_hours = user.utc_offset / 60
         oakland_6am_today_in_utc = (DateTime.now.in_time_zone(utc_offset_in_hours).beginning_of_day + 6.hours).utc
@@ -45,6 +45,10 @@ describe "UserService" do
         expect(@recent_activity[0][:group]).to eq(group)
       end
 
+      it "returns users membership" do
+        expect(@recent_activity[0][:membership]).to eq(@membership)
+      end
+
       it "returns all draft buckets created between 6am yesterday and 6am today (user's local time)" do
         expect(@recent_activity[0][:draft_buckets].length).to eq(2)
         expect(@recent_activity[0][:draft_buckets]).to include(@d1, @d2) 
@@ -64,6 +68,7 @@ describe "UserService" do
     context "user has multiple memberships" do
       before do
         make_user_group_member
+        user.update(utc_offset: -480)
         create(:membership, member: user)
         create(:membership, member: user)
         @recent_activity = UserService.fetch_recent_activity_for(user: user)
@@ -71,6 +76,14 @@ describe "UserService" do
 
       it "returns recent activity for every group user is a member of" do
         expect(@recent_activity.length).to eq(3)
+      end
+    end
+
+    context "user does not have a utc_offset specified yet" do
+      it "returns nil" do
+        make_user_group_member
+        user.update(utc_offset: nil)
+        expect(UserService.fetch_recent_activity_for(user: user)).to be_nil
       end
     end
   end
