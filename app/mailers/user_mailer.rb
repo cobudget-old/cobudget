@@ -139,8 +139,9 @@ class UserMailer < ActionMailer::Base
          subject: subject)
   end
 
-  def daily_email_digest(user:)
+  def daily_email_digest(user: , recent_activity:)
     @user = user 
+    @recent_activity = recent_activity
     mail(to: user.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "its an email digest")

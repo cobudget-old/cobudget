@@ -1,5 +1,5 @@
 class UserService
-  def self.fetch_recent_activity_for(user: user)
+  def self.fetch_recent_activity_for(user:)
     user_utc_offset_in_hours = user.utc_offset / 60
     user_6am_today_in_utc = (DateTime.now.in_time_zone(user_utc_offset_in_hours).beginning_of_day + 6.hours).utc 
     user_6am_yesterday_in_utc = user_6am_today_in_utc - 1.day
