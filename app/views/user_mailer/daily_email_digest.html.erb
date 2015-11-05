@@ -1,0 +1,47 @@
+<p>Cobudget Daily Summary</p>
+
+<p> <%= @time_now_formatted %> </p>
+
+<p>Hi! Here's a summary of what happened in your Cobudget groups yesterday:</p>
+
+<p>---</p>
+
+<% @user.memberships.each do |membership| %>
+  <% group = membership.group %>
+  <% new_draft_buckets = group.buckets.where(status: 'draft', created_at > @user.last_email_digest_sent_at) %>
+  <% new_live_buckets = group.buckets.where(status: 'live', live_at > @user.last_email_digest_sent_at) %>
+  <% new_funded_buckets = group.buckets.where(status: 'funded', funded_at > @user.last_email_digest_sent_at) %>
+
+  <p><b><%= link_to group.name, "#{root_url}#/groups/#{group.id}" %></b> has <%= group.formatted_balance %> to spend together. You have <%= membership.formatted_balance %> to spend.</p>
+
+  <b><%= new_draft_buckets.length %> New bucket <%= pluralize(new_draft_buckets.length, 'idea') %></b><br/>
+  <ul>
+    <% new_draft_buckets.each do |bucket| %>
+      <li>
+        <%= link_to bucket.name, "#{root_url}#/buckets/#{bucket.id}" %>
+      </li>
+    <% end %>
+  </ul>
+
+  <b><%= new_live_buckets.length %> New <%= pluralize(new_live_buckets.length, 'bucket') %> funding</b><br/>
+  <ul>
+    <% new_live_buckets.each do |bucket| %>
+      <li>
+        <%= link_to bucket.name, "#{root_url}#/buckets/#{bucket.id}" %> (<%= bucket.percent_funded %>% funded)
+      </li>
+    <% end %>
+  </ul>
+
+  <b><%= new_funded_buckets.length %> New <%= pluralize(new_funded_buckets.length, 'bucket') %> funded</b><br/>
+  <ul>
+    <% new_funded_buckets.each do |bucket| %>
+      <li>
+        <%= link_to bucket.name, "#{root_url}#/buckets/#{bucket.id}" %> ($<%= @bucket.formatted_target %>)
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<p>Do you have an idea you want to propose for funding? <%= link_to "Create it now", "#{root_url}#/buckets/new}" %></p>
+
+<p><%= "<3" %> from Cobudget</p>
