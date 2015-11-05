@@ -51,6 +51,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'database_cleaner'
   gem 'simplecov', :require => false
+  gem 'timecop'
 end
 
 group :production do
