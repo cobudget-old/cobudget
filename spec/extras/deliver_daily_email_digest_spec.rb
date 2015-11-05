@@ -31,5 +31,17 @@ describe "DeliverDailyEmailDigest" do
       expect(@recipient_email_addresses).to include(parisian_user_1.email)
       expect(@recipient_email_addresses).to include(parisian_user_2.email)
     end
+
+    xcontext "user does not have a utc_offset specified yet" do
+      it "does not send any emails" do
+        
+      end
+    end
+
+    xcontext "there has been no recent activity" do
+      it "does not send any emails" do
+
+      end
+    end
   end
 end
