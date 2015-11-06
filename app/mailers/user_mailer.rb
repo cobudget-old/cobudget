@@ -1,3 +1,13 @@
+module ActionMailer
+  class Base
+    def do_not_deliver
+      def self.deliver
+        false
+      end
+    end
+  end
+end
+
 class UserMailer < ActionMailer::Base
   def invite_email(user: , group: , inviter: , initial_allocation_amount:)
     @user = user
@@ -139,12 +149,13 @@ class UserMailer < ActionMailer::Base
          subject: subject)
   end
 
-  def daily_email_digest(user: , recent_activity:)
+  def daily_email_digest(user:)
     @user = user 
-    @recent_activity = recent_activity
     @formatted_date_today = DateTime.now.in_time_zone(user.utc_offset / 60).strftime("%A, %B %d")
-    mail(to: user.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "its an email digest")
+    if @recent_activity = UserService.fetch_recent_activity_for(user: user)
+      mail(to: user.name_and_email,
+           from: "Cobudget Updates <updates@cobudget.co>",
+           subject: "its an email digest")
+    end
   end
 end
