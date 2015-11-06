@@ -1,6 +1,38 @@
 require 'faker'
 require 'factory_girl_rails'
 
+### TIMEZONES
+
+utc_offsets = [
+  - 720, # baker island
+  - 660, # hawaii
+  - 600, # cook islands
+  - 540, # alaska (anchorage)
+  - 480, # california
+  - 420, # colorado
+  - 360, # costa rica
+  - 300, # ecuador
+  - 240, # brazil
+  - 180, # uruguay
+  - 120, # south sandwich islands
+  -  60, # cape verde
+  +   0, # ghana
+  +  60, # france
+  + 120, # finland
+  + 180, # ethiopia
+  + 240, # armenia
+  + 300, # pakistan
+  + 360, # bangladesh
+  + 420, # cambodia
+  + 480, # singapore
+  + 540, # japan
+  + 600, # australia, queensland
+  + 660, # new caledonia
+  + 720, # auckland
+  + 780, # samoa
+  + 840  # line islands
+]
+
 ### USERS
 
 Allocation.destroy_all
@@ -11,16 +43,21 @@ Group.destroy_all
 Membership.destroy_all
 User.destroy_all
 
-admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password')
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480) # oaklander
 puts "generated admin account email: 'admin@example.com', password: 'password'"
-non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password')
+non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480) # oaklander
 puts "generated user account email: 'user@example.com', password: 'password'"
 
 users = []
-18.times do
-  users << User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: 'password')
+utc_offsets.each do |utc_offset|
+  users << User.create!(
+    name: Faker::Name.name, 
+    email: Faker::Internet.email, 
+    password: 'password', 
+    utc_offset: utc_offset
+  )
 end
-puts "generated 18 more fake users"
+puts "generated 27 more fake users"
 
 ### GROUPS
 
