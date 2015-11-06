@@ -5,7 +5,7 @@ class UserService
     user_6am_today_in_utc = (DateTime.now.in_time_zone(user_utc_offset_in_hours).beginning_of_day + 6.hours).utc 
     user_6am_yesterday_in_utc = user_6am_today_in_utc - 1.day
 
-    user.memberships.map do |membership|
+    recent_activity = user.memberships.map do |membership|
       group = membership.group
       draft_buckets = Bucket.where(group: group, status: 'draft', created_at: (user_6am_yesterday_in_utc ... user_6am_today_in_utc ))
       live_buckets = Bucket.where(group: group, status: 'live', live_at: (user_6am_yesterday_in_utc ... user_6am_today_in_utc ))
@@ -18,5 +18,9 @@ class UserService
         funded_buckets: funded_buckets
       }
     end
+
+    recent_activity.select! { |a| a[:draft_buckets].any? || a[:live_buckets].any? || a[:funded_buckets].any? }
+
+    recent_activity if recent_activity.any?
   end
 end
