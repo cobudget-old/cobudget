@@ -145,7 +145,7 @@ class UserMailer < ActionMailer::Base
     if @recent_activity = UserService.fetch_recent_activity_for(user: user)
       mail(to: user.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "its an email digest")
+           subject: "[Cobudget] Daily Summary - New activity in your groups")
     end
   end
 end
