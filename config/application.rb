@@ -43,6 +43,7 @@ module CobudgetApi
 
     config.eager_load_paths += %W( #{config.root}/services )
     config.eager_load_paths += %W( #{config.root}/extras )
+    config.eager_load_paths += %W( #{config.root}/lib/core_ext )
 
     ActiveSupport.encode_big_decimal_as_string = false
   end
