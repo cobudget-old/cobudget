@@ -13,3 +13,6 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
 
     resetPassword: (params) ->
       @remote.post('reset_password', params)
+
+    updateProfile: (params) ->
+      @remote.post('update_profile', user: params)
