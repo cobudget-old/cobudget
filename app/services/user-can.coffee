@@ -26,4 +26,3 @@ global.cobudgetApp.factory 'UserCan', ($location, $q, Records, Toast) ->
         memberId: global.cobudgetApp.currentUserId
       })
       validMemberships.length == 0
-
