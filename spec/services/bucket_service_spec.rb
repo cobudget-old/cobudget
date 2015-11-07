@@ -13,7 +13,7 @@ describe "BucketService" do
 
   describe "#send_bucket_funded_emails" do
     context "bucket author subscribed to personal activity" do
-      it "bucket author receives only 1 'bucket funded' notification email" do
+      it "bucket author receives notification email" do
         @bucket_author.update(subscribed_to_personal_activity: true)
         BucketService.send_bucket_funded_emails(bucket: bucket)
         emails_to_author = ActionMailer::Base.deliveries.select { |e| e.to.first == @bucket_author.email }
