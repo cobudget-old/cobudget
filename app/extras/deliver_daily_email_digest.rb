@@ -6,7 +6,7 @@ class DeliverDailyEmailDigest
       (Time.now.utc + utc_offset.minutes).hour == 6 if utc_offset
     end
 
-    User.where(utc_offset: unique_utc_offsets).find_each do |user|
+    User.where(utc_offset: unique_utc_offsets, subscribed_to_daily_digest: true).find_each do |user|
       UserMailer.daily_email_digest(user: user).deliver_later
     end
   end

@@ -79,11 +79,22 @@ describe "DeliverDailyEmailDigest" do
         Timecop.freeze(@current_utc_time) do
           # and the digest is sent out
           DeliverDailyEmailDigest.to_subscribers!
-          @sent_emails = ActionMailer::Base.deliveries
-          @recipient_email_addresses = @sent_emails.map { |e| e.to.first }
+          sent_emails = ActionMailer::Base.deliveries
 
           # no emails are sent, because there's nothing to report on
-          expect(@recipient_email_addresses.length).to eq(0)    
+          expect(sent_emails.length).to eq(0)
+        end
+      end
+    end
+
+    context "users not subscribed to daily digest" do
+      it "does not send daily digest emails" do
+        User.update_all(subscribed_to_daily_digest: false)
+
+        Timecop.freeze(@current_utc_time) do
+          DeliverDailyEmailDigest.to_subscribers!
+          sent_emails = ActionMailer::Base.deliveries
+          expect(sent_emails.length).to eq(0)    
         end
       end
     end
