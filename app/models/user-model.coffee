@@ -16,4 +16,4 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
       @recordStore.groups.find(groupIds)
 
     primaryGroup: ->
-      @groups[0]
+      @groups()[0]
