@@ -4,7 +4,7 @@ class ContributionService
     bucket = contribution.bucket
     bucket_author = bucket.user
 
-    unless funder == bucket_author
+    if bucket_author && funder != bucket_author && bucket_author.subscribed_to_personal_activity
       UserMailer.notify_author_that_bucket_received_contribution(contribution: contribution).deliver_later
     end
 
