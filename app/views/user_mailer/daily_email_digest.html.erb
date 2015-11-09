@@ -1,0 +1,48 @@
+<p>Hi!</p>
+
+<p>Here's a summary of what happened in your Cobudget groups yesterday:</p>
+
+<p>---</p>
+
+<% @recent_activity.each do |activity| %>
+  <% group = activity[:group] %>
+  <% membership = activity[:membership] %>
+  <% draft_buckets = activity[:draft_buckets] %>
+  <% live_buckets = activity[:live_buckets] %>
+  <% funded_buckets = activity[:funded_buckets] %>
+
+  <p><b><%= link_to group.name, "#{root_url}#/groups/#{group.id}" %></b> has <%= group.formatted_balance %> to spend together. You have <%= membership.formatted_balance %> to spend.</p>
+
+  <b><%= draft_buckets.length %> New bucket <%= "idea".pluralize(draft_buckets.length) %></b><br/>
+  <ul>
+    <% draft_buckets.each do |bucket| %>
+      <li>
+        <%= link_to bucket.name, "#{root_url}#/buckets/#{bucket.id}" %>
+      </li>
+    <% end %>
+  </ul>
+
+  <b><%= live_buckets.length %> New <%= "bucket".pluralize(live_buckets.length) %> funding</b><br/>
+  <ul>
+    <% live_buckets.each do |bucket| %>
+      <li>
+        <%= link_to bucket.name, "#{root_url}#/buckets/#{bucket.id}" %> (<%= bucket.formatted_percent_funded %> funded)
+      </li>
+    <% end %>
+  </ul>
+
+  <b><%= funded_buckets.length %> New <%= "bucket".pluralize(funded_buckets.length) %> funded</b><br/>
+  <ul>
+    <% funded_buckets.each do |bucket| %>
+      <li>
+        <%= link_to bucket.name, "#{root_url}#/buckets/#{bucket.id}" %> (<%= bucket.formatted_target %>)
+      </li>
+    <% end %>
+  </ul>
+
+  <p>---</p>
+<% end %>
+  
+<p>Do you have an idea you want to propose for funding? <%= link_to "Create it now", "#{root_url}#/buckets/new" %></p>
+
+<p><%= "<3" %> from Cobudget</p>

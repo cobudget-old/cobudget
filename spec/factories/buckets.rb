@@ -1,14 +1,22 @@
 FactoryGirl.define do
   factory :bucket do
-    name { Faker::Company.name }
+    name { Faker::Lorem.sentence }
     group
     user
     target 500
     status 'live'
   end
 
+  factory :funded_bucket, class: Bucket do
+    name { Faker::Lorem.sentence }
+    group
+    user
+    target 500
+    status 'funded'
+  end
+
   factory :live_bucket, class: Bucket do
-    name { Faker::Company.name }
+    name { Faker::Lorem.sentence }
     group
     user
     target 500
@@ -16,7 +24,7 @@ FactoryGirl.define do
   end
 
   factory :draft_bucket, class: Bucket do
-    name { Faker::Company.name }
+    name { Faker::Lorem.sentence }
     group
     user
     status 'draft'

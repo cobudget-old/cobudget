@@ -26,6 +26,10 @@ class Group < ActiveRecord::Base
     allocation_sum - contribution_sum
   end
 
+  def formatted_balance
+    Money.new(balance * 100, currency_code).format
+  end
+
   private 
     def update_currency_symbol_if_currency_code_changed
       if self.currency_code

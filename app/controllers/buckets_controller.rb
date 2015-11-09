@@ -15,7 +15,7 @@ class BucketsController < AuthenticatedController
   def create
     bucket = Bucket.new(bucket_params_create)
     if bucket.save
-      BucketService.send_bucket_created_emails(bucket: bucket, current_user: current_user)
+      # BucketService.send_bucket_created_emails(bucket: bucket, current_user: current_user)
       render json: [bucket]
     else 
       render json: {
@@ -45,7 +45,7 @@ class BucketsController < AuthenticatedController
   def open_for_funding
     bucket = Bucket.find(params[:id])
     bucket.open_for_funding(target: params[:target], funding_closes_at: params[:funding_closes_at])
-    BucketService.send_bucket_live_emails(bucket: bucket, current_user: current_user)
+    # BucketService.send_bucket_live_emails(bucket: bucket, current_user: current_user)
     render json: [bucket]
   end
 
