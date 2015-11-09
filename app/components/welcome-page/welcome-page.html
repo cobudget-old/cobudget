@@ -4,7 +4,7 @@
   </md-toolbar>
 
   <md-content layout-padding class="welcome-page__content">
-    <form novalidate ng-submit="login(formData)">
+    <form novalidate ng-submit="login(formData); formData = {}">
       <div class="welcome-page__form-errors">{{ formError }}</div>
 
       <md-input-container>

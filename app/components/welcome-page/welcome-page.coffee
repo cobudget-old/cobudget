@@ -1,7 +1,7 @@
 module.exports = 
   url: '/'
   template: require('./welcome-page.html')
-  controller: ($scope, $auth, LoadBar, $location, Records, Error) ->
+  controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope) ->
 
     Error.clear()
     LoadBar.start()
@@ -16,10 +16,9 @@ module.exports =
           
     $scope.login = (formData) ->
       LoadBar.start()
-      $scope.formError = ""
-      $auth.submitLogin(formData) 
+      $auth.submitLogin(formData)
         .catch ->
-          $scope.formError = "Invalid Credentials"
+          Dialog.alert(title: 'error!', content: 'invalid credentials')
           LoadBar.stop()
 
     $scope.visitForgotPasswordPage = ->
