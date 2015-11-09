@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'UserCan', (Toast, $location, $q, Records) ->
+global.cobudgetApp.factory 'UserCan', ($location, $q, Records, Toast) ->
   new class UserCan
 
     viewGroup: (group) ->

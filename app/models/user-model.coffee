@@ -14,3 +14,6 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
       groupIds = _.map @memberships(), (membership) ->
         membership.groupId
       @recordStore.groups.find(groupIds)
+
+    primaryGroup: ->
+      @groups()[0]
