@@ -140,7 +140,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def daily_email_digest(user:)
-    @user = user 
+    @user = user
     @formatted_date_today = DateTime.now.in_time_zone(user.utc_offset / 60).strftime("%A, %B %d")
     if @recent_activity = UserService.fetch_recent_activity_for(user: user)
       mail(to: user.name_and_email,
