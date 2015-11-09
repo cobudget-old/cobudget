@@ -16,9 +16,17 @@ class ContributionsController < AuthenticatedController
 
   api :POST, '/contributions', 'Create new contribution'
   def create
-    contribution = Contribution.create(contribution_params)
-    ContributionService.send_bucket_received_contribution_emails(contribution: contribution)
-    render json: [contribution]
+    current_membership_balance = Bucket.find_by_id(contribution_params[:bucket_id])
+                                       .group.memberships
+                                       .find_by_member_id(current_user.id)
+                                       .balance.to_f
+    if current_membership_balance >= contribution_params[:amount].to_f
+      contribution = Contribution.create(contribution_params)
+      ContributionService.send_bucket_received_contribution_emails(contribution: contribution)
+      render json: [contribution], status: 201
+    else
+      render nothing: true, status: 403
+    end
   end
 
   private
