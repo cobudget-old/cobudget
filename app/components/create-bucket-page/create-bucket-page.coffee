@@ -6,14 +6,17 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/buckets/new'
   template: require('./create-bucket-page.html')
-  controller: (CurrentUser, Error, $location, Records, $scope, Toast) ->
-
+  controller: (CurrentUser, Error, ipCookie, $location, Records, $scope, Toast, $window) ->
     $scope.accessibleGroups = CurrentUser().groups()
     $scope.bucket = Records.buckets.build()
 
     $scope.cancel = () ->
-      group = CurrentUser().primaryGroup()
-      $location.path("/groups/#{group.id}")
+      if ipCookie('currentGroupId')
+        groupId = ipCookie('currentGroupId')
+      else
+        groupId = CurrentUser().primaryGroup().id
+
+      $location.path("/groups/#{groupId}")
 
     $scope.done = () ->
       if $scope.bucketForm.$valid
