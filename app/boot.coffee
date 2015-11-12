@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.run ($auth, CurrentUser, $location, $q, Records, $rootScope, Toast, $window) ->
+global.cobudgetApp.run ($auth, CurrentUser, ipCookie, $location, $q, Records, $rootScope, Toast, $window) ->
 
   membershipsLoadedDeferred = $q.defer()
   global.cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise
@@ -42,3 +42,7 @@ global.cobudgetApp.run ($auth, CurrentUser, $location, $q, Records, $rootScope, 
       $location.path('/')
     else
       $window.location.reload()
+
+  $rootScope.$on '$stateChangeSuccess', (e, toState, toParams, fromState, fromParams) -> 
+    if toState.url == '/groups/:groupId'
+      ipCookie('currentGroupId', toParams.groupId)
