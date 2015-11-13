@@ -16,12 +16,12 @@ class MembershipsController < AuthenticatedController
     render json: [membership]
   end
 
-  def destroy
+  def archive
     membership = Membership.find(params[:id])
-    if current_user.is_admin_for?(membership.group)
-      MembershipService.delete_membership(membership: membership)
+    if current_user.is_admin_for?(membership.group)    
+      membership.update(archived_at: DateTime.now.utc)
       render nothing: true, status: 200
-    else
+    else 
       render nothing: true, status: 403
     end
   end
