@@ -10,6 +10,9 @@ module.exports =
     $scope.accessibleGroups = CurrentUser().groups()
     $scope.bucket = Records.buckets.build()
 
+    if document.referrer
+      $scope.bucket.groupId = ipCookie('currentGroupId')
+
     $scope.cancel = () ->
       if ipCookie('currentGroupId')
         groupId = ipCookie('currentGroupId')
