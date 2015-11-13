@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107030406) do
+ActiveRecord::Schema.define(version: 20151113081236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,11 +91,12 @@ ActiveRecord::Schema.define(version: 20151107030406) do
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.integer  "group_id",                   null: false
-    t.integer  "member_id",                  null: false
-    t.boolean  "is_admin",   default: false, null: false
+    t.integer  "group_id",                    null: false
+    t.integer  "member_id",                   null: false
+    t.boolean  "is_admin",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "archived_at"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
