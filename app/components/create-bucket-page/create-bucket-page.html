@@ -49,12 +49,12 @@
 
       <md-input-container>
         <label>Group</label>
-        <md-select ng-model="bucket.groupId">
-          <md-option required ng-repeat="group in accessibleGroups" value="{{group.id}}">
+        <md-select name="group" required ng-model="bucket.groupId">
+          <md-option ng-repeat="group in accessibleGroups" value="{{group.id}}">
             {{group.name}}
           </md-option>
         </md-select>
-        <div ng-messages="bucketForm.description.$error">
+        <div ng-messages="bucketForm.group.$error">
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
