@@ -12,6 +12,10 @@
   @include fontGrande;
 }
 
+.welcome-page__login-form {
+  margin-bottom: 18px;
+}
+
 .welcome-page__login-btn {
   margin: 0;
   border: 1px solid $cobudget-gunmetal;
@@ -19,10 +23,19 @@
   margin-top: 10px;
 }
 
-.welcome-page__forgot-password-btn {
-  font-size: 12px;
+.welcome-page__buttons-container {
+  position: relative;
   float: right;
+}
+
+.welcome-page__forgot-password-btn {
+  width: 100%;
+  text-align: right;
+  display: block;
+  font-size: 12px;
   background: none;
-  margin-right: 0;
-  padding-right: 5px;
+  line-height: 30px;
+  min-height: 30px;
+  margin: 0;
+  margin-bottom: 5px;
 }
