@@ -6,7 +6,7 @@ class Membership < ActiveRecord::Base
   validates :member_id, presence: true, uniqueness: { scope: :group_id }
 
   scope :archived, -> { where.not(archived_at: nil) }
-  scope :live, -> { where(archived_at: nil) }
+  scope :active, -> { where(archived_at: nil) }
 
   def total_allocations
     group.allocations.where(user_id: member_id).sum(:amount)
