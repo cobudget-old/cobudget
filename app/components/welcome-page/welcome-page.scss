@@ -23,6 +23,13 @@
   font-size: 12px;
   float: right;
   background: none;
-  margin-right: 0;
   padding-right: 5px;
+  line-height: 30px;
+  min-height: 30px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.welcome-page__login-form {
+  margin-bottom: 18px;
 }
