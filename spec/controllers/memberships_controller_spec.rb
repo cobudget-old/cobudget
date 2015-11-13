@@ -17,7 +17,7 @@ describe MembershipsController, :type => :controller do
 
       it "returns http status ok" do
         expect(response).to have_http_status(:ok)
-      end
+      end 
 
       it "sets user's archived_at to current time" do
         expect(@membership.archived_at).to be_truthy
