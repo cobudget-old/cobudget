@@ -12,6 +12,8 @@ module.exports =
 
     if document.referrer
       $scope.bucket.groupId = ipCookie('currentGroupId')
+    if $scope.accessibleGroups.length == 1
+      $scope.bucket.groupId = CurrentUser().primaryGroup().id
 
     $scope.cancel = () ->
       if ipCookie('currentGroupId')
