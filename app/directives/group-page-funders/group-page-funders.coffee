@@ -26,7 +26,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
             $scope.cancel = ->
               $mdDialog.cancel()
             $scope.proceed = ->
-              membership.destroy().then ->
+              membership.archive().then ->
                 $mdDialog.hide()
                 Dialog.alert(
                   title: 'Success!' 
