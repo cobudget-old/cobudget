@@ -40,6 +40,33 @@ describe MembershipsController, :type => :controller do
     end
   end
 
+  describe "#my_memberships" do
+    context "user logged in" do
+      before do
+        create_list(:membership, 3, member: user)
+        create_list(:membership, 8)
+        create_list(:membership, 1, member: user, archived_at: DateTime.now.utc - 5.days)
+        request.headers.merge!(user.create_new_auth_token)
+        get :my_memberships        
+      end
+
+      it "returns http status success" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns all users active memberships" do
+        expect(parsed(response)["memberships"].length).to eq(3)
+      end
+    end
+
+    context "user not logged in" do
+      it "returns http status unauthorized" do
+        get :my_memberships
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
   describe "#archive" do
     before do
       @membership = make_user_group_member
