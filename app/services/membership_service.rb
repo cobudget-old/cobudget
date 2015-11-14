@@ -11,7 +11,7 @@ class MembershipService
       contributions = bucket.contributions
       funders = contributions.map { |c| c.user }.uniq
       funders.each do |funder|
-        UserMailer.notify_funder_that_bucket_was_deleted(funder: funder, bucket: bucket).deliver_later
+        UserMailer.notify_funder_that_bucket_was_deleted(funder: funder, bucket: bucket).deliver_now
       end
       contributions.destroy_all
       bucket.destroy
