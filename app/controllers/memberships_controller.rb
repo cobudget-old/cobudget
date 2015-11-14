@@ -1,5 +1,5 @@
 class MembershipsController < AuthenticatedController
-  api :GET, 'memberships?group_id=', 'Get memberships for a particular group'
+  api :GET, 'memberships?group_id', 'Get memberships for a particular group'
   def index
     group = Group.find(params[:group_id])
     render json: group.memberships.active
