@@ -1,5 +1,5 @@
 class MembershipService
-  def self.delete_membership(membership: )
+  def self.archive_membership(membership: )
     member = membership.member
     group = membership.group
 

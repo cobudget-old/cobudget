@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "MembershipService" do
-  describe "#delete_membership(membership: )" do
+  describe "#archive_membership(membership: )" do
     before do
       @group = create(:group)
       @user = create(:user)
@@ -11,14 +11,14 @@ describe "MembershipService" do
     end
 
     it "destroys membership" do
-      MembershipService.delete_membership(membership: @membership)
+      MembershipService.archive_membership(membership: @membership)
       expect(Membership.find_by_id(@membership.id)).to be_nil
     end
 
     it "destroys all member's draft buckets within the membership's group" do
       create_list(:bucket, 3, user: @user, status: 'draft', group: @group)
 
-      MembershipService.delete_membership(membership: @membership)
+      MembershipService.archive_membership(membership: @membership)
 
       expect(Bucket.where(group: @group).length).to eq(0)
     end
@@ -52,7 +52,7 @@ describe "MembershipService" do
       expect(membership2.balance).to eq(20)
 
       ActionMailer::Base.deliveries.clear
-      MembershipService.delete_membership(membership: @membership)
+      MembershipService.archive_membership(membership: @membership)
       sent_emails = ActionMailer::Base.deliveries
       user_1_email = sent_emails.find { |e| e.to[0] == user1.email }
       user_2_email = sent_emails.find { |e| e.to[0] == user2.email }
@@ -76,7 +76,7 @@ describe "MembershipService" do
       create(:allocation, user: @user, group: @group, amount: 200)
       create_list(:contribution, 3, user: @user, bucket: live_group_bucket, amount: 30)
 
-      MembershipService.delete_membership(membership: @membership)
+      MembershipService.archive_membership(membership: @membership)
 
       expect(live_group_bucket.contributions.length).to eq(0)
     end
@@ -109,7 +109,7 @@ describe "MembershipService" do
       expect(@group.balance).to eq(40)
 
       # delete membership service called
-      MembershipService.delete_membership(membership: @membership)
+      MembershipService.archive_membership(membership: @membership)
 
       # funded bucket should still have 2 contributions, totalling to 100
       expect(funded_bucket.contributions.length).to eq(2)
@@ -124,7 +124,7 @@ describe "MembershipService" do
 
     context "user has more than one membership" do
       it "does not destroy member" do
-        MembershipService.delete_membership(membership: @membership)
+        MembershipService.archive_membership(membership: @membership)
 
         expect(User.find_by_id(@user.id)).to be_truthy        
       end
@@ -133,7 +133,7 @@ describe "MembershipService" do
     context "user has only one membership" do
       it "also destroys member" do
         @other_membership.destroy
-        MembershipService.delete_membership(membership: @membership)
+        MembershipService.archive_membership(membership: @membership)
 
         expect(User.find_by_id(@user.id)).to be_nil
       end
