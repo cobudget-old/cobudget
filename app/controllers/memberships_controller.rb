@@ -23,7 +23,7 @@ class MembershipsController < AuthenticatedController
   def archive
     membership = Membership.find(params[:id])
     if current_user.is_admin_for?(membership.group)    
-      membership.update(archived_at: DateTime.now.utc)
+      MembershipService.archive_membership(membership: membership)
       render nothing: true, status: 200
     else 
       render nothing: true, status: 403
