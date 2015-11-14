@@ -33,11 +33,11 @@ class User < ActiveRecord::Base
   end
 
   def is_admin_for?(group)
-    Membership.where(group: group, member: self, is_admin: true).length > 0
+    Membership.where(group: group, member: self, archived_at: nil, is_admin: true).length > 0
   end
 
   def is_member_of?(group)
-    group.members.include?(self)
+    Membership.where(group: group, member: self, archived_at: nil).length > 0
   end
 
   def has_set_up_account?
