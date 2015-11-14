@@ -2,7 +2,11 @@ class MembershipsController < AuthenticatedController
   api :GET, 'memberships?group_id', 'Get memberships for a particular group'
   def index
     group = Group.find(params[:group_id])
-    render json: group.memberships.active
+    if current_user.is_member_of?(group)
+      render json: group.memberships.active, status: 200
+    else
+      render nothing: true, status: 403
+    end
   end
 
   api :GET, 'memberships/my_memberships', 'Get memberships for the current_user'

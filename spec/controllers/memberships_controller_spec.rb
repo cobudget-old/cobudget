@@ -6,7 +6,7 @@ describe MembershipsController, :type => :controller do
   end
 
   describe "#index" do
-    context "user logged in" do
+    context "user member of group" do
       before do
         make_user_group_member
         request.headers.merge!(user.create_new_auth_token)
@@ -21,6 +21,14 @@ describe MembershipsController, :type => :controller do
 
       it "returns all active memberships for the group" do
         expect(parsed(response)["memberships"].length).to eq(6)
+      end
+    end
+
+    context "user not member of group" do
+      it "returns http status forbidden" do
+        request.headers.merge!(user.create_new_auth_token)
+        get :index, group_id: group.id
+        expect(response).to have_http_status(:forbidden)
       end
     end
 
