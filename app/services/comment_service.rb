@@ -13,6 +13,7 @@ class CommentService
 
     funders =  User.joins(:contributions).where(contributions: {bucket_id: bucket.id}).uniq
 
+    # TODO: need to add .active filter to memberships here later
     # users_to_notify = (commenters + funders).uniq.reject { |member| member == comment_author || member == bucket_author }
     # users_to_notify.each { |user| UserMailer.notify_user_of_new_comment_email(comment: comment, user: user).deliver_later } 
   end
