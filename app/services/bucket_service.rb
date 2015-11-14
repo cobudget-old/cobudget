@@ -7,8 +7,8 @@ class BucketService
     end
   end
 
-  def self.send_bucket_live_emails(bucket: , current_user: )
-    memberships = bucket.group.memberships.reject { |membership| membership.member == current_user }
+  def self.send_bucket_live_emails(bucket: )
+    memberships = bucket.group.memberships.active.reject { |membership| membership.member == bucket.user }
     memberships.each do |membership|
       member = membership.member
       if membership.balance > 0
