@@ -23,10 +23,7 @@ class MembershipService
     # remove member's funds from group (by creating a negative allocation equal to the member's balance)
     Allocation.create(user: member, group: group, amount: -membership.balance)
 
-    # destroy membership
-    membership.destroy
-
-    # destroy member, if they have no more memberships
-    member.destroy if member.memberships.length == 0
+    # archive membership
+    membership.update(archived_at: DateTime.now.utc)
   end
 end

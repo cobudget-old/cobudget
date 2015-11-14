@@ -6,13 +6,12 @@ describe "MembershipService" do
       @group = create(:group)
       @user = create(:user)
       @membership = create(:membership, member: @user, group: @group)
-
       @other_membership = create(:membership, member: @user)
     end
 
-    it "destroys membership" do
+    it "archives membership" do
       MembershipService.archive_membership(membership: @membership)
-      expect(Membership.find_by_id(@membership.id)).to be_nil
+      expect(Membership.find_by_id(@membership).archived_at).to be_truthy
     end
 
     it "destroys all member's draft buckets within the membership's group" do
@@ -120,23 +119,6 @@ describe "MembershipService" do
       expect(live_bucket.contributions.sum(:amount)).to eq(20)
 
       expect(@group.balance).to eq(30)
-    end
-
-    context "user has more than one membership" do
-      it "does not destroy member" do
-        MembershipService.archive_membership(membership: @membership)
-
-        expect(User.find_by_id(@user.id)).to be_truthy        
-      end
-    end
-
-    context "user has only one membership" do
-      it "also destroys member" do
-        @other_membership.destroy
-        MembershipService.archive_membership(membership: @membership)
-
-        expect(User.find_by_id(@user.id)).to be_nil
-      end
     end
   end
 end
