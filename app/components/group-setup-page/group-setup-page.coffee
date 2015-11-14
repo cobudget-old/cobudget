@@ -10,7 +10,6 @@ module.exports =
   url: '/groups/:groupId/setup'
   template: require('./group-setup-page.html')
   controller: (Error, LoadBar, $location, Records, $scope, $stateParams, UserCan) ->
-    
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)

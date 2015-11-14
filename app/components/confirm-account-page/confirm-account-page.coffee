@@ -23,8 +23,8 @@ module.exports =
           loginParams = { email: user.email, password: formData.password }
           $auth.submitLogin(loginParams)
             .then (ev, user) ->
-              if $scope.group_id
-                $location.path("/groups/#{$scope.group_id}/setup")
+              if $scope.groupId
+                $location.path("/groups/#{$scope.groupId}/setup")
         .catch ->
           Toast.show('Sorry, that confirmation token has expired.')
           $location.path('/')

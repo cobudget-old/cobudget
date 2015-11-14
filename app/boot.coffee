@@ -12,25 +12,23 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
       membershipsLoadedDeferred.resolve()
 
   $rootScope.$on 'auth:login-success', (ev, user) ->
-    if user.archived_at
-      $auth.signOut().then ->
-        $location.path('/')
-        Dialog.alert(title: 'error!', content: 'invalid credentials!')
-        LoadBar.stop()
-    else
-      global.cobudgetApp.currentUserId = user.id
-      Records.memberships.fetchMyMemberships().then (data) ->
-
+    global.cobudgetApp.currentUserId = user.id
+    Records.memberships.fetchMyMemberships().then (data) ->
+      membershipsLoadedDeferred.resolve()
+      
+      if !data.groups
+        $auth.signOut().then ->
+          global.cobudgetApp.currentUserId = null
+          $location.path('/')
+          Dialog.alert(title: 'error!', content: 'invalid credentials!')
+          LoadBar.stop()
+          
+      if data.groups && _.every(data.groups, {'initialized': true})
+        groupId = data.groups[0].id
+        $location.path("/groups/#{groupId}")
+        Toast.show('Welcome to Cobudget!')
         if CurrentUser().utcOffset != moment().utcOffset()
-          Records.users.updateProfile(utc_offset: moment().utcOffset()).then (data) ->
-        membershipsLoadedDeferred.resolve()
-        
-        # during invite new group flow, user created and logged in without having a group yet
-        # so we perform this quick check
-        if data.groups
-          groupId = data.groups[0].id
-          $location.path("/groups/#{groupId}")
-          Toast.show('Welcome to Cobudget!')
+          Records.users.updateProfile(utc_offset: moment().utcOffset())
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     console.log('$stateChangeError signal fired!')
