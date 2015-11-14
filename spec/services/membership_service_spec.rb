@@ -120,5 +120,13 @@ describe "MembershipService" do
 
       expect(@group.balance).to eq(30)
     end
+
+    context "after archiving, user has no more active memberships" do
+      it "sets user's archived_at to current time in utc" do
+        @other_membership.update(archived_at: DateTime.now.utc)
+        MembershipService.archive_membership(membership: @membership)
+        expect(@user.reload.archived_at).to be_truthy
+      end
+    end
   end
 end
