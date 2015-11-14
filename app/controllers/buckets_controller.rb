@@ -15,7 +15,7 @@ class BucketsController < AuthenticatedController
   def create
     bucket = Bucket.new(bucket_params_create)
     if bucket.save
-      # BucketService.send_bucket_created_emails(bucket: bucket, current_user: current_user)
+      # BucketService.send_bucket_created_emails(bucket: bucket)
       render json: [bucket]
     else 
       render json: {
