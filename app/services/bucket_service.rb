@@ -1,7 +1,8 @@
 class BucketService
-  def self.send_bucket_created_emails(bucket: , current_user:)
-    members = bucket.group.members.where.not(id: current_user.id)
-    members.each do |member|
+  def self.send_bucket_created_emails(bucket: )
+    memberships = bucket.group.memberships.active.where.not(member_id: bucket.user_id)
+    memberships.each do |membership|
+      member = membership.member
       UserMailer.notify_member_that_bucket_was_created(bucket: bucket, member: member).deliver_later
     end
   end
