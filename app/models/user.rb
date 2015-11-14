@@ -44,10 +44,6 @@ class User < ActiveRecord::Base
     confirmation_token.nil?
   end
 
-  def archive!
-    update(archived_at: DateTime.now.utc)
-  end
-
   private
     def assign_uid_and_provider
       self.uid = self.email

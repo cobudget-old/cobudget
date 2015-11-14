@@ -25,9 +25,5 @@ class MembershipService
 
     # archive membership
     membership.update(archived_at: DateTime.now.utc)
-
-    # archive user if they have no more active memberships
-    member.reload
-    member.archive! if member.memberships.active.length == 0
   end
 end
