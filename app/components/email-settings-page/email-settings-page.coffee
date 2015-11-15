@@ -13,7 +13,7 @@ module.exports =
         description: "When you create a bucket, you are subscribed to all activity on that bucket."
       },
       {
-        header: "Activity in buckets I participate in.", 
+        header: "Activity in buckets I've participated in.", 
         description: "When you participate in a bucket, you will get all activity from that bucket mailed to you."
       }
     ]
