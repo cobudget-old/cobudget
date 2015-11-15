@@ -50,10 +50,13 @@
         <a class="edit-bucket-page__markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
       </div>
 
-
       <md-input-container>
         <label>Funding Target (required for funding)</label>
-        <input name="target" type="number" ng-model="bucket.target">
+        <input ng-required="bucket.status == 'live'" name="target" min="0" type="number" ng-model="bucket.target">
+        <div ng-messages="bucketForm.target.$error" multiple>
+          <div ng-message="required">This is required.</div>
+          <div ng-message="min">Target must be positive.</div>
+        </div>
       </md-input-container>
     </form>
   </md-content>
