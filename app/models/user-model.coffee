@@ -5,7 +5,13 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
   class UserModel extends BaseModel
     @singular: 'user'
     @plural: 'users'
-    @serializableAttributes: ['email']
+
+    @serializableAttributes: [
+      'email',
+      'subscribedToPersonalActivity',
+      'subscribedToDailyDigest',
+      'subscribedToParticipantActivity'
+    ]
 
     relationships: ->
       @hasMany 'memberships', with: 'memberId'
