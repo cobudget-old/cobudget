@@ -23,7 +23,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
         $scope.tabSelected = parseInt tabNum
 
       $scope.openEmailSettings = ->
-        $location.path('/email_settings')
+        $location.path('/email_settings').search('previous_group_id', $scope.group.id)
 
       $scope.signOut = ->
         $auth.signOut().then ->

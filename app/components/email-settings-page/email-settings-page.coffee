@@ -1,14 +1,15 @@
 module.exports = 
-  url: '/email_settings'
+  url: '/email_settings?previous_group_id'
   resolve:
     userValidated: ($auth) ->
       $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
   template: require('./email-settings-page.html')
-  controller: ($scope, CurrentUser) ->
+  controller: (CurrentUser, $location, $scope, $stateParams, Toast) ->
 
     $scope.currentUser = CurrentUser()
+    previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
 
     $scope.settings = [
       {
@@ -29,9 +30,10 @@ module.exports =
     ]
 
     $scope.cancel = ->
-      console.log('cancel clicked')
+      $location.search('previous_group_id', null)
+      $location.path("/groups/#{previousGroupId}")
 
     $scope.done = ->
-      console.log('done clicked')
+
 
     return
