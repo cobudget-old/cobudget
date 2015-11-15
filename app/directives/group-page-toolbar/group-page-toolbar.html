@@ -8,7 +8,7 @@
       ></ng-md-icon>
     </md-button>
     <span flex class="group-page__group-name">{{ group.name }}</span>
-    <md-button class="md-icon-button group-page-feedback-button" aria-label="Give Feedback" ng-click="openFeedbackForm()">
+<!--     <md-button class="md-icon-button group-page-feedback-button" aria-label="Give Feedback" ng-click="openFeedbackForm()">
       <ng-md-icon icon="live_help" 
         class="group-page__menu-icon" 
         layout="column" 
@@ -22,6 +22,29 @@
         layout-align="center center"
       ></ng-md-icon>
     </md-button>      
+ -->  
+
+    <md-menu class="group-page__toolbar-menu">
+      <div class="group-page__toolbar-menu-btn" layout="column" layout-align="center center" ng-click="$mdOpenMenu($event)">
+        <div>{{ currentUser.name[0] | uppercase }}</div>
+      </div>
+
+      <md-menu-content class="group-page__toolbar-menu-content" width="3">
+        <md-menu-item>
+          <md-button ng-click="openEmailSettings()">
+            <div layout="row" layout-align="start center">
+              <ng-md-icon icon="mail" 
+                class="group-page__toolbar-menu-icon" 
+                layout="column" 
+                layout-align="center center"
+              ></ng-md-icon>
+              <span md-menu-align-target>Email Settings</span>
+            </div>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
   </div>
 
   <div class="md-toolbar-tools group-page__funds-bar">

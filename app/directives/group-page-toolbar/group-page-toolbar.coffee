@@ -22,4 +22,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
       $scope.selectTab = (tabNum) ->
         $scope.tabSelected = parseInt tabNum
 
+      $scope.openEmailSettings = ->
+        $location.path('/email_settings')
+
       return
