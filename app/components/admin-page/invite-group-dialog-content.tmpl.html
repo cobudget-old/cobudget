@@ -4,7 +4,7 @@
       <md-input-container>
         <label>email</label>
         <input required name="email" type="email" ng-pattern="/^.+@.+\..+$/" ng-model="newGroupAdmin.email">
-        <div ng-messages="inviteGroupForm.email.$error" ng-if="inviteGroupForm.name.$dirty || inviteGroupForm.$submitted" multiple>
+        <div ng-messages="inviteGroupForm.email.$error" ng-if="inviteGroupForm.$submitted" multiple>
           <div ng-message="required">This is required.</div>
           <div ng-message="pattern">Invalid email format.</div>
         </div>
