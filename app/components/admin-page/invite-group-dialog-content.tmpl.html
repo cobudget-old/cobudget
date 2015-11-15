@@ -1,16 +1,17 @@
 <md-dialog aria-label="invite group">
   <md-dialog-content class="sticky-container">
-    <form name='inviteGroupForm' class="admin-page__form" ng-submit="inviteGroupForm.$setUntouched()">
+    <form novalidate name='inviteGroupForm' class="admin-page__form" ng-submit="inviteGroupForm.$setUntouched()">
       <md-input-container>
         <label>email</label>
-        <input required name="email" type="text" ng-model="newGroupAdmin.email">
-        <div ng-messages="inviteGroupForm.email.$error">
+        <input required name="email" type="email" ng-pattern="/^.+@.+\..+$/" ng-model="newGroupAdmin.email">
+        <div ng-messages="inviteGroupForm.email.$error" ng-if="inviteGroupForm.name.$dirty || inviteGroupForm.$submitted" multiple>
           <div ng-message="required">This is required.</div>
+          <div ng-message="pattern">Invalid email format.</div>
         </div>
       </md-input-container>
       <div class="md-actions" layout="row">
         <md-button ng-click="closeDialog()">cancel</md-button>
-        <md-button ng-click="inviteGroup()">send</md-button>
+        <md-button ng-click="inviteGroupForm.$valid && inviteGroup()">send</md-button>
       </div>
     </form>
   </md-dialog-content>
