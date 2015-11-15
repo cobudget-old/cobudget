@@ -1,5 +1,10 @@
 module.exports = 
   url: '/email_settings'
+  resolve:
+    userValidated: ($auth) ->
+      $auth.validateUser()
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   template: require('./email-settings-page.html')
   controller: ($scope, CurrentUser) ->
 
