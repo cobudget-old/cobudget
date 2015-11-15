@@ -16,6 +16,7 @@ module.exports =
       $location.path("/groups/#{group.id}")
 
     $scope.done = () ->
+      $scope.bucketFormSubmitted = true
       if $scope.bucketForm.$valid
         $scope.bucket.save().then (data) ->
           bucketId = data.buckets[0].id
