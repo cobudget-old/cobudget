@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :bucket do
     name { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     group
     user
     target 500
@@ -9,6 +10,7 @@ FactoryGirl.define do
 
   factory :funded_bucket, class: Bucket do
     name { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     group
     user
     target 500
@@ -17,6 +19,7 @@ FactoryGirl.define do
 
   factory :live_bucket, class: Bucket do
     name { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     group
     user
     target 500
@@ -25,6 +28,7 @@ FactoryGirl.define do
 
   factory :draft_bucket, class: Bucket do
     name { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     group
     user
     status 'draft'
