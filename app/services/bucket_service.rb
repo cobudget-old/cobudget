@@ -1,4 +1,5 @@
 class BucketService
+  # given current email settings - might remove in future? 
   def self.send_bucket_created_emails(bucket: , current_user:)
     members = bucket.group.members.where.not(id: current_user.id)
     members.each do |member|
