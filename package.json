@@ -14,12 +14,10 @@
     "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
     "build": "gulp build",
     "develop": "gulp develop",
-
     "set-remote": "git remote add deploy-beta git@github.com:cobudget/beta.cobudget.co",
     "deploy-cname": "cp app/assets/CNAME.deploy app/assets/CNAME",
     "deploy-push": "git push deploy-beta gh-pages -f",
     "deploy": "(export NODE_ENV=production; npm run deploy-cname && gulp branch && npm run deploy-push)",
-
     "set-remote-stage": "git remote add stage-beta git@github.com:cobudget/staging.cobudget.co",
     "stage-cname": "cp app/assets/CNAME.stage app/assets/CNAME",
     "stage-push": "git push stage-beta gh-pages -f",
@@ -70,6 +68,7 @@
     "lodash": "^3.0.0",
     "lokijs": "^1.3.7",
     "moment": "^2.8.4",
+    "morph": "^0.2.0",
     "napa": "^1.2.0",
     "ng-focus-if": "^1.0.2",
     "ng-sanitize": "0.0.2",
