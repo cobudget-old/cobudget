@@ -6,7 +6,7 @@ module.exports =
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
   template: require('./email-settings-page.html')
-  controller: (CurrentUser, $location, $scope, $stateParams, Toast) ->
+  controller: (CurrentUser, $location, Records, $scope, $stateParams, Toast) ->
 
     $scope.currentUser = CurrentUser()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
@@ -34,6 +34,13 @@ module.exports =
       $location.path("/groups/#{previousGroupId}")
 
     $scope.done = ->
-
+      params = _.pick $scope.currentUser, [
+        'subscribedToDailyDigest', 
+        'subscribedToPersonalActivity', 
+        'subscribedToParticipantActivity'
+      ]
+      Records.users.updateProfile(params).then ->
+        Toast.show('Email settings updated!')
+        $scope.cancel()
 
     return

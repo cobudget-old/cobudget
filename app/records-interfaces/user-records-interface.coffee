@@ -15,4 +15,5 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
       @remote.post('reset_password', params)
 
     updateProfile: (params) ->
+      params = morph.toSnake(params)
       @remote.post('update_profile', user: params)
