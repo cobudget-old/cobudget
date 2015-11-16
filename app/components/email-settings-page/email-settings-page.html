@@ -20,18 +20,12 @@
 
   <md-content class="email-settings-page__content">
     <div layout="row" layout-align="start start" class="email-settings-page__email-setting" ng-repeat="setting in settings">
-      <ng-md-icon icon="check_box"
-        class="email-settings-page__checkbox-icon" 
-        layout="column"
-        layout-align="center center"
-        ng-if="setting.isSelected"
-      ></ng-md-icon>
-      <ng-md-icon icon="check_box_outline_blank"
-        class="email-settings-page__checkbox-icon" 
-        layout="column"
-        layout-align="center center"
-        ng-if="!setting.isSelected"
-      ></ng-md-icon>
+      <md-checkbox 
+        ng-model="currentUser[setting.property]" 
+        ng-attr-aria-label="{{ setting.header }}"
+        class="email-settings-page__checkbox">
+      </md-checkbox>
+
       <div layout="column" layout-align="start start">
         <div class="email-settings-page__setting-header">
           {{ setting.header }}
