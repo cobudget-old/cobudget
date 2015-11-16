@@ -17,7 +17,6 @@ global.cobudgetApp.run ($auth, CurrentUser, $location, $q, Records, $rootScope, 
       if CurrentUser().utcOffset != moment().utcOffset()
         Records.users.updateProfile(utc_offset: moment().utcOffset()).then (data) ->
       membershipsLoadedDeferred.resolve()
-      
       # during invite new group flow, user created and logged in without having a group yet
       # so we perform this quick check
       if data.groups
