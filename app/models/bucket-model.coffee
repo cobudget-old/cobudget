@@ -46,4 +46,4 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
       if @author().isMemberOf(@group())
         @author().name
       else
-        "[deleted user]"
+        "[removed user]"

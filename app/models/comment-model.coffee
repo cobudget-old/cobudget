@@ -16,4 +16,4 @@ global.cobudgetApp.factory 'CommentModel', (BaseModel) ->
       if @author().isMemberOf(@bucket().group())
         @author().name
       else
-        "[deleted user]"
+        "[removed user]"
