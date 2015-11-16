@@ -27,9 +27,11 @@ class BucketService
     if bucket_author && bucket_author.subscribed_to_personal_activity
       UserMailer.notify_author_that_bucket_is_funded(bucket: bucket).deliver_later
     end
-    # members = bucket.group.members.reject { |member| member == bucket_author }
-    # members.each do |member|
-    #   UserMailer.notify_member_that_bucket_is_funded(bucket: bucket, member: member).deliver_later
-    # end
+    members = bucket.group.members
+                    .where.not(id: bucket_author.id)
+                    .where(subscribed_to_participant_activity: true)
+    members.each do |member|
+      UserMailer.notify_member_that_bucket_is_funded(bucket: bucket, member: member).deliver_later
+    end
   end
 end

@@ -65,6 +65,37 @@ describe "BucketService" do
   end
 
   describe "#send_bucket_funded_emails" do
+    it "sends 'notify_member_that_bucket_is_funded' emails to all bucket participants subscribed to participant activity" do
+      # temporarily stub out emails sent to author for this set of specs
+      mail_double = double(:mail)
+      allow(UserMailer).to receive(:notify_author_that_bucket_is_funded).and_return(mail_double)
+      allow(mail_double).to receive(:deliver_later).and_return(nil)
+
+      make_user_group_member
+      bucket = create(:funded_bucket, user: user, group: group)
+
+      # create bucket participant subscribed to participant activity
+      @subscribed_participant = create_bucket_participant(bucket: bucket, subscribed: true)
+
+      # bucket creator comments on their bucket
+      create(:comment, bucket: bucket, user: user)
+
+      # create bucket participant not subscribed to participant activity
+      @unsubscribed_participant = create_bucket_participant(bucket: bucket, subscribed: false)
+
+      # create non participant
+      @non_participant = create(:user)
+      create(:membership, group: group, member: @non_participant)
+
+      BucketService.send_bucket_funded_emails(bucket: bucket)
+      @email_recipients = ActionMailer::Base.deliveries.map { |e| e.to.first }
+
+      expect(@email_recipients).to include(@subscribed_participant.email)
+      expect(@email_recipients).not_to include(user.email)
+      expect(@email_recipients).not_to include(@unsubscribed_participant.email)
+      expect(@email_recipients).not_to include(@non_participant.email)
+    end
+
     context "bucket author subscribed to personal activity" do
       it "bucket author receives notification email" do
         @bucket_author.update(subscribed_to_personal_activity: true)
