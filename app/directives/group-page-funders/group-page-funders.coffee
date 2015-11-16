@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
     restrict: 'E'
     template: require('./group-page-funders.html')
     replace: true
-    controller: (Dialog, $scope, $window) ->
+    controller: (Dialog, LoadBar, $scope, $window) ->
 
       $scope.toggleMemberAdmin = (membership) ->
         membership.isAdmin = !membership.isAdmin
@@ -26,8 +26,10 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
             $scope.cancel = ->
               $mdDialog.cancel()
             $scope.proceed = ->
+              $mdDialog.hide()
+              LoadBar.start()
               membership.archive().then ->
-                $mdDialog.hide()
+                LoadBar.stop()
                 Dialog.alert(
                   title: 'Success!' 
                   content: "#{$scope.member.name} was removed from #{$scope.group.name}"
