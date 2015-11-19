@@ -1,10 +1,11 @@
 class Bucket < ActiveRecord::Base
-  has_many :contributions, -> { order("amount DESC") }
+  has_many :contributions, -> { order("amount DESC") }, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :group
   belongs_to :user
 
   validates :name, presence: true
+  validates :description, presence: true
   validates :group_id, presence: true
   validates :user_id, presence: true
   validates :status, presence: true
@@ -49,6 +50,25 @@ class Bucket < ActiveRecord::Base
     renderer = Redcarpet::Render::HTML.new 
     markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     markdown.render(description).html_safe
+  end
+
+  def participants(exclude_author: nil, type: nil, subscribed: nil)
+    case type
+      when :contributors then ids = contributions.pluck(:user_id)
+      when :comments then ids = comments.pluck(:user_id)
+      else ids = (contributions.pluck(:user_id) + comments.pluck(:user_id)).uniq
+    end
+    users = User.where(id: ids)
+    users = users.where.not(id: user_id) if exclude_author
+    users.all
+  end
+
+  def contributors(exclude_author: nil)
+    participants(exclude_author: exclude_author, type: :contributors)
+  end
+
+  def commenters(exclude_author: nil)
+    participants(exclude_author: exclude_author, type: :commenters)
   end
 
   private

@@ -10,6 +10,7 @@ class GroupsController < AuthenticatedController
   api :POST, '/groups', 'Create a group'
   def create
     group = Group.create(group_params)
+    group.update(initialized: true)
     group.add_admin(current_user)
     render json: [group]
   end

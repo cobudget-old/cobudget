@@ -63,7 +63,7 @@ puts "generated 27 more fake users"
 
 groups = []
 2.times do
-  group = Group.create!(name: Faker::Company.name)
+  group = Group.create!(name: Faker::Company.name, initialized: true)
   group.add_admin(admin)
   group.add_member(non_admin)
   groups << group

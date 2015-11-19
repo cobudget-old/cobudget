@@ -10,11 +10,12 @@ class User < ActiveRecord::Base
   ### from previous authentication scheme ###
   # include TokenAuthenticable
 
-  has_many :allocations
-  has_many :memberships, foreign_key: "member_id"
   has_many :groups, through: :memberships
-  has_many :comments
-  has_many :contributions
+  has_many :memberships, foreign_key: "member_id", dependent: :destroy
+  has_many :allocations, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :contributions, dependent: :destroy
+  has_many :buckets, dependent: :destroy
 
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
@@ -32,11 +33,11 @@ class User < ActiveRecord::Base
   end
 
   def is_admin_for?(group)
-    Membership.where(group: group, member: self, is_admin: true).length > 0
+    Membership.where(group: group, member: self, archived_at: nil, is_admin: true).length > 0
   end
 
   def is_member_of?(group)
-    group.members.include?(self)
+    Membership.where(group: group, member: self, archived_at: nil).length > 0
   end
 
   def has_set_up_account?

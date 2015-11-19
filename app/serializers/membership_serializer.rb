@@ -5,6 +5,7 @@ class MembershipSerializer < ActiveModel::Serializer
              :created_at, 
              :total_allocations, 
              :total_contributions
+             :archived_at
 
   has_one :member, serializer: UserSerializer, root: 'users'
   has_one :group, serializer: GroupSerializer, root: 'groups'

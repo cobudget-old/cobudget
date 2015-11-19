@@ -1,13 +1,14 @@
 class BucketService
-  def self.send_bucket_created_emails(bucket: , current_user:)
-    members = bucket.group.members.where.not(id: current_user.id)
-    members.each do |member|
+  def self.send_bucket_created_emails(bucket: )
+    memberships = bucket.group.memberships.active.where.not(member_id: bucket.user_id)
+    memberships.each do |membership|
+      member = membership.member
       UserMailer.notify_member_that_bucket_was_created(bucket: bucket, member: member).deliver_later
     end
   end
 
-  def self.send_bucket_live_emails(bucket: , current_user: )
-    memberships = bucket.group.memberships.reject { |membership| membership.member == current_user }
+  def self.send_bucket_live_emails(bucket: )
+    memberships = bucket.group.memberships.active.reject { |membership| membership.member == bucket.user }
     memberships.each do |membership|
       member = membership.member
       if membership.balance > 0
@@ -23,6 +24,8 @@ class BucketService
     if bucket_author && bucket_author.subscribed_to_personal_activity
       UserMailer.notify_author_that_bucket_is_funded(bucket: bucket).deliver_later
     end
+
+    ## TODO, when this is brought back, need to add .active filter to memberships
     # members = bucket.group.members.reject { |member| member == bucket_author }
     # members.each do |member|
     #   UserMailer.notify_member_that_bucket_is_funded(bucket: bucket, member: member).deliver_later
