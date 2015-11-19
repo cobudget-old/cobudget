@@ -15,7 +15,6 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
     global.cobudgetApp.currentUserId = user.id
     Records.memberships.fetchMyMemberships().then (data) ->
       membershipsLoadedDeferred.resolve()
-      
       if !data.groups
         $auth.signOut().then ->
           global.cobudgetApp.currentUserId = null
