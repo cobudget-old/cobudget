@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :memberships
   has_many :comments
   has_many :contributions
-
+  
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
 

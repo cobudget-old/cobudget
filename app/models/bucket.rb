@@ -51,6 +51,26 @@ class Bucket < ActiveRecord::Base
     markdown.render(description).html_safe
   end
 
+  def participants(exclude_author: nil, type: nil, subscribed: nil)
+    case type
+      when :contributors then ids = contributions.pluck(:user_id)
+      when :comments then ids = comments.pluck(:user_id)
+      else ids = (contributions.pluck(:user_id) + comments.pluck(:user_id)).uniq
+    end
+    users = User.where(id: ids)
+    users = users.where(subscribed_to_participant_activity: true) if subscribed
+    users = users.where.not(id: user_id) if exclude_author
+    users.all
+  end
+
+  def contributors(exclude_author: nil)
+    participants(exclude_author: exclude_author, type: :contributors)
+  end
+
+  def commenters(exclude_author: nil)
+    participants(exclude_author: exclude_author, type: :commenters)
+  end
+
   private
     def set_timestamp_if_status_updated
       case self.status

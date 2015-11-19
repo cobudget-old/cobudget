@@ -2,13 +2,6 @@ require "rails_helper"
 
 describe "BucketService" do
 
-  def create_bucket_participant(bucket: , subscribed:)
-    participant = create(:user, subscribed_to_participant_activity: subscribed)
-    create(:membership, member: participant, group: bucket.group)
-    create(:comment, bucket: bucket, user: participant)
-    participant
-  end
-
   before do
     @bucket_author = bucket.user
     @contribution = create(:contribution, bucket: bucket, amount: bucket.target)
