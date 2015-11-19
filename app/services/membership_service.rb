@@ -8,12 +8,10 @@ class MembershipService
 
     # destroy member's funding buckets, refund all their funders, and notify funders of refund via email
     Bucket.where(user_id: member.id, status: 'live', group_id: group.id).each do |bucket|
-      contributions = bucket.contributions
-      funders = contributions.map { |c| c.user }.uniq
+      funders = bucket.contributors(exclude_author: true)
       funders.each do |funder|
         UserMailer.notify_funder_that_bucket_was_deleted(funder: funder, bucket: bucket).deliver_now
       end
-      contributions.destroy_all
       bucket.destroy
     end
 

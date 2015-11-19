@@ -22,7 +22,7 @@ describe "MembershipService" do
       expect(Bucket.where(group: @group).length).to eq(0)
     end
 
-    it "destroys member's funding buckets, and refunds all its contributors, and sends email notifications to refunded contributors" do
+    it "destroys member's funding buckets, and refunds all its contributors, and sends email notifications to refunded contributors, except author" do
       bucket = create(:bucket, group: @group, user: @user, status: 'live', target: 1000)
 
       user1 = create(:user)
@@ -46,16 +46,23 @@ describe "MembershipService" do
       expect(@group.balance).to eq(70)
       expect(membership2.balance).to eq(50)
 
-      contribution2 = create(:contribution, user: user2, bucket: bucket, amount: 30)
+      contribution3 = create(:contribution, user: user2, bucket: bucket, amount: 30)
       expect(@group.balance).to eq(40)
       expect(membership2.balance).to eq(20)
+
+      # member who is about to be deleted has also contributed to their own bucket
+      contribution4 = create(:contribution, user: @user, bucket: bucket, amount: 1)
+      expect(@group.balance).to eq(39)
 
       ActionMailer::Base.deliveries.clear
       MembershipService.archive_membership(membership: @membership)
       sent_emails = ActionMailer::Base.deliveries
+      email_recipients = sent_emails.map { |e| e.to.first }
+
       user_1_email = sent_emails.find { |e| e.to[0] == user1.email }
       user_2_email = sent_emails.find { |e| e.to[0] == user2.email }
 
+      expect(email_recipients).not_to include(@user.email)
       expect(Bucket.find_by_id(bucket.id)).to be_nil
       expect(Contribution.find_by_id(contribution1.id)).to be_nil
       expect(Contribution.find_by_id(contribution2.id)).to be_nil
