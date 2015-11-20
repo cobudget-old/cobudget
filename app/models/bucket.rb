@@ -1,10 +1,11 @@
 class Bucket < ActiveRecord::Base
-  has_many :contributions, -> { order("amount DESC") }
+  has_many :contributions, -> { order("amount DESC") }, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :group
   belongs_to :user
 
   validates :name, presence: true
+  validates :description, presence: true
   validates :group_id, presence: true
   validates :user_id, presence: true
   validates :status, presence: true

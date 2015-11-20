@@ -52,6 +52,10 @@ describe GroupsController, :type => :controller do
       expect(Membership.find_by(group: @new_group, member: user, is_admin: true)).to be_truthy
     end
 
+    it "initializes group" do
+      expect(@new_group.initialized).to be_truthy
+    end
+
     it "returns new group, as json" do
       expect(@parsed_response["groups"][0]["id"]).to eq(@new_group.id)
     end

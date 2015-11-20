@@ -5,6 +5,9 @@ class Membership < ActiveRecord::Base
   validates :group_id, presence: true
   validates :member_id, presence: true, uniqueness: { scope: :group_id }
 
+  scope :archived, -> { where.not(archived_at: nil) }
+  scope :active, -> { where(archived_at: nil) }
+
   def total_allocations
     group.allocations.where(user_id: member_id).sum(:amount)
   end
@@ -20,6 +23,10 @@ class Membership < ActiveRecord::Base
 
   def formatted_balance
     Money.new(balance * 100, currency_code).format
+  end
+
+  def archived?
+    archived_at
   end
 
   private

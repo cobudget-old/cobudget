@@ -1,5 +1,5 @@
 class MembershipService
-  def self.delete_membership(membership: )
+  def self.archive_membership(membership: )
     member = membership.member
     group = membership.group
 
@@ -8,12 +8,10 @@ class MembershipService
 
     # destroy member's funding buckets, refund all their funders, and notify funders of refund via email
     Bucket.where(user_id: member.id, status: 'live', group_id: group.id).each do |bucket|
-      contributions = bucket.contributions
-      funders = contributions.map { |c| c.user }.uniq
+      funders = bucket.contributors(exclude_author: true)
       funders.each do |funder|
-        UserMailer.notify_funder_that_bucket_was_deleted(funder: funder, bucket: bucket).deliver_later
+        UserMailer.notify_funder_that_bucket_was_deleted(funder: funder, bucket: bucket).deliver_now
       end
-      contributions.destroy_all
       bucket.destroy
     end
 
@@ -23,10 +21,7 @@ class MembershipService
     # remove member's funds from group (by creating a negative allocation equal to the member's balance)
     Allocation.create(user: member, group: group, amount: -membership.balance)
 
-    # destroy membership
-    membership.destroy
-
-    # destroy member, if they have no more memberships
-    member.destroy if member.memberships.length == 0
+    # archive membership
+    membership.update(archived_at: DateTime.now.utc)
   end
 end

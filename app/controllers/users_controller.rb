@@ -12,16 +12,17 @@ class UsersController < AuthenticatedController
     end
   end
 
-  api :POST, '/users?invite_group'
-  def create
-    # TODO: only an admin should be able to create a user
-    user = User.create_with_confirmation_token(email: user_params[:email])
+  api :POST, '/users/invite_to_create_group?email'
+  def invite_to_create_group
+    user = User.create_with_confirmation_token(email: params[:email])
     if user.valid?
-      UserMailer.invite_new_group_email(user: user, inviter: current_user).deliver_later
+      group = Group.create(name: "New Group")
+      group.add_admin(user)
+      UserMailer.invite_new_group_email(user: user, inviter: current_user, group: group).deliver_later
       render nothing: true
     else
       render status: 409, nothing: true
-    end
+    end    
   end
 
   api :POST, '/users/update_profile'

@@ -98,6 +98,39 @@ describe "UserService" do
       end
     end
 
+    context "user has some archived memberships" do
+      before do
+        make_user_group_member
+        user.update(utc_offset: -480)
+        utc_offset_in_hours = user.utc_offset / 60
+        oakland_6am_today_in_utc = (DateTime.now.in_time_zone(utc_offset_in_hours).beginning_of_day + 6.hours).utc
+        oakland_6am_yesterday_in_utc = oakland_6am_today_in_utc - 1.day
+
+        membership1 = create(:membership, member: user)
+        membership2 = create(:membership, member: user, archived_at: DateTime.now.utc - 5.days)
+        group1 = membership1.group
+        group2 = membership2.group
+
+        Timecop.freeze(oakland_6am_yesterday_in_utc + 2.hours) do
+          create(:draft_bucket, group: group1)
+          create(:live_bucket, group: group1)
+          create(:funded_bucket, group: group1)
+        end
+
+        Timecop.freeze(oakland_6am_yesterday_in_utc + 3.hours) do
+          create(:draft_bucket, group: group2)
+          create(:live_bucket, group: group2)
+          create(:funded_bucket, group: group2)
+        end
+
+        @recent_activity = UserService.fetch_recent_activity_for(user: user)
+      end
+
+      it "returns recent activity for every group user is a member of" do
+        expect(@recent_activity.length).to eq(1)
+      end
+    end
+
     context "user does not have a utc_offset specified yet" do
       it "returns nil" do
         make_user_group_member

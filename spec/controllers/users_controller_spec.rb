@@ -56,18 +56,19 @@ describe UsersController, :type => :controller do
     end
   end
 
-  describe "#create" do
+  describe "#invite_to_create_group" do
     before do
       make_user_group_admin
       request.headers.merge!(user.create_new_auth_token)
     end
 
-    context "params[:invite_group] specified" do
+    context "specified email does not yet exist in DB" do
       before do
-        user_params = {email: Faker::Internet.email}
-        post :create, {invite_group: true, user: user_params}
-        @new_user = User.find_by(user_params)
+        params = { email: Faker::Internet.email }
+        post :invite_to_create_group, params
+        @new_user = User.find_by(params)
         @sent_email = ActionMailer::Base.deliveries.first
+        @new_group = @new_user.groups.first
       end
 
       after do
@@ -79,24 +80,29 @@ describe UsersController, :type => :controller do
         expect(@new_user.confirmation_token).to be_truthy
       end
 
-      it "sends email to user with link to confirm account page containing confirmation_token and create_group flag " do
+      it "creates a temporary group for the user, and adds them as an admin to it" do
+        expect(@new_group.name).to eq("New Group")
+        expect(@new_user.is_admin_for?(@new_group)).to be_truthy
+      end
+
+      it "sends email to user with link to confirm account page containing confirmation_token and new group_id" do
         expect(@sent_email.to).to eq([@new_user.email])
-        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}&create_group=true"
+        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}&group_id=#{@new_group.id}"
         expect(@sent_email.body.to_s).to include(expected_url)
       end
     end
 
-    context "user email not unique" do
+    context "specified email already exists in DB" do
       before do
         make_user_group_admin
         request.headers.merge!(user.create_new_auth_token)
         create(:user, email: "meow@meow.com")
-        @user_params = {email: "meow@meow.com"}
-        post :create, {user: @user_params}
+        @params = {email: "meow@meow.com"}
+        post :invite_to_create_group, @params
       end
 
       it "does not create user" do
-        expect(User.where(@user_params).length).to eq(1)
+        expect(User.where(@params).length).to eq(1)
       end
 
       it "returns http status conflict" do
