@@ -20,9 +20,3 @@ global.cobudgetApp.factory 'UserCan', ($location, $q, Records, Toast) ->
         isAdmin: true
       })
       validMemberships.length > 0
-
-    viewGroupSetupPage: ->
-      validMemberships = Records.memberships.find({
-        memberId: global.cobudgetApp.currentUserId
-      })
-      validMemberships.length == 0

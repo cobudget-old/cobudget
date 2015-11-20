@@ -23,3 +23,7 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
 
     primaryGroup: ->
       @groups()[0]
+
+    isMemberOf: (group) ->
+      _.find @memberships(), (membership) ->
+        membership.groupId == group.id 

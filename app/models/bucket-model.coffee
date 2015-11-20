@@ -41,3 +41,9 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     percentContributedByUser: (user) ->
       @amountContributedByUser(user) / @target * 100
+
+    authorName: ->
+      if @author().isMemberOf(@group())
+        @author().name
+      else
+        "[removed user]"

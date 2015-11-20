@@ -1,15 +1,15 @@
 module.exports =
-  url: '/confirm_account?confirmation_token&create_group'
+  url: '/confirm_account?confirmation_token&:group_id'
   template: require('./confirm-account-page.html')
   controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Toast) ->
 
     $scope.confirmationToken = $stateParams.confirmation_token
-    $scope.createGroup = $stateParams.create_group
+    $scope.groupId = $stateParams.group_id
 
     $scope.confirmAccount = (formData) ->
       LoadBar.start()
       $location.search('confirmation_token', null)
-      $location.search('create_group', null)
+      $location.search('group_id', null)
       
       params = 
         name: formData.name        
@@ -23,8 +23,8 @@ module.exports =
           loginParams = { email: user.email, password: formData.password }
           $auth.submitLogin(loginParams)
             .then (ev, user) ->
-              if $scope.createGroup
-                $location.path('/setup_group')
+              if $scope.groupId
+                $location.path("/groups/#{$scope.groupId}/setup")
         .catch ->
           Toast.show('Sorry, that confirmation token has expired.')
           $location.path('/')
