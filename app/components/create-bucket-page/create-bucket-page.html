@@ -31,7 +31,7 @@
       <md-input-container>
         <label>Title</label>
         <input required name="name" type="text" ng-model="bucket.name">
-        <div ng-messages="bucketForm.name.$error" ng-if="bucketForm.name.$dirty || bucketForm.$submitted">
+        <div ng-messages="bucketForm.name.$error" ng-if="bucketForm.name.$dirty || formSubmitted">
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
@@ -40,7 +40,7 @@
         <md-input-container>
           <label>Description</label>
           <textarea required name="description" ng-model="bucket.description"></textarea>
-          <div ng-messages="bucketForm.description.$error" ng-if="bucketForm.description.$dirty || bucketForm.$submitted">
+          <div ng-messages="bucketForm.description.$error" ng-if="bucketForm.description.$dirty || formSubmitted">
             <div ng-message="required">This is required.</div>
           </div>
         </md-input-container>
@@ -54,7 +54,7 @@
             {{group.name}}
           </md-option>
         </md-select>
-        <div ng-messages="bucketForm.groupId.$error" ng-if="bucketForm.groupId.$dirty || bucketForm.$submitted">
+        <div ng-messages="bucketForm.groupId.$error" ng-if="bucketForm.groupId.$dirty || formSubmitted">
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
