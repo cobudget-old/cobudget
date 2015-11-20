@@ -4,15 +4,14 @@
   </md-toolbar>
 
   <md-content layout-padding class="group-setup-page__content">
-    <form novalidate name="newGroupForm" ng-submit="newGroupForm.$valid && saveGroup()">
+    <form novalidate name="newGroupForm" ng-submit="newGroupForm.$valid && setupGroup(formData)">
       <md-input-container>
         <label>name</label>
-        <input required name="name" type="text" ng-model="newGroup.name">
+        <input required name="name" type="text" ng-model="formData.name">
         <div ng-messages="newGroupForm.name.$error" ng-if="newGroupForm.name.$dirty || newGroupForm.$submitted">
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
-
       <md-button class="group-setup-page__submit-btn">submit</md-button>
     </form>
   </md-content>

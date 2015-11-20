@@ -45,19 +45,17 @@ module.exports =
         scope: $scope
         template: require('./invite-group-dialog-content.tmpl.html')
 
-    $scope.newGroupAdmin = Records.users.build()
-    $scope.inviteGroup = ->
-      $scope.newGroupAdmin.save()
+    $scope.inviteGroup = () ->
+      Records.users.inviteToCreateGroup($scope.formData)
         .then ->
           Dialog.alert
             title: 'Success!'
             content: "Your invite was sent."
+          $scope.formData = {}
         .catch ->
           Dialog.alert
             title: 'Error!'
             content: 'Email invalid or already taken.'
-        .finally ->
-          $scope.newGroupAdmin = Records.users.build()
 
     $scope.closeDialog = ->
       Dialog.close()

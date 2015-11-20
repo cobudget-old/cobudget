@@ -16,3 +16,6 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
 
     updateProfile: (params) ->
       @remote.post('update_profile', user: params)
+
+    inviteToCreateGroup: (params) ->
+      @remote.post('invite_to_create_group', params)

@@ -4,19 +4,26 @@ module.exports =
       $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-  url: '/buckets/new'
+  url: '/buckets/new?group_id'
   template: require('./create-bucket-page.html')
-  controller: (CurrentUser, Error, $location, Records, $scope, Toast) ->
-
+  controller: (config, CurrentUser, Error, $location, Records, $scope, $stateParams, Toast, $window) ->
     $scope.accessibleGroups = CurrentUser().groups()
-    $scope.bucket = Records.buckets.build()
+    $scope.bucket = Records.buckets.build(groupId: $stateParams.group_id)
+
+    if $scope.accessibleGroups.length == 1
+      $scope.bucket.groupId = CurrentUser().primaryGroup().id
 
     $scope.cancel = () ->
-      group = CurrentUser().primaryGroup()
-      $location.path("/groups/#{group.id}")
+      $location.search('group_id', null)
+      if $scope.bucket.groupId
+        groupId = $scope.bucket.groupId
+      else
+        groupId = CurrentUser().primaryGroup().id
+
+      $location.path("/groups/#{groupId}")
 
     $scope.done = () ->
-      $scope.bucketFormSubmitted = true
+      $location.search('group_id', null)
       if $scope.bucketForm.$valid
         $scope.bucket.save().then (data) ->
           bucketId = data.buckets[0].id

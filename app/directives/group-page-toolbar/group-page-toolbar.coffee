@@ -17,7 +17,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
         $location.path("/admin")
 
       $scope.createBucket = ->
-        $location.path("/buckets/new")
+        $location.path("/buckets/new").search('group_id', $scope.group.id)
 
       $scope.selectTab = (tabNum) ->
         $scope.tabSelected = parseInt tabNum

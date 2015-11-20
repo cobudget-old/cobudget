@@ -1,0 +1,38 @@
+<md-dialog aria-label="remove membership dialog">
+  <md-dialog-content class="sticky-container">
+
+    <div class="group-page__remove-membership-dialog-header" layout="column" layout-align="center center">
+      <ng-md-icon icon="warning"
+        layout="column"
+        layout-align="center center"
+        class="group-page__remove-membership-dialog-warning-icon"
+        size="35"
+      ></ng-md-icon>
+      <div class="group-page__remove-membership-dialog-header-text">
+        Remove {{ member.name }} from {{ group.name }}
+      </div>
+    </div>
+    <md-divider></md-divider>
+
+    <div class="group-page__remove-membership-dialog-list-container">
+      <div class="group-page__remove-membership-dialog-list-header">
+        Warning: This cannot be undone
+      </div>
+      <ul class="group-page__remove-membership-dialog-list">
+        <li class="group-page__remove-membership-dialog-list-item" ng-repeat="warning in warnings" layout="row" layout-align="start start">
+          <ng-md-icon icon="check"
+            layout="column"
+            layout-align="center center"
+            class="group-page__remove-membership-dialog-checkbox-icon"
+            size="20"
+          ></ng-md-icon>
+          <div class="group-page__remove-membership-dialog-warning-text">{{ warning }}</div>
+        </li>
+      </ul>
+    </div>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <md-button class="md-raised group-page__remove-membership-dialog-remove-btn" ng-click="proceed()">remove</md-button>
+    <md-button class="group-page__remove-membership-dialog-cancel-btn" ng-click="cancel()">cancel</md-button>
+  </div>
+</md-dialog>

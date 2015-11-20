@@ -3,7 +3,7 @@
     <form novalidate name='inviteGroupForm' class="admin-page__form" ng-submit="inviteGroupForm.$setUntouched()">
       <md-input-container>
         <label>email</label>
-        <input required name="email" type="email" ng-pattern="/^.+@.+\..+$/" ng-model="newGroupAdmin.email">
+        <input required name="email" type="email" ng-pattern="/^.+@.+\..+$/" ng-model="formData.email">
         <div ng-messages="inviteGroupForm.email.$error" ng-if="inviteGroupForm.$submitted" multiple>
           <div ng-message="required">This is required.</div>
           <div ng-message="pattern">Invalid email format.</div>
