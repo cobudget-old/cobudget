@@ -11,7 +11,7 @@
 
     <md-menu class="group-page__toolbar-menu">
       <div class="group-page__toolbar-menu-btn" layout="column" layout-align="center center" ng-click="$mdOpenMenu($event)">
-        <div>{{ currentUser.name[0] | uppercase }}</div>
+        {{ currentUser.name[0] | uppercase }}
       </div>
 
       <md-menu-content class="group-page__toolbar-menu-content" width="3">
