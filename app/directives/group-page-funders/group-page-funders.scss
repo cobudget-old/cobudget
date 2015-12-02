@@ -64,7 +64,7 @@
   fill: $cobudget-dark-grey;
 }
 
-// remove membership modal
+// remove membership dialog
 
 .group-page__remove-membership-dialog-header {
   text-align: center;
@@ -120,4 +120,27 @@
 .group-page__remove-membership-dialog-cancel-btn {
   color: $grey-on-white !important;
   background: transparent !important;
+}
+
+// manage funds dialog
+
+.group-page__manage-funds-dialog-header {
+  padding-top: 10px !important;
+}
+
+.group-page__manage-funds-dialog-header-avatar {
+  background: black;
+  width: 60px;
+  height: 60px;
+  color: white;
+  font-size: 35px;
+  border-radius: 50%;
+}
+
+.group-page__manage-funds-dialog-header-title {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 8px;
+  color: $cobudget-dark-grey;
 }
