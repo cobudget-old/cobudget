@@ -126,6 +126,7 @@
 
 .group-page__manage-funds-dialog-header {
   padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }
 
 .group-page__manage-funds-dialog-header-avatar {
@@ -143,4 +144,26 @@
   text-align: center;
   margin-top: 8px;
   color: $cobudget-dark-grey;
+}
+
+.group-page__manage-funds-options {
+  padding-top: 30px !important;
+}
+
+.group-page__manage-funds-option-icon-container {
+  border: 3px solid black;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 12px;
+}
+
+.group-page__manage-funds-change-icon > svg {
+  width: 16px;
+  position: relative;
+  left: 4px;
+}
+
+.group-page__manage-funds-option-label {
+  font-size: 15px;
 }
