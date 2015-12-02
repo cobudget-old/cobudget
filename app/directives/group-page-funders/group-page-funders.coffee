@@ -41,11 +41,17 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
           scope: $scope
           template: require('./../../directives/group-page-funders/manage-funds-dialog.tmpl.html')
           controller: ($scope) ->
+            $scope.formData = {}
             $scope.mode = 'add'
             $scope.managedMembership = funderMembership
             $scope.managedMember = funderMembership.member()
 
             $scope.setMode = (mode) ->
               $scope.mode = mode
+
+            $scope.normalizeAllocationAmount = ->
+              allocationAmount = $scope.formData.allocationAmount || 0
+              if allocationAmount + $scope.managedMembership.balance() < 0
+                $scope.formData.allocationAmount = -$scope.managedMembership.balance()
 
       return

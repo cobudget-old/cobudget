@@ -38,13 +38,15 @@
 
     <div class="group-page__manage-funds-calculation">
       <div ng-if="mode == 'add'">
-        <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance() | currency : group.currencySymbol : 0 }}</span>
+        <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance() | currency : group.currencySymbol : 2 }}</span>
         <span class="group-page__manage-funds-operator">+</span>
         <md-input-container class="group-page__manage-funds-input-container" md-no-float>
-          <input aria-label="amount" class="group-page__manage-funds-input" type="number" step="any" ng-model="fundingAmount">
+          <input aria-label="amount" class="group-page__manage-funds-input" type="number" step="any" ng-model="formData.allocationAmount" ng-change="normalizeAllocationAmount()" ng-keypress="normalizeAllocationAmount()">
         </md-input-container>
         <span class="group-page__manage-funds-operator">=</span>
-        <span class="group-page__manage-funds-total-amount">{{ (fundingAmount || 0) + managedMembership.balance() | currency : group.currencySymbol : 0}}</span>
+        <span class="group-page__manage-funds-total-amount">
+          {{ (formData.allocationAmount || 0) + managedMembership.balance() | currency : group.currencySymbol : 2}}
+        </span>
         <span class="group-page__manage-funds-total-label">total</span>
       </div>
 
@@ -53,7 +55,7 @@
         <span class="group-page__manage-funds-current-amount">$350</span>
         <span class="group-page__manage-funds-filler-text">to</span>
         <md-input-container class="group-page__manage-funds-input-container" md-no-float>
-          <input aria-label="amount" class="group-page__manage-funds-input" type="number" step="any" min="0" pattern="[0-9]*" ng-model="fundingAmount">
+          <input aria-label="amount" class="group-page__manage-funds-input" type="number" step="any" min="0" pattern="[0-9]*" ng-model="formData.something">
         </md-input-container>
         <span class="group-page__manage-funds-filler-text">total</span>
       </div>
