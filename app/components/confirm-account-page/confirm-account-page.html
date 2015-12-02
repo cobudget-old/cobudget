@@ -4,11 +4,11 @@
   </md-toolbar>
 
   <md-content layout-padding class="confirm-account-page__content">
-    <form name="newUserForm" ng-submit="confirmAccount(formData)">
+    <form novalidate name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)">
       <md-input-container>
         <label>name</label>
         <input required name="name" type="text" ng-model="formData.name">
-        <div ng-messages="newUserForm.name.$error">
+        <div ng-messages="newUserForm.name.$error" ng-if="newUserForm.name.$dirty || newUserForm.$submitted">
           <div ng-message="required">This is required.</div>
         </div>
       </md-input-container>
@@ -16,9 +16,9 @@
       <md-input-container>
         <label>new password</label>
         <input minlength="8" required name="password" type="password" ng-model="formData.password">
-        <div ng-messages="newUserForm.password.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="minlength">Password must be at least 8 characters long.</div>
+        <div ng-messages="newUserForm.password.$error" multiple>
+          <div ng-message="required" ng-if="newUserForm.password.$dirty || newUserForm.$submitted">This is required.</div>
+          <div ng-message="minlength" ng-if="newUserForm.$submitted">Password must be at least 8 characters long.</div>
         </div>
       </md-input-container>
 

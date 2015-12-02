@@ -4,25 +4,33 @@
   </md-toolbar>
 
   <md-content layout-padding class="welcome-page__content">
-    <form novalidate class="welcome-page__login-form" ng-submit="login(formData); formData = {}">
+    <form novalidate name="loginForm" class="welcome-page__login-form" ng-submit="login(formData)">
       <div class="welcome-page__form-errors">{{ formError }}</div>
 
       <md-input-container>
         <label>email</label>
-        <input name="email" type="email" ng-model="formData.email">
+        <input required name="email" type="email" ng-pattern="/^.+@.+\..+$/" ng-model="formData.email">
+        <div ng-messages="loginForm.email.$error" ng-if="loginForm.$submitted" multiple>
+          <div ng-message="required">This is required.</div>
+          <div ng-message="pattern">Invalid email format.</div>
+        </div>
       </md-input-container>
 
       <md-input-container>
         <label>password</label>
-        <input name="password" type="password" ng-model="formData.password">
+        <input required name="password" type="password" ng-model="formData.password">
+        <div ng-messages="loginForm.password.$error">
+          <div ng-message="required" ng-if="loginForm.password.$dirty || loginForm.$submitted">This is required.</div>
+        </div>
       </md-input-container>
+
+
 
       <md-button class="welcome-page__login-btn">Log In</md-button>
     </form>
 
     <div class="welcome-page__buttons-container">
       <md-button class="welcome-page__forgot-password-btn" ng-click="visitForgotPasswordPage()">Having trouble logging in?</md-button>
-
       <md-button class="welcome-page__forgot-password-btn" ng-click="openFeedbackForm()">Give us feedback!</md-button>
     </div>
 

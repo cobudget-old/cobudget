@@ -45,13 +45,13 @@ module.exports =
         scope: $scope
         template: require('./invite-group-dialog-content.tmpl.html')
 
-    $scope.inviteGroup = (email) ->
-      $scope.formData = {}
-      Records.users.inviteToCreateGroup(email: email)
+    $scope.inviteGroup = () ->
+      Records.users.inviteToCreateGroup($scope.formData)
         .then ->
           Dialog.alert
             title: 'Success!'
             content: "Your invite was sent."
+          $scope.formData = {}
         .catch ->
           Dialog.alert
             title: 'Error!'

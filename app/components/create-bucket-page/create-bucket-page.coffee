@@ -23,9 +23,10 @@ module.exports =
       $location.path("/groups/#{groupId}")
 
     $scope.done = () ->
-      $location.search('group_id', null)
+      $scope.formSubmitted = true
       if $scope.bucketForm.$valid
         $scope.bucket.save().then (data) ->
+          $location.search('group_id', null)
           bucketId = data.buckets[0].id
           $location.path("/buckets/#{bucketId}")
           Toast.show('You drafted a new bucket')
