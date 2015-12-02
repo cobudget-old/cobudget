@@ -59,7 +59,7 @@
 
       <div ng-if="mode == 'change'">
         <span class="group-page__manage-funds-filler-text">Change from</span>
-        <span class="group-page__manage-funds-current-amount">$350</span>
+        <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance() | currency : group.currencySymbol : 2}}</span>
         <span class="group-page__manage-funds-filler-text">to</span>
         <md-input-container class="group-page__manage-funds-input-container" md-no-float>
           <input aria-label="amount"
