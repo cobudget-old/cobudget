@@ -25,6 +25,10 @@ class Membership < ActiveRecord::Base
     Money.new(balance * 100, currency_code).format
   end
 
+  def archived?
+    archived_at
+  end
+
   private
     def currency_code 
       group.currency_code

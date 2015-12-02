@@ -6,5 +6,6 @@ FactoryGirl.define do
     initialized true
     subscribed_to_personal_activity true
     subscribed_to_daily_digest true
+    subscribed_to_participant_activity false
   end
 end

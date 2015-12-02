@@ -17,8 +17,13 @@ class User < ActiveRecord::Base
   has_many :contributions, dependent: :destroy
   has_many :buckets, dependent: :destroy
 
+  scope :active_in_group, -> (group) { joins(:memberships).where(memberships: {archived_at: nil, group_id: group.id}) }
+
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
+  validates_inclusion_of :subscribed_to_daily_digest, in: [true, false]
+  validates_inclusion_of :subscribed_to_personal_activity, in: [true, false]
+  validates_inclusion_of :subscribed_to_participant_activity, in: [true, false]
 
   def name_and_email
     "#{name} <#{email}>"
@@ -38,6 +43,10 @@ class User < ActiveRecord::Base
 
   def is_member_of?(group)
     Membership.where(group: group, member: self, archived_at: nil).length > 0
+  end
+
+  def membership_for(group)
+    memberships.find_by(group_id: group.id)
   end
 
   def has_set_up_account?

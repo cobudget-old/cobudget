@@ -2,9 +2,7 @@
   <%= @commenter.name %> has commented on <%= @bucket.name %> in <%= @group.name %> on Cobudget.
 </p>
 
-<p>
-  "<%= @comment.body_as_markdown %>"
-</p>
+<%= @comment.body_as_markdown %>
 
 <p>
   <%= link_to 'reply', "#{root_url}#/buckets/#{@bucket.id}" %>

@@ -60,6 +60,12 @@ class UsersController < AuthenticatedController
 
   private
     def user_params
-      params.require(:user).permit(:utc_offset)
+      params.require(:user).permit(
+        :email, 
+        :utc_offset, 
+        :subscribed_to_personal_activity, 
+        :subscribed_to_daily_digest, 
+        :subscribed_to_participant_activity 
+      )
     end
 end

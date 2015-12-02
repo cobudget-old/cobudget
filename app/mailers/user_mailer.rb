@@ -29,7 +29,7 @@ class UserMailer < ActionMailer::Base
     @group = @bucket.group
     mail(to: @author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{@commenter.name} has commented on your bucket.")
+         subject: "Someone commented on your bucket.")
   end
 
   def notify_user_of_new_comment_email(comment: , user:)
@@ -39,7 +39,7 @@ class UserMailer < ActionMailer::Base
     @group = @bucket.group
     mail(to: user.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{@commenter.name} has commented on #{@bucket.name}")
+         subject: "Someone commented on #{@bucket.name}")
   end
 
   def notify_author_that_bucket_received_contribution(contribution: )
@@ -50,7 +50,7 @@ class UserMailer < ActionMailer::Base
     author = @bucket.user
     mail(to: author.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{@funder.name} has funded your bucket - #{@contribution.formatted_amount}.")
+         subject: "Someone funded your bucket - #{@contribution.formatted_amount}.")
   end
 
   def notify_author_that_bucket_is_funded(bucket: )
