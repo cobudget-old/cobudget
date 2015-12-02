@@ -1,0 +1,39 @@
+<div class="email-settings-page">
+  <md-toolbar class="md-whiteframe-z1 email-settings-page__toolbar" layout-align="column">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+        <ng-md-icon icon="close"
+          class="email-settings-page__cancel-icon" 
+          layout="column" 
+          layout-align="center center"
+        ></ng-md-icon>
+      </md-button>
+      <span class="email-settings-page__header-text">Email Settings</span>
+      <span flex></span>
+      <md-button class="md-icon-button email-settings-page__done-button" aria-label="done" ng-click="done()">
+        <div layout="column" layout-align="center center">
+          <span class="email-settings-page__done-button-text">Done</span>
+        </div>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content class="email-settings-page__content">
+    <div layout="row" layout-align="start start" class="email-settings-page__email-setting" ng-repeat="setting in settings">
+      <md-checkbox 
+        ng-model="currentUser[setting.property]" 
+        ng-attr-aria-label="{{ setting.header }}"
+        class="email-settings-page__checkbox">
+      </md-checkbox>
+
+      <div layout="column" layout-align="start start">
+        <div class="email-settings-page__setting-header">
+          {{ setting.header }}
+        </div>
+        <div class="email-settings-page__setting-description">
+          {{ setting.description }}          
+        </div>
+      </div>
+    </div>
+  </md-content>
+</div>

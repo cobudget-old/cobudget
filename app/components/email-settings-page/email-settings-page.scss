@@ -1,0 +1,51 @@
+// toolbar heading
+
+.email-settings-page__toolbar {
+  background: $cobudget-gunmetal;
+  color: white;
+}
+
+.email-settings-page__cancel-icon {
+  @include fontGrande;
+  fill: white;
+}
+
+.email-settings-page__header-text {
+  @include fontLarge;
+}
+
+.email-settings-page__done-button-text {
+  margin-right: 5px; 
+}
+
+
+// settings list
+
+.email-settings-page__content {
+  padding: 15px;
+}
+
+.email-settings-page__email-setting {
+  margin-bottom: 10px;
+}
+
+.email-settings-page__checkbox {
+  margin-right: 16px;
+}
+
+.email-settings-page__checkbox.md-checked .md-icon {
+  background-color: $grey-on-white;
+}
+
+.email-settings-page__setting-header {
+  font-weight: bold;
+  color: $grey-on-white;
+  margin-bottom: 10px;
+  margin-top: 11px;
+}
+
+.email-settings-page__setting-description {
+  font-size: 14px;
+  line-height: 25px;
+  color: $grey-on-white;
+}

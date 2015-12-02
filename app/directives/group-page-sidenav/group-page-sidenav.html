@@ -5,26 +5,11 @@
         <div>{{ currentUser.name[0] | uppercase }}</div>
       </div>
 
-      <md-menu class="group-page__account-options-menu">
-        <div layout="row" layout-align="start center" ng-click="$mdOpenMenu($event)">
-          <div class="group-page__user-email">
-            {{ currentUser.email }}
-          </div>
-          <ng-md-icon icon="arrow_drop_down" 
-            style="fill: white"
-            layout="column"
-            layout-align="center center"
-          ></ng-md-icon>
+      <div layout="row" layout-align="start center">
+        <div class="group-page__user-email">
+          {{ currentUser.email }}
         </div>
-
-        <md-menu-content width="2">
-          <md-menu-item>
-            <md-button ng-click="signOut()">
-              <span md-menu-align-target>Sign Out</span>
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+      </div>
     </div>
   </md-toolbar>
 

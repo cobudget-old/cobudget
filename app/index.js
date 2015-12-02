@@ -2,6 +2,7 @@ global.jQuery = require('jquery')
 global._ = require('lodash')
 global.moment = require('moment')
 global.camelize = require('camelize')
+global.morph = require('morph')
 
 require('angular')
 require('angular-ui-router')
