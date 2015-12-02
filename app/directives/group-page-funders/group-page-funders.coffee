@@ -40,11 +40,14 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
         Dialog.custom
           scope: $scope
           template: require('./../../directives/group-page-funders/manage-funds-dialog.tmpl.html')
-          controller: ($scope) ->
+          controller: ($mdDialog, $scope) ->
             $scope.formData = {}
             $scope.mode = 'add'
             $scope.managedMembership = funderMembership
             $scope.managedMember = funderMembership.member()
+
+            $scope.cancel = ->
+              $mdDialog.cancel()
 
             $scope.setMode = (mode) ->
               $scope.mode = mode
