@@ -128,13 +128,18 @@
   text-align: center;
 }
 
+.group-page__manage-funds-dialog :focus {
+  outline-color: transparent;
+  outline-style: none;
+}
+
 .group-page__manage-funds-dialog-header {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
 
 .group-page__manage-funds-dialog-header-avatar {
-  background: black;
+  background: rgba(0, 0, 0, 0.27);
   width: 60px;
   height: 60px;
   color: white;
@@ -153,8 +158,27 @@
   padding-top: 30px !important;
 }
 
+.group-page__manage-funds-option-container-disabled {
+  border-color: $cobudget-grey;
+  color: $cobudget-grey;
+  fill: $cobudget-grey;
+}
+
+.group-page__manage-funds-option-container-add {
+  border-color: $cobudget-green;
+  color: $cobudget-green;
+  fill: $cobudget-green;
+}
+
+.group-page__manage-funds-option-container-change {
+  border-color: $cobudget-pink;
+  color: $cobudget-pink;
+  fill: $cobudget-pink;
+}
+
 .group-page__manage-funds-option-icon-container {
-  border: 3px solid black;
+  border-width: 3px;
+  border-style: solid;
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -200,7 +224,9 @@
 }
 
 .group-page__manage-funds-filler-text {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: normal;
 }
 
 .group-page__manage-funds-total-amount {
@@ -213,7 +239,6 @@
   font-weight: 500;
   letter-spacing: normal;
 }
-
 
 .group-page__manage-funds-dialog-cancel-btn {
   color: $cobudget-grey;

@@ -13,20 +13,24 @@
     <md-divider></md-divider>
 
     <div class="group-page__manage-funds-options" layout="row" layout-align="space-around center">
-      <div class="group-page__manage-funds-option-container" layout="column" layout-align="space-around center">
+      <div ng-class="mode == 'add' ? 'group-page__manage-funds-option-container-add' : 'group-page__manage-funds-option-container-disabled'"
+        layout="column"
+        layout-align="space-around center"
+        ng-click="setMode('add')"
+      >
         <div class="group-page__manage-funds-option-icon-container">
-          <ng-md-icon icon="add"
-            class="group-page__manage-funds-option-icon"
-          ></ng-md-icon>
+          <ng-md-icon icon="add" class="group-page__manage-funds-option-icon"></ng-md-icon>
         </div>
         <div class="group-page__manage-funds-option-label">Add</div>
       </div>
 
-      <div class="group-page__manage-funds-option-container" layout="column" layout-align="space-around center">
+      <div ng-class="mode == 'change' ? 'group-page__manage-funds-option-container-change' : 'group-page__manage-funds-option-container-disabled'"
+        layout="column"
+        layout-align="space-around center"
+        ng-click="setMode('change')"
+      >
         <div class="group-page__manage-funds-option-icon-container">
-          <ng-md-icon icon="edit"
-            class="group-page__manage-funds-option-icon group-page__manage-funds-change-icon"
-          ></ng-md-icon>
+          <ng-md-icon icon="edit" class="group-page__manage-funds-option-icon group-page__manage-funds-change-icon"></ng-md-icon>
         </div>
         <div class="group-page__manage-funds-option-label">Change</div>
       </div>
@@ -54,7 +58,6 @@
         <span class="group-page__manage-funds-filler-text">total</span>
       </div>
     </div>
-
   </md-dialog-content>
 
   <div class="md-actions" layout="row">

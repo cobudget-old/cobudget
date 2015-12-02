@@ -31,9 +31,20 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               membership.archive().then ->
                 LoadBar.stop()
                 Dialog.alert(
-                  title: 'Success!' 
+                  title: 'Success!'
                   content: "#{$scope.member.name} was removed from #{$scope.group.name}"
                 ).then ->
                   $window.location.reload()
+
+      $scope.openManageFundsDialog = ->
+        Dialog.custom
+          scope: $scope
+          template: require('./../../directives/group-page-funders/manage-funds-dialog.tmpl.html')
+          controller: ($scope) ->
+            $scope.mode = 'add'
+
+            $scope.setMode = (mode) ->
+              $scope.mode = mode
+
 
       return
