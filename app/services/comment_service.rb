@@ -9,11 +9,12 @@ class CommentService
       UserMailer.notify_author_of_new_comment_email(comment: comment).deliver_later
     end
 
-    users_to_notify = bucket.participants(exclude_author: true, subscribed: true).reject { |u| u == comment_author }
-    users_to_notify.each do |user| 
+    users_to_notify = bucket.participants(exclude_author: true, subscribed: true)
+                            .active_in_group(group)
+                            .reject { |u| u == comment_author }
+    users_to_notify.each do |user|
       membership = user.membership_for(group)
-      next if membership.archived?
-      UserMailer.notify_user_of_new_comment_email(comment: comment, user: user).deliver_later 
+      UserMailer.notify_user_of_new_comment_email(comment: comment, user: user).deliver_later
     end
   end
 end

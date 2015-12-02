@@ -10,10 +10,9 @@ class BucketService
 
   def self.send_bucket_live_emails(bucket: )
     group = bucket.group
-    members = bucket.participants(exclude_author: true, subscribed: true)
+    members = bucket.participants(exclude_author: true, subscribed: true).active_in_group(group)
     members.each do |member|
       membership = member.membership_for(group)
-      next if membership.archived?
       if membership.balance > 0
         UserMailer.notify_member_with_balance_that_bucket_is_live(bucket: bucket, member: member).deliver_later
       else
@@ -29,10 +28,9 @@ class BucketService
       UserMailer.notify_author_that_bucket_is_funded(bucket: bucket).deliver_later
     end
 
-    members = bucket.participants(exclude_author: true, subscribed: true)
+    members = bucket.participants(exclude_author: true, subscribed: true).active_in_group(group)
     members.each do |member|
       membership = member.membership_for(group)
-      next if membership.archived?
       UserMailer.notify_member_that_bucket_is_funded(bucket: bucket, member: member).deliver_later
     end
   end
