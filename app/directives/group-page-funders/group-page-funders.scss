@@ -17,7 +17,7 @@
 
 .group-page__funder-name {
   @include truncatedText;
-  @include fontMedLarge;  
+  @include fontMedLarge;
 }
 
 .group-page__funder-balance {
@@ -55,10 +55,13 @@
   border-radius: 50%;
   background: $cobudget-dark-grey;
   color: white;
+  margin-right: 14px;
+  margin-left: 2px;
 }
 
-.group-page__funder-more-menu-item-label {
-  margin-left: 12px;
+.group-page__funder-more-menu-item-icon {
+  margin-right: 12px;
+  fill: $cobudget-dark-grey;
 }
 
 // remove membership modal

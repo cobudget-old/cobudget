@@ -38,13 +38,29 @@
 
             <md-menu-item>
               <md-button ng-click="toggleMemberAdmin(funderMembership)">
-                <span md-menu-align-target>{{ funderMembership.isAdmin ? "Undo" : "Make" }} Admin</span>
+                <div layout="row" layout-align="start center">
+                  <ng-md-icon
+                    icon="portrait"
+                    layout="column"
+                    layout-align="center center"
+                    class="group-page__funder-more-menu-item-icon"
+                  ></ng-md-icon>
+                  <span md-menu-align-target class="group-page__funder-more-menu-item-label">{{ funderMembership.isAdmin ? "Undo" : "Make" }} Admin</span>
+                </div>
               </md-button>
             </md-menu-item>
 
             <md-menu-item ng-if="funderMembership.id != membership.id">
               <md-button ng-click="removeMembership(funderMembership)">
-                <span md-menu-align-target>Remove User</span>
+                <div layout="row" layout-align="start center">
+                  <ng-md-icon
+                    icon="cancel"
+                    layout="column"
+                    layout-align="center center"
+                    class="group-page__funder-more-menu-item-icon"
+                  ></ng-md-icon>
+                  <span md-menu-align-target class="group-page__funder-more-menu-item-label">Remove User</span>
+                </div>
               </md-button>
             </md-menu-item>
           </md-menu-content>
