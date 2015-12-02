@@ -16,10 +16,10 @@
 
         <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
           <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
-            <ng-md-icon 
-              icon="more_vert" 
-              layout="column" 
-              layout-align="center center" 
+            <ng-md-icon
+              icon="more_vert"
+              layout="column"
+              layout-align="center center"
               class="group-page__funder-more-button-icon"
             ></ng-md-icon>
           </md-button>
@@ -38,13 +38,13 @@
 
             <md-menu-item>
               <md-button ng-click="toggleMemberAdmin(funderMembership)">
-                <span md-menu-align-target>{{ funderMembership.isAdmin ? "Undo" : "Make" }} administrator</span>
+                <span md-menu-align-target>{{ funderMembership.isAdmin ? "Undo" : "Make" }} Admin</span>
               </md-button>
             </md-menu-item>
 
             <md-menu-item ng-if="funderMembership.id != membership.id">
               <md-button ng-click="removeMembership(funderMembership)">
-                <span md-menu-align-target>Remove user</span>
+                <span md-menu-align-target>Remove User</span>
               </md-button>
             </md-menu-item>
           </md-menu-content>
