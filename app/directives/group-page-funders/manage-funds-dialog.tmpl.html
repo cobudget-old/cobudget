@@ -1,4 +1,4 @@
-<md-dialog aria-label="manage funds dialog">
+<md-dialog class="group-page__manage-funds-dialog" aria-label="manage funds dialog">
   <md-dialog-content class="sticky-container">
     <div class="group-page__manage-funds-dialog-header" layout="column" layout-align="space-between center">
       <div class="group-page__manage-funds-dialog-header-avatar" layout="column" layout-align="center center">
@@ -33,14 +33,26 @@
     </div>
 
     <div class="group-page__manage-funds-calculation">
-      <span class="group-page__manage-funds-current-amount">$350</span>
-      <span class="group-page__manage-funds-operator">+</span>
-      <md-input-container class="group-page__manage-funds-input-container" md-no-float>
-        <input aria-label="amount" class="group-page__manage-funds-input" type="number" step="any" min="0" pattern="[0-9]*" ng-model="amount">
-      </md-input-container>
-      <span class="group-page__manage-funds-operator">=</span>
-      <span class="group-page__manage-funds-total-amount">$350</span>
-      <span class="group-page__manage-funds-total-label">total</span>
+      <div ng-if="mode == 'add'">
+        <span class="group-page__manage-funds-current-amount">$350</span>
+        <span class="group-page__manage-funds-operator">+</span>
+        <md-input-container class="group-page__manage-funds-input-container" md-no-float>
+          <input aria-label="amount" class="group-page__manage-funds-input" type="number" step="any" min="0" pattern="[0-9]*" ng-model="amount">
+        </md-input-container>
+        <span class="group-page__manage-funds-operator">=</span>
+        <span class="group-page__manage-funds-total-amount">$350</span>
+        <span class="group-page__manage-funds-total-label">total</span>
+      </div>
+
+      <div ng-if="mode == 'change'">
+        <span class="group-page__manage-funds-filler-text">Change from</span>
+        <span class="group-page__manage-funds-current-amount">$350</span>
+        <span class="group-page__manage-funds-filler-text">to</span>
+        <md-input-container class="group-page__manage-funds-input-container" md-no-float>
+          <input aria-label="amount" class="group-page__manage-funds-input" type="number" step="any" min="0" pattern="[0-9]*" ng-model="amount">
+        </md-input-container>
+        <span class="group-page__manage-funds-filler-text">total</span>
+      </div>
     </div>
 
   </md-dialog-content>
