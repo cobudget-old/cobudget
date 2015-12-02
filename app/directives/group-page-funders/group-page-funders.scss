@@ -194,6 +194,10 @@
   letter-spacing: inherit;
 }
 
+.group-page__manage-funds-calculation md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+  border-color: $cobudget-blue;
+}
+
 .group-page__manage-funds-total-amount {
   color: $cobudget-green;
 }
