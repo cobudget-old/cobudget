@@ -174,6 +174,7 @@
   letter-spacing: 1px;
   text-align: center;
   color: $cobudget-dark-grey;
+  padding-bottom: 30px !important;
 }
 
 .group-page__manage-funds-operator {
@@ -207,4 +208,12 @@
   color: $cobudget-grey;
   font-weight: 500;
   letter-spacing: normal;
+}
+
+.group-page__manage-funds-dialog-cancel-btn {
+  color: $cobudget-grey;
+}
+
+.group-page__manage-funds-dialog-done-btn {
+  background: $cobudget-blue !important;
 }
