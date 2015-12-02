@@ -54,4 +54,11 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               if allocationAmount + $scope.managedMembership.balance() < 0
                 $scope.formData.allocationAmount = -$scope.managedMembership.balance()
 
+            $scope.normalizeNewBalance = ->
+              if $scope.formData.newBalance < 0
+                $scope.formData.newBalance = 0
+
+            $scope.isValidForm = ->
+              ($scope.mode == 'add' && $scope.formData.allocationAmount) || ($scope.mode == 'change' && $scope.formData.newBalance)
+
       return

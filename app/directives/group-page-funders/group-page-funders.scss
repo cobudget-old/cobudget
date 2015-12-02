@@ -246,3 +246,8 @@
 .group-page__manage-funds-dialog-done-btn {
   background: $cobudget-blue !important;
 }
+
+.md-button[disabled], .md-button.md-raised[disabled] {
+  opacity: 0.20;
+  color: white !important;
+}
