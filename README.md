@@ -17,7 +17,7 @@ Cobudget is a web app helping people collaborate on budgets. For more about the 
 Install node and npm: https://github.com/joyent/node/wiki/Installation 
 
 ```
-git clone https://github.com/open-app/cobudget-ui
+git clone https://github.com/cobudget/cobudget-ui
 cd cobudget-ui
 npm install
 ```
