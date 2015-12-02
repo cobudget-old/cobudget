@@ -167,3 +167,40 @@
 .group-page__manage-funds-option-label {
   font-size: 15px;
 }
+
+.group-page__manage-funds-calculation {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  color: $cobudget-dark-grey;
+}
+
+.group-page__manage-funds-operator {
+  position: relative;
+  bottom: 2px;
+  margin: auto 3px;
+}
+
+.group-page__manage-funds-input-container {
+  display: inline-block;
+  padding-bottom: 20px !important;
+}
+
+.group-page__manage-funds-input {
+  width: 70px;
+  position: relative;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.group-page__manage-funds-total-amount {
+  color: $cobudget-green;
+}
+
+.group-page__manage-funds-total-label {
+  font-size: 14px;
+  color: $cobudget-grey;
+  font-weight: 500;
+  letter-spacing: normal;
+}
