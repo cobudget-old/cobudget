@@ -73,8 +73,11 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               allocation = Records.allocations.build(params)
               allocation.save()
                 .then (res) ->
-                  console.log('res: ', res)
+                  Records.memberships.findOrFetchById($scope.managedMembership.id)
+                  Dialog.alert(title: 'Success!')
                 .catch (err) ->
-                  console.log('err: ', err)
+                  Dialog.alert(title: 'Error!')
+                .finally ->
+                  $scope.cancel()
 
       return
