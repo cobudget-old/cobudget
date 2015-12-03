@@ -40,14 +40,11 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
         Dialog.custom
           scope: $scope
           template: require('./../../directives/group-page-funders/manage-funds-dialog.tmpl.html')
-          controller: ($mdDialog, $scope) ->
+          controller: ($mdDialog, $scope, Records) ->
             $scope.formData = {}
             $scope.mode = 'add'
             $scope.managedMembership = funderMembership
             $scope.managedMember = funderMembership.member()
-
-            $scope.cancel = ->
-              $mdDialog.cancel()
 
             $scope.setMode = (mode) ->
               $scope.mode = mode
@@ -63,5 +60,21 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
 
             $scope.isValidForm = ->
               ($scope.mode == 'add' && $scope.formData.allocationAmount) || ($scope.mode == 'change' && $scope.formData.newBalance)
+
+            $scope.cancel = ->
+              $mdDialog.cancel()
+
+            $scope.createAllocation = ->
+              if $scope.mode == 'add'
+                amount = $scope.formData.allocationAmount
+              if $scope.mode == 'change'
+                amount = $scope.formData.newBalance - $scope.managedMembership.balance()
+              params = {groupId: $scope.group.id, userId: $scope.managedMember.id, amount: amount }
+              allocation = Records.allocations.build(params)
+              allocation.save()
+                .then (res) ->
+                  console.log('res: ', res)
+                .catch (err) ->
+                  console.log('err: ', err)
 
       return
