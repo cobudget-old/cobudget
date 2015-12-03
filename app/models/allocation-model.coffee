@@ -7,3 +7,7 @@ global.cobudgetApp.factory 'AllocationModel', (BaseModel) ->
     @plural: 'allocations'
     @indices: ['groupId', 'userId']
     @serializableAttributes: ['groupId', 'userId', 'amount']
+
+    relationships: ->
+      @belongsTo 'group'
+      @belongsTo 'user'
