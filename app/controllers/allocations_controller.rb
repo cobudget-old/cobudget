@@ -15,4 +15,22 @@ class AllocationsController < AuthenticatedController
     AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
     render nothing: true, status: 200
   end
+
+  api :POST, '/allocations?membership_id&amount'
+  def create
+    group = Group.find(allocation_params[:group_id])
+    render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
+
+    allocation = Allocation.new(allocation_params)
+    if allocation.save
+      render json: [allocation], status: 201
+    else
+      render status: 400, nothing: true
+    end
+  end
+
+  private
+    def allocation_params
+      params.require(:allocation).permit(:group_id, :user_id, :amount)
+    end
 end
