@@ -13,5 +13,6 @@ class BucketSerializer < ActiveModel::Serializer
              :funding_closes_at,
              :funded_at,
              :live_at,
-             :num_of_comments
+             :num_of_comments,
+             :author_name
 end

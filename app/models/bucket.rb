@@ -72,6 +72,11 @@ class Bucket < ActiveRecord::Base
     participants(exclude_author: exclude_author, type: :commenters)
   end
 
+  def author_name
+    membership = user.membership_for(group)
+    membership.archived? ? "[removed user]" : user.name
+  end
+
   private
     def set_timestamp_if_status_updated
       case self.status
