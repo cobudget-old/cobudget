@@ -11,9 +11,3 @@ global.cobudgetApp.factory 'CommentModel', (BaseModel) ->
     relationships: ->
       @belongsTo 'author', from: 'users', by: 'userId'
       @belongsTo 'bucket'
-
-    authorName: ->
-      if @author().isMemberOf(@bucket().group())
-        @author().name
-      else
-        "[removed user]"
