@@ -6,5 +6,6 @@ class CommentSerializer < ActiveModel::Serializer
              :user_id,
              :body,
              :created_at,
-             :updated_at
+             :updated_at,
+             :author_name
 end
