@@ -41,7 +41,7 @@
         <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance() | currency : group.currencySymbol : 2 }}</span>
         <span class="group-page__manage-funds-operator">+</span>
         <md-input-container class="group-page__manage-funds-input-container" md-no-float>
-          <input
+          <input aria-label="amount"
             class="group-page__manage-funds-input"
             type="number"
             step="any"
@@ -70,7 +70,7 @@
       <div class="group-page__manage-funds-calculation-newline"></div>
       <div>
         <md-input-container class="group-page__manage-funds-input-container" md-no-float>
-          <input
+          <input aria-label="amount"
             class="group-page__manage-funds-input"
             type="number"
             step="any"
