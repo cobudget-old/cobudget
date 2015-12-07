@@ -194,38 +194,50 @@
 }
 
 .group-page__manage-funds-calculation {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
   color: $cobudget-dark-grey;
-  padding-bottom: 30px !important;
+  overflow: auto;
+}
+
+.group-page__manage-funds-calculation-newline {
+  height: 20px;
 }
 
 .group-page__manage-funds-operator {
   position: relative;
   bottom: 2px;
+  margin: auto 10px;
 }
 
 .group-page__manage-funds-input-container {
   display: inline-block;
-  padding-bottom: 20px !important;
+  position: relative;
+  bottom: 1px;
+  padding: 0 !important;
 }
 
 .group-page__manage-funds-input {
   width: 80px;
-  position: relative;
+  display: inline-block !important;
+  padding: 0 !important;
   font-weight: inherit;
   letter-spacing: inherit;
+  color: inherit;
+  text-align: center;
 }
 
 .group-page__manage-funds-dialog md-input-container:not(.md-input-invalid).md-input-focused .md-input {
   border-color: $cobudget-blue;
 }
 
-.group-page__manage-funds-dialog ::-webkit-input-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
-.group-page__manage-funds-dialog :-moz-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
-.group-page__manage-funds-dialog ::-moz-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
-.group-page__manage-funds-dialog :-ms-input-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
+// duplicated because "when a browser doesn’t understand a selector, it invalidates the entire line of selectors (except IE 7)."
+// from https://css-tricks.com/snippets/css/style-placeholder-text/#comment-96772
+// .group-page__manage-funds-dialog ::-webkit-input-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
+// .group-page__manage-funds-dialog :-moz-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
+// .group-page__manage-funds-dialog ::-moz-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
+// .group-page__manage-funds-dialog :-ms-input-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
 
 .group-page__manage-funds-filler-text {
   font-size: 15px;
