@@ -224,8 +224,11 @@
   padding: 0 !important;
   font-weight: inherit;
   letter-spacing: inherit;
-  color: inherit;
   text-align: center;
+}
+
+.group-page__manage-funds-input-add {
+  color: $cobudget-green !important;
 }
 
 .group-page__manage-funds-dialog md-input-container:not(.md-input-invalid).md-input-focused .md-input {
@@ -243,10 +246,6 @@
   font-size: 15px;
   font-weight: 400;
   letter-spacing: normal;
-}
-
-.group-page__manage-funds-total-amount {
-  color: $cobudget-green;
 }
 
 .group-page__manage-funds-total-label {
