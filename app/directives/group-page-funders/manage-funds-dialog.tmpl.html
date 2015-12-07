@@ -36,36 +36,39 @@
       </div>
     </div>
 
-    <div class="group-page__manage-funds-calculation">
-      <div ng-if="mode == 'add'">
-        <div>
-          <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance() | currency : group.currencySymbol : 2 }}</span>
-          <span class="group-page__manage-funds-operator">+</span>
-          <md-input-container class="group-page__manage-funds-input-container" md-no-float>
-            <input
-              class="group-page__manage-funds-input"
-              type="number"
-              step="any"
-              ng-model="formData.allocationAmount"
-              ng-change="normalizeAllocationAmount()"
-              ng-keypress="normalizeAllocationAmount()"
-            >
-          </md-input-container>
-        </div>
-        <div class="group-page__manage-funds-calculation-newline"></div>
-        <div>
-          <span class="group-page__manage-funds-operator">=</span>
-          <span class="group-page__manage-funds-total-amount">
-            {{ (formData.allocationAmount || 0) + managedMembership.balance() | currency : group.currencySymbol : 2}}
-          </span>
-          <span class="group-page__manage-funds-total-label">total</span>
-        </div>
+    <div class="group-page__manage-funds-calculation" ng-if="mode == 'add'">
+      <div>
+        <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance() | currency : group.currencySymbol : 2 }}</span>
+        <span class="group-page__manage-funds-operator">+</span>
+        <md-input-container class="group-page__manage-funds-input-container" md-no-float>
+          <input
+            class="group-page__manage-funds-input"
+            type="number"
+            step="any"
+            ng-model="formData.allocationAmount"
+            ng-change="normalizeAllocationAmount()"
+            ng-keypress="normalizeAllocationAmount()"
+          >
+        </md-input-container>
       </div>
+      <div class="group-page__manage-funds-calculation-newline"></div>
+      <div>
+        <span class="group-page__manage-funds-operator">=</span>
+        <span class="group-page__manage-funds-total-amount">
+          {{ (formData.allocationAmount || 0) + managedMembership.balance() | currency : group.currencySymbol : 2}}
+        </span>
+        <span class="group-page__manage-funds-total-label">total</span>
+      </div>
+    </div>
 
-      <div ng-if="mode == 'change'">
+    <div class="group-page__manage-funds-calculation" ng-if="mode == 'change'">
+      <div>
         <span class="group-page__manage-funds-filler-text">Change from</span>
         <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance() | currency : group.currencySymbol : 2}}</span>
         <span class="group-page__manage-funds-filler-text">to</span>
+      </div>
+      <div class="group-page__manage-funds-calculation-newline"></div>
+      <div>
         <md-input-container class="group-page__manage-funds-input-container" md-no-float>
           <input
             class="group-page__manage-funds-input"
@@ -76,9 +79,11 @@
             ng-keypress="normalizeNewBalance()"
           >
         </md-input-container>
-        <span class="group-page__manage-funds-filler-text">total</span>
+        <span class="group-page__manage-funds-total-label">total</span>
       </div>
     </div>
+  </div>
+
   </md-dialog-content>
 
   <div class="md-actions" layout="row">
