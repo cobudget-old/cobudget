@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 describe MembershipsController, :type => :controller do
-  def parsed(response)
-    JSON.parse(response.body)
-  end
-
   describe "#index" do
     context "user member of group" do
       before do
@@ -40,6 +36,46 @@ describe MembershipsController, :type => :controller do
     end
   end
 
+  describe "#show" do
+    context "user member of group" do
+      before do
+        make_user_group_member
+        request.headers.merge!(user.create_new_auth_token)
+        @membership = create(:membership, group: group)
+        get :show, id: @membership.id
+      end
+
+      it "returns http status success" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns specified membership as json" do
+        expect(parsed(response)["memberships"][0]["id"]).to eq(@membership.id)
+      end
+    end
+
+    context "user not member of group" do
+      before do
+        make_user_group_member
+        request.headers.merge!(user.create_new_auth_token)
+        @membership = create(:membership)
+        get :show, id: @membership.id
+      end
+
+      it "returns http status forbidden" do
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    context "user not logged in" do
+      it "returns http status unauthorized" do
+        membership = make_user_group_member
+        get :show, id: membership.id
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
   describe "#my_memberships" do
     context "user logged in" do
       before do
@@ -47,7 +83,7 @@ describe MembershipsController, :type => :controller do
         create_list(:membership, 8)
         create_list(:membership, 1, member: user, archived_at: DateTime.now.utc - 5.days)
         request.headers.merge!(user.create_new_auth_token)
-        get :my_memberships        
+        get :my_memberships
       end
 
       it "returns http status success" do
@@ -82,7 +118,7 @@ describe MembershipsController, :type => :controller do
 
       it "returns http status ok" do
         expect(response).to have_http_status(:ok)
-      end 
+      end
 
       it "sets user's archived_at to current time" do
         expect(@membership.archived_at).to be_truthy

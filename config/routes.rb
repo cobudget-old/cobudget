@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :allocations, only: [:index] do
+    resources :allocations, only: [:index, :create] do
       collection do
         post :upload
       end
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
     resources :comments, only: [:index, :create]
 
-    resources :memberships, only: [:index, :update] do
+    resources :memberships, only: [:index, :show, :update] do
       collection do
         get :my_memberships
       end
@@ -42,6 +42,6 @@ Rails.application.routes.draw do
 
     resources :contributions, only: [:index, :create]
   end
-  
+
   root to: redirect('/docs')
 end
