@@ -36,7 +36,7 @@
 
 .bucket-page__progress-bar-secondary {
   position: absolute;
-  height: 100%; 
+  height: 100%;
   left: 0;
   background: $cobudget-green;
   z-index: 1;
@@ -55,7 +55,7 @@
 }
 
 .bucket-page__progress-unit {
-  display: block;  
+  display: block;
   @include fontSmall;
   color: $grey-on-white;
 }
@@ -74,8 +74,8 @@
   padding-bottom: 0;
 }
 
-.bucket-page input[type=number]::-webkit-inner-spin-button, 
+.bucket-page input[type=number]::-webkit-inner-spin-button,
 .bucket-page input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none; 
-  margin: 0; 
+  -webkit-appearance: none;
+  margin: 0;
 }
