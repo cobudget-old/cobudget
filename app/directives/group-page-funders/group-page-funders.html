@@ -50,6 +50,20 @@
               </md-button>
             </md-menu-item>
 
+            <md-menu-item>
+              <md-button ng-click="toggleMemberAdmin(funderMembership)">
+                <div layout="row" layout-align="start center">
+                  <ng-md-icon
+                    icon="mail"
+                    layout="column"
+                    layout-align="center center"
+                    class="group-page__funder-more-menu-item-icon"
+                  ></ng-md-icon>
+                  <span md-menu-align-target class="group-page__funder-more-menu-item-label">Invite Again</span>
+                </div>
+              </md-button>
+            </md-menu-item>
+
             <md-menu-item ng-if="funderMembership.id != membership.id">
               <md-button ng-click="removeMembership(funderMembership)">
                 <div layout="row" layout-align="start center">
