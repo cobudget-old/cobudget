@@ -17,4 +17,3 @@ global.cobudgetApp.factory 'MembershipModel', (BaseModel) ->
 
     archive: ->
       @remote.postMember(@id, 'archive')
-      

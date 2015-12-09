@@ -31,9 +31,53 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               membership.archive().then ->
                 LoadBar.stop()
                 Dialog.alert(
-                  title: 'Success!' 
+                  title: 'Success!'
                   content: "#{$scope.member.name} was removed from #{$scope.group.name}"
                 ).then ->
                   $window.location.reload()
+
+      $scope.openManageFundsDialog = (funderMembership) ->
+        Dialog.custom
+          scope: $scope
+          template: require('./../../directives/group-page-funders/manage-funds-dialog.tmpl.html')
+          controller: ($mdDialog, $scope, Records) ->
+            $scope.formData = {}
+            $scope.mode = 'add'
+            $scope.managedMembership = funderMembership
+            $scope.managedMember = funderMembership.member()
+
+            $scope.setMode = (mode) ->
+              $scope.mode = mode
+
+            $scope.normalizeAllocationAmount = ->
+              allocationAmount = $scope.formData.allocationAmount || 0
+              if allocationAmount + $scope.managedMembership.balance() < 0
+                $scope.formData.allocationAmount = -$scope.managedMembership.balance()
+
+            $scope.normalizeNewBalance = ->
+              if $scope.formData.newBalance < 0
+                $scope.formData.newBalance = 0
+
+            $scope.isValidForm = ->
+              ($scope.mode == 'add' && $scope.formData.allocationAmount) || ($scope.mode == 'change' && $scope.formData.newBalance)
+
+            $scope.cancel = ->
+              $mdDialog.cancel()
+
+            $scope.createAllocation = ->
+              if $scope.mode == 'add'
+                amount = $scope.formData.allocationAmount
+              if $scope.mode == 'change'
+                amount = $scope.formData.newBalance - $scope.managedMembership.balance()
+              params = {groupId: $scope.group.id, userId: $scope.managedMember.id, amount: amount }
+              allocation = Records.allocations.build(params)
+              allocation.save()
+                .then (res) ->
+                  Records.memberships.findOrFetchById($scope.managedMembership.id)
+                  Dialog.alert(title: 'Success!')
+                .catch (err) ->
+                  Dialog.alert(title: 'Error!')
+                .finally ->
+                  $scope.cancel()
 
       return

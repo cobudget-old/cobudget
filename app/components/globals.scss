@@ -1,0 +1,21 @@
+md-toast {
+  position: fixed;
+}
+
+md-toast > span.ng-binding {
+  @include fontTiny;
+}
+
+md-toast > button.md-button {
+  color: $cobudget-jade;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield !important;
+}
