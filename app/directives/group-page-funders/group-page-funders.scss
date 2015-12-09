@@ -235,13 +235,6 @@
   border-color: $cobudget-blue;
 }
 
-// duplicated because "when a browser doesn’t understand a selector, it invalidates the entire line of selectors (except IE 7)."
-// from https://css-tricks.com/snippets/css/style-placeholder-text/#comment-96772
-// .group-page__manage-funds-dialog ::-webkit-input-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
-// .group-page__manage-funds-dialog :-moz-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
-// .group-page__manage-funds-dialog ::-moz-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
-// .group-page__manage-funds-dialog :-ms-input-placeholder { font-size: 15px; font-weight: normal; letter-spacing: normal; }
-
 .group-page__manage-funds-filler-text {
   font-size: 15px;
   font-weight: 400;
