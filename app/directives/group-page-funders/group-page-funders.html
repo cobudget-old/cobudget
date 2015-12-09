@@ -1,16 +1,17 @@
 <div class="group-page__funders-content">
   <md-list class="group-page__funders">
     <md-list-item ng-repeat="funderMembership in group.memberships()">
-      <div layout="row" flex class="group-page__funder-container">
-        <div class="group-page__funder-name-container" layout="row" layout-align="start center" flex>
-          <div class="group-page__funder-avatar" layout="column" layout-align="center center">
-            <div>{{ funderMembership.member().name[0] | uppercase }}</div>
-          </div>
+      <div layout="row" layout-align="start center" flex class="group-page__funder-container">
+        <div class="group-page__funder-avatar" layout="column" layout-align="center center">
+          <div>{{ funderMembership.member().name[0] | uppercase }}</div>
+        </div>
+
+        <div layout="column" layout-align="center start" flex>
           <span class="group-page__funder-name">{{ funderMembership.member().name }}</span>
           <span class="group-page__funder-admin-label" ng-if="funderMembership.isAdmin">(admin)</span>
         </div>
 
-        <div layout="column" layout-align="center end" flex="20">
+        <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
           <span class="group-page__funder-balance">{{ funderMembership.balance() | currency : group.currencySymbol : 0 }}</span>
         </div>
 

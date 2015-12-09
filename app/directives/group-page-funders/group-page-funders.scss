@@ -5,9 +5,13 @@
   padding-right: 16px;
 }
 
+.group-page__funder-container {
+  margin-bottom: 10px;
+}
+
 .group-page__funder-avatar {
-  width: 25px;
-  height: 25px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background: rgba(0,0,0,0.27);
   color: white;
@@ -16,21 +20,25 @@
 }
 
 .group-page__funder-name {
+  width: 100%;
   @include truncatedText;
-  @include fontMedLarge;
+  @include fontMedium;
+}
+
+.group-page__funder-balance-container {
+  margin-left: 15px;
 }
 
 .group-page__funder-balance {
-  @include fontLarge;
+  font-size: 19px;
   color: $cobudget-green;
+  font-weight: 500;
 }
 
 .group-page__funder-admin-label {
+  margin-top: 3px;
   color: $grey-on-white;
-  font-size: 12px;
-  margin-left: 5px;
-  top: 1px;
-  position: relative;
+  font-size: 11px;
 }
 
 .group-page__funder-more-menu {
@@ -45,6 +53,7 @@
 
 .group-page__funder-more-button-icon {
   width: 15px;
+  fill: rgba(0,0,0,0.40);
 }
 
 // funder more menu
