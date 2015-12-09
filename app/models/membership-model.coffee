@@ -15,5 +15,8 @@ global.cobudgetApp.factory 'MembershipModel', (BaseModel) ->
     balance: ->
       parseFloat(@totalAllocations) - parseFloat(@totalContributions)
 
+    isPending: ->
+      @member().confirmationToken != null
+
     archive: ->
       @remote.postMember(@id, 'archive')

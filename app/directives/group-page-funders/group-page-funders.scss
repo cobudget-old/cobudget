@@ -25,6 +25,16 @@
   @include fontMedium;
 }
 
+.group-page__funder-invited-icon {
+  fill: rgba(0,0,0,0.5);
+}
+
+.group-page__funder-invited-label {
+  position: relative;
+  bottom: 4px;
+  margin-left: 1px;
+}
+
 .group-page__funder-balance-container {
   margin-left: 15px;
 }

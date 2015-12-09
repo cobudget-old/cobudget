@@ -8,7 +8,11 @@
 
         <div layout="column" layout-align="center start" flex>
           <span class="group-page__funder-name">{{ funderMembership.member().name }}</span>
-          <span class="group-page__funder-admin-label" ng-if="funderMembership.isAdmin">(admin)</span>
+          <span class="group-page__funder-admin-label" ng-if="!funderMembership.isPending() && funderMembership.isAdmin">(admin)</span>
+          <span class="group-page__funder-admin-label" ng-if="funderMembership.isPending()">
+            <ng-md-icon icon="mail" size="17" class="group-page__funder-invited-icon"></ng-md-icon>
+            <span class="group-page__funder-invited-label">Invited</span>
+          </span>
         </div>
 
         <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
