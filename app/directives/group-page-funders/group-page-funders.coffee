@@ -5,20 +5,23 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
     restrict: 'E'
     template: require('./group-page-funders.html')
     replace: true
-    controller: (Dialog, LoadBar, Records, $scope, $window) ->
+    controller: (Dialog, LoadBar, Records, $scope, Toast, $window) ->
 
       $scope.toggleMemberAdmin = (membership) ->
         membership.isAdmin = !membership.isAdmin
         membership.save()
 
       $scope.inviteAgain = (membership) ->
-        alert('i was called')
-        Records.memberships.reinvite(membership)
-          .then (res) ->
-            console.log('res: ', res)
-            alert('it work')
-          .catch ->
-            alert('it not work')
+        member = membership.member()
+        Dialog.confirm({
+          content: "This will send another invitation to #{member.name} at #{member.email}",
+          ok: 'send'
+        }).then ->
+          Records.memberships.reinvite(membership)
+            .then ->
+              Toast.show('Invitation sent!')
+            .catch ->
+              Dialog.alert({title: 'Error!'})
 
       $scope.removeMembership = (membership) ->
         Dialog.custom
