@@ -76,6 +76,78 @@ describe MembershipsController, :type => :controller do
     end
   end
 
+  describe "#reinvite" do
+    before do
+      @membership_to_reinvite = create(:membership, group: group)
+      @user_to_reinvite = @membership_to_reinvite.member
+    end
+
+    after do
+      ActionMailer::Base.deliveries.clear
+    end
+
+    context "current_user signed in" do
+      before do
+        request.headers.merge!(user.create_new_auth_token)
+      end
+
+      context "current_user is admin of user's group" do
+        before do
+          create(:membership, member: user, group: group, is_admin: true)
+          post :reinvite, {id: @membership_to_reinvite.id}
+          @user_to_reinvite.reload
+        end
+
+        it "returns http status 'success'" do
+          expect(response).to have_http_status(:success)
+        end
+
+        it "creates a new confirmaton token for the user" do
+          expect(@user_to_reinvite.confirmation_token).to be_truthy
+        end
+
+        it "resends invite email to specified user" do
+          sent_emails = ActionMailer::Base.deliveries
+          expect(sent_emails.length).to eq(1)
+          expect(sent_emails.first.to).to eq([@user_to_reinvite.email])
+        end
+
+        it "returns the user as json" do
+          expect(parsed(response)["users"][0]["email"]).to eq(@user_to_reinvite.email)
+        end
+      end
+
+      context "current_user not admin of user's group" do
+        before do
+          post :reinvite, {id: @membership_to_reinvite.id}
+          @user_to_reinvite.reload
+        end
+
+        it "returns http status forbidden" do
+          expect(response).to have_http_status(:forbidden)
+        end
+
+        it "does not create a new confirmation token for the user" do
+          expect(@user_to_reinvite.confirmation_token).to be_nil
+        end
+
+        it "does not send invite email to specified user" do
+          expect(ActionMailer::Base.deliveries.length).to eq(0)
+        end
+      end
+    end
+
+    context "current_user signed in" do
+      before do
+        post :reinvite, {id: @membership_to_reinvite.id}
+      end
+
+      it "returns http status 'unauthorized'" do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
   describe "#my_memberships" do
     context "user logged in" do
       before do

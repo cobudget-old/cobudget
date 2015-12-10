@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
@@ -30,11 +32,11 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_confirmation_token(email: )
-    require 'securerandom'
     tmp_name = email[/[^@]+/]
-    confirmation_token = SecureRandom.urlsafe_base64.to_s
     tmp_password = SecureRandom.hex
-    self.create(name: tmp_name, email: email, password: tmp_password, confirmation_token: confirmation_token)
+    new_user = self.create(name: tmp_name, email: email, password: tmp_password)
+    new_user.generate_confirmation_token!
+    new_user
   end
 
   def is_admin_for?(group)
@@ -51,6 +53,10 @@ class User < ActiveRecord::Base
 
   def has_set_up_account?
     confirmation_token.nil?
+  end
+
+  def generate_confirmation_token!
+    self.update(confirmation_token: SecureRandom.urlsafe_base64.to_s)
   end
 
   private

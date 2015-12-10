@@ -25,6 +25,19 @@ class MembershipsController < AuthenticatedController
     render json: Membership.where(member_id: current_user.id).active
   end
 
+  api :POST, '/memberships/:id/reinvite'
+  def reinvite
+    membership = Membership.find(params[:id])
+    if current_user.is_admin_for?(membership.group)
+      member, group = membership.member, membership.group
+      member.generate_confirmation_token!
+      UserMailer.invite_email(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance).deliver_later
+      render json: [membership], status: 200
+    else
+      render nothing: true, status: 403
+    end
+  end
+
   def update
     membership = Membership.find(params[:id])
     membership.update(membership_params)
