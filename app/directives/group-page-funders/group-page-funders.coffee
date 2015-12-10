@@ -5,11 +5,20 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
     restrict: 'E'
     template: require('./group-page-funders.html')
     replace: true
-    controller: (Dialog, LoadBar, $scope, $window) ->
+    controller: (Dialog, LoadBar, Records, $scope, $window) ->
 
       $scope.toggleMemberAdmin = (membership) ->
         membership.isAdmin = !membership.isAdmin
         membership.save()
+
+      $scope.inviteAgain = (membership) ->
+        alert('i was called')
+        Records.memberships.reinvite(membership)
+          .then (res) ->
+            console.log('res: ', res)
+            alert('it work')
+          .catch ->
+            alert('it not work')
 
       $scope.removeMembership = (membership) ->
         Dialog.custom
