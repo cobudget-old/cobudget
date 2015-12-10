@@ -31,7 +31,7 @@ class MembershipsController < AuthenticatedController
     if current_user.is_admin_for?(membership.group)
       member, group = membership.member, membership.group
       member.generate_confirmation_token!
-      UserMailer.invite_email(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance).deliver_later
+      UserMailer.invite_email(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance.to_f).deliver_later
       render json: [membership], status: 200
     else
       render nothing: true, status: 403
