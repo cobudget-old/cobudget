@@ -13,9 +13,9 @@ global.cobudgetApp.factory 'Dialog', ($mdDialog) ->
 
     confirm: (args = {}) ->
       confirm = $mdDialog.confirm
-        title: args.title 
+        title: args.title
         content: args.content
-        ok: args.confirm || 'ok'
+        ok: args.ok || 'ok'
         cancel: args.cancel || 'cancel'
       $mdDialog.show(confirm)
 

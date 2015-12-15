@@ -19,3 +19,7 @@ md-toast > button.md-button {
 input[type=number] {
   -moz-appearance: textfield !important;
 }
+
+md-dialog-content {
+  word-wrap: break-word;
+}
