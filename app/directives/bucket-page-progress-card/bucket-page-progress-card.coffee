@@ -20,7 +20,7 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
 
       $scope.normalizeContributionAmount = ->
         if $scope.newContribution.amount > maxAllowableContribution
-          $scope.newContribution.amount = maxAllowableContribution
+          $scope.newContribution.amount = +maxAllowableContribution.toFixed(2)
 
       $scope.submitContribution = ->
         $scope.newContribution.save().then ->
