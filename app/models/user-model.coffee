@@ -10,7 +10,8 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
       'email',
       'subscribedToPersonalActivity',
       'subscribedToDailyDigest',
-      'subscribedToParticipantActivity'
+      'subscribedToParticipantActivity',
+      'confirmationToken'
     ]
 
     relationships: ->
@@ -26,4 +27,4 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
 
     isMemberOf: (group) ->
       _.find @memberships(), (membership) ->
-        membership.groupId == group.id 
+        membership.groupId == group.id

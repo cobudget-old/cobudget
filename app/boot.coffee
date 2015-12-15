@@ -21,13 +21,14 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
           $location.path('/')
           Dialog.alert(title: 'error!', content: 'invalid credentials!')
           LoadBar.stop()
-          
       if data.groups && _.every(data.groups, {'initialized': true})
         groupId = data.groups[0].id
         $location.path("/groups/#{groupId}")
         Toast.show('Welcome to Cobudget!')
         if CurrentUser().utcOffset != moment().utcOffset()
           Records.users.updateProfile(utc_offset: moment().utcOffset())
+        if CurrentUser().isPendingConfirmation
+          Records.users.updateProfile(confirmationToken: null)
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     console.log('$stateChangeError signal fired!')
