@@ -1,6 +1,6 @@
 class UsersController < AuthenticatedController
 
-  skip_before_action :authenticate_user!, except: [:create, :update_profile]
+  skip_before_action :authenticate_user!, except: [:update_profile]
 
   api :POST, '/users/confirm_account'
   def confirm_account

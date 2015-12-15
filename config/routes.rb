@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
       member do
         post :archive
+        post :reinvite
       end
     end
 
