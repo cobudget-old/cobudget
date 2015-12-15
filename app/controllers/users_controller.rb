@@ -22,7 +22,7 @@ class UsersController < AuthenticatedController
       render nothing: true
     else
       render status: 409, nothing: true
-    end    
+    end
   end
 
   api :POST, '/users/update_profile'
@@ -61,11 +61,12 @@ class UsersController < AuthenticatedController
   private
     def user_params
       params.require(:user).permit(
-        :email, 
-        :utc_offset, 
-        :subscribed_to_personal_activity, 
-        :subscribed_to_daily_digest, 
-        :subscribed_to_participant_activity 
+        :email,
+        :utc_offset,
+        :subscribed_to_personal_activity,
+        :subscribed_to_daily_digest,
+        :subscribed_to_participant_activity,
+        :confirmation_token
       )
     end
 end
