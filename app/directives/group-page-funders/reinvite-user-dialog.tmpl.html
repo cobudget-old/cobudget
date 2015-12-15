@@ -1,0 +1,9 @@
+<md-dialog aria-label="reinvite user dialog">
+  <md-dialog-content class="sticky-container group-page__reinvite-user-dialog-content">
+    This will send another invitation to <b>{{member.name}}</b> at <b>{{member.email}}</b>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <md-button ng-click="cancel()">cancel</md-button>
+    <md-button ng-click="proceed()">send</md-button>
+  </div>
+</md-dialog>

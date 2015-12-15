@@ -12,16 +12,20 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
         membership.save()
 
       $scope.inviteAgain = (membership) ->
-        member = membership.member()
-        Dialog.confirm({
-          content: "This will send another invitation to #{member.name} at #{member.email}",
-          ok: 'send'
-        }).then ->
-          Records.memberships.reinvite(membership)
-            .then ->
-              Toast.show('Invitation sent!')
-            .catch ->
-              Dialog.alert({title: 'Error!'})
+        Dialog.custom
+          template: require('./reinvite-user-dialog.tmpl.html')
+          scope: $scope
+          controller: (Dialog, $mdDialog, Records, $scope, Toast) ->
+            $scope.member = membership.member()
+            $scope.cancel = ->
+              $mdDialog.cancel()
+            $scope.proceed = ->
+              Records.memberships.reinvite(membership)
+                .then ->
+                  $scope.cancel()
+                  Toast.show('Invitation sent!')
+                .catch ->
+                  Dialog.alert({title: 'Error!'})
 
       $scope.removeMembership = (membership) ->
         Dialog.custom
