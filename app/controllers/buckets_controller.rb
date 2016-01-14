@@ -37,11 +37,6 @@ class BucketsController < AuthenticatedController
     end
   end
 
-  api :DELETE, '/buckets/:id', 'Deletes a bucket'
-  def destroy
-    destroy_resource
-  end
-
   api :POST, '/buckets/:id?target&funding_closes_at'
   def open_for_funding
     bucket = Bucket.find(params[:id])
