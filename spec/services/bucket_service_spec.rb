@@ -8,7 +8,7 @@ describe "BucketService" do
   describe "#send_bucket_live_emails(bucket:)" do
     before do
       make_user_group_member
-      bucket = create(:live_bucket, user: user, group: group)
+      bucket = create(:bucket, user: user, group: group, status: "live")
       @bucket_author = bucket.user
 
       # create member with $100.00, who has subscribed to participant activity + has commented on bucket
@@ -40,7 +40,7 @@ describe "BucketService" do
     it "sends emails to all bucket participants subscribed to participant activity, whose membership in the group is active, except bucket author" do
       expect(@emails.length).to eq(2)
       expect(@email_recipients).to include(@subscribed_participant_with_balance.email)
-      expect(@email_recipients).to include(@subscribed_participant_without_balance.email)      
+      expect(@email_recipients).to include(@subscribed_participant_without_balance.email)
 
       expect(@email_recipients).not_to include(@bucket_author.email)
       expect(@email_recipients).not_to include(@unsubscribed_participant.email)
@@ -62,7 +62,7 @@ describe "BucketService" do
   describe "#send_bucket_funded_emails" do
     before do
       make_user_group_member
-      @bucket = create(:funded_bucket, user: user, group: group)
+      @bucket = create(:bucket, user: user, group: group, status: "funded")
       @bucket_author = @bucket.user
 
       # create member with $100.00, who has subscribed to participant activity + has commented on bucket
@@ -123,7 +123,7 @@ describe "BucketService" do
   describe "#send_bucket_created_emails(bucket:)" do
     it "sends emails to all active group members, except creator" do
       make_user_group_member
-      bucket = create(:draft_bucket, user: user, group: group)
+      bucket = create(:bucket, user: user, group: group, status: "draft")
       create_list(:membership, 5, group: group)
       create_list(:archived_membership, 2, group: group)
       BucketService.send_bucket_created_emails(bucket: bucket)
