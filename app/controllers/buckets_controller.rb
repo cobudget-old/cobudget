@@ -1,6 +1,6 @@
 class BucketsController < AuthenticatedController
   api :GET, '/buckets?group_id'
-  def index 
+  def index
     group = Group.find(params[:group_id])
     render json: group.buckets
   end
@@ -17,7 +17,7 @@ class BucketsController < AuthenticatedController
     if bucket.save
       # BucketService.send_bucket_created_emails(bucket: bucket)
       render json: [bucket]
-    else 
+    else
       render json: {
         errors: bucket.errors.full_messages
       }, status: 400
@@ -27,6 +27,7 @@ class BucketsController < AuthenticatedController
   api :PATCH, '/buckets/:id', 'Update a bucket'
   def update
     bucket = Bucket.find(params[:id])
+    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user)
     bucket.update_attributes(bucket_params_update)
     if bucket.save
       render json: [bucket]

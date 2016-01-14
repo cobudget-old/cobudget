@@ -47,7 +47,7 @@ class Bucket < ActiveRecord::Base
   end
 
   def description_as_markdown
-    renderer = Redcarpet::Render::HTML.new 
+    renderer = Redcarpet::Render::HTML.new
     markdown = Redcarpet::Markdown.new(renderer, extensions = {})
     markdown.render(description).html_safe
   end
@@ -75,6 +75,10 @@ class Bucket < ActiveRecord::Base
   def author_name
     membership = user.membership_for(group)
     membership.archived? ? "[removed user]" : user.name
+  end
+
+  def is_editable_by?(member)
+    member.is_admin_for?(group) || user == member
   end
 
   private
