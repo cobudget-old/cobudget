@@ -6,30 +6,68 @@ describe UsersController, :type => :controller do
   end
 
   after do
-    ActionMailer::Base.deliveries.clear    
+    ActionMailer::Base.deliveries.clear
   end
 
   describe "#confirm_account" do
     context "active confirmation token" do
       before do
         @user = User.create_with_confirmation_token(email: Faker::Internet.email)
-        request_params = {
+        @request_params = {
           name: "new name",
           password: "password",
           confirmation_token: @user.confirmation_token
         }
-        post :confirm_account, request_params
-        @parsed_response = JSON.parse(response.body)
-        @user.reload
       end
 
-      it "updates user with specified name, and password, and clears confirmation token" do
-        expect(@user.name).to eq("new name")
-        expect(@user.confirmation_token).to be_nil
+      context "name and password specified" do
+        before do
+          post :confirm_account, @request_params
+          @parsed_response = JSON.parse(response.body)
+          @user.reload
+        end
+
+        it "updates user with specified name, and password, and clears confirmation token" do
+          expect(@user.name).to eq("new name")
+          expect(@user.confirmation_token).to be_nil
+        end
+
+        it "returns user as json" do
+          expect(@parsed_response["users"][0]["id"]).to eq(@user.id)
+        end
       end
 
-      it "returns user as json" do
-        expect(@parsed_response["users"][0]["id"]).to eq(@user.id)
+      context "password not specified" do
+        before do
+          @request_params[:password] = nil
+          post :confirm_account, @request_params
+          @user.reload
+        end
+
+        it "returns http status bad_request" do
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "does not update user" do
+          expect(@user.name).not_to eq("new name")
+          expect(@user.confirmation_token).not_to be_nil
+        end
+      end
+
+      context "name not specified" do
+        before do
+          @request_params[:name] = nil
+          post :confirm_account, @request_params
+        end
+
+        it "returns http status bad_request" do
+          expect(response).to have_http_status(:bad_request)
+        end
+
+        it "does not update user" do
+          expect(@user.name).not_to eq("password")
+          expect(@user.confirmation_token).not_to be_nil
+        end
       end
     end
 
@@ -52,6 +90,21 @@ describe UsersController, :type => :controller do
 
       it "does not update user" do
         expect(@user.name).not_to eq("new name")
+      end
+    end
+
+    context "no confirmation token" do
+      before do
+        request_params = {
+          name: "new name",
+          password: "password",
+          confirmation_token: nil
+        }
+        post :confirm_account, request_params
+      end
+
+      it "returns http status bad_request" do
+        expect(response).to have_http_status(:bad_request)
       end
     end
   end
@@ -138,7 +191,7 @@ describe UsersController, :type => :controller do
     end
 
     context "user not signed in" do
-      before do 
+      before do
         post :update_profile
       end
 
@@ -160,7 +213,7 @@ describe UsersController, :type => :controller do
         user.reload
         expect(user.reset_password_token).to be_truthy
       end
-      
+
       it "sends them a reset password email with link to reset_password page containing their reset_password_token" do
         post :request_password_reset, {email: user.email}
         @sent_email = ActionMailer::Base.deliveries.first

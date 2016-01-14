@@ -4,6 +4,7 @@ class UsersController < AuthenticatedController
 
   api :POST, '/users/confirm_account'
   def confirm_account
+    render status: 400, nothing: true and return unless valid_confirm_account_params?
     if user = User.find_by_confirmation_token(params[:confirmation_token])
       user.update(name: params[:name], password: params[:password], confirmation_token: nil)
       render json: [user]
@@ -68,5 +69,9 @@ class UsersController < AuthenticatedController
         :subscribed_to_participant_activity,
         :confirmation_token
       )
+    end
+
+    def valid_confirm_account_params?
+      params[:confirmation_token].present? && params[:name].present? && params[:password].present?
     end
 end

@@ -16,6 +16,7 @@ module MyLetDeclarations
   # HTTP status codes
   let(:success) { 200 }
   let(:created) { 201 }
+  let(:bad_request) { 400 }
   let(:unauthorized) { 401 }
   let(:forbidden) { 403 }
   let(:conflict) { 409 }
