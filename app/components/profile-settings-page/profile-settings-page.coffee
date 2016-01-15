@@ -4,6 +4,13 @@ module.exports =
       $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-  url: '/profile_settings'
+  url: '/profile_settings?previous_group_id'
   template: require('./profile-settings-page.html')
-  controller: ($scope) ->
+  controller: (CurrentUser, $location, $scope, $stateParams) ->
+
+    $scope.currentUser = CurrentUser()
+    previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
+
+    $scope.back = ->
+      $location.search('previous_group_id', null)
+      $location.path("/groups/#{previousGroupId}")
