@@ -1,9 +1,8 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'UserCan', ($location, $q, Records, Toast) ->
+global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toast) ->
   new class UserCan
-
     viewGroup: (group) ->
       validMemberships = Records.memberships.find({
         groupId: group.id,
@@ -13,6 +12,10 @@ global.cobudgetApp.factory 'UserCan', ($location, $q, Records, Toast) ->
 
     viewBucket: (bucket) ->
       @viewGroup(bucket.group())
+
+    editBucket: (bucket) ->
+      isBucketAuthor = bucket.userId == global.cobudgetApp.currentUserId
+      isBucketAuthor || CurrentUser().isAdminOf(bucket.group())
 
     viewAdminPanel: ->
       validMemberships = Records.memberships.find({
