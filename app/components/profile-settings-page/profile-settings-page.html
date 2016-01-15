@@ -17,7 +17,7 @@
     <form novalidate class="profile-settings-page__details-form" ng-submit="save()">
       <div class="profile-settings-page__input-container">
         <label class="profile-settings-page__input-label" for="name">NAME</label>
-        <input class="profile-settings-page__text-input" type="text" name="name" ng-model="currentUser.name" />
+        <input class="profile-settings-page__text-input" type="text" name="name" ng-model="currentUser.name" ng-change="changesMade = true"/>
       </div>
 
       <div class="profile-settings-page__input-container">

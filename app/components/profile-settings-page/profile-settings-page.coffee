@@ -11,6 +11,8 @@ module.exports =
     $scope.currentUser = CurrentUser()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
 
+    $scope.changesMade = false
+
     $scope.back = ->
       $location.search('previous_group_id', null)
       $location.path("/groups/#{previousGroupId}")

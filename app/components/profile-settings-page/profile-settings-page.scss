@@ -47,6 +47,9 @@
 
 .profile-settings-page__text-input:focus {
   outline: none;
+}
+
+.profile-settings-page__text-input.ng-dirty {
   border-color: $cobudget-light-blue;
 }
 
