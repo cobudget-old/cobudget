@@ -10,6 +10,9 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
       $scope.openSidenav = ->
         $rootScope.$broadcast('open sidenav')
 
+      $scope.openProfileSettings = ->
+        $location.path('/profile_settings')
+      
       $scope.openFeedbackForm = ->
         $window.location.href = 'https://docs.google.com/forms/d/1-_zDQzdMmq_WndQn2bPUEW2DZQSvjl7nIJ6YkvUcp0I/viewform?usp=send_form';
 
