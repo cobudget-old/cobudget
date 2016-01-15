@@ -11,27 +11,27 @@ describe "UserService" do
         oakland_6am_yesterday_in_utc = oakland_6am_today_in_utc - 1.day
 
         Timecop.freeze(oakland_6am_yesterday_in_utc - 1.hours) do
-          create(:draft_bucket, group: group)
-          create(:live_bucket, group: group)
-          create(:funded_bucket, group: group)
+          create(:bucket, group: group, status: "draft")
+          create(:bucket, group: group, status: "live")
+          create(:bucket, group: group, status: "funded")
         end
 
         Timecop.freeze(oakland_6am_yesterday_in_utc + 2.hours) do
-          @d1 = create(:draft_bucket, group: group)
-          @l1 = create(:live_bucket, group: group)
-          @f1 = create(:funded_bucket, group: group)
+          @d1 = create(:bucket, group: group, status: "draft")
+          @l1 = create(:bucket, group: group, status: "live")
+          @f1 = create(:bucket, group: group, status: "funded")
         end
 
         Timecop.freeze(oakland_6am_yesterday_in_utc + 3.hours) do
-          @d2 = create(:draft_bucket, group: group)
-          @l2 = create(:live_bucket, group: group)
-          @f2 = create(:funded_bucket, group: group)
+          @d2 = create(:bucket, group: group, status: "draft")
+          @l2 = create(:bucket, group: group, status: "live")
+          @f2 = create(:bucket, group: group, status: "funded")
         end
 
         Timecop.freeze(oakland_6am_today_in_utc + 1.hours) do
-          create(:draft_bucket, group: group)
-          create(:live_bucket, group: group)
-          create(:funded_bucket, group: group)
+          create(:bucket, group: group, status: "draft")
+          create(:bucket, group: group, status: "live")
+          create(:bucket, group: group, status: "funded")
         end
 
         @recent_activity = UserService.fetch_recent_activity_for(user: user)
@@ -51,17 +51,17 @@ describe "UserService" do
 
       it "returns all draft buckets created between 6am yesterday and 6am today (user's local time)" do
         expect(@recent_activity[0][:draft_buckets].length).to eq(2)
-        expect(@recent_activity[0][:draft_buckets]).to include(@d1, @d2) 
-      end 
+        expect(@recent_activity[0][:draft_buckets]).to include(@d1, @d2)
+      end
 
       it "returns all buckets that became live between 6am yesterday and 6am today (user's local time)" do
         expect(@recent_activity[0][:live_buckets].length).to eq(2)
-        expect(@recent_activity[0][:live_buckets]).to include(@l1, @l2) 
+        expect(@recent_activity[0][:live_buckets]).to include(@l1, @l2)
       end
 
       it "returns all buckets that became funded between 6am yesterday and 6am today (user's local time)" do
         expect(@recent_activity[0][:funded_buckets].length).to eq(2)
-        expect(@recent_activity[0][:funded_buckets]).to include(@f1, @f2) 
+        expect(@recent_activity[0][:funded_buckets]).to include(@f1, @f2)
       end
     end
 
@@ -79,15 +79,15 @@ describe "UserService" do
         group2 = membership2.group
 
         Timecop.freeze(oakland_6am_yesterday_in_utc + 2.hours) do
-          create(:draft_bucket, group: group1)
-          create(:live_bucket, group: group1)
-          create(:funded_bucket, group: group1)
+          create(:bucket, group: group1, status: "draft")
+          create(:bucket, group: group1, status: "live")
+          create(:bucket, group: group1, status: "funded")
         end
 
         Timecop.freeze(oakland_6am_yesterday_in_utc + 3.hours) do
-          create(:draft_bucket, group: group2)
-          create(:live_bucket, group: group2)
-          create(:funded_bucket, group: group2)
+          create(:bucket, group: group2, status: "draft")
+          create(:bucket, group: group2, status: "live")
+          create(:bucket, group: group2, status: "funded")
         end
 
         @recent_activity = UserService.fetch_recent_activity_for(user: user)
@@ -112,15 +112,15 @@ describe "UserService" do
         group2 = membership2.group
 
         Timecop.freeze(oakland_6am_yesterday_in_utc + 2.hours) do
-          create(:draft_bucket, group: group1)
-          create(:live_bucket, group: group1)
-          create(:funded_bucket, group: group1)
+          create(:bucket, group: group1, status: "draft")
+          create(:bucket, group: group1, status: "live")
+          create(:bucket, group: group1, status: "funded")
         end
 
         Timecop.freeze(oakland_6am_yesterday_in_utc + 3.hours) do
-          create(:draft_bucket, group: group2)
-          create(:live_bucket, group: group2)
-          create(:funded_bucket, group: group2)
+          create(:bucket, group: group2, status: "draft")
+          create(:bucket, group: group2, status: "live")
+          create(:bucket, group: group2, status: "funded")
         end
 
         @recent_activity = UserService.fetch_recent_activity_for(user: user)

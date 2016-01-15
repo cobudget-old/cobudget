@@ -19,13 +19,13 @@ describe "DeliverDailyEmailDigest" do
       auckland_user_2 = create(:user, utc_offset: +720)
 
       # all are members of the same group
-      User.all.each { |user| create(:membership, group: group, member: user) }      
+      User.all.each { |user| create(:membership, group: group, member: user) }
 
       # and just an hour ago, there was some recent activity in the group!
       Timecop.freeze(@current_utc_time - 1.hour) do
-        create(:draft_bucket, group: group) # a new idea was made
-        create(:live_bucket, group: group) # an idea started its funding phase
-        create(:funded_bucket, group: group) # and a funding bucket became fully funded
+        create(:bucket, group: group, status: "draft") # a new idea was made
+        create(:bucket, group: group, status: "live") # an idea started its funding phase
+        create(:bucket, group: group, status: "fundedl") # and a funding bucket became fully funded
       end
     end
 
@@ -41,7 +41,7 @@ describe "DeliverDailyEmailDigest" do
         @sent_emails = ActionMailer::Base.deliveries
         @recipient_email_addresses = @sent_emails.map { |e| e.to.first }
 
-        expect(@recipient_email_addresses.length).to eq(2)      
+        expect(@recipient_email_addresses.length).to eq(2)
         expect(@recipient_email_addresses).to include(@parisian_user_1.email)
         expect(@recipient_email_addresses).to include(@parisian_user_2.email)
       end
@@ -61,7 +61,7 @@ describe "DeliverDailyEmailDigest" do
           @recipient_email_addresses = @sent_emails.map { |e| e.to.first }
 
           # only 1 email is sent to parisian user 2
-          expect(@recipient_email_addresses.length).to eq(1)    
+          expect(@recipient_email_addresses.length).to eq(1)
           expect(@recipient_email_addresses).not_to include(@parisian_user_1.email)
           expect(@recipient_email_addresses).to include(@parisian_user_2.email)
           # because the server has no idea that parisian user 1 is in paris
@@ -94,7 +94,7 @@ describe "DeliverDailyEmailDigest" do
         Timecop.freeze(@current_utc_time) do
           DeliverDailyEmailDigest.to_subscribers!
           sent_emails = ActionMailer::Base.deliveries
-          expect(sent_emails.length).to eq(0)    
+          expect(sent_emails.length).to eq(0)
         end
       end
     end
