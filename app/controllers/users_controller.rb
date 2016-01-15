@@ -45,6 +45,7 @@ class UsersController < AuthenticatedController
     end
   end
 
+  # ahhh fuck this is actually really sketchy
   api :POST, '/users/reset_password?password&confirm_password&reset_password_token'
   def reset_password
     if params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
