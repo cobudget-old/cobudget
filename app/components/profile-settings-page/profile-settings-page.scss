@@ -98,6 +98,7 @@
 
 .profile-settings-page__change-password-dialog {
   max-width: 90% !important;
+  max-height: none !important;
   width: 90% !important;
   background: $cobudget-light-grey;
 }
@@ -119,4 +120,10 @@
 .profile-settings-page__change-password-dialog-save-btn {
   background: $cobudget-light-blue !important;
   color: white !important;
+}
+
+.profile-settings-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
 }
