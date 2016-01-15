@@ -41,7 +41,9 @@ module.exports =
         controller: ($mdDialog, $scope, Toast) ->
           $scope.formParams = {}
           $scope.savePassword = ->
+            $scope.formSubmitted = true
             $scope.errors = {}
+
             Records.users.updatePassword($scope.formParams)
               .then (res) ->
                 Toast.show('Your new password was saved')
