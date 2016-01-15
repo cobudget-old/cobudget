@@ -40,8 +40,9 @@ module.exports =
         template: require('./change-password-dialog.tmpl.html')
         controller: ($mdDialog, $scope, Toast) ->
           $scope.formParams = {}
+          $scope.formSubmitted = false
+          
           $scope.savePassword = ->
-            $scope.formSubmitted = true
             $scope.errors = {}
 
             Records.users.updatePassword($scope.formParams)
