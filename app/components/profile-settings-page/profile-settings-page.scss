@@ -67,3 +67,28 @@
   margin-top: 10px !important;
   width: 100%;
 }
+
+// discard-changes-dialog
+
+.profile-settings-page__discard-changes-dialog {
+  background: $cobudget-light-grey;
+}
+
+.profile-settings-page__discard-changes-dialog-content {
+  padding: 20px !important;
+}
+
+.profile-settings-page__discard-changes-dialog-header {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.profile-settings-page__discard-changes-dialog-text {
+  @include fontMedLarge;
+  color: $grey-on-grey;
+}
+
+.profile-settings-page__discard-changes-dialog-btn {
+  color: $cobudget-light-blue;
+  font-size: 14px;
+}
