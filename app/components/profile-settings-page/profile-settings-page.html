@@ -14,23 +14,23 @@
   </md-toolbar>
 
   <md-content class="profile-settings-page__content">
-    <form novalidate class="profile-settings-page__form" ng-submit="save()">
+    <form novalidate class="profile-settings-page__details-form" ng-submit="save()">
       <div class="profile-settings-page__input-container">
-        <label for="name">NAME</label>
-        <input type="text" name="name" ng-model="currentUser.name" />
+        <label class="profile-settings-page__input-label" for="name">NAME</label>
+        <input class="profile-settings-page__text-input" type="text" name="name" ng-model="currentUser.name" />
       </div>
 
       <div class="profile-settings-page__input-container">
-        <label for="name">EMAIL</label>
-        <input type="email" name="email" ng-model="currentUser.email" />
+        <label class="profile-settings-page__input-label" for="name">EMAIL</label>
+        <input class="profile-settings-page__text-input" type="email" name="email" ng-model="currentUser.email" />
       </div>
 
       <div class="profile-settings-page__input-container">
-        <label>PASSWORD</label>
-        <a ng-click="openChangePasswordDialog()">CHANGE PASSWORD</a>
+        <label class="profile-settings-page__input-label">PASSWORD</label>
+        <a class="profile-settings-page__change-password-link" ng-click="openChangePasswordDialog()">CHANGE PASSWORD</a>
       </div>
 
-      <md-button class="md-raised md-primary">save</md-button>
+      <md-button class="md-raised md-primary profile-settings-page__save-btn">save</md-button>
     </form>
   </md-content>
 </div>

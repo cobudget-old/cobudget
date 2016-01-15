@@ -15,3 +15,52 @@
 .profile-settings-page__content {
   padding: 15px;
 }
+
+// details form
+
+.profile-settings-page__details-form {
+  position: relative;
+  max-width: 640px;
+  margin-top: 15px;
+}
+
+.profile-settings-page__input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-settings-page__input-label {
+  display: block;
+  margin-bottom: 15px;
+  color: $grey-on-white;
+}
+
+.profile-settings-page__text-input {
+  display: block;
+  border: 1px solid $grey-on-white;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.profile-settings-page__text-input:focus {
+  outline: none;
+  border-color: $cobudget-light-blue;
+}
+
+.profile-settings-page__change-password-link {
+  @include fontMedium;
+  font-weight: 500;
+  color: $grey-on-white;
+  border-bottom: 1px solid $grey-on-white;
+  margin-top: 5px;
+}
+
+.profile-settings-page__save-btn {
+  background: $cobudget-light-blue !important;
+  margin: 0 !important;
+  margin-top: 10px !important;
+  width: 100%;
+}
