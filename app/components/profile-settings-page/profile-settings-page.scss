@@ -43,6 +43,7 @@
   box-sizing: border-box;
   padding: 10px;
   border-radius: 2px;
+  background: inherit;
 }
 
 .profile-settings-page__text-input:focus {
@@ -110,7 +111,6 @@
 .profile-settings-page__change-password-dialog-content {
   padding: 20px !important;
 }
-
 
 .profile-settings-page__change-password-dialog-cancel-btn {
   color: $grey-on-grey;
