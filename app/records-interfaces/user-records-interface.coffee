@@ -1,4 +1,4 @@
-global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface, UserModel) -> 
+global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface, UserModel) ->
   class UserRecordsInterface extends BaseRecordsInterface
     model: UserModel
     constructor: (recordStore) ->
@@ -20,3 +20,6 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
 
     inviteToCreateGroup: (params) ->
       @remote.post('invite_to_create_group', params)
+
+    updatePassword: (params) ->
+      @remote.post('update_password', params)

@@ -39,8 +39,15 @@ module.exports =
         scope: $scope
         template: require('./change-password-dialog.tmpl.html')
         controller: ($mdDialog, $scope) ->
+          $scope.formParams = {}
           $scope.savePassword = ->
-            console.log('save was clicked!')
+            Records.users.updatePassword($scope.formParams)
+              .then (res, status) ->
+                console.log('res: ', res)
+                console.log('status: ', status)
+              .catch (err, status) ->
+                console.log('err: ', err)
+                console.log('status: ', status)
             $mdDialog.cancel()
           $scope.cancel = ->
             $mdDialog.cancel()
