@@ -14,3 +14,9 @@ module.exports =
     $scope.back = ->
       $location.search('previous_group_id', null)
       $location.path("/groups/#{previousGroupId}")
+
+    $scope.save = ->
+      console.log('save called!')
+
+    $scope.openChangePasswordDialog = ->
+      console.log('openChangePasswordDialog called!')
