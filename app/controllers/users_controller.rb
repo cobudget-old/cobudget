@@ -1,6 +1,6 @@
 class UsersController < AuthenticatedController
 
-  skip_before_action :authenticate_user!, except: [:update_profile]
+  skip_before_action :authenticate_user!, except: [:update_profile, :update_password]
 
   api :POST, '/users/confirm_account'
   def confirm_account
@@ -59,6 +59,21 @@ class UsersController < AuthenticatedController
     end
   end
 
+  api :POST, '/users/update_password?current_password&password&confirm_password'
+  def update_password
+    render status: 403, nothing: true and return unless valid_update_password_params?
+    if current_user.valid_password?(params[:current_password])
+      if params[:password] == params[:confirm_password]
+        current_user.update(password: params[:password])
+        render status: 200, nothing: true
+      else
+        render status: 400, json: { error: "passwords do not match" }
+      end
+    else
+      render status: 401, json: { error: "current_password is incorrect" }
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(
@@ -74,5 +89,9 @@ class UsersController < AuthenticatedController
 
     def valid_confirm_account_params?
       params[:confirmation_token].present? && params[:name].present? && params[:password].present?
+    end
+
+    def valid_update_password_params?
+      params[:current_password].present? && params[:password].present? && params[:confirm_password].present?
     end
 end

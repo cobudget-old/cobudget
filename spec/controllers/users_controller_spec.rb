@@ -315,4 +315,74 @@ describe UsersController, :type => :controller do
       end
     end
   end
+
+  describe "#update_password" do
+    let!(:user) { create(:user, password: "password") }
+
+    context "user logged in" do
+      before { request.headers.merge!(user.create_new_auth_token) }
+
+      context "correct current_password specified" do
+        let!(:params) { {current_password: "password"} }
+        let!(:old_encrypted_password) { user.encrypted_password }
+
+        context "password and confirm_password match" do
+          before do
+            params.merge!({password: "420blazeit", confirm_password: "420blazeit"})
+            post :update_password, params
+            user.reload
+          end
+
+          it "returns http status ok" do
+            expect(response).to have_http_status(:ok)
+          end
+
+          it "updates the users password" do
+            expect(user.encrypted_password).not_to eq(old_encrypted_password)
+          end
+        end
+
+        context "password and confirm_password don't match" do
+          before do
+            params.merge!({password: "420blazeit", confirm_password: "421blazeit"})
+            post :update_password, params
+          end
+
+          it "returns http status bad_request" do
+            expect(response).to have_http_status(:bad_request)
+          end
+        end
+      end
+
+      context "current_password not specified" do
+        before do
+          post :update_password, {current_password: "", password: "420blazeit", confirm_password: "420blazeit"}
+        end
+
+        it "returns http status bad request" do
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
+
+      context "current_password incorrect" do
+        before do
+          post :update_password, {current_password: "wrongpassword", password: "420blazeit", confirm_password: "420blazeit"}
+        end
+
+        it "returns http status unauthorized" do
+          expect(response).to have_http_status(:unauthorized)
+        end
+      end
+    end
+
+    context "user not logged in" do
+      before do
+        post :update_password, {current_password: "password", password: "420blazeit", confirm_password: "420blazeit"}
+      end
+
+      it "returns http status unauthorized" do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
 end
