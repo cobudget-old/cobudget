@@ -19,7 +19,7 @@
       </div>
 
       <md-menu-content class="group-page__toolbar-menu-content" width="3">
-        <md-menu-item ng-repeat="menuItem in menuItems">
+        <md-menu-item ng-repeat="menuItem in accessibleMenuItems()">
           <md-button aria-label="{{ menuItem.label }}" ng-click="menuItem.onClick()">
             <div layout="row" layout-align="start center">
               <ng-md-icon icon="{{ menuItem.icon }}"
