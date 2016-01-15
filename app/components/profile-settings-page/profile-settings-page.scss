@@ -1,3 +1,11 @@
-.profile-settings-page {
-  background: gold;
+// toolbar heading
+
+.profile-settings-page__toolbar {
+  background: $cobudget-gunmetal;
+  color: white;
+}
+
+.profile-settings-page__back-icon {
+  @include fontGrande;
+  fill: white;
 }

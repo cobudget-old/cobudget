@@ -7,4 +7,3 @@ module.exports =
   url: '/profile_settings'
   template: require('./profile-settings-page.html')
   controller: ($scope) ->
-    console.log('ima controller lol')
