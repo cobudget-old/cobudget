@@ -61,7 +61,7 @@ class UsersController < AuthenticatedController
 
   api :POST, '/users/update_password?current_password&password&confirm_password'
   def update_password
-    render status: 403, nothing: true and return unless valid_update_password_params?
+    render status: 401, nothing: true and return unless valid_update_password_params?
     if current_user.valid_password?(params[:current_password])
       if params[:password] == params[:confirm_password]
         current_user.update(password: params[:password])

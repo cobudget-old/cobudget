@@ -359,8 +359,8 @@ describe UsersController, :type => :controller do
           post :update_password, {current_password: "", password: "420blazeit", confirm_password: "420blazeit"}
         end
 
-        it "returns http status bad request" do
-          expect(response).to have_http_status(:forbidden)
+        it "returns http status unauthorized" do
+          expect(response).to have_http_status(:unauthorized)
         end
       end
 
