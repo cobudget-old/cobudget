@@ -62,15 +62,13 @@ class UsersController < AuthenticatedController
   api :POST, '/users/update_password?current_password&password&confirm_password'
   def update_password
     render status: 401, nothing: true and return unless valid_update_password_params?
-    if current_user.valid_password?(params[:current_password])
-      if params[:password] == params[:confirm_password]
-        current_user.update(password: params[:password])
-        render status: 200, nothing: true
-      else
-        render status: 400, json: { error: "passwords do not match" }
-      end
+    render status: 401, json: { errors: ["current_password is incorrect"] } and return unless current_user.valid_password?(params[:current_password])
+    render status: 400, json: { errors: ["passwords do not match"] } and return unless params[:password] == params[:confirm_password]
+    current_user.update(password: params[:password])
+    if current_user.valid?
+      render status: 200, nothing: true
     else
-      render status: 401, json: { error: "current_password is incorrect" }
+      render status: 400, json: { errors: current_user.errors.full_messages }
     end
   end
 
