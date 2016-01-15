@@ -35,4 +35,12 @@ module.exports =
         Toast.show('Profile settings updated!')
 
     $scope.openChangePasswordDialog = ->
-      console.log('openChangePasswordDialog called!')
+      Dialog.custom
+        scope: $scope
+        template: require('./change-password-dialog.tmpl.html')
+        controller: ($mdDialog, $scope) ->
+          $scope.savePassword = ->
+            console.log('save was clicked!')
+            $mdDialog.cancel()
+          $scope.cancel = ->
+            $mdDialog.cancel()

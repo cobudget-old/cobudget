@@ -92,3 +92,31 @@
   color: $cobudget-light-blue;
   font-size: 14px;
 }
+
+// change password dialog
+
+.profile-settings-page__change-password-dialog {
+  max-width: 90% !important;
+  width: 90% !important;
+  background: $cobudget-light-grey;
+}
+
+.profile-settings-page__change-password-dialog-header {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 20px auto;
+}
+
+.profile-settings-page__change-password-dialog-content {
+  padding: 20px !important;
+}
+
+
+.profile-settings-page__change-password-dialog-cancel-btn {
+  color: $grey-on-grey;
+}
+
+.profile-settings-page__change-password-dialog-save-btn {
+  background: $cobudget-light-blue !important;
+  color: white !important;
+}
