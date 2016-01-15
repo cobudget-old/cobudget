@@ -62,6 +62,7 @@ class UsersController < AuthenticatedController
   private
     def user_params
       params.require(:user).permit(
+        :name,
         :email,
         :utc_offset,
         :subscribed_to_personal_activity,
