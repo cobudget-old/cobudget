@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/profile_settings?previous_group_id'
   template: require('./profile-settings-page.html')
-  controller: (CurrentUser, $location, $scope, $stateParams) ->
+  controller: (CurrentUser, $location, Records, $scope, $stateParams, Toast) ->
 
     $scope.currentUser = CurrentUser()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
@@ -18,7 +18,9 @@ module.exports =
       $location.path("/groups/#{previousGroupId}")
 
     $scope.save = ->
-      console.log('save called!')
+      params = _.pick $scope.currentUser, ['name']
+      Records.users.updateProfile(params).then ->
+        Toast.show('Profile settings updated!')
 
     $scope.openChangePasswordDialog = ->
       console.log('openChangePasswordDialog called!')
