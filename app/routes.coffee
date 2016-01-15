@@ -14,4 +14,4 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'forgot-password', require('app/components/forgot-password-page/forgot-password-page.coffee')
     .state 'reset-password', require('app/components/reset-password-page/reset-password-page.coffee')
     .state 'email-settings', require('app/components/email-settings-page/email-settings-page.coffee')
-    
+    .state 'profile-settings', require('app/components/profile-settings-page/profile-settings-page.coffee')
