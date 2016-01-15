@@ -7,11 +7,13 @@ module.exports =
   url: '/profile_settings?previous_group_id'
   template: require('./profile-settings-page.html')
   controller: (CurrentUser, Dialog, $location, Records, $scope, $stateParams, Toast, $window) ->
-
     $scope.currentUser = CurrentUser()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
-
     $scope.changesMade = false
+
+    $scope.back = ->
+        $location.search('previous_group_id', null)
+        $location.path("/groups/#{previousGroupId}")
 
     $scope.attemptBack = ->
       if $scope.changesMade
@@ -24,13 +26,8 @@ module.exports =
             $scope.okay = ->
               $mdDialog.cancel()
               $scope.back()
-
       else
         $scope.back()
-
-    $scope.back = ->
-        $location.search('previous_group_id', null)
-        $location.path("/groups/#{previousGroupId}")
 
     $scope.save = ->
       params = _.pick $scope.currentUser, ['name']
