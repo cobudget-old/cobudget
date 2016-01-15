@@ -28,5 +28,6 @@ module.exports =
 
     $scope.setupGroup = (formData) ->
       $scope.group.name = formData.name
+      $scope.group.initialized = true
       $scope.group.save().then ->
-        $location.path("/groups/#{$scope.group.id}")        
+        $location.path("/groups/#{$scope.group.id}")
