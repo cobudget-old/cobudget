@@ -41,12 +41,18 @@ module.exports =
         controller: ($mdDialog, $scope, Toast) ->
           $scope.formParams = {}
           $scope.savePassword = ->
+            $scope.errors = {}
             Records.users.updatePassword($scope.formParams)
-              .then (res, status) ->
+              .then (res) ->
                 Toast.show('Your new password was saved')
-              .catch (err, status) ->
-                console.log('err: ', err)
-                console.log('status: ', status)
-            $mdDialog.cancel()
+                $mdDialog.cancel()
+              .catch (err) ->
+                if err.status == 401
+                  $scope.errors.currentPassword = 'Sorry, we couldn\'t confirm your current password.'
+                  $scope.formParams.current_password = ""
+                else if err.status == 400
+                  $scope.errors.newPassword = 'Sorry, your repeated new password didn\'t match.'
+                  $scope.formParams.password = ""
+                  $scope.formParams.confirm_password = ""
           $scope.cancel = ->
             $mdDialog.cancel()
