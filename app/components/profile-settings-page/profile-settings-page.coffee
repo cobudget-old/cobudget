@@ -38,13 +38,12 @@ module.exports =
       Dialog.custom
         scope: $scope
         template: require('./change-password-dialog.tmpl.html')
-        controller: ($mdDialog, $scope) ->
+        controller: ($mdDialog, $scope, Toast) ->
           $scope.formParams = {}
           $scope.savePassword = ->
             Records.users.updatePassword($scope.formParams)
               .then (res, status) ->
-                console.log('res: ', res)
-                console.log('status: ', status)
+                Toast.show('Your new password was saved')
               .catch (err, status) ->
                 console.log('err: ', err)
                 console.log('status: ', status)
