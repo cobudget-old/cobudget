@@ -17,7 +17,8 @@
     <form novalidate class="profile-settings-page__details-form" name="accountDetailsForm" ng-submit="save(); accountDetailsForm.$setPristine()">
       <div class="profile-settings-page__input-container">
         <label class="profile-settings-page__input-label" for="name">NAME</label>
-        <input class="profile-settings-page__text-input" type="text" name="name" ng-model="currentUser.name" ng-change="changesMade = true"/>
+        <input class="profile-settings-page__text-input" type="text" required name="name" ng-model="currentUser.name" ng-change="changesMade = true"/>
+        <div ng-if="accountDetailsForm.name.$error.required" class="profile-settings-page__input-error">Name is required.</div>
       </div>
 
       <div class="profile-settings-page__input-container">
