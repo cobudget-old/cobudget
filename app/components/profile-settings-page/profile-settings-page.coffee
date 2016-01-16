@@ -32,6 +32,7 @@ module.exports =
     $scope.save = ->
       params = _.pick $scope.currentUser, ['name']
       Records.users.updateProfile(params).then ->
+        $scope.changesMade = false
         Toast.show('Profile settings updated!')
 
     $scope.openChangePasswordDialog = ->
@@ -44,7 +45,6 @@ module.exports =
 
           $scope.savePassword = ->
             $scope.errors = {}
-
             Records.users.updatePassword($scope.formParams)
               .then (res) ->
                 Toast.show('Your new password was saved')
