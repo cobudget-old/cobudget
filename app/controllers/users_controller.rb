@@ -59,6 +59,7 @@ class UsersController < AuthenticatedController
     end
   end
 
+  # TODO: refactor into service 
   api :POST, '/users/update_password?current_password&password&confirm_password'
   def update_password
     render status: 401, nothing: true and return unless valid_update_password_params?
