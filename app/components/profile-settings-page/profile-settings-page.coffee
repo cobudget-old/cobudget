@@ -41,7 +41,7 @@ module.exports =
         controller: ($mdDialog, $scope, Toast) ->
           $scope.formParams = {}
           $scope.formSubmitted = false
-          
+
           $scope.savePassword = ->
             $scope.errors = {}
 
