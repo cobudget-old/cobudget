@@ -97,9 +97,9 @@
 // change password dialog
 
 .profile-settings-page__change-password-dialog {
-  max-width: 90% !important;
-  max-height: none !important;
   width: 90% !important;
+  max-width: 640px;
+  max-height: none !important;
   background: $cobudget-light-grey;
 }
 
