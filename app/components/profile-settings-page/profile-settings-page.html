@@ -31,6 +31,30 @@
         <a class="profile-settings-page__change-password-link" ng-click="openChangePasswordDialog()">CHANGE PASSWORD</a>
       </div>
 
+      <md-divider></md-divider>
+
+      <div class="profile-settings-page__password-fields">
+        <div class="profile-settings-page__input-container">
+          <label class="profile-settings-page__input-label" for="current_password">CURRENT PASSWORD</label>
+          <input class="profile-settings-page__text-input" type="password" name="current_password" ng-model="formParams.current_password" />
+          <div ng-if="errors.currentPassword" class="profile-settings-page__input-error">{{ errors.currentPassword }}</div>
+        </div>
+
+        <div class="profile-settings-page__input-container">
+          <label class="profile-settings-page__input-label" for="password">NEW PASSWORD</label>
+          <input class="profile-settings-page__text-input" ng-minlength="8" type="password" name="password" ng-model="formParams.password" />
+          <div ng-if="errors.newPassword" class="profile-settings-page__input-error">{{ errors.newPassword }}</div>
+          <div ng-if="changePasswordForm.password.$error.minlength && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
+        </div>
+
+        <div class="profile-settings-page__input-container">
+          <label class="profile-settings-page__input-label" for="confirm_password">REPEAT NEW PASSWORD</label>
+          <input class="profile-settings-page__text-input" ng-minlength="8" type="password" name="confirm_password" ng-model="formParams.confirm_password" />
+          <div ng-if="errors.newPassword" class="profile-settings-page__input-error">{{ errors.newPassword }}</div>
+          <div ng-if="changePasswordForm.confirm_password.$error.minlength && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
+        </div>
+      </div>
+
       <md-button class="md-raised md-primary profile-settings-page__save-btn" ng-disabled="!changesMade">save</md-button>
     </form>
   </md-content>

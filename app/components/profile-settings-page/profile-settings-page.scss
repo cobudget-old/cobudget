@@ -13,7 +13,8 @@
 // content
 
 .profile-settings-page__content {
-  padding: 15px;
+  padding: 20px;
+  @include fontMedium;
 }
 
 // details form
@@ -32,7 +33,7 @@
 
 .profile-settings-page__input-label {
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: $grey-on-white;
 }
 
@@ -41,7 +42,7 @@
   border: 1px solid $grey-on-white;
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 2px;
   background: inherit;
 }
@@ -55,7 +56,7 @@
 }
 
 .profile-settings-page__change-password-link {
-  @include fontMedium;
+  @include fontTiny;
   font-weight: 500;
   color: $grey-on-white;
   border-bottom: 1px solid $grey-on-white;
@@ -70,7 +71,17 @@
 }
 
 .profile-settings-page__save-btn:disabled {
-  background: $grey-on-white !important; 
+  background: $grey-on-white !important;
+}
+
+.profile-settings-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+
+.profile-settings-page__password-fields {
+  margin-top: 15px;
 }
 
 // discard-changes-dialog
@@ -96,38 +107,4 @@
 .profile-settings-page__discard-changes-dialog-btn {
   color: $cobudget-light-blue;
   font-size: 14px;
-}
-
-// change password dialog
-
-.profile-settings-page__change-password-dialog {
-  width: 90% !important;
-  max-width: 640px;
-  max-height: none !important;
-  background: $cobudget-light-grey;
-}
-
-.profile-settings-page__change-password-dialog-header {
-  font-size: 18px;
-  font-weight: 500;
-  margin: 20px auto;
-}
-
-.profile-settings-page__change-password-dialog-content {
-  padding: 20px !important;
-}
-
-.profile-settings-page__change-password-dialog-cancel-btn {
-  color: $grey-on-grey;
-}
-
-.profile-settings-page__change-password-dialog-save-btn {
-  background: $cobudget-light-blue !important;
-  color: white !important;
-}
-
-.profile-settings-page__input-error {
-  font-size: 12px;
-  margin-top: 5px;
-  color: red;
 }
