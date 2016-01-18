@@ -69,6 +69,10 @@
   width: 100%;
 }
 
+.profile-settings-page__save-btn:disabled {
+  background: $grey-on-white !important; 
+}
+
 // discard-changes-dialog
 
 .profile-settings-page__discard-changes-dialog {
