@@ -35,27 +35,8 @@ module.exports =
         $scope.changesMade = false
         Toast.show('Profile settings updated!')
 
-    $scope.openChangePasswordDialog = ->
-      Dialog.custom
-        scope: $scope
-        template: require('./change-password-dialog.tmpl.html')
-        controller: ($mdDialog, $scope, Toast) ->
-          $scope.formParams = {}
-          $scope.formSubmitted = false
+    $scope.openPasswordFields = ->
+      $scope.showPasswordFields = true
 
-          $scope.savePassword = ->
-            $scope.errors = {}
-            Records.users.updatePassword($scope.formParams)
-              .then (res) ->
-                Toast.show('Your new password was saved')
-                $mdDialog.cancel()
-              .catch (err) ->
-                if err.status == 401
-                  $scope.errors.currentPassword = 'Sorry, we couldn\'t confirm your current password.'
-                  $scope.formParams.current_password = ""
-                else if err.status == 400
-                  $scope.errors.newPassword = 'Sorry, your repeated new password didn\'t match.'
-                  $scope.formParams.password = ""
-                  $scope.formParams.confirm_password = ""
-          $scope.cancel = ->
-            $mdDialog.cancel()
+    $scope.closePasswordFields = ->
+      $scope.showPasswordFields = false

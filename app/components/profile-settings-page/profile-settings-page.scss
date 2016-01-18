@@ -63,6 +63,18 @@
   margin-top: 5px;
 }
 
+.profile-settings-page__cancel-btn {
+  fill: $grey-on-white;
+}
+
+.profile-settings-page__cancel-btn:focus {
+  outline: none;
+}
+
+.profile-settings-page__form-divider {
+  margin-bottom: 15px;
+}
+
 .profile-settings-page__save-btn {
   background: $cobudget-light-blue !important;
   margin: 0 !important;
@@ -78,10 +90,6 @@
   font-size: 12px;
   margin-top: 5px;
   color: red;
-}
-
-.profile-settings-page__password-fields {
-  margin-top: 15px;
 }
 
 // discard-changes-dialog
