@@ -49,7 +49,7 @@ module.exports =
         updatedFields = _.map resolvedPromises, (promise) ->
           promise.$$state.value
         if updatedFields.length > 0
-          Toast.show("Your new #{updatedFields.join(' and ')} #{if updatedFields.length > 1 then 'were' else 'was'} saved")
+          Toast.show("Your new #{listify(updatedFields)} #{if updatedFields.length > 1 then 'were' else 'was'} saved")
           $scope.formSubmitted = false
 
     $scope.updateProfile = ->
