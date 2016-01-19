@@ -14,7 +14,7 @@
   </md-toolbar>
 
   <md-content class="profile-settings-page__content">
-    <form novalidate class="profile-settings-page__details-form" name="accountDetailsForm" ng-submit="accountDetailsForm.$valid && save(); accountDetailsForm.$setPristine()">
+    <form novalidate class="profile-settings-page__details-form" name="accountDetailsForm" ng-submit="save(); accountDetailsForm.$setPristine()">
       <div class="profile-settings-page__input-container">
         <label class="profile-settings-page__input-label" for="name">NAME</label>
         <input class="profile-settings-page__text-input" type="text" required name="name" ng-model="currentUser.name" />
