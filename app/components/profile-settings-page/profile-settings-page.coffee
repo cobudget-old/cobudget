@@ -9,6 +9,7 @@ module.exports =
   controller: (CurrentUser, Dialog, $location, $q, Records, $scope, $stateParams, Toast, $window) ->
     $scope.currentUser = CurrentUser()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
+    $scope.passwordParams = {}
 
     $scope.back = ->
         $location.search('previous_group_id', null)
@@ -25,6 +26,13 @@ module.exports =
             $scope.okay = ->
               $mdDialog.cancel()
               $scope.back()
+            $scope.unsavedFields = ->
+              fields = []
+              if $scope.accountDetailsForm.name.$dirty
+                fields.push('name')
+              if !isEmptyObject($scope.passwordParams)
+                fields.push('password')
+              listify(_.map(fields, (field) -> "<b>#{field}</b>"))
       else
         $scope.back()
 
