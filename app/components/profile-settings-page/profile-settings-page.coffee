@@ -28,12 +28,6 @@ module.exports =
       else
         $scope.back()
 
-    $scope.save = ->
-      params = _.pick $scope.currentUser, ['name']
-      Records.users.updateProfile(params).then ->
-        $scope.changesMade = false
-        Toast.show('Profile settings updated!')
-
     $scope.openPasswordFields = ->
       $scope.showPasswordFields = true
 
@@ -41,3 +35,39 @@ module.exports =
       $scope.passwordParams = {}
       $scope.passwordErrors = {}
       $scope.showPasswordFields = false
+
+    $scope.save = ->
+      $scope.formSubmitted = true
+      promises = []
+      changes = []
+      if $scope.accountDetailsForm.name.$dirty
+        promises.push($scope.updateProfile())
+        changes.push('name')
+      if $scope.showPasswordFields
+        promises.push($scope.savePassword())
+        changes.push('password')
+      $q.all(promises).then ->
+        Toast.show("Your new #{changes.join(' and ')} #{if changes.length > 1 then 'were' else 'was'} saved")
+
+    $scope.updateProfile = ->
+      profileParams = _.pick $scope.currentUser, ['name']
+      Records.users.updateProfile(profileParams)
+
+    $scope.savePassword = ->
+      $scope.passwordErrors = {}
+      deferred = $q.defer()
+      promise = deferred.promise
+      Records.users.updatePassword($scope.passwordParams)
+        .then (res) ->
+          deferred.resolve()
+          $scope.closePasswordFields()
+        .catch (err) ->
+          deferred.reject()
+          if err.status == 401
+            $scope.passwordErrors.currentPassword = 'Sorry, we couldn\'t confirm your current password.'
+            $scope.passwordParams.current_password = ""
+          else if err.status == 400
+            $scope.passwordErrors.newPassword = 'Sorry, your repeated new password didn\'t match.'
+            $scope.passwordParams.password = ""
+            $scope.passwordParams.confirm_password = ""
+      promise
