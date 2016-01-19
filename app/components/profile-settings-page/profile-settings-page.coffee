@@ -38,4 +38,6 @@ module.exports =
       $scope.showPasswordFields = true
 
     $scope.closePasswordFields = ->
+      $scope.passwordParams = {}
+      $scope.passwordErrors = {}
       $scope.showPasswordFields = false
