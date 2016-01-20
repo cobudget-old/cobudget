@@ -18,7 +18,7 @@
       <div class="profile-settings-page__input-container">
         <label class="profile-settings-page__input-label" for="name">NAME</label>
         <input class="profile-settings-page__text-input" type="text" required name="name" ng-model="currentUser.name" />
-        <div ng-if="accountDetailsForm.name.$error.required" class="profile-settings-page__input-error">Name is required.</div>
+        <div ng-if="accountDetailsForm.name.$error.required && formSubmitted" class="profile-settings-page__input-error">Name is required.</div>
       </div>
 
       <div class="profile-settings-page__input-container">
