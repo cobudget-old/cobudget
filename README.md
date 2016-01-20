@@ -1,6 +1,5 @@
 # Cobudget! user interface
 
-[![Build Status](https://travis-ci.org/cobudget/cobudget-ui.svg?branch=master)](https://travis-ci.org/open-app/cobudget-ui)
 [![Code Climate](https://codeclimate.com/github/open-app/cobudget-ui/badges/gpa.svg)](https://codeclimate.com/github/open-app/cobudget-ui)
 
 Cobudget is a web app helping people collaborate on budgets. For more about the project as a whole, check out the [top-level repo](https://github.com/open-app/cobudget). This repo is the user interface component.
