@@ -7,7 +7,8 @@ class UserSerializer < ActiveModel::Serializer
              :subscribed_to_personal_activity,
              :subscribed_to_daily_digest,
              :subscribed_to_participant_activity,
-             :is_pending_confirmation
+             :is_pending_confirmation,
+             :archived_at
 
   def is_pending_confirmation
     !object.has_set_up_account?
