@@ -17,10 +17,8 @@ class UsersController < AuthenticatedController
   def invite_to_create_group
     user = User.create_with_confirmation_token(email: params[:email])
     if user.valid?
-      group = Group.create(name: "New Group")
-      group.add_admin(user)
-      UserMailer.invite_new_group_email(user: user, inviter: current_user, group: group).deliver_later
-      render nothing: true
+      UserMailer.join_cobudget_and_create_group_invite(user: user, inviter: current_user).deliver_later
+      render status: 200, nothing: true
     else
       render status: 409, nothing: true
     end
