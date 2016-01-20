@@ -9,7 +9,7 @@ Cobudget is a web app helping people collaborate on budgets. For more about the 
 
 ---
 
-#### Install
+### Install
 
 ```
 git clone https://github.com/cobudget/cobudget-api
@@ -20,11 +20,15 @@ gem install mailcatcher
 mailcatcher
 ```
 
-#### Configure
+---
 
-To configure database environments, edit `config/database.yml`.
+### Configure
 
-#### Setup
+Edit `config/database.yml`.
+
+---
+
+### Setup
 
 ```
 bundle exec rake db:setup
@@ -32,13 +36,17 @@ bundle exec rake db:seed
 bundle exec rake jobs:work
 ```
 
-#### Run
+---
+
+### Run
 
 ```
 bundle exec rails s
 ```
 
-#### Test
+---
+
+### Test
 
 ```
 bundle exec rspec
