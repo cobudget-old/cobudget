@@ -1,8 +1,6 @@
 # [cobudget](http://cobudget.co/)
 
-a collaborative funding tool for crowds with purpose
-
-[see how it works](https://docs.google.com/presentation/d/1ZQYKxhHwKuQGmOMPpoE8Eo0XMuw1yn55Bjgsh6-D0eQ/present?slide=id.p)
+a collaborative funding tool for crowds with purpose; [see how it works](https://docs.google.com/presentation/d/1ZQYKxhHwKuQGmOMPpoE8Eo0XMuw1yn55Bjgsh6-D0eQ/present?slide=id.p)!
 
 ---
 
