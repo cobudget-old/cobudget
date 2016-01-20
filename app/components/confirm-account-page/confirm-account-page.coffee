@@ -1,5 +1,5 @@
 module.exports =
-  url: '/confirm_account?confirmation_token&:group_id'
+  url: '/confirm_account?confirmation_token&group_id'
   template: require('./confirm-account-page.html')
   controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Toast) ->
 
