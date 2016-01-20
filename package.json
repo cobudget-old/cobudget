@@ -73,6 +73,7 @@
     "morph": "^0.2.0",
     "napa": "^1.2.0",
     "ng-focus-if": "^1.0.2",
+    "ng-q-all-settled": "^1.0.0",
     "ng-sanitize": "0.0.2",
     "ng-token-auth": "lynndylanhurley/ng-token-auth#v0.0.29-beta1",
     "node-sass": "^3.3.3",

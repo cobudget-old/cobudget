@@ -55,7 +55,7 @@ module.exports =
         promises.push($scope.updateProfile())
       if $scope.showPasswordFields
         promises.push($scope.savePassword())
-      $q.all(promises).finally ->
+      $q.allSettled(promises).finally ->
         resolvedPromises = _.filter promises, (promise) ->
           promise.$$state.status == 1
         updatedFields = _.map resolvedPromises, (promise) ->

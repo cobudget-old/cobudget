@@ -21,6 +21,7 @@ require('angular-material-icons')
 require('ng-sanitize')
 require('angular-truncate-2')
 require('angular-marked')
+require('ng-q-all-settled')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -38,7 +39,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ngMdIcons',
   'ngSanitize',
   'truncate',
-  'hc.marked'
+  'hc.marked',
+  'qAllSettled'
 ])
 .constant('config', require('app/configs/app'))
 
