@@ -43,6 +43,8 @@ module.exports =
       $scope.passwordParams = {}
       $scope.passwordErrors = {}
       $scope.showPasswordFields = false
+      _.each ['current_password', 'password', 'confirm_password'], (fieldName) ->
+        $scope.accountDetailsForm[fieldName].$setPristine()
 
     $scope.save = ->
       $scope.formSubmitted = true
