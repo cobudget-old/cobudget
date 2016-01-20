@@ -51,12 +51,16 @@ class User < ActiveRecord::Base
     memberships.find_by(group_id: group.id)
   end
 
-  def has_set_up_account?
-    confirmation_token.nil?
-  end
-
   def generate_confirmation_token!
     self.update(confirmation_token: SecureRandom.urlsafe_base64.to_s)
+  end
+
+  def confirm!
+    update(confirmation_token: nil, confirmed_at: DateTime.now.utc())
+  end
+
+  def confirmed?
+    confirmed_at.present?
   end
 
   private
