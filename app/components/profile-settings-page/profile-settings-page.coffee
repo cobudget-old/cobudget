@@ -55,14 +55,16 @@ module.exports =
         promises.push($scope.updateProfile())
       if $scope.showPasswordFields
         promises.push($scope.savePassword())
-      $q.allSettled(promises).finally ->
-        resolvedPromises = _.filter promises, (promise) ->
-          promise.$$state.status == 1
-        updatedFields = _.map resolvedPromises, (promise) ->
-          promise.$$state.value
-        if updatedFields.length > 0
-          Toast.show("Your new #{listify(updatedFields)} #{if updatedFields.length > 1 then 'were' else 'was'} saved")
-          $scope.formSubmitted = false
+      $q.allSettled(promises)
+        .then ->
+          formSubmitted = false
+        .finally ->
+          resolvedPromises = _.filter promises, (promise) ->
+            promise.$$state.status == 1
+          updatedFields = _.map resolvedPromises, (promise) ->
+            promise.$$state.value
+          if updatedFields.length > 0
+            Toast.show("Your new #{listify(updatedFields)} #{if updatedFields.length > 1 then 'were' else 'was'} saved")
 
     $scope.updateProfile = ->
       deferred = $q.defer()
