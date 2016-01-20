@@ -45,7 +45,7 @@ class UsersController < AuthenticatedController
 
   api :POST, '/users/reset_password?password&confirm_password&reset_password_token'
   def reset_password
-    if params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
+    if valid_reset_password_params?
       if user = User.find_by_reset_password_token(params[:reset_password_token])
         user.update(password: params[:password], reset_password_token: nil)
         render json: [user]
@@ -71,5 +71,9 @@ class UsersController < AuthenticatedController
 
     def valid_confirm_account_params?
       params[:confirmation_token].present? && params[:name].present? && params[:password].present?
+    end
+
+    def valid_reset_password_params?
+      params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
     end
 end
