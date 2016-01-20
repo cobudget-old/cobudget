@@ -1,6 +1,6 @@
 # Cobudget API
 
-[![Build Status](https://travis-ci.org/open-app/cobudget-api.svg?branch=master)](https://travis-ci.org/open-app/cobudget-api) [![Stories in Ready](https://badge.waffle.io/open-app/cobudget-api.png?label=ready&title=Ready)](https://waffle.io/open-app/cobudget-api)
+[![Build Status](https://travis-ci.org/cobudget/cobudget-api.svg?branch=master)](https://travis-ci.org/open-app/cobudget-api)
 
 Cobudget is a web app helping people collaborate on budgets. For more about the project as a whole, check out the [top-level repo](https://github.com/open-app/cobudget). This repo is the backend API of Cobudget.
 
