@@ -34,7 +34,7 @@ class UsersController < AuthenticatedController
   api :POST, '/users/request_password_reset?email'
   def request_password_reset
     if user = User.find_by_email(params[:email])
-      if user.has_set_up_account?
+      if user.confirmed?
         user.update(reset_password_token: SecureRandom.urlsafe_base64.to_s)
       end
       UserMailer.reset_password_email(user: user).deliver_later
