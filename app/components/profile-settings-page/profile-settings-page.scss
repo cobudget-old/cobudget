@@ -61,10 +61,12 @@
   color: $grey-on-white;
   border-bottom: 1px solid $grey-on-white;
   margin-top: 5px;
+  cursor: pointer;
 }
 
 .profile-settings-page__cancel-btn {
   fill: $grey-on-white;
+  cursor: pointer;
 }
 
 .profile-settings-page__cancel-btn:focus {
