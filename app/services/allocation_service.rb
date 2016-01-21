@@ -2,7 +2,7 @@ class AllocationService
   def self.create_allocations_from_csv(csv: , group: , current_user:)
     csv.each do |email, amount|
       email = email.downcase.strip
-      amount = amount.to_f
+      amount = amount.to_s.gsub(",", "").to_f
 
       if user = User.find_by_email(email)
         if user.is_member_of?(group)
