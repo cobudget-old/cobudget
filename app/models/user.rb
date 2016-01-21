@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
 
   before_validation :assign_uid_and_provider
 
-  ### from previous authentication scheme ###
-  # include TokenAuthenticable
-
   has_many :groups, through: :memberships
   has_many :memberships, foreign_key: "member_id", dependent: :destroy
   has_many :allocations, dependent: :destroy
