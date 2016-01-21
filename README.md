@@ -6,7 +6,6 @@ a collaborative funding tool for crowds with purpose; [see how it works](https:/
 
 - [UI repo](https://github.com/cobudget/cobudget-ui) - angular/node front-end
 - [API repo](http://github.com/cobudget/cobudget-api) - rails back-end
-
 - [roadmap to public beta](https://trello.com/b/Ca4BpYOz/cobudget-sprint-board)
 - [private beta](beta.cobudget.co)
 
