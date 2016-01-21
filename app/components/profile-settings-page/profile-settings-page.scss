@@ -1,0 +1,120 @@
+// toolbar heading
+
+.profile-settings-page__toolbar {
+  background: $cobudget-gunmetal;
+  color: white;
+}
+
+.profile-settings-page__back-icon {
+  @include fontGrande;
+  fill: white;
+}
+
+// content
+
+.profile-settings-page__content {
+  padding: 20px;
+  @include fontMedium;
+}
+
+// details form
+
+.profile-settings-page__details-form {
+  position: relative;
+  max-width: 640px;
+  margin: 15px auto;
+}
+
+.profile-settings-page__input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-settings-page__input-label {
+  display: block;
+  margin-bottom: 10px;
+  color: $grey-on-white;
+}
+
+.profile-settings-page__text-input {
+  display: block;
+  border: 1px solid $grey-on-white;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 2px;
+  background: inherit;
+}
+
+.profile-settings-page__text-input:focus {
+  outline: none;
+}
+
+.profile-settings-page__text-input.ng-dirty {
+  border-color: $cobudget-light-blue;
+}
+
+.profile-settings-page__change-password-link {
+  @include fontTiny;
+  font-weight: 500;
+  color: $grey-on-white;
+  border-bottom: 1px solid $grey-on-white;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.profile-settings-page__cancel-btn {
+  fill: $grey-on-white;
+  cursor: pointer;
+}
+
+.profile-settings-page__cancel-btn:focus {
+  outline: none;
+}
+
+.profile-settings-page__form-divider {
+  margin-bottom: 15px;
+}
+
+.profile-settings-page__save-btn {
+  background: $cobudget-light-blue !important;
+  margin: 0 !important;
+  margin-top: 10px !important;
+  width: 100%;
+}
+
+.profile-settings-page__save-btn:disabled {
+  background: $grey-on-white !important;
+}
+
+.profile-settings-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+
+// discard-changes-dialog
+
+.profile-settings-page__discard-changes-dialog {
+  background: $cobudget-light-grey;
+}
+
+.profile-settings-page__discard-changes-dialog-content {
+  padding: 20px !important;
+}
+
+.profile-settings-page__discard-changes-dialog-header {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.profile-settings-page__discard-changes-dialog-text {
+  @include fontMedLarge;
+  color: $grey-on-grey;
+}
+
+.profile-settings-page__discard-changes-dialog-btn {
+  color: $cobudget-light-blue;
+  font-size: 14px;
+}

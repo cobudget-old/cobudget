@@ -1,0 +1,72 @@
+<div class="profile-settings-page">
+  <md-toolbar class="profile-settings-page__toolbar">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="back" ng-click="attemptBack()">
+        <ng-md-icon icon="arrow_back"
+          layout="column"
+          layout-align="center center"
+          class="profile-settings-page__back-icon"
+        ></ng-md-icon>
+      </md-button>
+
+      <h1>Profile Settings</h1>
+    </div>
+  </md-toolbar>
+
+  <md-content class="profile-settings-page__content">
+    <form novalidate class="profile-settings-page__details-form" name="accountDetailsForm" ng-submit="save(); accountDetailsForm.$setPristine()">
+      <div class="profile-settings-page__input-container">
+        <label class="profile-settings-page__input-label" for="name">NAME</label>
+        <input class="profile-settings-page__text-input" type="text" required name="name" ng-model="currentUser.name" />
+        <div ng-if="accountDetailsForm.name.$error.required && formSubmitted" class="profile-settings-page__input-error">Name is required.</div>
+      </div>
+
+      <div class="profile-settings-page__input-container">
+        <label class="profile-settings-page__input-label" for="name">EMAIL</label>
+        <input class="profile-settings-page__text-input" disabled type="email" name="email" ng-model="currentUser.email" />
+      </div>
+
+      <div class="profile-settings-page__input-container">
+        <label class="profile-settings-page__input-label">PASSWORD</label>
+        <div layout="row" layout-align="space-between center">
+          <a class="profile-settings-page__change-password-link" ng-click="openPasswordFields()">CHANGE PASSWORD</a>
+          <span flex></span>
+          <ng-md-icon icon="close"
+            ng-if="showPasswordFields"
+            ng-click="closePasswordFields()"
+            size="20"
+            class="profile-settings-page__cancel-btn"
+            layout="column"
+            layout-align="center center"
+          ></ng-md-icon>
+        </div>
+      </div>
+
+    <div class="profile-settings-page__password-fields" ng-show="showPasswordFields">
+        <md-divider class="profile-settings-page__form-divider"></md-divider>
+
+        <div class="profile-settings-page__input-container">
+          <label class="profile-settings-page__input-label" for="current_password">CURRENT PASSWORD</label>
+          <input class="profile-settings-page__text-input" type="password" name="current_password" ng-model="passwordParams.current_password"/>
+          <div ng-if="passwordErrors.currentPassword" class="profile-settings-page__input-error">{{ passwordErrors.currentPassword }}</div>
+        </div>
+
+        <div class="profile-settings-page__input-container">
+          <label class="profile-settings-page__input-label" for="password">NEW PASSWORD</label>
+          <input class="profile-settings-page__text-input" type="password" name="password" ng-model="passwordParams.password"/>
+          <div ng-if="passwordErrors.newPassword" class="profile-settings-page__input-error">{{ passwordErrors.newPassword }}</div>
+          <div ng-if="passwordParams.password.length < 8 && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
+        </div>
+
+        <div class="profile-settings-page__input-container">
+          <label class="profile-settings-page__input-label" for="confirm_password">REPEAT NEW PASSWORD</label>
+          <input class="profile-settings-page__text-input" type="password" name="confirm_password" ng-model="passwordParams.confirm_password"/>
+          <div ng-if="passwordErrors.newPassword" class="profile-settings-page__input-error">{{ passwordErrors.newPassword }}</div>
+          <div ng-if="passwordParams.confirm_password.length < 8 && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
+        </div>
+      </div>
+
+      <md-button class="md-raised md-primary profile-settings-page__save-btn" ng-disabled="accountDetailsForm.$pristine">save</md-button>
+    </form>
+  </md-content>
+</div>
