@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         post :reset_password
         post :update_profile
         post :invite_to_create_group
+        post :update_password
       end
     end
 
