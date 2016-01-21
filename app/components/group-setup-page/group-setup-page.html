@@ -4,7 +4,7 @@
   </md-toolbar>
 
   <md-content layout-padding class="group-setup-page__content">
-    <form novalidate name="newGroupForm" ng-submit="newGroupForm.$valid && setupGroup(formData)">
+    <form novalidate name="newGroupForm" ng-submit="newGroupForm.$valid && createGroup(formData)">
       <md-input-container>
         <label>name</label>
         <input required name="name" type="text" ng-model="formData.name">

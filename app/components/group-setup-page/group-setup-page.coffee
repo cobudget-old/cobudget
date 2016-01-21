@@ -11,8 +11,7 @@ module.exports =
   template: require('./group-setup-page.html')
   controller: ($location, $scope) ->
 
-    $scope.setupGroup = (formData) ->
+    $scope.createGroup = (formData) ->
       $scope.group.name = formData.name
-      $scope.group.initialized = true
       $scope.group.save().then ->
         $location.path("/groups/#{$scope.group.id}")
