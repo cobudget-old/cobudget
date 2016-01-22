@@ -1,4 +1,3 @@
-# (EL) NOTE: may want to use this as an 'edit group' page in the future
 # http://i.imgur.com/RMs4njZ.gifv
 
 module.exports =
@@ -9,9 +8,11 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/setup_group'
   template: require('./group-setup-page.html')
-  controller: ($location, $scope) ->
+  controller: ($location, Records, $scope) ->
 
     $scope.createGroup = (formData) ->
-      $scope.group.name = formData.name
-      $scope.group.save().then ->
-        $location.path("/groups/#{$scope.group.id}")
+      Records.groups.build(name: formData.name).save().then ->
+        Records.memberships.fetchMyMemberships().then (data) ->
+          newGroup = _.find data.groups, (group) ->
+            group.name == formData.name
+          $location.path("/groups/#{newGroup.id}")
