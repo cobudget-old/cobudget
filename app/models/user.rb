@@ -60,6 +60,10 @@ class User < ActiveRecord::Base
     confirmed_at.present?
   end
 
+  def has_ever_joined_a_group?
+    joined_first_group_at.present?
+  end
+
   private
     def assign_uid_and_provider
       self.uid = self.email
