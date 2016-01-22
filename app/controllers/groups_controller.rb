@@ -10,7 +10,6 @@ class GroupsController < AuthenticatedController
   api :POST, '/groups', 'Create a group'
   def create
     group = Group.create(group_params)
-    group.update(initialized: true)
     group.add_admin(current_user)
     render json: [group]
   end
@@ -34,6 +33,6 @@ class GroupsController < AuthenticatedController
 
   private
     def group_params
-      params.require(:group).permit(:name, :currency_code, :initialized)
+      params.require(:group).permit(:name, :currency_code)
     end
 end
