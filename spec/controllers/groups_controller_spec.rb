@@ -34,7 +34,7 @@ describe GroupsController, :type => :controller do
   describe "#create" do
     before do
       make_user_group_admin
-      request.headers.merge!(user.create_new_auth_token)      
+      request.headers.merge!(user.create_new_auth_token)
       group_params = {
         name: 'test',
         currency_code: 'NZD'
@@ -50,10 +50,6 @@ describe GroupsController, :type => :controller do
 
     it "adds current_user as admin to that group" do
       expect(Membership.find_by(group: @new_group, member: user, is_admin: true)).to be_truthy
-    end
-
-    it "initializes group" do
-      expect(@new_group.initialized).to be_truthy
     end
 
     it "returns new group, as json" do

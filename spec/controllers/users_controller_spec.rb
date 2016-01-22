@@ -122,7 +122,6 @@ describe UsersController, :type => :controller do
         post :invite_to_create_group, params
         @new_user = User.find_by(params)
         @sent_email = ActionMailer::Base.deliveries.first
-        @new_group = @new_user.groups.first
       end
 
       after do
@@ -134,14 +133,9 @@ describe UsersController, :type => :controller do
         expect(@new_user.confirmation_token).to be_truthy
       end
 
-      it "creates a temporary group for the user, and adds them as an admin to it" do
-        expect(@new_group.name).to eq("New Group")
-        expect(@new_user.is_admin_for?(@new_group)).to be_truthy
-      end
-
-      it "sends email to user with link to confirm account page containing confirmation_token and new group_id" do
+      it "sends email to user with link to confirm account page containing confirmation_token" do
         expect(@sent_email.to).to eq([@new_user.email])
-        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}&group_id=#{@new_group.id}"
+        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}"
         expect(@sent_email.body.to_s).to include(expected_url)
       end
     end
@@ -227,9 +221,7 @@ describe UsersController, :type => :controller do
 
     context "user has not set up their account yet" do
       before do
-        require 'securerandom'
-        confirmation_token = SecureRandom.urlsafe_base64.to_s
-        user.update(confirmation_token: confirmation_token)
+        user.generate_confirmation_token!
       end
 
       it "returns http status ok" do
