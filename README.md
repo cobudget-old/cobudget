@@ -28,7 +28,6 @@ edit `config/database.yml`.
 
 ```
 bundle exec rake db:setup
-bundle exec rake db:seed
 bundle exec rake jobs:work
 ```
 
