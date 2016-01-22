@@ -27,9 +27,10 @@ describe UsersController, :type => :controller do
           @user.reload
         end
 
-        it "updates user with specified name, and password, and clears confirmation token" do
+        it "updates user with specified name, and password, clears confirmation token, and sets confirmed_at" do
           expect(@user.name).to eq("new name")
           expect(@user.confirmation_token).to be_nil
+          expect(@user.confirmed_at).not_to be_nil
         end
 
         it "returns user as json" do

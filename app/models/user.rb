@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_confirmation_token!
-    self.update(confirmation_token: SecureRandom.urlsafe_base64.to_s)
+    self.update(confirmation_token: SecureRandom.urlsafe_base64.to_s, confirmed_at: nil)
   end
 
   def confirm!
