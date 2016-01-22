@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     joined_first_group_at.present?
   end
 
+  def generate_reset_password_token!
+    update(reset_password_token: SecureRandom.urlsafe_base64.to_s)
+  end
+
   private
     def assign_uid_and_provider
       self.uid = self.email
