@@ -19,54 +19,15 @@
       </div>
 
       <md-menu-content class="group-page__toolbar-menu-content" width="3">
-        <md-menu-item>
-          <md-button ng-click="openEmailSettings()">
+        <md-menu-item ng-repeat="menuItem in accessibleMenuItems()">
+          <md-button aria-label="{{ menuItem.label }}" ng-click="menuItem.onClick()">
             <div layout="row" layout-align="start center">
-              <ng-md-icon icon="mail"
+              <ng-md-icon icon="{{ menuItem.icon }}"
                 class="group-page__toolbar-menu-icon"
                 layout="column"
                 layout-align="center center"
               ></ng-md-icon>
-              <span md-menu-align-target>Email Settings</span>
-            </div>
-          </md-button>
-        </md-menu-item>
-
-        <md-menu-item>
-          <md-button aria-label="Give Feedback" ng-click="openFeedbackForm()">
-            <div layout="row" layout-align="start center">
-              <ng-md-icon icon="live_help"
-                class="group-page__toolbar-menu-icon"
-                layout="column"
-                layout-align="center center"
-              ></ng-md-icon>
-              <span md-menu-align-target>Give Feedback</span>
-            </div>
-          </md-button>
-        </md-menu-item>
-
-        <md-menu-item ng-if="membership.isAdmin">
-          <md-button aria-label="Admin Panel" ng-click="openAdminPanel()">
-            <div layout="row" layout-align="start center">
-              <ng-md-icon icon="local_pizza"
-                class="group-page__toolbar-menu-icon"
-                layout="column"
-                layout-align="center center"
-              ></ng-md-icon>
-              <span md-menu-align-target>Admin Panel</span>
-            </div>
-          </md-button>
-        </md-menu-item>
-
-        <md-menu-item>
-          <md-button aria-label="Log Out" ng-click="signOut()">
-            <div layout="row" layout-align="start center">
-              <ng-md-icon icon="exit_to_app"
-                class="group-page__toolbar-menu-icon"
-                layout="column"
-                layout-align="center center"
-              ></ng-md-icon>
-              <span md-menu-align-target>Log Out</span>
+              <span md-menu-align-target>{{ menuItem.label }}</span>
             </div>
           </md-button>
         </md-menu-item>

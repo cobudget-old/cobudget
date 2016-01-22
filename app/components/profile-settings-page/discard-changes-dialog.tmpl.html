@@ -1,0 +1,13 @@
+<md-dialog class="profile-settings-page__discard-changes-dialog" aria-label="discard changes dialog">
+  <md-dialog-content class="sticky-container profile-settings-page__discard-changes-dialog-content">
+    <h2 class="profile-settings-page__discard-changes-dialog-header">Discard Changes?</h2>
+    <p class="profile-settings-page__discard-changes-dialog-text">
+      Looks like you have some unsaved changes made to your <span ng-bind-html="unsavedFields()"></span>.<br/><br/>
+      Any changes you have made to your account will be lost.
+    </p>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <md-button class="profile-settings-page__discard-changes-dialog-btn" ng-click="cancel()">cancel</md-button>
+    <md-button class="profile-settings-page__discard-changes-dialog-btn" ng-click="okay()">okay</md-button>
+  </div>
+</md-dialog>
