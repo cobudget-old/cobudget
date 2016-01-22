@@ -26,4 +26,4 @@ module.exports =
               $location.path("/setup_group")
         .catch ->
             Toast.show('Sorry, that confirmation token has expired.')
-          $location.path('/')
+            $location.path('/')
