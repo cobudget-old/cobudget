@@ -14,7 +14,6 @@ module.exports =
         name: formData.name
         password: formData.password
         confirmation_token: $scope.confirmationToken
-
       Records.users.confirmAccount(params)
         .then (data) ->
           user = data.users[0]
