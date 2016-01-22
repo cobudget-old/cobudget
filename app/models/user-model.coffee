@@ -35,3 +35,9 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
 
     isConfirmed: ->
       !!@confirmedAt
+
+    hasEverJoinedAGroup: ->
+      !!@joinedFirstGroupAt
+
+    hasMemberships: ->
+      @memberships().length > 0
