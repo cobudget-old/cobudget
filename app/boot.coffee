@@ -27,6 +27,8 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
             $location.path('/')
             Dialog.alert(title: 'error!', content: 'invalid credentials!')
             LoadBar.stop()
+      else
+        LoadBar.stop()
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     console.log('$stateChangeError signal fired!')
