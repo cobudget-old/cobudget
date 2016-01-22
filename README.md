@@ -1,61 +1,43 @@
-# Cobudget API
+# cobudget-api
 
-[![Build Status](https://travis-ci.org/open-app/cobudget-api.svg?branch=master)](https://travis-ci.org/open-app/cobudget-api) [![Stories in Ready](https://badge.waffle.io/open-app/cobudget-api.png?label=ready&title=Ready)](https://waffle.io/open-app/cobudget-api)
+[![Build Status](https://travis-ci.org/cobudget/cobudget-api.svg?branch=master)](https://travis-ci.org/open-app/cobudget-api)
+[![Code Climate](https://codeclimate.com/github/cobudget/cobudget-api/badges/gpa.svg)](https://codeclimate.com/github/cobudget/cobudget-api)
 
-Cobudget is a web app helping people collaborate on budgets. For more about the project as a whole, check out the [top-level repo](https://github.com/open-app/cobudget). This repo is the backend API of Cobudget.
+cobudget's backend api. for more information on the project as a whole, check out the [top-level repo](https://github.com/cobudget/cobudget)
 
-#### Don't push to master - feature branches and pull requests please.
+**don't push to master - feature branches and pull requests please.**
 
-## How to...
+---
 
-### Install
-
-Install ruby and gem: https://www.ruby-lang.org/en/installation/
+### install
 
 ```
-git clone https://github.com/open-app/cobudget-api
+git clone https://github.com/cobudget/cobudget-api
 cd cobudget-api
 bundle install
-```
 
-Install [MailCatcher](http://mailcatcher.me/)
-
-```
 gem install mailcatcher
 mailcatcher
 ```
 
-and visit: http://localhost:1080/
+### configure
 
-### Configure
+edit `config/database.yml`.
 
-To configure database environments, edit `config/database.yml`.
-
-### Setup database
-
-*Setup and seed the db:*
+### setup
 
 ```
 bundle exec rake db:setup
+bundle exec rake jobs:work
 ```
 
-### Run
-
-*Start rails server:*
+### run
 
 ```
 bundle exec rails s
 ```
 
-*Start Workers*
-
-```
-rake jobs:work
-```
-
-### Test
-
-*Test*
+### test
 
 ```
 bundle exec rspec
