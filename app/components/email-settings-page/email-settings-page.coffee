@@ -6,6 +6,7 @@ module.exports =
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
   template: require('./email-settings-page.html')
+  reloadOnSearch: false
   controller: (CurrentUser, $location, Records, $scope, $stateParams, Toast) ->
 
     $scope.currentUser = CurrentUser()

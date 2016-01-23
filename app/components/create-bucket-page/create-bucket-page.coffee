@@ -1,11 +1,12 @@
-module.exports = 
-  resolve: 
+module.exports =
+  resolve:
     userValidated: ($auth) ->
       $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
   url: '/buckets/new?group_id'
   template: require('./create-bucket-page.html')
+  reloadOnSearch: false
   controller: (config, CurrentUser, Error, $location, Records, $scope, $stateParams, Toast, $window) ->
     $scope.accessibleGroups = CurrentUser().groups()
     $scope.bucket = Records.buckets.build(groupId: $stateParams.group_id)

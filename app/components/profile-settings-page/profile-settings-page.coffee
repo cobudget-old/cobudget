@@ -6,6 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/profile_settings?previous_group_id'
   template: require('./profile-settings-page.html')
+  reloadOnSearch: false
   controller: (CurrentUser, Dialog, $location, $q, Records, $scope, $stateParams, Toast, $window) ->
     $scope.currentUser = CurrentUser()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
