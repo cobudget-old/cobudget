@@ -1,11 +1,11 @@
 module.exports =
   resolve:
-    signOutUser: (Session) ->
+    clearSession: (Session) ->
       Session.clear()
   url: '/confirm_account?confirmation_token&setup_group'
   template: require('./confirm-account-page.html')
-  controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Toast) ->
-
+  reloadOnSearch: false
+  controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Session, Toast) ->
     $scope.confirmationToken = $stateParams.confirmation_token
     $scope.setupGroup = $stateParams.setup_group
 
