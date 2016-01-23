@@ -6,7 +6,8 @@ class UsersController < AuthenticatedController
   def confirm_account
     render status: 400, nothing: true and return unless valid_confirm_account_params?
     if user = User.find_by_confirmation_token(params[:confirmation_token])
-      user.update(name: params[:name], password: params[:password], confirmation_token: nil)
+      user.update(name: params[:name], password: params[:password])
+      user.confirm!
       render json: [user]
     else
       render status: 403, nothing: true
@@ -17,10 +18,8 @@ class UsersController < AuthenticatedController
   def invite_to_create_group
     user = User.create_with_confirmation_token(email: params[:email])
     if user.valid?
-      group = Group.create(name: "New Group")
-      group.add_admin(user)
-      UserMailer.invite_new_group_email(user: user, inviter: current_user, group: group).deliver_later
-      render nothing: true
+      UserMailer.join_cobudget_and_create_group_invite(user: user, inviter: current_user).deliver_later
+      render status: 200, nothing: true
     else
       render status: 409, nothing: true
     end
@@ -35,9 +34,7 @@ class UsersController < AuthenticatedController
   api :POST, '/users/request_password_reset?email'
   def request_password_reset
     if user = User.find_by_email(params[:email])
-      if user.has_set_up_account?
-        user.update(reset_password_token: SecureRandom.urlsafe_base64.to_s)
-      end
+      user.generate_reset_password_token! if user.confirmed?
       UserMailer.reset_password_email(user: user).deliver_later
       render nothing: true, status: 200
     else
@@ -47,7 +44,7 @@ class UsersController < AuthenticatedController
 
   api :POST, '/users/reset_password?password&confirm_password&reset_password_token'
   def reset_password
-    if params[:reset_password_token] && params[:password] && params[:password] == params[:confirm_password]
+    if valid_reset_password_params?
       if user = User.find_by_reset_password_token(params[:reset_password_token])
         user.update(password: params[:password], reset_password_token: nil)
         render json: [user]
@@ -59,7 +56,7 @@ class UsersController < AuthenticatedController
     end
   end
 
-  # TODO: refactor into service 
+  # TODO: refactor into service
   api :POST, '/users/update_password?current_password&password&confirm_password'
   def update_password
     render status: 401, nothing: true and return unless valid_update_password_params?
@@ -88,6 +85,10 @@ class UsersController < AuthenticatedController
 
     def valid_confirm_account_params?
       params[:confirmation_token].present? && params[:name].present? && params[:password].present?
+    end
+
+    def valid_reset_password_params?
+      params[:reset_password_token].present? && params[:password].present? && params[:password] == params[:confirm_password]
     end
 
     def valid_update_password_params?

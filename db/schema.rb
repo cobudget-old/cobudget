@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115221849) do
+ActiveRecord::Schema.define(version: 20160122052600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20151115221849) do
     t.datetime "updated_at"
     t.string   "currency_symbol", default: "$"
     t.string   "currency_code",   default: "USD"
-    t.boolean  "initialized",     default: false
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -117,7 +116,6 @@ ActiveRecord::Schema.define(version: 20151115221849) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "initialized",                        default: false, null: false
     t.text     "tokens"
     t.string   "provider"
     t.string   "uid"
@@ -125,8 +123,9 @@ ActiveRecord::Schema.define(version: 20151115221849) do
     t.integer  "utc_offset"
     t.boolean  "subscribed_to_personal_activity",    default: true
     t.boolean  "subscribed_to_daily_digest",         default: true
-    t.datetime "archived_at"
     t.boolean  "subscribed_to_participant_activity", default: false
+    t.datetime "confirmed_at"
+    t.datetime "joined_first_group_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

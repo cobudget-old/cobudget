@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
 
   before_validation :assign_uid_and_provider
 
-  ### from previous authentication scheme ###
-  # include TokenAuthenticable
-
   has_many :groups, through: :memberships
   has_many :memberships, foreign_key: "member_id", dependent: :destroy
   has_many :allocations, dependent: :destroy
@@ -51,12 +48,24 @@ class User < ActiveRecord::Base
     memberships.find_by(group_id: group.id)
   end
 
-  def has_set_up_account?
-    confirmation_token.nil?
+  def generate_confirmation_token!
+    self.update(confirmation_token: SecureRandom.urlsafe_base64.to_s, confirmed_at: nil)
   end
 
-  def generate_confirmation_token!
-    self.update(confirmation_token: SecureRandom.urlsafe_base64.to_s)
+  def confirm!
+    update(confirmation_token: nil, confirmed_at: DateTime.now.utc())
+  end
+
+  def confirmed?
+    confirmed_at.present?
+  end
+
+  def has_ever_joined_a_group?
+    joined_first_group_at.present?
+  end
+
+  def generate_reset_password_token!
+    update(reset_password_token: SecureRandom.urlsafe_base64.to_s)
   end
 
   private

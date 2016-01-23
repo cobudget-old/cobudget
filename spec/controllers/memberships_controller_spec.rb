@@ -102,8 +102,9 @@ describe MembershipsController, :type => :controller do
           expect(response).to have_http_status(:success)
         end
 
-        it "creates a new confirmaton token for the user" do
+        it "creates a new confirmaton token for the user and resets confirmed_at to nil" do
           expect(@user_to_reinvite.confirmation_token).to be_truthy
+          expect(@user_to_reinvite.confirmed_at).to be_nil
         end
 
         it "resends invite email to specified user" do

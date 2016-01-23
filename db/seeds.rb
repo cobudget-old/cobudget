@@ -1,5 +1,4 @@
 require 'faker'
-require 'factory_girl_rails'
 
 ### TIMEZONES
 
@@ -43,18 +42,19 @@ Group.destroy_all
 Membership.destroy_all
 User.destroy_all
 
-admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480) # oaklander
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc) # oaklander
 puts "generated admin account email: 'admin@example.com', password: 'password'"
-non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480) # oaklander
+non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc) # oaklander
 puts "generated user account email: 'user@example.com', password: 'password'"
 
 users = []
 utc_offsets.each do |utc_offset|
   users << User.create!(
-    name: Faker::Name.name, 
-    email: Faker::Internet.email, 
-    password: 'password', 
-    utc_offset: utc_offset
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    password: 'password',
+    utc_offset: utc_offset,
+    confirmed_at: DateTime.now.utc
   )
 end
 puts "generated 27 more fake users"
@@ -63,7 +63,7 @@ puts "generated 27 more fake users"
 
 groups = []
 2.times do
-  group = Group.create!(name: Faker::Company.name, initialized: true)
+  group = Group.create!(name: Faker::Company.name)
   group.add_admin(admin)
   group.add_member(non_admin)
   groups << group
@@ -82,15 +82,16 @@ puts "added users as members to one of the groups"
 
 groups.each do |group|
   rand(5..7).times do
-    bucket = group.buckets.create(name: Faker::Lorem.sentence(1, false, 4), 
-                         user: group.members.sample, 
-                         description: Faker::Lorem.paragraph(3, false, 14), 
-                         target: rand(0..1000),
-                         status: 'live',
-                         created_at: Time.zone.now - rand(1..10).days,
-                         funding_closes_at: Time.zone.now + rand(10..30).days,
-                         live_at: Time.now.utc
-                         )
+    bucket = group.buckets.create(
+      name: Faker::Lorem.sentence(1, false, 4),
+      user: group.members.sample,
+      description: Faker::Lorem.paragraph(3, false, 14),
+      target: rand(0..1000),
+      status: 'live',
+      created_at: Time.zone.now - rand(1..10).days,
+      funding_closes_at: Time.zone.now + rand(10..30).days,
+      live_at: Time.now.utc
+    )
     rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }
   end
 end
@@ -100,8 +101,8 @@ puts "created 5 - 7 live buckets for both groups with 0 - 9 comments"
 
 groups.each do |group|
   rand(5..7).times do
-    bucket = group.buckets.create(name: Faker::Lorem.sentence(1, false, 4), 
-                         user: group.members.sample, 
+    bucket = group.buckets.create(name: Faker::Lorem.sentence(1, false, 4),
+                         user: group.members.sample,
                          description: Faker::Lorem.paragraph(3, false, 14),
                          target: [rand(0..4200), nil].sample,
                          status: 'draft',

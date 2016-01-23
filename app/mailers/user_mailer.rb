@@ -89,10 +89,10 @@ class UserMailer < ActionMailer::Base
       mail(to: member.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
            subject: "You did it! #{@bucket.name} has been fully funded!")
-    else 
+    else
       mail(to: member.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "#{@bucket.name} has been fully funded!")      
+           subject: "#{@bucket.name} has been fully funded!")
     end
   end
 
@@ -100,7 +100,7 @@ class UserMailer < ActionMailer::Base
     @bucket = bucket
     mail(to: member.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{bucket.user.name} has created a new bucket idea: #{@bucket.name}")      
+         subject: "#{bucket.user.name} has created a new bucket idea: #{@bucket.name}")
   end
 
   def notify_member_that_they_received_allocation(admin: , member: , group: , amount:)
@@ -112,10 +112,10 @@ class UserMailer < ActionMailer::Base
          subject: "#{admin.name} gave you funds to spend in #{@group.name}")
   end
 
-  def invite_new_group_email(user: , inviter:, group:)
+  def join_cobudget_and_create_group_invite(user: , inviter:)
     @user = user
     @inviter = inviter
-    @redirect_url = "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}&group_id=#{group.id}".html_safe
+    @redirect_url = "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}&setup_group=true".html_safe
     mail(to: @user.name_and_email,
          from: "Cobudget Accounts <accounts@cobudget.co>",
          subject: "#{inviter.name} invited you to create a new group on Cobudget")
@@ -133,7 +133,7 @@ class UserMailer < ActionMailer::Base
 
   def reset_password_email(user:)
     @user = user
-    subject = @user.has_set_up_account? ? "Reset Password Instructions" : "Set up your Cobudget Account"
+    subject = @user.confirmed? ? "Reset Password Instructions" : "Set up your Cobudget Account"
     mail(to: user.name_and_email,
          from: "Cobudget Accounts <accounts@cobudget.co>",
          subject: subject)

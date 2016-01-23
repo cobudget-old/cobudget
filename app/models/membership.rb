@@ -8,6 +8,8 @@ class Membership < ActiveRecord::Base
   scope :archived, -> { where.not(archived_at: nil) }
   scope :active, -> { where(archived_at: nil) }
 
+  after_create :update_member_if_this_is_their_first_membership
+
   def total_allocations
     group.allocations.where(user_id: member_id).sum(:amount)
   end
@@ -30,7 +32,13 @@ class Membership < ActiveRecord::Base
   end
 
   private
-    def currency_code 
+    def currency_code
       group.currency_code
+    end
+
+    def update_member_if_this_is_their_first_membership
+      unless member.has_ever_joined_a_group?
+        member.update(joined_first_group_at: Time.now.utc)
+      end
     end
 end

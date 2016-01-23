@@ -4,6 +4,5 @@ class GroupSerializer < ActiveModel::Serializer
              :name,
              :balance,
              :currency_symbol,
-             :currency_code,
-             :initialized
+             :currency_code
 end
