@@ -8,6 +8,7 @@ global.cobudgetApp.factory 'Session', ($auth, CurrentUser, $q) ->
       deferred = $q.defer()
       if CurrentUser()
         $auth.signOut().then ->
+          global.cobudgetApp.currentUserId = null
           deferred.resolve()
       else
         deferred.resolve()
