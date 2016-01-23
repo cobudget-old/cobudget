@@ -22,8 +22,7 @@ module.exports =
           loginParams = { email: user.email, password: formData.password }
           $auth.submitLogin(loginParams)
             .then (ev, user) ->
-              $location.search('confirmation_token', null)
-              $location.search('setup_group', null)
+              $location.url($location.path())
               if $scope.setupGroup
                 $location.path("/setup_group")
         .catch ->
