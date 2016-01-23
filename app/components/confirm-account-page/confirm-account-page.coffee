@@ -1,8 +1,8 @@
 module.exports =
   resolve:
-    signOutUser: ($auth) ->
-      $auth.signOut()
-  url: '/confirm_account?confirmation_token'
+    signOutUser: (Session) ->
+      Session.clear()
+  url: '/confirm_account?confirmation_token&setup_group'
   template: require('./confirm-account-page.html')
   controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Toast) ->
 
