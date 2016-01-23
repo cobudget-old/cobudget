@@ -7,6 +7,7 @@ module.exports =
   controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Toast) ->
 
     $scope.confirmationToken = $stateParams.confirmation_token
+    $scope.setupGroup = $stateParams.setup_group
 
     $scope.confirmAccount = (formData) ->
       LoadBar.start()
@@ -22,7 +23,9 @@ module.exports =
           $auth.submitLogin(loginParams)
             .then (ev, user) ->
               $location.search('confirmation_token', null)
-              $location.path("/setup_group")
+              $location.search('setup_group', null)
+              if $scope.setupGroup
+                $location.path("/setup_group")
         .catch ->
             Toast.show('Sorry, that confirmation token has expired.')
             $location.path('/')
