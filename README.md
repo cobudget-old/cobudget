@@ -1,7 +1,7 @@
 
 # cobudget-ui
 
-[![Code Climate](https://codeclimate.com/github/open-app/cobudget-ui/badges/gpa.svg)](https://codeclimate.com/github/open-app/cobudget-ui)
+[![Code Climate](https://codeclimate.com/github/cobudget/cobudget-ui/badges/gpa.svg)](https://codeclimate.com/github/open-app/cobudget-ui)
 
 
 cobudget's user interface. for more information on the project as a whole, check out the [top-level repo](https://github.com/cobudget/cobudget)
