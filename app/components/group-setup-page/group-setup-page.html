@@ -1,10 +1,10 @@
-<div class="group-setup-page" ng-if="authorized">
+<div class="group-setup-page">
   <md-toolbar class="md-primary group-setup-page__toolbar">
     <h1 class="md-toolbar-tools group-setup-page__heading" layout-align="center">Group setup</h1>
   </md-toolbar>
 
   <md-content layout-padding class="group-setup-page__content">
-    <form novalidate name="newGroupForm" ng-submit="newGroupForm.$valid && setupGroup(formData)">
+    <form novalidate name="newGroupForm" ng-submit="newGroupForm.$valid && createGroup(formData)">
       <md-input-container>
         <label>name</label>
         <input required name="name" type="text" ng-model="formData.name">

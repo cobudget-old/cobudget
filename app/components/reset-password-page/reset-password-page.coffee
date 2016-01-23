@@ -1,6 +1,7 @@
 module.exports =
   url: '/reset_password?reset_password_token'
   template: require('./reset-password-page.html')
+  reloadOnSearch: false
   controller: ($auth, Dialog, LoadBar, $location, Records, $scope, $stateParams, Toast) ->
 
     $scope.formData = {}

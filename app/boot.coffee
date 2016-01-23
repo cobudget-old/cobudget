@@ -15,25 +15,20 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
     global.cobudgetApp.currentUserId = user.id
     Records.memberships.fetchMyMemberships().then (data) ->
       membershipsLoadedDeferred.resolve()
-
-      # if user has no groups, log user out, display error dialog, and redirect home
-      if !data.groups
-        $auth.signOut().then ->
-          global.cobudgetApp.currentUserId = null
-          $location.path('/')
-          Dialog.alert(title: 'error!', content: 'invalid credentials!')
-          LoadBar.stop()
-
-      # if user has groups, and every group is initialized, redirect to group page
-      # with toast, set timezone, and confirm user if necessary
-      if data.groups && _.every(data.groups, {'initialized': true})
-        groupId = data.groups[0].id
-        $location.path("/groups/#{groupId}")
-        Toast.show('Welcome to Cobudget!')
-        if CurrentUser().utcOffset != moment().utcOffset()
+      if CurrentUser().hasEverJoinedAGroup()
+        if CurrentUser().hasMemberships()
+          groupId = data.groups[0].id
+          $location.path("/groups/#{groupId}")
+          Toast.show('Welcome to Cobudget!')
           Records.users.updateProfile(utc_offset: moment().utcOffset())
-        if CurrentUser().isPendingConfirmation
-          Records.users.updateProfile(confirmationToken: null)
+        else
+          $auth.signOut().then ->
+            global.cobudgetApp.currentUserId = null
+            $location.path('/')
+            Dialog.alert(title: 'error!', content: 'invalid credentials!')
+            LoadBar.stop()
+      else
+        LoadBar.stop()
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     console.log('$stateChangeError signal fired!')
