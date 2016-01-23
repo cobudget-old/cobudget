@@ -133,9 +133,9 @@ describe UsersController, :type => :controller do
         expect(@new_user.confirmation_token).to be_truthy
       end
 
-      it "sends email to user with link to confirm account page containing confirmation_token" do
+      it "sends email to user with link to confirm account page containing confirmation_token and boolean setup_group set to true" do
         expect(@sent_email.to).to eq([@new_user.email])
-        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}"
+        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}&setup_group=true"
         expect(@sent_email.body.to_s).to include(expected_url)
       end
     end

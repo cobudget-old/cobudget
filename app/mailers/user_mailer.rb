@@ -115,7 +115,7 @@ class UserMailer < ActionMailer::Base
   def join_cobudget_and_create_group_invite(user: , inviter:)
     @user = user
     @inviter = inviter
-    @redirect_url = "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}".html_safe
+    @redirect_url = "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}&setup_group=true".html_safe
     mail(to: @user.name_and_email,
          from: "Cobudget Accounts <accounts@cobudget.co>",
          subject: "#{inviter.name} invited you to create a new group on Cobudget")
