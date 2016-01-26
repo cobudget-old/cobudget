@@ -1,0 +1,34 @@
+.landing-page__toolbar {
+  background: $cobudget-gunmetal;
+  color: white;
+  height: 55px;
+  padding-right: 10px;
+}
+
+// .landing-page__menu-icon {
+//   @include fontMedLarge;
+//   fill: white;
+// }
+
+.landing-page__login-btn {
+  cursor: pointer;
+}
+
+.landing-page__login-btn-label {
+  @include fontMedium;
+}
+
+.landing-page__toolbar-person-icon-container {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: white;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.landing-page__person-icon {
+  fill: #D8D8D8;
+}
