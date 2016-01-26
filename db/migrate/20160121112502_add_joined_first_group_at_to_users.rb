@@ -9,6 +9,6 @@ class AddJoinedFirstGroupAtToUsers < ActiveRecord::Migration
   end
 
   def down
-    remove_column :users, :joined_first_group_at
+    remove_column :users, :joined_first_group_at, :datetime
   end
 end
