@@ -20,6 +20,7 @@
   margin-top: 20px;
 }
 
+// TODO: move this into mixins
 .landing-page__email-field {
   @include fontMedium;
   display: block;

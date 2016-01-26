@@ -1,15 +1,30 @@
-.confirm-account-page__toolbar {
-  background: $cobudget-gunmetal;
-  color: white;
+.confirm-account-page__logo {
+  display: block;
+  width: 200px;
+  margin: 30px auto;
+  margin-bottom: 20px;
 }
 
 .confirm-account-page__content {
   max-width: 640px;
   margin: 0 auto;
+  padding: 0 15px;
 }
 
-.confirm-account-page__heading {
-  @include fontGrande;
+.confirm-account-page__content-card {
+  background: #FBFBFB;
+}
+
+.confirm-account-page__form {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.confirm-account-page__logo-subheader {
+  font-weight: 300;
+  @include fontMedLarge;
+  text-align: center;
+  margin: 0;
 }
 
 .confirm-account-page__submit-btn {
@@ -17,4 +32,51 @@
   border: 1px solid $cobudget-gunmetal;
   width: 100%;
   margin-top: 10px;
+}
+
+.confirm-account-page__input-field-container {
+  position: relative;
+  width: 90%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.confirm-account-page__input-field {
+  @include fontMedium;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #E4E4E4 !important;
+  box-sizing: border-box;
+  padding: 3px 10px !important;
+  border-radius: 3px !important;
+  background: white !important;
+  margin-top: 5px;
+  font-weight: 300;
+}
+
+.confirm-account-page__person-icon-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #D8D8D8;
+  background: white;
+  font-size: 16px;
+  margin: 15px auto;
+  cursor: pointer;
+}
+
+.confirm-account-page__person-icon {
+  fill: #D8D8D8;
+}
+
+.confirm-account-page__submit-btn {
+  @include fontSmall;
+  width: 170px;
+  background: $cobudget-green !important;
+  color: white !important;
+  min-height: 32px;
+  height: 32px;
+  margin-top: 12px;
+  border: none;
 }
