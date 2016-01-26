@@ -1,5 +1,5 @@
-module.exports = 
-  url: '/'
+module.exports =
+  url: '/login'
   template: require('./welcome-page.html')
   controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, $window) ->
 
@@ -13,7 +13,7 @@ module.exports =
           $location.path("/groups/#{groupId}")
       .catch ->
         LoadBar.stop()
-          
+
     $scope.login = (formData) ->
       LoadBar.start()
       $auth.submitLogin(formData)
