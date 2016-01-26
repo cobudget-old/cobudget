@@ -1,6 +1,6 @@
 module.exports =
   url: '/login'
-  template: require('./welcome-page.html')
+  template: require('./login-page.html')
   controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, $window) ->
 
     Error.clear()
