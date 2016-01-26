@@ -3,6 +3,7 @@
 global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise '/'
   $stateProvider
+    .state 'landing', require('app/components/landing-page/landing-page.coffee')
     .state 'group', require('app/components/group-page/group-page.coffee')
     .state 'welcome', require('app/components/welcome-page/welcome-page.coffee')
     .state 'create-bucket', require('app/components/create-bucket-page/create-bucket-page.coffee')
