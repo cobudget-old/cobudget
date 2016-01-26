@@ -21,7 +21,7 @@
 }
 
 .landing-page__email-field {
-  font-size: 17px;
+  @include fontMedium;
   display: block;
   margin: 0 auto;
   border: 2px solid #E4E4E4;
@@ -32,6 +32,7 @@
   background: inherit;
   text-align: center;
   margin-top: 5px;
+  font-weight: 300;
 }
 
 .landing-page__email-field:focus {
