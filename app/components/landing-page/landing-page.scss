@@ -1,1 +1,53 @@
-.landing-page { }
+.landing-page__content {
+  margin-top: 40px;
+}
+
+.landing-page__logo {
+  display: block;
+  width: 275px;
+  margin: 0 auto;
+}
+
+.landing-page__logo-subheader {
+  font-weight: 300;
+  @include fontMedLarge;
+  text-align: center;
+  margin: 0;
+}
+
+.landing-page__start-group-form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.landing-page__email-field {
+  font-size: 17px;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #E4E4E4;
+  width: 200px;
+  box-sizing: border-box;
+  padding: 5px 7px;
+  border-radius: 3px;
+  background: inherit;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.landing-page__email-field:focus {
+  outline: none;
+}
+
+.landing-page__submit-btn {
+  @include fontSmall;
+  width: 170px;
+  background: $cobudget-green !important;
+  color: white !important;
+  min-height: 32px;
+  height: 32px;
+  margin-top: 12px;
+}
+
+.landing-page__content {
+  height: 100%;
+}

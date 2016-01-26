@@ -3,6 +3,7 @@ module.exports =
   template: require('./landing-page.html')
   controller: ($scope) ->
 
-    console.log('landing-page loaded!')
+    $scope.startGroup = ->
+      console.log('ive been clicked!')
 
     return
