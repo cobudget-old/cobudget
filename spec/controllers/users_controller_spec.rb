@@ -9,6 +9,54 @@ describe UsersController, :type => :controller do
     ActionMailer::Base.deliveries.clear
   end
 
+  describe "#create" do
+    context "specified email does not yet exist in DB" do
+      before do
+        params = { email: Faker::Internet.email }
+        post :create, params
+        @new_user = User.find_by(params)
+        @sent_email = ActionMailer::Base.deliveries.first
+      end
+
+      after do
+        ActionMailer::Base.deliveries.clear
+      end
+
+      it "creates a new user with confirmation token" do
+        expect(@new_user).to be_truthy
+        expect(@new_user.confirmation_token).to be_truthy
+      end
+
+      it "sends email to user with link to confirm account page containing confirmation_token" do
+        expect(@sent_email.to).to eq([@new_user.email])
+        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}"
+        expect(@sent_email.body.to_s).to include(expected_url)
+      end
+
+      it "returns the new user's email and temporary password as json" do
+        parsed_response = parsed(response)
+        expect(parsed_response["email"]).to eq(@new_user.email)
+        expect(@new_user.valid_password?(parsed_response["password"])).to be_truthy
+      end
+    end
+
+    context "specified email already exists in DB" do
+      before do
+        create(:user, email: "meow@meow.com")
+        @params = {email: "meow@meow.com"}
+        post :create, @params
+      end
+
+      it "does not create user" do
+        expect(User.where(@params).length).to eq(1)
+      end
+
+      it "returns http status conflict" do
+        expect(response).to have_http_status(:conflict)
+      end
+    end
+  end
+
   describe "#confirm_account" do
     context "active confirmation token" do
       before do

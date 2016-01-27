@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   scope path: 'api/v1', defaults: { format: :json } do
     mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks, :passwords, :registrations]
 
-    resources :users, defaults: { format: :json } do
+    resources :users, only: :create, defaults: { format: :json } do
       collection do
         post :confirm_account
         post :request_password_reset

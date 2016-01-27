@@ -148,4 +148,12 @@ class UserMailer < ActionMailer::Base
            subject: "[Cobudget] Daily Summary - New activity in your groups")
     end
   end
+
+  def confirm_account_email(user:)
+    @user = user
+    mail(to: user.name_and_email,
+         from: "Cobudget Accounts <accounts@cobudget.co>",
+         subject: "hey set up your cobudget account!"
+    )
+  end
 end
