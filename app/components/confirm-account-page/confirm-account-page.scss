@@ -16,7 +16,8 @@
 }
 
 .confirm-account-page__form {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -34,25 +35,16 @@
   margin-top: 10px;
 }
 
-.confirm-account-page__input-field-container {
-  position: relative;
-  width: 90%;
+.confirm-account-page__input-field {
+  @include cob-std-input;
+  width: 80%;
   max-width: 300px;
-  margin: 0 auto;
+  background: white;
+  margin-bottom: 10px;
 }
 
-.confirm-account-page__input-field {
-  @include fontMedium;
-  width: 100%;
-  display: block;
-  margin: 0 auto;
-  border: 2px solid #E4E4E4 !important;
-  box-sizing: border-box;
-  padding: 3px 10px !important;
-  border-radius: 3px !important;
-  background: white !important;
-  margin-top: 5px;
-  font-weight: 300;
+.confirm-account-page__error-messages {
+  padding-left: 2px;
 }
 
 .confirm-account-page__person-icon-container {
@@ -72,11 +64,18 @@
 
 .confirm-account-page__submit-btn {
   @include fontSmall;
-  width: 170px;
-  background: $cobudget-green !important;
+  width: 78%;
+  max-width: 298px;
+  background: #00CF00 !important;
   color: white !important;
   min-height: 32px;
   height: 32px;
-  margin-top: 12px;
+  margin-top: 7px;
   border: none;
+}
+
+.confirm-account-page__steps-to-go {
+  margin-top: 5px;
+  font-size: 10px;
+  color: #A5A5A5;
 }

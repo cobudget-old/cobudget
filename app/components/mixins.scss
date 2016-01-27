@@ -1,28 +1,9 @@
-/* let's only use semantic names for our colours */
 $grey-on-grey:  #666;
-$primary-text-color: #262626;
-$border-color: #dcdcdc;
-$list-hover-color: #E0E0E0;
-$list-hover-transparent-color: rgba(224,224,224,0.8);
-$background-color: #ebebeb;
-$card-background-color: #fff;
-$highlight-red: #D0021B;
-
-$item-highlight-color: #FFFFE8;
-$progress-bar-color: #176EE3;
-$loomio-orange: #F6A82B;
-
-$main-max-width: 640px;
-$large-max-width: 960px;
-$navbar-height: 44px;
-
-// stuff used by cobudget:
 $cobudget-blue: #6064FF;
 $cobudget-happy-blue: #00B8D4;
 $cobudget-navy: #3A11B4;
 $cobudget-cyan: #00BCD7;
 $cobudget-light-blue: #3E88E8;
-
 $cobudget-grey: #BDBDBD;
 $cobudget-orange: #FF8600;
 $cobudget-light-grey: #FAFAFA;
@@ -37,10 +18,11 @@ $cobudget-gunmetal: #243239;
 $cobudget-dark-grey: #454545;
 $cobudget-pink: #FF85B7;
 
-
 $small-height: 36px;
 $medium-height: 48px;
 $large-height: 60px;
+
+// text
 
 @mixin fontTiny {
   font-size: 12px;
@@ -88,5 +70,24 @@ $large-height: 60px;
 @mixin markdown {
   h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
+  }
+}
+
+// inputs
+
+@mixin cob-std-input {
+  @include fontMedium;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #E4E4E4;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background: inherit;
+  margin-top: 5px;
+  font-weight: 300;
+
+  &:focus {
+    outline: none;
   }
 }

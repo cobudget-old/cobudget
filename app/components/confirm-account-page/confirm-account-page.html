@@ -18,23 +18,16 @@
         </div>
 
         <h2 class="confirm-account-page__logo-subheader">First, let's set up your account</h2>
-        <form novalidate class="confirm-account-page__form" name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)">
-          <md-input-container md-no-float class="confirm-account-page__input-field-container">
-            <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="email">
-            <div ng-messages="newUserForm.name.$error" ng-if="newUserForm.name.$dirty || newUserForm.$submitted">
-              <div ng-message="required">This is required.</div>
-            </div>
-          </md-input-container>
 
-          <md-input-container md-no-float class="confirm-account-page__input-field-container">
-            <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="password">
-            <div ng-messages="newUserForm.password.$error" multiple>
-              <div ng-message="required" ng-if="newUserForm.password.$dirty || newUserForm.$submitted">This is required.</div>
-              <div ng-message="minlength" ng-if="newUserForm.$submitted">Password must be at least 8 characters long.</div>
-            </div>
-          </md-input-container>
+        <form novalidate class="confirm-account-page__form" name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)">
+
+          <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="email">
+
+          <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="password">
 
           <md-button class="confirm-account-page__submit-btn">next</md-button>
+
+          <div class="confirm-account-page__steps-to-go">1 step to go</div>
         </form>
       </md-card-content>
     </md-card>
