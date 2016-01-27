@@ -91,3 +91,12 @@ $large-height: 60px;
     outline: none;
   }
 }
+
+@mixin cob-std-submit-btn {
+  @include fontSmall;
+  background: #00CF00 !important;
+  color: white !important;
+  min-height: 32px;
+  height: 32px;
+  border: none;
+}

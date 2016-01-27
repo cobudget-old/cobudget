@@ -52,15 +52,10 @@
 }
 
 .confirm-account-page__submit-btn {
-  @include fontSmall;
+  @include cob-std-submit-btn;
   width: 78%;
   max-width: 298px;
-  background: #00CF00 !important;
-  color: white !important;
-  min-height: 32px;
-  height: 32px;
   margin-top: 7px;
-  border: none;
 }
 
 .confirm-account-page__steps-to-go {

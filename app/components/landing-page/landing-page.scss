@@ -42,11 +42,7 @@
 }
 
 .landing-page__submit-btn {
-  @include fontSmall;
+  @include cob-std-submit-btn;
   width: 170px;
-  background: #00CF00 !important;
-  color: white !important;
-  min-height: 32px;
-  height: 32px;
   margin-top: 12px;
 }
