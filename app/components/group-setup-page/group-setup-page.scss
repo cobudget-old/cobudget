@@ -15,27 +15,6 @@
   background: #FBFBFB;
 }
 
-.group-setup-page__form {
-  margin-top: 30px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.group-setup-page__logo-subheader {
-  font-weight: 300;
-  @include fontMedLarge;
-  text-align: center;
-  margin: 0;
-}
-
-.group-setup-page__input-field {
-  @include cob-std-input;
-  width: 80%;
-  max-width: 300px;
-  background: white;
-  margin-bottom: 10px;
-}
-
 .group-setup-page__person-icon-container {
   width: 70px;
   height: 70px;
@@ -49,6 +28,40 @@
 
 .group-setup-page__person-icon {
   fill: #D8D8D8;
+}
+
+.group-setup-page__form {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.group-setup-page__logo-subheader {
+  font-weight: 300;
+  @include fontMedLarge;
+  text-align: center;
+  margin: 0;
+}
+
+.group-setup-page__input-container {
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.group-setup-page__input-field {
+  @include cob-std-input;
+  margin-top: 5px;
+  background: white;
+  width: 100%;
+}
+
+.group-setup-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+  text-align: left;
 }
 
 .group-setup-page__submit-btn {

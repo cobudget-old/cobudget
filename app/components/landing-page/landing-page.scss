@@ -33,6 +33,7 @@
 
 .landing-page__email-field {
   @include cob-std-input;
+  margin-top: 5px;
   width: 200px;
   text-align: center;
 }
