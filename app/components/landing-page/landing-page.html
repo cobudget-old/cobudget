@@ -1,12 +1,14 @@
-<div class="landing-page" flex>
+<div class="landing-page">
   <landing-page-toolbar></landing-page-toolbar>
-  <md-content class="landing-page__content" layout="column" layout-align="center center" >
-    <img class="landing-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
-    <h2 class="landing-page__logo-subheader">Create more together</h2>
+  <md-content class="landing-page__content" layout="column" layout-align="center center">
+    <div class="landing-page__content-container">
+      <img class="landing-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
+      <h2 class="landing-page__logo-subheader">Create more together</h2>
 
-    <form novalidate class="landing-page__start-group-form" ng-submit="startGroup()">
-      <input class="landing-page__email-field" type="email" name="email" placeholder="Email Address">
-      <md-button class="landing-page__submit-btn">start a group</md-button>
-    </form>
+      <form novalidate class="landing-page__start-group-form" ng-submit="startGroup()">
+        <input class="landing-page__email-field" type="email" name="email" placeholder="Email Address">
+        <md-button class="landing-page__submit-btn">start a group</md-button>
+      </form>
+    </div>
   </md-content>
 </div>

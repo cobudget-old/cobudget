@@ -28,23 +28,12 @@
   margin: 0;
 }
 
-.confirm-account-page__submit-btn {
-  margin: 0;
-  border: 1px solid $cobudget-gunmetal;
-  width: 100%;
-  margin-top: 10px;
-}
-
 .confirm-account-page__input-field {
   @include cob-std-input;
   width: 80%;
   max-width: 300px;
   background: white;
   margin-bottom: 10px;
-}
-
-.confirm-account-page__error-messages {
-  padding-left: 2px;
 }
 
 .confirm-account-page__person-icon-container {

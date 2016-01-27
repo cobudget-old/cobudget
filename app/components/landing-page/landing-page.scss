@@ -1,5 +1,16 @@
+.landing-page {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
 .landing-page__content {
-  margin-top: 40px;
+  height: 100%;
+}
+
+.landing-page__content-container {
+  position: relative;
+  bottom: 5%;
 }
 
 .landing-page__logo {
@@ -33,13 +44,9 @@
 .landing-page__submit-btn {
   @include fontSmall;
   width: 170px;
-  background: $cobudget-green !important;
+  background: #00CF00 !important;
   color: white !important;
   min-height: 32px;
   height: 32px;
   margin-top: 12px;
-}
-
-.landing-page__content {
-  height: 100%;
 }
