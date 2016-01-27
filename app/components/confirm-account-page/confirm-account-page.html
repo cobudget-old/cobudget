@@ -1,11 +1,9 @@
 <div class="confirm-account-page">
-
   <landing-page-toolbar></landing-page-toolbar>
 
   <img class="confirm-account-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
 
   <md-content layout-padding class="confirm-account-page__content">
-
     <md-card class="confirm-account-page__content-card">
       <md-card-content>
         <div class="confirm-account-page__person-icon-container" layout="column" layout-align="center center">
@@ -20,7 +18,6 @@
         <h2 class="confirm-account-page__logo-subheader">First, let's set up your account</h2>
 
         <form novalidate class="confirm-account-page__form" name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)">
-
           <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="email">
 
           <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="password">
