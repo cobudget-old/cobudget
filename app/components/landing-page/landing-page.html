@@ -5,8 +5,12 @@
       <img class="landing-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
       <h2 class="landing-page__logo-subheader">Create more together</h2>
 
-      <form novalidate class="landing-page__start-group-form" ng-submit="startGroup()">
-        <input class="landing-page__email-field" type="email" name="email" placeholder="Email Address">
+      <form novalidate name="emailForm" class="landing-page__start-group-form" ng-submit="emailForm.$valid && startGroup()">
+        <div class="landing-page__input-container">
+          <input required class="landing-page__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
+          <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
+          <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
+        </div>
         <md-button class="landing-page__submit-btn">start a group</md-button>
       </form>
     </div>

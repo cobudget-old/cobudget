@@ -31,15 +31,26 @@
   margin-top: 20px;
 }
 
+.landing-page__input-container {
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
 .landing-page__email-field {
   @include cob-std-input;
-  margin-top: 5px;
-  width: 200px;
   text-align: center;
+  width: 100%;
 }
 
 .landing-page__email-field:focus {
   outline: none;
+}
+
+.landing-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
 }
 
 .landing-page__submit-btn {
