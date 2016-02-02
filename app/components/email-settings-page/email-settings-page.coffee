@@ -1,4 +1,4 @@
-module.exports = 
+module.exports =
   url: '/email_settings?previous_group_id'
   resolve:
     userValidated: ($auth) ->
@@ -7,7 +7,14 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   template: require('./email-settings-page.html')
   reloadOnSearch: false
-  controller: (CurrentUser, $location, Records, $scope, $stateParams, Toast) ->
+  controller: (CurrentUser, Error, $location, Records, $scope, $stateParams, Toast, UserCan) ->
+
+    if UserCan.changeEmailSettings()
+      $scope.authorized = true
+      Error.clear()
+    else
+      $scope.authorized = false
+      Error.set("you can't view this page")
 
     $scope.currentUser = CurrentUser()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
@@ -36,8 +43,8 @@ module.exports =
 
     $scope.done = ->
       params = _.pick $scope.currentUser, [
-        'subscribedToDailyDigest', 
-        'subscribedToPersonalActivity', 
+        'subscribedToDailyDigest',
+        'subscribedToPersonalActivity',
         'subscribedToParticipantActivity'
       ]
       Records.users.updateProfile(params).then ->

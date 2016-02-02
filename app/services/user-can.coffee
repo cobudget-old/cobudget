@@ -23,3 +23,6 @@ global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toas
         isAdmin: true
       })
       validMemberships.length > 0
+
+    changeEmailSettings: ->
+      CurrentUser().isConfirmed()
