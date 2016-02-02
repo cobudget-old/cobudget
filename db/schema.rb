@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122052600) do
+ActiveRecord::Schema.define(version: 20160202055141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 20160122052600) do
     t.string   "uid"
     t.string   "confirmation_token"
     t.integer  "utc_offset"
-    t.boolean  "subscribed_to_personal_activity",    default: true
-    t.boolean  "subscribed_to_daily_digest",         default: true
+    t.boolean  "subscribed_to_personal_activity",    default: false
+    t.boolean  "subscribed_to_daily_digest",         default: false
     t.boolean  "subscribed_to_participant_activity", default: false
     t.datetime "confirmed_at"
     t.datetime "joined_first_group_at"
