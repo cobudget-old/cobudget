@@ -2,7 +2,7 @@ require 'securerandom'
 
 class UsersController < AuthenticatedController
 
-  skip_before_action :authenticate_user!, except: [:update_profile, :update_password]
+  skip_before_action :authenticate_user!, except: [:update_profile, :update_password, :me]
 
   api :POST, '/users/confirm_account'
   def confirm_account
@@ -82,6 +82,11 @@ class UsersController < AuthenticatedController
     else
       render status: 400, json: { errors: current_user.errors.full_messages }
     end
+  end
+
+  api :GET, '/users/me'
+  def me
+    render status: 200, json: [current_user]
   end
 
   private

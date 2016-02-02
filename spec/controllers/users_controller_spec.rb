@@ -357,6 +357,7 @@ describe UsersController, :type => :controller do
     end
   end
 
+
   describe "#update_password" do
     let!(:user) { create(:user, password: "password") }
 
@@ -422,6 +423,33 @@ describe UsersController, :type => :controller do
       end
 
       it "returns http status unauthorized" do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
+  describe "#me" do
+    before { make_user_group_member }
+
+    context "user logged in" do
+      before do
+        request.headers.merge!(user.create_new_auth_token)
+        get :me
+      end
+
+      it "returns http status 'success'" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns the current_user as json" do
+        expect(parsed(response)["users"][0]["email"]).to eq(user.email)
+      end
+    end
+
+    context "user not logged in" do
+      before { get :me }
+
+      it "returns http status 'unauthorized'" do
         expect(response).to have_http_status(:unauthorized)
       end
     end
