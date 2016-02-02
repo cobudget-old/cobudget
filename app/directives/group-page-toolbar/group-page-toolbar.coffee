@@ -35,17 +35,14 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
           Toast.show('You\'ve been signed out')
 
       $scope.menuItems = [
-        {label: 'Profile Settings', onClick: $scope.openProfileSettings, icon: 'person', adminOnly: false},
-        {label: 'Email Settings', onClick: $scope.openEmailSettings, icon: 'mail', adminOnly: false},
-        {label: 'Give Feedback', onClick: $scope.openFeedbackForm, icon: 'live_help', adminOnly: false},
-        {label: 'Admin Panel', onClick: $scope.openAdminPanel, icon: 'local_pizza', adminOnly: true},
-        {label: 'Log Out', onClick: $scope.signOut, icon: 'exit_to_app', adminOnly: false}
+        {label: 'Profile Settings', onClick: $scope.openProfileSettings, icon: 'person', isDisplayed: true},
+        {label: 'Email Settings', onClick: $scope.openEmailSettings, icon: 'mail', isDisplayed: $scope.currentUser.isConfirmed()},
+        {label: 'Give Feedback', onClick: $scope.openFeedbackForm, icon: 'live_help', isDisplayed: true},
+        {label: 'Admin Panel', onClick: $scope.openAdminPanel, icon: 'local_pizza', isDisplayed: $scope.currentUser.isAdminOf($scope.group)},
+        {label: 'Log Out', onClick: $scope.signOut, icon: 'exit_to_app', isDisplayed: true}
       ]
 
       $scope.accessibleMenuItems = ->
-        if $scope.currentUser.isAdminOf($scope.group)
-          $scope.menuItems
-        else
-          _.filter $scope.menuItems, {adminOnly: false}
+        _.filter $scope.menuItems, {isDisplayed: true}
 
       return
