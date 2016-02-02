@@ -27,6 +27,7 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
     fetchMe: ->
       deferred = $q.defer()
       if @find(global.cobudgetApp.currentUserId)
+        # if it becomes necessary, re-fetch the current_user in the background
         deferred.resolve()
       else
         @remote.get('me', {}).then ->
