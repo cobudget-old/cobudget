@@ -30,7 +30,7 @@ class UsersController < AuthenticatedController
   api :POST, '/users?email'
   def create
     tmp_password = SecureRandom.hex
-    user = User.create_with_confirmation_token(email: params[:email], password: tmp_password)
+    user = User.create_with_confirmation_token(email: params[:user][:email], password: tmp_password)
     if user.valid?
       UserMailer.confirm_account_email(user: user).deliver_later
       render status: 200, json: { email: user.email, password: tmp_password }
