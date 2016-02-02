@@ -13,9 +13,9 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
 
   $rootScope.$on 'auth:login-success', (ev, user) ->
     global.cobudgetApp.currentUserId = user.id
-    Records.users.fetchMe().then ->
-      Records.memberships.fetchMyMemberships().then (data) ->
-        membershipsLoadedDeferred.resolve()
+    Records.memberships.fetchMyMemberships().then (data) ->
+      membershipsLoadedDeferred.resolve()
+      Records.users.fetchMe().then ->
         if CurrentUser().hasEverJoinedAGroup()
           if CurrentUser().hasMemberships()
             groupId = data.groups[0].id
