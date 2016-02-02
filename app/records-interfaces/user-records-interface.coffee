@@ -1,4 +1,4 @@
-global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface, UserModel) ->
+global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface, $q, UserModel) ->
   class UserRecordsInterface extends BaseRecordsInterface
     model: UserModel
     constructor: (recordStore) ->
@@ -25,4 +25,10 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
       @remote.post('update_password', params)
 
     fetchMe: ->
-      @remote.get('me', {})
+      deferred = $q.defer()
+      if @find(global.cobudgetApp.currentUserId)
+        deferred.resolve()
+      else
+        @remote.get('me', {}).then ->
+          deferred.resolve()
+      deferred.promise
