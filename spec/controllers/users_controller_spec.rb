@@ -12,9 +12,9 @@ describe UsersController, :type => :controller do
   describe "#create" do
     context "specified email does not yet exist in DB" do
       before do
-        params = { email: Faker::Internet.email }
-        post :create, params
-        @new_user = User.find_by(params)
+        user_params = { user: { email: Faker::Internet.email } }
+        post :create, user_params
+        @new_user = User.find_by(user_params[:user])
         @sent_email = ActionMailer::Base.deliveries.first
       end
 
@@ -43,12 +43,12 @@ describe UsersController, :type => :controller do
     context "specified email already exists in DB" do
       before do
         create(:user, email: "meow@meow.com")
-        @params = {email: "meow@meow.com"}
-        post :create, @params
+        @user_params = { user: {email: "meow@meow.com"} }
+        post :create, @user_params
       end
 
       it "does not create user" do
-        expect(User.where(@params).length).to eq(1)
+        expect(User.where(@user_params[:user]).length).to eq(1)
       end
 
       it "returns http status conflict" do
