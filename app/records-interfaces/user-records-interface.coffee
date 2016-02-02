@@ -23,3 +23,6 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
 
     updatePassword: (params) ->
       @remote.post('update_password', params)
+
+    fetchMe: ->
+      @remote.get('me', {})
