@@ -18,7 +18,6 @@ module.exports =
       LoadBar.start()
       $auth.submitLogin(formData)
         .catch ->
-          Dialog.alert(title: 'error!', content: 'invalid credentials')
           LoadBar.stop()
 
     $scope.visitForgotPasswordPage = ->

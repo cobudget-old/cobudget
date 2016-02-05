@@ -31,6 +31,9 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
         else
           LoadBar.stop()
 
+  $rootScope.$on 'auth:login-error', (ev, reason) ->
+    Dialog.alert(title: 'error!', content: reason.errors[0])
+
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     console.log('$stateChangeError signal fired!')
     console.log('e: ', e)
