@@ -10,6 +10,6 @@ module.exports =
           $auth.submitLogin(userData).then ->
             $location.path('/setup_group')
         .catch (err) ->
-          console.log('err: ', err)
+          $location.path('/login').search('setup_group', true)
 
     return
