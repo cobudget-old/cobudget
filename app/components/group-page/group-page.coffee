@@ -1,4 +1,9 @@
 module.exports =
+  onEnter: ($location, Toast) ->
+    if $location.search().setup_group
+      $location.url($location.path())
+      $location.path('/setup_group')
+      Toast.hide()
   resolve:
     userValidated: ($auth) ->
       $auth.validateUser()
