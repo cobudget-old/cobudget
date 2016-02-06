@@ -12,7 +12,6 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
       membershipsLoadedDeferred.resolve(data)
 
   $rootScope.$on 'auth:login-error', (ev, reason) ->
-    # TODO: only do this if login error occurs on login page
     Dialog.alert(title: 'error!', content: reason.errors[0])
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
