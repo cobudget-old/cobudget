@@ -8,7 +8,7 @@ module.exports =
     $scope.formData = {}
     email = $location.search().email
     if email
-      $location.url($location.path())
+      $location.search('email', null)
       $scope.formData.email = email
 
     $scope.login = (formData) ->
