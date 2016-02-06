@@ -3,14 +3,14 @@ module.exports =
     ValidateAndRedirectLoggedInUser()
   url: '/'
   template: require('./landing-page.html')
-  controller: ($auth, Dialog, LoadBar, $location, Records, $scope) ->
+  controller: (Dialog, LoadBar, $location, Records, $scope, Session) ->
 
     $scope.startGroup = ->
       LoadBar.start()
       newUser = Records.users.build($scope.formData)
       newUser.save()
         .then (userData) ->
-          $auth.submitLogin(userData).then ->
+          Session.create(userData).then ->
             $location.path('/setup_group')
         .catch (err) ->
           $location.path('/login').search({setup_group: true, email: newUser.email})

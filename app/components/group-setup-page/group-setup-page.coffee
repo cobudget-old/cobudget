@@ -1,11 +1,11 @@
 # http://i.imgur.com/RMs4njZ.gifv
 
 module.exports =
+  onEnter: ($location) ->
+    $location.url($location.path())
   resolve:
     userValidated: ($auth) ->
       $auth.validateUser()
-    membershipsLoaded: ->
-      global.cobudgetApp.membershipsLoaded
   url: '/setup_group'
   template: require('./group-setup-page.html')
   controller: (LoadBar, $location, Records, $scope) ->

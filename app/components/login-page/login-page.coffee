@@ -3,19 +3,20 @@ module.exports =
     ValidateAndRedirectLoggedInUser()
   url: '/login'
   template: require('./login-page.html')
-  controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, $window) ->
+  controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, Session, $window) ->
 
     $scope.formData = {}
     email = $location.search().email
+    setupGroup = $location.search().setup_group
+
     if email
       $location.search('email', null)
       $scope.formData.email = email
 
     $scope.login = (formData) ->
       LoadBar.start()
-      $auth.submitLogin(formData)
-        .catch ->
-          LoadBar.stop()
+      redirectTo = if setupGroup then 'group setup' else 'group'
+      Session.create(formData, {redirectTo: redirectTo})
 
     $scope.visitForgotPasswordPage = ->
       $location.path('/forgot_password')
