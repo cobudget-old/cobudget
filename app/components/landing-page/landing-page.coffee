@@ -15,5 +15,5 @@ module.exports =
         .catch (err) ->
           $location.path('/login').search({setup_group: true, email: newUser.email})
         .finally ->
-          LoadBar.start()
+          LoadBar.stop()
     return
