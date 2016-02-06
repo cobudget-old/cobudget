@@ -1,24 +1,15 @@
 module.exports =
+  onEnter: (ValidateAndRedirectLoggedInUser) ->
+    ValidateAndRedirectLoggedInUser()
   url: '/login'
   template: require('./login-page.html')
   controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, $window) ->
-
-    Error.clear()
-    LoadBar.start()
 
     $scope.formData = {}
     email = $location.search().email
     if email
       $location.url($location.path())
       $scope.formData.email = email
-
-    $auth.validateUser()
-      .then ->
-        Records.memberships.fetchMyMemberships().then (data) ->
-          groupId = data.groups[0].id
-          $location.path("/groups/#{groupId}")
-      .catch ->
-        LoadBar.stop()
 
     $scope.login = (formData) ->
       LoadBar.start()

@@ -8,8 +8,8 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
 
   $rootScope.$on 'auth:validation-success', (ev, user) ->
     global.cobudgetApp.currentUserId = user.id
-    Records.memberships.fetchMyMemberships().then ->
-      membershipsLoadedDeferred.resolve()
+    Records.memberships.fetchMyMemberships().then (data) ->
+      membershipsLoadedDeferred.resolve(data)
 
   $rootScope.$on 'auth:login-success', (ev, user) ->
     global.cobudgetApp.currentUserId = user.id

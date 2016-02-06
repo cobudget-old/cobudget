@@ -1,4 +1,6 @@
 module.exports =
+  onEnter: (ValidateAndRedirectLoggedInUser) ->
+    ValidateAndRedirectLoggedInUser()
   url: '/'
   template: require('./landing-page.html')
   controller: ($auth, Dialog, LoadBar, $location, Records, $scope) ->
