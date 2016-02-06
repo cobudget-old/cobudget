@@ -47,6 +47,20 @@ describe "DeliverDailyEmailDigest" do
       end
     end
 
+    context "user has no balance" do
+      it "digest says you've got money to spend, only to members with a non-zero balance" do
+        create(:allocation, user: @parisian_user_2, group: group, amount: 4.20)
+        Timecop.freeze(@current_utc_time) do
+          DeliverDailyEmailDigest.to_subscribers!
+          @sent_emails = ActionMailer::Base.deliveries
+          @parisian_user_1_email = @sent_emails.find { |e| e.to.first == @parisian_user_1.email }
+          @parisian_user_2_email = @sent_emails.find { |e| e.to.first == @parisian_user_2.email }
+          expect(@parisian_user_1_email.body.raw_source).not_to include("You have $0.00 to spend")
+          expect(@parisian_user_2_email.body.raw_source).to include("You have $4.20 to spend")
+        end
+      end
+    end
+
     context "user does not have a utc_offset specified yet" do
       it "does not send any emails" do
         # but what if one of our parisian users doesn't have a utc_offset associated with their account yet?

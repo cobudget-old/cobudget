@@ -11,7 +11,12 @@
   <% live_buckets = activity[:live_buckets] %>
   <% funded_buckets = activity[:funded_buckets] %>
 
-  <p><b><%= link_to group.name, "#{root_url}#/groups/#{group.id}" %></b> has <%= group.formatted_balance %> to spend together. You have <%= membership.formatted_balance %> to spend.</p>
+  <p>
+    <b><%= link_to group.name, "#{root_url}#/groups/#{group.id}" %></b> has <%= group.formatted_balance %> to spend together.
+    <% if membership.balance > 0 %>
+      You have <%= membership.formatted_balance %> to spend.
+    <% end %>
+  </p>
 
   <% if draft_buckets.any? %>
     <b><%= draft_buckets.length %> New bucket <%= "idea".pluralize(draft_buckets.length) %></b><br/>
@@ -48,7 +53,7 @@
 
   <p>---</p>
 <% end %>
-  
+
 <p>Do you have an idea you want to propose for funding? <%= link_to "Create it now", "#{root_url}#/buckets/new" %></p>
 
 <p><%= "<3" %> from Cobudget</p>
