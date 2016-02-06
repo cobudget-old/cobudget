@@ -1,9 +1,9 @@
 module.exports =
-  onEnter: (ValidateAndRedirectLoggedInUser) ->
-    ValidateAndRedirectLoggedInUser()
   url: '/login'
   template: require('./login-page.html')
-  controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, Session, $window) ->
+  controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, Session, ValidateAndRedirectLoggedInUser, $window) ->
+
+    ValidateAndRedirectLoggedInUser()
 
     $scope.formData = {}
     email = $location.search().email
