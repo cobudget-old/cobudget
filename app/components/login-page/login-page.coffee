@@ -6,6 +6,12 @@ module.exports =
     Error.clear()
     LoadBar.start()
 
+    $scope.formData = {}
+    email = $location.search().email
+    if email
+      $location.url($location.path())
+      $scope.formData.email = email
+
     $auth.validateUser()
       .then ->
         Records.memberships.fetchMyMemberships().then (data) ->
