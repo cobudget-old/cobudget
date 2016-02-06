@@ -2,7 +2,7 @@ module.exports =
   url: '/reset_password?reset_password_token'
   template: require('./reset-password-page.html')
   reloadOnSearch: false
-  controller: ($auth, Dialog, LoadBar, $location, Records, $scope, $stateParams, Toast) ->
+  controller: (Dialog, LoadBar, $location, Records, $scope, Session, $stateParams, Toast) ->
 
     $scope.formData = {}
     resetPasswordToken = $stateParams.reset_password_token
@@ -14,17 +14,14 @@ module.exports =
       $scope.formData = {}
       if password == confirmPassword
         $location.search('reset_password_token', null)
-        requestParams = 
+        requestParams =
           password: password
           confirm_password: confirmPassword
           reset_password_token: resetPasswordToken
         Records.users.resetPassword(requestParams)
           .then (res) ->
-            user = res.users[0]
-            loginParams =
-              email: user.email
-              password: password
-            $auth.submitLogin(loginParams)
+            loginParams = {email: res.users[0].email, password: password}
+            Session.create(loginParams, redirectTo: 'group')
           .catch (err) ->
             Toast.show('Your reset password token has expired, please request another')
             $location.path('/forgot_password')
