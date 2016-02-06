@@ -37,6 +37,7 @@ module Overrides
 
         render_create_success
       elsif not @resource.confirmed?
+        UserMailer.confirm_account_email(user: @resource).deliver_later
         render_create_error_not_confirmed
       else
         render_create_error_bad_credentials
