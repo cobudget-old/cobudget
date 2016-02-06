@@ -153,7 +153,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: user.name_and_email,
          from: "Cobudget Accounts <accounts@cobudget.co>",
-         subject: "hey set up your cobudget account!"
+         subject: "Time to set up your account!"
     )
   end
 end
