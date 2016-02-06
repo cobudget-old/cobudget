@@ -10,10 +10,8 @@ module.exports =
       newUser = Records.users.build($scope.formData)
       newUser.save()
         .then (userData) ->
-            Session.create(userData).then ->
-            $location.path('/setup_group')
+          Session.create(userData, redirectTo: 'group setup')
         .catch (err) ->
-          $location.path('/login').search({setup_group: true, email: newUser.email})
-        .finally ->
           LoadBar.stop()
+          $location.path('/login').search({setup_group: true, email: newUser.email})
     return
