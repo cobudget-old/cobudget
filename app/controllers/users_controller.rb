@@ -8,7 +8,7 @@ class UsersController < AuthenticatedController
   def confirm_account
     render status: 400, nothing: true and return unless valid_confirm_account_params?
     if user = User.find_by_confirmation_token(params[:confirmation_token])
-      user.update(name: params[:name], password: params[:password])
+      user.update(name: params[:name], password: params[:password], subscribed_to_daily_digest: true, subscribed_to_personal_activity: true)
       user.confirm!
       render json: [user]
     else
