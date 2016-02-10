@@ -20,7 +20,7 @@
         <form novalidate class="group-setup-page__form" name="newGroupForm" ng-submit="newGroupForm.$valid && createGroup(formData)">
 
           <div class="group-setup-page__input-container">
-            <input required class="group-setup-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="name">
+            <input required class="group-setup-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="group name">
             <div ng-if="newGroupForm.name.$error.required && newGroupForm.$submitted" class="group-setup-page__input-error">Name is required.</div>
           </div>
 
