@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202055141) do
+ActiveRecord::Schema.define(version: 20160211052541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20160202055141) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.decimal  "amount",     precision: 12, scale: 2, default: 0.0
+    t.decimal  "amount",     precision: 12, scale: 2, null: false
     t.integer  "group_id"
   end
 
@@ -33,9 +33,9 @@ ActiveRecord::Schema.define(version: 20160202055141) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.decimal  "target",            precision: 12, scale: 2
+    t.integer  "target"
     t.integer  "group_id"
-    t.string   "status",                                     default: "draft"
+    t.string   "status",            default: "draft"
     t.datetime "funding_closes_at"
     t.datetime "funded_at"
     t.datetime "live_at"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20160202055141) do
     t.integer  "bucket_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount",     precision: 12, scale: 2, default: 0.0
+    t.integer  "amount",     null: false
   end
 
   add_index "contributions", ["bucket_id"], name: "index_contributions_on_bucket_id", using: :btree
