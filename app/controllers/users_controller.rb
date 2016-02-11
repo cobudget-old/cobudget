@@ -1,12 +1,14 @@
+require 'securerandom'
+
 class UsersController < AuthenticatedController
 
-  skip_before_action :authenticate_user!, except: [:update_profile, :update_password]
+  skip_before_action :authenticate_user!, except: [:update_profile, :update_password, :me]
 
   api :POST, '/users/confirm_account'
   def confirm_account
     render status: 400, nothing: true and return unless valid_confirm_account_params?
     if user = User.find_by_confirmation_token(params[:confirmation_token])
-      user.update(name: params[:name], password: params[:password])
+      user.update(name: params[:name], password: params[:password], subscribed_to_daily_digest: true, subscribed_to_personal_activity: true)
       user.confirm!
       render json: [user]
     else
@@ -20,6 +22,18 @@ class UsersController < AuthenticatedController
     if user.valid?
       UserMailer.join_cobudget_and_create_group_invite(user: user, inviter: current_user).deliver_later
       render status: 200, nothing: true
+    else
+      render status: 409, nothing: true
+    end
+  end
+
+  api :POST, '/users?email'
+  def create
+    tmp_password = SecureRandom.hex
+    user = User.create_with_confirmation_token(email: params[:user][:email], password: tmp_password)
+    if user.valid?
+      UserMailer.confirm_account_email(user: user).deliver_later
+      render status: 200, json: { email: user.email, password: tmp_password }
     else
       render status: 409, nothing: true
     end
@@ -68,6 +82,11 @@ class UsersController < AuthenticatedController
     else
       render status: 400, json: { errors: current_user.errors.full_messages }
     end
+  end
+
+  api :GET, '/users/me'
+  def me
+    render status: 200, json: [current_user]
   end
 
   private

@@ -71,16 +71,16 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
-    devise (3.5.1)
+    devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise_token_auth (0.1.31)
-      devise (~> 3.3)
-      rails (~> 4.2)
+    devise_token_auth (0.1.37)
+      devise (> 3.5.2, < 4.1)
+      rails (< 6)
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
@@ -231,7 +231,7 @@ GEM
     timecop (0.7.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    warden (1.2.3)
+    warden (1.2.6)
       rack (>= 1.0)
 
 PLATFORMS
@@ -248,8 +248,8 @@ DEPENDENCIES
   database_cleaner
   delayed-plugins-airbrake
   delayed_job_active_record
-  devise
-  devise_token_auth
+  devise (~> 3.5.2)
+  devise_token_auth (~> 0.1.37)
   factory_girl_rails
   faker
   foreigner

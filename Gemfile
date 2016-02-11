@@ -19,9 +19,9 @@ gem 'responders', '~> 2.0'
 gem 'money-rails'
 
 # auth
-gem 'devise'
+gem 'devise', '~> 3.5.2'
 gem 'pundit'
-gem 'devise_token_auth'
+gem 'devise_token_auth', '~> 0.1.37'
 gem 'omniauth'
 
 # server

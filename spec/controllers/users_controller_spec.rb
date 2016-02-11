@@ -9,6 +9,54 @@ describe UsersController, :type => :controller do
     ActionMailer::Base.deliveries.clear
   end
 
+  describe "#create" do
+    context "specified email does not yet exist in DB" do
+      before do
+        user_params = { user: { email: Faker::Internet.email } }
+        post :create, user_params
+        @new_user = User.find_by(user_params[:user])
+        @sent_email = ActionMailer::Base.deliveries.first
+      end
+
+      after do
+        ActionMailer::Base.deliveries.clear
+      end
+
+      it "creates a new user with confirmation token" do
+        expect(@new_user).to be_truthy
+        expect(@new_user.confirmation_token).to be_truthy
+      end
+
+      it "sends email to user with link to confirm account page containing confirmation_token" do
+        expect(@sent_email.to).to eq([@new_user.email])
+        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}"
+        expect(@sent_email.body.to_s).to include(expected_url)
+      end
+
+      it "returns the new user's email and temporary password as json" do
+        parsed_response = parsed(response)
+        expect(parsed_response["email"]).to eq(@new_user.email)
+        expect(@new_user.valid_password?(parsed_response["password"])).to be_truthy
+      end
+    end
+
+    context "specified email already exists in DB" do
+      before do
+        create(:user, email: "meow@meow.com")
+        @user_params = { user: {email: "meow@meow.com"} }
+        post :create, @user_params
+      end
+
+      it "does not create user" do
+        expect(User.where(@user_params[:user]).length).to eq(1)
+      end
+
+      it "returns http status conflict" do
+        expect(response).to have_http_status(:conflict)
+      end
+    end
+  end
+
   describe "#confirm_account" do
     context "active confirmation token" do
       before do
@@ -27,10 +75,12 @@ describe UsersController, :type => :controller do
           @user.reload
         end
 
-        it "updates user with specified name, and password, clears confirmation token, and sets confirmed_at" do
+        it "updates user with specified name, and password, clears confirmation token, sets confirmed_at, and sets default email settings" do
           expect(@user.name).to eq("new name")
           expect(@user.confirmation_token).to be_nil
           expect(@user.confirmed_at).not_to be_nil
+          expect(@user.subscribed_to_daily_digest).to be_truthy
+          expect(@user.subscribed_to_personal_activity).to be_truthy
         end
 
         it "returns user as json" do
@@ -309,6 +359,7 @@ describe UsersController, :type => :controller do
     end
   end
 
+
   describe "#update_password" do
     let!(:user) { create(:user, password: "password") }
 
@@ -374,6 +425,33 @@ describe UsersController, :type => :controller do
       end
 
       it "returns http status unauthorized" do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
+  describe "#me" do
+    before { make_user_group_member }
+
+    context "user logged in" do
+      before do
+        request.headers.merge!(user.create_new_auth_token)
+        get :me
+      end
+
+      it "returns http status 'success'" do
+        expect(response).to have_http_status(:success)
+      end
+
+      it "returns the current_user as json" do
+        expect(parsed(response)["users"][0]["email"]).to eq(user.email)
+      end
+    end
+
+    context "user not logged in" do
+      before { get :me }
+
+      it "returns http status 'unauthorized'" do
         expect(response).to have_http_status(:unauthorized)
       end
     end
