@@ -1,18 +1,32 @@
 <div class="group-setup-page">
-  <md-toolbar class="md-primary group-setup-page__toolbar">
-    <h1 class="md-toolbar-tools group-setup-page__heading" layout-align="center">Group setup</h1>
-  </md-toolbar>
+  <landing-page-toolbar></landing-page-toolbar>
+
+  <img class="group-setup-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
 
   <md-content layout-padding class="group-setup-page__content">
-    <form novalidate name="newGroupForm" ng-submit="newGroupForm.$valid && createGroup(formData)">
-      <md-input-container>
-        <label>name</label>
-        <input required name="name" type="text" ng-model="formData.name">
-        <div ng-messages="newGroupForm.name.$error" ng-if="newGroupForm.name.$dirty || newGroupForm.$submitted">
-          <div ng-message="required">This is required.</div>
+    <md-card class="group-setup-page__content-card">
+      <md-card-content>
+        <div class="group-setup-page__person-icon-container" layout="column" layout-align="center center">
+          <ng-md-icon icon="group"
+            size="40"
+            class="group-setup-page__person-icon"
+            layout="column"
+            layout-align="center center">
+          </ng-md-icon>
         </div>
-      </md-input-container>
-      <md-button class="group-setup-page__submit-btn">submit</md-button>
-    </form>
+
+        <h2 class="group-setup-page__logo-subheader">Give your group a name</h2>
+
+        <form novalidate class="group-setup-page__form" name="newGroupForm" ng-submit="newGroupForm.$valid && createGroup(formData)">
+
+          <div class="group-setup-page__input-container">
+            <input required class="group-setup-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="group name">
+            <div ng-if="newGroupForm.name.$error.required && newGroupForm.$submitted" class="group-setup-page__input-error">Name is required.</div>
+          </div>
+
+          <md-button class="group-setup-page__submit-btn">let's go!</md-button>
+        </form>
+      </md-card-content>
+    </md-card>
   </md-content>
 </div>

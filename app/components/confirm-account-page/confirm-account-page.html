@@ -1,28 +1,37 @@
 <div class="confirm-account-page">
-  <md-toolbar class="md-primary confirm-account-page__toolbar">
-    <h1 class="md-toolbar-tools confirm-account-page__heading" layout-align="center">Confirm your Account</h1>
-  </md-toolbar>
+  <landing-page-toolbar></landing-page-toolbar>
+
+  <img class="confirm-account-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
 
   <md-content layout-padding class="confirm-account-page__content">
-    <form novalidate name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)">
-      <md-input-container>
-        <label>name</label>
-        <input required name="name" type="text" ng-model="formData.name">
-        <div ng-messages="newUserForm.name.$error" ng-if="newUserForm.name.$dirty || newUserForm.$submitted">
-          <div ng-message="required">This is required.</div>
+    <md-card class="confirm-account-page__content-card">
+      <md-card-content>
+        <div class="confirm-account-page__person-icon-container" layout="column" layout-align="center center">
+          <ng-md-icon icon="person"
+            size="60"
+            class="confirm-account-page__person-icon"
+            layout="column"
+            layout-align="center center"
+          ></ng-md-icon>
         </div>
-      </md-input-container>
 
-      <md-input-container>
-        <label>new password</label>
-        <input minlength="8" required name="password" type="password" ng-model="formData.password">
-        <div ng-messages="newUserForm.password.$error" multiple>
-          <div ng-message="required" ng-if="newUserForm.password.$dirty || newUserForm.$submitted">This is required.</div>
-          <div ng-message="minlength" ng-if="newUserForm.$submitted">Password must be at least 8 characters long.</div>
-        </div>
-      </md-input-container>
+        <h2 class="confirm-account-page__logo-subheader">Let's set up your account</h2>
 
-      <md-button class="confirm-account-page__submit-btn">submit</md-button>
-    </form>
+        <form novalidate class="confirm-account-page__form" name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)">
+          <div class="confirm-account-page__input-container">
+            <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="name">
+            <div ng-if="newUserForm.name.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Name is required.</div>
+          </div>
+
+          <div class="confirm-account-page__input-container">
+            <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="password">
+            <div ng-if="newUserForm.password.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Password is required.</div>
+            <div ng-if="newUserForm.password.$error.minlength && newUserForm.$submitted" class="confirm-account-page__input-error">Password must be longer than 8 characters.</div>
+          </div>
+
+          <md-button class="confirm-account-page__submit-btn">next</md-button>
+        </form>
+      </md-card-content>
+    </md-card>
   </md-content>
 </div>

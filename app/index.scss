@@ -6,7 +6,8 @@
 @import './components/mixins.scss';
 @import './components/utilities.scss';
 
-@import './components/welcome-page/welcome-page.scss';
+@import './components/landing-page/landing-page.scss';
+@import './components/login-page/login-page.scss';
 @import './components/group-page/group-page.scss';
 @import './components/create-bucket-page/create-bucket-page.scss';
 @import './components/bucket-page/bucket-page.scss';
@@ -18,6 +19,8 @@
 @import './components/reset-password-page/reset-password-page.scss';
 @import './components/email-settings-page/email-settings-page.scss';
 @import './components/profile-settings-page/profile-settings-page.scss';
+
+@import './directives/landing-page-toolbar/landing-page-toolbar.scss';
 
 @import './directives/group-page-sidenav/group-page-sidenav.scss';
 @import './directives/group-page-toolbar/group-page-toolbar.scss';

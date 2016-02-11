@@ -1,4 +1,6 @@
 module.exports =
+  onExit: ($location) ->
+    $location.url($location.path())
   resolve:
     clearSession: (Session) ->
       Session.clear()
@@ -17,14 +19,12 @@ module.exports =
         confirmation_token: $scope.confirmationToken
       Records.users.confirmAccount(params)
         .then (data) ->
-          user = data.users[0]
-          global.cobudgetApp.currentUserId = user.id
-          loginParams = { email: user.email, password: formData.password }
-          $auth.submitLogin(loginParams)
-            .then (ev, user) ->
-              $location.url($location.path())
-              if $scope.setupGroup
-                $location.path("/setup_group")
+          loginParams = { email: data.users[0].email, password: formData.password }
+          if $scope.setupGroup
+            Session.create(loginParams).then ->
+              $location.path("/setup_group")
+          else
+            Session.create(loginParams, {redirectTo: 'group'})
         .catch ->
-            Toast.show('Sorry, that confirmation token has expired.')
-            $location.path('/')
+          Toast.show('Sorry, that confirmation token has expired.')
+          $location.path('/')

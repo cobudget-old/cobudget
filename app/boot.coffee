@@ -8,27 +8,11 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
 
   $rootScope.$on 'auth:validation-success', (ev, user) ->
     global.cobudgetApp.currentUserId = user.id
-    Records.memberships.fetchMyMemberships().then ->
-      membershipsLoadedDeferred.resolve()
-
-  $rootScope.$on 'auth:login-success', (ev, user) ->
-    global.cobudgetApp.currentUserId = user.id
     Records.memberships.fetchMyMemberships().then (data) ->
-      membershipsLoadedDeferred.resolve()
-      if CurrentUser().hasEverJoinedAGroup()
-        if CurrentUser().hasMemberships()
-          groupId = data.groups[0].id
-          $location.path("/groups/#{groupId}")
-          Toast.show('Welcome to Cobudget!')
-          Records.users.updateProfile(utc_offset: moment().utcOffset())
-        else
-          $auth.signOut().then ->
-            global.cobudgetApp.currentUserId = null
-            $location.path('/')
-            Dialog.alert(title: 'error!', content: 'invalid credentials!')
-            LoadBar.stop()
-      else
-        LoadBar.stop()
+      membershipsLoadedDeferred.resolve(data)
+
+  $rootScope.$on 'auth:login-error', (ev, reason) ->
+    Dialog.alert(title: 'error!', content: reason.errors[0])
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     console.log('$stateChangeError signal fired!')

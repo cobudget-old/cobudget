@@ -26,11 +26,11 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
       @groups()[0]
 
     isMemberOf: (group) ->
-      _.find @memberships(), (membership) ->
+      !!_.find @memberships(), (membership) ->
         membership.groupId == group.id
 
     isAdminOf: (group) ->
-      _.find @memberships(), (membership) ->
+      !!_.find @memberships(), (membership) ->
         membership.groupId == group.id && membership.isAdmin
 
     isConfirmed: ->

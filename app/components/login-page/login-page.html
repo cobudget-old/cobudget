@@ -1,11 +1,11 @@
-<div class="welcome-page" ng-hide="loading">
-  <md-toolbar class="md-primary welcome-page__toolbar">
-    <h1 class="md-toolbar-tools welcome-page__heading" layout-align="center">Welcome to Cobudget!</h1>
+<div class="login-page">
+  <md-toolbar class="md-primary login-page__toolbar">
+    <h1 class="md-toolbar-tools login-page__heading" layout-align="center">Welcome to Cobudget!</h1>
   </md-toolbar>
 
-  <md-content layout-padding class="welcome-page__content">
-    <form novalidate name="loginForm" class="welcome-page__login-form" ng-submit="login(formData)">
-      <div class="welcome-page__form-errors">{{ formError }}</div>
+  <md-content layout-padding class="login-page__content">
+    <form novalidate name="loginForm" class="login-page__login-form" ng-submit="login(formData)">
+      <div class="login-page__form-errors">{{ formError }}</div>
 
       <md-input-container>
         <label>email</label>
@@ -26,12 +26,12 @@
 
 
 
-      <md-button class="welcome-page__login-btn">Log In</md-button>
+      <md-button class="login-page__login-btn">Log In</md-button>
     </form>
 
-    <div class="welcome-page__buttons-container">
-      <md-button class="welcome-page__forgot-password-btn" ng-click="visitForgotPasswordPage()">Having trouble logging in?</md-button>
-      <md-button class="welcome-page__forgot-password-btn" ng-click="openFeedbackForm()">Give us feedback!</md-button>
+    <div class="login-page__buttons-container">
+      <md-button class="login-page__forgot-password-btn" ng-click="visitForgotPasswordPage()">Having trouble logging in?</md-button>
+      <md-button class="login-page__forgot-password-btn" ng-click="openFeedbackForm()">Give us feedback!</md-button>
     </div>
 
   </md-content>

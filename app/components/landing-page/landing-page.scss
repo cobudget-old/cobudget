@@ -1,0 +1,67 @@
+.landing-page {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+.landing-page__content {
+  height: 100%;
+}
+
+.landing-page__content-container {
+  position: relative;
+  bottom: 5%;
+  max-width: 500px;
+}
+
+.landing-page__dollar-logo {
+  display: block;
+  width: 160px;
+  margin: 0 auto;
+}
+
+.landing-page__cobudget-logo {
+  display: block;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.landing-page__logo-subheader {
+  font-weight: 300;
+  @include fontMedLarge;
+  text-align: center;
+  margin: 0;
+}
+
+.landing-page__start-group-form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.landing-page__input-container {
+  width: 63%;
+  margin: 0 auto;
+  margin-top: 5px;
+}
+
+.landing-page__email-field {
+  @include cob-std-input;
+  text-align: center;
+  width: 100%;
+}
+
+.landing-page__email-field:focus {
+  outline: none;
+}
+
+.landing-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+
+.landing-page__submit-btn {
+  @include cob-std-submit-btn;
+  width: 57%;
+  margin-top: 3%;
+}
