@@ -5,7 +5,7 @@ class AllocationService
       amount = amount.to_s.gsub(",", "").to_f
 
       if user = User.find_by_email(email)
-        if user.is_member_of?(group)
+        if user.is_member_of?(group) && amount >= 1
           UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_later if amount > 0
         else
           group.add_member(user)

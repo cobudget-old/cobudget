@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @group = group
     @inviter = inviter
-    @initial_allocation_amount = initial_allocation_amount
+    @initial_allocation_amount = initial_allocation_amount.floor
     @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
     mail(to: @user.name_and_email,
         from: "Cobudget Accounts <accounts@cobudget.co>",
@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @inviter = inviter
     @group = group
-    @initial_allocation_amount = initial_allocation_amount
+    @initial_allocation_amount = initial_allocation_amount.floor
     @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
     mail(to: @user.name_and_email,
         from: "Cobudget Accounts <accounts@cobudget.co>",
