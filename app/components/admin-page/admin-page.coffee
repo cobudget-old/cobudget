@@ -17,7 +17,7 @@ module.exports =
     if UserCan.viewAdminPanel()
       $scope.authorized = true
       Error.clear()
-      $scope.accessibleGroups = CurrentUser().groups()
+      $scope.accessibleGroups = CurrentUser().administeredGroups()
     else
       $scope.authorized = false
       Error.set("you can't view this page")
