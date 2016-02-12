@@ -3,8 +3,8 @@
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
         <ng-md-icon icon="close"
-          class="create-bucket-page__cancel-icon" 
-          layout="column" 
+          class="create-bucket-page__cancel-icon"
+          layout="column"
           layout-align="center center"
         ></ng-md-icon>
       </md-button>
@@ -22,7 +22,7 @@
     <div>
       <md-subheader class="create-bucket-page__subheader-title">You're about to propose an idea</md-subheader>
     </div>
-    
+
     <div>
       <md-subheader class="create-bucket-page__subheader-text">People in your group can comment on your idea, and when you're ready you can request funding.</md-subheader>
     </div>
@@ -61,7 +61,10 @@
 
       <md-input-container>
         <label>Funding Target (required for funding)</label>
-        <input name="target" type="number" ng-model="bucket.target">
+        <input name="target" type="number" ng-model="bucket.target" min="1" only-digits>
+        <div ng-messages="bucketForm.target.$error" ng-if="bucketForm.target.$dirty || formSubmitted">
+          <div ng-message="min">Bucket target must be greater than zero</div>
+        </div>
       </md-input-container>
     </form>
   </md-content>
