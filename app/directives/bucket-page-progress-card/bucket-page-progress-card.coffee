@@ -7,7 +7,7 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
     replace: true
     controller: ($scope, $state, Records, Toast) ->
 
-      maxAllowableContribution = _.min([$scope.bucket.amountRemaining(), $scope.membership.balance()])
+      maxAllowableContribution = _.min([$scope.bucket.amountRemaining(), $scope.membership.balance])
 
       $scope.openFundForm = ->
         $scope.fundFormOpened = true

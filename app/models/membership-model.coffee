@@ -12,9 +12,6 @@ global.cobudgetApp.factory 'MembershipModel', (BaseModel) ->
       @belongsTo 'member', from: 'users'
       @belongsTo 'group'
 
-    balance: ->
-      parseFloat(@totalAllocations) - parseFloat(@totalContributions)
-
     isPending: ->
       !@member().isConfirmed()
 
