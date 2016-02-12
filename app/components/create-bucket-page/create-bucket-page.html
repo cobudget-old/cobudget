@@ -61,7 +61,7 @@
 
       <md-input-container>
         <label>Funding Target (required for funding)</label>
-        <input name="target" type="number" ng-model="bucket.target" min="1" only-digits>
+        <input name="target" type="text" ng-model="bucket.target" min="1" only-digits>
         <div ng-messages="bucketForm.target.$error" ng-if="bucketForm.target.$dirty || formSubmitted">
           <div ng-message="min">Bucket target must be greater than zero</div>
         </div>
