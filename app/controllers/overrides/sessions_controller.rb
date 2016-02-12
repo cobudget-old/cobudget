@@ -36,7 +36,7 @@ module Overrides
         yield if block_given?
 
         render_create_success
-      elsif not @resource.confirmed?
+      elsif @resource && !@resource.confirmed?
         UserMailer.confirm_account_email(user: @resource).deliver_later
         render_create_error_not_confirmed
       else
