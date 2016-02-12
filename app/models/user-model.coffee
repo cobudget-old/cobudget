@@ -26,6 +26,9 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
       _.filter @groups(), (group) =>
         @isAdminOf(group)
 
+    isAGroupAdmin: () ->
+      @administeredGroups().length > 0
+
     primaryGroup: ->
       @groups()[0]
 
