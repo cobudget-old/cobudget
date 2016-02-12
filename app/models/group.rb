@@ -21,19 +21,17 @@ class Group < ActiveRecord::Base
   end
 
   def balance
-    allocation_sum = allocations.sum(:amount)
-    contribution_sum = buckets.map { |b| b.total_contributions }.reduce(:+) || 0
-    allocation_sum - contribution_sum
+    memberships.map { |m| m.balance }.reduce(:+) || 0
   end
 
   def formatted_balance
     Money.new(balance * 100, currency_code).format
   end
 
-  private 
+  private
     def update_currency_symbol_if_currency_code_changed
       if self.currency_code
         self.currency_symbol = Money.new(0, self.currency_code).symbol
-      end      
+      end
     end
 end
