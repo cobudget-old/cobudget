@@ -81,15 +81,22 @@
 
 .group-page__admin-btn {
   border: 0;
-  padding: 0;
+  height: 35px;
+  padding: 5px 13px;
   background: #E9E9E9;
   color: black;
   font-weight: 400;
   font-size: 15px;
-  height: 30px;
-  width: 140px;
   margin-left: 5px;
   border-radius: 2px;
+}
+
+.group-page__invite-people-btn-label {
+  margin-left: 8px;
+}
+
+.group-page__manage-funds-btn-label {
+  margin-left: 7px;
 }
 
 .group-page__tabs {

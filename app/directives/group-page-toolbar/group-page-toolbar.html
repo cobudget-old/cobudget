@@ -64,8 +64,22 @@
     </div>
 
     <div flex></div>
-    <button class="group-page__admin-btn">Invite People</button>
-    <button class="group-page__admin-btn">Manage Funds</button>
+    <div class="group-page__admin-btn" layout="row" layout-align="center center">
+      <ng-md-icon icon="person_add"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+      <div class="group-page__invite-people-btn-label">Invite People</div>
+    </div>
+
+    <div class="group-page__admin-btn" layout="row" layout-align="center center">
+      <ng-md-icon icon="attach_money"
+        size="20"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+      <div class="group-page__manage-funds-btn-label">Manage Funds</div>
+    </div>
   </div>
 
   <md-tabs class="group-page__tabs" md-stretch-tabs="never" md-dynamic-height>
