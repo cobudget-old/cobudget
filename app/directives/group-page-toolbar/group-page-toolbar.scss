@@ -55,16 +55,11 @@
 .group-page__funds-bar {
   height: $medium-height;
   margin-bottom: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .group-page__funds-overview-container {
-  margin-left: 35px;
-}
-
-@media (min-width: 330px) {
-  .group-page__funds-overview-container {
-    margin-left: 41px;
-  }
 }
 
 .group-page__funds-overview-header {
