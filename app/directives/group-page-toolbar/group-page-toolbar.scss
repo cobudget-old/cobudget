@@ -59,9 +59,6 @@
   padding-right: 50px;
 }
 
-.group-page__funds-overview-container {
-}
-
 .group-page__funds-overview-header {
   @include fontTiny;
   margin-left: 5px;
@@ -80,6 +77,19 @@
 
 .group-page__funds-overview-amount {
   @include fontGrande;
+}
+
+.group-page__admin-btn {
+  border: 0;
+  padding: 0;
+  background: #E9E9E9;
+  color: black;
+  font-weight: 400;
+  font-size: 15px;
+  height: 30px;
+  width: 140px;
+  margin-left: 5px;
+  border-radius: 2px;
 }
 
 .group-page__tabs {
