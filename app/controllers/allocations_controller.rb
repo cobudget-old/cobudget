@@ -12,8 +12,18 @@ class AllocationsController < AuthenticatedController
     file = params[:csv].tempfile
     csv = CSV.read(file)
     group = Group.find(params[:group_id])
-    AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
-    render nothing: true, status: 200
+    errors = []
+    ActiveRecord::Base.transaction do
+      errors = AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
+      if errors
+        raise ActiveRecord::Rollback
+      end
+    end
+    if errors
+      render json: {errors: errors}, status: 409
+    else
+      render nothing: true, status: 200
+    end
   end
 
   api :POST, '/allocations?membership_id&amount'
