@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 
 class AllocationsController < AuthenticatedController
   api :GET, '/allocations?group_id=', 'Get allocations for a particular group'
