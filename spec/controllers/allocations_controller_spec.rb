@@ -7,6 +7,24 @@ RSpec.describe AllocationsController, type: :controller do
       request.headers.merge!(user.create_new_auth_token)
     end
 
+    it "succeeds when uploading csv" do
+      # upload a csv file containing that user's email address
+      post :upload, {group_id: @membership.group.id, csv: fixture_file_upload('test-csv.csv', 'text/csv')}
+      expect(response).to have_http_status(200)
+    end
+
+    it "fails with errors when uploading csv with archived members" do
+      # create an archived member of the group
+      participant = create(:user, email: 'gbickford@gmail.com')
+      create(:membership, member: participant, group: @membership.group)
+      Membership.find_by(group: group, member: participant).update(archived_at: DateTime.now.utc - 5.days)
+
+      # upload a csv file containing that user's email address
+      post :upload, {group_id: @membership.group.id, csv: fixture_file_upload('test-csv.csv', 'text/csv')}
+      expect(response).to have_http_status(409)
+      expect(parsed(response)["errors"][0]).to eq('gbickford@gmail.com is no longer an active member.')
+    end
+
     context "valid params" do
       before do
         valid_params = {
