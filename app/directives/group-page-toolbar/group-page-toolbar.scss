@@ -79,6 +79,23 @@
   @include fontGrande;
 }
 
+@media (max-width: 670px) {
+  .group-page__admin-btn {
+    display: none;
+  }
+
+  .group-page__funds-bar {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (min-width: 670px) {
+  .group-page__admin-more-btn {
+    display: none;
+  }
+}
+
 .group-page__admin-btn {
   border: 0;
   height: 35px;
@@ -89,6 +106,7 @@
   font-size: 15px;
   margin-left: 5px;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .group-page__invite-people-btn-label {
@@ -97,6 +115,11 @@
 
 .group-page__manage-funds-btn-label {
   margin-left: 7px;
+}
+
+.group-page__admin-more-btn {
+  cursor: pointer;
+  fill: white;
 }
 
 .group-page__tabs {
