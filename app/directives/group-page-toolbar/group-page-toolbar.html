@@ -66,7 +66,7 @@
     <div flex></div>
 
     <div layout="row" layout-align="center center" ng-if="currentUser.isAdminOf(group)">
-      <div class="group-page__admin-btn" layout="row" layout-align="center center">
+      <div class="group-page__admin-btn" layout="row" layout-align="center center" ng-click="openInvitePeople()">
         <ng-md-icon icon="person_add"
           layout="column"
           layout-align="center center"
@@ -74,7 +74,7 @@
         <div class="group-page__invite-people-btn-label">Invite People</div>
       </div>
 
-      <div class="group-page__admin-btn" layout="row" layout-align="center center">
+      <div class="group-page__admin-btn" layout="row" layout-align="center center" ng-click="openManageFunds()">
         <ng-md-icon icon="attach_money"
           size="20"
           layout="column"
@@ -83,7 +83,7 @@
         <div class="group-page__manage-funds-btn-label">Manage Funds</div>
       </div>
 
-      <div class="group-page__admin-more-btn">
+      <div class="group-page__admin-more-btn" ng-click="openBottomSheet()">
         <ng-md-icon icon="more_vert"
           size="27"
           layout="column"
