@@ -27,7 +27,10 @@ describe "AllocationService" do
     it "uploads new allocations via csv" do
       csv = CSV.read("./spec/fixtures/test-csv.csv")
 
-      AllocationService.create_allocations_from_csv(csv: csv, group: @group, current_user: @admin_user)
+      if errors = AllocationService.create_allocations_from_csv(csv: csv, group: @group, current_user: @admin_user)
+        expect(errors).to be_empty
+      end
+
       kat = User.find_by(email: "katrine_ebert@hermann.net")
       expect(kat).to be_truthy
       expect(@group.memberships.find_by(member: kat)).to be_truthy
@@ -35,19 +38,14 @@ describe "AllocationService" do
 
     it "returns errors when csv contains archived member(s)" do
       csv = CSV.read("./spec/fixtures/test-csv.csv")
-      
+
       csv << [@archived_participant[:email], "9000"]
       csv << [@archived_participant2[:email], "9000"]
       csv << ["gbickford@gmail.com", "9000"]
 
-      errors = []
-      ActiveRecord::Base.transaction do
-        errors = AllocationService.create_allocations_from_csv(csv: csv, group: @group, current_user: @admin_user)
-        expect(errors).not_to be_empty
-        if errors
-          raise ActiveRecord::Rollback
-        end
-      end
+      errors = AllocationService.create_allocations_from_csv(csv: csv, group: @group, current_user: @admin_user)
+      expect(errors).not_to be_empty
+
       gardner_user = User.find_by(email: "gbickford@gmail.com")
       expect(gardner_user).not_to be_truthy
 

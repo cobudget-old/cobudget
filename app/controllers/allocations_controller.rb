@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 
 class AllocationsController < AuthenticatedController
   api :GET, '/allocations?group_id=', 'Get allocations for a particular group'
@@ -12,14 +13,9 @@ class AllocationsController < AuthenticatedController
     file = params[:csv].tempfile
     csv = CSV.read(file)
     group = Group.find(params[:group_id])
-    errors = []
-    ActiveRecord::Base.transaction do
-      errors = AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
-      if errors
-        raise ActiveRecord::Rollback
-      end
-    end
-    if errors
+    errors = AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
+
+    if not errors.empty?
       render json: {errors: errors}, status: 409
     else
       render nothing: true, status: 200
