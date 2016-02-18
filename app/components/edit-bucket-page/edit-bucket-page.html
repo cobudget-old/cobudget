@@ -4,7 +4,7 @@
       <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
         <ng-md-icon icon="close"
           class="edit-bucket-page__cancel-icon"
-          layout="column" 
+          layout="column"
           layout-align="center center"
         ></ng-md-icon>
       </md-button>
@@ -52,10 +52,10 @@
 
       <md-input-container>
         <label>Funding Target (required for funding)</label>
-        <input ng-required="bucket.status == 'live'" name="target" min="0" type="number" ng-model="bucket.target">
+        <input ng-required="bucket.status == 'live'" name="target" min="1" type="text" ng-model="bucket.target" only-digits>
         <div ng-messages="bucketForm.target.$error" multiple>
           <div ng-message="required">This is required.</div>
-          <div ng-message="min">Target must be positive.</div>
+          <div ng-message="min">Bucket target must be greater than zero</div>
         </div>
       </md-input-container>
     </form>
