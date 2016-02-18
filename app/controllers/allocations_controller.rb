@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 
 class AllocationsController < AuthenticatedController
   api :GET, '/allocations?group_id=', 'Get allocations for a particular group'
@@ -12,8 +13,12 @@ class AllocationsController < AuthenticatedController
     file = params[:csv].tempfile
     csv = CSV.read(file)
     group = Group.find(params[:group_id])
-    AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
-    render nothing: true, status: 200
+
+    if errors = AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
+      render json: {errors: errors}, status: 409
+    else
+      render nothing: true, status: 200
+    end
   end
 
   api :POST, '/allocations?membership_id&amount'
