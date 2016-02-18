@@ -1,17 +1,20 @@
 .manage-group-funds-page__header {
   height: 186px;
   background: rgba(36,50,57,1);
+  padding-bottom: 25px;
+}
+
+.manage-group-funds-page__header-text {
   color: white;
   font-size: 22px;
   font-weight: 500;
-  fill: white;
-  padding-bottom: 25px;
 }
 
 .manage-group-funds-page__money-icon {
   border: 2px solid white;
   border-radius: 50%;
   margin-right: 15px;
+  fill: white;
 }
 
 .manage-group-funds-page__money-icon svg {
