@@ -32,7 +32,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
         console.log('invite-people-btn clicked!')
 
       $scope.openManageFunds = ->
-        console.log('manage-funds-btn clicked!')
+        $location.path("/groups/#{$scope.group.id}/manage_funds")
 
       $scope.signOut = ->
         $auth.signOut().then ->
