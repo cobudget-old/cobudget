@@ -65,7 +65,7 @@
 
     <div flex></div>
 
-    <div layout="row" layout-align="center center">
+    <div layout="row" layout-align="center center" ng-if="currentUser.isAdminOf(group)">
       <div class="group-page__admin-btn" layout="row" layout-align="center center">
         <ng-md-icon icon="person_add"
           layout="column"
