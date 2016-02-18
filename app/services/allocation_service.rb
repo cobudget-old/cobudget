@@ -34,9 +34,7 @@ class AllocationService
         Allocation.create(group: group, user: user, amount: amount)
       end # each
 
-      if not errors.empty?
-        raise ActiveRecord::Rollback
-      end
+      raise ActiveRecord::Rollback unless errors.empty?
     end
     errors if errors.any?
   end
