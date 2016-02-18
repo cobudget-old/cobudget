@@ -13,9 +13,8 @@ class AllocationsController < AuthenticatedController
     file = params[:csv].tempfile
     csv = CSV.read(file)
     group = Group.find(params[:group_id])
-    errors = AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
 
-    if not errors.empty?
+    if errors = AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
       render json: {errors: errors}, status: 409
     else
       render nothing: true, status: 200

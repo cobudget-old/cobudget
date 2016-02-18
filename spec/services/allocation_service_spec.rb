@@ -28,6 +28,7 @@ describe "AllocationService" do
       csv = CSV.read("./spec/fixtures/test-csv.csv")
 
       if errors = AllocationService.create_allocations_from_csv(csv: csv, group: @group, current_user: @admin_user)
+        # fail if there are any errors
         expect(errors).to be_empty
       end
 
@@ -43,6 +44,7 @@ describe "AllocationService" do
       csv << [@archived_participant2[:email], "9000"]
       csv << ["gbickford@gmail.com", "9000"]
 
+      # there is no if statement here to ensure that expect() is called.
       errors = AllocationService.create_allocations_from_csv(csv: csv, group: @group, current_user: @admin_user)
       expect(errors).not_to be_empty
 

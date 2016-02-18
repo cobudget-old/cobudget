@@ -38,6 +38,6 @@ class AllocationService
         raise ActiveRecord::Rollback
       end
     end
-    errors
+    errors if errors.any?
   end
 end
