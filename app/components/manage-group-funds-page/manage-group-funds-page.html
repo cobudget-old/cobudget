@@ -20,11 +20,12 @@
 
     <md-divider></md-divider>
 
-    <div layout="row" layout-align="center center">
-      <div layout="column" layout-align="center start">
+    <div layout="row" layout-align="center start" class="manage-group-funds-page__btns-container">
+      <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container manage-group-funds-page__upload-btn-container" flex>
         <div layout="row" layout-align="start center" class="manage-group-funds-page__btn">
-          <ng-md-icon icon="attach_money"
-            size="30"
+          <ng-md-icon icon="cloud_upload"
+            class="manage-group-funds-page__btn-icon"
+            size="20"
             layout="column"
             layout-align="center center"
           ></ng-md-icon>
@@ -34,17 +35,16 @@
           </div>
         </div>
 
-        <div class="manage-group-funds-page__btn-info">
+        <p class="manage-group-funds-page__btn-info">
           Upload a csv file to update many member's funds at once. You can also invite new members at the same time. (more details)
-        </div>
+        </p>
       </div>
 
-      <div class="manage-group-funds-page__vert-divider"></div>
-
-      <div layout="column" layout-align="center start">
+      <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container" flex>
         <div layout="row" layout-align="start center" class="manage-group-funds-page__btn">
-          <ng-md-icon icon="attach_money"
-            size="30"
+          <ng-md-icon icon="file_download"
+            class="manage-group-funds-page__btn-icon"
+            size="20"
             layout="column"
             layout-align="center center"
           ></ng-md-icon>
@@ -54,9 +54,9 @@
           </div>
         </div>
 
-        <div class="manage-group-funds-page__btn-info">
+        <p class="manage-group-funds-page__btn-info">
           Download a csv of all your group members, their emails, and their available funds
-        </div>
+        </p>
       </div>
     </div>
 

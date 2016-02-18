@@ -37,6 +37,8 @@
   background: inherit;
   max-width: 640px;
   margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .manage-group-funds-page__subheader {
@@ -47,4 +49,43 @@
   margin-bottom: 20px;
 }
 
-// blue: #448CE2
+// btns
+
+.manage-group-funds-page__btns-container {
+  padding-top: 30px;
+}
+
+.manage-group-funds-page__btn {
+  padding-top: 20px;
+}
+
+.manage-group-funds-page__btn-icon {
+  fill: #448CE2;
+  border: 3px solid #448CE2;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.manage-group-funds-page__btn-label {
+  color: #448CE2;
+  font-weight: 700;
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+@media (max-width: 525px) {
+  .manage-group-funds-page__btn-label {
+    display: none;
+  }
+}
+
+.manage-group-funds-page__btn-info {
+  color: #A2A2A2;
+  @include fontMedium;
+}
+
+.manage-group-funds-page__upload-btn-container {
+  border-right: 1px solid #DCDCDC;
+  margin-right: 30px;
+  padding-right: 15px;
+}
