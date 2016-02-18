@@ -13,7 +13,7 @@ class AllocationService
             next
           end
 
-          if user.is_member_of?(group)
+          if user.is_member_of?(group) && amount >= 1
             UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_later if amount > 0
           else
             begin

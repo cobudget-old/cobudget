@@ -56,7 +56,7 @@ describe "DeliverDailyEmailDigest" do
           @parisian_user_1_email = @sent_emails.find { |e| e.to.first == @parisian_user_1.email }
           @parisian_user_2_email = @sent_emails.find { |e| e.to.first == @parisian_user_2.email }
           expect(@parisian_user_1_email.body.raw_source).not_to include("You have $0.00 to spend")
-          expect(@parisian_user_2_email.body.raw_source).to include("You have $4.20 to spend")
+          expect(@parisian_user_2_email.body.raw_source).to include("You have $4.00 to spend")
         end
       end
     end

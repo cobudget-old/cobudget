@@ -20,7 +20,7 @@ class Membership < ActiveRecord::Base
   end
 
   def balance
-    total_allocations - total_contributions
+    (total_allocations - total_contributions).floor
   end
 
   def formatted_balance
