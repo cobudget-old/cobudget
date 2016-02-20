@@ -22,6 +22,7 @@ require('ng-sanitize')
 require('angular-truncate-2')
 require('angular-marked')
 require('ng-q-all-settled')
+require('angular-eha.only-digits')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -40,7 +41,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ngSanitize',
   'truncate',
   'hc.marked',
-  'qAllSettled'
+  'qAllSettled',
+  'eha.only-digits'
 ])
 .constant('config', require('app/configs/app'))
 

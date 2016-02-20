@@ -16,7 +16,7 @@
       ></ng-md-icon>
       <div layout="column" layout-align="center center">
         <span class="bucket-page__funds-overview-header">Your funds</span>
-        <span class="bucket-page__funds-overview-amount">{{ membership.balance() - newContribution.amount | currency : group.currencySymbol : 0 }}</span>
+        <span class="bucket-page__funds-overview-amount">{{ membership.balance - newContribution.amount | currency : group.currencySymbol : 0 }}</span>
       </div>
     </span>
 
@@ -26,4 +26,4 @@
       <md-button class="bucket-page__edit-button" ng-click="editBucket()">Edit</md-button>
     </span>
   </div>
-</md-toolbar> 
+</md-toolbar>
