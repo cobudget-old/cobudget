@@ -16,7 +16,7 @@
         </div>
 
         <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
-          <span class="group-page__funder-balance">{{ funderMembership.balance() | currency : group.currencySymbol : 0 }}</span>
+          <span class="group-page__funder-balance">{{ funderMembership.balance | currency : group.currencySymbol : 0 }}</span>
         </div>
 
         <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">

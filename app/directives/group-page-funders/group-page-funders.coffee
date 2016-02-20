@@ -67,8 +67,8 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
 
             $scope.normalizeAllocationAmount = ->
               allocationAmount = $scope.formData.allocationAmount || 0
-              if allocationAmount + $scope.managedMembership.balance() < 0
-                $scope.formData.allocationAmount = -$scope.managedMembership.balance()
+              if allocationAmount + $scope.managedMembership.balance < 0
+                $scope.formData.allocationAmount = -$scope.managedMembership.balance
 
             $scope.normalizeNewBalance = ->
               if $scope.formData.newBalance < 0
@@ -84,7 +84,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
               if $scope.mode == 'add'
                 amount = $scope.formData.allocationAmount
               if $scope.mode == 'change'
-                amount = $scope.formData.newBalance - $scope.managedMembership.balance()
+                amount = $scope.formData.newBalance - $scope.managedMembership.balance
               params = {groupId: $scope.group.id, userId: $scope.managedMember.id, amount: amount }
               allocation = Records.allocations.build(params)
               allocation.save()
