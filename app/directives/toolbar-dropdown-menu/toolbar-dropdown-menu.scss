@@ -1,8 +1,8 @@
-.group-page__toolbar-menu {
+.toolbar-dropdown-menu {
   margin-right: 0 !important;
 }
 
-.group-page__toolbar-menu-btn {
+.toolbar-dropdown-menu__btn {
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -13,15 +13,15 @@
   cursor: pointer;
 }
 
-.group-page__person-icon {
+.toolbar-dropdown-menu__btn-icon {
   fill: #D8D8D8;
 }
 
-.group-page__toolbar-menu-content {
+.toolbar-dropdown-menu__content {
   padding: 0;
 }
 
-.group-page__toolbar-menu-icon {
+.toolbar-dropdown-menu__item-icon {
   fill: #454545;
   margin-right: 12px;
 }
