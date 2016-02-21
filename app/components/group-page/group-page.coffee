@@ -18,7 +18,6 @@ module.exports =
           $scope.group = group
           $scope.currentUser = CurrentUser()
           $scope.membership = group.membershipFor(CurrentUser())
-          console.log('$scope.membership: ', $scope.membership)
           Records.memberships.fetchByGroupId(groupId)
           Records.buckets.fetchByGroupId(groupId).then ->
             LoadBar.stop()
