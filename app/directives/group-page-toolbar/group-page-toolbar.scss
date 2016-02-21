@@ -22,34 +22,6 @@
   @include truncatedText;
 }
 
-.group-page__toolbar-menu {
-  margin-right: 0 !important;
-}
-
-.group-page__toolbar-menu-btn {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: white;
-  font-size: 16px;
-  margin-left: 10px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.group-page__person-icon {
-  fill: #D8D8D8;
-}
-
-.group-page__toolbar-menu-content {
-  padding: 0;
-}
-
-.group-page__toolbar-menu-icon {
-  fill: #454545;
-  margin-right: 12px;
-}
-
 // toolbar funds
 
 .group-page__funds-bar {
