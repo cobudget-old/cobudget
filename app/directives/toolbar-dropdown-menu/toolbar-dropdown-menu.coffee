@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'toolbarDropdownMenu', () ->
     restrict: 'E'
     template: require('./toolbar-dropdown-menu.html')
     replace: true
-    controller: ($auth, $location, $mdBottomSheet, $rootScope, $scope, Toast, $window) ->
+    controller: ($auth, $location, $scope, Toast, $window) ->
 
       $scope.openProfileSettings = ->
         $location.path('/profile_settings').search('previous_group_id', $scope.group.id)

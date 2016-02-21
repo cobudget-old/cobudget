@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
     restrict: 'E'
     template: require('./group-page-toolbar.html')
     replace: true
-    controller: ($auth, $location, $mdBottomSheet, $rootScope, $scope, Toast, $window) ->
+    controller: ($location, $mdBottomSheet, $rootScope, $scope) ->
 
       $scope.openSidenav = ->
         $rootScope.$broadcast('open sidenav')
