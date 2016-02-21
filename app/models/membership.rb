@@ -19,8 +19,12 @@ class Membership < ActiveRecord::Base
     Contribution.where(bucket_id: group_bucket_ids, user_id: member_id).sum(:amount)
   end
 
+  def raw_balance
+    total_allocations - total_contributions
+  end
+
   def balance
-    (total_allocations - total_contributions).floor
+    raw_balance.floor
   end
 
   def formatted_balance
