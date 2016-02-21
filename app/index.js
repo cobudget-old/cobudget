@@ -23,6 +23,7 @@ require('angular-truncate-2')
 require('angular-marked')
 require('ng-q-all-settled')
 require('angular-eha.only-digits')
+require('ng-csv')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -42,7 +43,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'truncate',
   'hc.marked',
   'qAllSettled',
-  'eha.only-digits'
+  'eha.only-digits',
+  'ngCsv'
 ])
 .constant('config', require('app/configs/app'))
 

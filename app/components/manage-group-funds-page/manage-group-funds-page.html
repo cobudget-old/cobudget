@@ -42,7 +42,7 @@
       </div>
 
       <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container" flex>
-        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn">
+        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn" ng-csv="csvData()" filename={{csvFileName()}}>
           <ng-md-icon icon="file_download"
             class="manage-group-funds-page__btn-icon"
             size="20"
