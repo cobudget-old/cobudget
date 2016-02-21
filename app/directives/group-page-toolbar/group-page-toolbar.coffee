@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
     restrict: 'E'
     template: require('./group-page-toolbar.html')
     replace: true
-    controller: ($auth, $location, $rootScope, $scope, Toast, $window) ->
+    controller: ($auth, $location, $mdBottomSheet, $rootScope, $scope, Toast, $window) ->
 
       $scope.openSidenav = ->
         $rootScope.$broadcast('open sidenav')
@@ -28,6 +28,12 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
       $scope.openEmailSettings = ->
         $location.path('/email_settings').search('previous_group_id', $scope.group.id)
 
+      $scope.openInvitePeople = ->
+        console.log('invite-people-btn clicked!')
+
+      $scope.openManageFunds = ->
+        console.log('manage-funds-btn clicked!')
+
       $scope.signOut = ->
         $auth.signOut().then ->
           global.cobudgetApp.currentUserId = null
@@ -44,5 +50,18 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
 
       $scope.accessibleMenuItems = ->
         _.filter $scope.menuItems, {isDisplayed: true}
+
+      $scope.openBottomSheet = ->
+        $mdBottomSheet.show({
+          preserveScope: true
+          scope: $scope
+          template: require('./bottom-sheet.tmpl.html')
+          controller: ->
+            $scope.adminActions = [
+              {label: 'Invite People', onClick: $scope.openInvitePeople, icon: 'person_add'},
+              {label: 'Manage Funds', onClick: $scope.openManageFunds, icon: 'attach_money'},
+              {label: 'Cancel', onClick: $mdBottomSheet.cancel, icon: 'cancel'}
+            ]
+        })
 
       return
