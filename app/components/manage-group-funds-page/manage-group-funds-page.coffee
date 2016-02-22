@@ -27,7 +27,9 @@ module.exports =
         Error.set('group not found')
 
     $scope.csvData = ->
-      _.map Records.memberships.collection.data, (membership) ->
+      groupMemberships = _.filter Records.memberships.collection.data, (membership) ->
+        membership.groupId == groupId
+      _.map groupMemberships, (membership) ->
         [membership.member().email, membership.rawBalance]
 
     $scope.csvFileName = ->
