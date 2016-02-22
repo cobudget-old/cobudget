@@ -1,0 +1,67 @@
+<div class="manage-group-funds-page" ng-if="authorized">
+  <admin-toolbar></admin-toolbar>
+  
+  <div class="manage-group-funds-page__header" layout="column" layout-align="end center">
+    <div layout="row" layout-align="center center">
+      <ng-md-icon icon="attach_money"
+        class="manage-group-funds-page__money-icon"
+        size="30"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+      <h1 class="manage-group-funds-page__header-text">
+        Manage Group Funds
+      </h1>
+    </div>
+  </div>
+
+  <md-content class="manage-group-funds-page__content">
+    <h2 class="manage-group-funds-page__subheader">
+      Here you can change member's available funds using CSV files
+    </h2>
+
+    <md-divider></md-divider>
+
+    <div layout="row" layout-align="center start" class="manage-group-funds-page__btns-container">
+      <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container manage-group-funds-page__upload-btn-container" flex ng-if="ready">
+        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn">
+
+          <ng-md-icon icon="cloud_upload"
+            class="manage-group-funds-page__btn-icon"
+            size="20"
+            layout="column"
+            layout-align="center center"
+          ></ng-md-icon>
+
+          <div class="manage-group-funds-page__btn-label">
+            Update by CSV file
+          </div>
+        </div>
+
+        <p class="manage-group-funds-page__btn-info">
+          Upload a csv file to update many member's funds at once. You can also invite new members at the same time. (more details)
+        </p>
+      </div>
+
+      <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container" flex>
+        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn" ng-csv="csvData()" filename={{csvFileName()}}>
+          <ng-md-icon icon="file_download"
+            class="manage-group-funds-page__btn-icon"
+            size="20"
+            layout="column"
+            layout-align="center center"
+          ></ng-md-icon>
+
+          <div class="manage-group-funds-page__btn-label">
+            Download CSV file
+          </div>
+        </div>
+
+        <p class="manage-group-funds-page__btn-info">
+          Download a csv of all your group members, their emails, and their available funds
+        </p>
+      </div>
+    </div>
+
+  </md-content>
+</div>
