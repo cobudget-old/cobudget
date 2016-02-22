@@ -17,6 +17,7 @@ module.exports =
           $scope.authorized = true
           Error.clear()
           $scope.group = group
+          $scope.currentUser = CurrentUser()
           Records.memberships.fetchByGroupId(groupId)
         else
           $scope.authorized = false

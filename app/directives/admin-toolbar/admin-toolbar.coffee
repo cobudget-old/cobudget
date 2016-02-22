@@ -6,4 +6,3 @@ global.cobudgetApp.directive 'adminToolbar', () ->
     template: require('./admin-toolbar.html')
     replace: true
     controller: ($scope) ->
-      console.log('loaded lol')
