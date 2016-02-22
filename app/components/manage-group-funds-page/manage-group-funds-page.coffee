@@ -44,23 +44,28 @@ module.exports =
           $scope.cancel = ->
             $mdDialog.cancel()
 
+          $scope.uploadPathForGroup = ->
+            "#{config.apiPrefix}/allocations/upload_review?group_id=#{groupId}"
+
+          $scope.openCSVUploadDialog = ->
+            $timeout( ->
+              angular.element('.manage-group-funds-page__upload-csv-primer-dialog-hidden-btn input').trigger('click')
+            , 100)
+
+          $scope.onCSVUploadSuccess = ->
+            alert('upload success')
+
+          $scope.onCSVUploadError = ->
+            $scope.cancel()
+            Dialog.custom
+              template: require('./upload-csv-error-dialog.tmpl.html')
+              scope: $scope
+              controller: ($scope, $mdDialog) ->
+                $scope.cancel = ->
+                  $mdDialog.cancel()
+                $scope.tryAgain = ->
+                  $scope.openUploadCSVPrimerDialog()
+
     $scope.openUploadCSVPrimerDialog()
-
-    $scope.uploadPathForGroup = ->
-      "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
-
-    $scope.openCSVUploadDialog = ->
-      $timeout( ->
-        angular.element('.manage-group-funds-page__upload-csv-primer-dialog-hidden-btn input').trigger('click')
-      , 100)
-
-    $scope.onCSVUploadSuccess = ->
-      alert('upload success')
-
-    $scope.onCSVUploadCompletion = ->
-      alert('upload complete')
-
-    $scope.onCSVUploadError = ->
-      alert('upload error')
 
     return

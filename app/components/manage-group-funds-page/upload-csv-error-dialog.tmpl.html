@@ -1,0 +1,16 @@
+<md-dialog class="manage-group-funds-page__upload-csv-primer-dialog" aria-label="upload-csv-primer-dialog">
+  <md-dialog-content class="sticky-container manage-group-funds-page__upload-csv-primer-dialog-content">
+    <h2 class="manage-group-funds-page__upload-csv-primer-dialog-header">
+      Looks like there was a problem...
+    </h2>
+
+    <p class="manage-group-funds-page__upload-csv-primer-dialog-paragraph">
+      Sorry, but we couldn't upload your file. Maybe your CSV file was not correctly formatted. Please try again or check out our help documentation.
+    </p>
+  </md-dialog-content>
+
+  <div class="md-actions manage-group-funds-page__upload-csv-primer-dialog-btns" layout="row">
+    <md-button class="manage-group-funds-page__upload-csv-primer-dialog-cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button class="manage-group-funds-page__upload-csv-primer-dialog-ok-btn" ng-click="tryAgain()">ok, select file</md-button>
+  </div>
+</md-dialog>
