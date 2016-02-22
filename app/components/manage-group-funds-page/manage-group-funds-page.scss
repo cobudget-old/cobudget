@@ -148,11 +148,16 @@
   margin-bottom: 20px;
 }
 
-.manage-group-funds-page__upload-csv-primer-dialog-btn {
-  color: #50A3E8;
-}
-
 .manage-group-funds-page__upload-csv-primer-dialog-btns {
   padding-left: 30px !important;
   padding-right: 30px !important;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-btn {
+  position: relative;
+  color: #50A3E8;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-hidden-btn {
+  display: none;
 }

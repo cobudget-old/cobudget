@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/manage_funds'
   template: require('./manage-group-funds-page.html')
-  controller: (CurrentUser, Error, LoadBar, Dialog, Records, $scope, $stateParams, UserCan) ->
+  controller: (config, CurrentUser, Error, LoadBar, Dialog, Records, $scope, $stateParams, $timeout, UserCan) ->
 
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
@@ -45,5 +45,22 @@ module.exports =
             $mdDialog.cancel()
 
     $scope.openUploadCSVPrimerDialog()
+
+    $scope.uploadPathForGroup = ->
+      "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
+
+    $scope.openCSVUploadDialog = ->
+      $timeout( ->
+        angular.element('.manage-group-funds-page__upload-csv-primer-dialog-hidden-btn input').trigger('click')
+      , 100)
+
+    $scope.onCSVUploadSuccess = ->
+      alert('upload success')
+
+    $scope.onCSVUploadCompletion = ->
+      alert('upload complete')
+
+    $scope.onCSVUploadError = ->
+      alert('upload error')
 
     return

@@ -23,6 +23,17 @@
 
   <div class="md-actions manage-group-funds-page__upload-csv-primer-dialog-btns" layout="row">
     <md-button class="manage-group-funds-page__upload-csv-primer-dialog-btn" ng-click="cancel()">cancel</md-button>
-    <md-button class="manage-group-funds-page__upload-csv-primer-dialog-btn" ng-click="cancel()">ok, select file</md-button>
+
+    <md-button class="manage-group-funds-page__upload-csv-primer-dialog-btn" ng-click="openCSVUploadDialog()">ok, select file</md-button>
+
+    <div upload-button
+      class="manage-group-funds-page__upload-csv-primer-dialog-hidden-btn"
+      url="{{ uploadPathForGroup() }}"
+      param="csv"
+      accept="text/csv"
+      on-success="onCSVUploadSuccess(group.id)"
+      on-complete="onCSVUploadCompletion()"
+      on-error="onCSVUploadError()"
+    ></div>
   </div>
 </md-dialog>
