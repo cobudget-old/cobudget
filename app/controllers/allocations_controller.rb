@@ -7,6 +7,14 @@ class AllocationsController < AuthenticatedController
     render json: group.allocations
   end
 
+  api :GET, '/allocations/upload_review'
+  def upload_review
+    group = Group.find(params[:group_id])
+    render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
+
+    render nothing: true
+  end
+
   api :POST, '/allocations/upload?group_id='
   def upload
     file = params[:csv].tempfile

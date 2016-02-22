@@ -20,7 +20,8 @@ Rails.application.routes.draw do
 
     resources :allocations, only: [:index, :create] do
       collection do
-        post :upload
+        get :upload_review
+        post :upload    
       end
     end
 

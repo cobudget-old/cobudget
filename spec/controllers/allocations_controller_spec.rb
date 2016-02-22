@@ -1,6 +1,43 @@
 require 'rails_helper'
 
 RSpec.describe AllocationsController, type: :controller do
+  describe "#upload_review" do
+    context "user is group admin" do
+      before do
+        @membership = make_user_group_admin
+        request.headers.merge!(user.create_new_auth_token)
+        get :upload_review, {group_id: @membership.group_id}
+      end
+
+      it "returns http status 'ok'" do
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "user is not group admin" do
+      before do
+        membership = make_user_group_member
+        request.headers.merge!(user.create_new_auth_token)
+        get :upload_review, {group_id: membership.group_id}
+      end
+
+      it "returns http status 'forbidden'" do
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    context "user not logged in" do
+      before do
+        membership = make_user_group_member
+        get :upload_review, {group_id: membership.group_id}
+      end
+
+      it "returns http status 'unauthorized'" do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
   describe "#upload" do
     context "user is group admin" do
       before do
