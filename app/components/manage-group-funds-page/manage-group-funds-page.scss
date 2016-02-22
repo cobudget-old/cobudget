@@ -127,12 +127,17 @@
   font-weight: 600;
 }
 
-
 .manage-group-funds-page__upload-csv-primer-img {
   width: 275px;
   margin: 0 auto;
   margin-top: 30px;
   display: block;
+}
+
+@media (max-width: 450px) {
+  .manage-group-funds-page__upload-csv-primer-img {
+    width: 200px;
+  }
 }
 
 .manage-group-funds-page__upload-csv-primer-img-caption {
