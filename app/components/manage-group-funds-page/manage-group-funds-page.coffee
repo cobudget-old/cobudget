@@ -44,4 +44,6 @@ module.exports =
           $scope.cancel = ->
             $mdDialog.cancel()
 
+    $scope.openUploadCSVPrimerDialog()
+
     return

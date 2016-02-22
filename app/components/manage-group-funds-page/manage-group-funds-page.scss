@@ -98,3 +98,56 @@
   margin-right: 30px;
   padding-right: 15px;
 }
+
+// upload csv primer dialog
+
+.manage-group-funds-page__upload-csv-primer-dialog {
+  background: #FAFAFA;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-content {
+  padding: 30px !important;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-header {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-paragraph {
+  font-size: 15px;
+  line-height: 21px;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-link {
+  text-decoration: none;
+  color: #50A3E8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.manage-group-funds-page__upload-csv-primer-img {
+  width: 275px;
+  margin: 0 auto;
+  margin-top: 30px;
+  display: block;
+}
+
+.manage-group-funds-page__upload-csv-primer-img-caption {
+  font-size: 14px;
+  color: #C5C5C5;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-btn {
+  color: #50A3E8;
+}
+
+.manage-group-funds-page__upload-csv-primer-dialog-btns {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}

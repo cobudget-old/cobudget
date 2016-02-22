@@ -1,8 +1,28 @@
-<md-dialog aria-label="upload-csv-primer-dialog">
+<md-dialog class="manage-group-funds-page__upload-csv-primer-dialog" aria-label="upload-csv-primer-dialog">
   <md-dialog-content class="sticky-container manage-group-funds-page__upload-csv-primer-dialog-content">
-    test
+    <h2 class="manage-group-funds-page__upload-csv-primer-dialog-header">Give many people funds at once using a CSV file</h2>
+
+    <p class="manage-group-funds-page__upload-csv-primer-dialog-paragraph">
+      In order to give many people funds and / or invite them at the same time, you'll need to create a csv file to upload. <a href="#" class="manage-group-funds-page__upload-csv-primer-dialog-link">How do I do that?</a>
+    </p>
+
+    <p class="manage-group-funds-page__upload-csv-primer-dialog-paragraph">
+      Please upload a csv file with 2 columns (no headings), with email addresses in the first column, and an amount that you want to <b>ADD</b> to their account in the second column. Check out the example below.
+    </p>
+
+    <img class="manage-group-funds-page__upload-csv-primer-img" src="./img/example-csv.png" alt="example csv" />
+
+    <p class="manage-group-funds-page__upload-csv-primer-img-caption">
+      Example spreadsheet (download)
+    </p>
+
+    <p class="manage-group-funds-page__upload-csv-primer-dialog-paragraph">
+      <b>PS.</b> Don't worry, you'll be able to review and confirm changes before they are applied.
+    </p>
   </md-dialog-content>
-  <div class="md-actions" layout="row">
-    <md-button ng-click="cancel()">cancel</md-button>
+
+  <div class="md-actions manage-group-funds-page__upload-csv-primer-dialog-btns" layout="row">
+    <md-button class="manage-group-funds-page__upload-csv-primer-dialog-btn" ng-click="cancel()">cancel</md-button>
+    <md-button class="manage-group-funds-page__upload-csv-primer-dialog-btn" ng-click="cancel()">ok, select file</md-button>
   </div>
 </md-dialog>
