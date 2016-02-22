@@ -74,7 +74,7 @@ class Bucket < ActiveRecord::Base
 
   def author_name
     membership = user.membership_for(group)
-    membership.archived? ? "[removed user]" : user.name
+    !membership || membership.archived? ? "[removed user]" : user.name
   end
 
   def is_editable_by?(member)
