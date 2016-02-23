@@ -62,12 +62,10 @@ module.exports =
               scope: $scope
               controller: ($scope, $mdDialog) ->
                 $scope.csvUploadErrors = response.data.errors
-                
+
                 $scope.cancel = ->
                   $mdDialog.cancel()
                 $scope.tryAgain = ->
                   $scope.openUploadCSVPrimerDialog()
-
-    $scope.openUploadCSVPrimerDialog()
 
     return
