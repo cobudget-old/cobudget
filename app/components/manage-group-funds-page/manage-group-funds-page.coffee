@@ -44,7 +44,7 @@ module.exports =
           $scope.cancel = ->
             $mdDialog.cancel()
 
-          $scope.uploadPathForGroup = ->
+          $scope.uploadPath = ->
             "#{config.apiPrefix}/allocations/upload_review?group_id=#{groupId}"
 
           $scope.openCSVUploadDialog = ->
@@ -55,12 +55,14 @@ module.exports =
           $scope.onCSVUploadSuccess = ->
             alert('upload success')
 
-          $scope.onCSVUploadError = ->
+          $scope.onCSVUploadError = (response) ->
             $scope.cancel()
             Dialog.custom
               template: require('./upload-csv-error-dialog.tmpl.html')
               scope: $scope
               controller: ($scope, $mdDialog) ->
+                $scope.csvUploadErrors = response.data.errors
+                
                 $scope.cancel = ->
                   $mdDialog.cancel()
                 $scope.tryAgain = ->

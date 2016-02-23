@@ -28,13 +28,12 @@
 
     <div upload-button
       class="manage-group-funds-page__upload-csv-primer-dialog-hidden-btn"
-      method="GET"
-      url="{{ uploadPathForGroup() }}"
+      url="{{ uploadPath() }}"
       param="csv"
       accept="text/csv"
       on-success="onCSVUploadSuccess()"
       on-complete="onCSVUploadCompletion()"
-      on-error="onCSVUploadError()"
+      on-error="onCSVUploadError(response)"
     ></div>
   </div>
 </md-dialog>
