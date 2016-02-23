@@ -7,7 +7,7 @@ class AllocationsController < AuthenticatedController
     render json: group.allocations
   end
 
-  api :GET, '/allocations/upload_review'
+  api :POST, '/allocations/upload_review'
   def upload_review
     file = params[:csv].tempfile
     csv = CSV.read(file)

@@ -15,7 +15,7 @@ RSpec.describe AllocationsController, type: :controller do
 
       context "valid csv" do
         before do
-          get :upload_review, {group_id: @membership.group_id, csv: valid_csv}
+          post :upload_review, {group_id: @membership.group_id, csv: valid_csv}
         end
 
         it "returns http status 'ok'" do
@@ -25,21 +25,21 @@ RSpec.describe AllocationsController, type: :controller do
 
       context "csv has fucked up email addresses" do
         it "returns http status 'unprocessable'" do
-          get :upload_review, {group_id: @membership.group_id, csv: csv_with_fucked_up_email_addresses}
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_fucked_up_email_addresses}
           expect(response).to have_http_status(422)
         end
       end
 
       context "csv has non-number allocation amounts" do
         it "returns http status 'unprocessable'" do
-          get :upload_review, {group_id: @membership.group_id, csv: csv_with_non_number_allocations}
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_non_number_allocations}
           expect(response).to have_http_status(422)
         end
       end
 
       context "csv has more than two columns" do
         it "returns http status 'unprocessable'" do
-          get :upload_review, {group_id: @membership.group_id, csv: csv_with_too_many_columns}
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_too_many_columns}
           expect(response).to have_http_status(422)
         end
       end
@@ -49,7 +49,7 @@ RSpec.describe AllocationsController, type: :controller do
       before do
         membership = make_user_group_member
         request.headers.merge!(user.create_new_auth_token)
-        get :upload_review, {group_id: membership.group_id, csv: valid_csv}
+        post :upload_review, {group_id: membership.group_id, csv: valid_csv}
       end
 
       it "returns http status 'forbidden'" do
@@ -60,7 +60,7 @@ RSpec.describe AllocationsController, type: :controller do
     context "user not logged in" do
       before do
         membership = make_user_group_member
-        get :upload_review, {group_id: membership.group_id, csv: valid_csv}
+        post :upload_review, {group_id: membership.group_id, csv: valid_csv}
       end
 
       it "returns http status 'unauthorized'" do
