@@ -1,4 +1,16 @@
 class AllocationService
+  def self.review_csv(csv: )
+    report = { errors: [], data: {} }
+    csv.each_with_index do |row, index|
+      email = row[0]
+      allocation_amount = row[1]
+      report[:errors] << "too many columns in row #{index + 1}" if row.length > 2
+      report[:errors] << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
+      report[:errors] << "non-number allocation amount '#{allocation_amount}' for email: #{email}" unless is_number?(allocation_amount)
+    end
+    report
+  end
+
   def self.create_allocations_from_csv(csv: , group: , current_user:)
     errors = []
     ActiveRecord::Base.transaction do
@@ -38,4 +50,10 @@ class AllocationService
     end
     errors if errors.any?
   end
+
+  private
+
+    def self.is_number?(string)
+      true if Float(string) rescue false
+    end
 end

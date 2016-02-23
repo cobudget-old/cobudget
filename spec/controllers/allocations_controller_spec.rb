@@ -1,16 +1,47 @@
 require 'rails_helper'
 
 RSpec.describe AllocationsController, type: :controller do
+  let(:valid_csv) { fixture_file_upload('test-csv.csv', 'text/csv') }
+  let(:csv_with_fucked_up_email_addresses) { fixture_file_upload('test-csv-fucked-up-email-addresses.csv', 'text/csv') }
+  let(:csv_with_non_number_allocations) { fixture_file_upload('test-csv-non-number-allocations.csv', 'text/csv') }
+  let(:csv_with_too_many_columns) { fixture_file_upload('test-csv-too-many-columns.csv', 'text/csv') }
+
   describe "#upload_review" do
     context "user is group admin" do
       before do
         @membership = make_user_group_admin
         request.headers.merge!(user.create_new_auth_token)
-        get :upload_review, {group_id: @membership.group_id}
       end
 
-      it "returns http status 'ok'" do
-        expect(response).to have_http_status(:ok)
+      context "valid csv" do
+        before do
+          get :upload_review, {group_id: @membership.group_id, csv: valid_csv}
+        end
+
+        it "returns http status 'ok'" do
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      context "csv has fucked up email addresses" do
+        it "returns http status 'unprocessable'" do
+          get :upload_review, {group_id: @membership.group_id, csv: csv_with_fucked_up_email_addresses}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv has non-number allocation amounts" do
+        it "returns http status 'unprocessable'" do
+          get :upload_review, {group_id: @membership.group_id, csv: csv_with_non_number_allocations}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv has more than two columns" do
+        it "returns http status 'unprocessable'" do
+          get :upload_review, {group_id: @membership.group_id, csv: csv_with_too_many_columns}
+          expect(response).to have_http_status(422)
+        end
       end
     end
 
@@ -18,7 +49,7 @@ RSpec.describe AllocationsController, type: :controller do
       before do
         membership = make_user_group_member
         request.headers.merge!(user.create_new_auth_token)
-        get :upload_review, {group_id: membership.group_id}
+        get :upload_review, {group_id: membership.group_id, csv: valid_csv}
       end
 
       it "returns http status 'forbidden'" do
@@ -29,7 +60,7 @@ RSpec.describe AllocationsController, type: :controller do
     context "user not logged in" do
       before do
         membership = make_user_group_member
-        get :upload_review, {group_id: membership.group_id}
+        get :upload_review, {group_id: membership.group_id, csv: valid_csv}
       end
 
       it "returns http status 'unauthorized'" do
@@ -47,7 +78,7 @@ RSpec.describe AllocationsController, type: :controller do
 
       it "succeeds when uploading csv" do
         # upload a csv file containing that user's email address
-        post :upload, {group_id: @membership.group.id, csv: fixture_file_upload('test-csv.csv', 'text/csv')}
+        post :upload, {group_id: @membership.group.id, csv: valid_csv}
         expect(response).to have_http_status(200)
       end
 
@@ -58,7 +89,7 @@ RSpec.describe AllocationsController, type: :controller do
         Membership.find_by(group: group, member: participant).update(archived_at: DateTime.now.utc - 5.days)
 
         # upload a csv file containing that user's email address
-        post :upload, {group_id: @membership.group.id, csv: fixture_file_upload('test-csv.csv', 'text/csv')}
+        post :upload, {group_id: @membership.group.id, csv: valid_csv}
         expect(response).to have_http_status(409)
         expect(parsed(response)["errors"][0]).to eq('gbickford@gmail.com is no longer an active member.')
       end
@@ -68,7 +99,7 @@ RSpec.describe AllocationsController, type: :controller do
       before do
         membership = make_user_group_member
         request.headers.merge!(user.create_new_auth_token)
-        post :upload, {group_id: membership.group_id, csv: fixture_file_upload('test-csv.csv', 'text/csv')}
+        post :upload, {group_id: membership.group_id, csv: valid_csv}
       end
 
       it "returns http status 'forbidden'" do
