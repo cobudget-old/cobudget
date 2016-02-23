@@ -1,14 +1,16 @@
 class AllocationService
-  def self.review_csv(csv: )
-    report = { errors: [], data: {} }
+  def self.check_csv_for_errors(csv: )
+    errors = []
+    errors << "too many columns" if csv.first.length > 2
+
     csv.each_with_index do |row, index|
       email = row[0]
       allocation_amount = row[1]
-      report[:errors] << "too many columns in row #{index + 1}" if row.length > 2
-      report[:errors] << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
-      report[:errors] << "non-number allocation amount '#{allocation_amount}' for email: #{email}" unless is_number?(allocation_amount)
+      errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
+      errors << "non-number allocation amount '#{allocation_amount}' for email: #{email}" unless is_number?(allocation_amount)
     end
-    report
+
+    errors if errors.any?
   end
 
   def self.create_allocations_from_csv(csv: , group: , current_user:)
