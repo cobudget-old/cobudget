@@ -1,10 +1,8 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
-  
+class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   include ActionController::ImplicitRender
   include ActionController::Serialization
-
+  
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
