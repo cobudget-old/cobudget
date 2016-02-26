@@ -24,4 +24,12 @@ class MembershipService
     # archive membership
     membership.archive!
   end
+
+  def self.generate_csv(memberships:)
+    CSV.generate do |csv|
+      memberships.each do |membership|
+        csv << [membership.member.email, membership.balance.to_f]
+      end
+    end
+  end
 end

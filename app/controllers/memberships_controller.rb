@@ -3,7 +3,17 @@ class MembershipsController < AuthenticatedController
   def index
     group = Group.find(params[:group_id])
     if current_user.is_member_of?(group)
-      render json: group.memberships.active, status: 200
+      respond_to do |format|
+        memberships = group.memberships.active
+        format.json do
+          render json: memberships
+        end
+
+        format.csv do
+          csv = MembershipService.generate_csv(memberships: memberships)
+          send_data csv, filename: "fuck.csv", type: "text/csv; charset=utf-8"
+        end
+      end
     else
       render nothing: true, status: 403
     end
