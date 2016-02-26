@@ -3,20 +3,45 @@ require 'rails_helper'
 describe MembershipsController, :type => :controller do
   describe "#index" do
     context "user member of group" do
+
+      render_views
+
+      
       before do
         make_user_group_member
         request.headers.merge!(user.create_new_auth_token)
         create_list(:membership, 5, group: group)
         create_list(:membership, 2, group: group, archived_at: DateTime.now.utc - 5.days)
-        get :index, group_id: group.id
       end
 
-      it "returns http status success" do
-        expect(response).to have_http_status(:success)
+      context "specified format is json" do
+        before do
+          get :index, {group_id: group.id, format: :json}
+        end
+
+        it "returns http status success" do
+          expect(response).to have_http_status(:success)
+        end
+
+        it "returns all active memberships for the group" do
+          expect(parsed(response)["memberships"].length).to eq(6)
+        end
       end
 
-      it "returns all active memberships for the group" do
-        expect(parsed(response)["memberships"].length).to eq(6)
+      context "specified format is csv" do
+        before do
+          get :index, {group_id: group.id, format: :csv}
+        end
+
+        it "returns http status 'ok'" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "returns a csv file" do
+          expect(response.header["Content-Type"]).to eq("text/csv")
+          expect(response.header["Content-Disposition"]).to include(".csv")
+          expect(CSV.parse(response.body).length).to be >= 1
+        end
       end
     end
 

@@ -3,7 +3,16 @@ class MembershipsController < AuthenticatedController
   def index
     group = Group.find(params[:group_id])
     if current_user.is_member_of?(group)
-      render json: group.memberships.active, status: 200
+      respond_to do |format|
+        format.json do
+          render json: group.memberships.active, status: 200
+        end
+
+        format.csv do
+          headers['Content-Disposition'] = "attachment; filename=fuck.csv"
+          headers['Content-Type'] ||= 'text/csv'
+        end
+      end
     else
       render nothing: true, status: 403
     end
