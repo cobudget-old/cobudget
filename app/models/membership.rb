@@ -31,6 +31,18 @@ class Membership < ActiveRecord::Base
     archived_at
   end
 
+  def active?
+    !archived?
+  end
+
+  def archive!
+    update(archived_at: DateTime.now.utc)
+  end
+
+  def reactivate!
+    update(archived_at: nil)
+  end
+
   private
     def currency_code
       group.currency_code

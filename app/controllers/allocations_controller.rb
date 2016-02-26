@@ -10,10 +10,11 @@ class AllocationsController < AuthenticatedController
   api :POST, '/allocations/upload?group_id='
   def upload
     file = params[:csv].tempfile
-    csv = CSV.read(file)
+    parsed_csv = CSV.read(file)
     group = Group.find(params[:group_id])
-
-    if errors = AllocationService.create_allocations_from_csv(csv: csv, group: group, current_user: current_user)
+    AllocationService.create_allocations_from_csv(parsed_csv: parsed_csv, group: group, current_user: current_user)
+    
+    if errors =
       render json: {errors: errors}, status: 409
     else
       render nothing: true, status: 200
