@@ -22,6 +22,6 @@ class MembershipService
     Allocation.create(user: member, group: group, amount: -membership.balance)
 
     # archive membership
-    membership.update(archived_at: DateTime.now.utc)
+    membership.archive!
   end
 end
