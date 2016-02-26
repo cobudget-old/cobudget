@@ -14,12 +14,12 @@
     <md-subheader class="admin-page__group-list-subheader">Edit Existing Groups</md-subheader>
 
     <md-list class="admin-page__group-list">
-      <div class="admin-page__group-list-item-container" ng-repeat="group in accessibleGroups">      
+      <div class="admin-page__group-list-item-container" ng-repeat="group in accessibleGroups">
         <md-list-item class="admin-page__group-list-item">
           <div>
             <div class="admin-page__group-info" layout="row" layout-align="start center">
               <div class="admin-page__group-name">
-                {{ group.name }} 
+                {{ group.name }}
                 <md-button ng-click="viewGroup(group.id)">view</md-button>
               </div>
             </div>
@@ -35,12 +35,13 @@
               </span>
 
               <span >
-                <div upload-button 
-                  class="admin-page__upload-btn-container" 
-                  url="{{ uploadPathForGroup(group.id) }}" 
-                  param="csv" 
+                <div upload-button
+                  class="admin-page__upload-btn-container"
+                  url="{{ uploadPathForGroup(group.id) }}"
+                  param="csv"
                   accept="text/csv"
-                  on-success="onCsvUploadSuccess(group.id)"
+                  on-success="onCsvUploadSuccess()"
+                  on-error="onCsvUploadError()"
                   on-complete="onCsvUploadCompletion()"
                 >update members + allocations via csv upload<br><br>
                 </div>
