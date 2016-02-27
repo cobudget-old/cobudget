@@ -34,8 +34,8 @@ describe MembershipsController, :type => :controller do
         end
 
         it "returns a csv file of active memberships" do
-          expect(response.header["Content-Type"]).to eq("text/csv; charset=utf-8")
-          expect(response.header["Content-Disposition"]).to eq("attachment; filename=\"fuck.csv\"")
+          expect(response.header["Content-Type"]).to include("text/csv")
+          expect(response.header["Content-Disposition"]).to include("filename=\"#{group.name}-member-data")
           expect(CSV.parse(response.body).length).to eq(6)
         end
       end
