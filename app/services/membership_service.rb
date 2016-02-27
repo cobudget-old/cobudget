@@ -1,3 +1,5 @@
+require 'csv'
+
 class MembershipService
   def self.archive_membership(membership: )
     member = membership.member
