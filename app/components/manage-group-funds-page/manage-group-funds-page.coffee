@@ -27,8 +27,10 @@ module.exports =
         Error.set('group not found')
 
     $scope.downloadCSV = ->
+      timestamp = moment().format('YYYY-MM-DD-HH-mm-ss')
+      filename = "#{$scope.group.name}-member-data-#{timestamp}"
       params =
         url: "http://localhost:3000/api/v1/memberships.csv?group_id=#{groupId}"
-        filename: 'fuck'
+        filename: filename
       DownloadCSV(params)
     return
