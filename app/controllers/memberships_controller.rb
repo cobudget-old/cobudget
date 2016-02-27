@@ -11,8 +11,7 @@ class MembershipsController < AuthenticatedController
 
         format.csv do
           csv = MembershipService.generate_csv(memberships: memberships)
-          filename = "#{group.name}-member-data-#{Time.now.utc.iso8601}"
-          send_data csv, filename: filename, type: "text/csv; charset=utf-8"
+          send_data csv, type: "text/csv; charset=utf-8"
         end
       end
     else
