@@ -24,7 +24,7 @@ require('angular-marked')
 require('ng-q-all-settled')
 require('angular-eha.only-digits')
 require('ng-csv')
-require('./ng-download-csv')
+require('ng-download-csv')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
