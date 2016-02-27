@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/manage_funds'
   template: require('./manage-group-funds-page.html')
-  controller: (CurrentUser, Error, LoadBar, Records, $scope, $stateParams, UserCan) ->
+  controller: (CurrentUser, DownloadCSV, Error, LoadBar, Records, $scope, $stateParams, UserCan) ->
 
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
@@ -26,14 +26,9 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
-    $scope.csvData = ->
-      groupMemberships = _.filter Records.memberships.collection.data, (membership) ->
-        membership.groupId == groupId
-      _.map groupMemberships, (membership) ->
-        [membership.member().email, membership.rawBalance]
-
-    $scope.csvFileName = ->
-      timestamp = moment().format('YYYY-MM-DD-HH-mm-ss')
-      "#{$scope.group.name}-member-data-#{timestamp}"
-
+    $scope.downloadCSV = ->
+      params =
+        url: "http://localhost:3000/api/v1/memberships.csv?group_id=#{groupId}"
+        filename: 'fuck'
+      DownloadCSV(params)
     return
