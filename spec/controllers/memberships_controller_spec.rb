@@ -8,15 +8,36 @@ describe MembershipsController, :type => :controller do
         request.headers.merge!(user.create_new_auth_token)
         create_list(:membership, 5, group: group)
         create_list(:membership, 2, group: group, archived_at: DateTime.now.utc - 5.days)
-        get :index, group_id: group.id
       end
 
-      it "returns http status success" do
-        expect(response).to have_http_status(:success)
+      context "specified format is json" do
+        before do
+          get :index, {group_id: group.id, format: :json}
+        end
+
+        it "returns http status success" do
+          expect(response).to have_http_status(:success)
+        end
+
+        it "returns all active memberships for the group" do
+          expect(parsed(response)["memberships"].length).to eq(6)
+        end
       end
 
-      it "returns all active memberships for the group" do
-        expect(parsed(response)["memberships"].length).to eq(6)
+      context "specified format is csv" do
+        before do
+          get :index, {group_id: group.id, format: :csv}
+        end
+
+        it "returns http status 'ok'" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "returns a csv file of active memberships" do
+          expect(response.header["Content-Type"]).to include("text/csv")
+          expect(response.header["Content-Disposition"]).to include("attachment; filename=")
+          expect(CSV.parse(response.body).length).to eq(6)
+        end
       end
     end
 
