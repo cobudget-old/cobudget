@@ -1,6 +1,6 @@
 <div class="manage-group-funds-page" ng-if="authorized">
   <admin-toolbar></admin-toolbar>
-  
+
   <div class="manage-group-funds-page__header" layout="column" layout-align="end center">
     <div layout="row" layout-align="center center">
       <ng-md-icon icon="attach_money"
@@ -58,10 +58,15 @@
         </div>
 
         <p class="manage-group-funds-page__btn-info">
-          Download a csv of all your group members, their emails, and their available funds
+          Download a csv of all your group members, their emails, and their available funds.
+        </p>
+
+        <p class="manage-group-funds-page__btn-info">
+          <b>Using Safari?</b><br/>
+          A bug in Safari names all downloaded CSVs as <code>Unknown</code>.
+          So after downloading, you will need to rename the file to <code>YOUR_PREFERRED_NAME.csv</code>.
         </p>
       </div>
     </div>
-
   </md-content>
 </div>
