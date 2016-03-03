@@ -5,6 +5,7 @@ RSpec.describe AllocationsController, type: :controller do
   let(:csv_with_fucked_up_email_addresses) { fixture_file_upload('test-csv-fucked-up-email-addresses.csv', 'text/csv') }
   let(:csv_with_non_number_allocations) { fixture_file_upload('test-csv-non-number-allocations.csv', 'text/csv') }
   let(:csv_with_too_many_columns) { fixture_file_upload('test-csv-too-many-columns.csv', 'text/csv') }
+  let(:totally_fucked_csv) { fixture_file_upload('totally-fucked-csv.csv', 'text/csv') }
 
   describe "#upload_review" do
     context "user is group admin" do
@@ -76,22 +77,18 @@ RSpec.describe AllocationsController, type: :controller do
         request.headers.merge!(user.create_new_auth_token)
       end
 
-      it "succeeds when uploading csv" do
-        # upload a csv file containing that user's email address
-        post :upload, {group_id: @membership.group.id, csv: valid_csv}
-        expect(response).to have_http_status(200)
+      context "csv is properly formatted" do
+        it "returns http status 'ok'" do
+          post :upload, {group_id: @membership.group.id, csv: valid_csv}
+          expect(response).to have_http_status(:ok)
+        end
       end
 
-      it "fails with errors when uploading csv with archived members" do
-        # create an archived member of the group
-        participant = create(:user, email: 'gbickford@gmail.com')
-        create(:membership, member: participant, group: @membership.group)
-        Membership.find_by(group: group, member: participant).update(archived_at: DateTime.now.utc - 5.days)
-
-        # upload a csv file containing that user's email address
-        post :upload, {group_id: @membership.group.id, csv: valid_csv}
-        expect(response).to have_http_status(409)
-        expect(parsed(response)["errors"][0]).to eq('gbickford@gmail.com is no longer an active member.')
+      context "csv is fucked" do
+        it "returns http status 'unprocessable'" do
+          post :upload, {group_id: @membership.group.id, csv: totally_fucked_csv}
+          expect(response).to have_http_status(422)
+        end
       end
     end
 
@@ -114,7 +111,6 @@ RSpec.describe AllocationsController, type: :controller do
         expect(response).to have_http_status(:unauthorized)
       end
     end
-
   end
 
   describe "#create" do
