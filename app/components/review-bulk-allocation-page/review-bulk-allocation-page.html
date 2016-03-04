@@ -1,3 +1,21 @@
-<div class="review-bulk-allocation-page">
-  FUCKING PAGE
+<div class="review-bulk-allocation-page" ng-if="authorized">
+  <admin-toolbar></admin-toolbar>
+
+  <div class="review-bulk-allocation-page__header" layout="column" layout-align="end center">
+    <div layout="row" layout-align="center center">
+      <div class="review-bulk-allocation-page__upload-icon-container">
+        <ng-md-icon icon="cloud_upload"
+        class="review-bulk-allocation-page__upload-icon"
+        size="22"
+        layout="column"
+        layout-align="center center"
+        ></ng-md-icon>
+      </div>
+
+      <h1 class="review-bulk-allocation-page__header-text">
+        Please review & confirm your upload
+      </h1>
+    </div>
+  </div>
+
 </div>

@@ -1,3 +1,32 @@
 .review-bulk-allocation-page {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #F9F9F9;
+}
 
+.review-bulk-allocation-page__header {
+  height: 138px;
+  background: rgba(36,50,57,1);
+  padding-bottom: 25px;
+}
+
+.review-bulk-allocation-page__header-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.review-bulk-allocation-page__upload-icon-container {
+  border: 4px solid white;
+  border-radius: 50%;
+  margin-right: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.review-bulk-allocation-page__upload-icon {
+  position: relative;
+  top: 3px;
+  fill: white;
 }
