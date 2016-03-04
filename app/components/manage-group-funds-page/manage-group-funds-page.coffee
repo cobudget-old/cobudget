@@ -40,7 +40,7 @@ module.exports =
       Dialog.custom
         template: require('./upload-csv-primer-dialog.tmpl.html')
         scope: $scope
-        controller: ($scope, $mdDialog) ->
+        controller: ($scope, $mdDialog, $state) ->
           $scope.cancel = ->
             $mdDialog.cancel()
 
@@ -52,8 +52,10 @@ module.exports =
               angular.element('.manage-group-funds-page__upload-csv-primer-dialog-hidden-btn input').trigger('click')
             , 100)
 
-          $scope.onCSVUploadSuccess = ->
-            alert('upload success')
+          $scope.onCSVUploadSuccess = (response) ->
+            people = response.data.data
+            $scope.cancel()
+            $state.go('review-bulk-allocation', {people: people, groupId: groupId})
 
           $scope.onCSVUploadError = (response) ->
             $scope.cancel()

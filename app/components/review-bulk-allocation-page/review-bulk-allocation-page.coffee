@@ -6,6 +6,9 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/manage_funds/review_upload'
   template: require('./review-bulk-allocation-page.html')
+  params:
+    people: null
+    groupId: null
   controller: (config, CurrentUser, Error, LoadBar, Dialog, Records, $scope, $stateParams, $timeout, UserCan) ->
 
     LoadBar.start()
@@ -25,5 +28,7 @@ module.exports =
       .catch ->
         LoadBar.stop()
         Error.set('group not found')
+
+    console.log('$stateParams: ', $stateParams)
 
     return
