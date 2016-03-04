@@ -16,11 +16,24 @@ RSpec.describe AllocationsController, type: :controller do
 
       context "valid csv" do
         before do
+          @group = @membership.group
+          person0 = create(:user, email: "person0@example.com", name: "Person0")
+          create(:membership, member: person0, group: @group)
           post :upload_review, {group_id: @membership.group_id, csv: valid_csv}
         end
 
         it "returns http status 'ok'" do
           expect(response).to have_http_status(:ok)
+        end
+
+        it "returns review data as json" do
+          expect(parsed(response)).to eq({
+            "data" => [
+              {"email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => true},
+              {"email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => false},
+              {"email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => false}
+            ]
+          })
         end
       end
 

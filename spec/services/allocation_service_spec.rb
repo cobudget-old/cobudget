@@ -1,22 +1,4 @@
 require "rails_helper"
-
-#
-# @group = create(:group)
-# @admin_user = create(:user)
-# @admin_membership = create(:membership, member: @admin_user, group: @group, is_admin: true)
-# @bucket = create(:bucket, user: @admin_user, group: @group, status: "live")
-#
-# @user = create(:user)
-# @membership = create(:membership, member: @user, group: @group)
-#
-# # create an archived participant
-# @archived_participant = create_bucket_participant(bucket: @bucket, subscribed: true)
-# Membership.find_by(group: @bucket.group, member: @archived_participant).update(archived_at: DateTime.now.utc - 5.days)
-#
-# @archived_participant2 = create_bucket_participant(bucket: @bucket, subscribed: true)
-# Membership.find_by(group: @bucket.group, member: @archived_participant2).update(archived_at: DateTime.now.utc - 5.days)
-#
-
 require "csv"
 
 def generate_parsed_csv_with_user(user: , allocation_amount: )

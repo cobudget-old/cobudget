@@ -14,11 +14,11 @@ class AllocationsController < AuthenticatedController
     group = Group.find(params[:group_id])
     render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
 
-
     if errors = AllocationService.check_csv_for_errors(csv: csv)
       render status: 422, json: {errors: errors}
     else
-      render nothing: true
+      upload_preview = AllocationService.generate_csv_upload_preview(csv: csv, group: group)
+      render json: {data: upload_preview}
     end
   end
 

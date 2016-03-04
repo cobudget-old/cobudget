@@ -13,6 +13,20 @@ class AllocationService
     errors if errors.any?
   end
 
+  def self.generate_csv_upload_preview(csv:, group:)
+    csv.map do |row|
+      email = row[0]
+      allocation_amount = row[1]
+      user = group.members.find_by_email(email)
+      {
+        email: email,
+        name: user ? user.name : "",
+        allocation_amount: allocation_amount,
+        new_member: !!user
+      }
+    end
+  end
+
   def self.create_allocations_from_csv(parsed_csv: , group: , current_user:)
     upload_success = true
     emails = []
