@@ -30,16 +30,18 @@
 
     <div class="" layout="column" >
       <div class="" layout="row" layout-align="space-between center">
-        <div>People & status</div>
-        <div>Funds</div>
+        <div class="review-bulk-allocation-page__list-header">People & status</div>
+        <div class="review-bulk-allocation-page__funds-column-container" layout="row" layout-align="start center">
+          <div class="review-bulk-allocation-page__list-header">Funds</div>
+        </div>
       </div>
 
-      <md-divider></md-divider>
+      <md-divider class="review-bulk-allocation-page__top-divider"></md-divider>
 
-      <div class="" layout="row" layout-align="space-between center">
-        <div>Derek Razo (derek@enspiral.com)</div>
-        <div class="" layout="row" layout-align="space-between center">
-          <div>+$350</div>
+      <div class="review-bulk-allocation-page__list-row" layout="row" layout-align="space-between start">
+        <div><b>Derek Razo</b> ( derek@enspiral.com )</div>
+        <div class="review-bulk-allocation-page__funds-column-container" layout="row" layout-align="space-between center">
+          <div><b>+$350</b></div>
           <div>
             <ng-md-icon
               icon="more_vert"
@@ -51,10 +53,10 @@
         </div>
       </div>
 
-      <div class="" layout="row" layout-align="space-between center">
-        <div>Eugene Lynch (eugene@enspiral.com)</div>
-        <div class="" layout="row" layout-align="space-between center">
-          <div>+$350</div>
+      <div class="review-bulk-allocation-page__list-row" layout="row" layout-align="space-between start">
+        <div><b>Eugene Lynch</b> ( eugene@enspiral.com )</div>
+        <div class="review-bulk-allocation-page__funds-column-container" layout="row" layout-align="space-between center">
+          <div><b>+$350</b></div>
           <div>
             <ng-md-icon
               icon="more_vert"
@@ -66,14 +68,20 @@
         </div>
       </div>
 
-      <div class="" layout="row" layout-align="space-between center">
+      <div class="review-bulk-allocation-page__list-row" layout="row" layout-align="space-between start">
         <div class="" layout="column" layout-align="start start">
-          <div>chelsearobinson@gmail.com</div>
-          <div class="" layout="row" layout-align="space-between center"></div>
-          <div class="">Invitation Ready</div>
+          <div><b>chelsearobinson@gmail.com</b></div>
+          <div class="" layout="row" layout-align="space-between center">
+            <ng-md-icon icon="mail"
+              class="toolbar-dropdown-menu__item-icon"
+              layout="column"
+              layout-align="center center"
+            ></ng-md-icon>
+            <div class="">Invitation Ready</div>
+          </div>
         </div>
-        <div class="" layout="row" layout-align="space-between center">
-          <div>+$0</div>
+        <div class="review-bulk-allocation-page__funds-column-container" layout="row" layout-align="space-between center">
+          <div><b>+$0</b></div>
           <div>
             <ng-md-icon
               icon="more_vert"
@@ -86,11 +94,11 @@
       </div>
     </div>
 
-    <md-divider></md-divider>
+    <md-divider class="review-bulk-allocation-page__bottom-divider"></md-divider>
 
-    <md-button>Confirm</md-button>
-    <md-button>Try Again</md-button>
-    <md-button>Cancel</md-button>
+    <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__confirm-btn">Confirm</md-button>
+    <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__try-again-btn">Try Again</md-button>
+    <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__cancel-btn">Cancel</md-button>
 
   </md-content>
 
