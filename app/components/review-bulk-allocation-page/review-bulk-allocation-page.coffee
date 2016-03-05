@@ -29,6 +29,15 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
+    $scope.people = ->
+      $stateParams.people
+
+    $scope.people = [
+      {email: 'derek@enspiral.com', name: 'Derek Razo', allocation_amount: '+$350' , new_member: false},
+      {email: 'eugene@enspiral.com', name: 'Eugene Lynch', allocation_amount: '+$350' , new_member: false},
+      {email: 'chelsearobinson@gmail.com', name: '', allocation_amount: '+$0' , new_member: true},
+    ]
+
     console.log('$stateParams: ', $stateParams)
 
     return
