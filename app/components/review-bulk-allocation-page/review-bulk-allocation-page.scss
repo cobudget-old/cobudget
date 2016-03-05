@@ -55,7 +55,7 @@
 }
 
 .review-bulk-allocation-page__funds-column-container {
-  width: 75px;
+  width: 85px;
 }
 
 .review-bulk-allocation-page__list-row {
@@ -75,4 +75,18 @@
 .review-bulk-allocation-page__btn {
   display: block;
   width: 100%;
+}
+
+.review-bulk-allocation-page__funds-amount {
+  color: $cobudget-green;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.review-bulk-allocation-page__name-and-email {
+  font-size: 15px;
+}
+
+.review-bulk-allocation-page__invitation-text {
+  font-size: 15px;
 }
