@@ -48,15 +48,12 @@
   font-size: 15px;
   line-height: 18px;
   margin-top: -7px;
-  margin-bottom: 40px;
 }
 
-.review-bulk-allocation-page__addition-overview {
-  color: $cobudget-green;
-}
+.review-bulk-allocation-page__overview-list {
+  color: inherit;
+  margin-top: 5px;
 
-.review-bulk-allocation-page__subtraction-overview {
-  color: $cobudget-red;
 }
 
 // people + status list

@@ -23,52 +23,44 @@
       Overview
     </h2>
 
-    <p class="review-bulk-allocation-page__text-overview">
-      Looks like you're trying to
+    <div class="review-bulk-allocation-page__text-overview">
+      Looks like you're trying to do the following to {{ group.name }}:
 
-      <span>
-        add
-        <b class="review-bulk-allocation-page__addition-overview">
-          ${{ summedAllocationsFrom(peopleWithPositiveAllocations) }} total
-          <ng-pluralize
+      <ul class="review-bulk-allocation-page__overview-list">
+        <li ng-if="peopleWithPositiveAllocations.length > 0">
+          add <b>${{ summedAllocationsFrom(peopleWithPositiveAllocations) }} total</b> to
+          <b><ng-pluralize
             count="peopleWithPositiveAllocations.length"
             when="{
-              'one': 'to 1 person',
-              'other': 'to {} people'
+              'one': '1 person',
+              'other': '{} people'
             }"
-          ></ng-pluralize>
-        </b>
-      </span>
+          ></ng-pluralize></b>
+        </li>
 
-      <span>
-        subtract
-        <b class="review-bulk-allocation-page__subtraction-overview">
-          ${{ summedAllocationsFrom(peopleWithNegativeAllocations) }} total
-          <ng-pluralize
+        <li ng-if="peopleWithNegativeAllocations.length > 0">
+          subtract <b>${{ summedAllocationsFrom(peopleWithNegativeAllocations) }} total</b> from
+          <b><ng-pluralize
             count="peopleWithNegativeAllocations.length"
             when="{
-              'one': 'from 1 person',
-              'other': 'from {} people'
+              'one': '1 person',
+              'other': '{} people'
             }"
-          ></ng-pluralize>
-        </b>
-      </span>
+          ></ng-pluralize></b>
+        </li>
 
-      <span>
-        add
-        <b>
-          <ng-pluralize
+        <li ng-if="newPeople.length > 0">
+          add
+          <b><ng-pluralize
             count="newPeople.length"
             when="{
               'one': '1 new person',
               'other': '{} new people'
             }"
-          ></ng-pluralize>
-        </b>
-      </span>
-
-       to {{ group.name }}
-    </p>
+          ></ng-pluralize></b>
+        </li>
+      </ul>
+    </div>
 
     <div layout="column">
       <div layout="row" layout-align="space-between center">
