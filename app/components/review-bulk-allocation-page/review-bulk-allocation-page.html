@@ -88,7 +88,7 @@
         </div>
 
         <div class="review-bulk-allocation-page__funds-column-container" layout="row" layout-align="space-between center">
-          <div class="review-bulk-allocation-page__funds-amount">{{ person.allocation_amount | currency : group.currencySymbol }}</div>
+          <div class="review-bulk-allocation-page__funds-amount"><span ng-if="person.allocation_amount >= 0">+</span>{{ person.allocation_amount | currency : group.currencySymbol }}</div>
 
           <div>
             <ng-md-icon

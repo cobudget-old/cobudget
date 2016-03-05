@@ -27,6 +27,7 @@ module.exports =
           $scope.group = group
           $scope.currentUser = CurrentUser()
           Records.memberships.fetchByGroupId(groupId)
+          $scope.preparePeopleList()
         else
           $scope.authorized = false
           Error.set("you can't view this page")
@@ -34,19 +35,20 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
-    $scope.people = $stateParams.people
-    $scope.peopleWithPositiveAllocations = []
-    $scope.peopleWithNegativeAllocations = []
-    $scope.newPeople = []
-
-    _.each $scope.people, (person) ->
-      amount = parseFloat(person.allocation_amount)
-      if amount > 0
-        $scope.peopleWithPositiveAllocations.push(person)
-      else if amount < 0
-        $scope.peopleWithNegativeAllocations.push(person)
-      if person.new_member
-        $scope.newPeople.push(person)
+    $scope.preparePeopleList = ->
+      $scope.people = _.map $stateParams.people, (person) ->
+        person.allocation_amount = parseFloat(person.allocation_amount)
+        person
+      $scope.peopleWithPositiveAllocations = []
+      $scope.peopleWithNegativeAllocations = []
+      $scope.newPeople = []
+      _.each $scope.people, (person) ->
+        if person.allocation_amount > 0
+          $scope.peopleWithPositiveAllocations.push(person)
+        else if person.allocation_amount < 0
+          $scope.peopleWithNegativeAllocations.push(person)
+        if person.new_member
+          $scope.newPeople.push(person)
 
     $scope.summedAllocationsFrom = (people) ->
       callback = (sum, person) ->
