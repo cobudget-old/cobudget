@@ -82,6 +82,19 @@
   font-weight: 500;
 }
 
+.review-bulk-allocation-page__funds-positive-amount {
+  color: $cobudget-green;
+}
+
+.review-bulk-allocation-page__funds-negative-amount {
+  color: $cobudget-red;
+}
+
+.review-bulk-allocation-page__funds-sign {
+  position: relative;
+  bottom: 1px;
+}
+
 .review-bulk-allocation-page__name-and-email {
   font-size: 15px;
 }

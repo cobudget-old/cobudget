@@ -35,6 +35,9 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
+    $scope.abs = (val) ->
+      Math.abs(val)
+
     $scope.preparePeopleList = ->
       $scope.people = _.map $stateParams.people, (person) ->
         person.allocation_amount = parseFloat(person.allocation_amount)
