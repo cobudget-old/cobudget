@@ -28,7 +28,7 @@
 
       <ul class="review-bulk-allocation-page__overview-list">
         <li ng-if="peopleWithPositiveAllocations.length > 0">
-          add <b>${{ summedAllocationsFrom(peopleWithPositiveAllocations) }} total</b> to
+          add <b>{{ summedAllocationsFrom(peopleWithPositiveAllocations) | currency : group.currencySymbol }} total</b> to
           <b><ng-pluralize
             count="peopleWithPositiveAllocations.length"
             when="{
@@ -39,7 +39,7 @@
         </li>
 
         <li ng-if="peopleWithNegativeAllocations.length > 0">
-          subtract <b>${{ summedAllocationsFrom(peopleWithNegativeAllocations) }} total</b> from
+          subtract <b>{{ summedAllocationsFrom(peopleWithNegativeAllocations) | currency : group.currencySymbol }} total</b> from
           <b><ng-pluralize
             count="peopleWithNegativeAllocations.length"
             when="{
@@ -88,7 +88,7 @@
         </div>
 
         <div class="review-bulk-allocation-page__funds-column-container" layout="row" layout-align="space-between center">
-          <div class="review-bulk-allocation-page__funds-amount">{{ person.allocation_amount }}</div>
+          <div class="review-bulk-allocation-page__funds-amount">{{ person.allocation_amount | currency : group.currencySymbol }}</div>
 
           <div>
             <ng-md-icon
