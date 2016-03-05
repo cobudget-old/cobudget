@@ -24,7 +24,37 @@
     </h2>
 
     <p class="review-bulk-allocation-page__text-overview">
-      Looks like you're trying to add <b>$700 total</b> to <b>3 people</b>, and add <b>1 new person</b> to POC21 Community
+      Looks like you're trying to
+      <span>
+        add <b>${{ summedAllocationsFrom(peopleWithPositiveAllocations) }} total</b> to
+        <b><ng-pluralize
+          count="peopleWithPositiveAllocations.length"
+          when="{
+            'one': '1 person',
+            'other': '{} people'
+          }"
+        ></ng-pluralize></b>
+      </span>
+      <span>
+        subtract <b>${{ summedAllocationsFrom(peopleWithNegativeAllocations) }} total</b> from
+        <b><ng-pluralize
+          count="peopleWithNegativeAllocations.length"
+          when="{
+            'one': '1 person',
+            'other': '{} people'
+          }"
+        ></ng-pluralize></b>
+      </span>
+      <span>
+        add <b>{{ newPeople.length }}</b> new
+        <b><ng-pluralize
+          count="newPeople.length"
+          when="{
+            'one': 'person',
+            'other': 'people'
+          }"
+        ></ng-pluralize></b> to {{ group.name }}
+      </span>
     </p>
 
     <div layout="column">

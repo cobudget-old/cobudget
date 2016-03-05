@@ -7,7 +7,12 @@ module.exports =
   url: '/groups/:groupId/manage_funds/review_upload'
   template: require('./review-bulk-allocation-page.html')
   params:
-    people: null
+    people: [
+      {email: 'derek@enspiral.com', name: 'Derek Razo', allocation_amount: '300' , new_member: false},
+      {email: 'eugene@enspiral.com', name: 'Eugene Lynch', allocation_amount: '-100' , new_member: false},
+      {email: 'data@doge.com', name: 'Data Doge', allocation_amount: '50' , new_member: false},
+      {email: 'chelsearobinson@gmail.com', name: '', allocation_amount: '0' , new_member: true}
+    ]
     groupId: null
   controller: (config, CurrentUser, Error, LoadBar, Dialog, Records, $scope, $stateParams, $timeout, UserCan) ->
 
@@ -29,15 +34,23 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
-    $scope.people = ->
-      $stateParams.people
+    $scope.people = $stateParams.people
+    $scope.peopleWithPositiveAllocations = []
+    $scope.peopleWithNegativeAllocations = []
+    $scope.newPeople = []
 
-    $scope.people = [
-      {email: 'derek@enspiral.com', name: 'Derek Razo', allocation_amount: '+$350' , new_member: false},
-      {email: 'eugene@enspiral.com', name: 'Eugene Lynch', allocation_amount: '+$350' , new_member: false},
-      {email: 'chelsearobinson@gmail.com', name: '', allocation_amount: '+$0' , new_member: true},
-    ]
+    _.each $scope.people, (person) ->
+      amount = parseFloat(person.allocation_amount)
+      if amount > 0
+        $scope.peopleWithPositiveAllocations.push(person)
+      else if amount < 0
+        $scope.peopleWithNegativeAllocations.push(person)
+      if person.new_member
+        $scope.newPeople.push(person)
 
-    console.log('$stateParams: ', $stateParams)
+    $scope.summedAllocationsFrom = (people) ->
+      callback = (sum, person) ->
+        sum + Math.abs(parseFloat(person.allocation_amount))
+      _.reduce(people, callback, 0)
 
     return
