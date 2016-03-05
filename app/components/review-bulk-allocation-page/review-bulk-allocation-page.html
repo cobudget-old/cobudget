@@ -25,7 +25,7 @@
 
     <p class="review-bulk-allocation-page__text-overview">
       Looks like you're trying to
-      <span>
+      <span class="review-bulk-allocation-page__addition-overview">
         add <b>${{ summedAllocationsFrom(peopleWithPositiveAllocations) }} total</b> to
         <b><ng-pluralize
           count="peopleWithPositiveAllocations.length"
@@ -35,7 +35,7 @@
           }"
         ></ng-pluralize></b>
       </span>
-      <span>
+      <span class="review-bulk-allocation-page__subtraction-overview">
         subtract <b>${{ summedAllocationsFrom(peopleWithNegativeAllocations) }} total</b> from
         <b><ng-pluralize
           count="peopleWithNegativeAllocations.length"
@@ -46,12 +46,12 @@
         ></ng-pluralize></b>
       </span>
       <span>
-        add <b>{{ newPeople.length }}</b> new
+        add
         <b><ng-pluralize
           count="newPeople.length"
           when="{
-            'one': 'person',
-            'other': 'people'
+            'one': '1 new person',
+            'other': '{} new people'
           }"
         ></ng-pluralize></b> to {{ group.name }}
       </span>

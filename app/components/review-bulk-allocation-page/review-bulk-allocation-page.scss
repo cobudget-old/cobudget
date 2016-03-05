@@ -35,6 +35,8 @@
   padding-left: 20px;
 }
 
+// text overview
+
 .review-bulk-allocation-page__subheader {
   font-weight: normal;
   font-size: 22px;
@@ -48,6 +50,16 @@
   margin-top: -7px;
   margin-bottom: 40px;
 }
+
+.review-bulk-allocation-page__addition-overview {
+  color: $cobudget-green;
+}
+
+.review-bulk-allocation-page__subtraction-overview {
+  color: $cobudget-red;
+}
+
+// people + status list
 
 .review-bulk-allocation-page__list-header {
   font-weight: 500;
