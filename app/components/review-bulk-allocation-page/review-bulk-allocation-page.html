@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <md-content class="manage-group-funds-page__content">
+  <md-content class="review-bulk-allocation-page__content">
     <h2 class="review-bulk-allocation-page__subheader">
       Overview
     </h2>
@@ -44,7 +44,7 @@
 
           <div ng-if="person.new_member" class="review-bulk-allocation-page__invitation-text" layout="row" layout-align="space-between center">
             <ng-md-icon icon="mail"
-              class="toolbar-dropdown-menu__item-icon"
+              class="review-bulk-allocation-page__item-icon"
               layout="column"
               layout-align="center center"
             ></ng-md-icon>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="review-bulk-allocation-page__funds-column-container" layout="row" layout-align="space-between center">
-          <div class="review-bulk-allocation-page__funds-amount">+$0</div>
+          <div class="review-bulk-allocation-page__funds-amount">{{ person.allocation_amount }}</div>
 
           <div>
             <ng-md-icon
