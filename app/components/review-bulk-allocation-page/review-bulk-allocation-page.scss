@@ -67,16 +67,6 @@
   margin-top: 7px;
 }
 
-.review-bulk-allocation-page__bottom-divider {
-  margin-top: 20px;
-  margin-bottom: 5px;
-}
-
-.review-bulk-allocation-page__btn {
-  display: block;
-  width: 100%;
-}
-
 .review-bulk-allocation-page__funds-amount {
   color: $cobudget-green;
   font-size: 20px;
@@ -94,4 +84,25 @@
 .review-bulk-allocation-page__item-icon {
   fill: #757575;
   margin-right: 7px;
+}
+
+.review-bulk-allocation-page__bottom-divider {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+// bottom btns
+
+.review-bulk-allocation-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.review-bulk-allocation-page__confirm-btn {
+  background: #4A90E2 !important;
+  color: white;
+}
+
+.review-bulk-allocation-page__try-again-btn, .review-bulk-allocation-page__cancel-btn {
+  color: #7B7B7B;
 }
