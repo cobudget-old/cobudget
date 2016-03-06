@@ -56,7 +56,9 @@ module.exports =
       _.reduce(people, callback, 0)
 
     $scope.openUploadCSVPrimerDialog = ->
-      Component = require('./../upload-csv-primer-dialog/upload-csv-primer-dialog.coffee')($scope)
-      Dialog.open(Component)
+      uploadCSVPrimerDialog = require('./../upload-csv-primer-dialog/upload-csv-primer-dialog.coffee')({
+        scope: $scope
+      })
+      Dialog.open(uploadCSVPrimerDialog)
 
     return

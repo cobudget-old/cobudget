@@ -1,6 +1,6 @@
-module.exports = ($scope) ->
+module.exports = (params) ->
   template: require('./upload-csv-primer-dialog.html')
-  scope: $scope
+  scope: params.scope
   controller: (Dialog, config, $mdDialog, $scope, $state, $timeout) ->
     $scope.cancel = ->
       $mdDialog.cancel()
@@ -10,7 +10,7 @@ module.exports = ($scope) ->
 
     $scope.openCSVUploadDialog = ->
       $timeout( ->
-        angular.element('.manage-group-funds-page__upload-csv-primer-dialog-hidden-btn input').trigger('click')
+        angular.element('.upload-csv-primer-dialog__hidden-btn input').trigger('click')
       , 100)
 
     $scope.onCSVUploadSuccess = (response) ->
@@ -19,14 +19,9 @@ module.exports = ($scope) ->
       $state.go('review-bulk-allocation', {people: people, groupId: groupId})
 
     $scope.onCSVUploadError = (response) ->
-      # $scope.cancel()
-      # Dialog.custom
-      #   template: require('./upload-csv-error-dialog.tmpl.html')
-      #   scope: $scope
-      #   controller: ($scope, $mdDialog) ->
-      #     $scope.csvUploadErrors = response.data.errors
-      #
-      #     $scope.cancel = ->
-      #       $mdDialog.cancel()
-      #     $scope.tryAgain = ->
-      #       $scope.openUploadCSVPrimerDialog()
+      $scope.cancel()
+      uploadCSVPrimerDialogError = require('./../upload-csv-primer-dialog-error/upload-csv-primer-dialog-error.coffee')({
+        scope: $scope,
+        response: response
+      })
+      Dialog.open(uploadCSVPrimerDialogError)
