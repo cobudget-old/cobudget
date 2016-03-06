@@ -16,7 +16,7 @@ module.exports = (params) ->
     $scope.onCSVUploadSuccess = (response) ->
       people = response.data.data
       $scope.cancel()
-      $state.go('review-bulk-allocation', {people: people, groupId: groupId})
+      $state.go('review-bulk-allocation', {people: people, groupId: $scope.group.id})
 
     $scope.onCSVUploadError = (response) ->
       $scope.cancel()
