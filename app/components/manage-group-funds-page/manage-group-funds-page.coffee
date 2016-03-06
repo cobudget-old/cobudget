@@ -40,7 +40,7 @@ module.exports =
       Dialog.custom
         template: require('./upload-csv-primer-dialog.tmpl.html')
         scope: $scope
-        controller: ($scope, $mdDialog, $state) ->
+        controller: (config, $mdDialog, $scope, $state) ->
           $scope.cancel = ->
             $mdDialog.cancel()
 
