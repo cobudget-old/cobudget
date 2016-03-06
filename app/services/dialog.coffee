@@ -28,3 +28,7 @@ global.cobudgetApp.factory 'Dialog', ($mdDialog) ->
 
     close: ->
       $mdDialog.cancel()
+
+    open: (Component, $scope) ->
+      
+      @custom(Component)
