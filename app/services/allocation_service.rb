@@ -17,12 +17,12 @@ class AllocationService
     csv.map do |row|
       email = row[0]
       allocation_amount = row[1]
-      user = group.members.find_by_email(email)
+      user = User.find_by_email(email)
       {
         email: email,
-        name: user ? user.name : "",
+        name: user && user.is_member_of?(group) ? user.name : "",
         allocation_amount: allocation_amount,
-        new_member: !!user
+        new_member: !user || !user.is_member_of?(group)
       }
     end
   end
