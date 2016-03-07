@@ -22,24 +22,6 @@ class AllocationsController < AuthenticatedController
     end
   end
 
-  api :POST, '/allocations/upload?group_id='
-  def upload
-    file = params[:csv].tempfile
-    parsed_csv = CSV.read(file)
-    group = Group.find(params[:group_id])
-    render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
-
-    render nothing: true, status: 403 and return unless current_user.is_admin_for?(group)
-
-    status = AllocationService.create_allocations_from_csv(
-      parsed_csv: parsed_csv,
-      group: group,
-      current_user: current_user
-    ) ? 200 : 422
-
-    render nothing: true, status: status
-  end
-
   api :POST, '/allocations?membership_id&amount'
   def create
     group = Group.find(allocation_params[:group_id])
