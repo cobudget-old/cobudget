@@ -1,15 +1,17 @@
 class AllocationService
   def self.check_csv_for_errors(csv: )
     errors = []
-    errors << "too many columns" if csv.first.length > 2
-
-    csv.each_with_index do |row, index|
-      email = row[0]
-      allocation_amount = row[1]
-      errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
-      errors << "non-number allocation amount '#{allocation_amount}' for email: #{email}" unless is_number?(allocation_amount)
+    if csv.nil? || csv.empty?
+      errors << "csv is empty"
+    else
+      errors << "too many columns" if csv.first.length > 2
+      csv.each_with_index do |row, index|
+        email = row[0]
+        allocation_amount = row[1]
+        errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
+        errors << "non-number allocation amount '#{allocation_amount}' for email: #{email}" unless is_number?(allocation_amount)
+      end
     end
-
     errors if errors.any?
   end
 

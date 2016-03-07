@@ -6,6 +6,7 @@ RSpec.describe AllocationsController, type: :controller do
   let(:csv_with_non_number_allocations) { fixture_file_upload('test-csv-non-number-allocations.csv', 'text/csv') }
   let(:csv_with_too_many_columns) { fixture_file_upload('test-csv-too-many-columns.csv', 'text/csv') }
   let(:totally_fucked_csv) { fixture_file_upload('totally-fucked-csv.csv', 'text/csv') }
+  let(:empty_csv) { fixture_file_upload('empty-csv.csv', 'text/csv') }
 
   describe "#upload_review" do
     context "user is group admin" do
@@ -29,9 +30,9 @@ RSpec.describe AllocationsController, type: :controller do
         it "returns review data as json" do
           expect(parsed(response)).to eq({
             "data" => [
-              {"email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => true},
-              {"email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => false},
-              {"email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => false}
+              {"email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
+              {"email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => true},
+              {"email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => true}
             ]
           })
         end
@@ -54,6 +55,13 @@ RSpec.describe AllocationsController, type: :controller do
       context "csv has more than two columns" do
         it "returns http status 'unprocessable'" do
           post :upload_review, {group_id: @membership.group_id, csv: csv_with_too_many_columns}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv is empty" do
+        it "returns http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: empty_csv}
           expect(response).to have_http_status(422)
         end
       end
