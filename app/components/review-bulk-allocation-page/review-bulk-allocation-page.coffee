@@ -68,6 +68,11 @@ module.exports =
     $scope.confirmBulkAllocations = ->
       _.each $scope.newPeople, (newPerson) ->
         params = {group_id: groupId, email: newPerson.email}
-        Records.memberships.remote.create(params)
+        Records.memberships.remote.create(params).then (data) ->
+          params = {groupId: groupId, userId: data.users[0].id, amount: newPerson.allocation_amount}
+          allocation = Records.allocations.build(params)
+          allocation.save().then ->
+            newMembership = data.memberships[0]
+            Records.memberships.invite(newMembership)
 
     return
