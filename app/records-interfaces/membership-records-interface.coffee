@@ -18,5 +18,5 @@ global.cobudgetApp.factory 'MembershipRecordsInterface', (config, BaseRecordsInt
         params:
           group_id: groupId
 
-    reinvite: (membership) ->
-      @remote.postMember(membership.id, 'reinvite')
+    invite: (membership) ->
+      @remote.postMember(membership.id, 'invite')
