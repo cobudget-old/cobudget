@@ -61,4 +61,7 @@ module.exports =
       })
       Dialog.open(uploadCSVPrimerDialog)
 
+    $scope.cancel = ->
+      $location.path("/groups/#{groupId}")
+
     return
