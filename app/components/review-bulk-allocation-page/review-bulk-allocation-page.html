@@ -94,15 +94,6 @@
             <span class="review-bulk-allocation-page__funds-sign">{{ person.allocation_amount >= 0 ? '+' : '-'}}</span>
             {{ abs(person.allocation_amount) | currency : group.currencySymbol }}
           </div>
-
-          <div>
-            <ng-md-icon
-              icon="more_vert"
-              layout="column"
-              layout-align="center center"
-              class="group-page__funder-more-button-icon"
-            ></ng-md-icon>
-          </div>
         </div>
       </div>
     </div>
