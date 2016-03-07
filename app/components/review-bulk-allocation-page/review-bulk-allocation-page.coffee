@@ -87,6 +87,7 @@ module.exports =
             Records.memberships.invite(newMembership).then ->
               newMember.status = 'complete'
               newMember.deferred.resolve()
+
       _.each $scope.existingMembers, (existingMember) ->
         existingMember.status = 'pending'
         params = {groupId: groupId, userId: existingMember.id, amount: existingMember.allocation_amount}
