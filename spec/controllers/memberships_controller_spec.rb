@@ -29,8 +29,8 @@ describe MembershipsController, :type => :controller do
           get :index, {group_id: group.id, format: :csv}
         end
 
-        it "returns http status 'ok'" do
-          expect(response).to have_http_status(:ok)
+        it "returns http status 'success'" do
+          expect(response).to have_http_status(:success)
         end
 
         it "returns a csv file of active memberships" do
@@ -52,6 +52,90 @@ describe MembershipsController, :type => :controller do
     context "user not logged in" do
       it "returns http status unauthorized" do
         get :index, group_id: group.id
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
+  describe "#create" do
+    let(:user) { create(:user) }
+    let(:group) { create(:group) }
+    let(:valid_email) { Faker::Internet.email }
+
+    context "user signed in" do
+      before { request.headers.merge!(user.create_new_auth_token) }
+
+      context "user is admin of group" do
+        let!(:membership) { create(:membership, member: user, group: group, is_admin: true) }
+
+        context "specified email address belongs to existing user" do
+          let!(:existing_user) { create(:user, email: valid_email) }
+
+          before do
+            post :create, {group_id: group.id, email: valid_email}
+            @new_membership = Membership.find_by(member: existing_user, group: group)
+          end
+
+          it "returns http status 'success'" do
+            expect(response).to have_http_status(:success)
+          end
+
+          it "creates membership" do
+            expect(@new_membership).to be_truthy
+          end
+
+          it "returns new membership as json" do
+            expect(parsed(response)["memberships"][0]["id"]).to eq(@new_membership.id)
+          end
+        end
+
+        context "specified email address does not belong to existing user" do
+          before do
+            post :create, {group_id: group.id, email: valid_email}
+            @new_user = User.find_by_email(valid_email)
+            @new_membership = Membership.find_by(group: group, member: @new_user)
+          end
+
+          it "returns http status 'success'" do
+            expect(response).to have_http_status(:success)
+          end
+
+          it "creates user with confirmation_token" do
+            expect(@new_user).to be_truthy
+            expect(@new_user.confirmation_token).to be_truthy
+          end
+
+          it "creates membership" do
+            expect(@new_membership).to be_truthy
+          end
+
+          it "returns new membership as json" do
+            expect(parsed(response)["memberships"][0]["id"]).to eq(@new_membership.id)
+          end
+        end
+
+        context "invalid email address" do
+          before { post :create, {group_id: group.id, email: "ehehehehuhuh"} }
+
+          it "returns http status 'bad_request'" do
+            expect(response).to have_http_status(:bad_request)
+          end
+        end
+      end
+
+      context "user not admin of group" do
+        before { post :create, {group_id: group.id, email: valid_email} }
+
+        it "returns http status 'forbidden'" do
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
+    end
+
+    context "user not signed in" do
+      before { post :create, {group_id: group.id, email: valid_email} }
+
+      it "returns http status 'unauthorized'" do
         expect(response).to have_http_status(:unauthorized)
       end
     end

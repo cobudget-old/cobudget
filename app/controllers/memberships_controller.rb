@@ -20,6 +20,26 @@ class MembershipsController < AuthenticatedController
     end
   end
 
+  api :POST, '/memberships?group_id&email'
+  def create
+    group = Group.find(params[:group_id])
+    email = params[:email]
+    render nothing: true, status: 403 and return unless current_user.is_admin_for?(group)
+
+    if user = User.find_by_email(email)
+      membership = Membership.create(member: user, group: group)
+      render json: [membership]
+    else
+      user = User.create_with_confirmation_token(email: email)
+      if user.valid?
+        membership = Membership.create(member: user, group: group)
+        render json: [membership]
+      else
+        render nothing: true, status: 400
+      end
+    end
+  end
+
   api :GET, '/memberships/:id'
   def show
     membership = Membership.find(params[:id])
