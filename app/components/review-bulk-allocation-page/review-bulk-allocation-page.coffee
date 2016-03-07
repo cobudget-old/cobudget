@@ -42,14 +42,17 @@ module.exports =
         person
       $scope.peopleWithPositiveAllocations = []
       $scope.peopleWithNegativeAllocations = []
-      $scope.newPeople = []
+      $scope.newMembers = []
+      $scope.existingMembers = []
       _.each $scope.people, (person) ->
         if person.allocation_amount > 0
           $scope.peopleWithPositiveAllocations.push(person)
         else if person.allocation_amount < 0
           $scope.peopleWithNegativeAllocations.push(person)
         if person.new_member
-          $scope.newPeople.push(person)
+          $scope.newMembers.push(person)
+        else
+          $scope.existingMembers.push(person)
 
     $scope.summedAllocationsFrom = (people) ->
       callback = (sum, person) ->
@@ -66,13 +69,16 @@ module.exports =
       $location.path("/groups/#{groupId}")
 
     $scope.confirmBulkAllocations = ->
-      _.each $scope.newPeople, (newPerson) ->
-        params = {group_id: groupId, email: newPerson.email}
+      _.each $scope.newMembers, (newMember) ->
+        params = {group_id: groupId, email: newMember.email}
         Records.memberships.remote.create(params).then (data) ->
-          params = {groupId: groupId, userId: data.users[0].id, amount: newPerson.allocation_amount}
+          params = {groupId: groupId, userId: data.users[0].id, amount: newMember.allocation_amount}
           allocation = Records.allocations.build(params)
           allocation.save().then ->
             newMembership = data.memberships[0]
             Records.memberships.invite(newMembership)
+      _.each $scope.existingMembers, (existingMember) ->
+        params = {groupId: groupId, userId: existingMember.id, amount: existingMember.allocation_amount}
+        allocation = Records.allocations.build(params)
 
     return
