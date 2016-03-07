@@ -9,7 +9,7 @@ module.exports =
   params:
     people: null
     groupId: null
-  controller: (config, CurrentUser, Dialog, Error, LoadBar, $location, $q, Records, $scope, $stateParams, $timeout, UserCan) ->
+  controller: (config, CurrentUser, Dialog, Error, LoadBar, $location, $q, Records, $scope, $state, $stateParams, $timeout, UserCan) ->
 
     $scope.uploadStatus = 'standby'
 
@@ -97,5 +97,11 @@ module.exports =
 
       $q.allSettled(promises).then ->
         $scope.uploadStatus = 'complete'
+
+    $scope.done = ->
+      $scope.cancel()
+
+    $scope.seeAllMembers = ->
+      $state.go('group', {groupId: groupId, openMembersTab: true})
 
     return
