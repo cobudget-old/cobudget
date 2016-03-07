@@ -36,8 +36,8 @@ class MembershipsController < AuthenticatedController
     render json: Membership.where(member_id: current_user.id).active
   end
 
-  api :POST, '/memberships/:id/reinvite'
-  def reinvite
+  api :POST, '/memberships/:id/invite'
+  def invite
     membership = Membership.find(params[:id])
     if current_user.is_admin_for?(membership.group)
       member, group = membership.member, membership.group

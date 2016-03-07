@@ -97,10 +97,10 @@ describe MembershipsController, :type => :controller do
     end
   end
 
-  describe "#reinvite" do
+  describe "#invite" do
     before do
-      @membership_to_reinvite = create(:membership, group: group)
-      @user_to_reinvite = @membership_to_reinvite.member
+      @membership_to_invite = create(:membership, group: group)
+      @user_to_invite = @membership_to_invite.member
     end
 
     after do
@@ -115,8 +115,8 @@ describe MembershipsController, :type => :controller do
       context "current_user is admin of user's group" do
         before do
           create(:membership, member: user, group: group, is_admin: true)
-          post :reinvite, {id: @membership_to_reinvite.id}
-          @user_to_reinvite.reload
+          post :invite, {id: @membership_to_invite.id}
+          @user_to_invite.reload
         end
 
         it "returns http status 'success'" do
@@ -124,25 +124,25 @@ describe MembershipsController, :type => :controller do
         end
 
         it "creates a new confirmaton token for the user and resets confirmed_at to nil" do
-          expect(@user_to_reinvite.confirmation_token).to be_truthy
-          expect(@user_to_reinvite.confirmed_at).to be_nil
+          expect(@user_to_invite.confirmation_token).to be_truthy
+          expect(@user_to_invite.confirmed_at).to be_nil
         end
 
         it "resends invite email to specified user" do
           sent_emails = ActionMailer::Base.deliveries
           expect(sent_emails.length).to eq(1)
-          expect(sent_emails.first.to).to eq([@user_to_reinvite.email])
+          expect(sent_emails.first.to).to eq([@user_to_invite.email])
         end
 
         it "returns the user as json" do
-          expect(parsed(response)["users"][0]["email"]).to eq(@user_to_reinvite.email)
+          expect(parsed(response)["users"][0]["email"]).to eq(@user_to_invite.email)
         end
       end
 
       context "current_user not admin of user's group" do
         before do
-          post :reinvite, {id: @membership_to_reinvite.id}
-          @user_to_reinvite.reload
+          post :invite, {id: @membership_to_invite.id}
+          @user_to_invite.reload
         end
 
         it "returns http status forbidden" do
@@ -150,7 +150,7 @@ describe MembershipsController, :type => :controller do
         end
 
         it "does not create a new confirmation token for the user" do
-          expect(@user_to_reinvite.confirmation_token).to be_nil
+          expect(@user_to_invite.confirmation_token).to be_nil
         end
 
         it "does not send invite email to specified user" do
@@ -161,7 +161,7 @@ describe MembershipsController, :type => :controller do
 
     context "current_user signed in" do
       before do
-        post :reinvite, {id: @membership_to_reinvite.id}
+        post :invite, {id: @membership_to_invite.id}
       end
 
       it "returns http status 'unauthorized'" do
