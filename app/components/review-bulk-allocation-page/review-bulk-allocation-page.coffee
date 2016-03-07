@@ -65,4 +65,9 @@ module.exports =
     $scope.cancel = ->
       $location.path("/groups/#{groupId}")
 
+    $scope.confirmBulkAllocations = ->
+      _.each $scope.newPeople, (newPerson) ->
+        params = {group_id: groupId, email: newPerson.email}
+        Records.memberships.remote.create(params)
+
     return
