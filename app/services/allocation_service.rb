@@ -43,13 +43,13 @@ class AllocationService
             if membership = user.membership_for(group)
               if membership.archived?
                 membership.reactivate!
-                emails << UserMailer.invite_to_group_email(user: user, inviter: current_user, group: group, initial_allocation_amount: amount)
+                emails << UserMailer.invite_email(user: user, inviter: current_user, group: group, initial_allocation_amount: amount)
               else
                 emails << UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount) if amount >= 1
               end
             else
               group.add_member(user)
-              emails << UserMailer.invite_to_group_email(user: user, inviter: current_user, group: group, initial_allocation_amount: amount)
+              emails << UserMailer.invite_email(user: user, inviter: current_user, group: group, initial_allocation_amount: amount)
             end
           else
             user = User.create_with_confirmation_token(email: email)

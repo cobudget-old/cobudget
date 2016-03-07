@@ -31,7 +31,7 @@ describe "AllocationService" do
 
         it "user receives 'invite to group' email" do
           sent_email = ActionMailer::Base.deliveries.first
-          expect(sent_email.body.to_s).to include("#{current_user.name} has invited you to collaboratively budget with everyone else at #{group.name}. You've got $420.00 to spend!")
+          expect(sent_email.body.to_s).to include("You have been invited by #{current_user.name} to collaboratively budget with #{group.name} on Cobudget. You've got $420.00 to spend!")
         end
 
         it "user receives allocation" do
@@ -65,7 +65,7 @@ describe "AllocationService" do
 
         it "user receives 'invite to group' email" do
           sent_email = ActionMailer::Base.deliveries.first
-          expect(sent_email.body.to_s).to include("#{current_user.name} has invited you to collaboratively budget with everyone else at #{group.name}. You've got $420.00 to spend!".html_safe)
+          expect(sent_email.body.to_s).to include("You have been invited by #{current_user.name} to collaboratively budget with #{group.name} on Cobudget. You've got $420.00 to spend!".html_safe)
         end
 
         it "membership created for user" do
@@ -95,7 +95,7 @@ describe "AllocationService" do
 
       it "new_user receives 'invite to cobudget' email" do
         sent_email = ActionMailer::Base.deliveries.first
-        expect(sent_email.body.to_s).to include("You have been invited by #{current_user.name} to collaboratively fund with #{group.name} on Cobudget. You've got $420.00 to spend!")
+        expect(sent_email.body.to_s).to include("You have been invited by #{current_user.name} to collaboratively budget with #{group.name} on Cobudget. You've got $420.00 to spend!")
       end
 
       it "new_user receives allocation" do
