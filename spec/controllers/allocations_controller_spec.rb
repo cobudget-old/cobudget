@@ -18,8 +18,8 @@ RSpec.describe AllocationsController, type: :controller do
       context "valid csv" do
         before do
           @group = @membership.group
-          person0 = create(:user, email: "person0@example.com", name: "Person0")
-          create(:membership, member: person0, group: @group)
+          @person0 = create(:user, email: "person0@example.com", name: "Person0")
+          create(:membership, member: @person0, group: @group)
           post :upload_review, {group_id: @membership.group_id, csv: valid_csv}
         end
 
@@ -30,9 +30,9 @@ RSpec.describe AllocationsController, type: :controller do
         it "returns review data as json" do
           expect(parsed(response)).to eq({
             "data" => [
-              {"email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
-              {"email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => true},
-              {"email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => true}
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => true }
             ]
           })
         end

@@ -21,6 +21,7 @@ class AllocationService
       allocation_amount = row[1]
       user = User.find_by_email(email)
       {
+        id: user && user.is_member_of?(group) ? user.id : "",
         email: email,
         name: user && user.is_member_of?(group) ? user.name : "",
         allocation_amount: allocation_amount,
