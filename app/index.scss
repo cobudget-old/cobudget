@@ -19,8 +19,11 @@
 @import './components/reset-password-page/reset-password-page.scss';
 @import './components/email-settings-page/email-settings-page.scss';
 @import './components/profile-settings-page/profile-settings-page.scss';
+@import './components/manage-group-funds-page/manage-group-funds-page.scss';
 
 @import './directives/landing-page-toolbar/landing-page-toolbar.scss';
+@import './directives/toolbar-dropdown-menu/toolbar-dropdown-menu.scss';
+@import './directives/admin-toolbar/admin-toolbar.scss';
 
 @import './directives/group-page-sidenav/group-page-sidenav.scss';
 @import './directives/group-page-toolbar/group-page-toolbar.scss';
