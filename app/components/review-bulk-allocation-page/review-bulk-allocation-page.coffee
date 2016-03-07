@@ -9,12 +9,13 @@ module.exports =
   params:
     people: null
     groupId: null
-  controller: (config, CurrentUser, Error, LoadBar, Dialog, Records, $scope, $stateParams, $timeout, UserCan) ->
-
-    # TODO: need to redirect if people is null
+  controller: (config, CurrentUser, Error, LoadBar, $location, Dialog, Records, $scope, $stateParams, $timeout, UserCan) ->
 
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
+    unless $stateParams.people
+      $location.path("/groups/#{groupId}/manage_funds")
+
     Records.groups.findOrFetchById(groupId)
       .then (group) ->
         LoadBar.stop()
