@@ -1,3 +1,5 @@
+// TODO: grey background
+
 // header
 
 .review-bulk-allocation-page__header {
@@ -24,6 +26,11 @@
   position: relative;
   top: 3px;
   fill: white;
+}
+
+.review-bulk-allocation-page__upload-pending-icon {
+  fill: white;
+  margin-right: 10px;
 }
 
 // content
@@ -113,17 +120,24 @@
   margin-bottom: 25px;
 }
 
-.review-bulk-allocation-page__upload-status-icon {
+.review-bulk-allocation-page__upload-member-status-icon {
   margin-right: 15px;
   position: relative;
   bottom: 2px;
 }
 
-.review-bulk-allocation-page__upload-pending-icon {
+.review-bulk-allocation-page__upload-member-pending-icon {
   fill: #757575;
+  -webkit-animation:spin 1s linear infinite;
+  -moz-animation:spin 1s linear infinite;
+  animation:spin 1s linear infinite;
 }
 
-.review-bulk-allocation-page__upload-complete-icon {
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.review-bulk-allocation-page__upload-member-complete-icon {
   fill: $cobudget-green;
 }
 

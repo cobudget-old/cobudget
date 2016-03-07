@@ -2,7 +2,7 @@
   <admin-toolbar></admin-toolbar>
 
   <div class="review-bulk-allocation-page__header" layout="column" layout-align="end center">
-    <div layout="row" layout-align="center center">
+    <div layout="row" layout-align="center center" ng-if="uploadStatus == 'standby'">
       <div class="review-bulk-allocation-page__upload-icon-container">
         <ng-md-icon icon="cloud_upload"
         class="review-bulk-allocation-page__upload-icon"
@@ -16,6 +16,32 @@
         Please review & confirm your upload
       </h1>
     </div>
+
+    <div layout="row" layout-align="center center" ng-if="uploadStatus == 'pending'">
+      <ng-md-icon icon="sync"
+      class="review-bulk-allocation-page__upload-pending-icon"
+      size="30"
+      layout="column"
+      layout-align="center center"
+      ></ng-md-icon>
+
+      <h1 class="review-bulk-allocation-page__header-text">
+        Uploading ...
+      </h1>
+    </div>
+
+    <div layout="row" layout-align="center center" ng-if="uploadStatus == 'complete'">
+      <ng-md-icon icon="check"
+      class="review-bulk-allocation-page__upload-pending-icon"
+      size="40"
+      layout="column"
+      layout-align="center center"
+      ></ng-md-icon>
+
+      <h1 class="review-bulk-allocation-page__header-text">
+        It worked!
+      </h1>
+    </div>
   </div>
 
   <md-content class="review-bulk-allocation-page__content">
@@ -23,12 +49,14 @@
       Overview
     </h2>
 
-    <div class="review-bulk-allocation-page__text-overview">
-      Looks like you're trying to do the following to {{ group.name }}:
+    <div class="review-bulk-allocation-page__text-overview" ng-if="uploadStatus != 'pending'">
+      <div ng-if="uploadStatus == 'standby'">
+        Looks like you're trying to do the following to {{ group.name }}:
+      </div>
 
       <ul class="review-bulk-allocation-page__overview-list">
         <li ng-if="peopleWithPositiveAllocations.length > 0">
-          add <b>{{ summedAllocationsFrom(peopleWithPositiveAllocations) | currency : group.currencySymbol }} total</b> to
+          {{ uploadStatus == 'standby' ? 'add' : 'gave'}} <b>{{ summedAllocationsFrom(peopleWithPositiveAllocations) | currency : group.currencySymbol }} total</b> to
           <b><ng-pluralize
             count="peopleWithPositiveAllocations.length"
             when="{
@@ -39,7 +67,7 @@
         </li>
 
         <li ng-if="peopleWithNegativeAllocations.length > 0">
-          subtract <b>{{ summedAllocationsFrom(peopleWithNegativeAllocations) | currency : group.currencySymbol }} total</b> from
+          {{ uploadStatus == 'standby' ? 'subtract' : 'removed'}} <b>{{ summedAllocationsFrom(peopleWithNegativeAllocations) | currency : group.currencySymbol }} total</b> from
           <b><ng-pluralize
             count="peopleWithNegativeAllocations.length"
             when="{
@@ -50,7 +78,7 @@
         </li>
 
         <li ng-if="newMembers.length > 0">
-          add
+          {{ uploadStatus == 'standby' ? 'add' : 'added'}}
           <b><ng-pluralize
             count="newMembers.length"
             when="{
@@ -73,16 +101,16 @@
       <md-divider class="review-bulk-allocation-page__top-divider"></md-divider>
 
       <div class="review-bulk-allocation-page__list-row" layout="row" layout-align="start start" ng-repeat="person in people">
-        <div ng-if="person.status == 'pending'" class="review-bulk-allocation-page__upload-status-icon">
+        <div ng-if="person.status == 'pending'" class="review-bulk-allocation-page__upload-member-status-icon">
           <ng-md-icon icon="sync"
-          class="review-bulk-allocation-page__upload-pending-icon"
+          class="review-bulk-allocation-page__upload-member-pending-icon"
           layout="column"
           layout-align="center center"
           ></ng-md-icon>
         </div>
-        <div ng-if="person.status == 'complete'" class="review-bulk-allocation-page__upload-status-icon">
+        <div ng-if="person.status == 'complete'" class="review-bulk-allocation-page__upload-member-status-icon">
           <ng-md-icon icon="check_circle"
-          class="review-bulk-allocation-page__upload-complete-icon"
+          class="review-bulk-allocation-page__upload-member-complete-icon"
           layout="column"
           layout-align="center center"
           ></ng-md-icon>
@@ -99,7 +127,7 @@
               layout="column"
               layout-align="center center"
             ></ng-md-icon>
-            <div>Invitation Ready</div>
+            <div>Invitation {{person.status == 'complete' ? 'Sent!' : 'Ready'}}</div>
           </div>
         </div>
 
@@ -118,10 +146,15 @@
 
     <md-divider class="review-bulk-allocation-page__bottom-divider"></md-divider>
 
-    <div layout="column" layout-align="center space-between">
+    <div layout="column" layout-align="center space-between" ng-if="uploadStatus == 'standby'">
       <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__confirm-btn" ng-click="confirmBulkAllocations()">Confirm</md-button>
       <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__try-again-btn" ng-click="openUploadCSVPrimerDialog()">Try Again</md-button>
       <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__cancel-btn" ng-click="cancel()">Cancel</md-button>
+    </div>
+
+    <div layout="column" layout-align="center space-between" ng-if="uploadStatus != 'standby'">
+      <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__confirm-btn" ng-click="done()" ng-disabled="uploadStatus != 'complete'">Done</md-button>
+      <md-button class="review-bulk-allocation-page__btn review-bulk-allocation-page__try-again-btn" ng-click="seeAllMembers()" ng-disabled="uploadStatus != 'complete'">See All Members</md-button>
     </div>
   </md-content>
 </div>

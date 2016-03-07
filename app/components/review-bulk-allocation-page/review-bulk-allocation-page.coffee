@@ -9,7 +9,9 @@ module.exports =
   params:
     people: null
     groupId: null
-  controller: (config, CurrentUser, Error, LoadBar, $location, Dialog, Records, $scope, $stateParams, $timeout, UserCan) ->
+  controller: (config, CurrentUser, Dialog, Error, LoadBar, $location, $q, Records, $scope, $stateParams, $timeout, UserCan) ->
+
+    $scope.uploadStatus = 'standby'
 
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
@@ -38,6 +40,7 @@ module.exports =
 
     $scope.preparePeopleList = ->
       $scope.people = _.map $stateParams.people, (person) ->
+        person.deferred = $q.defer()
         person.allocation_amount = parseFloat(person.allocation_amount)
         person
       $scope.peopleWithPositiveAllocations = []
@@ -69,7 +72,12 @@ module.exports =
       $location.path("/groups/#{groupId}")
 
     $scope.confirmBulkAllocations = ->
+      $scope.uploadStatus = 'pending'
+      promises = _.map $scope.people, (person) ->
+        person.deferred.promise
+
       _.each $scope.newMembers, (newMember) ->
+        newMember.status = 'pending'
         params = {group_id: groupId, email: newMember.email}
         Records.memberships.remote.create(params).then (data) ->
           params = {groupId: groupId, userId: data.users[0].id, amount: newMember.allocation_amount}
@@ -77,11 +85,17 @@ module.exports =
           allocation.save().then ->
             newMembership = data.memberships[0]
             Records.memberships.invite(newMembership).then ->
-              newMember.status = 'pending'
+              newMember.status = 'complete'
+              newMember.deferred.resolve()
       _.each $scope.existingMembers, (existingMember) ->
+        existingMember.status = 'pending'
         params = {groupId: groupId, userId: existingMember.id, amount: existingMember.allocation_amount}
         allocation = Records.allocations.build(params)
         allocation.save().then ->
           existingMember.status = 'complete'
+          existingMember.deferred.resolve()
+
+      $q.allSettled(promises).then ->
+        $scope.uploadStatus = 'complete'
 
     return
