@@ -113,6 +113,20 @@
   margin-bottom: 25px;
 }
 
+.review-bulk-allocation-page__upload-status-icon {
+  margin-right: 15px;
+  position: relative;
+  bottom: 2px;
+}
+
+.review-bulk-allocation-page__upload-pending-icon {
+  fill: #757575;
+}
+
+.review-bulk-allocation-page__upload-complete-icon {
+  fill: $cobudget-green;
+}
+
 // bottom btns
 
 .review-bulk-allocation-page__btn {

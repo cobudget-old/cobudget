@@ -76,9 +76,12 @@ module.exports =
           allocation = Records.allocations.build(params)
           allocation.save().then ->
             newMembership = data.memberships[0]
-            Records.memberships.invite(newMembership)
+            Records.memberships.invite(newMembership).then ->
+              newMember.status = 'pending'
       _.each $scope.existingMembers, (existingMember) ->
         params = {groupId: groupId, userId: existingMember.id, amount: existingMember.allocation_amount}
         allocation = Records.allocations.build(params)
+        allocation.save().then ->
+          existingMember.status = 'complete'
 
     return
