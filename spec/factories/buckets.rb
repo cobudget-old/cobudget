@@ -5,7 +5,7 @@ FactoryGirl.define do
     group
     user
     target 500
-    status 'live'
+    status 'draft'
 
     after(:create) do |bucket|
       group = bucket.group

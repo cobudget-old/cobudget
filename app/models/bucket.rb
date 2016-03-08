@@ -9,6 +9,7 @@ class Bucket < ActiveRecord::Base
   validates :group_id, presence: true
   validates :user_id, presence: true
   validates :status, presence: true
+  validate :target_cannot_be_updated_unless_idea, on: :update
 
   before_save :set_timestamp_if_status_updated
 
@@ -91,5 +92,11 @@ class Bucket < ActiveRecord::Base
 
     def currency_code
       group.currency_code
+    end
+
+    def target_cannot_be_updated_unless_idea
+      if target_changed? && status != 'draft'
+        errors.add(:target, "target can only be changed for draft buckets")
+      end
     end
 end
