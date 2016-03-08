@@ -52,7 +52,7 @@
 
       <md-input-container>
         <label>Funding Target (required for funding)</label>
-        <input ng-required="bucket.status == 'live'" name="target" min="1" type="text" ng-model="bucket.target" only-digits>
+        <input ng-disabled="bucket.status != 'draft'" name="target" min="1" type="text" ng-model="bucket.target" only-digits>
         <div ng-messages="bucketForm.target.$error" multiple>
           <div ng-message="required">This is required.</div>
           <div ng-message="min">Bucket target must be greater than zero</div>
