@@ -44,7 +44,7 @@
       </div>
 
       <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container" flex>
-        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn" ng-csv="csvData()" filename={{csvFileName()}}>
+        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn" ng-click="downloadCSV()">
           <ng-md-icon icon="file_download"
             class="manage-group-funds-page__btn-icon"
             size="20"
@@ -58,10 +58,15 @@
         </div>
 
         <p class="manage-group-funds-page__btn-info">
-          Download a csv of all your group members, their emails, and their available funds
+          Download a csv of all your group members, their emails, and their available funds.
+        </p>
+
+        <p class="manage-group-funds-page__btn-info">
+          <b>Using Safari?</b><br/>
+          A bug in Safari names all downloaded CSVs as <code>Unknown</code>.
+          So after downloading, you will need to rename the file to <code>YOUR_PREFERRED_NAME.csv</code>.
         </p>
       </div>
     </div>
-
   </md-content>
 </div>

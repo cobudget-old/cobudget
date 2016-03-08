@@ -24,6 +24,7 @@ require('angular-marked')
 require('ng-q-all-settled')
 require('angular-eha.only-digits')
 require('ng-csv')
+require('ng-download-csv')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -44,7 +45,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'hc.marked',
   'qAllSettled',
   'eha.only-digits',
-  'ngCsv'
+  'ngCsv',
+  'ngDownloadCsv'
 ])
 .constant('config', require('app/configs/app'))
 
