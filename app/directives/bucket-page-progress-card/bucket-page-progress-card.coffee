@@ -31,11 +31,9 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
             Toast.show('You funded a bucket')
 
       $scope.showBackers = ->
-        backers = _.map $scope.bucket.contributions(), (contribution) ->
-          {name: contribution.user().name, contributionAmount: contribution.amount}
         backersListDialog = require('./../../components/backers-list-dialog/backers-list-dialog.coffee')({
           scope: $scope,
-          backers: backers
+          contributions: $scope.bucket.contributions()
         })
         Dialog.open(backersListDialog)
 

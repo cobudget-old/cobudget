@@ -9,7 +9,7 @@
     <p class="backers-list-dialog__paragraph">
       <ul class="backers-list-dialog__backers">
         <li class="backers-list-dialog__backer" ng-repeat="backer in backers">
-          <b>{{ backer.name }}</b>: {{ backer.contributionAmount | currency }}
+          <b>{{ backer.name }}</b>: {{ backer.contributionAmount | currency : group.currencySymbol }}
         </li>
       </ul>
     </p>
