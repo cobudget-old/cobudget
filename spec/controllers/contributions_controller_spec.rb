@@ -9,6 +9,7 @@ RSpec.describe ContributionsController, type: :controller do
   describe "#create" do
     before do
       bucket.update(target: 100, group: group)
+      bucket.update(status: 'live')
     end
 
     context "contribution amount does not exceed contributor's balance" do
@@ -47,7 +48,7 @@ RSpec.describe ContributionsController, type: :controller do
             amount: 100
           }
           post :create, {contribution: contribution_params}
-          expect(bucket.reload.status).to eq('funded')  
+          expect(bucket.reload.status).to eq('funded')
         end
       end
 
