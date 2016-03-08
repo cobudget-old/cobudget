@@ -27,7 +27,7 @@ RSpec.describe Bucket, :type => :model do
       user2 = create(:user)
       create(:contribution, bucket: bucket, user: user1)
       create(:contribution, bucket: bucket, user: user1)
-      create(:contribution, bucket: bucket, user: user2)   
+      create(:contribution, bucket: bucket, user: user2)
       expect(bucket.num_of_contributors).to eq(2)
     end
   end
@@ -45,6 +45,15 @@ RSpec.describe Bucket, :type => :model do
         bucket.update(status: 'funded')
         expect(bucket.funded_at).to be_truthy
       end
+    end
+  end
+
+  describe "#formatted_percent_funded" do
+    it "returns percent that the bucket has been funded, with no decimal places" do
+      bucket = create(:bucket, status: 'live', target: 100)
+      expect(bucket.formatted_percent_funded).to eq("0%")
+      create(:contribution, bucket: bucket, amount: 22)
+      expect(bucket.formatted_percent_funded).to eq("22%")
     end
   end
 end
