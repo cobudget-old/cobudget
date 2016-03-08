@@ -1,0 +1,14 @@
+.bucket-page__backers-card {
+  background: $cobudget-light-grey;
+}
+
+.bucket-page__backers-header {
+  @include fontLarge;
+  margin-bottom: 20px;
+}
+
+.bucket-page__backers-card-backers-list {
+  padding-left: 0;
+  list-style: none;
+  font-size: 14px;
+}
