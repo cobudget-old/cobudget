@@ -1,0 +1,14 @@
+<md-card class="bucket-page__backers-card">
+  <md-card-content class="bucket-page__backers-card-content">
+    <div class="bucket-page__status-header">Backers:</div>
+    </div>
+
+    <p>
+      <ul>
+        <li ng-repeat="backer in backers">
+          <b>{{ backer.name }}</b>: {{ backer.contributionAmount | currency : group.currencySymbol }}
+        </li>
+      </ul>
+    </p>
+  </md-card-content>
+</md-card>
