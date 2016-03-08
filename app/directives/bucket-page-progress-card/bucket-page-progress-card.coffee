@@ -23,6 +23,7 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
           $scope.newContribution.amount = +maxAllowableContribution.toFixed(2)
 
       $scope.submitContribution = ->
+        $scope.contributionSubmitted = true
         $scope.newContribution.save().then ->
           # hack, to get records to properly update
           Records.memberships.fetchMyMemberships().then ->
