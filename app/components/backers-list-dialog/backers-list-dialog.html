@@ -1,0 +1,21 @@
+<md-dialog class="backers-list-dialog" aria-label="backers-list-dialog">
+  <md-dialog-content class="sticky-container backers-list-dialog__content">
+    <h2 class="backers-list-dialog__header">
+      Backers:
+    </h2>
+
+    <md-divider></md-divider>
+
+    <p class="backers-list-dialog__paragraph">
+      <ul class="backers-list-dialog__backers">
+        <li class="backers-list-dialog__backer" ng-repeat="backer in backers">
+          <b>{{ backer.name }}</b>: {{ backer.contributionAmount | currency : group.currencySymbol }}
+        </li>
+      </ul>
+    </p>
+  </md-dialog-content>
+
+  <div class="md-actions backers-list-dialog__btns" layout="row">
+    <md-button class="backers-list-dialog__ok-btn" ng-click="ok()">ok</md-button>
+  </div>
+</md-dialog>
