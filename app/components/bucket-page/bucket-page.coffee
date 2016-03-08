@@ -1,4 +1,4 @@
-module.exports = 
+module.exports =
   resolve:
     userValidated: ($auth) ->
       $auth.validateUser()
@@ -20,6 +20,7 @@ module.exports =
           $scope.group = bucket.group()
           $scope.membership = $scope.group.membershipFor(CurrentUser())
           Records.contributions.fetchByBucketId(bucketId).then ->
+            $scope.contributions = $scope.bucket.contributions()
             $window.scrollTo(0,0)
             LoadBar.stop()
           Records.comments.fetchByBucketId(bucketId)
