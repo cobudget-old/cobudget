@@ -117,7 +117,7 @@ puts "created 5 - 7 draft buckets for both groups with 0 - 9 comments"
 
 groups.each do |group|
   group.members.each do |member|
-    rand(1..4).times { group.allocations.create(user: member, amount: rand(0..300)) }
+    rand(1..4).times { group.allocations.create(user: member, amount: rand(0.0..300.0)) }
   end
 end
 puts "created 1 - 4 allocations for each member in each group"

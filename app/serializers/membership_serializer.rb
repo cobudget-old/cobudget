@@ -3,8 +3,9 @@ class MembershipSerializer < ActiveModel::Serializer
   attributes :id,
              :is_admin,
              :created_at,
-             :balance
-             :archived_at
+             :balance,
+             :archived_at,
+             :raw_balance
 
   has_one :member, serializer: UserSerializer, root: 'users'
   has_one :group, serializer: GroupSerializer, root: 'groups'
