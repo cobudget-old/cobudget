@@ -29,3 +29,6 @@ global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toas
 
     manageFundsForGroup: (group) ->
       CurrentUser().isAdminOf(group)
+
+    inviteMembersToGroup: (group) ->
+      @manageFundsForGroup(group)

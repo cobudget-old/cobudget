@@ -1,0 +1,92 @@
+// header
+
+.invite-members-page__header {
+  height: 138px;
+  background: rgba(36,50,57,1);
+  padding-bottom: 25px;
+}
+
+.invite-members-page__header-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.invite-members-page__money-icon {
+  border: 2px solid white;
+  border-radius: 50%;
+  margin-right: 15px;
+  fill: white;
+}
+
+.invite-members-page__money-icon svg {
+  position: relative;
+  left: 1px;
+}
+
+// content
+
+.invite-members-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.invite-members-page__subheader {
+  font-weight: normal;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+// btns
+
+.invite-members-page__btns-container {
+  padding-top: 30px;
+}
+
+.invite-members-page__btn {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.invite-members-page__btn-icon {
+  fill: #448CE2;
+  border: 3px solid #448CE2;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.invite-members-page__btn-label {
+  color: #448CE2;
+  font-weight: 700;
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+@media (max-width: 525px) {
+  .invite-members-page__btn-label {
+    display: none;
+  }
+
+  .invite-members-page__header-text {
+    font-size: 20px;
+  }
+
+  .invite-members-page__subheader {
+    font-size: 16px;
+  }
+}
+
+.invite-members-page__btn-info {
+  color: #A2A2A2;
+  @include fontMedium;
+}
+
+.invite-members-page__upload-btn-container {
+  border-right: 1px solid #DCDCDC;
+  margin-right: 30px;
+  padding-right: 15px;
+}
