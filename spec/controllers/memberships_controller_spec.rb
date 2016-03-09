@@ -281,6 +281,7 @@ describe MembershipsController, :type => :controller do
     end
   end
 
+
   describe "#archive" do
     before do
       @membership = make_user_group_member
@@ -310,4 +311,87 @@ describe MembershipsController, :type => :controller do
       end
     end
   end
+
+  describe "#upload_review" do
+    let(:valid_csv) { fixture_file_upload('bulk-invite-members-csvs/test-csv.csv', 'text/csv') }
+    let(:csv_with_fucked_up_email_addresses) { fixture_file_upload('bulk-invite-members-csvs/test-csv-fucked-up-email-addresses.csv', 'text/csv') }
+    let(:csv_with_too_many_columns) { fixture_file_upload('bulk-invite-members-csvs/test-csv-too-many-columns.csv', 'text/csv') }
+    let(:totally_fucked_csv) { fixture_file_upload('bulk-invite-members-csvs/totally-fucked-csv.csv', 'text/csv') }
+    let(:empty_csv) { fixture_file_upload('bulk-invite-members-csvs/empty-csv.csv', 'text/csv') }
+
+    context "user is group admin" do
+      before do
+        @membership = make_user_group_admin
+        request.headers.merge!(user.create_new_auth_token)
+      end
+
+      context "valid csv" do
+        before do
+          @group = @membership.group
+          @person0 = create(:user, email: "person0@example.com", name: "Person0")
+          create(:membership, member: @person0, group: @group)
+          post :upload_review, {group_id: @membership.group_id, csv: valid_csv}
+        end
+
+        it "returns http status 'ok'" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "returns review data as json" do
+          expect(parsed(response)).to eq({
+            "data" => [
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "new_member" => false},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "new_member" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "new_member" => true }
+            ]
+          })
+        end
+      end
+
+      context "csv has fucked up email addresses" do
+        it "returns http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_fucked_up_email_addresses}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv has more than one column" do
+        it "returns http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_too_many_columns}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv is empty" do
+        it "returns http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: empty_csv}
+          expect(response).to have_http_status(422)
+        end
+      end
+    end
+
+    context "user is not group admin" do
+      before do
+        membership = make_user_group_member
+        request.headers.merge!(user.create_new_auth_token)
+        post :upload_review, {group_id: membership.group_id, csv: valid_csv}
+      end
+
+      it "returns http status 'forbidden'" do
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    context "user not logged in" do
+      before do
+        membership = make_user_group_member
+        post :upload_review, {group_id: membership.group_id, csv: valid_csv}
+      end
+
+      it "returns http status 'unauthorized'" do
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
 end

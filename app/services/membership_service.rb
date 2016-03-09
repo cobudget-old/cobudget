@@ -34,4 +34,31 @@ class MembershipService
       end
     end
   end
+
+  def self.check_csv_for_errors(csv: )
+    errors = []
+    if csv.nil? || csv.empty?
+      errors << "csv is empty"
+    else
+      errors << "too many columns" if csv.first.length > 1
+      csv.each_with_index do |row, index|
+        email = row[0]
+        errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
+      end
+    end
+    errors if errors.any?
+  end
+
+  def self.generate_csv_upload_preview(csv:, group:)
+    csv.map do |row|
+      email = row[0]
+      user = User.find_by_email(email)
+      {
+        id: user && user.is_member_of?(group) ? user.id : "",
+        email: email,
+        name: user && user.is_member_of?(group) ? user.name : "",
+        new_member: !user || !user.is_member_of?(group)
+      }
+    end
+  end
 end
