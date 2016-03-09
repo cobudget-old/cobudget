@@ -1,0 +1,158 @@
+// TODO: grey background
+
+// header
+
+.review-bulk-allocation-page__header {
+  height: 138px;
+  background: rgba(36,50,57,1);
+  padding-bottom: 25px;
+}
+
+.review-bulk-allocation-page__header-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.review-bulk-allocation-page__upload-icon-container {
+  border: 4px solid white;
+  border-radius: 50%;
+  margin-right: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.review-bulk-allocation-page__upload-icon {
+  position: relative;
+  top: 3px;
+  fill: white;
+}
+
+.review-bulk-allocation-page__upload-pending-icon {
+  fill: white;
+  margin-right: 10px;
+}
+
+// content
+
+.review-bulk-allocation-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+// text overview
+
+.review-bulk-allocation-page__subheader {
+  font-weight: normal;
+  font-size: 22px;
+  margin-top: 35px;
+}
+
+.review-bulk-allocation-page__text-overview {
+  color: #6E6E6E;
+  font-size: 15px;
+  line-height: 18px;
+  margin-top: -7px;
+}
+
+.review-bulk-allocation-page__overview-list {
+  color: inherit;
+  margin-top: 5px;
+
+}
+
+// people + status list
+
+.review-bulk-allocation-page__list-header {
+  font-weight: 500;
+  font-size: 19px;
+}
+
+.review-bulk-allocation-page__funds-column-container {
+  width: 110px;
+}
+
+.review-bulk-allocation-page__list-row {
+  height: 50px;
+}
+
+.review-bulk-allocation-page__top-divider {
+  margin-bottom: 23px;
+  margin-top: 7px;
+}
+
+.review-bulk-allocation-page__funds-amount {
+  color: $cobudget-green;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.review-bulk-allocation-page__funds-positive-amount {
+  color: $cobudget-green;
+}
+
+.review-bulk-allocation-page__funds-negative-amount {
+  color: $cobudget-red;
+}
+
+.review-bulk-allocation-page__funds-sign {
+  position: relative;
+  bottom: 1px;
+}
+
+.review-bulk-allocation-page__name-and-email {
+  font-size: 15px;
+}
+
+.review-bulk-allocation-page__invitation-text {
+  font-size: 15px;
+}
+
+.review-bulk-allocation-page__item-icon {
+  fill: #757575;
+  margin-right: 7px;
+}
+
+.review-bulk-allocation-page__bottom-divider {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.review-bulk-allocation-page__upload-member-status-icon {
+  margin-right: 15px;
+  position: relative;
+  bottom: 2px;
+}
+
+.review-bulk-allocation-page__upload-member-pending-icon {
+  fill: #757575;
+  -webkit-animation:spin 1s linear infinite;
+  -moz-animation:spin 1s linear infinite;
+  animation:spin 1s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.review-bulk-allocation-page__upload-member-complete-icon {
+  fill: $cobudget-green;
+}
+
+// bottom btns
+
+.review-bulk-allocation-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.review-bulk-allocation-page__confirm-btn {
+  background: #4A90E2 !important;
+  color: white;
+}
+
+.review-bulk-allocation-page__try-again-btn, .review-bulk-allocation-page__cancel-btn {
+  color: #7B7B7B;
+}

@@ -20,7 +20,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
             $scope.cancel = ->
               $mdDialog.cancel()
             $scope.proceed = ->
-              Records.memberships.reinvite(membership)
+              Records.memberships.invite(membership)
                 .then ->
                   $scope.cancel()
                   Toast.show('Invitation sent!')
