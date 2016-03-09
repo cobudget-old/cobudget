@@ -1,5 +1,5 @@
 module.exports = (params) ->
-  template: require('./upload-csv-primer-dialog.html')
+  template: require('./bulk-allocation-primer-dialog.html')
   scope: params.scope
   controller: (Dialog, config, $mdDialog, $scope, $state, $timeout) ->
     $scope.cancel = ->
@@ -10,7 +10,7 @@ module.exports = (params) ->
 
     $scope.openCSVUploadDialog = ->
       $timeout( ->
-        angular.element('.upload-csv-primer-dialog__hidden-btn input').trigger('click')
+        angular.element('.bulk-allocation-primer-dialog__hidden-btn input').trigger('click')
       , 100)
 
     $scope.onCSVUploadSuccess = (response) ->

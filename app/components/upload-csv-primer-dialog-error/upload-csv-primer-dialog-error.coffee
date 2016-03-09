@@ -8,7 +8,7 @@ module.exports = (params) ->
         $mdDialog.cancel()
 
       $scope.tryAgain = ->
-        uploadCSVPrimerDialog = require('./../upload-csv-primer-dialog/upload-csv-primer-dialog.coffee')({
+        uploadCSVPrimerDialog = require('./../bulk-allocation-primer-dialog/bulk-allocation-primer-dialog.coffee')({
           scope: $scope
         })
         Dialog.open(uploadCSVPrimerDialog)
