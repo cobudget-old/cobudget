@@ -26,6 +26,8 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
+    $scope.usingSafari = browser.safari
+
     $scope.downloadCSV = ->
       timestamp = moment().format('YYYY-MM-DD-HH-mm-ss')
       filename = "#{$scope.group.name}-member-data-#{timestamp}"
