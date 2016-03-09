@@ -7,12 +7,7 @@ module.exports =
   url: '/groups/:groupId/manage_funds/review_upload'
   template: require('./review-bulk-allocation-page.html')
   params:
-    people: [
-      {email: 'derek@enspiral.com', name: 'Derek Razo', allocation_amount: '300' , new_member: false},
-      {email: 'eugene@enspiral.com', name: 'Eugene Lynch', allocation_amount: '-100' , new_member: false},
-      {email: 'data@doge.com', name: 'Data Doge', allocation_amount: '50' , new_member: false},
-      {email: 'chelsearobinson@gmail.com', name: '', allocation_amount: '0' , new_member: true}
-    ]
+    people: null
     groupId: null
   controller: (config, CurrentUser, Dialog, Error, LoadBar, $location, $q, Records, $scope, $state, $stateParams, $timeout, UserCan) ->
 
