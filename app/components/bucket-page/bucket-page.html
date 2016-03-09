@@ -4,7 +4,7 @@
   <md-content class="bucket-page__content">
     <bucket-page-header-card></bucket-page-header-card>
     <bucket-page-progress-card ng-if="bucket.status == 'live'"></bucket-page-progress-card>
-    <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions" contributions="contributions"></bucket-page-backers-card> <bucket-page-status-card></bucket-page-status-card>
+    <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions.length > 0" contributions="contributions"></bucket-page-backers-card> <bucket-page-status-card></bucket-page-status-card>
     <bucket-page-activity-card></bucket-page-activity-card>
   </md-content>
 </div>
