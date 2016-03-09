@@ -5,6 +5,7 @@ global.camelize = require('camelize')
 global.morph = require('morph')
 global.listify = require('listify')
 global.isEmptyObject = require('is-empty-object')
+global.browser = require('bowser')
 
 require('angular')
 require('angular-ui-router')

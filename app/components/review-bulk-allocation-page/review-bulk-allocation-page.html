@@ -51,43 +51,16 @@
 
     <div class="review-bulk-allocation-page__text-overview" ng-if="uploadStatus != 'pending'">
       <div ng-if="uploadStatus == 'standby'">
-        Looks like you're trying to do the following to {{ group.name }}:
+        Looks like you're trying to {{ uploadStatus == 'standby' ? 'add' : 'gave'}} <b>{{ summedAllocationsFrom(peopleWithPositiveAllocations) | currency : group.currencySymbol }} total</b> to
+        <b><ng-pluralize count="peopleWithPositiveAllocations.length" when="{ 'one': '1 person', 'other': '{} people' }"></ng-pluralize></b>
+
+        <span ng-if="newMembers.length > 0">
+          and {{ uploadStatus == 'standby' ? 'add' : 'added'}}
+          <b><ng-pluralize count="newMembers.length" when="{ 'one': '1 new person', 'other': '{} new people' }" ></ng-pluralize></b>
+        </span>
+
+        {{ newMembers.length > 0 ? 'to' : 'in' }} {{ group.name }}
       </div>
-
-      <ul class="review-bulk-allocation-page__overview-list">
-        <li ng-if="peopleWithPositiveAllocations.length > 0">
-          {{ uploadStatus == 'standby' ? 'add' : 'gave'}} <b>{{ summedAllocationsFrom(peopleWithPositiveAllocations) | currency : group.currencySymbol }} total</b> to
-          <b><ng-pluralize
-            count="peopleWithPositiveAllocations.length"
-            when="{
-              'one': '1 person',
-              'other': '{} people'
-            }"
-          ></ng-pluralize></b>
-        </li>
-
-        <li ng-if="peopleWithNegativeAllocations.length > 0">
-          {{ uploadStatus == 'standby' ? 'subtract' : 'removed'}} <b>{{ summedAllocationsFrom(peopleWithNegativeAllocations) | currency : group.currencySymbol }} total</b> from
-          <b><ng-pluralize
-            count="peopleWithNegativeAllocations.length"
-            when="{
-              'one': '1 person',
-              'other': '{} people'
-            }"
-          ></ng-pluralize></b>
-        </li>
-
-        <li ng-if="newMembers.length > 0">
-          {{ uploadStatus == 'standby' ? 'add' : 'added'}}
-          <b><ng-pluralize
-            count="newMembers.length"
-            when="{
-              'one': '1 new person',
-              'other': '{} new people'
-            }"
-          ></ng-pluralize></b>
-        </li>
-      </ul>
     </div>
 
     <div layout="column">
