@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe AllocationsController, type: :controller do
-  let(:valid_csv) { fixture_file_upload('test-csv.csv', 'text/csv') }
-  let(:csv_with_fucked_up_email_addresses) { fixture_file_upload('test-csv-fucked-up-email-addresses.csv', 'text/csv') }
-  let(:csv_with_non_number_allocations) { fixture_file_upload('test-csv-non-number-allocations.csv', 'text/csv') }
-  let(:csv_with_too_many_columns) { fixture_file_upload('test-csv-too-many-columns.csv', 'text/csv') }
-  let(:totally_fucked_csv) { fixture_file_upload('totally-fucked-csv.csv', 'text/csv') }
-  let(:empty_csv) { fixture_file_upload('empty-csv.csv', 'text/csv') }
+  let(:valid_csv) { fixture_file_upload('bulk-allocation-csvs/test-csv.csv', 'text/csv') }
+  let(:csv_with_fucked_up_email_addresses) { fixture_file_upload('bulk-allocation-csvs/test-csv-fucked-up-email-addresses.csv', 'text/csv') }
+  let(:csv_with_non_number_allocations) { fixture_file_upload('bulk-allocation-csvs/test-csv-non-number-allocations.csv', 'text/csv') }
+  let(:csv_with_too_many_columns) { fixture_file_upload('bulk-allocation-csvs/test-csv-too-many-columns.csv', 'text/csv') }
+  let(:totally_fucked_csv) { fixture_file_upload('bulk-allocation-csvs/totally-fucked-csv.csv', 'text/csv') }
+  let(:empty_csv) { fixture_file_upload('bulk-allocation-csvs/empty-csv.csv', 'text/csv') }
 
   describe "#upload_review" do
     context "user is group admin" do
