@@ -8,7 +8,12 @@ module.exports = (params) ->
         $mdDialog.cancel()
 
       $scope.tryAgain = ->
-        uploadCSVPrimerDialog = require('./../bulk-allocation-primer-dialog/bulk-allocation-primer-dialog.coffee')({
-          scope: $scope
-        })
+        if params.type == 'invite-members'
+          uploadCSVPrimerDialog = require('./../bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.coffee')({
+            scope: $scope
+          })
+        else if params.type == 'allocation'
+          uploadCSVPrimerDialog = require('./../bulk-allocation-primer-dialog/bulk-allocation-primer-dialog.coffee')({
+            scope: $scope
+          })
         Dialog.open(uploadCSVPrimerDialog)

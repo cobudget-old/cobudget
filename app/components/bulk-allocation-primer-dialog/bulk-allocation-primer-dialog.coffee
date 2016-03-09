@@ -22,6 +22,7 @@ module.exports = (params) ->
       $scope.cancel()
       uploadCSVPrimerDialogError = require('./../upload-csv-primer-dialog-error/upload-csv-primer-dialog-error.coffee')({
         scope: $scope,
-        response: response
+        response: response,
+        type: 'allocation'
       })
       Dialog.open(uploadCSVPrimerDialogError)
