@@ -10,17 +10,6 @@ class UserMailer < ActionMailer::Base
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
-  def invite_to_group_email(user: , inviter: , group: , initial_allocation_amount:)
-    @user = user
-    @inviter = inviter
-    @group = group
-    @initial_allocation_amount = initial_allocation_amount.floor
-    @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
-    mail(to: @user.name_and_email,
-        from: "Cobudget Accounts <accounts@cobudget.co>",
-        subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
-  end
-
   def notify_author_of_new_comment_email(comment: )
     @comment = comment
     @bucket = @comment.bucket
