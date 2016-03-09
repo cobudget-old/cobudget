@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/invite_members'
   template: require('./invite-members-page.html')
-  controller: (config, CurrentUser, Dialog, DownloadCSV, Error, LoadBar, Records, $scope, $stateParams, UserCan) ->
+  controller: (config, CurrentUser, Dialog, DownloadCSV, Error, $location, LoadBar, Records, $scope, $stateParams, UserCan) ->
 
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
@@ -25,5 +25,15 @@ module.exports =
       .catch ->
         LoadBar.stop()
         Error.set('group not found')
+
+    $scope.openInviteMembersPrimerDialog = ->
+      inviteMembersPrimerDialog = require('./../bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.coffee')({
+        scope: $scope
+      })
+      Dialog.open(inviteMembersPrimerDialog)
+
+    $scope.redirectToManageGroupFundsPage = ->
+      Dialog.close()
+      $location.path("/groups/#{groupId}/manage_funds")
 
     return
