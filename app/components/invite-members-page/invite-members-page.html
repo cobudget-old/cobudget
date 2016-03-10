@@ -1,0 +1,32 @@
+<div class="invite-members-page" ng-if="authorized">
+  <admin-toolbar></admin-toolbar>
+
+  <div class="invite-members-page__header" layout="column" layout-align="end center">
+    <div layout="row" layout-align="center center">
+      <ng-md-icon icon="person_add"
+        class="invite-members-page__money-icon"
+        size="30"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+      <h1 class="invite-members-page__header-text">
+        Invite Members
+      </h1>
+    </div>
+  </div>
+
+  <md-content class="invite-members-page__content">
+    <h2 class="invite-members-page__subheader">
+      Members can see, comment on, and fund buckets in {{ group.name }}
+    </h2>
+
+    <md-divider></md-divider>
+
+    <div class="invite-members-page__bulk-invite-btn-container">
+      big group?
+      <a class="invite-members-page__bulk-invite-btn" href="" ng-click="openInviteMembersPrimerDialog()">
+        Add many people at once
+      </a>
+    </div>
+  </md-content>
+</div>

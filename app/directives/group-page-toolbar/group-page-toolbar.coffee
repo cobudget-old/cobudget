@@ -17,9 +17,9 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
         $scope.tabSelected = parseInt tabNum
 
       $scope.openInvitePeople = ->
-        console.log('invite-people-btn clicked!')
+        $location.path("/groups/#{$scope.group.id}/invite_members")        
         $mdBottomSheet.cancel()
-        
+
       $scope.openManageFunds = ->
         $location.path("/groups/#{$scope.group.id}/manage_funds")
         $mdBottomSheet.cancel()
