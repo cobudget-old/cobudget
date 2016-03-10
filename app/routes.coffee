@@ -19,3 +19,4 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'manage-group-funds', require('app/components/manage-group-funds-page/manage-group-funds-page.coffee')
     .state 'review-bulk-allocation', require('app/components/review-bulk-allocation-page/review-bulk-allocation-page.coffee')
     .state 'invite-members', require('app/components/invite-members-page/invite-members-page.coffee')
+    .state 'review-bulk-invite-members', require('app/components/review-bulk-invite-members-page/review-bulk-invite-members-page.coffee')
