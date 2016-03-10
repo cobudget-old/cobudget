@@ -22,7 +22,7 @@
 
     <md-divider></md-divider>
 
-    <form novalidate class="invite-members-page__details-form" name="inviteMemberForm" ng-submit="save(); inviteMemberForm.$setPristine()">
+    <form novalidate class="invite-members-page__details-form" name="inviteMemberForm">
       <div class="invite-members-page__input-container">
         <label class="invite-members-page__input-label" for="name">EMAIL ADDRESS</label>
         <input class="invite-members-page__text-input" type="email" name="email" ng-model="inviteMemberFormParams.email" />
@@ -44,7 +44,7 @@
     </div>
 
     <div layout="column" layout-align="center space-between">
-      <md-button class="invite-members-page__btn invite-members-page__confirm-btn" ng-click="inviteMember()">Invite 1 Person</md-button>
+      <md-button class="invite-members-page__btn invite-members-page__confirm-btn" ng-click="inviteMember(); inviteMemberForm.$setPristine()">Invite 1 Person</md-button>
       <md-button class="invite-members-page__btn invite-members-page__cancel-btn" ng-click="cancel()">Cancel</md-button>
     </div>
 

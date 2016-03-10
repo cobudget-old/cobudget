@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/invite_members'
   template: require('./invite-members-page.html')
-  controller: (config, CurrentUser, Dialog, DownloadCSV, Error, $location, LoadBar, Records, $scope, $stateParams, UserCan) ->
+  controller: (config, CurrentUser, Dialog, DownloadCSV, Error, $location, LoadBar, Records, $scope, $stateParams, Toast, UserCan) ->
 
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
@@ -45,6 +45,8 @@ module.exports =
     $scope.inviteMember = ->
       Records.memberships.remote.create($scope.inviteMemberFormParams)
         .then () ->
+          $scope.inviteMemberFormParams = {}
+          Toast.show('Invitation sent!')
 
 
     return
