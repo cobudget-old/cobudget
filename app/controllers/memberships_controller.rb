@@ -20,11 +20,12 @@ class MembershipsController < AuthenticatedController
     end
   end
 
-  api :POST, '/memberships?group_id&email'
+  api :POST, '/memberships?group_id&email&name'
   def create
-    user = User.find_by_email(params[:email]) || User.create_with_confirmation_token(email: params[:email])
+    user = User.find_by_email(params[:email]) || User.create_with_confirmation_token(email: params[:email], name: params[:name])
     render nothing: true, status: 400 and return unless user.valid?
     membership = Membership.create(member: user, group: group)
+    render nothing: true, status: 409 and return unless membership.valid?
     render json: [membership]
   end
 

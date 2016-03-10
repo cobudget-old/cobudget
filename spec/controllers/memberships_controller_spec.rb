@@ -121,6 +121,15 @@ describe MembershipsController, :type => :controller do
             expect(response).to have_http_status(:bad_request)
           end
         end
+
+        context "membership already exists" do
+          let!(:existing_membership) { create(:membership, group: group, is_admin: true) }
+
+          it "returns http status conflict" do
+            post :create, {group_id: group.id, email: existing_membership.member.email}
+            expect(response).to have_http_status(:conflict)
+          end
+        end
       end
 
       context "user not admin of group" do
@@ -280,7 +289,6 @@ describe MembershipsController, :type => :controller do
       end
     end
   end
-
 
   describe "#archive" do
     before do
