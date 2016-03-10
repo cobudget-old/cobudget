@@ -63,10 +63,6 @@
   font-size: 19px;
 }
 
-.review-bulk-invite-members-page__funds-column-container {
-  width: 110px;
-}
-
 .review-bulk-invite-members-page__list-row {
   height: 50px;
   margin-bottom: 10px;
@@ -75,25 +71,6 @@
 .review-bulk-invite-members-page__top-divider {
   margin-bottom: 23px;
   margin-top: 7px;
-}
-
-.review-bulk-invite-members-page__funds-amount {
-  color: $cobudget-green;
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.review-bulk-invite-members-page__funds-positive-amount {
-  color: $cobudget-green;
-}
-
-.review-bulk-invite-members-page__funds-negative-amount {
-  color: $cobudget-red;
-}
-
-.review-bulk-invite-members-page__funds-sign {
-  position: relative;
-  bottom: 1px;
 }
 
 .review-bulk-invite-members-page__name-and-email {
