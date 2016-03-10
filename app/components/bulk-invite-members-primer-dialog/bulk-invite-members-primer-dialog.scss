@@ -1,32 +1,32 @@
 // upload csv primer dialog
 
-.upload-csv-primer-dialog {
+.bulk-invite-members-primer-dialog {
   background: #FAFAFA;
 }
 
-.upload-csv-primer-dialog__content {
+.bulk-invite-members-primer-dialog__content {
   padding: 30px !important;
 }
 
-.upload-csv-primer-dialog__header {
+.bulk-invite-members-primer-dialog__header {
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 20px;
 }
 
-.upload-csv-primer-dialog__paragraph {
+.bulk-invite-members-primer-dialog__paragraph {
   font-size: 15px;
   line-height: 21px;
 }
 
-.upload-csv-primer-dialog__link {
+.bulk-invite-members-primer-dialog__link {
   text-decoration: none;
   color: #50A3E8;
   font-size: 13px;
   font-weight: 600;
 }
 
-.upload-csv-primer-dialog__upload-csv-primer-img {
+.bulk-invite-members-primer-dialog__upload-csv-primer-img {
   width: 275px;
   margin: 0 auto;
   margin-top: 30px;
@@ -34,12 +34,12 @@
 }
 
 @media (max-width: 450px) {
-  .upload-csv-primer-dialog__upload-csv-primer-img {
+  .bulk-invite-members-primer-dialog__upload-csv-primer-img {
     width: 200px;
   }
 }
 
-.upload-csv-primer-dialog__upload-csv-primer-img-caption {
+.bulk-invite-members-primer-dialog__upload-csv-primer-img-caption {
   font-size: 14px;
   color: #C5C5C5;
   text-align: center;
@@ -47,23 +47,23 @@
   margin-bottom: 20px;
 }
 
-.upload-csv-primer-dialog__btns {
+.bulk-invite-members-primer-dialog__btns {
   padding-left: 30px !important;
   padding-right: 30px !important;
 }
 
-.upload-csv-primer-dialog__ok-btn {
+.bulk-invite-members-primer-dialog__ok-btn {
   color: #50A3E8;
 }
 
-.upload-csv-primer-dialog__cancel-btn {
+.bulk-invite-members-primer-dialog__cancel-btn {
   color: #B9B9B9;
 }
 
-.upload-csv-primer-dialog__hidden-btn {
+.bulk-invite-members-primer-dialog__hidden-btn {
   display: none;
 }
 
-.upload-csv-primer-dialog__error {
+.bulk-invite-members-primer-dialog__error {
   font-size: 14px;
 }

@@ -21,7 +21,8 @@
 @import './components/profile-settings-page/profile-settings-page.scss';
 @import './components/manage-group-funds-page/manage-group-funds-page.scss';
 @import './components/review-bulk-allocation-page/review-bulk-allocation-page.scss';
-
+@import './components/invite-members-page/invite-members-page.scss';
+@import './components/review-bulk-invite-members-page/review-bulk-invite-members-page.scss';
 
 @import './directives/landing-page-toolbar/landing-page-toolbar.scss';
 @import './directives/toolbar-dropdown-menu/toolbar-dropdown-menu.scss';
@@ -40,7 +41,8 @@
 @import './directives/bucket-page-status-card-flagpoint/bucket-page-status-card-flagpoint.scss';
 @import './directives/bucket-page-activity-card/bucket-page-activity-card.scss';
 
-@import './components/upload-csv-primer-dialog/upload-csv-primer-dialog.scss';
+@import './components/bulk-allocation-primer-dialog/bulk-allocation-primer-dialog.scss';
+@import './components/bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.scss';
 @import './components/upload-csv-primer-dialog-error/upload-csv-primer-dialog-error.scss';
 
 @import './directives/error-page/error-page.scss';
