@@ -38,4 +38,7 @@ module.exports =
       Dialog.close()
       $location.path("/groups/#{groupId}/manage_funds")
 
+    $scope.cancel = ->
+      $location.path("/groups/#{groupId}")
+
     return
