@@ -26,6 +26,8 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
+    $scope.inviteMemberFormParams = {}
+
     $scope.openInviteMembersPrimerDialog = ->
       inviteMembersPrimerDialog = require('./../bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.coffee')({
         scope: $scope

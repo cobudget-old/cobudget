@@ -22,6 +22,20 @@
 
     <md-divider></md-divider>
 
+    <form novalidate class="invite-members-page__details-form" name="inviteMemberForm" ng-submit="save(); inviteMemberForm.$setPristine()">
+      <div class="invite-members-page__input-container">
+        <label class="invite-members-page__input-label" for="name">EMAIL ADDRESS</label>
+        <input class="invite-members-page__text-input" type="email" name="email" ng-model="inviteMemberFormParams.email" />
+        <div ng-if="inviteMemberForm.email.$error.required && inviteMemberForm.$submitted" class="invite-members-page__input-error">Email is required.</div>
+        <div ng-if="inviteMemberForm.email.$error.email && inviteMemberForm.$submitted" class="invite-members-page__input-error">Email address must be valid.</div>
+      </div>
+
+      <div class="invite-members-page__input-container">
+        <label class="invite-members-page__input-label" for="name">NAME (OPTIONAL)</label>
+        <input class="invite-members-page__text-input" type="text" name="name" ng-model="inviteMemberFormParams.name" />
+      </div>
+    </form>
+
     <div class="invite-members-page__bulk-invite-btn-container">
       big group?
       <a class="invite-members-page__bulk-invite-btn" href="" ng-click="openInviteMembersPrimerDialog()">

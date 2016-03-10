@@ -33,10 +33,57 @@
   margin-bottom: 20px;
 }
 
+// invite member form
+
+.invite-members-page__details-form {
+  position: relative;
+  max-width: 640px;
+  margin-top: 30px;
+}
+
+.invite-members-page__input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.invite-members-page__input-label {
+  display: block;
+  margin-bottom: 15px;
+  color: $grey-on-white;
+  font-size: 15px;
+}
+
+.invite-members-page__text-input {
+  display: block;
+  border: 1px solid $grey-on-white;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 2px;
+  background: inherit;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.invite-members-page__text-input:focus {
+  outline: none;
+}
+
+.invite-members-page__text-input.ng-dirty {
+  border-color: $cobudget-light-blue;
+}
+
+.invite-members-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+
 // bulk invite btn
 
 .invite-members-page__bulk-invite-btn-container {
-  margin-top: 40px;
+  margin-top: 25px;
   border: 1px solid #DFDFDF !important;
   box-shadow: none;
   border-radius: 5px;
