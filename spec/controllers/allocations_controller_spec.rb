@@ -7,6 +7,7 @@ RSpec.describe AllocationsController, type: :controller do
   let(:csv_with_too_many_columns) { fixture_file_upload('bulk-allocation-csvs/test-csv-too-many-columns.csv', 'text/csv') }
   let(:totally_fucked_csv) { fixture_file_upload('bulk-allocation-csvs/totally-fucked-csv.csv', 'text/csv') }
   let(:empty_csv) { fixture_file_upload('bulk-allocation-csvs/empty-csv.csv', 'text/csv') }
+  let(:enormous_debt_csv) { fixture_file_upload('bulk-allocation-csvs/enormous-debt-csv.csv', 'text/csv') }
 
   describe "#upload_review" do
     context "user is group admin" do
@@ -62,6 +63,13 @@ RSpec.describe AllocationsController, type: :controller do
       context "csv is empty" do
         it "returns http status 'unprocessable'" do
           post :upload_review, {group_id: @membership.group_id, csv: empty_csv}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv contains values that would overdraft members" do
+        it "return http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: enormous_debt_csv}
           expect(response).to have_http_status(422)
         end
       end
