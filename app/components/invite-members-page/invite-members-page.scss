@@ -84,6 +84,7 @@
 
 .invite-members-page__bulk-invite-btn-container {
   margin-top: 25px;
+  margin-bottom: 40px;
   border: 1px solid #DFDFDF !important;
   box-shadow: none;
   border-radius: 5px;
@@ -96,4 +97,20 @@
   text-decoration: none;
   color: #50A3E8;
   font-weight: 500;
+}
+
+// btns
+
+.invite-members-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.invite-members-page__confirm-btn {
+  background: #4A90E2 !important;
+  color: white;
+}
+
+.invite-members-page__cancel-btn {
+  color: #7B7B7B;
 }
