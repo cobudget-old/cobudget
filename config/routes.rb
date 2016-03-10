@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
     resources :allocations, only: [:index, :create] do
       collection do
-        post :upload
+        post :upload_review
       end
     end
 
@@ -28,14 +28,14 @@ Rails.application.routes.draw do
 
     resources :comments, only: [:index, :create]
 
-    resources :memberships, only: [:index, :show, :update] do
+    resources :memberships, only: [:index, :create, :show, :update] do
       collection do
         get :my_memberships
       end
 
       member do
         post :archive
-        post :reinvite
+        post :invite
       end
     end
 
