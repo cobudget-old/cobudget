@@ -1,3 +1,5 @@
+require 'csv'
+
 class MembershipsController < AuthenticatedController
   before_action :validate_user_is_group_admin!, only: [:create, :invite, :archive]
   before_action :validate_user_is_group_member!, only: [:index, :show]
@@ -52,6 +54,21 @@ class MembershipsController < AuthenticatedController
   def archive
     MembershipService.archive_membership(membership: membership)
     render nothing: true, status: 200
+  end
+
+  api :POST, '/memberships/upload_review?group_id&csv'
+  def upload_review
+    file = params[:csv].tempfile
+    csv = CSV.read(file)
+    group = Group.find(params[:group_id])
+    render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
+
+    if errors = MembershipService.check_csv_for_errors(csv: csv)
+      render status: 422, json: {errors: errors}
+    else
+      upload_preview = MembershipService.generate_csv_upload_preview(csv: csv, group: group)
+      render json: {data: upload_preview}
+    end
   end
 
   private
