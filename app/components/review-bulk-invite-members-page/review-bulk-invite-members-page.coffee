@@ -61,7 +61,7 @@ module.exports =
     $scope.cancel = ->
       $location.path("/groups/#{groupId}")
 
-    $scope.confirmBulkAllocations = ->
+    $scope.confirmBulkInvites = ->
       $scope.uploadStatus = 'pending'
       promises = _.map $scope.people, (person) ->
         person.deferred.promise

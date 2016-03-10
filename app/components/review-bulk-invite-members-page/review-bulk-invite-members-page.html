@@ -80,9 +80,9 @@
         </div>
         <div ng-if="person.status == 'complete'" class="review-bulk-invite-members-page__upload-member-status-icon">
           <ng-md-icon icon="check_circle"
-          class="review-bulk-invite-members-page__upload-member-complete-icon"
-          layout="column"
-          layout-align="center center"
+            class="{{person.new_member ?  'review-bulk-invite-members-page__upload-member-complete-icon' : 'review-bulk-invite-members-page__upload-member-skipped-icon'}}"
+            layout="column"
+            layout-align="center center"
           ></ng-md-icon>
         </div>
 
@@ -114,7 +114,7 @@
     <md-divider class="review-bulk-invite-members-page__bottom-divider"></md-divider>
 
     <div layout="column" layout-align="center space-between" ng-if="uploadStatus == 'standby'">
-      <md-button class="review-bulk-invite-members-page__btn review-bulk-invite-members-page__confirm-btn" ng-click="confirmBulkAllocations()">Confirm</md-button>
+      <md-button class="review-bulk-invite-members-page__btn review-bulk-invite-members-page__confirm-btn" ng-click="confirmBulkInvites()">Confirm</md-button>
       <md-button class="review-bulk-invite-members-page__btn review-bulk-invite-members-page__try-again-btn" ng-click="openUploadCSVPrimerDialog()">Try Again</md-button>
       <md-button class="review-bulk-invite-members-page__btn review-bulk-invite-members-page__cancel-btn" ng-click="cancel()">Cancel</md-button>
     </div>

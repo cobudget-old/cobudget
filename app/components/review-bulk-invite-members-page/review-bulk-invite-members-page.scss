@@ -93,9 +93,9 @@
 }
 
 .review-bulk-invite-members-page__upload-member-status-icon {
-  margin-right: 15px;
+  margin-right: 10px;
   position: relative;
-  bottom: 2px;
+  bottom: 1px;
 }
 
 .review-bulk-invite-members-page__upload-member-pending-icon {
@@ -111,6 +111,10 @@
 
 .review-bulk-invite-members-page__upload-member-complete-icon {
   fill: $cobudget-green;
+}
+
+.review-bulk-invite-members-page__upload-member-skipped-icon {
+  fill: #FEC300;
 }
 
 // bottom btns
