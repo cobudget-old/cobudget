@@ -1,3 +1,5 @@
+require 'csv'
+
 class MembershipsController < AuthenticatedController
   before_action :validate_user_is_group_admin!, only: [:create, :invite, :archive]
   before_action :validate_user_is_group_member!, only: [:index, :show]
