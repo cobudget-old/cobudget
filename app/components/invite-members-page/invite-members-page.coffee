@@ -26,7 +26,6 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
-    $scope.inviteMemberFormParams = {}
 
     $scope.openInviteMembersPrimerDialog = ->
       inviteMembersPrimerDialog = require('./../bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.coffee')({
@@ -40,5 +39,12 @@ module.exports =
 
     $scope.cancel = ->
       $location.path("/groups/#{groupId}")
+
+    $scope.inviteMemberFormParams = {group_id: groupId}
+
+    $scope.inviteMember = ->
+      Records.memberships.remote.create($scope.inviteMemberFormParams)
+        .then () ->
+
 
     return
