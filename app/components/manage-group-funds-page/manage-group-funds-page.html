@@ -22,10 +22,9 @@
 
     <md-divider></md-divider>
 
-    <div layout="row" layout-align="center start" class="manage-group-funds-page__btns-container">
-      <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container manage-group-funds-page__upload-btn-container" flex ng-if="ready">
-        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn">
-
+    <div class="manage-group-funds-page__btns-container">
+      <div layout="column" layout-align="center start" class="manage-group-funds-page__btn-container manage-group-funds-page__upload-btn-container" flex>
+        <div layout="row" layout-align="start center" class="manage-group-funds-page__btn"  ng-click="openUploadCSVPrimerDialog()">
           <ng-md-icon icon="cloud_upload"
             class="manage-group-funds-page__btn-icon"
             size="20"
@@ -61,7 +60,7 @@
           Download a csv of all your group members, their emails, and their available funds.
         </p>
 
-        <p class="manage-group-funds-page__btn-info">
+        <p class="manage-group-funds-page__btn-info manage-group-funds-page__safari-help" ng-if="usingSafari">
           <b>Using Safari?</b><br/>
           A bug in Safari names all downloaded CSVs as <code>Unknown</code>.
           So after downloading, you will need to rename the file to <code>YOUR_PREFERRED_NAME.csv</code>.

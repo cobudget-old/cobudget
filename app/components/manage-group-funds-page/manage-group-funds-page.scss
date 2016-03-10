@@ -1,10 +1,3 @@
-.manage-group-funds-page {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  background: #F9F9F9;
-}
-
 // header
 
 .manage-group-funds-page__header {
@@ -34,7 +27,6 @@
 // content
 
 .manage-group-funds-page__content {
-  background: inherit;
   max-width: 640px;
   margin: 0 auto;
   padding-right: 20px;
@@ -75,9 +67,6 @@
 }
 
 @media (max-width: 525px) {
-  .manage-group-funds-page__btn-label {
-    display: none;
-  }
 
   .manage-group-funds-page__header-text {
     font-size: 20px;
@@ -86,6 +75,62 @@
   .manage-group-funds-page__subheader {
     font-size: 16px;
   }
+
+  .manage-group-funds-page__btns-container {
+    padding-bottom: 40px;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .manage-group-funds-page__btn-container {
+    width: 80%;
+  }
+
+  .manage-group-funds-page__upload-btn-container {
+    border-bottom: 1px solid #DCDCDC;
+    padding-bottom: 5px;
+  }
+
+}
+
+
+@media (min-width: 525px) {
+
+  .manage-group-funds-page__upload-btn-container {
+    border-right: 1px solid #DCDCDC;
+    margin-right: 30px;
+    padding-right: 15px;
+  }
+
+  .manage-group-funds-page__btns-container {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
 }
 
 .manage-group-funds-page__btn-info {
@@ -93,8 +138,6 @@
   @include fontMedium;
 }
 
-.manage-group-funds-page__upload-btn-container {
-  border-right: 1px solid #DCDCDC;
-  margin-right: 30px;
-  padding-right: 15px;
+.manage-group-funds-page__safari-help {
+  font-size: 12px;
 }

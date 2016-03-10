@@ -20,6 +20,7 @@
 @import './components/email-settings-page/email-settings-page.scss';
 @import './components/profile-settings-page/profile-settings-page.scss';
 @import './components/manage-group-funds-page/manage-group-funds-page.scss';
+@import './components/review-bulk-allocation-page/review-bulk-allocation-page.scss';
 
 
 @import './directives/landing-page-toolbar/landing-page-toolbar.scss';
@@ -38,6 +39,9 @@
 @import './directives/bucket-page-status-card/bucket-page-status-card.scss';
 @import './directives/bucket-page-status-card-flagpoint/bucket-page-status-card-flagpoint.scss';
 @import './directives/bucket-page-activity-card/bucket-page-activity-card.scss';
+
+@import './components/upload-csv-primer-dialog/upload-csv-primer-dialog.scss';
+@import './components/upload-csv-primer-dialog-error/upload-csv-primer-dialog-error.scss';
 
 @import './directives/error-page/error-page.scss';
 @import './directives/loading-page/loading-page.scss';

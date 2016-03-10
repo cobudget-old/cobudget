@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/manage_funds'
   template: require('./manage-group-funds-page.html')
-  controller: (config, CurrentUser, DownloadCSV, Error, LoadBar, Records, $scope, $stateParams, UserCan) ->
+  controller: (config, CurrentUser, Dialog, DownloadCSV, Error, LoadBar, Records, $scope, $stateParams, UserCan) ->
 
     LoadBar.start()
     groupId = parseInt($stateParams.groupId)
@@ -26,6 +26,8 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
+    $scope.usingSafari = browser.safari
+
     $scope.downloadCSV = ->
       timestamp = moment().format('YYYY-MM-DD-HH-mm-ss')
       filename = "#{$scope.group.name}-member-data-#{timestamp}"
@@ -33,4 +35,11 @@ module.exports =
         url: "#{config.apiPrefix}/memberships.csv?group_id=#{groupId}"
         filename: filename
       DownloadCSV(params)
+
+    $scope.openUploadCSVPrimerDialog = ->
+      uploadCSVPrimerDialog = require('./../upload-csv-primer-dialog/upload-csv-primer-dialog.coffee')({
+        scope: $scope
+      })
+      Dialog.open(uploadCSVPrimerDialog)
+
     return
