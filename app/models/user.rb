@@ -28,10 +28,10 @@ class User < ActiveRecord::Base
     "#{name} <#{email}>"
   end
 
-  def self.create_with_confirmation_token(email:, password: nil)
-    tmp_name = email[/[^@]+/]
+  def self.create_with_confirmation_token(email:, password: nil, name: nil)
+    name = name || email[/[^@]+/]
     tmp_password = password || SecureRandom.hex
-    new_user = self.create(name: tmp_name, email: email, password: tmp_password)
+    new_user = self.create(name: name, email: email, password: tmp_password)
     new_user.generate_confirmation_token!
     new_user
   end

@@ -1,26 +1,75 @@
 require 'rails_helper'
 
 RSpec.describe AllocationsController, type: :controller do
-  let(:valid_csv) { fixture_file_upload('test-csv.csv', 'text/csv') }
-  let(:totally_fucked_csv) { fixture_file_upload('totally-fucked-csv.csv', 'text/csv') }
+  let(:valid_csv) { fixture_file_upload('bulk-allocation-csvs/test-csv.csv', 'text/csv') }
+  let(:csv_with_fucked_up_email_addresses) { fixture_file_upload('bulk-allocation-csvs/test-csv-fucked-up-email-addresses.csv', 'text/csv') }
+  let(:csv_with_non_number_allocations) { fixture_file_upload('bulk-allocation-csvs/test-csv-non-number-allocations.csv', 'text/csv') }
+  let(:csv_with_too_many_columns) { fixture_file_upload('bulk-allocation-csvs/test-csv-too-many-columns.csv', 'text/csv') }
+  let(:totally_fucked_csv) { fixture_file_upload('bulk-allocation-csvs/totally-fucked-csv.csv', 'text/csv') }
+  let(:empty_csv) { fixture_file_upload('bulk-allocation-csvs/empty-csv.csv', 'text/csv') }
+  let(:enormous_debt_csv) { fixture_file_upload('bulk-allocation-csvs/enormous-debt-csv.csv', 'text/csv') }
 
-  describe "#upload" do
+  describe "#upload_review" do
     context "user is group admin" do
       before do
         @membership = make_user_group_admin
         request.headers.merge!(user.create_new_auth_token)
       end
 
-      context "csv is properly formatted" do
+      context "valid csv" do
+        before do
+          @group = @membership.group
+          @person0 = create(:user, email: "person0@example.com", name: "Person0")
+          create(:membership, member: @person0, group: @group)
+          post :upload_review, {group_id: @membership.group_id, csv: valid_csv}
+        end
+
         it "returns http status 'ok'" do
-          post :upload, {group_id: @membership.group.id, csv: valid_csv}
           expect(response).to have_http_status(:ok)
+        end
+
+        it "returns review data as json" do
+          expect(parsed(response)).to eq({
+            "data" => [
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => true }
+            ]
+          })
         end
       end
 
-      context "csv is fucked" do
+      context "csv has fucked up email addresses" do
         it "returns http status 'unprocessable'" do
-          post :upload, {group_id: @membership.group.id, csv: totally_fucked_csv}
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_fucked_up_email_addresses}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv has non-number allocation amounts" do
+        it "returns http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_non_number_allocations}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv has more than two columns" do
+        it "returns http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_too_many_columns}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv is empty" do
+        it "returns http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: empty_csv}
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv contains values that would overdraft members" do
+        it "return http status 'unprocessable'" do
+          post :upload_review, {group_id: @membership.group_id, csv: enormous_debt_csv}
           expect(response).to have_http_status(422)
         end
       end
@@ -30,7 +79,7 @@ RSpec.describe AllocationsController, type: :controller do
       before do
         membership = make_user_group_member
         request.headers.merge!(user.create_new_auth_token)
-        post :upload, {group_id: membership.group_id, csv: valid_csv}
+        post :upload_review, {group_id: membership.group_id, csv: valid_csv}
       end
 
       it "returns http status 'forbidden'" do
@@ -38,14 +87,16 @@ RSpec.describe AllocationsController, type: :controller do
       end
     end
 
-    context "user is not logged in" do
-      it "returns http status 'unauthorized'" do
+    context "user not logged in" do
+      before do
         membership = make_user_group_member
-        post :create, {membership_id: membership.id, amount: 420}
+        post :upload_review, {group_id: membership.group_id, csv: valid_csv}
+      end
+
+      it "returns http status 'unauthorized'" do
         expect(response).to have_http_status(:unauthorized)
       end
     end
-
   end
 
   describe "#create" do

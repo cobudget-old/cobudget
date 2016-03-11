@@ -16,6 +16,7 @@ class UsersController < AuthenticatedController
     end
   end
 
+  # can remove once user can start their own group
   api :POST, '/users/invite_to_create_group?email'
   def invite_to_create_group
     user = User.create_with_confirmation_token(email: params[:email])

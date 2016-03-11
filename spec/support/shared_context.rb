@@ -21,16 +21,6 @@ module MyLetDeclarations
   let(:forbidden) { 403 }
   let(:conflict) { 409 }
   let(:unprocessable) { 422 }
-
-  def create_bucket_participant(bucket:, subscribed:, type: :commenter)
-    participant = create(:user, subscribed_to_participant_activity: subscribed)
-    create(:membership, member: participant, group: bucket.group)
-    case type
-      when :commenter then create(:comment, bucket: bucket, user: participant)
-      when :funder then create(:contribution, bucket: bucket, user: participant)
-    end
-    participant
-  end
 end
 
 RSpec.configure { |c| c.include MyLetDeclarations }

@@ -1,7 +1,9 @@
 class ContributionsController < AuthenticatedController
-  api :GET, '/contributions?bucket_id= &group_id='
+  before_action :validate_user_is_group_member!
+
+  api :GET, '/contributions?bucket_id&group_id'
   def index
-    contributions = 
+    contributions =
       if params[:group_id]
         # all contributions for group for current_user
         Contribution.joins(:bucket)
@@ -16,21 +18,27 @@ class ContributionsController < AuthenticatedController
 
   api :POST, '/contributions', 'Create new contribution'
   def create
-    current_membership_balance = Bucket.find_by_id(contribution_params[:bucket_id])
-                                       .group.memberships
-                                       .find_by_member_id(current_user.id)
-                                       .balance.to_f
-    if current_membership_balance >= contribution_params[:amount].to_f
-      contribution = Contribution.create(contribution_params)
+    contribution = Contribution.create(contribution_params)
+    if contribution.valid?
       ContributionService.send_bucket_received_contribution_emails(contribution: contribution)
-      render json: [contribution], status: 201
+      render json: [contribution]
     else
-      render nothing: true, status: 403
+      render nothing: true, status: 422
     end
   end
 
   private
     def contribution_params
       params.require(:contribution).permit(:bucket_id, :amount).merge(user_id: current_user.id)
+    end
+
+    def validate_user_is_group_member!
+      render nothing: true, status: 403 and return unless current_user.is_member_of?(group)
+    end
+
+    def group
+      return @group if @group
+      group_id = params[:group_id] || Bucket.find_by_id(contribution_params[:bucket_id]).group_id
+      @group = Group.find_by_id(group_id) if group_id
     end
 end

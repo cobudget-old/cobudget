@@ -51,8 +51,8 @@ describe "MembershipService" do
       expect(membership2.balance).to eq(20)
 
       # member who is about to be deleted has also contributed to their own bucket
+      create(:allocation, user: @user, group: bucket.group, amount: 1)
       contribution4 = create(:contribution, user: @user, bucket: bucket, amount: 1)
-      expect(@group.balance).to eq(39)
 
       ActionMailer::Base.deliveries.clear
       MembershipService.archive_membership(membership: @membership)
@@ -126,6 +126,17 @@ describe "MembershipService" do
       expect(live_bucket.contributions.sum(:amount)).to eq(20)
 
       expect(@group.balance).to eq(30)
+    end
+  end
+
+  describe "#generate_csv(memberships:)" do
+    it "returns memberships as csv string" do
+      memberships = create_list(:membership, 2)
+      csv_string = MembershipService.generate_csv(memberships: memberships)
+      expect(CSV.parse(csv_string)).to eq([
+        [memberships.first.member.email, memberships.first.balance.to_f.to_s],
+        [memberships.last.member.email, memberships.last.balance.to_f.to_s],
+      ])
     end
   end
 end
