@@ -22,9 +22,6 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
-  validates_inclusion_of :subscribed_to_daily_digest, in: [true, false]
-  validates_inclusion_of :subscribed_to_personal_activity, in: [true, false]
-  validates_inclusion_of :subscribed_to_participant_activity, in: [true, false]
 
   def name_and_email
     "#{name} <#{email}>"
