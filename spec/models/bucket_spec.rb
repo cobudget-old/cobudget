@@ -23,11 +23,12 @@ RSpec.describe Bucket, :type => :model do
   describe "num_of_contributors" do
     it "returns the number of contributions with unique user_id" do
       bucket = create(:bucket)
-      user1 = create(:user)
-      user2 = create(:user)
-      create(:contribution, bucket: bucket, user: user1)
-      create(:contribution, bucket: bucket, user: user1)
-      create(:contribution, bucket: bucket, user: user2)
+      group = bucket.group
+      membership1 = membership_with_balance(balance: 1000, group: group)
+      membership2 = membership_with_balance(balance: 1000, group: group)
+      create(:contribution, bucket: bucket, user: membership1.member)
+      create(:contribution, bucket: bucket, user: membership1.member)
+      create(:contribution, bucket: bucket, user: membership2.member)
       expect(bucket.num_of_contributors).to eq(2)
     end
   end

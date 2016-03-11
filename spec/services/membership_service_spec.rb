@@ -51,8 +51,8 @@ describe "MembershipService" do
       expect(membership2.balance).to eq(20)
 
       # member who is about to be deleted has also contributed to their own bucket
+      create(:allocation, user: @user, group: bucket.group, amount: 1)
       contribution4 = create(:contribution, user: @user, bucket: bucket, amount: 1)
-      expect(@group.balance).to eq(39)
 
       ActionMailer::Base.deliveries.clear
       MembershipService.archive_membership(membership: @membership)
