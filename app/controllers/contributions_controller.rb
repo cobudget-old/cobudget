@@ -38,7 +38,8 @@ class ContributionsController < AuthenticatedController
 
     def group
       return @group if @group
-      group_id = params[:group_id] || Bucket.find_by_id(contribution_params[:bucket_id]).group_id
+      bucket_id = params[:bucket_id] || contribution_params[:bucket_id]
+      group_id = params[:group_id] || Bucket.find_by_id(bucket_id).group_id
       @group = Group.find_by_id(group_id) if group_id
     end
 end
