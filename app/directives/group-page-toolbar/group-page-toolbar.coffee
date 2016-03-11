@@ -17,7 +17,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
         $scope.tabSelected = parseInt tabNum
 
       $scope.openInvitePeople = ->
-        $location.path("/groups/#{$scope.group.id}/invite_members")        
+        $location.path("/groups/#{$scope.group.id}/invite_members")
         $mdBottomSheet.cancel()
 
       $scope.openManageFunds = ->
@@ -31,7 +31,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
           template: require('./bottom-sheet.tmpl.html')
           controller: ->
             $scope.adminActions = [
-              {label: 'Invite People', onClick: $scope.openInvitePeople, icon: 'person_add'},
+              {label: 'Invite Members', onClick: $scope.openInvitePeople, icon: 'person_add'},
               {label: 'Manage Funds', onClick: $scope.openManageFunds, icon: 'attach_money'},
               {label: 'Cancel', onClick: $mdBottomSheet.cancel, icon: 'cancel'}
             ]

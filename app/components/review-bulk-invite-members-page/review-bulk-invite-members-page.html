@@ -52,20 +52,20 @@
     <div class="review-bulk-invite-members-page__text-overview" ng-if="uploadStatus != 'pending'">
       <div ng-if="uploadStatus == 'standby'">
         Looks like you're trying to add
-        <b><ng-pluralize count="newMembers.length" when="{ 'one': '1 new person', 'other': '{} new people' }" ></ng-pluralize></b>
+        <b><ng-pluralize count="newMembers.length" when="{ 'one': '1 new member', 'other': '{} new members' }" ></ng-pluralize></b>
         to {{ group.name }}
       </div>
 
       <div ng-if="uploadStatus == 'complete'">
         You invited
-        <b><ng-pluralize count="newMembers.length" when="{ 'one': '1 person', 'other': '{} people' }" ></ng-pluralize></b>
+        <b><ng-pluralize count="newMembers.length" when="{ 'one': '1 member', 'other': '{} members' }" ></ng-pluralize></b>
         to {{ group.name }}
       </div>
     </div>
 
     <div layout="column">
       <div layout="row" layout-align="space-between center">
-        <div class="review-bulk-invite-members-page__list-header">People & status</div>
+        <div class="review-bulk-invite-members-page__list-header">Members & status</div>
       </div>
 
       <md-divider class="review-bulk-invite-members-page__top-divider"></md-divider>
