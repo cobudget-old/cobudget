@@ -19,6 +19,10 @@
   margin-right: 10px;
 }
 
+.group-page__funder-name-container {
+  min-width: 0;
+}
+
 .group-page__funder-name {
   width: 100%;
   @include truncatedText;
