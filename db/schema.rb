@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311035750) do
+ActiveRecord::Schema.define(version: 20160311100322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,24 @@ ActiveRecord::Schema.define(version: 20160311035750) do
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
   add_index "memberships", ["member_id"], name: "index_memberships_on_member_id", using: :btree
+
+  create_table "subscription_trackers", force: :cascade do |t|
+    t.integer  "user_id",                                                     null: false
+    t.boolean  "comment_on_your_bucket",                   default: true,     null: false
+    t.boolean  "comment_on_bucket_you_participated_in",    default: true,     null: false
+    t.boolean  "bucket_idea_created",                      default: true,     null: false
+    t.boolean  "bucket_started_funding",                   default: true,     null: false
+    t.boolean  "bucket_fully_funded",                      default: true,     null: false
+    t.boolean  "funding_for_your_bucket",                  default: true,     null: false
+    t.boolean  "funding_for_a_bucket_you_participated_in", default: true,     null: false
+    t.boolean  "your_bucket_fully_funded",                 default: true,     null: false
+    t.datetime "recent_activity_last_fetched_at"
+    t.string   "notification_frequency",                   default: "hourly", null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+  end
+
+  add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                              default: "",    null: false
