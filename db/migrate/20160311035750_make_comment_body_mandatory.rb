@@ -1,7 +1,7 @@
 class MakeCommentBodyMandatory < ActiveRecord::Migration
   def up
-    change_column :comments, :body, :string, null: false
     Comment.where(body: nil).delete_all
+    change_column :comments, :body, :string, null: false
   end
 
   def down
