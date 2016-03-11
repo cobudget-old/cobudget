@@ -29,7 +29,7 @@ class Contribution < ActiveRecord::Base
 
     def amount_cannot_overdraft_member
       membership = Membership.find_by(member_id: user_id, group_id: bucket.group_id)
-      if membership.raw_balance + amount < 0
+      if membership.raw_balance - amount < 0
         errors.add(:amount, "amount cannot overdraft member")
       end
     end
