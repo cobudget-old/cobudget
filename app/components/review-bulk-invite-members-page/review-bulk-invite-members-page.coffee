@@ -7,12 +7,7 @@ module.exports =
   url: '/groups/:groupId/invite_members/review_upload'
   template: require('./review-bulk-invite-members-page.html')
   params:
-    people: [
-      {email: 'derek@enspiral.com', name: 'Derek Razo', new_member: false},
-      {email: 'eugene@enspiral.com', name: 'Eugene Lynch', new_member: true},
-      {email: 'data@doge.com', name: 'Data Doge', new_member: false},
-      {email: 'chelsearobinson@gmail.com', name: '', new_member: true}
-    ]
+    people: null
     groupId: null
   controller: (config, CurrentUser, Dialog, Error, LoadBar, $location, $q, Records, $scope, $state, $stateParams, $timeout, UserCan) ->
 
