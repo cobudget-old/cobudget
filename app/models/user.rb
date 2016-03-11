@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :contributions, dependent: :destroy
   has_many :buckets, dependent: :destroy
-  has_one :subscription_tracker
+  has_one :subscription_tracker, dependent: :destroy
 
   scope :active_in_group, -> (group) { joins(:memberships).where(memberships: {archived_at: nil, group_id: group.id}) }
 
