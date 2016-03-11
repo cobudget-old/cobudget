@@ -5,6 +5,7 @@ global.camelize = require('camelize')
 global.morph = require('morph')
 global.listify = require('listify')
 global.isEmptyObject = require('is-empty-object')
+global.browser = require('bowser')
 
 require('angular')
 require('angular-ui-router')
@@ -23,6 +24,8 @@ require('angular-truncate-2')
 require('angular-marked')
 require('ng-q-all-settled')
 require('angular-eha.only-digits')
+require('ng-csv')
+require('ng-download-csv')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -42,7 +45,9 @@ global.cobudgetApp = angular.module('cobudget', [
   'truncate',
   'hc.marked',
   'qAllSettled',
-  'eha.only-digits'
+  'eha.only-digits',
+  'ngCsv',
+  'ngDownloadCsv'
 ])
 .constant('config', require('app/configs/app'))
 

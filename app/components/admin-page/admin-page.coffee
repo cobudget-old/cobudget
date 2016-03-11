@@ -60,15 +60,6 @@ module.exports =
     $scope.closeDialog = ->
       Dialog.close()
 
-    $scope.uploadPathForGroup = (groupId) ->
-      "#{config.apiPrefix}/allocations/upload?group_id=#{groupId}"
-
-    $scope.onCsvUploadSuccess = ->
-      Dialog.alert(title: 'upload successful!')
-
-    $scope.onCsvUploadError = () ->
-      Dialog.alert(title: 'error!', content: 'yo something was wrong with your csv, try again?')
-
     $scope.updateGroupCurrency = (groupId, currencyCode) ->
       Records.groups.findOrFetchById(groupId).then (group) ->
         group.currencyCode = currencyCode

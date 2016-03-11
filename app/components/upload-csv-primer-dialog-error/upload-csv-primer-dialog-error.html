@@ -1,0 +1,25 @@
+<md-dialog class="upload-csv-primer-dialog-error" aria-label="upload-csv-primer-dialog">
+  <md-dialog-content class="sticky-container upload-csv-primer-dialog-error__content">
+    <h2 class="upload-csv-primer-dialog-error__header">
+      Looks like there was a problem...
+    </h2>
+
+    <p class="upload-csv-primer-dialog-error__paragraph">
+      Sorry, but we couldn't upload your file for the following reasons:
+      <ul>
+        <li class="upload-csv-primer-dialog-error__error" ng-repeat="error in csvUploadErrors">
+          {{ error }}
+        </li>
+      </ul>
+    </p>
+
+    <p>
+       Please try again or <a target="_blank" href="https://docs.google.com/document/d/1_a2Wn8z27tZl08Tk80akGdScEBkWczS43YM7wlXesQY/edit#heading=h.cpommtpjsm9r" class="upload-csv-primer-dialog-error__link">check out our help documentation</a>.
+    </p>
+  </md-dialog-content>
+
+  <div class="md-actions upload-csv-primer-dialog-error__btns" layout="row">
+    <md-button class="upload-csv-primer-dialog-error__cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button class="upload-csv-primer-dialog-error__ok-btn" ng-click="tryAgain()">try again</md-button>
+  </div>
+</md-dialog>

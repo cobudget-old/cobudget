@@ -1,0 +1,24 @@
+<md-menu class="toolbar-dropdown-menu">
+  <div class="toolbar-dropdown-menu__btn" layout="column" layout-align="center center" ng-click="$mdOpenMenu($event)">
+    <ng-md-icon icon="person"
+      class="toolbar-dropdown-menu__btn-icon"
+      layout="column"
+      layout-align="center center"
+    ></ng-md-icon>
+  </div>
+
+  <md-menu-content class="toolbar-dropdown-menu__content" width="3">
+    <md-menu-item ng-repeat="menuItem in accessibleMenuItems()">
+      <md-button aria-label="{{ menuItem.label }}" ng-click="menuItem.onClick()">
+        <div layout="row" layout-align="start center">
+          <ng-md-icon icon="{{ menuItem.icon }}"
+            class="toolbar-dropdown-menu__item-icon"
+            layout="column"
+            layout-align="center center"
+          ></ng-md-icon>
+          <span md-menu-align-target>{{ menuItem.label }}</span>
+        </div>
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

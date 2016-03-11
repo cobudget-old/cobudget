@@ -26,3 +26,9 @@ global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toas
 
     changeEmailSettings: ->
       CurrentUser().isConfirmed()
+
+    manageFundsForGroup: (group) ->
+      CurrentUser().isAdminOf(group)
+
+    inviteMembersToGroup: (group) ->
+      @manageFundsForGroup(group)

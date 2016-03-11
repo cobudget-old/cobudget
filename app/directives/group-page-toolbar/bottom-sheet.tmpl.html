@@ -1,0 +1,14 @@
+<md-bottom-sheet class="group-page__bottom-sheet md-list">
+  <md-list>
+    <md-list-item ng-repeat="action in adminActions" ng-click="action.onClick()">
+      <div layout="row" layout-align="start center">
+        <ng-md-icon icon="{{ action.icon }}"
+          class="group-page__bottom-sheet-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        <span md-menu-align-target>{{ action.label }}</span>
+      </div>
+    </md-list-item>
+  </md-list>
+</md-bottom-sheet>

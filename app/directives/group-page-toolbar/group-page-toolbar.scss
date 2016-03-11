@@ -22,49 +22,13 @@
   @include truncatedText;
 }
 
-.group-page__toolbar-menu {
-  margin-right: 0 !important;
-}
-
-.group-page__toolbar-menu-btn {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: white;
-  font-size: 16px;
-  margin-left: 10px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.group-page__person-icon {
-  fill: #D8D8D8;
-}
-
-.group-page__toolbar-menu-content {
-  padding: 0;
-}
-
-.group-page__toolbar-menu-icon {
-  fill: #454545;
-  margin-right: 12px;
-}
-
 // toolbar funds
 
 .group-page__funds-bar {
   height: $medium-height;
   margin-bottom: 20px;
-}
-
-.group-page__funds-overview-container {
-  margin-left: 35px;
-}
-
-@media (min-width: 330px) {
-  .group-page__funds-overview-container {
-    margin-left: 41px;
-  }
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .group-page__funds-overview-header {
@@ -85,6 +49,49 @@
 
 .group-page__funds-overview-amount {
   @include fontGrande;
+}
+
+@media (max-width: 670px) {
+  .group-page__admin-btn {
+    display: none;
+  }
+
+  .group-page__funds-bar {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media (min-width: 670px) {
+  .group-page__admin-more-btn {
+    display: none;
+  }
+}
+
+.group-page__admin-btn {
+  border: 0;
+  height: 30px;
+  padding: 5px 13px;
+  background: #E9E9E9;
+  color: black;
+  font-weight: 400;
+  font-size: 13px;
+  margin-left: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.group-page__invite-people-btn-label {
+  margin-left: 8px;
+}
+
+.group-page__manage-funds-btn-label {
+  margin-left: 7px;
+}
+
+.group-page__admin-more-btn {
+  cursor: pointer;
+  fill: white;
 }
 
 .group-page__tabs {
@@ -117,4 +124,11 @@
 
 .group-page__create-bucket-fab-icon {
   fill: white;
+}
+
+// bottom sheet
+
+.group-page__bottom-sheet-icon {
+  fill: #454545;
+  margin-right: 12px;
 }
