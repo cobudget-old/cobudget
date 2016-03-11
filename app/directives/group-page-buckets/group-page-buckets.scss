@@ -12,6 +12,7 @@
 // live buckets
 
 .group-page__live-bucket-container {
+  min-width: 0;
   padding: 3px 0;
 }
 
@@ -52,7 +53,7 @@
 
 .group-page__progress-bar-secondary {
   position: absolute;
-  height: 100%; 
+  height: 100%;
   left: 0;
   background: $cobudget-green;
   z-index: 1;
@@ -64,6 +65,7 @@
 
 .group-page__draft-container {
   position: relative;
+  min-width: 0;
 }
 
 .group-page__draft-title {
@@ -101,6 +103,10 @@
 }
 
 // funded buckets
+
+.group-page__funded-bucket-container {
+  min-width: 0;
+}
 
 .group-page__funded-bucket-title {
   @include fontMedLarge;

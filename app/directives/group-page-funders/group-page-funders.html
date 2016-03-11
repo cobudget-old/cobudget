@@ -1,12 +1,12 @@
 <div class="group-page__funders-content">
   <md-list class="group-page__funders">
     <md-list-item ng-repeat="funderMembership in group.memberships()">
-      <div layout="row" layout-align="start center" flex class="group-page__funder-container">
+      <div layout="row" layout-align="center center" class="group-page__funder-container">
         <div class="group-page__funder-avatar" layout="column" layout-align="center center">
           <div>{{ funderMembership.member().name[0] | uppercase }}</div>
         </div>
 
-        <div layout="column" layout-align="center start" flex>
+        <div layout="column" layout-align="center start" class="group-page__funder-name-container" flex>
           <span class="group-page__funder-name">{{ funderMembership.member().name }}</span>
           <span class="group-page__funder-admin-label" ng-if="!funderMembership.isPending() && funderMembership.isAdmin">(admin)</span>
           <span class="group-page__funder-admin-label" ng-if="funderMembership.isPending()">

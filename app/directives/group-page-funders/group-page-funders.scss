@@ -7,6 +7,7 @@
 
 .group-page__funder-container {
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .group-page__funder-avatar {
@@ -17,6 +18,10 @@
   color: white;
   font-size: 20px;
   margin-right: 10px;
+}
+
+.group-page__funder-name-container {
+  min-width: 0;
 }
 
 .group-page__funder-name {
