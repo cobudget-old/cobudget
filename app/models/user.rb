@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   before_validation :assign_uid_and_provider
+  after_create :create_subscription_tracker
 
   has_many :groups, through: :memberships
   has_many :memberships, foreign_key: "member_id", dependent: :destroy
@@ -73,5 +74,10 @@ class User < ActiveRecord::Base
     def assign_uid_and_provider
       self.uid = self.email
       self.provider = "email"
+    end
+
+    def create_subscription_tracker
+      subscription_tracker = SubscriptionTracker.create(recent_activity_last_fetched_at: DateTime.now.utc)
+      self.update(subscription_tracker: subscription_tracker)
     end
 end
