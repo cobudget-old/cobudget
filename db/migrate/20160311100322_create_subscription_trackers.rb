@@ -21,7 +21,7 @@ class CreateSubscriptionTrackers < ActiveRecord::Migration
     end
 
     User.all.each do |user|
-      SubscriptionTracker.create(user: user, recent_activity_last_fetched_at: DateTime.now.utc) unless user.subscription_tracker
+      SubscriptionTracker.create(user: user, recent_activity_last_fetched_at: DateTime.now.utc.beginning_of_hour) unless user.subscription_tracker
     end
   end
 
