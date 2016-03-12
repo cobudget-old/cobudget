@@ -32,15 +32,10 @@ utc_offsets = [
   + 840  # line islands
 ]
 
-### USERS
-
-Allocation.destroy_all
-Bucket.destroy_all
-Comment.destroy_all
-Contribution.destroy_all
 Group.destroy_all
-Membership.destroy_all
 User.destroy_all
+
+### USERS
 
 admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc) # oaklander
 puts "generated admin account email: 'admin@example.com', password: 'password'"
