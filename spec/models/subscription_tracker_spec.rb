@@ -73,4 +73,43 @@ RSpec.describe SubscriptionTracker, type: :model do
       end
     end
   end
+
+  describe "#next_recent_activity_fetch_scheduled_at" do
+    let(:subscription_tracker) { parisian_user.subscription_tracker }
+    let(:six_am_today) { DateTime.now.utc.beginning_of_day + 6.hours }
+
+    def subscription_tracker_with_last_fetch_today_at_six_am(notification_frequency: )
+      subscription_tracker.update(notification_frequency: notification_frequency)
+      subscription_tracker.update(recent_activity_last_fetched_at: six_am_today)
+      subscription_tracker
+    end
+
+    context "if notification_frequency is 'never'" do
+      it "returns nil" do
+        tracker = subscription_tracker_with_last_fetch_today_at_six_am(notification_frequency: "never")
+        expect(tracker.next_recent_activity_fetch_scheduled_at).to be_nil
+      end
+    end
+
+    context "if notification_frequency is 'hourly'" do
+      it "returns datetime 1 hour after last fetch" do
+        tracker = subscription_tracker_with_last_fetch_today_at_six_am(notification_frequency: "hourly")
+        expect(tracker.next_recent_activity_fetch_scheduled_at).to eq(six_am_today + 1.hour)
+      end
+    end
+
+    context "if notification_frequency is 'daily'" do
+      it "returns datetime 1 day after last fetch" do
+        tracker = subscription_tracker_with_last_fetch_today_at_six_am(notification_frequency: "daily")
+        expect(tracker.next_recent_activity_fetch_scheduled_at).to eq(six_am_today + 1.day)
+      end
+    end
+
+    context "if notification_frequency is 'weekly'" do
+      it "returns datetime 1 week after last fetch" do
+        tracker = subscription_tracker_with_last_fetch_today_at_six_am(notification_frequency: "weekly")
+        expect(tracker.next_recent_activity_fetch_scheduled_at).to eq(six_am_today + 1.week)
+      end
+    end
+  end
 end

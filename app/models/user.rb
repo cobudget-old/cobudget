@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :buckets, dependent: :destroy
   has_one :subscription_tracker, dependent: :destroy
 
-  scope :active_in_group, -> (group) { joins(:memberships).where(memberships: {archived_at: nil, group_id: group.id}) }
+  scope :with_active_memberships, -> { joins(:memberships).where(memberships: {archived_at: nil}) }
 
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
