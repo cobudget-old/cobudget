@@ -1,6 +1,4 @@
 class UserService
-  attr_reader :user
-
   def self.fetch_recent_activity_for(user:)
     @@user = user
     Hash[users_active_groups.map { |group| collated_activity_for_group(group) }]
@@ -8,10 +6,10 @@ class UserService
 
   def self.collated_activity_for_group(group)
     [group, {
-      comments_on_buckets_user_participated_in: comments_on_buckets_user_participated_in.joins(:bucket).where(bucket: {group: group}),
-      comments_on_users_buckets: comments_on_users_buckets.joins(:bucket).where(bucket: {group: group}),
-      contributions_to_users_buckets: contributions_to_users_buckets.joins(:bucket).where(bucket: {group: group}),
-      contributions_to_buckets_user_participated_in: contributions_to_buckets_user_participated_in.joins(:bucket).where(bucket: {group: group}),
+      comments_on_buckets_user_participated_in: comments_on_buckets_user_participated_in.joins(:bucket).where(buckets: {group_id: group.id}),
+      comments_on_users_buckets: comments_on_users_buckets.joins(:bucket).where(buckets: {group_id: group.id}),
+      contributions_to_users_buckets: contributions_to_users_buckets.joins(:bucket).where(buckets: {group_id: group.id}),
+      contributions_to_buckets_user_participated_in: contributions_to_buckets_user_participated_in.joins(:bucket).where(buckets: {group_id: group.id}),
       users_buckets_fully_funded: users_buckets_fully_funded.where(group: group),
       new_draft_buckets: new_draft_buckets.where(group: group),
       new_live_buckets: new_live_buckets.where(group: group),
@@ -53,7 +51,7 @@ class UserService
 
   private
     def self.subscription_tracker
-      @@subscription_tracker ||= user.subscription_tracker
+      @@subscription_tracker ||= @@user.subscription_tracker
     end
 
     def self.time_range
@@ -61,14 +59,19 @@ class UserService
     end
 
     def self.buckets_user_participated_in
-      @@buckets_user_participated_in ||= Bucket.joins(:comments, :contributions).where(
-        comments: {user: user},
-        contributions: {user: user}
-      )
+      @@buckets_user_participated_in ||= buckets_user_commented_on + buckets_user_contributed_to
+    end
+
+    def self.buckets_user_commented_on
+      Bucket.joins(:comments).where(comments: {user: @@user})
+    end
+
+    def self.buckets_user_contributed_to
+      Bucket.joins(:contributions).where(contributions: {user: @@user})
     end
 
     def self.user_buckets
-      @@user_buckets ||= user.buckets
+      @@user_buckets ||= @@user.buckets
     end
 
     def self.user_group_buckets
@@ -76,6 +79,6 @@ class UserService
     end
 
     def self.users_active_groups
-      @@users_active_groups ||= Group.joins(:memberships).where(memberships: {member: user, archived_at: nil})
+      @@users_active_groups ||= Group.joins(:memberships).where(memberships: {member: @@user, archived_at: nil})
     end
 end
