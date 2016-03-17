@@ -24,6 +24,7 @@
         <md-divider></md-divider>
         <div class="bucket-page__comment-author-name">{{ comment.authorName }}</div>
         <div class="bucket-page__comment-body" marked="comment.body"></div>
+        <div class="bucket-page__comment-timestamp">{{ comment.createdAt | timeFromNowInWords }} ago</div>
       </md-list-item>
     </md-list>
   </md-card>
@@ -40,7 +41,6 @@
           <md-button class="md-primary bucket-page__submit-comment-btn" ng-disabled="commentForm.$invalid">submit</md-button>
         </md-input-container>
       </div>
-
     </form>
   </md-card>
 </div>
