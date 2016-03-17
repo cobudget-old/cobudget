@@ -12,7 +12,7 @@
 
     <ul style="list-style: none">
       <% if activity[:comments_on_buckets_user_participated_in] %>
-        <li>
+        <li id="comments-on-bucket-user-participated-in">
           <% comments_grouped_by_bucket = activity[:comments_on_buckets_user_participated_in].group_by { |comment| comment.bucket } %>
           <% if comments_grouped_by_bucket.length > 1 %>
             <p><b><%= comments_grouped_by_bucket.length %> Buckets</b> you participated in were <b>commented on</b>:</p>
@@ -35,7 +35,7 @@
       <% end %>
 
       <% if activity[:new_live_buckets] %>
-        <li>
+        <li id="new-live-buckets">
           <% if activity[:new_live_buckets].length > 1 %>
             <p><b><%= activity[:new_live_buckets].length %> Buckets</b> were proposed for <b>funding (you have <%= @user.membership_for(group).formatted_balance %>)</b></p>
           <% else %>
@@ -52,7 +52,7 @@
       <% end %>
 
       <% if activity[:new_draft_buckets] %>
-        <li>
+        <li id="new-draft-buckets">
           <% if activity[:new_draft_buckets].length > 1 %>
             <p><b><%= activity[:new_draft_buckets].length %> Buckets</b> were proposed for discussion:</p>
           <% else %>
@@ -74,7 +74,7 @@
       <% end %>
 
       <% if activity[:contributions_to_buckets_user_participated_in] %>
-        <li>
+        <li id="contributions-to-buckets-user-participated-in">
           <% contributions_grouped_by_bucket = activity[:contributions_to_buckets_user_participated_in].group_by { |contribution| contribution.bucket } %>
 
           <% if contributions_grouped_by_bucket.length > 1 %>
@@ -104,7 +104,7 @@
       <% end %>
 
       <% if activity[:other_buckets_fully_funded] %>
-        <li>
+        <li id="other-buckets-fully-funded">
           <% if activity[:other_buckets_fully_funded].length > 1 %>
             <p><b><%= activity[:other_buckets_fully_funded].length %> Buckets</b> was <b>fully funded</b></p>
           <% else %>
