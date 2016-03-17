@@ -51,28 +51,34 @@ describe "RecentActivityService" do
       # make some new activity
       Timecop.freeze(current_time - 30.minutes) do
         # comments_on_buckets_user_participated_in
-        create_list(:comment, 1, bucket: bucket_that_user_has_participated_in)
+        create(:comment, bucket: bucket_that_user_has_participated_in)
+
+        # counted under 'comments_on_users_buckets' but not 'comments_on_buckets_user_participated_in'
+        create(:comment, user: user, bucket: bucket_that_user_has_authored)
 
         # comments_on_users_buckets
-        create_list(:comment, 1, bucket: bucket_that_user_has_authored)
+        create(:comment, bucket: bucket_that_user_has_authored)
 
         # contributions_to_buckets_user_participated_in
-        create_list(:contribution, 1, bucket: bucket_that_user_has_participated_in)
+        create(:contribution, bucket: bucket_that_user_has_participated_in)
+
+        # counted under 'contributions_to_users_buckets' but not 'contributions_to_buckets_user_participated_in'
+        create(:contribution, user: user, bucket: bucket_that_user_has_authored)
 
         # contributions_to_users_buckets
-        create_list(:contribution, 1, bucket: bucket_that_user_has_authored)
+        create(:contribution, bucket: bucket_that_user_has_authored)
 
         # users_buckets_fully_funded
         other_bucket_that_user_has_authored.update(status: 'funded')
 
         # new_draft_buckets
-        create_list(:bucket, 1, status: 'draft', group: group)
+        create(:bucket, status: 'draft', group: group)
 
         # new_live_buckets
-        create_list(:bucket, 1, status: 'live', group: group)
+        create(:bucket, status: 'live', group: group)
 
         # new_funded_buckets
-        create_list(:bucket, 1, status: 'funded', group: group)
+        create(:bucket, status: 'funded', group: group)
       end
     end
 
@@ -85,13 +91,13 @@ describe "RecentActivityService" do
         expect(activity[:comments_on_buckets_user_participated_in].length).to eq(1)
 
         # comments_on_users_buckets
-        expect(activity[:comments_on_users_buckets].length).to eq(1)
+        expect(activity[:comments_on_users_buckets].length).to eq(2)
 
         # comments_on_buckets_user_participated_in (excludes contributions made on buckets user has authored)
         expect(activity[:contributions_to_buckets_user_participated_in].length).to eq(1)
 
         # contributions_to_users_buckets
-        expect(activity[:contributions_to_users_buckets].length).to eq(1)
+        expect(activity[:contributions_to_users_buckets].length).to eq(2)
 
         # users_buckets_fully_funded
         expect(activity[:users_buckets_fully_funded]).to include(other_bucket_that_user_has_authored)

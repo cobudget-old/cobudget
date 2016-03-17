@@ -106,15 +106,15 @@ class RecentActivityService
     end
 
     def buckets_user_participated_in
-      buckets_user_participated_in ||= buckets_user_commented_on + buckets_user_contributed_to
+      buckets_user_participated_in ||= (buckets_user_commented_on + buckets_user_contributed_to)
     end
 
     def buckets_user_commented_on
-      Bucket.joins(:comments).where(comments: {user: user})
+      Bucket.where.not(user: user).joins(:comments).where(comments: {user: user})
     end
 
     def buckets_user_contributed_to
-      Bucket.joins(:contributions).where(contributions: {user: user})
+      Bucket.where.not(user: user).joins(:contributions).where(contributions: {user: user})
     end
 
     def user_buckets
