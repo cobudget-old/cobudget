@@ -23,14 +23,14 @@ class RecentActivityService
 
   def for_group(group)
     {
-      comments_on_buckets_user_participated_in: comments_on_buckets_user_participated_in && comments_on_buckets_user_participated_in.any? ? comments_on_buckets_user_participated_in.joins(:bucket).where(buckets: {group_id: group.id}) : nil,
-      comments_on_users_buckets: comments_on_users_buckets && comments_on_users_buckets.any? ? comments_on_users_buckets.joins(:bucket).where(buckets: {group_id: group.id}) : nil,
-      contributions_to_users_buckets: contributions_to_users_buckets && contributions_to_users_buckets.any? ? contributions_to_users_buckets.joins(:bucket).where(buckets: {group_id: group.id}) : nil,
-      contributions_to_buckets_user_participated_in: contributions_to_buckets_user_participated_in && contributions_to_buckets_user_participated_in.any? ? contributions_to_buckets_user_participated_in.joins(:bucket).where(buckets: {group_id: group.id}) : nil,
-      users_buckets_fully_funded: users_buckets_fully_funded && users_buckets_fully_funded.any? ? users_buckets_fully_funded.where(group: group) : nil,
-      new_draft_buckets: new_draft_buckets && new_draft_buckets.any? ? new_draft_buckets.where(group: group) : nil,
-      new_live_buckets: new_live_buckets && new_live_buckets.any? ? new_live_buckets.where(group: group) : nil,
-      other_buckets_fully_funded: other_buckets_fully_funded && other_buckets_fully_funded.any? ? other_buckets_fully_funded.where(group: group) : nil
+      comments_on_buckets_user_participated_in:      filtered_collection(collection: comments_on_buckets_user_participated_in, group: group),
+      comments_on_users_buckets:                     filtered_collection(collection: comments_on_users_buckets, group: group),
+      contributions_to_users_buckets:                filtered_collection(collection: contributions_to_users_buckets, group: group),
+      contributions_to_buckets_user_participated_in: filtered_collection(collection: contributions_to_buckets_user_participated_in, group: group),
+      users_buckets_fully_funded:                    filtered_collection(collection: users_buckets_fully_funded, group: group),
+      new_draft_buckets:                             filtered_collection(collection: new_draft_buckets, group: group),
+      new_live_buckets:                              filtered_collection(collection: new_live_buckets, group: group),
+      other_buckets_fully_funded:                    filtered_collection(collection: other_buckets_fully_funded, group: group)
     }
   end
 
@@ -40,6 +40,15 @@ class RecentActivityService
   end
 
   private
+    def filtered_collection(collection:, group:)
+      return nil unless collection && collection.any?
+      if collection.table_name == 'comments' || collection.table_name == 'contributions'
+        collection.joins(:bucket).where(buckets: {group_id: group.id})
+      elsif collection.table_name == 'buckets'
+        collection.where(group: group)
+      end
+    end
+
     def comments_on_buckets_user_participated_in
       if subscription_tracker.comment_on_bucket_you_participated_in
         comments_on_buckets_user_participated_in ||= Comment.where(bucket: buckets_user_participated_in, created_at: time_range)
@@ -87,7 +96,7 @@ class RecentActivityService
         other_buckets_fully_funded ||= user_group_buckets.where(status: 'funded', funded_at: time_range).where.not(user_id: user.id)
       end
     end
-  
+
     def subscription_tracker
       subscription_tracker ||= user.subscription_tracker
     end
