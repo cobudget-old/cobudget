@@ -24,9 +24,17 @@ class MembershipsController < AuthenticatedController
   def create
     user = User.find_by_email(params[:email]) || User.create_with_confirmation_token(email: params[:email], name: params[:name])
     render nothing: true, status: 400 and return unless user.valid?
-    membership = Membership.create(member: user, group: group)
-    render nothing: true, status: 409 and return unless membership.valid?
-    render json: [membership]
+    if membership = Membership.find_by(member: user, group: group)
+      if membership.active?
+        render nothing: true, status: 409
+      else
+        membership.reactivate!
+        render json: [membership.reload]
+      end
+    else
+      membership = group.add_member(user)
+      render json: [membership]
+    end
   end
 
   api :GET, '/memberships/:id'

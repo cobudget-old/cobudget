@@ -122,12 +122,32 @@ describe MembershipsController, :type => :controller do
           end
         end
 
-        context "membership already exists" do
+        context "active membership already exists" do
           let!(:existing_membership) { create(:membership, group: group, is_admin: true) }
 
           it "returns http status conflict" do
             post :create, {group_id: group.id, email: existing_membership.member.email}
             expect(response).to have_http_status(:conflict)
+          end
+        end
+
+        context "archived membership already exists" do
+          let!(:existing_archived_membership) { create(:membership, group: group, archived_at: DateTime.now.utc) }
+
+          before do
+            post :create, {group_id: group.id, email: existing_archived_membership.member.email}
+          end
+
+          it "reactivates membership" do
+            expect(existing_archived_membership.reload.active?).to be_truthy
+          end
+
+          it "returns http status 'success'" do
+            expect(response).to have_http_status(:success)
+          end
+
+          it "returns reactivated membership as json" do
+            expect(parsed(response)["memberships"][0]["id"]).to eq(existing_archived_membership.id)
           end
         end
       end
