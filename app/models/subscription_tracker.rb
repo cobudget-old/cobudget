@@ -15,6 +15,10 @@ class SubscriptionTracker < ActiveRecord::Base
     notification_frequency != "never" && current_time >= next_recent_activity_fetch_scheduled_at
   end
 
+  def subscribed_to_any_activity?
+    comment_on_your_bucket || comment_on_bucket_you_participated_in || bucket_idea_created || bucket_started_funding || bucket_fully_funded || funding_for_your_bucket || funding_for_a_bucket_you_participated_in || your_bucket_fully_funded || recent_activity_last_fetched_at
+  end
+
   private
     def update_recent_activity_last_fetched_at
       if self.notification_frequency_changed?

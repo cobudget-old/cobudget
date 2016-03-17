@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
     update(reset_password_token: SecureRandom.urlsafe_base64.to_s)
   end
 
+  def active_groups
+    Group.joins(:memberships).where(memberships: {member: self, archived_at: nil})
+  end
+
   private
     def assign_uid_and_provider
       self.uid = self.email

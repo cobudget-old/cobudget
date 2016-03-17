@@ -18,248 +18,135 @@ describe "RecentActivityService" do
   let(:other_group1_bucket_that_user_has_authored) { create(:bucket, group: group1, user: user) }
   let(:other_group2_bucket_that_user_has_authored) { create(:bucket, group: group2, user: user) }
 
-  describe "recent_activity_for(user:)" do
+  before do
+    create(:allocation, user: user, group: group1, amount: 20000)
+    create(:allocation, user: user, group: group2, amount: 20000)
+    subscription_tracker.update(recent_activity_last_fetched_at: current_time - 1.hour)
+    create(:comment, user: user, bucket: group1_bucket_that_user_has_participated_in)
+    create(:contribution, user: user, bucket: group2_bucket_that_user_has_participated_in)
+  end
+
+  after { Timecop.return }
+
+  context "recent_activity exists" do
     before do
-      create(:allocation, user: user, group: group1, amount: 20000)
-      create(:allocation, user: user, group: group2, amount: 20000)
-      subscription_tracker.update(recent_activity_last_fetched_at: current_time - 1.hour)
-      create(:comment, user: user, bucket: group1_bucket_that_user_has_participated_in)
-      create(:contribution, user: user, bucket: group2_bucket_that_user_has_participated_in)
-    end
+      # make some old activity
+      Timecop.freeze(current_time - 70.minutes) do
+        # comments_on_buckets_user_participated_in
+        create_list(:comment, 2, bucket: group1_bucket_that_user_has_participated_in)
+        create_list(:comment, 1, bucket: group2_bucket_that_user_has_participated_in)
 
-    after { Timecop.return }
+        # comments_on_users_buckets
+        create_list(:comment, 2, bucket: group1_bucket_that_user_has_authored)
+        create_list(:comment, 1, bucket: group2_bucket_that_user_has_authored)
 
-    context "user is subscribed to all activity" do
+        # contributions_to_users_buckets
+        create_list(:contribution, 2, bucket: group1_bucket_that_user_has_authored)
+        create_list(:contribution, 1, bucket: group2_bucket_that_user_has_authored)
 
-      describe "#comments_on_buckets_user_participated_in(group:)" do
-        it "returns recent comments on buckets user has participated in, in specifed group" do
-          Timecop.freeze(current_time - 70.minutes) do
-            create_list(:comment, 2, bucket: group1_bucket_that_user_has_participated_in)
-            create_list(:comment, 1, bucket: group2_bucket_that_user_has_participated_in)
-          end
+        # contributions_to_buckets_user_participated_in
+        create_list(:contribution, 2, bucket: group1_bucket_that_user_has_participated_in)
+        create_list(:contribution, 1, bucket: group2_bucket_that_user_has_participated_in)
 
-          Timecop.freeze(current_time - 30.minutes) do
-            create_list(:comment, 1, bucket: group1_bucket_that_user_has_participated_in)
-            create_list(:comment, 2, bucket: group2_bucket_that_user_has_participated_in)
-          end
+        # users_buckets_fully_funded
+        group1_bucket_that_user_has_authored.update(status: 'funded')
+        other_group2_bucket_that_user_has_authored.update(status: 'funded')
 
-          recent_activity = RecentActivityService.new(user: user)
+        # new_draft_buckets
+        create_list(:bucket, 2, status: 'draft', group: group1)
+        create_list(:bucket, 1, status: 'draft', group: group2)
 
-          expect(recent_activity.comments_on_buckets_user_participated_in(group: group1).length).to eq(1)
-          expect(recent_activity.comments_on_buckets_user_participated_in(group: group2).length).to eq(2)
-        end
+        # new_live_buckets
+        create_list(:bucket, 2, status: 'live', group: group1)
+        create_list(:bucket, 1, status: 'live', group: group2)
+
+        # new_funded_buckets
+        create_list(:bucket, 2, status: 'funded', group: group1)
+        create_list(:bucket, 1, status: 'funded', group: group2)
       end
 
-      describe "#comments_on_users_buckets(group:)" do
-        it "returns recent comments on buckets user has authored, in specifed group" do
-          Timecop.freeze(current_time - 70.minutes) do
-            create_list(:comment, 2, bucket: group1_bucket_that_user_has_authored)
-            create_list(:comment, 1, bucket: group2_bucket_that_user_has_authored)
-          end
+      # make some new activity
+      Timecop.freeze(current_time - 30.minutes) do
+        # comments_on_buckets_user_participated_in
+        create_list(:comment, 1, bucket: group1_bucket_that_user_has_participated_in)
+        create_list(:comment, 2, bucket: group2_bucket_that_user_has_participated_in)
 
-          Timecop.freeze(current_time - 30.minutes) do
-            create_list(:comment, 1, bucket: group1_bucket_that_user_has_authored)
-            create_list(:comment, 2, bucket: group2_bucket_that_user_has_authored)
-          end
+        # comments_on_users_buckets
+        create_list(:comment, 1, bucket: group1_bucket_that_user_has_authored)
+        create_list(:comment, 2, bucket: group2_bucket_that_user_has_authored)
 
-          recent_activity = RecentActivityService.new(user: user)
+        # contributions_to_users_buckets
+        create_list(:contribution, 1, bucket: group1_bucket_that_user_has_authored)
+        create_list(:contribution, 2, bucket: group2_bucket_that_user_has_authored)
 
-          expect(recent_activity.comments_on_users_buckets(group: group1).length).to eq(1)
-          expect(recent_activity.comments_on_users_buckets(group: group2).length).to eq(2)
-        end
-      end
+        # contributions_to_buckets_user_participated_in
+        create_list(:contribution, 1, bucket: group1_bucket_that_user_has_participated_in)
+        create_list(:contribution, 2, bucket: group2_bucket_that_user_has_participated_in)
 
-      describe "#contributions_to_users_buckets(group:)" do
-        it "returns recent contributions on buckets user has authored, in specified group" do
-          Timecop.freeze(current_time - 70.minutes) do
-            create_list(:contribution, 2, bucket: group1_bucket_that_user_has_authored)
-            create_list(:contribution, 1, bucket: group2_bucket_that_user_has_authored)
-          end
+        # users_buckets_fully_funded
+        other_group1_bucket_that_user_has_authored.update(status: 'funded')
+        group2_bucket_that_user_has_authored.update(status: 'funded')
 
-          Timecop.freeze(current_time - 30.minutes) do
-            create_list(:contribution, 1, bucket: group1_bucket_that_user_has_authored)
-            create_list(:contribution, 2, bucket: group2_bucket_that_user_has_authored)
-          end
+        # new_draft_buckets
+        create_list(:bucket, 1, status: 'draft', group: group1)
+        create_list(:bucket, 2, status: 'draft', group: group2)
 
-          recent_activity = RecentActivityService.new(user: user)
+        # new_live_buckets
+        create_list(:bucket, 1, status: 'live', group: group1)
+        create_list(:bucket, 2, status: 'live', group: group2)
 
-          expect(recent_activity.contributions_to_users_buckets(group: group1).length).to eq(1)
-          expect(recent_activity.contributions_to_users_buckets(group: group2).length).to eq(2)
-        end
-      end
-
-      describe "#contributions_to_buckets_user_participated_in(group:)" do
-        it "returns recent contributions on buckets user has participated in, in specifed group" do
-          Timecop.freeze(current_time - 70.minutes) do
-            create_list(:contribution, 2, bucket: group1_bucket_that_user_has_participated_in)
-            create_list(:contribution, 1, bucket: group2_bucket_that_user_has_participated_in)
-          end
-
-          Timecop.freeze(current_time - 30.minutes) do
-            create_list(:contribution, 1, bucket: group1_bucket_that_user_has_participated_in)
-            create_list(:contribution, 2, bucket: group2_bucket_that_user_has_participated_in)
-          end
-
-          recent_activity = RecentActivityService.new(user: user)
-
-          expect(recent_activity.contributions_to_buckets_user_participated_in(group: group1).length).to eq(1)
-          expect(recent_activity.contributions_to_buckets_user_participated_in(group: group2).length).to eq(2)
-        end
-      end
-
-      describe "#users_buckets_fully_funded(group:)" do
-        it "returns all recent buckets that have been fully funded, in specified group" do
-          Timecop.freeze(current_time - 70.minutes) do
-            group1_bucket_that_user_has_authored.update(status: 'funded')
-            other_group2_bucket_that_user_has_authored.update(status: 'funded')
-          end
-
-          Timecop.freeze(current_time - 30.minutes) do
-            # users_buckets_fully_funded
-            other_group1_bucket_that_user_has_authored.update(status: 'funded')
-            group2_bucket_that_user_has_authored.update(status: 'funded')
-          end
-
-          recent_activity = RecentActivityService.new(user: user)
-
-          expect(recent_activity.users_buckets_fully_funded(group: group1)).to include(other_group1_bucket_that_user_has_authored)
-          expect(recent_activity.users_buckets_fully_funded(group: group1)).not_to include(group1_bucket_that_user_has_authored)
-          expect(recent_activity.users_buckets_fully_funded(group: group2)).to include(group2_bucket_that_user_has_authored)
-          expect(recent_activity.users_buckets_fully_funded(group: group2)).not_to include(other_group2_bucket_that_user_has_authored)
-        end
-      end
-
-      describe "#new_draft_buckets(group:)" do
-        it "returns all recently created draft buckets, in specified group" do
-          Timecop.freeze(current_time - 70.minutes) do
-            create_list(:bucket, 2, status: 'draft', group: group1)
-            create_list(:bucket, 1, status: 'draft', group: group2)
-          end
-
-          Timecop.freeze(current_time - 30.minutes) do
-            create_list(:bucket, 1, status: 'draft', group: group1)
-            create_list(:bucket, 2, status: 'draft', group: group2)
-          end
-
-          recent_activity = RecentActivityService.new(user: user)
-
-          expect(recent_activity.new_draft_buckets(group: group1).length).to eq(1)
-          expect(recent_activity.new_draft_buckets(group: group2).length).to eq(2)
-        end
-      end
-
-      describe "#new_live_buckets(group:)" do
-        it "returns all buckets that have recently gone live, in specified group" do
-          Timecop.freeze(current_time - 70.minutes) do
-            create_list(:bucket, 2, status: 'live', group: group1)
-            create_list(:bucket, 1, status: 'live', group: group2)
-          end
-
-          Timecop.freeze(current_time - 30.minutes) do
-            create_list(:bucket, 1, status: 'live', group: group1)
-            create_list(:bucket, 2, status: 'live', group: group2)
-          end
-
-          recent_activity = RecentActivityService.new(user: user)
-
-          expect(recent_activity.new_live_buckets(group: group1).length).to eq(1)
-          expect(recent_activity.new_live_buckets(group: group2).length).to eq(2)
-        end
-      end
-
-      describe "#other_buckets_fully_funded(group:)" do
-        it "returns all buckets that have recently been funded, in specified group -- but excluding those authored by user" do
-          Timecop.freeze(current_time - 70.minutes) do
-            create_list(:bucket, 2, status: 'funded', group: group1)
-            create_list(:bucket, 1, status: 'funded', group: group2)
-          end
-
-          Timecop.freeze(current_time - 30.minutes) do
-            create_list(:bucket, 1, status: 'funded', group: group1)
-            create_list(:bucket, 2, status: 'funded', group: group2)
-            create_list(:bucket, 1, status: 'funded', group: group1, user: user)
-            create_list(:bucket, 1, status: 'funded', group: group2, user: user)
-          end
-
-          recent_activity = RecentActivityService.new(user: user)
-
-          expect(recent_activity.other_buckets_fully_funded(group: group1).length).to eq(1)
-          expect(recent_activity.other_buckets_fully_funded(group: group2).length).to eq(2)
-        end
+        # new_funded_buckets
+        create_list(:bucket, 1, status: 'funded', group: group1)
+        create_list(:bucket, 2, status: 'funded', group: group2)
       end
     end
 
-    context "recent activity exists, but user not subscribed to any of it" do
+    context "user subscribed to all recent_activity" do
+      it "returns all recent_activity as a hash" do
+        recent_activity = RecentActivityService.new(user: user)
+        group1_recent_activity = recent_activity.for_group(group1)
+        group2_recent_activity = recent_activity.for_group(group2)
+
+        # comments_on_buckets_user_participated_in
+        expect(group1_recent_activity[:comments_on_buckets_user_participated_in].length).to eq(1)
+        expect(group2_recent_activity[:comments_on_buckets_user_participated_in].length).to eq(2)
+
+        # comments_on_users_buckets
+        expect(group1_recent_activity[:comments_on_users_buckets].length).to eq(1)
+        expect(group2_recent_activity[:comments_on_users_buckets].length).to eq(2)
+
+        # contributions_to_users_buckets
+        expect(group1_recent_activity[:contributions_to_users_buckets].length).to eq(1)
+        expect(group2_recent_activity[:contributions_to_users_buckets].length).to eq(2)
+
+        # comments_on_buckets_user_participated_in
+        expect(group1_recent_activity[:contributions_to_buckets_user_participated_in].length).to eq(1)
+        expect(group2_recent_activity[:contributions_to_buckets_user_participated_in].length).to eq(2)
+
+        # users_buckets_fully_funded
+        expect(group1_recent_activity[:users_buckets_fully_funded]).to include(other_group1_bucket_that_user_has_authored)
+        expect(group1_recent_activity[:users_buckets_fully_funded]).not_to include(group1_bucket_that_user_has_authored)
+        expect(group2_recent_activity[:users_buckets_fully_funded]).to include(group2_bucket_that_user_has_authored)
+        expect(group2_recent_activity[:users_buckets_fully_funded]).not_to include(other_group2_bucket_that_user_has_authored)
+
+        # new_draft_buckets
+        expect(group1_recent_activity[:new_draft_buckets].length).to eq(1)
+        expect(group2_recent_activity[:new_draft_buckets].length).to eq(2)
+
+        # new_live_buckets
+        expect(group1_recent_activity[:new_live_buckets].length).to eq(1)
+        expect(group2_recent_activity[:new_live_buckets].length).to eq(2)
+
+        # other_buckets_fully_funded (excludes those authored by user)
+        expect(group1_recent_activity[:other_buckets_fully_funded].length).to eq(1)
+        expect(group2_recent_activity[:other_buckets_fully_funded].length).to eq(2)
+
+        expect(recent_activity.is_present?).to eq(true)
+      end
+    end
+
+    context "user not subscribed to any recent_activity" do
       it "returns nil instead" do
-        Timecop.freeze(current_time - 70.minutes) do
-          # comments_on_buckets_user_participated_in
-          create_list(:comment, 2, bucket: group1_bucket_that_user_has_participated_in)
-          create_list(:comment, 1, bucket: group2_bucket_that_user_has_participated_in)
-
-          # comments_on_users_buckets
-          create_list(:comment, 2, bucket: group1_bucket_that_user_has_authored)
-          create_list(:comment, 1, bucket: group2_bucket_that_user_has_authored)
-
-          # contributions_to_users_buckets
-          create_list(:contribution, 2, bucket: group1_bucket_that_user_has_authored)
-          create_list(:contribution, 1, bucket: group2_bucket_that_user_has_authored)
-
-          # contributions_to_buckets_user_participated_in
-          create_list(:contribution, 2, bucket: group1_bucket_that_user_has_participated_in)
-          create_list(:contribution, 1, bucket: group2_bucket_that_user_has_participated_in)
-
-          # users_buckets_fully_funded
-          group1_bucket_that_user_has_authored.update(status: 'funded')
-          other_group2_bucket_that_user_has_authored.update(status: 'funded')
-
-          # new_draft_buckets
-          create_list(:bucket, 2, status: 'draft', group: group1)
-          create_list(:bucket, 1, status: 'draft', group: group2)
-
-          # new_live_buckets
-          create_list(:bucket, 2, status: 'live', group: group1)
-          create_list(:bucket, 1, status: 'live', group: group2)
-
-          # new_funded_buckets
-          create_list(:bucket, 2, status: 'funded', group: group1)
-          create_list(:bucket, 1, status: 'funded', group: group2)
-        end
-
-        # make some new activity
-        Timecop.freeze(current_time - 30.minutes) do
-          # comments_on_buckets_user_participated_in
-          create_list(:comment, 1, bucket: group1_bucket_that_user_has_participated_in)
-          create_list(:comment, 2, bucket: group2_bucket_that_user_has_participated_in)
-
-          # comments_on_users_buckets
-          create_list(:comment, 1, bucket: group1_bucket_that_user_has_authored)
-          create_list(:comment, 2, bucket: group2_bucket_that_user_has_authored)
-
-          # contributions_to_users_buckets
-          create_list(:contribution, 1, bucket: group1_bucket_that_user_has_authored)
-          create_list(:contribution, 2, bucket: group2_bucket_that_user_has_authored)
-
-          # contributions_to_buckets_user_participated_in
-          create_list(:contribution, 1, bucket: group1_bucket_that_user_has_participated_in)
-          create_list(:contribution, 2, bucket: group2_bucket_that_user_has_participated_in)
-
-          # users_buckets_fully_funded
-          other_group1_bucket_that_user_has_authored.update(status: 'funded')
-          group2_bucket_that_user_has_authored.update(status: 'funded')
-
-          # new_draft_buckets
-          create_list(:bucket, 1, status: 'draft', group: group1)
-          create_list(:bucket, 2, status: 'draft', group: group2)
-
-          # new_live_buckets
-          create_list(:bucket, 1, status: 'live', group: group1)
-          create_list(:bucket, 2, status: 'live', group: group2)
-
-          # new_funded_buckets
-          create_list(:bucket, 1, status: 'funded', group: group1)
-          create_list(:bucket, 2, status: 'funded', group: group2)
-        end
-
         subscription_tracker.update(
           comment_on_your_bucket: false,
           comment_on_bucket_you_participated_in: false,
@@ -274,80 +161,60 @@ describe "RecentActivityService" do
 
         recent_activity = RecentActivityService.new(user: user)
 
-        # comments_on_buckets_user_participated_in
-        expect(recent_activity.comments_on_buckets_user_participated_in(group: group1)).to be_nil
-        expect(recent_activity.comments_on_buckets_user_participated_in(group: group2)).to be_nil
+        expect(recent_activity.for_group(group1)).to eq({
+          comments_on_buckets_user_participated_in: nil,
+          comments_on_users_buckets: nil,
+          contributions_to_users_buckets: nil,
+          contributions_to_buckets_user_participated_in: nil,
+          users_buckets_fully_funded: nil,
+          new_draft_buckets: nil,
+          new_live_buckets: nil,
+          other_buckets_fully_funded: nil
+        })
 
-        # comments_on_users_buckets
-        expect(recent_activity.comments_on_users_buckets(group: group1)).to be_nil
-        expect(recent_activity.comments_on_users_buckets(group: group2)).to be_nil
+        expect(recent_activity.for_group(group2)).to eq({
+          comments_on_buckets_user_participated_in: nil,
+          comments_on_users_buckets: nil,
+          contributions_to_users_buckets: nil,
+          contributions_to_buckets_user_participated_in: nil,
+          users_buckets_fully_funded: nil,
+          new_draft_buckets: nil,
+          new_live_buckets: nil,
+          other_buckets_fully_funded: nil
+        })
 
-        # contributions_to_users_buckets
-        expect(recent_activity.contributions_to_users_buckets(group: group1)).to be_nil
-        expect(recent_activity.contributions_to_users_buckets(group: group2)).to be_nil
-
-        # comments_on_buckets_user_participated_in
-        expect(recent_activity.contributions_to_buckets_user_participated_in(group: group1)).to be_nil
-        expect(recent_activity.contributions_to_buckets_user_participated_in(group: group2)).to be_nil
-
-        # users_buckets_fully_funded
-        expect(recent_activity.users_buckets_fully_funded(group: group1)).to be_nil
-        expect(recent_activity.users_buckets_fully_funded(group: group1)).to be_nil
-        expect(recent_activity.users_buckets_fully_funded(group: group2)).to be_nil
-        expect(recent_activity.users_buckets_fully_funded(group: group2)).to be_nil
-
-        # new_draft_buckets
-        expect(recent_activity.new_draft_buckets(group: group1)).to be_nil
-        expect(recent_activity.new_draft_buckets(group: group2)).to be_nil
-
-        # new_live_buckets
-        expect(recent_activity.new_live_buckets(group: group1)).to be_nil
-        expect(recent_activity.new_live_buckets(group: group2)).to be_nil
-
-        # other_buckets_fully_funded (excludes those authored by user)
-        expect(recent_activity.other_buckets_fully_funded(group: group1)).to be_nil
-        expect(recent_activity.other_buckets_fully_funded(group: group2)).to be_nil
+        expect(recent_activity.is_present?).to eq(false)
       end
     end
+  end
 
-    context "user subscribed to recent activity, but none exists" do
-      it "returns nil instead" do
-        recent_activity = RecentActivityService.new(user: user)
+  context "user subscribed to all recent_activity, but none exists" do
+    it "returns nil instead" do
+      recent_activity = RecentActivityService.new(user: user)
 
-        # comments_on_buckets_user_participated_in
-        expect(recent_activity.comments_on_buckets_user_participated_in(group: group1)).to be_nil
-        expect(recent_activity.comments_on_buckets_user_participated_in(group: group2)).to be_nil
+      expect(recent_activity.for_group(group1)).to eq({
+        comments_on_buckets_user_participated_in: nil,
+        comments_on_users_buckets: nil,
+        contributions_to_users_buckets: nil,
+        contributions_to_buckets_user_participated_in: nil,
+        users_buckets_fully_funded: nil,
+        new_draft_buckets: nil,
+        new_live_buckets: nil,
+        other_buckets_fully_funded: nil
+      })
 
-        # comments_on_users_buckets
-        expect(recent_activity.comments_on_users_buckets(group: group1)).to be_nil
-        expect(recent_activity.comments_on_users_buckets(group: group2)).to be_nil
+      expect(recent_activity.for_group(group2)).to eq({
+        comments_on_buckets_user_participated_in: nil,
+        comments_on_users_buckets: nil,
+        contributions_to_users_buckets: nil,
+        contributions_to_buckets_user_participated_in: nil,
+        users_buckets_fully_funded: nil,
+        new_draft_buckets: nil,
+        new_live_buckets: nil,
+        other_buckets_fully_funded: nil
+      })
 
-        # contributions_to_users_buckets
-        expect(recent_activity.contributions_to_users_buckets(group: group1)).to be_nil
-        expect(recent_activity.contributions_to_users_buckets(group: group2)).to be_nil
-
-        # comments_on_buckets_user_participated_in
-        expect(recent_activity.contributions_to_buckets_user_participated_in(group: group1)).to be_nil
-        expect(recent_activity.contributions_to_buckets_user_participated_in(group: group2)).to be_nil
-
-        # users_buckets_fully_funded
-        expect(recent_activity.users_buckets_fully_funded(group: group1)).to be_nil
-        expect(recent_activity.users_buckets_fully_funded(group: group1)).to be_nil
-        expect(recent_activity.users_buckets_fully_funded(group: group2)).to be_nil
-        expect(recent_activity.users_buckets_fully_funded(group: group2)).to be_nil
-
-        # new_draft_buckets
-        expect(recent_activity.new_draft_buckets(group: group1)).to be_nil
-        expect(recent_activity.new_draft_buckets(group: group2)).to be_nil
-
-        # new_live_buckets
-        expect(recent_activity.new_live_buckets(group: group1)).to be_nil
-        expect(recent_activity.new_live_buckets(group: group2)).to be_nil
-
-        # other_buckets_fully_funded (excludes those authored by user)
-        expect(recent_activity.other_buckets_fully_funded(group: group1)).to be_nil
-        expect(recent_activity.other_buckets_fully_funded(group: group2)).to be_nil
-      end
+      expect(recent_activity.is_present?).to eq(false)
     end
   end
 end
