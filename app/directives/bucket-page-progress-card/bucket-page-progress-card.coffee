@@ -25,8 +25,8 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
     $scope.submitContribution = ->
       $scope.contributionSubmitted = true
       $scope.newContribution.save().then ->
-        # hack, to get records to properly update
-        Records.memberships.fetchMyMemberships().then ->
+        Records.memberships.findOrFetchById($scope.membership.id).then ->
+          $scope.newContribution = {}
           $state.reload()
           Toast.show('You funded a bucket')
 
