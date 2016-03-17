@@ -23,23 +23,30 @@
 }
 
 .bucket-page__comment-list {
-  padding-top: 0;  
-  padding-bottom: 0;  
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .bucket-page__comment {
   @include wordWrap;
   background: $cobudget-light-grey;
+  padding: 13px !important;
 }
 
 .bucket-page__comment-author-name {
   @include fontMedLarge;
-  margin-top: 10px;
 }
 
 .bucket-page__comment-body {
   @include fontMedium;
   @include markdown;
+
+  p { margin: 6px auto; }
+}
+
+.bucket-page__comment-timestamp {
+  color: #727272;
+  font-size: 11px;
 }
 
 .bucket-page__comment-form-card {
@@ -84,4 +91,3 @@
   background: $cobudget-lime !important;
   color: white !important;
 }
-
