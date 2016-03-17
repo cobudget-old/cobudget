@@ -41,7 +41,10 @@
   @include fontMedium;
   @include markdown;
 
-  p { margin: 6px auto; }
+  p {
+    margin: 6px auto;
+    margin-bottom: 8px;
+  }
 }
 
 .bucket-page__comment-timestamp {
