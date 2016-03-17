@@ -15,14 +15,16 @@ class RecentActivityService
                 :user_buckets,
                 :user_group_buckets,
                 :users_active_groups,
-                :user
+                :user,
+                :activity
 
   def initialize(user:)
     @user = user
+    @activity = {}
   end
 
   def for_group(group)
-    {
+    activity[group] ||= {
       comments_on_buckets_user_participated_in:      filtered_collection(collection: comments_on_buckets_user_participated_in, group: group),
       comments_on_users_buckets:                     filtered_collection(collection: comments_on_users_buckets, group: group),
       contributions_to_users_buckets:                filtered_collection(collection: contributions_to_users_buckets, group: group),

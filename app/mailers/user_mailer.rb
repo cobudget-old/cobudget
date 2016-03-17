@@ -63,4 +63,14 @@ class UserMailer < ActionMailer::Base
          subject: "Time to set up your account!"
     )
   end
+
+  def recent_activity(user:, recent_activity:)
+    @user = user
+    @recent_activity = recent_activity
+    @last_fetched_at = @user.subscription_tracker.last_fetched_at_formatted
+    mail(to: user.name_and_email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "My recent activity on Cobudget - from #{@last_fetched_at}"
+    )
+  end
 end

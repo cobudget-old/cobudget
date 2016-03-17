@@ -126,8 +126,7 @@ describe "RecentActivityService" do
           bucket_fully_funded: false,
           funding_for_your_bucket: false,
           funding_for_a_bucket_you_participated_in: false,
-          your_bucket_fully_funded: false,
-          recent_activity_last_fetched_at: false
+          your_bucket_fully_funded: false
         )
 
         recent_activity = RecentActivityService.new(user: user)
