@@ -112,4 +112,36 @@ RSpec.describe SubscriptionTracker, type: :model do
       end
     end
   end
+
+  describe "#last_fetched_at_formatted" do
+    let(:subscription_tracker) { parisian_user.subscription_tracker }
+
+    context "notification_frequency is 'hourly'" do
+      it "returns local time formatted as %l:%M%P" do
+        subscription_tracker.update(recent_activity_last_fetched_at: current_utc_time)
+        expect(subscription_tracker.last_fetched_at_formatted).to eq("6:10am")
+      end
+    end
+
+    context "notification_frequency is 'daily'" do
+      it "returns 'yesterday'" do
+        subscription_tracker.update(notification_frequency: "daily")
+        expect(subscription_tracker.last_fetched_at_formatted).to eq("yesterday")
+      end
+    end
+
+    context "notification_frequency is 'weekly'" do
+      it "returns 'weekly'" do
+        subscription_tracker.update(notification_frequency: "weekly")
+        expect(subscription_tracker.last_fetched_at_formatted).to eq("last week")
+      end
+    end
+
+    context "notification_frequency is 'never'" do
+      it "returns 'never'" do
+        subscription_tracker.update(notification_frequency: "never")
+        expect(subscription_tracker.last_fetched_at_formatted).to be_nil
+      end
+    end
+  end
 end

@@ -19,6 +19,14 @@ class SubscriptionTracker < ActiveRecord::Base
     comment_on_your_bucket || comment_on_bucket_you_participated_in || bucket_idea_created || bucket_started_funding || bucket_fully_funded || funding_for_your_bucket || funding_for_a_bucket_you_participated_in || your_bucket_fully_funded || recent_activity_last_fetched_at
   end
 
+  def last_fetched_at_formatted
+    case notification_frequency
+      when "hourly" then recent_activity_last_fetched_at.in_time_zone(user.utc_offset / 60).strftime("%l:%M%P").strip
+      when "daily" then "yesterday"
+      when "weekly" then "last week"
+    end
+  end
+
   private
     def update_recent_activity_last_fetched_at
       if self.notification_frequency_changed?
