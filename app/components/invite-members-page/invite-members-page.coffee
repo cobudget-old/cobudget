@@ -43,9 +43,11 @@ module.exports =
 
     $scope.inviteMember = ->
       Records.memberships.remote.create($scope.inviteMemberFormParams)
-        .then ->
-          $state.reload()
-          Toast.show('Invitation sent!')
+        .then (data) ->
+          newMembership = data.memberships[0]
+          Records.memberships.invite(newMembership).then ->
+            $state.reload()
+            Toast.show('Invitation sent!')
         .catch ->
           Dialog.alert({title: 'error!', content: 'member already exists'})
 
