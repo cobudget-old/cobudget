@@ -50,7 +50,7 @@ class MembershipsController < AuthenticatedController
   api :POST, '/memberships/:id/invite'
   def invite
     member, group = membership.member, membership.group
-    member.generate_confirmation_token!
+    member.generate_confirmation_token! unless member.confirmed?
     UserMailer.invite_email(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance.to_f).deliver_later
     render json: [membership], status: 200
   end

@@ -216,9 +216,7 @@ describe MembershipsController, :type => :controller do
       @user_to_invite = @membership_to_invite.member
     end
 
-    after do
-      ActionMailer::Base.deliveries.clear
-    end
+    after { ActionMailer::Base.deliveries.clear }
 
     context "current_user signed in" do
       before do
@@ -228,27 +226,61 @@ describe MembershipsController, :type => :controller do
       context "current_user is admin of user's group" do
         before do
           create(:membership, member: user, group: group, is_admin: true)
-          post :invite, {id: @membership_to_invite.id}
-          @user_to_invite.reload
         end
 
-        it "returns http status 'success'" do
-          expect(response).to have_http_status(:success)
+        context "member to be invited is not yet a confirmed user of cobudget" do
+          before do
+            @user_to_invite.update(confirmed_at: nil)
+            post :invite, {id: @membership_to_invite.id}
+            @user_to_invite.reload
+          end
+
+          it "returns http status 'success'" do
+            expect(response).to have_http_status(:success)
+          end
+
+          it "creates a new confirmaton token for the user and resets confirmed_at to nil" do
+            expect(@user_to_invite.confirmation_token).to be_truthy
+            expect(@user_to_invite.confirmed_at).to be_nil
+          end
+
+          it "sends invite email with link to 'confirm-account-page' to specified user" do
+            sent_emails = ActionMailer::Base.deliveries
+            expect(sent_emails.length).to eq(1)
+            expect(sent_emails.first.to).to eq([@user_to_invite.email])
+            expect(sent_emails.first.body.to_s).to include("#/confirm_account?confirmation_token=#{@user_to_invite.confirmation_token}")
+          end
+
+          it "returns the user as json" do
+            expect(parsed(response)["users"][0]["email"]).to eq(@user_to_invite.email)
+          end
         end
 
-        it "creates a new confirmaton token for the user and resets confirmed_at to nil" do
-          expect(@user_to_invite.confirmation_token).to be_truthy
-          expect(@user_to_invite.confirmed_at).to be_nil
-        end
+        context "member to be invited is already a confirmed user of cobudget" do
+          before do
+            post :invite, {id: @membership_to_invite.id}
+            @user_to_invite.reload
+          end
 
-        it "resends invite email to specified user" do
-          sent_emails = ActionMailer::Base.deliveries
-          expect(sent_emails.length).to eq(1)
-          expect(sent_emails.first.to).to eq([@user_to_invite.email])
-        end
+          it "returns http status 'success'" do
+            expect(response).to have_http_status(:success)
+          end
 
-        it "returns the user as json" do
-          expect(parsed(response)["users"][0]["email"]).to eq(@user_to_invite.email)
+          it "does not create a new confirmation_token for the user, and does not reset confirmed_at for the user" do
+            expect(@user_to_invite.confirmation_token).to be_nil
+            expect(@user_to_invite.confirmed_at).not_to be_nil
+          end
+
+          it "sends invite email with link to 'group-page' to specified user" do
+            sent_emails = ActionMailer::Base.deliveries
+            expect(sent_emails.length).to eq(1)
+            expect(sent_emails.first.to).to eq([@user_to_invite.email])
+            expect(sent_emails.first.body.to_s).to include("#/groups/#{group.id}")
+          end
+
+          it "returns the user as json" do
+            expect(parsed(response)["users"][0]["email"]).to eq(@user_to_invite.email)
+          end
         end
       end
 
