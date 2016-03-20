@@ -3,20 +3,20 @@ class UserMergerService
   def self.merge( user_to_kill: , user_to_keep: )
     
     user_to_kill.memberships.each do |membership|
+      memberships =         Membership.where(group_id: membership.group_id, member_id: [user_to_keep.id, user_to_kill.id])
       existing_membership = Membership.where(group_id: membership.group_id, member: user_to_keep).first
 
       if existing_membership
-        if existing_membership.is_admin || membership.is_admin
-          membership.update_attributes(is_admin: true)
+
+        if memberships.where(is_admin: true)
           existing_membership.update_attributes(is_admin: true)
         end
 
-        if existing_membership.archived?
-          existing_membership.destroy
-          membership.update_attributes( member_id: user_to_keep.id )
-        else
-          membership.destroy
+        if memberships.where(archived_at: nil)
+          existing_membership.update_attributes(archived_at: nil)
         end
+
+        membership.destroy
 
       else
         membership.update_attributes( member_id: user_to_keep.id )

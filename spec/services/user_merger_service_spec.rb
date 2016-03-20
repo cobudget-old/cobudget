@@ -28,34 +28,29 @@ describe "UserMergerService" do
         end
       end
 
-      context "the membership of the to_keep is archived," do
-        it "destroys that membership and transfers the to_kill" do
+      context "the membership of the to_keep is archived but the to_kill membership is not," do
+        it "it moves the archived_at: nil to the to_keep membership, them destroys the to_kill one " do
           @existing_membership.update_attributes(archived_at: Time.now)
 
           UserMergerService.merge( user_to_keep: @user_to_keep, user_to_kill: @user_to_kill)
-
-          expect(Membership.where(group: @group, member: [@user_to_keep, @user_to_kill]).count).to eq 1
+          
+          @existing_membership.reload
+          remaining_membership = Membership.where(group: @group, member: [@user_to_keep, @user_to_kill])
+          expect(remaining_membership).to eq [@existing_membership]
+          expect(@existing_membership.archived_at).to eq(nil)
         end
       end
 
       context "the to_kill membership is an admin" do 
-        it "destroys the to_keep membership and transfers the to_kill" do
+        it "it moves the is_admin: true to the to_keep membership, then destroys the to_kill one" do
           @membership_to_transfer.update_attributes(is_admin: true)
 
           UserMergerService.merge( user_to_keep: @user_to_keep, user_to_kill: @user_to_kill)
 
-          expect(Membership.where(group: @group, member: [@user_to_keep, @user_to_kill]).count).to eq 1
-        end
-      end
-
-      context "the to_keep membership is an admin" do
-        it "destroys the to_kill membership" do 
-          @existing_membership.update_attributes(is_admin: true)
-          @membership_to_transfer.update_attributes(is_admin: true)
-
-          UserMergerService.merge( user_to_keep: @user_to_keep, user_to_kill: @user_to_kill)
-
-          expect(Membership.where(group: @group, member: [@user_to_keep, @user_to_kill]).count).to eq 1
+          @existing_membership.reload
+          remaining_membership = Membership.where(group: @group, member: [@user_to_keep, @user_to_kill])
+          expect(remaining_membership).to eq [@existing_membership]
+          expect(@existing_membership.is_admin).to eq(true)
         end
       end
 
