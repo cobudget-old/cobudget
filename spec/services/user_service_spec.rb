@@ -240,10 +240,5 @@ describe "UserService" do
 
       UserService.merge_users( user_to_keep: @user_to_keep, user_to_kill: @user_to_kill)
     end
-
-    #it "raises an error if the user_to_kill is an admin" do
-
-    #end
-
   end
 end
