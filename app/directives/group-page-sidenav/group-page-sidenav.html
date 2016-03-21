@@ -15,29 +15,35 @@
 
   <md-content class="group-page__sidenav-content">
     <div layout="row" layout-align="start center" class="group-page__sidenav-option">
-      <ng-md-icon icon="group" 
-        class="group-page__sidenav-option-icon" 
+      <ng-md-icon icon="group"
+        class="group-page__sidenav-option-icon"
         layout="column"
         layout-align="center center"
       ></ng-md-icon>
 
       <div class="group-page__sidenav-option-subheader">My Groups</div>
-      
-      <ng-md-icon icon="arrow_drop_down" 
-        class="group-page__sidenav-option-icon"
-        layout="column"
-        layout-align="center center"
-      ></ng-md-icon>    
     </div>
 
     <md-divider></md-divider>
 
-    <div class="group-page__sidenav-expanded-content">
-      <md-list-item ng-repeat="group in accessibleGroups()" ng-click="redirectToGroupPage(group.id)">
-        <div layout="row" layout-align="start center">
-          <div class="group-page__sidenav-group-name">{{ group.name | characters:25:false }}</div>
-        </div>
-      </md-list-item>
-    </div>
+    <md-list-item ng-repeat="group in accessibleGroups()" ng-click="redirectToGroupPage(group.id)">
+      <div layout="row" layout-align="start center">
+        <div class="group-page__sidenav-group-name">{{ group.name | characters:25:false }}</div>
+      </div>
+    </md-list-item>
+
+    <md-divider></md-divider>
+
+    <md-list-item ng-click="redirectToGroupSetupPage()">
+      <div layout="row" layout-align="center center">
+        <ng-md-icon icon="person_add"
+          class="group-page__sidenav-create-group-btn-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+
+        <div class="group-page__sidenav-create-group-btn-text">Create new group</div>
+      </div>
+    </md-list-item>
   </md-content>
 </md-sidenav>

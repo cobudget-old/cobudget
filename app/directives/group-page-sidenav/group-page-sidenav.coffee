@@ -19,4 +19,7 @@ global.cobudgetApp.directive 'groupPageSidenav', () ->
         else
           $location.path("/groups/#{groupId}")
 
+      $scope.redirectToGroupSetupPage = ->
+        $location.path("/setup_group")
+
       return
