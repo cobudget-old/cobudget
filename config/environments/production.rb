@@ -83,16 +83,6 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.default_url_options = { :host => ENV['CANONICAL_HOST'] }
-  
-  # config.action_mailer.smtp_settings = {
-  #   :address        => 'smtp.sendgrid.net',
-  #   :port           => '587',
-  #   :authentication => :plain,
-  #   :user_name      => ENV['SENDGRID_USERNAME'],
-  #   :password       => ENV['SENDGRID_PASSWORD'],
-  #   :domain         => 'heroku.com',
-  #   :enable_starttls_auto => true
-  # }
 
   config.action_mailer.smtp_settings = {
     :address        => ENV['SMTP_SERVER'],
@@ -100,7 +90,8 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => ENV['SMTP_USERNAME'],
     :password       => ENV['SMTP_PASSWORD'],
-    :domain         => ENV['SMTP_DOMAIN']
+    :domain         => ENV['SMTP_DOMAIN'],
+    :enable_starttls_auto => true
   }
 
 end
