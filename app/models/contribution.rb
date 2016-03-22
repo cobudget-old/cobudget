@@ -7,7 +7,7 @@ class Contribution < ActiveRecord::Base
   validates :amount, numericality: { greater_than: 0 }
   validate :amount_cannot_overdraft_member
 
-  before_save :lower_amount_if_exceeds_target
+  before_save :lower_amount_if_exceeds_bucket_target
   after_save :update_bucket_status_if_funded
 
   def formatted_amount
@@ -15,7 +15,7 @@ class Contribution < ActiveRecord::Base
   end
 
   private
-    def lower_amount_if_exceeds_target
+    def lower_amount_if_exceeds_bucket_target
       if bucket.total_contributions + self.amount > bucket.target
         self.amount = bucket.target - bucket.total_contributions
       end
@@ -29,7 +29,8 @@ class Contribution < ActiveRecord::Base
 
     def amount_cannot_overdraft_member
       membership = Membership.find_by(member_id: user_id, group_id: bucket.group_id)
-      if membership.raw_balance - amount < 0
+      @balance ||= membership.raw_balance
+      if @balance - self.amount < 0
         errors.add(:amount, "amount cannot overdraft member")
       end
     end
