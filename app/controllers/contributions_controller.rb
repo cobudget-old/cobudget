@@ -22,7 +22,7 @@ class ContributionsController < AuthenticatedController
     if contribution.valid?
       render json: [contribution]
     else
-      render nothing: true, status: 422
+      render json: contribution.errors.full_messages, status: 422
     end
   end
 

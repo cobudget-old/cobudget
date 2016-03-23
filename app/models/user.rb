@@ -12,11 +12,11 @@ class User < ActiveRecord::Base
 
   has_many :groups, through: :memberships
   has_many :memberships, foreign_key: "member_id", dependent: :destroy
-  has_many :allocations, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :contributions, dependent: :destroy
-  has_many :buckets, dependent: :destroy
-  has_one :subscription_tracker, dependent: :destroy
+  has_one :subscription_tracker,                   dependent: :destroy
+  has_many :allocations,                           dependent: :destroy
+  has_many :comments,                              dependent: :destroy
+  has_many :contributions,                         dependent: :destroy
+  has_many :buckets,                               dependent: :destroy
 
   scope :with_active_memberships, -> { joins(:memberships).where(memberships: {archived_at: nil}) }
 

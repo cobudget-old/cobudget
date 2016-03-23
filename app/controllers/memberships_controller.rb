@@ -24,9 +24,17 @@ class MembershipsController < AuthenticatedController
   def create
     user = User.find_by_email(params[:email]) || User.create_with_confirmation_token(email: params[:email], name: params[:name])
     render nothing: true, status: 400 and return unless user.valid?
-    membership = Membership.create(member: user, group: group)
-    render nothing: true, status: 409 and return unless membership.valid?
-    render json: [membership]
+    if membership = Membership.find_by(member: user, group: group)
+      if membership.active?
+        render nothing: true, status: 409
+      else
+        membership.reactivate!
+        render json: [membership.reload]
+      end
+    else
+      membership = group.add_member(user)
+      render json: [membership]
+    end
   end
 
   api :GET, '/memberships/:id'
@@ -42,7 +50,7 @@ class MembershipsController < AuthenticatedController
   api :POST, '/memberships/:id/invite'
   def invite
     member, group = membership.member, membership.group
-    member.generate_confirmation_token!
+    member.generate_confirmation_token! unless member.confirmed?
     UserMailer.invite_email(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance.to_f).deliver_later
     render json: [membership], status: 200
   end
