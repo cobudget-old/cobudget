@@ -23,7 +23,6 @@ require('ng-sanitize')
 require('angular-truncate-2')
 require('angular-marked')
 require('ng-q-all-settled')
-require('angular-eha.only-digits')
 require('ng-csv')
 require('ng-download-csv')
 
@@ -45,7 +44,6 @@ global.cobudgetApp = angular.module('cobudget', [
   'truncate',
   'hc.marked',
   'qAllSettled',
-  'eha.only-digits',
   'ngCsv',
   'ngDownloadCsv'
 ])

@@ -49,7 +49,6 @@
     "angular-aria": "^1.4.3",
     "angular-autoselect": "^0.3.2",
     "angular-cookie": "ivpusic/angular-cookie#v4.0.9",
-    "angular-eha.only-digits": "^1.0.2",
     "angular-marked": "git@github.com:Hypercubed/angular-marked.git",
     "angular-material": "^0.10.0",
     "angular-material-icons": "^0.6.0",
