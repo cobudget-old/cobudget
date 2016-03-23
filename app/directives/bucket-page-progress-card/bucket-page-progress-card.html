@@ -24,14 +24,23 @@
       </div>
     </div>
 
-    <form class="bucket-page__fund-form" layout="row" ng-if="membership.balance >= 1">
+    <form class="bucket-page__fund-form" layout="row" ng-if="membership.balance > 0" name="fundForm">
       <md-input-container class="bucket-page__fund-form-input-container" ng-if="fundFormOpened">
         <label>Amount</label>
-        <input class="bucket-page__fund-form-amount-input" type="text" min="0" pattern="[0-9]*" ng-model="newContribution.amount" ng-change="normalizeContributionAmount()" ng-keypress="normalizeContributionAmount()" focus-if only-digits convert-to-number="true">
+        <input class="bucket-page__fund-form-amount-input"
+          type="number"
+          name="amount"
+          ng-required
+          min="1"
+          pattern="[0-9]*"
+          ng-model="newContribution.amount"
+          ng-change="normalizeContributionAmount()"
+          focus-if
+        >
       </md-input-container>
 
       <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='openFundForm()' ng-hide="fundFormOpened">Fund</md-button>
-      <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='submitContribution()' ng-if="fundFormOpened" ng-disabled="contributionSubmitted">Submit</md-button>
+      <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='submitContribution()' ng-if="fundFormOpened" ng-disabled="!fundForm.$valid || contributionSubmitted">Submit</md-button>
     </form>
   </md-card-content>
 </md-card>

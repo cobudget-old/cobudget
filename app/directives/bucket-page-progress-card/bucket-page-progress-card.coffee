@@ -24,10 +24,17 @@ global.cobudgetApp.directive 'bucketPageProgressCard', () ->
 
     $scope.submitContribution = ->
       $scope.contributionSubmitted = true
-      $scope.newContribution.save().then ->
-        Records.memberships.findOrFetchById($scope.membership.id).then ->
-          $scope.newContribution = {}
-          $state.reload()
-          Toast.show('You funded a bucket')
+      $scope.newContribution.save()
+        .then ->
+          Records.memberships.findOrFetchById($scope.membership.id).then ->
+            $scope.newContribution = {}
+            $state.reload()
+            Toast.show('You funded a bucket')
+        .catch (err) ->
+          console.log('err: ', err)
+
+    jQuery(document).on 'keypress', '.bucket-page__fund-form-amount-input', (e) ->
+      unless _.includes(_.range(48, 57), e.keyCode)
+        e.preventDefault()
 
     return
