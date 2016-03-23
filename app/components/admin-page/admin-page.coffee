@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/admin'
   template: require('./admin-page.html')
-  controller: (config, CurrentUser, Dialog, Error, $location, Records, $scope, UserCan) ->
+  controller: (CurrentUser, Error, $location, Records, $scope, UserCan) ->
 
     $scope.currencies = [
       { code: 'USD', symbol: '$' },
@@ -21,44 +21,6 @@ module.exports =
     else
       $scope.authorized = false
       Error.set("you can't view this page")
-
-    $scope.newGroup = Records.groups.build()
-
-    $scope.openCreateGroupDialog = ->
-      Dialog.custom
-        scope: $scope
-        template: require('./create-group-dialog-content.tmpl.html')
-
-    $scope.createGroup = ->
-      $scope.newGroup.save()
-        .then (data) ->
-          Dialog.alert
-            title: 'Success!'
-            content: 'Group created.'
-          newGroupId = data.groups[0].id
-          Records.memberships.fetchMyMemberships().then (data) ->
-            $scope.accessibleGroups = CurrentUser().groups()
-          $scope.newGroup = Records.groups.build()
-
-    $scope.openInviteGroupDialog = ->
-      Dialog.custom
-        scope: $scope
-        template: require('./invite-group-dialog-content.tmpl.html')
-
-    $scope.inviteGroup = () ->
-      Records.users.inviteToCreateGroup($scope.formData)
-        .then ->
-          Dialog.alert
-            title: 'Success!'
-            content: "Your invite was sent."
-          $scope.formData = {}
-        .catch ->
-          Dialog.alert
-            title: 'Error!'
-            content: 'Email invalid or already taken.'
-
-    $scope.closeDialog = ->
-      Dialog.close()
 
     $scope.updateGroupCurrency = (groupId, currencyCode) ->
       Records.groups.findOrFetchById(groupId).then (group) ->
