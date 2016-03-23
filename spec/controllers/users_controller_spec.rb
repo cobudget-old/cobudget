@@ -160,55 +160,6 @@ describe UsersController, :type => :controller do
     end
   end
 
-  describe "#invite_to_create_group" do
-    before do
-      make_user_group_admin
-      request.headers.merge!(user.create_new_auth_token)
-    end
-
-    context "specified email does not yet exist in DB" do
-      before do
-        params = { email: Faker::Internet.email }
-        post :invite_to_create_group, params
-        @new_user = User.find_by(params)
-        @sent_email = ActionMailer::Base.deliveries.first
-      end
-
-      after do
-        ActionMailer::Base.deliveries.clear
-      end
-
-      it "creates a new user with confirmation token" do
-        expect(@new_user).to be_truthy
-        expect(@new_user.confirmation_token).to be_truthy
-      end
-
-      it "sends email to user with link to confirm account page containing confirmation_token and boolean setup_group set to true" do
-        expect(@sent_email.to).to eq([@new_user.email])
-        expected_url = "/#/confirm_account?confirmation_token=#{@new_user.confirmation_token}&setup_group=true"
-        expect(@sent_email.body.to_s).to include(expected_url)
-      end
-    end
-
-    context "specified email already exists in DB" do
-      before do
-        make_user_group_admin
-        request.headers.merge!(user.create_new_auth_token)
-        create(:user, email: "meow@meow.com")
-        @params = {email: "meow@meow.com"}
-        post :invite_to_create_group, @params
-      end
-
-      it "does not create user" do
-        expect(User.where(@params).length).to eq(1)
-      end
-
-      it "returns http status conflict" do
-        expect(response).to have_http_status(:conflict)
-      end
-    end
-  end
-
   describe "#update_profile" do
     context "user signed in" do
       before do
