@@ -1,0 +1,25 @@
+<li id="contributions-to-funded-buckets-user-participated-in">
+  <% if contributions_grouped_by_bucket.length > 1 %>
+    <p><b><%= contributions_grouped_by_bucket.length %> Buckets</b> you participated in were <b>funded</b>:</p>
+  <% else %>
+    <p><b>1 Buckets</b> you participated in was <b>funded</b>:</p>
+  <% end %>
+
+  <ul style="list-style: none">
+    <% contributions_grouped_by_bucket.each do |bucket, contributions| %>
+      <% users_contributions = contributions.reject! { |c| c.user == user } || [] %>
+      <% other_contributions = contributions %>
+
+      <li style="margin-bottom: 10px">
+        <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %> (<%= bucket.formatted_percent_funded %> funded, <%= bucket.formatted_amount_left %> left)</b></a><br>
+        <% users_contributions.each do |contribution| %>
+          You gave <%= contribution.formatted_amount %><br>
+        <% end %>
+
+        <% other_contributions.each do |contribution| %>
+          <%= contribution.user.name %> gave <%= contribution.formatted_amount %><br>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>

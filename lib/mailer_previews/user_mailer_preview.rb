@@ -75,7 +75,10 @@ class UserMailerPreview < ActionMailer::Preview
     end
 
     def generate_bucket(user: nil, group:, status: "draft", target: 420)
-      user ||= generate_user
+      if user.nil?
+        user = generate_user
+        group.add_member(user)
+      end
       Bucket.create(name: Faker::Lorem.sentence, description: Faker::Lorem.paragraph, target: target, user: user, group: group, status: status)
     end
 

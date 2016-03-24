@@ -1,0 +1,14 @@
+<li id="new-live-buckets">
+  <% if buckets.length > 1 %>
+    <p><b><%= buckets.length %> Buckets</b> were proposed for <b>funding (you have <%= membership.formatted_balance %>)</b>:</p>
+  <% else %>
+    <p><b>1 Bucket</b> was proposed for <b>funding (you have <%= membership.formatted_balance %>)</b>:</p>
+  <% end %>
+
+  <ul style="list-style: none">
+    <% buckets.each do |bucket| %>
+      <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %> (<%= bucket.formatted_target %>)</b></a><br>
+      <%= bucket.author_name %>
+    <% end %>
+  </ul>
+</li>
