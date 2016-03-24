@@ -86,7 +86,7 @@ describe "RecentActivityService" do
       end
     end
 
-    xcontext "user not subscribed to any recent_activity" do
+    context "user not subscribed to any recent_activity" do
       it "returns nil instead" do
         subscription_tracker.update(
           comment_on_your_bucket: false,
@@ -103,13 +103,13 @@ describe "RecentActivityService" do
 
         expect(recent_activity.for_group(group)).to eq({
           comments_on_buckets_user_participated_in: nil,
-          comments_on_users_buckets: nil,
-          contributions_to_users_buckets: nil,
-          contributions_to_buckets_user_participated_in: nil,
-          users_buckets_fully_funded: nil,
+          comments_on_buckets_user_authored: nil,
+          contributions_to_live_buckets_user_authored: nil,
+          contributions_to_funded_buckets_user_authored: nil,
+          contributions_to_live_buckets_user_participated_in: nil,
+          contributions_to_funded_buckets_user_participated_in: nil,
           new_draft_buckets: nil,
-          new_live_buckets: nil,
-          other_buckets_fully_funded: nil
+          new_live_buckets: nil
         })
 
         expect(recent_activity.is_present?).to eq(false)
@@ -117,19 +117,19 @@ describe "RecentActivityService" do
     end
   end
 
-  xcontext "user subscribed to all recent_activity, but none exists" do
+  context "user subscribed to all recent_activity, but none exists" do
     it "returns nil instead" do
       recent_activity = RecentActivityService.new(user: user)
 
       expect(recent_activity.for_group(group)).to eq({
         comments_on_buckets_user_participated_in: nil,
-        comments_on_users_buckets: nil,
-        contributions_to_users_buckets: nil,
-        contributions_to_buckets_user_participated_in: nil,
-        users_buckets_fully_funded: nil,
+        comments_on_buckets_user_authored: nil,
+        contributions_to_live_buckets_user_authored: nil,
+        contributions_to_funded_buckets_user_authored: nil,
+        contributions_to_live_buckets_user_participated_in: nil,
+        contributions_to_funded_buckets_user_participated_in: nil,
         new_draft_buckets: nil,
-        new_live_buckets: nil,
-        other_buckets_fully_funded: nil
+        new_live_buckets: nil
       })
 
       expect(recent_activity.is_present?).to eq(false)
