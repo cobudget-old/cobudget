@@ -25,8 +25,8 @@ class UserMailerPreview < ActionMailer::Preview
       bucket_user_participated_in_to_be_fully_funded = generate_bucket(group: group, status: "live")
       generate_contribution(user: user, bucket: bucket_user_participated_in_to_be_fully_funded)
 
-      bucket_user_authored = generate_bucket(group: group, user: user, status: "live")
-      bucket_user_authored_to_be_fully_funded = generate_bucket(group: group, user: user)
+      live_bucket_user_authored = generate_bucket(group: group, user: user, status: "live")
+      bucket_user_authored_to_be_fully_funded = generate_bucket(group: group, user: user, status: "live")
 
 
       Timecop.freeze(current_time - 30.minutes) do
@@ -34,17 +34,17 @@ class UserMailerPreview < ActionMailer::Preview
         generate_comment(bucket: bucket_user_participated_in)
         generate_comment(bucket: bucket_user_participated_in)
 
-        # create 2 comments on bucket_user_authored
-        generate_comment(bucket: bucket_user_authored)
-        generate_comment(bucket: bucket_user_authored)
+        # create 2 comments on live_bucket_user_authored
+        generate_comment(bucket: live_bucket_user_authored)
+        generate_comment(bucket: live_bucket_user_authored)
 
         # create 2 contributions for bucket_user_participated_in
         generate_contribution(bucket: bucket_user_participated_in)
         generate_contribution(bucket: bucket_user_participated_in)
 
-        # create 2 contributions for bucket_user_authored
-        generate_contribution(bucket: bucket_user_authored)
-        generate_contribution(bucket: bucket_user_authored, user: user)
+        # create 2 contributions for live_bucket_user_authored
+        generate_contribution(bucket: live_bucket_user_authored)
+        generate_contribution(bucket: live_bucket_user_authored, user: user)
 
         # create 2 contributions for bucket_user_participated_in_to_be_fully_funded
         generate_contribution(bucket: bucket_user_participated_in_to_be_fully_funded)
