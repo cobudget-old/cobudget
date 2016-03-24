@@ -5,121 +5,17 @@
     Activity since <%= @last_fetched_at %> (when you last logged in)
   </p>
 
-  <% @user.active_groups.each do |group| %>
-    <% activity = @recent_activity.for_group(group) %>
+  <ul style="list-style: none">
+    <% @user.active_groups.each do |group| %>
+      <li class="group-activity">
+        <% activity = @recent_activity.for_group(group) %>
+        <h3 style="font-weight: normal">In <%= group.name %></h3>
 
-    <h3 style="font-weight: normal">In <%= group.name %></h3>
+        <% if activity[:contributions_to_live_buckets_user_authored] %>
+          <%= render partial: "user_mailer/recent_activity_partials/contributions_to_live_buckets_user_authored", locals: {contributions_grouped_by_bucket: activity[:contributions_to_live_buckets_user_authored].group_by { |c| c.bucket }, user: @user} %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 
-    <ul style="list-style: none">
-      <% if activity[:comments_on_buckets_user_participated_in] %>
-        <li id="comments-on-bucket-user-participated-in">
-          <% comments_grouped_by_bucket = activity[:comments_on_buckets_user_participated_in].group_by { |comment| comment.bucket } %>
-          <% if comments_grouped_by_bucket.length > 1 %>
-            <p><b><%= comments_grouped_by_bucket.length %> Buckets</b> you participated in were <b>commented on</b>:</p>
-          <% else %>
-            <p><b>1 Bucket</b> you participated in was <b>commented on</b>:</p>
-          <% end %>
-
-          <ul style="list-style: none">
-            <% comments_grouped_by_bucket.each do |bucket, comments| %>
-              <li>
-                <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><%= bucket.name %></a><br>
-                <% comments.each do |comment| %>
-                  <%= comment.author_name %><br>
-                  "<%= comment.body %>"<br><br>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-
-      <% if activity[:new_live_buckets] %>
-        <li id="new-live-buckets">
-          <% if activity[:new_live_buckets].length > 1 %>
-            <p><b><%= activity[:new_live_buckets].length %> Buckets</b> were proposed for <b>funding (you have <%= @user.membership_for(group).formatted_balance %>)</b></p>
-          <% else %>
-            <p><b>1 Bucket</b> was proposed for <b>funding (you have <%= @user.membership_for(group).formatted_balance %>)</b></p>
-          <% end %>
-
-          <ul style="list-style: none">
-            <% activity[:new_live_buckets].each do |bucket| %>
-              <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><%= bucket.name %> (<%= bucket.formatted_target %>)</a><br>
-              <%= bucket.author_name %>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-
-      <% if activity[:new_draft_buckets] %>
-        <li id="new-draft-buckets">
-          <% if activity[:new_draft_buckets].length > 1 %>
-            <p><b><%= activity[:new_draft_buckets].length %> Buckets</b> were proposed for discussion:</p>
-          <% else %>
-            <p><b>1 Bucket</b> was proposed for discussion:</p>
-          <% end %>
-
-          <ul style="list-style: none">
-            <% activity[:new_draft_buckets].each do |bucket| %>
-              <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>">
-                <%= bucket.name %>
-                <% if bucket.target %>
-                  <%= "(#{bucket.formatted_target})" %>
-                <% end %>
-              </a><br>
-              <%= bucket.author_name %> - <%= time_ago_in_words(bucket.created_at) %> ago<br>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-
-      <% if activity[:contributions_to_buckets_user_participated_in] %>
-        <li id="contributions-to-buckets-user-participated-in">
-          <% contributions_grouped_by_bucket = activity[:contributions_to_buckets_user_participated_in].group_by { |contribution| contribution.bucket } %>
-
-          <% if contributions_grouped_by_bucket.length > 1 %>
-            <p><b><%= contributions_grouped_by_bucket.length %> Buckets</b> you participated in were <b>funded</b> by:</p>
-          <% else %>
-            <p><b>1 Bucket</b> you participated in was <b>funded</b> by:</p>
-          <% end %>
-
-          <ul style="list-style: none">
-            <% contributions_grouped_by_bucket.each do |bucket, contributions| %>
-              <% users_contributions = contributions.reject! { |c| c.user == @user } || [] %>
-              <% other_contributions = contributions %>
-
-              <li>
-                <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><%= bucket.name %> (<%= bucket.formatted_percent_funded %> funded, <%= bucket.formatted_amount_left %> left)</a><br>
-                <% users_contributions.each do |contribution| %>
-                  You gave <% contribution.formatted_amount %><br>
-                <% end %>
-
-                <% other_contributions.each do |contribution| %>
-                  <%= contribution.user.name %> gave <%= contribution.formatted_amount %><br>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-
-      <% if activity[:other_buckets_fully_funded] %>
-        <li id="other-buckets-fully-funded">
-          <% if activity[:other_buckets_fully_funded].length > 1 %>
-            <p><b><%= activity[:other_buckets_fully_funded].length %> Buckets</b> was <b>fully funded</b></p>
-          <% else %>
-            <p><b>1 Bucket</b> was <b>fully funded</b>:</p>
-          <% end %>
-          <ul style="list-style: none">
-            <% activity[:other_buckets_fully_funded].each do |bucket| %>
-              <li>
-                <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><%= bucket.name %> (<%= bucket.formatted_target %>)</a><br>
-                <%= bucket.author_name %>
-              </li>
-            <% end %>
-          </ul>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
 </body>

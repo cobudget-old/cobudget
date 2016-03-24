@@ -1,8 +1,4 @@
-require 'factory_girl_rails'
-
 class UserMailerPreview < ActionMailer::Preview
-  include FactoryGirl::Syntax::Methods
-
   def recent_activity
     user = generate_user
     group = Group.create(name: Faker::Company.name)
@@ -13,42 +9,62 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   private
+    # TODO: do same shit for spec as we did here, with the user and shit lol
     def generate_recent_activity_for(membership: )
+      current_time = DateTime.now.utc
       user = membership.member
       group = membership.group
-      current_time = DateTime.now.utc
-
-      # notification_frequency set to 'hourly' by default
+      # notification_frequency set to "hourly" by default
       subscription_tracker = user.subscription_tracker
-      bucket_that_user_has_participated_in = generate_bucket(group: group)
-      bucket_that_user_has_authored = generate_bucket(group: group, user: user)
-      other_bucket_that_user_has_authored = generate_bucket(group: group, user: user)
 
       Allocation.create(user: user, group: group, amount: 20000)
       subscription_tracker.update(recent_activity_last_fetched_at: current_time - 1.hour)
-      generate_comment(user: user, bucket: bucket_that_user_has_participated_in)
+
+      bucket_user_participated_in = generate_bucket(group: group)
+      generate_comment(user: user, bucket: bucket_user_participated_in)
+      bucket_user_participated_in_to_be_fully_funded = generate_bucket(group: group, status: "live")
+      generate_contribution(user: user, bucket: bucket_user_participated_in_to_be_fully_funded)
+
+      bucket_user_authored = generate_bucket(group: group, user: user, status: "live")
+      bucket_user_authored_to_be_fully_funded = generate_bucket(group: group, user: user)
+
 
       Timecop.freeze(current_time - 30.minutes) do
-        # comments_on_buckets_user_participated_in
-        generate_comment(bucket: bucket_that_user_has_participated_in)
-        # counted under 'comments_on_users_buckets' but not 'comments_on_buckets_user_participated_in'
-        generate_comment(user: user, bucket: bucket_that_user_has_authored)
-        # comments_on_users_buckets
-        generate_comment(bucket: bucket_that_user_has_authored)
-        # contributions_to_buckets_user_participated_in
-        generate_contribution(bucket: bucket_that_user_has_participated_in)
-        # counted under 'contributions_to_users_buckets' but not 'contributions_to_buckets_user_participated_in'
-        generate_contribution(user: user, bucket: bucket_that_user_has_authored)
-        # contributions_to_users_buckets
-        generate_contribution(bucket: bucket_that_user_has_authored)
-        # users_buckets_fully_funded
-        other_bucket_that_user_has_authored.update(status: 'funded')
-        # new_draft_buckets
-        generate_bucket(status: 'draft', group: group)
-        # new_live_buckets
-        generate_bucket(status: 'live', group: group)
-        # new_funded_buckets
-        generate_bucket(status: 'funded', group: group)
+        # create 2 comments on bucket_user_participated_in
+        generate_comment(bucket: bucket_user_participated_in)
+        generate_comment(bucket: bucket_user_participated_in)
+
+        # create 2 comments on bucket_user_authored
+        generate_comment(bucket: bucket_user_authored)
+        generate_comment(bucket: bucket_user_authored)
+
+        # create 2 contributions for bucket_user_participated_in
+        generate_contribution(bucket: bucket_user_participated_in)
+        generate_contribution(bucket: bucket_user_participated_in)
+
+        # create 2 contributions for bucket_user_authored
+        generate_contribution(bucket: bucket_user_authored)
+        generate_contribution(bucket: bucket_user_authored, user: user)
+
+        # create 2 contributions for bucket_user_participated_in_to_be_fully_funded
+        generate_contribution(bucket: bucket_user_participated_in_to_be_fully_funded)
+        generate_contribution(
+          bucket: bucket_user_participated_in_to_be_fully_funded,
+          amount: bucket_user_participated_in_to_be_fully_funded.amount_left
+        )
+
+        # create 2 contributions for bucket_user_authored_to_be_fully_funded
+        generate_contribution(bucket: bucket_user_authored_to_be_fully_funded)
+        generate_contribution(
+          bucket: bucket_user_authored_to_be_fully_funded,
+          amount: bucket_user_authored_to_be_fully_funded.amount_left
+        )
+
+        # create 2 new draft_buckets
+        generate_bucket(status: "draft", group: group, target: 420)
+
+        # create 2 new live_buckets
+        generate_bucket(status: "live", group: group, target: 420)
       end
 
       Timecop.return
@@ -58,7 +74,7 @@ class UserMailerPreview < ActionMailer::Preview
       User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "password")
     end
 
-    def generate_bucket(user: nil, group:, status: 'draft', target: 420)
+    def generate_bucket(user: nil, group:, status: "draft", target: 420)
       user ||= generate_user
       Bucket.create(name: Faker::Lorem.sentence, description: Faker::Lorem.paragraph, target: target, user: user, group: group, status: status)
     end

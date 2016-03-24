@@ -25,14 +25,14 @@ class RecentActivityService
 
   def for_group(group)
     activity[group] ||= {
-      comments_on_buckets_user_participated_in:             filtered_collection(collection: comments_on_buckets_user_participated_in,             group: group),
-      comments_on_buckets_user_authored:                    filtered_collection(collection: comments_on_buckets_user_authored,                    group: group),
       contributions_to_live_buckets_user_authored:          filtered_collection(collection: contributions_to_live_buckets_user_authored,          group: group),
       contributions_to_funded_buckets_user_authored:        filtered_collection(collection: contributions_to_funded_buckets_user_authored,        group: group),
-      contributions_to_live_buckets_user_participated_in:   filtered_collection(collection: contributions_to_live_buckets_user_participated_in,   group: group),
-      contributions_to_funded_buckets_user_participated_in: filtered_collection(collection: contributions_to_funded_buckets_user_participated_in, group: group),
+      comments_on_buckets_user_authored:                    filtered_collection(collection: comments_on_buckets_user_authored,                    group: group),
+      comments_on_buckets_user_participated_in:             filtered_collection(collection: comments_on_buckets_user_participated_in,             group: group),
+      new_live_buckets:                                     filtered_collection(collection: new_live_buckets,                                     group: group),
       new_draft_buckets:                                    filtered_collection(collection: new_draft_buckets,                                    group: group),
-      new_live_buckets:                                     filtered_collection(collection: new_live_buckets,                                     group: group)
+      contributions_to_live_buckets_user_participated_in:   filtered_collection(collection: contributions_to_live_buckets_user_participated_in,   group: group),
+      contributions_to_funded_buckets_user_participated_in: filtered_collection(collection: contributions_to_funded_buckets_user_participated_in, group: group)
     }
   end
 
