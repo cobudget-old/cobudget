@@ -29,6 +29,29 @@ describe "RecentActivityService" do
     before do
       # make some old activity
       Timecop.freeze(current_time - 70.minutes) do
+        # create 1 comments on @bucket_user_participated_in
+        create_list(:comment, 1, bucket: @bucket_user_participated_in)
+
+        # create 1 comments on @bucket_user_authored
+        create_list(:comment, 1, bucket: @bucket_user_authored)
+
+        # create 1 contributions for @bucket_user_participated_in
+        create_list(:contribution, 1, bucket: @bucket_user_participated_in)
+
+        # create 1 contributions for @bucket_user_authored
+        create_list(:contribution, 1, bucket: @bucket_user_authored)
+
+        # create 1 contribution for @bucket_user_participated_in_to_be_fully_funded
+        create(:contribution, bucket: @bucket_user_participated_in_to_be_fully_funded)
+
+        # create 1 contribution for@bucket_user_authored_to_be_fully_funded
+        create(:contribution, bucket:@bucket_user_authored_to_be_fully_funded)
+
+        # create 1 new draft_buckets
+        create_list(:bucket, 1, status: "draft", group: group, target: 420)
+
+        # create 1 new live_buckets
+        create_list(:bucket, 1, status: "live", group: group, target: 420)
       end
 
       # make some new activity
@@ -74,9 +97,7 @@ describe "RecentActivityService" do
           activity = recent_activity.for_group(group)
           expect(activity[:comments_on_buckets_user_participated_in].length).to eq(2)
           expect(activity[:comments_on_buckets_user_authored].length).to eq(2)
-
           expect(activity[:contributions_to_live_buckets_user_authored].length).to eq(2)
-
           expect(activity[:contributions_to_funded_buckets_user_authored].length).to eq(2)
           expect(activity[:contributions_to_live_buckets_user_participated_in].length).to eq(2)
           expect(activity[:contributions_to_funded_buckets_user_participated_in].length).to eq(2)
