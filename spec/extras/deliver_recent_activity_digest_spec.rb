@@ -5,7 +5,7 @@ describe "DeliverRecentActivityDigest" do
 
   describe "#run!" do
     before do
-      allow(UserService).to receive(:fetch_recent_activity_for)
+      allow(UserService).to receive(:send_recent_activity_email)
     end
 
     context "user has no active memberships" do
@@ -14,7 +14,7 @@ describe "DeliverRecentActivityDigest" do
       end
 
       it "does nothing" do
-        expect(UserService).not_to receive(:fetch_recent_activity_for)
+        expect(UserService).not_to receive(:send_recent_activity_email)
         DeliverRecentActivityDigest.run!
       end
     end
@@ -28,7 +28,7 @@ describe "DeliverRecentActivityDigest" do
         it "does nothing" do
           time = (user.subscription_tracker.next_recent_activity_fetch_scheduled_at - 1.minute).utc
           Timecop.freeze(time) do
-            expect(UserService).not_to receive(:fetch_recent_activity_for)
+            expect(UserService).not_to receive(:send_recent_activity_email)
             DeliverRecentActivityDigest.run!
           end
         end
@@ -38,7 +38,7 @@ describe "DeliverRecentActivityDigest" do
         it "calls fetches activity for user" do
           time = (user.subscription_tracker.next_recent_activity_fetch_scheduled_at + 1.minute).utc
           Timecop.freeze(time) do
-            expect(UserService).to receive(:fetch_recent_activity_for)
+            expect(UserService).to receive(:send_recent_activity_email)
             DeliverRecentActivityDigest.run!
           end
         end
