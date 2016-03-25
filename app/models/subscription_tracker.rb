@@ -27,6 +27,16 @@ class SubscriptionTracker < ActiveRecord::Base
     end
   end
 
+  def next_fetch_time_range
+    if recent_activity_last_fetched_at && next_recent_activity_fetch_scheduled_at
+      recent_activity_last_fetched_at..next_recent_activity_fetch_scheduled_at
+    end
+  end
+
+  def update_next_fetch_time_range!
+    update(recent_activity_last_fetched_at: next_recent_activity_fetch_scheduled_at)
+  end
+
   private
     def update_recent_activity_last_fetched_at
       if self.notification_frequency_changed?

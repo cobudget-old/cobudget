@@ -112,7 +112,7 @@ class RecentActivityService
     end
 
     def time_range
-      time_range ||= (subscription_tracker.recent_activity_last_fetched_at..subscription_tracker.next_recent_activity_fetch_scheduled_at)
+      time_range ||= subscription_tracker.next_fetch_time_range
     end
 
     def buckets_user_participated_in
