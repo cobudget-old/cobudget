@@ -105,6 +105,8 @@ describe "RecentActivityService" do
 
           expect(activity[:new_draft_buckets].length).to eq(2)
           expect(activity[:new_live_buckets].length).to eq(2)
+
+          expect(recent_activity.is_present?).to eq(true)
         end
       end
     end
