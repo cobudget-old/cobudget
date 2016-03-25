@@ -98,9 +98,11 @@ describe "RecentActivityService" do
           expect(activity[:comments_on_buckets_user_participated_in].length).to eq(2)
           expect(activity[:comments_on_buckets_user_authored].length).to eq(2)
           expect(activity[:contributions_to_live_buckets_user_authored].length).to eq(2)
-          expect(activity[:contributions_to_funded_buckets_user_authored].length).to eq(2)
           expect(activity[:contributions_to_live_buckets_user_participated_in].length).to eq(2)
-          expect(activity[:contributions_to_funded_buckets_user_participated_in].length).to eq(2)
+
+          expect(activity[:funded_buckets_user_authored].length).to eq(1)
+          expect(activity[:funded_buckets_user_participated_in].length).to eq(1)
+
           expect(activity[:new_draft_buckets].length).to eq(2)
           expect(activity[:new_live_buckets].length).to eq(2)
         end
@@ -126,9 +128,9 @@ describe "RecentActivityService" do
           comments_on_buckets_user_participated_in: nil,
           comments_on_buckets_user_authored: nil,
           contributions_to_live_buckets_user_authored: nil,
-          contributions_to_funded_buckets_user_authored: nil,
+          funded_buckets_user_authored: nil,
           contributions_to_live_buckets_user_participated_in: nil,
-          contributions_to_funded_buckets_user_participated_in: nil,
+          funded_buckets_user_participated_in: nil,
           new_draft_buckets: nil,
           new_live_buckets: nil
         })
@@ -146,9 +148,9 @@ describe "RecentActivityService" do
         comments_on_buckets_user_participated_in: nil,
         comments_on_buckets_user_authored: nil,
         contributions_to_live_buckets_user_authored: nil,
-        contributions_to_funded_buckets_user_authored: nil,
+        funded_buckets_user_authored: nil,
         contributions_to_live_buckets_user_participated_in: nil,
-        contributions_to_funded_buckets_user_participated_in: nil,
+        funded_buckets_user_participated_in: nil,
         new_draft_buckets: nil,
         new_live_buckets: nil
       })

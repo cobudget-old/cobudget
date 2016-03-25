@@ -1,0 +1,17 @@
+<li id="funded-buckets-user-participated-in">
+  <% if buckets.length > 1 %>
+    <p><b><%= buckets.length %> Buckets</b> you participated in were <b>funded</b>:</p>
+  <% else %>
+    <p><b>1 Buckets</b> you participated in was <b>funded</b>:</p>
+  <% end %>
+
+  <ul style="list-style: none">
+    <% buckets.each do |bucket| %>
+      <li style="margin-bottom: 10px">
+        <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %> (<%= bucket.formatted_target %>)</b></a><br>
+        By <%= bucket.author_name %><br>
+        <%= bucket.num_of_contributors %> funders
+      </li>
+    <% end %>
+  </ul>
+</li>

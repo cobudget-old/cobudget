@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160311213104) do
   add_index "buckets", ["user_id"], name: "index_buckets_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.string   "body",       null: false
+    t.text     "body",       null: false
     t.integer  "user_id"
     t.integer  "bucket_id"
     t.datetime "created_at", null: false
@@ -138,9 +138,9 @@ ActiveRecord::Schema.define(version: 20160311213104) do
     t.string   "provider"
     t.string   "uid"
     t.string   "confirmation_token"
+    t.integer  "utc_offset"
     t.datetime "confirmed_at"
     t.datetime "joined_first_group_at"
-    t.integer  "utc_offset"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

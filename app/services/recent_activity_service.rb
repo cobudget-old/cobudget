@@ -2,9 +2,9 @@ class RecentActivityService
   attr_accessor :comments_on_bucket_you_participated_in,
                 :comments_on_buckets_user_authored,
                 :contributions_to_live_buckets_user_authored,
-                :contributions_to_funded_buckets_user_authored,
+                :funded_buckets_user_authored,
                 :contributions_to_live_buckets_user_participated_in,
-                :contributions_to_funded_buckets_user_participated_in,
+                :funded_buckets_user_participated_in,
                 :new_draft_buckets,
                 :new_live_buckets,
                 :subscription_tracker,
@@ -25,14 +25,14 @@ class RecentActivityService
 
   def for_group(group)
     activity[group] ||= {
-      contributions_to_live_buckets_user_authored:          filtered_collection(collection: contributions_to_live_buckets_user_authored,          group: group),
-      contributions_to_funded_buckets_user_authored:        filtered_collection(collection: contributions_to_funded_buckets_user_authored,        group: group),
-      comments_on_buckets_user_authored:                    filtered_collection(collection: comments_on_buckets_user_authored,                    group: group),
-      comments_on_buckets_user_participated_in:             filtered_collection(collection: comments_on_buckets_user_participated_in,             group: group),
-      new_live_buckets:                                     filtered_collection(collection: new_live_buckets,                                     group: group),
-      new_draft_buckets:                                    filtered_collection(collection: new_draft_buckets,                                    group: group),
-      contributions_to_live_buckets_user_participated_in:   filtered_collection(collection: contributions_to_live_buckets_user_participated_in,   group: group),
-      contributions_to_funded_buckets_user_participated_in: filtered_collection(collection: contributions_to_funded_buckets_user_participated_in, group: group)
+      contributions_to_live_buckets_user_authored:        filtered_collection(collection: contributions_to_live_buckets_user_authored,          group: group),
+      funded_buckets_user_authored:                       filtered_collection(collection: funded_buckets_user_authored,        group: group),
+      comments_on_buckets_user_authored:                  filtered_collection(collection: comments_on_buckets_user_authored,                    group: group),
+      comments_on_buckets_user_participated_in:           filtered_collection(collection: comments_on_buckets_user_participated_in,             group: group),
+      new_live_buckets:                                   filtered_collection(collection: new_live_buckets,                                     group: group),
+      new_draft_buckets:                                  filtered_collection(collection: new_draft_buckets,                                    group: group),
+      contributions_to_live_buckets_user_participated_in: filtered_collection(collection: contributions_to_live_buckets_user_participated_in,   group: group),
+      funded_buckets_user_participated_in:                filtered_collection(collection: funded_buckets_user_participated_in, group: group)
     }
   end
 
@@ -72,12 +72,9 @@ class RecentActivityService
       end
     end
 
-    def contributions_to_funded_buckets_user_authored
+    def funded_buckets_user_authored
       if subscription_tracker.your_bucket_fully_funded
-        contributions_to_funded_buckets_user_authored ||= Contribution.where(
-          created_at: time_range,
-          bucket: user_buckets.where(funded_at: time_range)
-        )
+        funded_buckets_user_authored ||= user_buckets.where(funded_at: time_range)
       end
     end
 
@@ -102,12 +99,9 @@ class RecentActivityService
       end
     end
 
-    def contributions_to_funded_buckets_user_participated_in
+    def funded_buckets_user_participated_in
       if subscription_tracker.your_bucket_fully_funded
-        contributions_to_funded_buckets_user_participated_in ||= Contribution.where(
-          created_at: time_range,
-          bucket: buckets_user_participated_in.where(funded_at: time_range)
-        )
+        funded_buckets_user_participated_in ||= buckets_user_participated_in.where(funded_at: time_range)
       end
     end
 
