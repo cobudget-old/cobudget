@@ -4,14 +4,10 @@ describe "DeliverRecentActivityDigest" do
   after { Timecop.return }
 
   describe "#run!" do
-    before do
-      allow(UserService).to receive(:send_recent_activity_email)
-    end
+    before { allow(UserService).to receive(:send_recent_activity_email) }
 
     context "user has no active memberships" do
-      before do
-        create(:user)
-      end
+      before { create(:user) }
 
       it "does nothing" do
         expect(UserService).not_to receive(:send_recent_activity_email)
@@ -20,9 +16,7 @@ describe "DeliverRecentActivityDigest" do
     end
 
     context "user has at least one active membership" do
-      before do
-        make_user_group_member
-      end
+      before { make_user_group_member }
 
       context "current_time is before user's next scheduled fetch" do
         it "does nothing" do

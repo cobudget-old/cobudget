@@ -9,12 +9,11 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   private
-    # TODO: do same shit for spec as we did here, with the user and shit lol
     def generate_recent_activity_for(membership: )
       current_time = DateTime.now.utc
       user = membership.member
       group = membership.group
-      # notification_frequency set to "hourly" by default
+      # note: notification_frequency set to "hourly" by default
       subscription_tracker = user.subscription_tracker
 
       Allocation.create(user: user, group: group, amount: 20000)
