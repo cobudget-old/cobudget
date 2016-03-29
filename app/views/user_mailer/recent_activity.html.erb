@@ -41,8 +41,8 @@
             <%= render partial: "user_mailer/recent_activity_partials/contributions_to_live_buckets_user_participated_in", locals: {contributions_grouped_by_bucket: activity[:contributions_to_live_buckets_user_participated_in].group_by { |c| c.bucket }, user: @user} %>
           <% end %>
 
-          <% if activity[:funded_buckets_user_participated_in] %>
-            <%= render partial: "user_mailer/recent_activity_partials/funded_buckets_user_participated_in", locals: {buckets: activity[:funded_buckets_user_participated_in], user: @user} %>
+          <% if activity[:new_funded_buckets] %>
+            <%= render partial: "user_mailer/recent_activity_partials/new_funded_buckets", locals: {buckets: activity[:new_funded_buckets], user: @user} %>
           <% end %>
         </ul>
       </li>
