@@ -1,5 +1,4 @@
 class RecentActivityService
-  # TODO: move these into private
   attr_accessor :comments_on_bucket_you_participated_in,
                 :comments_on_buckets_user_authored,
                 :contributions_to_live_buckets_user_authored,
@@ -26,14 +25,14 @@ class RecentActivityService
 
   def for_group(group)
     activity[group] ||= {
-      contributions_to_live_buckets_user_authored:        filtered_collection(collection: contributions_to_live_buckets_user_authored,        group: group),
-      funded_buckets_user_authored:                       filtered_collection(collection: funded_buckets_user_authored,                       group: group),
-      comments_on_buckets_user_authored:                  filtered_collection(collection: comments_on_buckets_user_authored,                  group: group),
-      comments_on_buckets_user_participated_in:           filtered_collection(collection: comments_on_buckets_user_participated_in,           group: group),
-      new_live_buckets:                                   filtered_collection(collection: new_live_buckets,                                   group: group),
-      new_draft_buckets:                                  filtered_collection(collection: new_draft_buckets,                                  group: group),
-      contributions_to_live_buckets_user_participated_in: filtered_collection(collection: contributions_to_live_buckets_user_participated_in, group: group),
-      new_funded_buckets:                                 filtered_collection(collection: new_funded_buckets,                                 group: group)
+      contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),
+      funded_buckets_user_authored:                       collection_scoped_to_group(collection: funded_buckets_user_authored,                       group: group),
+      comments_on_buckets_user_authored:                  collection_scoped_to_group(collection: comments_on_buckets_user_authored,                  group: group),
+      comments_on_buckets_user_participated_in:           collection_scoped_to_group(collection: comments_on_buckets_user_participated_in,           group: group),
+      new_live_buckets:                                   collection_scoped_to_group(collection: new_live_buckets,                                   group: group),
+      new_draft_buckets:                                  collection_scoped_to_group(collection: new_draft_buckets,                                  group: group),
+      contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group),
+      new_funded_buckets:                                 collection_scoped_to_group(collection: new_funded_buckets,                                 group: group)
     }
   end
 
@@ -43,7 +42,7 @@ class RecentActivityService
   end
 
   private
-    def filtered_collection(collection:, group:)
+    def collection_scoped_to_group(collection:, group:)
       return nil unless collection && collection.any?
       if collection.table_name == "comments" || collection.table_name == "contributions"
         collection.joins(:bucket).where(buckets: {group_id: group.id})
