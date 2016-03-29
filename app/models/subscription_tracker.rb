@@ -16,7 +16,7 @@ class SubscriptionTracker < ActiveRecord::Base
   end
 
   def subscribed_to_any_activity?
-    comment_on_your_bucket || comment_on_bucket_you_participated_in || bucket_idea_created || bucket_started_funding || bucket_fully_funded || funding_for_your_bucket || funding_for_a_bucket_you_participated_in || your_bucket_fully_funded || recent_activity_last_fetched_at
+    comments_on_buckets_user_authored || comments_on_buckets_user_participated_in || new_draft_buckets || new_live_buckets || new_funded_buckets || contributions_to_live_buckets_user_authored || contributions_to_live_buckets_user_participated_in || funded_buckets_user_authored || recent_activity_last_fetched_at
   end
 
   def last_fetched_at_formatted

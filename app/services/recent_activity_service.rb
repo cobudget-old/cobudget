@@ -51,20 +51,8 @@ class RecentActivityService
       end
     end
 
-    def comments_on_buckets_user_participated_in
-      if subscription_tracker.comment_on_bucket_you_participated_in
-        comments_on_buckets_user_participated_in ||= Comment.where(bucket: buckets_user_participated_in, created_at: time_range)
-      end
-    end
-
-    def comments_on_buckets_user_authored
-      if subscription_tracker.comment_on_your_bucket
-        comments_on_buckets_user_authored ||= Comment.where(bucket: user_buckets, created_at: time_range)
-      end
-    end
-
     def contributions_to_live_buckets_user_authored
-      if subscription_tracker.funding_for_your_bucket
+      if subscription_tracker.contributions_to_live_buckets_user_authored
         contributions_to_live_buckets_user_authored ||= Contribution.where(
           created_at: time_range,
           bucket: user_buckets.where(funded_at: nil)
@@ -73,13 +61,37 @@ class RecentActivityService
     end
 
     def funded_buckets_user_authored
-      if subscription_tracker.your_bucket_fully_funded
+      if subscription_tracker.funded_buckets_user_authored
         funded_buckets_user_authored ||= user_buckets.where(funded_at: time_range)
       end
     end
 
+    def comments_on_buckets_user_authored
+      if subscription_tracker.comments_on_buckets_user_authored
+        comments_on_buckets_user_authored ||= Comment.where(bucket: user_buckets, created_at: time_range)
+      end
+    end
+
+    def comments_on_buckets_user_participated_in
+      if subscription_tracker.comments_on_buckets_user_participated_in
+        comments_on_buckets_user_participated_in ||= Comment.where(bucket: buckets_user_participated_in, created_at: time_range)
+      end
+    end
+
+    def new_live_buckets
+      if subscription_tracker.new_live_buckets
+        new_live_buckets ||= user_group_buckets.where(status: "live", live_at: time_range)
+      end
+    end
+
+    def new_draft_buckets
+      if subscription_tracker.new_draft_buckets
+        new_draft_buckets ||= user_group_buckets.where(status: "draft", created_at: time_range)
+      end
+    end
+
     def contributions_to_live_buckets_user_participated_in
-      if subscription_tracker.funding_for_a_bucket_you_participated_in
+      if subscription_tracker.contributions_to_live_buckets_user_participated_in
         contributions_to_live_buckets_user_participated_in ||= Contribution.where(
           created_at: time_range,
           bucket: buckets_user_participated_in.where(funded_at: nil)
@@ -87,20 +99,9 @@ class RecentActivityService
       end
     end
 
-    def new_draft_buckets
-      if subscription_tracker.bucket_idea_created
-        new_draft_buckets ||= user_group_buckets.where(status: "draft", created_at: time_range)
-      end
-    end
-
-    def new_live_buckets
-      if subscription_tracker.bucket_started_funding
-        new_live_buckets ||= user_group_buckets.where(status: "live", live_at: time_range)
-      end
-    end
-
-    def funded_buckets_user_participated_in
-      if subscription_tracker.your_bucket_fully_funded
+    # TODO: woops, this should include all fully funded buckets that aren't the user's -- update everything else accordingly
+    def new_funded_buckets
+      if subscription_tracker.new_funded_buckets
         funded_buckets_user_participated_in ||= buckets_user_participated_in.where(funded_at: time_range)
       end
     end

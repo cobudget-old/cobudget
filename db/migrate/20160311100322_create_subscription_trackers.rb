@@ -3,16 +3,16 @@ class CreateSubscriptionTrackers < ActiveRecord::Migration
     create_table :subscription_trackers do |t|
       t.belongs_to :user, index: true, null: false
 
-      t.boolean :comment_on_your_bucket, default: true, null: false
-      t.boolean :comment_on_bucket_you_participated_in, default: true, null: false
+      t.boolean :comments_on_buckets_user_authored, default: true, null: false
+      t.boolean :comments_on_buckets_user_participated_in, default: true, null: false
 
-      t.boolean :bucket_idea_created, default: true, null: false
-      t.boolean :bucket_started_funding, default: true, null: false
-      t.boolean :bucket_fully_funded, default: true, null: false
+      t.boolean :new_draft_buckets, default: true, null: false
+      t.boolean :new_live_buckets, default: true, null: false
+      t.boolean :new_funded_buckets, default: true, null: false
 
-      t.boolean :funding_for_your_bucket, default: true, null: false
-      t.boolean :funding_for_a_bucket_you_participated_in, default: true, null: false
-      t.boolean :your_bucket_fully_funded, default: true, null: false
+      t.boolean :contributions_to_live_buckets_user_authored, default: true, null: false
+      t.boolean :contributions_to_live_buckets_user_participated_in, default: true, null: false
+      t.boolean :funded_buckets_user_authored, default: true, null: false
 
       t.datetime :recent_activity_last_fetched_at
       t.string :notification_frequency, default: "hourly", null: false

@@ -114,14 +114,14 @@ describe "RecentActivityService" do
     context "user not subscribed to any recent_activity" do
       it "returns nil instead" do
         subscription_tracker.update(
-          comment_on_your_bucket: false,
-          comment_on_bucket_you_participated_in: false,
-          bucket_idea_created: false,
-          bucket_started_funding: false,
-          bucket_fully_funded: false,
-          funding_for_your_bucket: false,
-          funding_for_a_bucket_you_participated_in: false,
-          your_bucket_fully_funded: false
+          comments_on_buckets_user_authored: false,
+          comments_on_buckets_user_participated_in: false,
+          new_draft_buckets: false,
+          new_live_buckets: false,
+          new_funded_buckets: false,
+          contributions_to_live_buckets_user_authored: false,
+          contributions_to_live_buckets_user_participated_in: false,
+          funded_buckets_user_authored: false
         )
 
         recent_activity = RecentActivityService.new(user: user)
