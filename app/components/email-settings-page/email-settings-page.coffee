@@ -17,6 +17,7 @@ module.exports =
       Error.set("you can't view this page")
 
     $scope.currentUser = CurrentUser()
+    $scope.subscriptionTracker = $scope.currentUser.subscriptionTracker()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
 
     $scope.settings = [
@@ -29,6 +30,8 @@ module.exports =
       { property: 'newLiveBuckets', header: 'new bucket put up for funding' },
       { property: 'newFundedBuckets', header: 'new bucket funded' }
     ]
+
+    $scope.notificationFrequencyOptions = ['never', 'hourly', 'daily', 'weekly']
 
     $scope.cancel = ->
       $location.search('previous_group_id', null)

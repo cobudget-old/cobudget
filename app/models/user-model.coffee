@@ -16,6 +16,7 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
 
     relationships: ->
       @hasMany 'memberships', with: 'memberId'
+      @belongsTo 'subscriptionTracker'
 
     groups: () ->
       groupIds = _.map @memberships(), (membership) ->
