@@ -19,21 +19,35 @@
   </md-toolbar>
 
   <md-content class="email-settings-page__content">
-    <div layout="row" layout-align="start start" class="email-settings-page__email-setting" ng-repeat="setting in settings">
-      <md-checkbox
-        ng-model="currentUser[setting.property]"
-        ng-attr-aria-label="{{ setting.header }}"
-        class="email-settings-page__checkbox">
-      </md-checkbox>
+    <div>
+      <h2 class="email-settings-page__subheader">What types of notifications would you like to receive?</h2>
+      <div layout="row" layout-align="start center" class="email-settings-page__email-setting" ng-repeat="setting in settings">
+        <md-checkbox
+          ng-model="currentUser[setting.property]"
+          ng-attr-aria-label="{{ setting.header }}"
+          class="email-settings-page__checkbox">
+        </md-checkbox>
 
-      <div layout="column" layout-align="start start">
-        <div class="email-settings-page__setting-header">
-          {{ setting.header }}
-        </div>
-        <div class="email-settings-page__setting-description">
-          {{ setting.description }}
+        <div layout="column" layout-align="start center">
+          <div class="email-settings-page__setting-header">
+            {{ setting.header }}
+          </div>
         </div>
       </div>
+    </div>
+
+    <md-divider class="email-settings-page__horizontal-divider"></md-divider>
+
+    <div>
+      <h2 class="email-settings-page__subheader">How often would you like to receive them?</h2>
+
+      <md-input-container>
+        <md-select required class="email-settings-page__notification-frequency-options" name="notificationFrequency" ng-model="subscriptionTracker.notificationFrequency">
+          <md-option required ng-repeat="option in notificationFrequencyOptions" value="{{option}}">
+            {{option}}
+          </md-option>
+        </md-select>
+      </md-input-container>
     </div>
   </md-content>
 </div>

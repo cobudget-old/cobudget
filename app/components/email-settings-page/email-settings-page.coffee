@@ -20,21 +20,14 @@ module.exports =
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
 
     $scope.settings = [
-      {
-        property: "subscribedToDailyDigest"
-        header: "Daily summary email."
-        description: "Each day, send an email with yesterday's unread activity in every group that you're part of."
-      },
-      {
-        property: "subscribedToPersonalActivity"
-        header: "Activity in buckets I've created."
-        description: "When you create a bucket, you are subscribed to all activity on that bucket."
-      },
-      {
-        property: "subscribedToParticipantActivity"
-        header: "Activity in buckets I've participated in."
-        description: "When you participate in a bucket, you will get all activity from that bucket mailed to you."
-      }
+      { property: 'commentsOnBucketsUserAuthored', header: 'comment on your bucket' },
+      { property: 'commentsOnBucketsUserParticipatedIn', header: 'comment on a bucket you participated in' },
+      { property: 'contributionsToLiveBucketsUserAuthored', header: 'funding for your bucket' },
+      { property: 'contributionsToLiveBucketsUserParticipatedIn', header: 'funding in a bucket you participated in' },
+      { property: 'fundedBucketsUserAuthored', header: 'your bucket funded fully' },
+      { property: 'newDraftBuckets', header: 'new bucket idea created' },
+      { property: 'newLiveBuckets', header: 'new bucket put up for funding' },
+      { property: 'newFundedBuckets', header: 'new bucket funded' }
     ]
 
     $scope.cancel = ->
