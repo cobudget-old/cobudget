@@ -1,6 +1,7 @@
 class SubscriptionTracker < ActiveRecord::Base
   belongs_to :user
   after_update :update_recent_activity_last_fetched_at
+  validates :notification_frequency, inclusion: { in: %w(never hourly daily weekly) }
 
   def next_recent_activity_fetch_scheduled_at
     interval = case notification_frequency
