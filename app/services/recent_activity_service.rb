@@ -1,10 +1,11 @@
 class RecentActivityService
+  # TODO: move these into private
   attr_accessor :comments_on_bucket_you_participated_in,
                 :comments_on_buckets_user_authored,
                 :contributions_to_live_buckets_user_authored,
                 :funded_buckets_user_authored,
                 :contributions_to_live_buckets_user_participated_in,
-                :funded_buckets_user_participated_in,
+                :new_funded_buckets,
                 :new_draft_buckets,
                 :new_live_buckets,
                 :subscription_tracker,
@@ -32,7 +33,7 @@ class RecentActivityService
       new_live_buckets:                                   filtered_collection(collection: new_live_buckets,                                   group: group),
       new_draft_buckets:                                  filtered_collection(collection: new_draft_buckets,                                  group: group),
       contributions_to_live_buckets_user_participated_in: filtered_collection(collection: contributions_to_live_buckets_user_participated_in, group: group),
-      funded_buckets_user_participated_in:                filtered_collection(collection: funded_buckets_user_participated_in,                group: group)
+      new_funded_buckets:                                 filtered_collection(collection: new_funded_buckets,                                 group: group)
     }
   end
 
@@ -99,10 +100,10 @@ class RecentActivityService
       end
     end
 
-    # TODO: woops, this should include all fully funded buckets that aren't the user's -- update everything else accordingly
     def new_funded_buckets
       if subscription_tracker.new_funded_buckets
-        funded_buckets_user_participated_in ||= buckets_user_participated_in.where(funded_at: time_range)
+        new_funded_buckets ||= user_group_buckets.where(status: "funded", funded_at: time_range)
+                                                 .where.not(user: user)
       end
     end
 

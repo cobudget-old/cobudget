@@ -15,8 +15,6 @@ describe "RecentActivityService" do
 
       @bucket_user_participated_in = create(:bucket, group: group, target: 420, status: "live")
       create(:comment, user: user, bucket: @bucket_user_participated_in)
-      @bucket_user_participated_in_to_be_fully_funded = create(:bucket, group: group, target: 420, status: "live")
-      create(:contribution, user: user, bucket: @bucket_user_participated_in_to_be_fully_funded)
 
       @bucket_user_authored = create(:bucket, group: group, user: user, target: 420, status: "live")
       @bucket_user_authored_to_be_fully_funded = create(:bucket, group: group, user: user, target: 420, status: "live")
@@ -41,9 +39,6 @@ describe "RecentActivityService" do
         # create 1 contributions for @bucket_user_authored
         create_list(:contribution, 1, bucket: @bucket_user_authored)
 
-        # create 1 contribution for @bucket_user_participated_in_to_be_fully_funded
-        create(:contribution, bucket: @bucket_user_participated_in_to_be_fully_funded)
-
         # create 1 contribution for@bucket_user_authored_to_be_fully_funded
         create(:contribution, bucket:@bucket_user_authored_to_be_fully_funded)
 
@@ -52,6 +47,11 @@ describe "RecentActivityService" do
 
         # create 1 new live_buckets
         create_list(:bucket, 1, status: "live", group: group, target: 420)
+
+        # create 1 new funded_buckets
+        create_list(:bucket, 1, status: "live", group: group, target: 420).each do |bucket|
+          create(:contribution, bucket: bucket, amount: 420)
+        end
       end
 
       # make some new activity
@@ -68,14 +68,7 @@ describe "RecentActivityService" do
         # create 2 contributions for @bucket_user_authored
         create_list(:contribution, 2, bucket: @bucket_user_authored)
 
-        # create 2 contributions for @bucket_user_participated_in_to_be_fully_funded
-        create(:contribution, bucket: @bucket_user_participated_in_to_be_fully_funded)
-        create(:contribution,
-          bucket: @bucket_user_participated_in_to_be_fully_funded,
-          amount: @bucket_user_participated_in_to_be_fully_funded.amount_left
-        )
-
-        # create 2 contributions for@bucket_user_authored_to_be_fully_funded
+        # create 2 contributions for @bucket_user_authored_to_be_fully_funded
         create(:contribution, bucket:@bucket_user_authored_to_be_fully_funded)
         create(:contribution,
           bucket:@bucket_user_authored_to_be_fully_funded,
@@ -87,6 +80,11 @@ describe "RecentActivityService" do
 
         # create 2 new live_buckets
         create_list(:bucket, 2, status: "live", group: group, target: 420)
+
+        # create 2 new funded_buckets
+        create_list(:bucket, 2, status: "live", group: group, target: 420).each do |bucket|
+          create(:contribution, bucket: bucket, amount: 420)
+        end
       end
     end
 
@@ -101,10 +99,10 @@ describe "RecentActivityService" do
           expect(activity[:contributions_to_live_buckets_user_participated_in].length).to eq(2)
 
           expect(activity[:funded_buckets_user_authored].length).to eq(1)
-          expect(activity[:funded_buckets_user_participated_in].length).to eq(1)
 
           expect(activity[:new_draft_buckets].length).to eq(2)
           expect(activity[:new_live_buckets].length).to eq(2)
+          expect(activity[:new_funded_buckets].length).to eq(2)
 
           expect(recent_activity.is_present?).to eq(true)
         end
@@ -132,7 +130,7 @@ describe "RecentActivityService" do
           contributions_to_live_buckets_user_authored: nil,
           funded_buckets_user_authored: nil,
           contributions_to_live_buckets_user_participated_in: nil,
-          funded_buckets_user_participated_in: nil,
+          new_funded_buckets: nil,
           new_draft_buckets: nil,
           new_live_buckets: nil
         })
@@ -152,7 +150,7 @@ describe "RecentActivityService" do
         contributions_to_live_buckets_user_authored: nil,
         funded_buckets_user_authored: nil,
         contributions_to_live_buckets_user_participated_in: nil,
-        funded_buckets_user_participated_in: nil,
+        new_funded_buckets: nil,
         new_draft_buckets: nil,
         new_live_buckets: nil
       })
