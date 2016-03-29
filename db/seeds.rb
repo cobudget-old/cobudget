@@ -32,9 +32,6 @@ utc_offsets = [
   + 840  # line islands
 ]
 
-Group.destroy_all
-User.destroy_all
-
 ### USERS
 
 admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc) # oaklander
