@@ -13,7 +13,7 @@ class UserMailerPreview < ActionMailer::Preview
       current_time = DateTime.now.utc
       user = membership.member
       group = membership.group
-      # note: notification_frequency set to "hourly" by default
+      # note: notification_frequency set to "hourly"
       subscription_tracker = user.subscription_tracker
 
       Allocation.create(user: user, group: group, amount: 20000)
@@ -70,7 +70,9 @@ class UserMailerPreview < ActionMailer::Preview
     end
 
     def generate_user
-      User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "password")
+      user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "password")
+      user.confirm!
+      user
     end
 
     def generate_bucket(user: nil, group:, status: "draft", target: 420)
