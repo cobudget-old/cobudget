@@ -4,3 +4,17 @@ global.cobudgetApp.factory 'SubscriptionTrackerRecordsInterface', (config, BaseR
     constructor: (recordStore) ->
       @baseConstructor recordStore
       @remote.apiPrefix = config.apiPrefix
+
+    updateEmailSettings: (subscriptionTracker) ->
+      params = _.pick subscriptionTracker, [
+        'commentsOnBucketsUserAuthored',
+        'commentsOnBucketsUserParticipatedIn',
+        'contributionsToLiveBucketsUserAuthored',
+        'contributionsToLiveBucketsUserParticipatedIn',
+        'fundedBucketsUserAuthored',
+        'newDraftBuckets',
+        'newLiveBuckets',
+        'newFundedBuckets',
+        'notificationFrequency'
+      ]
+      @remote.post('update_email_settings', { subscription_tracker: morph.toSnake(params) })

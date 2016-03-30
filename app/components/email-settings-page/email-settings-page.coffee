@@ -38,12 +38,7 @@ module.exports =
       $location.path("/groups/#{previousGroupId}")
 
     $scope.done = ->
-      params = _.pick $scope.currentUser, [
-        'subscribedToDailyDigest',
-        'subscribedToPersonalActivity',
-        'subscribedToParticipantActivity'
-      ]
-      Records.users.updateProfile(params).then ->
+      Records.subscriptionTrackers.updateEmailSettings($scope.subscriptionTracker).then ->
         Toast.show('Email settings updated!')
         $scope.cancel()
 
