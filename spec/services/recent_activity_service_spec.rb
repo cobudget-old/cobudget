@@ -89,20 +89,22 @@ describe "RecentActivityService" do
     end
 
     context "user subscribed to all recent_activity" do
-      it "returns all recent_activity as a hash" do
+      it "prepares a hash of activity in all user's groups" do
         Timecop.freeze(current_time) do
           recent_activity = RecentActivityService.new(user: user)
-          activity = recent_activity.for_group(group)
-          expect(activity[:comments_on_buckets_user_participated_in].length).to eq(2)
-          expect(activity[:comments_on_buckets_user_authored].length).to eq(2)
-          expect(activity[:contributions_to_live_buckets_user_authored].length).to eq(2)
-          expect(activity[:contributions_to_live_buckets_user_participated_in].length).to eq(2)
 
-          expect(activity[:funded_buckets_user_authored].length).to eq(1)
+          recent_activity_in_group = recent_activity.activity[group]
 
-          expect(activity[:new_draft_buckets].length).to eq(2)
-          expect(activity[:new_live_buckets].length).to eq(2)
-          expect(activity[:new_funded_buckets].length).to eq(2)
+          expect(recent_activity_in_group[:comments_on_buckets_user_participated_in].length).to eq(2)
+          expect(recent_activity_in_group[:comments_on_buckets_user_authored].length).to eq(2)
+          expect(recent_activity_in_group[:contributions_to_live_buckets_user_authored].length).to eq(2)
+          expect(recent_activity_in_group[:contributions_to_live_buckets_user_participated_in].length).to eq(2)
+
+          expect(recent_activity_in_group[:funded_buckets_user_authored].length).to eq(1)
+
+          expect(recent_activity_in_group[:new_draft_buckets].length).to eq(2)
+          expect(recent_activity_in_group[:new_live_buckets].length).to eq(2)
+          expect(recent_activity_in_group[:new_funded_buckets].length).to eq(2)
 
           expect(recent_activity.is_present?).to eq(true)
         end
@@ -123,8 +125,9 @@ describe "RecentActivityService" do
         )
 
         recent_activity = RecentActivityService.new(user: user)
+        recent_activity_in_group = recent_activity.activity[group]
 
-        expect(recent_activity.for_group(group)).to eq({
+        expect(recent_activity_in_group).to eq({
           comments_on_buckets_user_participated_in: nil,
           comments_on_buckets_user_authored: nil,
           contributions_to_live_buckets_user_authored: nil,
@@ -143,8 +146,9 @@ describe "RecentActivityService" do
   context "user subscribed to all recent_activity, but none exists" do
     it "returns nil instead" do
       recent_activity = RecentActivityService.new(user: user)
+      recent_activity_in_group = recent_activity.activity[group]
 
-      expect(recent_activity.for_group(group)).to eq({
+      expect(recent_activity_in_group).to eq({
         comments_on_buckets_user_participated_in: nil,
         comments_on_buckets_user_authored: nil,
         contributions_to_live_buckets_user_authored: nil,
