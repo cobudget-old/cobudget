@@ -5,5 +5,6 @@ global.cobudgetApp.directive 'onlyDigits', () ->
   restrict: 'A'
   link: (scope, el, attrs) ->
     el.bind 'keypress', (e) ->
-      unless _.includes(_.range(48, 57), e.keyCode)
+      acceptableKeyCodes = _.range(48,57).concat([0, 8])
+      unless _.includes(acceptableKeyCodes, e.which)
         e.preventDefault()
