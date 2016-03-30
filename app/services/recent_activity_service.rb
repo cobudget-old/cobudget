@@ -20,31 +20,28 @@ class RecentActivityService
 
   def initialize(user:)
     @user = user
-    @activity = load_activity
+    @activity = {}
+  end
+
+  def for_group(group)
+    activity[group] ||= {
+      contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),
+      funded_buckets_user_authored:                       collection_scoped_to_group(collection: funded_buckets_user_authored,                       group: group),
+      comments_on_buckets_user_authored:                  collection_scoped_to_group(collection: comments_on_buckets_user_authored,                  group: group),
+      comments_on_buckets_user_participated_in:           collection_scoped_to_group(collection: comments_on_buckets_user_participated_in,           group: group),
+      new_live_buckets:                                   collection_scoped_to_group(collection: new_live_buckets,                                   group: group),
+      new_draft_buckets:                                  collection_scoped_to_group(collection: new_draft_buckets,                                  group: group),
+      contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group),
+      new_funded_buckets:                                 collection_scoped_to_group(collection: new_funded_buckets,                                 group: group)
+    }
   end
 
   def is_present?
     return false unless subscription_tracker.subscribed_to_any_activity?
-    activity.map { |group, group_activity| group_activity.values }.flatten.compact.any?
+    user.active_groups.map { |g| for_group(g).values }.flatten.compact.any?
   end
 
   private
-    def load_activity
-      array = user.active_groups.map do |group|
-        [group, {
-          contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),
-          funded_buckets_user_authored:                       collection_scoped_to_group(collection: funded_buckets_user_authored,                       group: group),
-          comments_on_buckets_user_authored:                  collection_scoped_to_group(collection: comments_on_buckets_user_authored,                  group: group),
-          comments_on_buckets_user_participated_in:           collection_scoped_to_group(collection: comments_on_buckets_user_participated_in,           group: group),
-          new_live_buckets:                                   collection_scoped_to_group(collection: new_live_buckets,                                   group: group),
-          new_draft_buckets:                                  collection_scoped_to_group(collection: new_draft_buckets,                                  group: group),
-          contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group),
-          new_funded_buckets:                                 collection_scoped_to_group(collection: new_funded_buckets,                                 group: group)
-        }]
-      end
-      Hash[array]
-    end
-
     def collection_scoped_to_group(collection:, group:)
       return nil unless collection && collection.any?
       if collection.table_name == "comments" || collection.table_name == "contributions"
