@@ -20,29 +20,30 @@ class RecentActivityService
 
   def initialize(user:)
     @user = user
-    @activity_for_all_groups = load_activity_for_all_groups
   end
 
   def is_present?
     return false unless subscription_tracker.subscribed_to_any_activity?
-    activity_for_all_groups.map { |group, group_activity| group_activity.values }.flatten.compact.any?
+    activity_for_all_groups.any?
+  end
+
+  def activity_for_all_groups
+    activity_for_all_groups ||= user.active_groups.map { |group| activity_for_group(group) }.compact
   end
 
   private
-    def load_activity_for_all_groups
-      array = user.active_groups.map do |group|
-        [group, {
-          contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),
-          funded_buckets_user_authored:                       collection_scoped_to_group(collection: funded_buckets_user_authored,                       group: group),
-          comments_on_buckets_user_authored:                  collection_scoped_to_group(collection: comments_on_buckets_user_authored,                  group: group),
-          comments_on_buckets_user_participated_in:           collection_scoped_to_group(collection: comments_on_buckets_user_participated_in,           group: group),
-          new_live_buckets:                                   collection_scoped_to_group(collection: new_live_buckets,                                   group: group),
-          new_draft_buckets:                                  collection_scoped_to_group(collection: new_draft_buckets,                                  group: group),
-          contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group),
-          new_funded_buckets:                                 collection_scoped_to_group(collection: new_funded_buckets,                                 group: group)
-        }]
-      end
-      Hash[array]
+    def activity_for_group(group)
+      group_activity_hash = {
+        contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),
+        funded_buckets_user_authored:                       collection_scoped_to_group(collection: funded_buckets_user_authored,                       group: group),
+        comments_on_buckets_user_authored:                  collection_scoped_to_group(collection: comments_on_buckets_user_authored,                  group: group),
+        comments_on_buckets_user_participated_in:           collection_scoped_to_group(collection: comments_on_buckets_user_participated_in,           group: group),
+        new_live_buckets:                                   collection_scoped_to_group(collection: new_live_buckets,                                   group: group),
+        new_draft_buckets:                                  collection_scoped_to_group(collection: new_draft_buckets,                                  group: group),
+        contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group),
+        new_funded_buckets:                                 collection_scoped_to_group(collection: new_funded_buckets,                                 group: group)
+      }
+      group_activity_hash.merge({group: group}) if group_activity_hash.values.compact.any?
     end
 
     def collection_scoped_to_group(collection:, group:)

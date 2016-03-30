@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def active_groups
-    Group.joins(:memberships).where(memberships: {member: self, archived_at: nil})
+    Group.joins(:memberships).where(memberships: {member: self, archived_at: nil}).order(:id)
   end
 
   private
