@@ -16,20 +16,20 @@ class RecentActivityService
                 :user_group_buckets,
                 :users_active_groups,
                 :user,
-                :activity
+                :activity_for_all_groups
 
   def initialize(user:)
     @user = user
-    @activity = load_activity
+    @activity_for_all_groups = load_activity_for_all_groups
   end
 
   def is_present?
     return false unless subscription_tracker.subscribed_to_any_activity?
-    activity.map { |group, group_activity| group_activity.values }.flatten.compact.any?
+    activity_for_all_groups.map { |group, group_activity| group_activity.values }.flatten.compact.any?
   end
 
   private
-    def load_activity
+    def load_activity_for_all_groups
       array = user.active_groups.map do |group|
         [group, {
           contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),

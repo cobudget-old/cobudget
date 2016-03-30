@@ -55,9 +55,9 @@ class UserMailer < ActionMailer::Base
     )
   end
 
-  def recent_activity(user:, recent_activity:)
+  def recent_activity(user:, recent_activity_for_all_groups:)
     @user = user
-    @recent_activity = recent_activity
+    @recent_activity_for_all_groups = recent_activity_for_all_groups
     @last_fetched_at = @user.subscription_tracker.last_fetched_at_formatted
     mail(to: user.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
