@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
 
   def confirm!
     update(confirmation_token: nil, confirmed_at: DateTime.now.utc())
+    subscription_tracker.update(notification_frequency: 'hourly')
   end
 
   def confirmed?
@@ -80,7 +81,6 @@ class User < ActiveRecord::Base
     def create_default_subscription_tracker
       SubscriptionTracker.create(
         user: self,
-        notification_frequency: "hourly",
         recent_activity_last_fetched_at: DateTime.now.utc.beginning_of_hour
       )
     end
