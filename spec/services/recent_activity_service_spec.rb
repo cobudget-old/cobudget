@@ -93,7 +93,7 @@ describe "RecentActivityService" do
         Timecop.freeze(current_time) do
           recent_activity = RecentActivityService.new(user: user)
 
-          recent_activity_in_group = recent_activity.activity_for_all_groups[group]
+          recent_activity_in_group = recent_activity.activity[group]
 
           expect(recent_activity_in_group[:comments_on_buckets_user_participated_in].length).to eq(2)
           expect(recent_activity_in_group[:comments_on_buckets_user_authored].length).to eq(2)
@@ -125,7 +125,7 @@ describe "RecentActivityService" do
         )
 
         recent_activity = RecentActivityService.new(user: user)
-        recent_activity_in_group = recent_activity.activity_for_all_groups[group]
+        recent_activity_in_group = recent_activity.activity[group]
 
         expect(recent_activity_in_group).to eq({
           comments_on_buckets_user_participated_in: nil,
@@ -146,7 +146,7 @@ describe "RecentActivityService" do
   context "user subscribed to all recent_activity, but none exists" do
     it "returns nil instead" do
       recent_activity = RecentActivityService.new(user: user)
-      recent_activity_in_group = recent_activity.activity_for_all_groups[group]
+      recent_activity_in_group = recent_activity.activity[group]
 
       expect(recent_activity_in_group).to eq({
         comments_on_buckets_user_participated_in: nil,

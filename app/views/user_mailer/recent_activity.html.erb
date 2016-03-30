@@ -8,7 +8,7 @@
   <ul style="list-style: none; padding-left: 0">
     <% @user.active_groups.each do |group| %>
       <li class="group-activity">
-        <% activity = @recent_activity_for_all_groups[group] %>
+        <% activity = @recent_activity.for_group(group) %>
 
         <h2 style="font-weight: normal">In <%= group.name %></h2>
 
