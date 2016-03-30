@@ -5,7 +5,7 @@ class UserMailerPreview < ActionMailer::Preview
     membership = Membership.create(member: user, group: group)
     generate_recent_activity_for(membership: membership)
     recent_activity = RecentActivityService.new(user: user)
-    UserMailer.recent_activity(user: user, recent_activity_for_all_groups: recent_activity.activity_for_all_groups)
+    UserMailer.recent_activity(user: user, recent_activity: recent_activity)
   end
 
   private
@@ -70,9 +70,7 @@ class UserMailerPreview < ActionMailer::Preview
     end
 
     def generate_user
-      user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "password")
-      user.confirm!
-      user
+      User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "password")
     end
 
     def generate_bucket(user: nil, group:, status: "draft", target: 420)
