@@ -27,7 +27,7 @@ describe "DeliverRecentActivityDigest" do
       it "does not schedule the next recent activity fetch" do
         Timecop.freeze(current_time + 1.minute) do
           DeliverRecentActivityDigest.run!
-          expect(subscription_tracker.reload.recent_activity_last_fetched_at).to eq(current_time - 1.hour)
+          expect(subscription_tracker.reload.recent_activity_last_fetched_at).to be_within(1).of(current_time - 1.hour)
         end
       end
     end
@@ -47,7 +47,7 @@ describe "DeliverRecentActivityDigest" do
         it "does not schedule the next recent activity fetch" do
           Timecop.freeze(current_time - 1.minute) do
             DeliverRecentActivityDigest.run!
-            expect(subscription_tracker.reload.recent_activity_last_fetched_at).to eq(current_time - 1.hour)
+            expect(subscription_tracker.reload.recent_activity_last_fetched_at).to be_within(1).of(current_time - 1.hour)
           end
         end
       end
@@ -76,7 +76,7 @@ describe "DeliverRecentActivityDigest" do
           it "updates user's subscription_tracker's recent_activity_last_fetched_at timestamp" do
             Timecop.freeze(current_time + 1.minute) do
               DeliverRecentActivityDigest.run!
-              expect(subscription_tracker.reload.recent_activity_last_fetched_at).to eq(current_time)
+              expect(subscription_tracker.reload.recent_activity_last_fetched_at).to be_within(1).of(current_time)
             end
           end
         end
@@ -92,7 +92,7 @@ describe "DeliverRecentActivityDigest" do
           it "updates user's subscription_tracker's recent_activity_last_fetched_at timestamp" do
             Timecop.freeze(current_time + 1.minute) do
               DeliverRecentActivityDigest.run!
-              expect(subscription_tracker.reload.recent_activity_last_fetched_at).to eq(current_time)
+              expect(subscription_tracker.reload.recent_activity_last_fetched_at).to be_within(1).of(current_time)
             end
           end
         end
