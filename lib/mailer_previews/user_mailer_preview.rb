@@ -4,8 +4,7 @@ class UserMailerPreview < ActionMailer::Preview
     group = Group.create(name: Faker::Company.name)
     membership = Membership.create(member: user, group: group)
     generate_recent_activity_for(membership: membership)
-    recent_activity = RecentActivityService.new(user: user)
-    UserMailer.recent_activity(user: user, recent_activity: recent_activity)
+    UserMailer.recent_activity(user: user)
   end
 
   private
