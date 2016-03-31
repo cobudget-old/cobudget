@@ -37,16 +37,6 @@ class UserMailer < ActionMailer::Base
          subject: subject)
   end
 
-  def daily_email_digest(user:)
-    @user = user
-    @formatted_date_today = DateTime.now.in_time_zone(user.utc_offset / 60).strftime("%A, %B %d")
-    if @recent_activity = UserService.fetch_recent_activity_for(user: user)
-      mail(to: user.name_and_email,
-           from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "[Cobudget] Daily Summary - New activity in your groups")
-    end
-  end
-
   def confirm_account_email(user:)
     @user = user
     mail(to: user.name_and_email,
@@ -55,13 +45,15 @@ class UserMailer < ActionMailer::Base
     )
   end
 
-  def recent_activity(user:, recent_activity:)
+  def recent_activity(user:)
     @user = user
-    @recent_activity = recent_activity
-    @last_fetched_at = @user.subscription_tracker.last_fetched_at_formatted
-    mail(to: user.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "My recent activity on Cobudget - from #{@last_fetched_at}"
-    )
+    @recent_activity = RecentActivityService.new(user: user)
+    if @recent_activity.is_present?
+      @last_fetched_at = @user.subscription_tracker.last_fetched_at_formatted
+      mail(to: user.name_and_email,
+           from: "Cobudget Updates <updates@cobudget.co>",
+           subject: "My recent activity on Cobudget - from #{@last_fetched_at}"
+      )
+    end
   end
 end

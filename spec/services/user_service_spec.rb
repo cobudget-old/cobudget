@@ -96,36 +96,4 @@ describe "UserService" do
       UserService.merge_users( user_to_keep: @user_to_keep, user_to_kill: @user_to_kill)
     end
   end
-
-  describe "#send_recent_activity_email(user:)" do
-    let!(:current_time) { DateTime.now.utc }
-    let!(:user) { create(:user) }
-    let!(:group) { create(:group) }
-    let!(:membership) { create(:membership, member: user, group: group) }
-    # notification_frequency set to 'hourly' by default
-    let!(:subscription_tracker) { user.subscription_tracker }
-
-    before do
-      subscription_tracker.update(recent_activity_last_fetched_at: current_time - 1.hour)
-    end
-
-    context "recent activity exists" do
-      it "sends email to user" do
-        Timecop.freeze(current_time - 30.minutes) do
-          create(:bucket, status: "draft", group: group, target: 420)
-        end
-
-        Timecop.return
-        UserService.send_recent_activity_email(user: user)
-        expect(ActionMailer::Base.deliveries.length).to eq(1)
-      end
-    end
-
-    context "recent activity doesn't exist" do
-      it "does not send email to user" do
-        UserService.send_recent_activity_email(user: user)
-        expect(ActionMailer::Base.deliveries.length).to eq(0)
-      end
-    end
-  end
 end
