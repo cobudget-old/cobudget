@@ -34,23 +34,26 @@ utc_offsets = [
 
 ### USERS
 
-admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc) # oaklander
-puts "generated admin account email: 'admin@example.com', password: 'password'"
-non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc) # oaklander
-puts "generated user account email: 'user@example.com', password: 'password'"
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, joined_first_group_at: DateTime.now.utc) # oaklander
+admin.confirm!
+puts "generated confirmed admin account email: 'admin@example.com', password: 'password'"
+non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480, joined_first_group_at: DateTime.now.utc) # oaklander
+non_admin.confirm!
+puts "generated confirmed user account email: 'user@example.com', password: 'password'"
 
 users = []
 utc_offsets.each do |utc_offset|
-  users << User.create!(
+  user = User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
     password: 'password',
     utc_offset: utc_offset,
-    confirmed_at: DateTime.now.utc,
     joined_first_group_at: DateTime.now.utc
   )
+  user.confirm!
+  users << user
 end
-puts "generated 27 more fake users"
+puts "generated 27 more confirmed fake users"
 
 ### GROUPS
 
