@@ -43,6 +43,7 @@ class RecentActivityService
 
   private
     def collection_scoped_to_group(collection:, group:)
+      return nil unless collection && collection.any?
       scoped_collection =
         if collection.table_name == "comments" || collection.table_name == "contributions"
           collection.joins(:bucket).where(buckets: {group_id: group.id})
