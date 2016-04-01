@@ -3,7 +3,6 @@ require 'faker'
 ### TIMEZONES
 
 utc_offsets = [
-  - 720, # baker island
   - 660, # hawaii
   - 600, # cook islands
   - 540, # alaska (anchorage)
@@ -28,8 +27,7 @@ utc_offsets = [
   + 600, # australia, queensland
   + 660, # new caledonia
   + 720, # auckland
-  + 780, # samoa
-  + 840  # line islands
+  + 780 # samoa
 ]
 
 ### USERS
