@@ -1,5 +1,5 @@
 class SubscriptionTrackersController < AuthenticatedController
-  api :POST, '/subscription_trackers', 'updates users email settings'
+  api :POST, '/subscription_trackers/update_email_settings', 'updates users email settings'
   def update_email_settings
     subscription_tracker = current_user.subscription_tracker
     subscription_tracker.update(subscription_tracker_params)
