@@ -1,0 +1,32 @@
+<md-dialog aria-label="archive bucket dialog">
+  <md-dialog-content class="sticky-container">
+
+    <div class="archive-bucket-dialog__header" layout="column" layout-align="center center">
+      <ng-md-icon icon="warning"
+        layout="column"
+        layout-align="center center"
+        class="archive-bucket-dialog__warning-icon"
+        size="35"
+      ></ng-md-icon>
+      <div class="archive-bucket-dialog__header-text">
+        Are you sure you want to archive this bucket?
+      </div>
+    </div>
+    <md-divider></md-divider>
+
+    <div class="archive-bucket-dialog__details-container">
+      <p class="archive-bucket-dialog__details">
+        If you confirm, the money that has already been given to this bucket will be returned to its funders.
+      </p>
+
+      <div class="archive-bucket-dialog__final-caution">
+        Caution: This cannot be undone
+      </div>
+    </div>
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button class="archive-bucket-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button class="md-raised archive-bucket-dialog__proceed-btn" ng-click="proceed()">proceed</md-button>
+  </div>
+</md-dialog>

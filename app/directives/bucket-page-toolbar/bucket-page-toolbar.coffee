@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
     restrict: 'E'
     template: require('./bucket-page-toolbar.html')
     replace: true
-    controller: ($location, $scope, Toast) ->
+    controller: (Dialog, $location, $scope, Toast) ->
 
       $scope.edit = ->
         $location.path("/buckets/#{$scope.bucket.id}/edit")
@@ -14,6 +14,10 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
         $scope.bucket && $scope.userCanStartFunding()
 
       $scope.archive = ->
-        console.log('meow')
+        if $scope.bucket.status == 'live'
+          archiveBucketDialog = require('./../../components/archive-bucket-dialog/archive-bucket-dialog.coffee')({
+            scope: $scope
+          })
+          Dialog.open(archiveBucketDialog)
 
       return
