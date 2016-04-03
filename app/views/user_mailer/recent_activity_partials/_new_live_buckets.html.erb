@@ -1,6 +1,11 @@
 <li id="new-live-buckets">
   <% if buckets.length > 1 %>
-    <p><b><%= buckets.length %> Buckets</b> were proposed for <b>funding (you have <%= membership.formatted_balance %>)</b>:</p>
+    <p>
+      <b><%= buckets.length %> Buckets</b> were proposed for <b>funding</b>
+      <% if membership.balance > 0 %>
+        <b>&nbsp;(you have <%= membership.formatted_balance %>)</b>:
+      <% end %>
+    </p>
   <% else %>
     <p><b>1 Bucket</b> was proposed for <b>funding (you have <%= membership.formatted_balance %>)</b>:</p>
   <% end %>
