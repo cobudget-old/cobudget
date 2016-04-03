@@ -23,7 +23,21 @@
     <span flex></span>
 
     <span ng-show="userCanEditBucket()">
-      <md-button class="bucket-page__edit-button" ng-click="editBucket()">Edit</md-button>
+      <md-button class="md-icon-button bucket-page__bucket-modifier-btn" aria-label="archive" ng-click="archive()">
+        <ng-md-icon icon="archive"
+        layout="column"
+        layout-align="center center"
+        class="bucket-page__menu-icon"
+        ></ng-md-icon>
+      </md-button>
+
+      <md-button class="md-icon-button bucket-page__bucket-modifier-btn" aria-label="edit" ng-click="edit()">
+        <ng-md-icon icon="edit"
+          layout="column"
+          layout-align="center center"
+          class="bucket-page__menu-icon"
+        ></ng-md-icon>
+      </md-button>
     </span>
   </div>
 </md-toolbar>

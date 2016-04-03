@@ -6,11 +6,14 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
     template: require('./bucket-page-toolbar.html')
     replace: true
     controller: ($location, $scope, Toast) ->
-      
-      $scope.editBucket = ->
+
+      $scope.edit = ->
         $location.path("/buckets/#{$scope.bucket.id}/edit")
 
       $scope.userCanEditBucket = ->
         $scope.bucket && $scope.userCanStartFunding()
+
+      $scope.archive = ->
+        console.log('meow')
 
       return
