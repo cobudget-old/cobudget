@@ -88,64 +88,6 @@
   fill: $cobudget-dark-grey;
 }
 
-// remove membership dialog
-
-.group-page__remove-membership-dialog-header {
-  text-align: center;
-  padding: 15px !important;
-}
-
-.group-page__remove-membership-dialog-header-text {
-  margin-top: 5px;
-  color: $cobudget-red;
-  font-weight: 500;
-}
-
-.group-page__remove-membership-dialog-warning-icon {
-  fill: $cobudget-red;
-}
-
-.group-page__remove-membership-dialog-list-header {
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  color: $grey-on-white;
-}
-
-.group-page__remove-membership-dialog-list-container {
-  padding: 15px !important;
-}
-
-.group-page__remove-membership-dialog-list {
-  padding-left: 0;
-  font-size: 12px;
-  list-style: none;
-}
-
-.group-page__remove-membership-dialog-list-item {
-  margin-bottom: 5px;
-}
-
-.group-page__remove-membership-dialog-warning-text {
-  @include fontMedium;
-  padding-left: 5px;
-  color: $grey-on-white;
-}
-
-.group-page__remove-membership-dialog-checkbox-icon {
-  fill: $grey-on-white;
-}
-
-.group-page__remove-membership-dialog-remove-btn {
-  background: $cobudget-red !important;
-  color: white !important;
-}
-
-.group-page__remove-membership-dialog-cancel-btn {
-  color: $grey-on-white !important;
-  background: transparent !important;
-}
-
 // manage funds dialog
 
 .group-page__manage-funds-dialog {
