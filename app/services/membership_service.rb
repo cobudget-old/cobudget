@@ -12,7 +12,7 @@ class MembershipService
     Bucket.where(user_id: member.id, status: 'live', group_id: group.id).each do |bucket|
       funders = bucket.contributors(exclude_author: true)
       funders.each do |funder|
-        UserMailer.notify_funder_that_bucket_was_deleted(funder: funder, bucket: bucket).deliver_now
+        UserMailer.notify_funder_that_bucket_was_removed(funder: funder, bucket: bucket).deliver_now
       end
       bucket.destroy
     end
