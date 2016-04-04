@@ -8,19 +8,6 @@ class BucketService
     end
   end
 
-  def self.send_bucket_live_emails(bucket: )
-    group = bucket.group
-    members = bucket.participants(exclude_author: true, subscribed: true).active_in_group(group)
-    members.each do |member|
-      membership = member.membership_for(group)
-      if membership.balance > 0
-        UserMailer.notify_member_with_balance_that_bucket_is_live(bucket: bucket, member: member).deliver_later
-      else
-        UserMailer.notify_member_with_zero_balance_that_bucket_is_live(bucket: bucket, member: member).deliver_later
-      end
-    end
-  end
-
   def self.send_bucket_funded_emails(bucket: )
     group = bucket.group
     bucket_author = bucket.user

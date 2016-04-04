@@ -38,11 +38,10 @@ class BucketsController < AuthenticatedController
     end
   end
 
-  api :POST, '/buckets/:id?target&funding_closes_at'
+  api :POST, '/buckets/:id/open_for_funding'
   def open_for_funding
     bucket = Bucket.find(params[:id])
-    bucket.open_for_funding(target: params[:target], funding_closes_at: params[:funding_closes_at])
-    # BucketService.send_bucket_live_emails(bucket: bucket)
+    bucket.update(status: "live")
     render json: [bucket]
   end
 
