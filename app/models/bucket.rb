@@ -78,7 +78,16 @@ class Bucket < ActiveRecord::Base
 
   def archive!
     update(archived_at: DateTime.now.utc)
-    contributions.destroy_all if live_at.present?
+    if live_at.present?
+      contributors.each do |funder|
+        UserMailer.notify_funder_that_bucket_was_removed(funder: funder, bucket: self).deliver_now
+      end
+      contributions.destroy_all
+    end
+  end
+
+  def archived?
+    archived_at.present?
   end
 
   private

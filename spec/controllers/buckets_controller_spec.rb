@@ -5,6 +5,8 @@ RSpec.describe BucketsController, type: :controller do
   let(:group) { create(:group) }
   let(:bucket) { create(:bucket, group: group, status: 'draft') }
 
+  after { ActionMailer::Base.deliveries.clear }
+
   describe "#update" do
     let(:bucket_params) {{
       id: bucket.id,
@@ -227,6 +229,14 @@ RSpec.describe BucketsController, type: :controller do
           end
 
           expect(bucket.total_contributions).to eq(0)
+        end
+
+        it "sends refund notification emails to funders" do
+          sent_emails = ActionMailer::Base.deliveries
+          recipients = sent_emails.map { |email| email.to.first }
+          contributor_emails = @memberships.map { |membership| membership.member.email }
+          expect(recipients).to match_array(contributor_emails)
+          expect(sent_emails.first.body).to include("archived")
         end
 
         it "returns bucket as json" do
