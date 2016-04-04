@@ -21,7 +21,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
       @totalContributions / @target * 100
 
     openForFunding: ->
-      @remote.postMember(@id,'open_for_funding', {target: @target, fundingClosesAt: @fundingClosesAt})
+      @remote.postMember(@id,'open_for_funding')
 
     hasComments: ->
       @numOfComments > 0
@@ -32,7 +32,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
     amountContributedByUser: (user) ->
       _.sum @contributionsByUser(user), (contribution) ->
         contribution.amount
-    
+
     amountContributedByOthers: (user) ->
       @totalContributions - @amountContributedByUser(user)
 
