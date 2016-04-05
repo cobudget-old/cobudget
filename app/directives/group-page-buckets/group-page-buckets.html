@@ -1,5 +1,5 @@
 <div class="group-page__buckets-content">
-  <md-list class="group-page__live-buckets">
+  <md-list class="group-page__live-buckets" ng-if="group.liveBuckets().length > 0">
     <div layout="row" layout-align="center center">
       <md-subheader class="group-page__subheader-title">FUNDING NOW</md-subheader>
     </div>
@@ -26,7 +26,7 @@
     </md-list-item>
   </md-list>
 
-  <md-list class="group-page__drafts">
+  <md-list class="group-page__drafts" ng-if="group.draftBuckets().length > 0">
     <div layout="row" layout-align="center center">
       <md-subheader class="group-page__subheader-title">IDEAS</md-subheader>
     </div>
@@ -54,7 +54,7 @@
     </md-list-item>
   </md-list>
 
-  <md-list class="group-page__funded-buckets">
+  <md-list class="group-page__funded-buckets" ng-if="group.fundedBuckets().length > 0">
     <div layout="row" layout-align="center center">
       <md-subheader class="group-page__subheader-title">FUNDED</md-subheader>
     </div>
@@ -84,7 +84,7 @@
     </md-list-item>
   </md-list>
 
-  <div class="group-page-buckets__archived-buckets-btn-container" layout="row">
+  <div class="group-page-buckets__archived-buckets-btn-container" layout="row" ng-if="group.archivedBuckets().length > 0">
     <div class="group-page-buckets__archived-buckets-btn" layout="row" layout-align="center center" ng-click="toggleArchivedBuckets()">
       <ng-md-icon icon="archive"
         layout="column"
