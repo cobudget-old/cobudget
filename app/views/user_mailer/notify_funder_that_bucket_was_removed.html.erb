@@ -1,9 +1,9 @@
 <p>
   '<%= @bucket.name %>' was
   <% if @bucket.archived? %>
-    &nbsp;archived
+    archived
   <% else %>
-    &nbsp;deleted
+    deleted
   <% end %>
-  &nbsp;in <%= @group.name %>. You've been refunded <%= @formatted_refund_amount %>.
+  in <%= @group.name %>. You've been refunded <%= @formatted_refund_amount %>.
 </p>
