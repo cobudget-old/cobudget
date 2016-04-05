@@ -19,5 +19,9 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
             scope: $scope
           })
           Dialog.open(archiveBucketDialog)
+        else
+          $scope.bucket.archive()
+          groupId = $scope.bucket.groupId
+          $location.path("/groups/#{groupId}")
 
       return
