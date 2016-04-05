@@ -1,5 +1,10 @@
 // buckets
 
+.group-page__buckets-content {
+  position: relative;
+  width: 100%;
+}
+
 .group-page md-divider {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -116,4 +121,29 @@
 .group-page__funded-bucket-author {
   @include fontSmall;
   color: $grey-on-white;
+}
+
+// archived buckets
+
+.group-page-buckets__archived-buckets-container {
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: 16px;
+}
+
+.group-page-buckets__archived-buckets-btn {
+  background: #E9E9E9;
+  text-transform: none;
+  margin: 0 auto;
+  font-weight: normal;
+  height: 35px;
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid #D0D0D0;
+  cursor: pointer;
+}
+
+.group-page-buckets__archived-buckets-btn-label {
+  margin-left: 10px;
 }
