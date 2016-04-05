@@ -69,9 +69,23 @@
     </md-list-item>
   </md-list>
 
-  <div class="group-page-buckets__archived-buckets-container" layout="row">
+  <md-list class="group-page-buckets__archived-buckets" ng-if="group.archivedBuckets().length > 0 && showArchivedBuckets">
+    <div layout="row" layout-align="center center">
+      <md-subheader class="group-page__subheader-title">ARCHIVED</md-subheader>
+    </div>
 
-    <div class="group-page-buckets__archived-buckets-btn" layout="row" layout-align="center center">
+    <md-divider></md-divider>
+
+    <md-list-item ng-repeat="archivedBucket in group.archivedBuckets()" ng-click="showBucket(archivedBucket.id)">
+      <div layout="column" flex class="group-page__funded-bucket-container">
+        <span class="group-page__funded-bucket-title">{{ archivedBucket.name }}</span>
+        <span class="group-page__funded-bucket-author">created by {{ archivedBucket.authorName }} {{ archivedBucket.createdAt | timeFromNowInWords }} ago</span>
+      </div>
+    </md-list-item>
+  </md-list>
+
+  <div class="group-page-buckets__archived-buckets-btn-container" layout="row">
+    <div class="group-page-buckets__archived-buckets-btn" layout="row" layout-align="center center" ng-click="toggleArchivedBuckets()">
       <ng-md-icon icon="archive"
         layout="column"
         layout-align="center center"
@@ -79,7 +93,7 @@
       ></ng-md-icon>
 
       <div class="group-page-buckets__archived-buckets-btn-label">
-        See Archived Buckets
+        {{ showArchivedBuckets ? 'Hide' : 'Show' }} Archived Buckets
       </div>
     </div>
   </div>

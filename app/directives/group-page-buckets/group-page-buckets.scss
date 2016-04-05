@@ -125,7 +125,7 @@
 
 // archived buckets
 
-.group-page-buckets__archived-buckets-container {
+.group-page-buckets__archived-buckets-btn-container {
   width: 100%;
   padding-left: 16px;
   padding-right: 16px;
@@ -142,6 +142,10 @@
   width: 100%;
   border: 1px solid #D0D0D0;
   cursor: pointer;
+}
+
+.group-page-buckets__archived-buckets-btn:focus {
+  outline: none;
 }
 
 .group-page-buckets__archived-buckets-btn-label {

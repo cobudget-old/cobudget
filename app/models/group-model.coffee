@@ -20,6 +20,13 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     fundedBuckets: ->
       @getActiveBuckets('funded', 'fundedAt')
 
+    archivedBuckets: ->
+      buckets = _.filter @buckets(), (bucket) ->
+        bucket.isArchived()
+      sortedBuckets = _.sortBy buckets, (bucket) ->
+        bucket.archivedAt
+      sortedBuckets.reverse()
+
     # hasManyThrough doesn't yet exist quite yet
     members: ->
       _.map @memberships(), (membership) ->
