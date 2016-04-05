@@ -7,4 +7,5 @@ module.exports = (params) ->
       $mdDialog.cancel()
 
     $scope.proceed = ->
-      console.log('mhm!')
+      $scope.cancel()
+      $scope.archiveBucketAndRedirect()

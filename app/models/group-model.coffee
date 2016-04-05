@@ -30,7 +30,6 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
         membership.memberId == member.id
 
     # private
-
     filterActiveBucketsByStatus: (status) ->
       _.filter @buckets(), (bucket) ->
         bucket.status == status && !bucket.isArchived()

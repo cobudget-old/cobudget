@@ -5,13 +5,23 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
     restrict: 'E'
     template: require('./bucket-page-toolbar.html')
     replace: true
-    controller: (Dialog, $location, $scope, Toast) ->
+    controller: (Dialog, LoadBar, $location, $scope, Toast) ->
 
       $scope.edit = ->
         $location.path("/buckets/#{$scope.bucket.id}/edit")
 
       $scope.userCanEditBucket = ->
         $scope.bucket && $scope.userCanStartFunding()
+
+      $scope.archiveBucketAndRedirect = ->
+        LoadBar.start()
+        $scope.bucket.archive()
+          .then ->
+            groupId = $scope.bucket.groupId
+            $location.path("/groups/#{groupId}")
+          .catch ->
+            Dialog.alert({title: "Error!"})
+            LoadBar.stop()
 
       $scope.archive = ->
         if $scope.bucket.status == 'live'
@@ -20,8 +30,6 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
           })
           Dialog.open(archiveBucketDialog)
         else
-          $scope.bucket.archive()
-          groupId = $scope.bucket.groupId
-          $location.path("/groups/#{groupId}")
+          $scope.archiveBucketAndRedirect()
 
       return
