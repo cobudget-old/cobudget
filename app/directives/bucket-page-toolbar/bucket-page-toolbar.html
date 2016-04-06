@@ -23,7 +23,7 @@
     <span flex></span>
 
     <span ng-show="userCanEditBucket()">
-      <md-button class="md-icon-button bucket-page__bucket-modifier-btn" aria-label="archive" ng-click="archive()">
+      <md-button class="md-icon-button bucket-page__bucket-modifier-btn" aria-label="archive" ng-click="archive()" ng-if="!bucket.isArchived()">
         <ng-md-icon icon="archive"
         layout="column"
         layout-align="center center"
