@@ -41,6 +41,7 @@ class BucketsController < AuthenticatedController
   api :POST, '/buckets/:id/open_for_funding'
   def open_for_funding
     bucket = Bucket.find(params[:id])
+    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && !bucket.archived?
     bucket.update(status: "live")
     render json: [bucket]
   end
