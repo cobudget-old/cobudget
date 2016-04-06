@@ -5,7 +5,9 @@ class Contribution < ActiveRecord::Base
   validates :bucket_id, presence: true
   validates :user_id, presence: true
   validates :amount, numericality: { greater_than: 0 }
+  validate :bucket_cannot_be_archived
   validate :amount_cannot_overdraft_member
+
 
   before_save :lower_amount_if_exceeds_bucket_target
   after_save :update_bucket_status_if_funded
@@ -32,6 +34,12 @@ class Contribution < ActiveRecord::Base
       @balance ||= membership.raw_balance
       if @balance - self.amount < 0
         errors.add(:amount, "amount cannot overdraft member")
+      end
+    end
+
+    def bucket_cannot_be_archived
+      if self.bucket.archived?
+        errors.add(:bucket, "bucket cannot be archived")
       end
     end
 
