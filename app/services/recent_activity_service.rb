@@ -36,9 +36,13 @@ class RecentActivityService
     }
   end
 
+  def is_present_for_group?(group)
+    for_group(group).values.compact.any?
+  end
+
   def is_present?
     return false unless subscription_tracker.subscribed_to_any_activity?
-    user.active_groups.map { |g| for_group(g).values }.flatten.compact.any?
+    user.active_groups.all? { |group| is_present_for_group?(group) }
   end
 
   private
