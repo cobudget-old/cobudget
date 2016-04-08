@@ -11,7 +11,7 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
         $location.path("/buckets/#{$scope.bucket.id}/edit")
 
       $scope.userCanEditBucket = ->
-        $scope.bucket && $scope.userCanStartFunding()
+        $scope.bucket && !$scope.bucket.isArchived() && $scope.userCanStartFunding()
 
       $scope.archiveBucketAndRedirect = ->
         LoadBar.start()
