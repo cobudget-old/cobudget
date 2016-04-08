@@ -55,5 +55,6 @@ class UserMailer < ActionMailer::Base
            subject: "My recent activity on Cobudget - from #{@last_fetched_at}"
       )
     end
+    user.subscription_tracker.update_next_fetch_time_range!
   end
 end
