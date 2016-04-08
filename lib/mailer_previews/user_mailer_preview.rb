@@ -62,8 +62,10 @@ class UserMailerPreview < ActionMailer::Preview
 
         # create 2 new draft_buckets
         generate_bucket(status: "draft", group: group, target: 420)
+        generate_bucket(status: "draft", group: group, target: 420)
 
         # create 2 new live_buckets
+        generate_bucket(status: "live", group: group, target: 420)
         generate_bucket(status: "live", group: group, target: 420)
       end
 

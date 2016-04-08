@@ -12,8 +12,10 @@
 
   <ul style="list-style: none">
     <% buckets.each do |bucket| %>
-      <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %> (<%= bucket.formatted_target %>)</b></a><br>
-      <%= bucket.author_name %>
+      <li style="margin-bottom: 10px;">
+        <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %> (<%= bucket.formatted_target %>)</b></a><br>
+        <%= bucket.author_name %>
+      </li>
     <% end %>
   </ul>
 </li>

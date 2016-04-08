@@ -7,13 +7,15 @@
 
   <ul style="list-style: none">
     <% buckets.each do |bucket| %>
-      <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b>
-        <%= bucket.name %>
-        <% if bucket.target %>
-          <%= "(#{bucket.formatted_target})" %>
-        <% end %>
-      </b></a><br>
-      <%= bucket.author_name %> - <%= time_ago_in_words(bucket.created_at) %> ago<br>
+      <li style="margin-bottom: 10px;">
+        <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b>
+          <%= bucket.name %>
+          <% if bucket.target %>
+            <%= "(#{bucket.formatted_target})" %>
+          <% end %>
+        </b></a><br>
+        <%= bucket.author_name %> - <%= time_ago_in_words(bucket.created_at) %> ago
+      </li>
     <% end %>
   </ul>
 </li>
