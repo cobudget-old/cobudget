@@ -201,6 +201,23 @@ RSpec.describe BucketsController, type: :controller do
             end
           end
         end
+
+        context "bucket is archived" do
+          before do
+            group.add_admin(user)
+            bucket.archive!
+            post :update, bucket_params
+            bucket.reload
+          end
+
+          it "returns http status 'forbidden'" do
+            expect(response).to have_http_status(:forbidden)
+          end
+
+          it "does not update bucket" do
+            expect(bucket.description).not_to eq("new description")
+          end
+        end
       end
 
       context "current_user not member of bucket's group" do
