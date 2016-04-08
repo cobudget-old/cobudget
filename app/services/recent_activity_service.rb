@@ -42,7 +42,7 @@ class RecentActivityService
 
   def is_present?
     return false unless subscription_tracker.subscribed_to_any_activity?
-    user.active_groups.all? { |group| is_present_for_group?(group) }
+    user.active_groups.any? { |group| is_present_for_group?(group) }
   end
 
   private
