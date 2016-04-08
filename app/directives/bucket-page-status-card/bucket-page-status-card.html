@@ -2,7 +2,7 @@
   <md-card-content class="bucket-page__status-card-content">
     <div class="bucket-page__status-header">Status</div>
 
-    <div ng-if="!bucket.isArchived()">
+    <div ng-if="bucket.status == 'funded' || !bucket.isArchived()">
       <div class="bucket-page__status-flagpoints" layout="row" layout-align="space-between center">
         <bucket-page-status-card-flagpoint status="draft" bucket="bucket"></bucket-page-status-card-flagpoint>
 
