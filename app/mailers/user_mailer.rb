@@ -45,7 +45,7 @@ class UserMailer < ActionMailer::Base
     )
   end
 
-  def recent_activity(user:)
+  def recent_activity_email(user:)
     @user = user
     @recent_activity = RecentActivityService.new(user: user)
     if @recent_activity.is_present?
