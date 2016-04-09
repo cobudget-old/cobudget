@@ -24,6 +24,7 @@
 
     <span ng-show="userCanEditBucket()">
       <md-button class="md-icon-button bucket-page__bucket-modifier-btn" aria-label="archive" ng-click="archive()" ng-if="!bucket.isArchived()">
+        <md-tooltip>Archive</md-tooltip>
         <ng-md-icon icon="archive"
         layout="column"
         layout-align="center center"
@@ -32,6 +33,7 @@
       </md-button>
 
       <md-button class="md-icon-button bucket-page__bucket-modifier-btn" aria-label="edit" ng-click="edit()">
+        <md-tooltip>Edit</md-tooltip>
         <ng-md-icon icon="edit"
           layout="column"
           layout-align="center center"
