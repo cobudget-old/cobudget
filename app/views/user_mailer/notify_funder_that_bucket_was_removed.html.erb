@@ -7,3 +7,7 @@
   <% end %>
   in <%= @group.name %>. You've been refunded <%= @formatted_refund_amount %>.
 </p>
+
+<% if @bucket.archived? %>
+  <p><%= link_to 'view', "#{root_url}#/buckets/#{@bucket.id}" %></p>
+<% end %>
