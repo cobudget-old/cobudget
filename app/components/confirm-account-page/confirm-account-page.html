@@ -19,12 +19,12 @@
 
         <form novalidate class="confirm-account-page__form" name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)">
           <div class="confirm-account-page__input-container">
-            <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="name">
+            <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="name" autocomplete="off">
             <div ng-if="newUserForm.name.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Name is required.</div>
           </div>
 
           <div class="confirm-account-page__input-container">
-            <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="password">
+            <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="password" autocomplete="off">
             <div ng-if="newUserForm.password.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Password is required.</div>
             <div ng-if="newUserForm.password.$error.minlength && newUserForm.$submitted" class="confirm-account-page__input-error">Password must be longer than 8 characters.</div>
           </div>
