@@ -57,7 +57,7 @@ RSpec.describe BucketsController, type: :controller do
       end
     end
 
-    describe "function" do
+    describe "behavior" do
       before do
         request.headers.merge!(user.create_new_auth_token)
         group.add_admin(user)
