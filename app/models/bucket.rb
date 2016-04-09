@@ -78,7 +78,7 @@ class Bucket < ActiveRecord::Base
 
   def archive!
     update(archived_at: DateTime.now.utc)
-    if live_at.present?
+    if status == 'live'
       contributors.each do |funder|
         UserMailer.notify_funder_that_bucket_was_removed(funder: funder, bucket: self).deliver_now
       end

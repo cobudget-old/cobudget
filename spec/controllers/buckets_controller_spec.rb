@@ -372,6 +372,10 @@ RSpec.describe BucketsController, type: :controller do
           expect(@contribution.user.membership_for(group).balance).to eq(0)
         end
 
+        it "does not send refund notification emails to funders" do
+          expect(ActionMailer::Base.deliveries).to be_empty
+        end
+
         it "returns bucket as json" do
           expect(parsed(response)["buckets"][0]["id"]).to eq(bucket.id)
         end
