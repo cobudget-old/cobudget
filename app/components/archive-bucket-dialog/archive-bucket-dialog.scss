@@ -10,12 +10,16 @@
 
 .archive-bucket-dialog__header-text {
   margin-top: 5px;
-  color: $cobudget-red;
-  font-weight: 500;
+  font-weight: bold;
+  color: $grey-on-white;
 }
 
-.archive-bucket-dialog__warning-icon {
+.archive-bucket-dialog__red-warning-icon {
   fill: $cobudget-red;
+}
+
+.archive-bucket-dialog__yellow-warning-icon {
+  fill: $cobudget-gold;
 }
 
 .archive-bucket-dialog__final-caution {
@@ -42,8 +46,15 @@
 }
 
 .archive-bucket-dialog__proceed-btn {
-  background: $cobudget-red !important;
   color: white !important;
+}
+
+.archive-bucket-dialog__red-proceed-btn {
+  background: $cobudget-red !important;
+}
+
+.archive-bucket-dialog__yellow-proceed-btn {
+  background: $cobudget-gold !important;
 }
 
 .archive-bucket-dialog__cancel-btn {

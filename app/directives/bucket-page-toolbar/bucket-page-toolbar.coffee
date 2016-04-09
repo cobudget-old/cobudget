@@ -13,23 +13,10 @@ global.cobudgetApp.directive 'bucketPageToolbar', () ->
       $scope.userCanEditBucket = ->
         $scope.bucket && !$scope.bucket.isArchived() && $scope.userCanStartFunding()
 
-      $scope.archiveBucketAndRedirect = ->
-        LoadBar.start()
-        $scope.bucket.archive()
-          .then ->
-            groupId = $scope.bucket.groupId
-            $location.path("/groups/#{groupId}")
-          .catch ->
-            Dialog.alert({title: "Error!"})
-            LoadBar.stop()
-
       $scope.archive = ->
-        if $scope.bucket.status == 'live'
-          archiveBucketDialog = require('./../../components/archive-bucket-dialog/archive-bucket-dialog.coffee')({
-            scope: $scope
-          })
-          Dialog.open(archiveBucketDialog)
-        else
-          $scope.archiveBucketAndRedirect()
+        archiveBucketDialog = require('./../../components/archive-bucket-dialog/archive-bucket-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(archiveBucketDialog)
 
       return
