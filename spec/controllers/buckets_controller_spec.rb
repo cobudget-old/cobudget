@@ -1,9 +1,90 @@
 require 'rails_helper'
 
 RSpec.describe BucketsController, type: :controller do
+  let(:user) { create(:user) }
+  let(:group) { create(:group) }
+  let(:bucket) { create(:bucket, group: group, status: 'draft') }
+
+  after { ActionMailer::Base.deliveries.clear }
+
+  describe "#open_for_funding" do
+    describe "permissions" do
+      context "user signed in" do
+        before { request.headers.merge!(user.create_new_auth_token) }
+
+        context "user is group member" do
+          before { group.add_member(user) }
+
+          context "user is admin" do
+            before { group.add_admin(user) }
+
+            it "returns http status 'success'" do
+              post :open_for_funding, { id: bucket.id }
+              expect(response).to have_http_status(:success)
+            end
+          end
+
+          context "user is bucket author" do
+            before { bucket.update(user: user) }
+
+            it "returns http status 'success'" do
+              post :open_for_funding, { id: bucket.id }
+              expect(response).to have_http_status(:success)
+            end
+          end
+
+          context "user is neither admin nor bucket author" do
+            it "returns http status 'forbidden'" do
+              post :open_for_funding, { id: bucket.id }
+              expect(response).to have_http_status(:forbidden)
+            end
+          end
+        end
+
+        context "user is not group member" do
+          it "returns http status 'forbidden'" do
+            post :open_for_funding, { id: bucket.id }
+            expect(response).to have_http_status(:forbidden)
+          end
+        end
+      end
+
+      context "user not signed in" do
+        it "returns http status 'unauthorized'" do
+          post :open_for_funding, { id: bucket.id }
+          expect(response).to have_http_status(:unauthorized)
+        end
+      end
+    end
+
+    describe "behavior" do
+      before do
+        request.headers.merge!(user.create_new_auth_token)
+        group.add_admin(user)
+      end
+
+      context "bucket active" do
+        before do
+          post :open_for_funding, { id: bucket.id }
+          bucket.reload
+        end
+
+        it "updates bucket status to live" do
+          expect(bucket.status).to eq("live")
+        end
+
+        it "sets live_at on bucket" do
+          expect(bucket.live_at).not_to be_nil
+        end
+
+        it "returns bucket as json" do
+          expect(parsed(response)["buckets"][0]["id"]).to eq(bucket.id)
+        end
+      end
+    end
+  end
+
   describe "#update" do
-    let!(:bucket) { create(:bucket, status: 'draft') }
-    let!(:group) { bucket.group }
     let(:bucket_params) {{
       id: bucket.id,
       bucket: {

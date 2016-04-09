@@ -34,6 +34,24 @@ RSpec.describe Bucket, :type => :model do
   end
 
   describe "#set_timestamp_if_status_updated" do
+    context "live bucket updated, but not status" do
+      it "does not set timestamps" do
+        current_time = DateTime.now.utc
+        Timecop.freeze(current_time - 1.hour) do
+          bucket.update(status: "live")
+        end
+
+        Timecop.freeze(current_time) do
+          bucket.update(description: "new description ayyyy")
+        end
+
+        Timecop.return
+
+        bucket.reload
+        expect(bucket.live_at).to be_within(1).of(current_time - 1.hour)
+      end
+    end
+
     context "status updated to 'live'" do
       it "sets live_at" do
         bucket.update(status: 'live')
