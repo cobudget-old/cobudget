@@ -17,6 +17,7 @@ gem 'responders', '~> 2.0'
 
 # model utilities
 gem 'money-rails'
+gem 'redcarpet'
 
 # auth
 gem 'devise', '~> 3.5.2'
@@ -37,7 +38,8 @@ gem 'airbrake'
 gem 'faker'
 gem 'factory_girl_rails'
 
-gem 'redcarpet'
+# analytics
+gem 'groupdate'
 
 group :development do
   gem 'capistrano', '2.15.5'
