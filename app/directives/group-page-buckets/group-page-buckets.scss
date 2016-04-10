@@ -133,15 +133,17 @@
 }
 
 .group-page-buckets__archived-buckets-btn {
-  background: #E9E9E9;
+  background: rgba(0,0,0,0.05);
   text-transform: none;
   margin: 0 auto;
   font-weight: normal;
   height: 35px;
   font-size: 14px;
   width: 100%;
-  border: 1px solid #D0D0D0;
+  border: 1px solid rgba(0,0,0,0.1);
   cursor: pointer;
+  fill: rgba(0,0,0,0.4);
+  color: rgba(0,0,0,0.6);
 }
 
 .group-page-buckets__archived-buckets-btn:focus {
