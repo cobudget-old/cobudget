@@ -32,3 +32,6 @@ global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toas
 
     inviteMembersToGroup: (group) ->
       @manageFundsForGroup(group)
+
+    viewAnalyticsPage: ->
+      true

@@ -1,0 +1,12 @@
+<div class="analytics-page" ng-if="authorized">
+
+  <div class="analytics-page__user-count-chart-container">
+    <h2>user count vs time</h2>
+    <canvas
+      class="chart chart-line analytics-page__user-count-chart"
+      chart-data="data"
+      chart-labels="labels"
+      chart-series="series"
+    ></canvas>
+  </div>
+</div>
