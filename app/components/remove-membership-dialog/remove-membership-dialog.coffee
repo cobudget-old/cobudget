@@ -7,8 +7,8 @@ module.exports = (params) ->
     $scope.warnings = [
       "All of their funds will be removed from currently funding buckets",
       "All of their funds will be removed from the group",
-      "All of their ideas will be removed from the group",
-      "All of their funding buckets will be removed from the group and money will be refunded"
+      "All of their ideas will be archived",
+      "All of their funding buckets will be archived and money will be refunded"
     ]
     $scope.cancel = ->
       $mdDialog.cancel()
