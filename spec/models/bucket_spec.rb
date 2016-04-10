@@ -48,7 +48,7 @@ RSpec.describe Bucket, :type => :model do
         Timecop.return
 
         bucket.reload
-        expect(bucket.live_at).to eq(current_time - 1.hour)
+        expect(bucket.live_at).to be_within(1).of(current_time - 1.hour)
       end
     end
 

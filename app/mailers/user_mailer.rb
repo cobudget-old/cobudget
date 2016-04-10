@@ -101,7 +101,7 @@ class UserMailer < ActionMailer::Base
          subject: "#{admin.name} gave you funds to spend in #{@group.name}")
   end
 
-  def notify_funder_that_bucket_was_removed(funder: , bucket: )
+  def notify_funder_that_bucket_was_archived(funder: , bucket: )
     @bucket = bucket
     @group = @bucket.group
     refund_amount = @bucket.contributions.where(user: funder).sum(:amount)

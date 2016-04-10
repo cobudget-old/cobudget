@@ -21,4 +21,14 @@ class BucketService
       UserMailer.notify_member_that_bucket_is_funded(bucket: bucket, member: member).deliver_later
     end
   end
+
+  def self.archive(bucket:, exclude_author_from_email_notifications: false)
+    bucket.update(archived_at: DateTime.now.utc)
+    if bucket.status == 'live'
+      bucket.contributors(exclude_author: exclude_author_from_email_notifications).each do |funder|
+        UserMailer.notify_funder_that_bucket_was_archived(funder: funder, bucket: bucket).deliver_now
+      end
+      bucket.contributions.destroy_all
+    end
+  end
 end

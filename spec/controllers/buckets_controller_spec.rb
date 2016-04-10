@@ -84,7 +84,7 @@ RSpec.describe BucketsController, type: :controller do
 
       context "bucket archived" do
         before do
-          bucket.archive!
+          BucketService.archive(bucket: bucket)
           post :open_for_funding, { id: bucket.id }
           bucket.reload
         end
@@ -205,7 +205,7 @@ RSpec.describe BucketsController, type: :controller do
         context "bucket is archived" do
           before do
             group.add_admin(user)
-            bucket.archive!
+            BucketService.archive(bucket: bucket)
             post :update, bucket_params
             bucket.reload
           end
