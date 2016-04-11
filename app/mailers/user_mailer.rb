@@ -45,16 +45,15 @@ class UserMailer < ActionMailer::Base
     )
   end
 
-  def recent_activity_email(user:)
+  def recent_personal_activity_email(user:, time_range:)
     @user = user
-    @recent_activity = RecentActivityService.new(user: user)
-    if @recent_activity.is_present?
-      @last_fetched_at = @user.subscription_tracker.last_fetched_at_formatted
+    @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
+    formatted_date = time_range.first.strftime("%I:%M %p (%B %d, %Y)")
+    if @recent_activity.personal_activity_present?
       mail(to: user.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "My recent activity on Cobudget - from #{@last_fetched_at}"
+           subject: "Activity in your Cobudget groups since #{formatted_date}"
       )
     end
-    user.subscription_tracker.update_next_fetch_time_range!
   end
 end

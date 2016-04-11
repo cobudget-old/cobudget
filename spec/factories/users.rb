@@ -7,7 +7,7 @@ FactoryGirl.define do
 
     after(:create) do |user|
       if user.confirmed?
-        user.subscription_tracker.update(notification_frequency: "hourly")
+        user.subscription_tracker.update(subscribed_to_email_notifications: true, email_digest_delivery_frequency: "weekly")
       end
     end
   end

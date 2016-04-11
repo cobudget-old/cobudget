@@ -15,34 +15,52 @@ class RecentActivityService
                 :user_group_buckets,
                 :users_active_groups,
                 :user,
-                :activity
+                :personal_activity
 
   def initialize(user:, time_range:)
     @user = user
-    @activity = {}
+    @time_range = time_range
+    @personal_activity = {}
   end
 
-  def for_group(group)
-    activity[group] ||= {
+  def personal_activity_for_group(group)
+    personal_activity[group] ||= {
       contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),
       funded_buckets_user_authored:                       collection_scoped_to_group(collection: funded_buckets_user_authored,                       group: group),
       comments_on_buckets_user_authored:                  collection_scoped_to_group(collection: comments_on_buckets_user_authored,                  group: group),
       comments_on_buckets_user_participated_in:           collection_scoped_to_group(collection: comments_on_buckets_user_participated_in,           group: group),
-      new_live_buckets:                                   collection_scoped_to_group(collection: new_live_buckets,                                   group: group),
-      new_draft_buckets:                                  collection_scoped_to_group(collection: new_draft_buckets,                                  group: group),
-      contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group),
-      new_funded_buckets:                                 collection_scoped_to_group(collection: new_funded_buckets,                                 group: group)
+      contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group)
     }
   end
 
-  def is_present_for_group?(group)
-    for_group(group).values.compact.any?
+  def personal_activity_present_for_group?(group)
+    personal_activity_for_group(group).values.compact.any?
   end
 
-  def is_present?
-    return false unless subscription_tracker.subscribed_to_any_activity?
-    user.active_groups.any? { |group| is_present_for_group?(group) }
+  def personal_activity_present?
+    user.active_groups.any? { |group| personal_activity_present_for_group?(group) }
   end
+
+  # def for_group(group)
+  #   activity[group] ||= {
+  #     contributions_to_live_buckets_user_authored:        collection_scoped_to_group(collection: contributions_to_live_buckets_user_authored,        group: group),
+  #     funded_buckets_user_authored:                       collection_scoped_to_group(collection: funded_buckets_user_authored,                       group: group),
+  #     comments_on_buckets_user_authored:                  collection_scoped_to_group(collection: comments_on_buckets_user_authored,                  group: group),
+  #     comments_on_buckets_user_participated_in:           collection_scoped_to_group(collection: comments_on_buckets_user_participated_in,           group: group),
+  #     new_live_buckets:                                   collection_scoped_to_group(collection: new_live_buckets,                                   group: group),
+  #     new_draft_buckets:                                  collection_scoped_to_group(collection: new_draft_buckets,                                  group: group),
+  #     contributions_to_live_buckets_user_participated_in: collection_scoped_to_group(collection: contributions_to_live_buckets_user_participated_in, group: group),
+  #     new_funded_buckets:                                 collection_scoped_to_group(collection: new_funded_buckets,                                 group: group)
+  #   }
+  # end
+  #
+  # def is_present_for_group?(group)
+  #   for_group(group).values.compact.any?
+  # end
+  #
+  # def is_present?
+  #   user.active_groups.any? { |group| is_present_for_group?(group) }
+  # end
 
   private
     def collection_scoped_to_group(collection:, group:)
