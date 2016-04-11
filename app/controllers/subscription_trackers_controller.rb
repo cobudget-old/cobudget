@@ -21,7 +21,8 @@ class SubscriptionTrackersController < AuthenticatedController
         :contributions_to_live_buckets_user_authored,
         :contributions_to_live_buckets_user_participated_in,
         :funded_buckets_user_authored,
-        :notification_frequency
+        :subscribed_to_email_notifications,
+        :email_digest_delivery_frequency
       )
     end
 end

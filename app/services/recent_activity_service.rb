@@ -7,7 +7,6 @@ class RecentActivityService
                 :new_funded_buckets,
                 :new_draft_buckets,
                 :new_live_buckets,
-                :subscription_tracker,
                 :time_range,
                 :buckets_user_participated_in,
                 :buckets_user_commented_on_ids,
@@ -18,7 +17,7 @@ class RecentActivityService
                 :user,
                 :activity
 
-  def initialize(user:)
+  def initialize(user:, time_range:)
     @user = user
     @activity = {}
   end
@@ -58,69 +57,45 @@ class RecentActivityService
     end
 
     def contributions_to_live_buckets_user_authored
-      if subscription_tracker.contributions_to_live_buckets_user_authored
-        contributions_to_live_buckets_user_authored ||= Contribution.where(
-          created_at: time_range,
-          bucket: user_buckets.where(funded_at: nil)
-        )
-      end
+      contributions_to_live_buckets_user_authored ||= Contribution.where(
+        created_at: time_range,
+        bucket: user_buckets.where(funded_at: nil)
+      )
     end
 
     def funded_buckets_user_authored
-      if subscription_tracker.funded_buckets_user_authored
-        funded_buckets_user_authored ||= user_buckets.where(funded_at: time_range)
-      end
+      funded_buckets_user_authored ||= user_buckets.where(funded_at: time_range)
     end
 
     def comments_on_buckets_user_authored
-      if subscription_tracker.comments_on_buckets_user_authored
-        comments_on_buckets_user_authored ||= Comment.where(bucket: user_buckets, created_at: time_range)
-      end
+      comments_on_buckets_user_authored ||= Comment.where(bucket: user_buckets, created_at: time_range)
     end
 
     def comments_on_buckets_user_participated_in
-      if subscription_tracker.comments_on_buckets_user_participated_in
-        comments_on_buckets_user_participated_in ||= Comment.where(bucket: buckets_user_participated_in, created_at: time_range)
-      end
+      comments_on_buckets_user_participated_in ||= Comment.where(bucket: buckets_user_participated_in, created_at: time_range)
     end
 
     def new_live_buckets
-      if subscription_tracker.new_live_buckets
-        new_live_buckets ||= user_group_buckets.where(status: "live", live_at: time_range)
-      end
+      new_live_buckets ||= user_group_buckets.where(status: "live", live_at: time_range)
     end
 
     def new_draft_buckets
-      if subscription_tracker.new_draft_buckets
-        new_draft_buckets ||= user_group_buckets.where(status: "draft", created_at: time_range)
-      end
+      new_draft_buckets ||= user_group_buckets.where(status: "draft", created_at: time_range)
     end
 
     def contributions_to_live_buckets_user_participated_in
-      if subscription_tracker.contributions_to_live_buckets_user_participated_in
-        contributions_to_live_buckets_user_participated_in ||= Contribution.where(
-          created_at: time_range,
-          bucket: buckets_user_participated_in.where(funded_at: nil)
-        )
-      end
+      contributions_to_live_buckets_user_participated_in ||= Contribution.where(
+        created_at: time_range,
+        bucket: buckets_user_participated_in.where(funded_at: nil)
+      )
     end
 
     def new_funded_buckets
-      if subscription_tracker.new_funded_buckets
-        new_funded_buckets ||= user_group_buckets.where(status: "funded", funded_at: time_range)
-                                                 .where.not(user: user)
-      end
+      new_funded_buckets ||= user_group_buckets.where(status: "funded", funded_at: time_range)
+                                               .where.not(user: user)
     end
 
     ###############################################################
-
-    def subscription_tracker
-      subscription_tracker ||= user.subscription_tracker
-    end
-
-    def time_range
-      time_range ||= subscription_tracker.next_fetch_time_range
-    end
 
     def buckets_user_participated_in
       buckets_user_participated_in ||= Bucket.where(id: (buckets_user_commented_on_ids + buckets_user_contributed_to_ids).uniq)

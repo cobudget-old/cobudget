@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330103630) do
+ActiveRecord::Schema.define(version: 20160410224309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,19 +103,11 @@ ActiveRecord::Schema.define(version: 20160330103630) do
   add_index "memberships", ["member_id"], name: "index_memberships_on_member_id", using: :btree
 
   create_table "subscription_trackers", force: :cascade do |t|
-    t.integer  "user_id",                                                              null: false
-    t.boolean  "comments_on_buckets_user_authored",                  default: true,    null: false
-    t.boolean  "comments_on_buckets_user_participated_in",           default: true,    null: false
-    t.boolean  "new_draft_buckets",                                  default: true,    null: false
-    t.boolean  "new_live_buckets",                                   default: true,    null: false
-    t.boolean  "new_funded_buckets",                                 default: true,    null: false
-    t.boolean  "contributions_to_live_buckets_user_authored",        default: true,    null: false
-    t.boolean  "contributions_to_live_buckets_user_participated_in", default: true,    null: false
-    t.boolean  "funded_buckets_user_authored",                       default: true,    null: false
-    t.datetime "recent_activity_last_fetched_at"
-    t.string   "notification_frequency",                             default: "never", null: false
-    t.datetime "created_at",                                                           null: false
-    t.datetime "updated_at",                                                           null: false
+    t.integer  "user_id",                                             null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.boolean  "subscribed_to_email_notifications", default: false
+    t.string   "email_digest_delivery_frequency",   default: "never"
   end
 
   add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
