@@ -1,24 +1,22 @@
 class UserMailerPreview < ActionMailer::Preview
-  def recent_activity_email
+  def personal_recent_activity_email
+    current_time = DateTime.now.utc
     user = generate_user
     group1 = Group.create(name: Faker::Company.name)
     group2 = Group.create(name: Faker::Company.name)
     membership1 = Membership.create(member: user, group: group1)
     membership2 = Membership.create(member: user, group: group2)
-    generate_recent_activity_for(membership: membership1)
-    UserMailer.recent_activity_email(user: user)
+    generate_recent_personal_activity_for(membership: membership1, current_time: current_time)
+    UserMailer.recent_personal_activity_email(user: user, time_range: (current_time - 1.hour)..current_time)
   end
 
   private
-    def generate_recent_activity_for(membership: )
-      current_time = DateTime.now.utc
+    def generate_recent_personal_activity_for(membership:, current_time:)
       user = membership.member
       group = membership.group
-      # note: notification_frequency set to "hourly"
       subscription_tracker = user.subscription_tracker
 
       Allocation.create(user: user, group: group, amount: 20000)
-      subscription_tracker.update(recent_activity_last_fetched_at: current_time - 1.hour)
 
       bucket_user_participated_in = generate_bucket(group: group)
       generate_comment(user: user, bucket: bucket_user_participated_in)
@@ -27,7 +25,6 @@ class UserMailerPreview < ActionMailer::Preview
 
       live_bucket_user_authored = generate_bucket(group: group, user: user, status: "live")
       bucket_user_authored_to_be_fully_funded = generate_bucket(group: group, user: user, status: "live")
-
 
       Timecop.freeze(current_time - 30.minutes) do
         # create 2 comments on bucket_user_participated_in
@@ -59,14 +56,6 @@ class UserMailerPreview < ActionMailer::Preview
           bucket: bucket_user_authored_to_be_fully_funded,
           amount: bucket_user_authored_to_be_fully_funded.amount_left
         )
-
-        # create 2 new draft_buckets
-        generate_bucket(status: "draft", group: group, target: 420)
-        generate_bucket(status: "draft", group: group, target: 420)
-
-        # create 2 new live_buckets
-        generate_bucket(status: "live", group: group, target: 420)
-        generate_bucket(status: "live", group: group, target: 420)
       end
 
       Timecop.return
