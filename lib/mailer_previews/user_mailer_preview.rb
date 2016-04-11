@@ -7,6 +7,7 @@ class UserMailerPreview < ActionMailer::Preview
     membership1 = Membership.create(member: user, group: group1)
     membership2 = Membership.create(member: user, group: group2)
     generate_recent_personal_activity_for(membership: membership1, current_time: current_time)
+    generate_recent_personal_activity_for(membership: membership2, current_time: current_time)
     UserMailer.recent_personal_activity_email(user: user, time_range: (current_time - 1.hour)..current_time)
   end
 

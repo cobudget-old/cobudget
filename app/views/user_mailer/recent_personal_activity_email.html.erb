@@ -9,7 +9,7 @@
 
           <h2 style="font-weight: normal">In <%= group.name %></h2>
 
-          <ul style="list-style: none">
+          <ul style="list-style: none; padding-left: 0">
             <% if activity[:contributions_to_live_buckets_user_authored] %>
               <%= render partial: "user_mailer/recent_activity_partials/contributions_to_live_buckets_user_authored", locals: {contributions_grouped_by_bucket: activity[:contributions_to_live_buckets_user_authored].group_by { |c| c.bucket }, user: @user} %>
             <% end %>
@@ -32,6 +32,8 @@
           </ul>
         </li>
       <% end %>
+
+      <div style="border-bottom: 1px solid black; margin-top: 25px; margin-bottom: 20px; width: 400px;"></div>
     <% end %>
   </ul>
 
