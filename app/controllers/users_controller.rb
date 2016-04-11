@@ -16,18 +16,6 @@ class UsersController < AuthenticatedController
     end
   end
 
-  # can remove once user can start their own group
-  api :POST, '/users/invite_to_create_group?email'
-  def invite_to_create_group
-    user = User.create_with_confirmation_token(email: params[:email])
-    if user.valid?
-      UserMailer.join_cobudget_and_create_group_invite(user: user, inviter: current_user).deliver_later
-      render status: 200, nothing: true
-    else
-      render status: 409, nothing: true
-    end
-  end
-
   api :POST, '/users?email'
   def create
     tmp_password = SecureRandom.hex

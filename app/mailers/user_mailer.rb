@@ -101,15 +101,6 @@ class UserMailer < ActionMailer::Base
          subject: "#{admin.name} gave you funds to spend in #{@group.name}")
   end
 
-  def join_cobudget_and_create_group_invite(user: , inviter:)
-    @user = user
-    @inviter = inviter
-    @redirect_url = "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}&setup_group=true".html_safe
-    mail(to: @user.name_and_email,
-         from: "Cobudget Accounts <accounts@cobudget.co>",
-         subject: "#{inviter.name} invited you to create a new group on Cobudget")
-  end
-
   def notify_funder_that_bucket_was_deleted(funder: , bucket: )
     @bucket = bucket
     @group = @bucket.group

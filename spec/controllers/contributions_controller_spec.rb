@@ -2,26 +2,31 @@ require 'rails_helper'
 
 RSpec.describe ContributionsController, type: :controller do
   describe "#create" do
+    let!(:user) { create(:user) }
+    let!(:group) { create(:group) }
+    let!(:bucket) { create(:bucket, group: group) }
+
     context "user signed in" do
       before { request.headers.merge!(user.create_new_auth_token) }
 
       context "user is member of group" do
+        let!(:membership) { create(:membership, member: user, group: group) }
+
         before do
-          make_user_group_member
-          bucket.update(target: 100, group: group)
+          bucket.update(target: 100)
           bucket.update(status: 'live')
         end
 
         context "contribution amount does not exceed contributor's balance" do
           before do
-            create(:allocation, user: user, group: group, amount: 1000)
+            create(:allocation, user: user, group: group, amount: 100)
           end
 
           context "contribution amount does not exceed bucket's funding target" do
             before do
               contribution_params = {
                 bucket_id: bucket.id,
-                amount: 50
+                amount: 100
               }
               post :create, {contribution: contribution_params}
               @contribution = Contribution.find_by(contribution_params)
@@ -54,6 +59,7 @@ RSpec.describe ContributionsController, type: :controller do
 
           context "contribution amount exceeds bucket's funding target" do
             it "contribution amount is decreased to exactly meet the bucket's funding target" do
+              create(:allocation, user: user, group: group, amount: 1000)
               contribution_params = {
                 bucket_id: bucket.id,
                 amount: 150

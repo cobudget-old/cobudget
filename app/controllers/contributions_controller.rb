@@ -23,7 +23,7 @@ class ContributionsController < AuthenticatedController
       ContributionService.send_bucket_received_contribution_emails(contribution: contribution)
       render json: [contribution]
     else
-      render nothing: true, status: 422
+      render json: contribution.errors.full_messages, status: 422
     end
   end
 
