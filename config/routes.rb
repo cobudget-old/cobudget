@@ -48,5 +48,7 @@ Rails.application.routes.draw do
     resources :contributions, only: [:index, :create]
   end
 
+  get '/analytics/report', to: 'analytics#report'
+
   root to: redirect('/docs')
 end
