@@ -89,10 +89,12 @@ class RecentActivityService
 
     def comments_on_buckets_user_authored
       comments_on_buckets_user_authored ||= Comment.where(bucket: user_buckets, created_at: time_range)
+                                                   .where.not(user: user)
     end
 
     def comments_on_buckets_user_participated_in
       comments_on_buckets_user_participated_in ||= Comment.where(bucket: buckets_user_participated_in, created_at: time_range)
+                                                          .where.not(user: user)
     end
 
     def new_live_buckets
