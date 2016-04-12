@@ -45,8 +45,10 @@ class UserMailer < ActionMailer::Base
     )
   end
 
-  def recent_personal_activity_email(user:, time_range:)
+  def recent_personal_activity_email(user:)
     @user = user
+    current_hour_utc = DateTime.now.utc.beginning_of_hour
+    time_range = (current_hour_utc - 1.hour)..current_hour_utc
     @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
     formatted_date = time_range.first.strftime("%I:%M %p (%B %d, %Y)")
     if @recent_activity.personal_activity_present?
@@ -57,11 +59,20 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def recent_activity_digest_email(user:, time_range:)
+  def recent_activity_digest_email(user:)
     @user = user
+    current_hour_utc = DateTime.now.utc.beginning_of_hour
+    if @user.subscription_tracker.email_digest_delivery_frequency == "daily"
+      time_range = (current_hour_utc - 1.day)..current_hour_utc
+      @formatted_time_period = "yesterday"
+    else
+      time_range = (current_hour_utc - 1.week)..current_hour_utc
+      @formatted_time_period = "last week"
+    end
+
     @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
     formatted_date = time_range.first.strftime("%B %d, %Y")
-    @formatted_time_period = user.subscription_tracker.email_digest_delivery_frequency == "daily" ? "yesterday" : "last week"
+
     if @recent_activity.is_present?
       mail(to: user.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
