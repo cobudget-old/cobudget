@@ -1,7 +1,7 @@
 <div class="email-settings-page" ng-if="authorized">
   <md-toolbar class="md-whiteframe-z1 email-settings-page__toolbar" layout-align="column">
     <div class="md-toolbar-tools">
-      <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+      <md-button class="md-icon-button" ng-click="attemptCancel(emailSettingsForm)" aria-label="cancel">
         <ng-md-icon icon="close"
           class="email-settings-page__cancel-icon"
           layout="column"
@@ -9,45 +9,54 @@
         ></ng-md-icon>
       </md-button>
       <span class="email-settings-page__header-text">Email Settings</span>
-      <span flex></span>
-      <md-button class="md-icon-button email-settings-page__done-button" aria-label="done" ng-click="done()">
-        <div layout="column" layout-align="center center">
-          <span class="email-settings-page__done-button-text">Done</span>
-        </div>
-      </md-button>
     </div>
   </md-toolbar>
 
   <md-content class="email-settings-page__content">
-    <div>
-      <h2 class="email-settings-page__subheader">What types of notifications would you like to receive?</h2>
-      <div layout="row" layout-align="start center" class="email-settings-page__email-setting" ng-repeat="setting in settings">
-        <md-checkbox
-          ng-model="subscriptionTracker[setting.property]"
-          ng-attr-aria-label="{{ setting.header }}"
-          class="email-settings-page__checkbox">
-        </md-checkbox>
-
+    <form novalidate name="emailSettingsForm" ng-submit="save(); emailSettingsForm.$setPristine()">
+      <div layout="row" layout-align="start center" class="email-settings-page__email-setting">
         <div layout="column" layout-align="start center">
           <div class="email-settings-page__setting-header">
-            {{ setting.header }}
+            Receive email notifications?
           </div>
         </div>
+
+        <span flex></span>
+
+        <md-checkbox
+          name="subscribedToEmailNotifications"
+          ng-model="subscriptionTracker.subscribedToEmailNotifications"
+          aria-label="subscribed to email notifications"
+          class="email-settings-page__checkbox">
+        </md-checkbox>
       </div>
-    </div>
 
-    <md-divider class="email-settings-page__horizontal-divider"></md-divider>
+      <div layout="row" layout-align="start center" class="email-settings-page__email-setting-note">
+        <span><b>note</b>: these updates are automatically set to hourly</span>
+      </div>
 
-    <div>
-      <h2 class="email-settings-page__subheader">How often would you like to receive them?</h2>
+      <div layout="row" layout-align="start center" class="email-settings-page__email-setting">
+        <div layout="column" layout-align="start center">
+          <div class="email-settings-page__setting-header">
+            Receive email digest?
+          </div>
+        </div>
 
-      <md-input-container>
-        <md-select required class="email-settings-page__notification-frequency-options" name="notificationFrequency" ng-model="subscriptionTracker.notificationFrequency" aria-label="notification frequency options">
-          <md-option required ng-repeat="option in notificationFrequencyOptions" value="{{option}}">
+        <span flex></span>
+
+        <md-select required
+          class="email-settings-page__notification-frequency-options"
+          name="emailDigestDeliveryFrequency"
+          ng-model="subscriptionTracker.emailDigestDeliveryFrequency"
+          aria-label="notification frequency options"
+        >
+          <md-option required ng-repeat="option in emailDigestDeliveryFrequencyOptions" value="{{option}}">
             {{option}}
           </md-option>
         </md-select>
-      </md-input-container>
-    </div>
+      </div>
+
+      <md-button class="md-raised md-primary email-settings-page__save-btn" ng-disabled="emailSettingsForm.$pristine">save</md-button>
+    </form>
   </md-content>
 </div>

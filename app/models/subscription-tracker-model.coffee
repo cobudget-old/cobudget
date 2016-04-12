@@ -7,15 +7,8 @@ global.cobudgetApp.factory 'SubscriptionTrackerModel', (BaseModel) ->
     @plural: 'subscriptionTrackers'
 
     @serializableAttributes: [
-      'commentsOnBucketsUserAuthored',
-      'commentsOnBucketsUserParticipatedIn',
-      'contributionsToLiveBucketsUserAuthored',
-      'contributionsToLiveBucketsUserParticipatedIn',
-      'fundedBucketsUserAuthored',
-      'newDraftBuckets',
-      'newLiveBuckets',
-      'newFundedBuckets',
-      'notificationFrequency'
+      'subscribedToEmailNotifications',
+      'emailDigestDeliveryFrequency'
     ]
 
     relationships: ->

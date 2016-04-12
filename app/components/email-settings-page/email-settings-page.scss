@@ -14,44 +14,38 @@
   @include fontLarge;
 }
 
-.email-settings-page__done-button-text {
-  margin-right: 5px;
-}
-
-
-// settings list
-
-.email-settings-page__subheader {
-  font-weight: normal;
-  font-size: 20px;
-  padding-left: 8px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.email-settings-page__horizontal-divider {
-  margin: 20px auto;
-}
+// settings
 
 .email-settings-page__content {
   padding: 15px;
-}
-
-.email-settings-page__checkbox {
-  margin-right: 10px;
 }
 
 .email-settings-page__checkbox.md-checked .md-icon {
   background-color: $grey-on-white;
 }
 
-.email-settings-page__setting-header {
-  font-weight: 500;
-  color: $grey-on-white;
+.email-settings-page__email-setting {
+  font-size: 18px;
+}
+
+.email-settings-page__email-setting-note {
+  font-size: 13px;
 }
 
 .email-settings-page__notification-frequency-options {
-  padding-left: 5px;
-  padding-right: 5px;
+  position: relative;
+  bottom: 2px;
+  font-size: 15px;
   max-width: 300px;
+}
+
+.email-settings-page__save-btn {
+  background: $cobudget-light-blue !important;
+  margin: 0 !important;
+  margin-top: 10px !important;
+  width: 100%;
+}
+
+.email-settings-page__save-btn:disabled {
+  background: $grey-on-white !important;
 }

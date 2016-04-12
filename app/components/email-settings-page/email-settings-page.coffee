@@ -7,7 +7,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   template: require('./email-settings-page.html')
   reloadOnSearch: false
-  controller: (CurrentUser, Error, $location, Records, $scope, $stateParams, Toast, UserCan) ->
+  controller: (CurrentUser, Dialog, Error, $location, Records, $scope, $stateParams, Toast, UserCan) ->
 
     if UserCan.changeEmailSettings()
       $scope.authorized = true
@@ -20,24 +20,21 @@ module.exports =
     $scope.subscriptionTracker = $scope.currentUser.subscriptionTracker()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
 
-    $scope.settings = [
-      { property: 'commentsOnBucketsUserAuthored', header: 'comment on your bucket' },
-      { property: 'commentsOnBucketsUserParticipatedIn', header: 'comment on a bucket you participated in' },
-      { property: 'contributionsToLiveBucketsUserAuthored', header: 'funding for your bucket' },
-      { property: 'contributionsToLiveBucketsUserParticipatedIn', header: 'funding in a bucket you participated in' },
-      { property: 'fundedBucketsUserAuthored', header: 'your bucket funded fully' },
-      { property: 'newDraftBuckets', header: 'new bucket idea created' },
-      { property: 'newLiveBuckets', header: 'new bucket put up for funding' },
-      { property: 'newFundedBuckets', header: 'new bucket funded' }
-    ]
-
-    $scope.notificationFrequencyOptions = ['never', 'hourly', 'daily', 'weekly']
+    $scope.emailDigestDeliveryFrequencyOptions = ['never', 'daily', 'weekly']
 
     $scope.cancel = ->
       $location.search('previous_group_id', null)
       $location.path("/groups/#{previousGroupId}")
 
-    $scope.done = ->
+    $scope.attemptCancel = (emailSettingsForm) ->
+      if emailSettingsForm.$dirty
+        Dialog.confirm({title: "Discard unsaved changes?"})
+          .then ->
+            $scope.cancel()
+      else
+        $scope.cancel()
+
+    $scope.save = ->
       Records.subscriptionTrackers.updateEmailSettings($scope.subscriptionTracker).then ->
         Toast.show('Email settings updated!')
         $scope.cancel()
