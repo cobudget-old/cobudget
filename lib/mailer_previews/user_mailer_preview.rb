@@ -6,16 +6,27 @@ class UserMailerPreview < ActionMailer::Preview
     group2 = Group.create(name: Faker::Company.name)
     membership1 = Membership.create(member: user, group: group1)
     membership2 = Membership.create(member: user, group: group2)
-    generate_recent_personal_activity_for(membership: membership1, current_time: current_time)
-    generate_recent_personal_activity_for(membership: membership2, current_time: current_time)
+    generate_recent_activity_for(membership: membership1, current_time: current_time, personal_activity_only: true)
+    generate_recent_activity_for(membership: membership2, current_time: current_time, personal_activity_only: true)
     UserMailer.recent_personal_activity_email(user: user, time_range: (current_time - 1.hour)..current_time)
   end
 
+  def recent_activity_digest_email
+    current_time = DateTime.now.utc
+    user = generate_user
+    group1 = Group.create(name: Faker::Company.name)
+    group2 = Group.create(name: Faker::Company.name)
+    membership1 = Membership.create(member: user, group: group1)
+    membership2 = Membership.create(member: user, group: group2)
+    generate_recent_activity_for(membership: membership1, current_time: current_time)
+    generate_recent_activity_for(membership: membership2, current_time: current_time)
+    UserMailer.recent_activity_digest_email(user: user, time_range: (current_time - 1.hour)..current_time)
+  end
+
   private
-    def generate_recent_personal_activity_for(membership:, current_time:)
+    def generate_recent_activity_for(membership:, current_time:, personal_activity_only: false)
       user = membership.member
       group = membership.group
-      subscription_tracker = user.subscription_tracker
 
       Allocation.create(user: user, group: group, amount: 20000)
 
@@ -28,6 +39,26 @@ class UserMailerPreview < ActionMailer::Preview
       bucket_user_authored_to_be_fully_funded = generate_bucket(group: group, user: user, status: "live")
 
       Timecop.freeze(current_time - 30.minutes) do
+        unless personal_activity_only
+          # create 2 new funded_buckets
+          funded_bucket = generate_bucket(status: "live", group: group, target: 420)
+          generate_contribution(bucket: funded_bucket, amount: 420)
+
+          generate_contribution(bucket: bucket_user_participated_in_to_be_fully_funded)
+          generate_contribution(
+            bucket: bucket_user_participated_in_to_be_fully_funded,
+            amount: bucket_user_participated_in_to_be_fully_funded.amount_left
+          )
+
+          # create 2 new draft_buckets
+          generate_bucket(status: "draft", group: group, target: 420)
+          generate_bucket(status: "draft", group: group, target: 420)
+
+          # create 2 new live_buckets
+          generate_bucket(status: "live", group: group, target: 420)
+          generate_bucket(status: "live", group: group, target: 420)
+        end
+
         # create 2 comments on bucket_user_participated_in
         generate_comment(bucket: bucket_user_participated_in)
         generate_comment(bucket: bucket_user_participated_in)
@@ -43,13 +74,6 @@ class UserMailerPreview < ActionMailer::Preview
         # create 2 contributions for live_bucket_user_authored
         generate_contribution(bucket: live_bucket_user_authored)
         generate_contribution(bucket: live_bucket_user_authored, user: user)
-
-        # create 2 contributions for bucket_user_participated_in_to_be_fully_funded
-        generate_contribution(bucket: bucket_user_participated_in_to_be_fully_funded)
-        generate_contribution(
-          bucket: bucket_user_participated_in_to_be_fully_funded,
-          amount: bucket_user_participated_in_to_be_fully_funded.amount_left
-        )
 
         # create 2 contributions for bucket_user_authored_to_be_fully_funded
         generate_contribution(bucket: bucket_user_authored_to_be_fully_funded)
