@@ -47,4 +47,69 @@ describe "DeliverRecentActivityEmails" do
       end
     end
   end
+
+  describe "#to_daily_digest_subscribers!" do
+    it "sends activity digest emails to users whose local time is 6am, with email_digest_delivery_frequency set to daily, containing recent_activity from the day previous, if it exists" do
+      group_with_no_activity_in_the_past_24_hours = create(:group)
+      group_with_activity_in_the_past_24_hours = create(:group)
+
+      parisian_user_with_no_active_memberships = create(:user, utc_offset: +60)
+      parisian_user_with_no_active_memberships.subscription_tracker.update(email_digest_delivery_frequency: "daily")
+      create(:membership, member: parisian_user_with_no_active_memberships, group: group_with_activity_in_the_past_24_hours, archived_at: DateTime.now.utc - 5.days)
+
+      parisian_user_subscribed_never = create(:user, utc_offset: +60)
+      parisian_user_subscribed_never.subscription_tracker.update(email_digest_delivery_frequency: "never")
+      group_with_activity_in_the_past_24_hours.add_member(parisian_user_subscribed_never)
+
+      parisian_user_subscribed_weekly = create(:user, utc_offset: +60)
+      parisian_user_subscribed_never.subscription_tracker.update(email_digest_delivery_frequency: "weekly")
+      group_with_activity_in_the_past_24_hours.add_member(parisian_user_subscribed_weekly)
+
+      parisian_user_with_no_activity_in_the_past_24_hours = create(:user, utc_offset: +60)
+      parisian_user_with_no_activity_in_the_past_24_hours.subscription_tracker.update(email_digest_delivery_frequency: "daily")
+      group_with_no_activity_in_the_past_24_hours.add_member(parisian_user_with_no_activity_in_the_past_24_hours)
+
+      # at this particular time in the world ..
+      current_utc_time = DateTime.parse("2015-11-05T05:10:00Z")
+
+      # for the oaklanders (UTC offset +60 min) it is currently 6:10AM
+      parisian_user_with_activity_in_the_past_24_hours = create(:user, utc_offset: +60)
+      parisian_user_with_activity_in_the_past_24_hours.subscription_tracker.update(email_digest_delivery_frequency: "daily")
+      group_with_activity_in_the_past_24_hours.add_member(parisian_user_with_activity_in_the_past_24_hours)
+
+      # for the oaklanders (UTC offset -480 min) it is currently 9:10PM
+      oakland_user_with_activity_in_the_past_24_hours = create(:user, utc_offset: -480)
+      oakland_user_with_activity_in_the_past_24_hours.subscription_tracker.update(email_digest_delivery_frequency: "daily")
+      group_with_activity_in_the_past_24_hours.add_member(oakland_user_with_activity_in_the_past_24_hours)
+
+      # and for the aucklanders (UTC offset +720 min) it is currently 6:10PM
+      auckland_user_with_activity_in_the_past_24_hours = create(:user, utc_offset: +720)
+      auckland_user_with_activity_in_the_past_24_hours.subscription_tracker.update(email_digest_delivery_frequency: "daily")
+      group_with_activity_in_the_past_24_hours.add_member(auckland_user_with_activity_in_the_past_24_hours)
+
+      Timecop.freeze(current_utc_time.beginning_of_hour - 1.day + 30.minutes) do
+        create(:bucket, group: group_with_activity_in_the_past_24_hours)
+      end
+
+      Timecop.freeze(current_utc_time.beginning_of_hour - 1.day - 1.minute) do
+        create(:bucket, group: group_with_no_activity_in_the_past_24_hours)
+      end
+
+      Timecop.freeze(current_utc_time) do
+        DeliverRecentActivityEmails.to_daily_digest_subscribers!
+        sent_emails = ActionMailer::Base.deliveries
+        email_recipients = sent_emails.map { |email| email.to.first }
+        expect(email_recipients).not_to include(parisian_user_with_no_active_memberships.email)
+        expect(email_recipients).not_to include(parisian_user_subscribed_never.email)
+        expect(email_recipients).not_to include(parisian_user_subscribed_weekly.email)
+        expect(email_recipients).not_to include(parisian_user_with_no_activity_in_the_past_24_hours.email)
+        expect(email_recipients).not_to include(oakland_user_with_activity_in_the_past_24_hours.email)
+        expect(email_recipients).not_to include(auckland_user_with_activity_in_the_past_24_hours.email)
+
+        expect(email_recipients).to include(parisian_user_with_activity_in_the_past_24_hours.email)
+        expect(sent_emails.first.body).to include("yesterday")
+        expect(sent_emails.first.subject).to include("Yesterday")
+      end
+    end
+  end
 end

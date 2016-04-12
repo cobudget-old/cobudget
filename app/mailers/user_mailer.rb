@@ -56,4 +56,20 @@ class UserMailer < ActionMailer::Base
       )
     end
   end
+
+  def recent_activity_digest_email(user:, time_range:)
+    @user = user
+    @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
+    formatted_date = time_range.first.strftime("%B %d, %Y")
+    subject =
+      if user.subscription_tracker.email_digest_delivery_frequency == "daily"
+        "Yesterday's activity in your Cobudget groups (#{formatted_date})"
+      end
+    if @recent_activity.is_present?
+      mail(to: user.name_and_email,
+           from: "Cobudget Updates <updates@cobudget.co>",
+           subject: subject
+      )
+    end
+  end
 end

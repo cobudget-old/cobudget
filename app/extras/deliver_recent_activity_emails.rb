@@ -8,6 +8,14 @@ class DeliverRecentActivityEmails
   end
 
   def self.to_daily_digest_subscribers!
+    current_hour_utc = DateTime.now.utc.beginning_of_hour
+    the_past_24_hours = (current_hour_utc - 1.day)..current_hour_utc
+    subscribers = User.with_active_memberships.joins(:subscription_tracker).where(subscription_trackers: { email_digest_delivery_frequency: "daily" } )
+    subscribers.each do |subscriber|
+      if current_hour_utc.in_time_zone((subscriber.utc_offset || 0) / 60).hour == 6
+        UserMailer.recent_activity_digest_email(user: subscriber, time_range: the_past_24_hours).deliver_later
+      end
+    end
   end
 
   def self.to_weekly_digest_subscribers!
