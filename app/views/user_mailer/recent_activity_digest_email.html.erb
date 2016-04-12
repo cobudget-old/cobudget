@@ -1,5 +1,5 @@
 <body style="font-family: Arial; font-size: 12px; padding-left: 20px; padding-top: 20px;">
-  <h1 style="font-weight: normal; margin-bottom: 5px">Here's what happened in your groups yesterday ...</h1>
+  <h1 style="font-weight: normal; margin-bottom: 5px">Here's what happened in your groups <%= @formatted_time_period %> ...</h1>
 
   <ul style="list-style: none; padding-left: 0">
     <% @user.active_groups.each do |group| %>

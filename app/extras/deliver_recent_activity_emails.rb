@@ -19,15 +19,14 @@ class DeliverRecentActivityEmails
   end
 
   def self.to_weekly_digest_subscribers!
+    current_hour_utc = DateTime.now.utc.beginning_of_hour
+    the_past_week = (current_hour_utc - 1.week)..current_hour_utc
+    subscribers = User.with_active_memberships.joins(:subscription_tracker).where(subscription_trackers: { email_digest_delivery_frequency: "weekly" } )
+    subscribers.each do |subscriber|
+      current_hour_local = current_hour_utc.in_time_zone((subscriber.utc_offset || 0) / 60)
+      if current_hour_local.hour == 6 && current_hour_local.wday == 1
+        UserMailer.recent_activity_digest_email(user: subscriber, time_range: the_past_week).deliver_later
+      end
+    end
   end
 end
-
-=begin
-every hour, we need to go through every user:
-  if (1) user is `subscribed_to_email_notifications` and (2) that user has personal_recent_activity between the beginning of last hour and the beginning of this hour
-    collect that `personal_recent_activity`, and send an email to the user, asynchronously
-  if (1) user's `email_digest_delivery_frequency` is set to 'daily' and (2) the beginning of this UTC hour is 6AM for their local time, and (3) recent activit yexist
-    collect `all_recent_activity` between 6AM yesterday and 6AM today, and send it via email
-  if (1) user's `email_digest_delivery_frequency` is set to 'weekly' and (2) the beginning of this UTC hour is 6AM monday for ther local time
-    collect `all_recent_activity` between 6AM last monday and 6AM this monday, and send it via email
-=end
