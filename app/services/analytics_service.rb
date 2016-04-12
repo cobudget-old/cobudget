@@ -17,7 +17,12 @@ class AnalyticsService
     def cumulative_user_count_data
       data = User.group_by_day(:created_at).count
       total_users = 0
-      data.map { |day, user_count| [day.strftime('%Y-%m-%d'), total_users += user_count]}.to_h
+      x, y = [], []
+      data.each do |day, user_count|
+        x << day.strftime('%Y-%m-%d')
+        y << total_users += user_count
+      end
+      {x: x, y: y}
     end
 
     def cumulative_group_count_data

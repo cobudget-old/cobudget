@@ -42,22 +42,24 @@ Group.destroy_all
 Membership.destroy_all
 User.destroy_all
 
-admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc, is_super_admin: true) # oaklander
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, is_super_admin: true) # oaklander
 puts "generated admin account email: 'admin@example.com', password: 'password'"
-non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc) # oaklander
+non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480) # oaklander
 puts "generated user account email: 'user@example.com', password: 'password'"
 
 users = []
 utc_offsets.each do |utc_offset|
+  user_genesis = DateTime.now.utc - rand(1..10).days
   users << User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
     password: 'password',
     utc_offset: utc_offset,
-    confirmed_at: DateTime.now.utc,
-    joined_first_group_at: DateTime.now.utc
+    created_at: user_genesis
   )
 end
+
+User.find_each { |user| user.confirm! }
 puts "generated 27 more fake users"
 
 ### GROUPS
