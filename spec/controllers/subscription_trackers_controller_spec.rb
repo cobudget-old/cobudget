@@ -6,21 +6,14 @@ describe SubscriptionTrackersController, :type => :controller do
     let(:subscription_tracker) { user.subscription_tracker }
     let(:valid_params) {{
       subscription_tracker: {
-        comments_on_buckets_user_authored: true,
-        comments_on_buckets_user_participated_in: false,
-        new_draft_buckets: true,
-        new_live_buckets: false,
-        new_funded_buckets: false,
-        contributions_to_live_buckets_user_authored: true,
-        contributions_to_live_buckets_user_participated_in: true,
-        funded_buckets_user_authored: false,
-        notification_frequency: "weekly"
+        subscribed_to_email_notifications: false,
+        email_digest_delivery_frequency: "daily"
       }
     }}
 
     let(:invalid_params) {{
       subscription_tracker: {
-        notification_frequency: "anti-dramatic refridgerator"
+        email_digest_delivery_frequency: "anti-dramatic refridgerator"
       }
     }}
 
@@ -51,7 +44,7 @@ describe SubscriptionTrackersController, :type => :controller do
         end
 
         it "does not update subscription_tracker" do
-          expect(subscription_tracker.notification_frequency).not_to eq("anti-dramatic refridgerator")
+          expect(subscription_tracker.email_digest_delivery_frequency).not_to eq("anti-dramatic refridgerator")
         end
       end
     end

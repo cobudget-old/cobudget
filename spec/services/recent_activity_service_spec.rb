@@ -5,13 +5,11 @@ describe "RecentActivityService" do
   let(:user) { create(:user) }
   let(:group) { create(:group) }
   let(:membership) { create(:membership, member: user, group: group) }
-  # notification_frequency set to 'hourly' by default
   let(:subscription_tracker) { user.subscription_tracker }
 
   before do
     Timecop.freeze(current_time - 70.minutes) do
       create(:allocation, user: user, group: group, amount: 20000)
-      subscription_tracker.update(recent_activity_last_fetched_at: current_time - 1.hour)
 
       @bucket_user_participated_in = create(:bucket, group: group, target: 420, status: "live")
       create(:comment, user: user, bucket: @bucket_user_participated_in)
@@ -23,7 +21,7 @@ describe "RecentActivityService" do
 
   after { Timecop.return }
 
-  context "recent_activity exists" do
+  context "recent_activity exists for specified user and time_range" do
     before do
       # make some old activity
       Timecop.freeze(current_time - 70.minutes) do
@@ -88,61 +86,27 @@ describe "RecentActivityService" do
       end
     end
 
-    context "user subscribed to all recent_activity" do
-      it "returns all recent_activity as a hash" do
-        Timecop.freeze(current_time) do
-          recent_activity = RecentActivityService.new(user: user)
-          activity = recent_activity.for_group(group)
-          expect(activity[:comments_on_buckets_user_participated_in].length).to eq(2)
-          expect(activity[:comments_on_buckets_user_authored].length).to eq(2)
-          expect(activity[:contributions_to_live_buckets_user_authored].length).to eq(2)
-          expect(activity[:contributions_to_live_buckets_user_participated_in].length).to eq(2)
+    it "returns all recent_activity as a hash" do
+      recent_activity = RecentActivityService.new(user: user, time_range: (current_time - 1.hour)..current_time)
+      activity = recent_activity.for_group(group)
+      expect(activity[:comments_on_buckets_user_participated_in].length).to eq(2)
+      expect(activity[:comments_on_buckets_user_authored].length).to eq(2)
+      expect(activity[:contributions_to_live_buckets_user_authored].length).to eq(2)
+      expect(activity[:contributions_to_live_buckets_user_participated_in].length).to eq(2)
 
-          expect(activity[:funded_buckets_user_authored].length).to eq(1)
+      expect(activity[:funded_buckets_user_authored].length).to eq(1)
 
-          expect(activity[:new_draft_buckets].length).to eq(2)
-          expect(activity[:new_live_buckets].length).to eq(2)
-          expect(activity[:new_funded_buckets].length).to eq(2)
+      expect(activity[:new_draft_buckets].length).to eq(2)
+      expect(activity[:new_live_buckets].length).to eq(2)
+      expect(activity[:new_funded_buckets].length).to eq(2)
 
-          expect(recent_activity.is_present?).to eq(true)
-        end
-      end
-    end
-
-    context "user not subscribed to any recent_activity" do
-      it "returns nil instead" do
-        subscription_tracker.update(
-          comments_on_buckets_user_authored: false,
-          comments_on_buckets_user_participated_in: false,
-          new_draft_buckets: false,
-          new_live_buckets: false,
-          new_funded_buckets: false,
-          contributions_to_live_buckets_user_authored: false,
-          contributions_to_live_buckets_user_participated_in: false,
-          funded_buckets_user_authored: false
-        )
-
-        recent_activity = RecentActivityService.new(user: user)
-
-        expect(recent_activity.for_group(group)).to eq({
-          comments_on_buckets_user_participated_in: nil,
-          comments_on_buckets_user_authored: nil,
-          contributions_to_live_buckets_user_authored: nil,
-          funded_buckets_user_authored: nil,
-          contributions_to_live_buckets_user_participated_in: nil,
-          new_funded_buckets: nil,
-          new_draft_buckets: nil,
-          new_live_buckets: nil
-        })
-
-        expect(recent_activity.is_present?).to eq(false)
-      end
+      expect(recent_activity.is_present?).to eq(true)
     end
   end
 
-  context "user subscribed to all recent_activity, but none exists" do
-    it "returns nil instead" do
-      recent_activity = RecentActivityService.new(user: user)
+  context "recent_activity does not exist for specified user and time_range" do
+    it "values in activity hash are set to nil" do
+      recent_activity = RecentActivityService.new(user: user, time_range: (current_time - 1.hour)..current_time)
 
       expect(recent_activity.for_group(group)).to eq({
         comments_on_buckets_user_participated_in: nil,

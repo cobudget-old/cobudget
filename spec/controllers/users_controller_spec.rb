@@ -79,7 +79,8 @@ describe UsersController, :type => :controller do
           expect(@user.name).to eq("new name")
           expect(@user.confirmation_token).to be_nil
           expect(@user.confirmed_at).not_to be_nil
-          expect(@user.subscription_tracker.notification_frequency).to eq("hourly")
+          expect(@user.subscription_tracker.email_digest_delivery_frequency).to eq("weekly")
+          expect(@user.subscription_tracker.subscribed_to_email_notifications).to eq(true)
         end
 
         it "returns user as json" do
