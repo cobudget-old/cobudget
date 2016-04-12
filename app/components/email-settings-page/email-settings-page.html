@@ -32,7 +32,7 @@
       </div>
 
       <div layout="row" layout-align="start center" class="email-settings-page__email-setting-note">
-        <span><b>note</b>: these updates are automatically set to hourly</span>
+        <span>Check the box to get updates on buckets you create or participate in.</span>
       </div>
 
       <div layout="row" layout-align="start center" class="email-settings-page__email-setting">
@@ -54,6 +54,10 @@
             {{option}}
           </md-option>
         </md-select>
+      </div>
+      
+      <div layout="row" layout-align="start center" class="email-settings-page__email-setting-note">
+        <span>Choose how frequently you would like to receive email about new activity in your groups.</span>
       </div>
 
       <md-button class="md-raised md-primary email-settings-page__save-btn" ng-disabled="emailSettingsForm.$pristine">save</md-button>
