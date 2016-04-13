@@ -8,5 +8,6 @@ class UserSerializer < ActiveModel::Serializer
              :subscribed_to_daily_digest,
              :subscribed_to_participant_activity,
              :confirmed_at,
-             :joined_first_group_at
+             :joined_first_group_at,
+             :is_super_admin
 end
