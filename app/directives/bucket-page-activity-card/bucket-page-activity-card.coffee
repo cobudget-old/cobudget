@@ -5,13 +5,13 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
     restrict: 'E'
     template: require('./bucket-page-activity-card.html')
     replace: true
-    controller: (LoadBar, Records, $scope, Toast, $window) ->
+    controller: (Records, $scope, Toast) ->
 
       $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)
 
       $scope.createComment = ->
-        LoadBar.start()
+        $scope.commentCreated = true
         $scope.newComment.save().then ->
-          LoadBar.stop()
           Toast.show('You posted a comment')
           $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)
+          $scope.commentCreated = false

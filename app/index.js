@@ -26,7 +26,7 @@ require('ng-q-all-settled')
 require('ng-csv')
 require('ng-download-csv')
 require('angular-chart.js')
-
+require('angular-autodisable/angular-autodisable')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -48,7 +48,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'qAllSettled',
   'ngCsv',
   'ngDownloadCsv',
-  'chart.js'
+  'chart.js',
+  'ngAutodisable'
 ])
 .constant('config', require('app/configs/app'))
 

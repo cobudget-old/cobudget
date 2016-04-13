@@ -38,7 +38,7 @@
       <div class="bucket-page__submit-comment-container">
         <a class="bucket-page__comment-form-markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
         <md-input-container class="bucket-page__submit-comment-btn-container">
-          <md-button class="md-primary bucket-page__submit-comment-btn" ng-disabled="commentForm.$invalid">submit</md-button>
+          <md-button class="md-primary bucket-page__submit-comment-btn" ng-disabled="commentForm.$invalid || commentCreated">submit</md-button>
         </md-input-container>
       </div>
     </form>
