@@ -66,7 +66,7 @@ puts "generated 27 more fake users"
 
 groups = []
 2.times do
-  group = Group.create!(name: Faker::Company.name)
+  group = Group.create!(name: Faker::Company.name, created_at: DateTime.now.utc - rand(1..10).days)
   group.add_admin(admin)
   group.add_member(non_admin)
   groups << group
@@ -133,7 +133,7 @@ groups.each do |group|
       membership = group.memberships.sample
       member = membership.member
       member_balance = membership.total_allocations - membership.total_contributions
-      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i)
+      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i, created_at: DateTime.now.utc - rand(1..10).days)
     end
   end
 end
