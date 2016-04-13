@@ -50,7 +50,7 @@ class UserMailer < ActionMailer::Base
     current_hour_utc = DateTime.now.utc.beginning_of_hour
     time_range = (current_hour_utc - 1.hour)..current_hour_utc
     @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
-    formatted_date = time_range.first.strftime("%I:%M %p (%B %d, %Y)")
+    formatted_date = time_range.first.in_time_zone((user.utc_offset || 0) / 60).strftime("%I:%M %p (%B %d, %Y)")
     if @recent_activity.personal_activity_present?
       mail(to: user.name_and_email,
            from: "Cobudget Updates <updates@cobudget.co>",
@@ -71,7 +71,7 @@ class UserMailer < ActionMailer::Base
     end
 
     @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
-    formatted_date = time_range.first.strftime("%B %d, %Y")
+    formatted_date = time_range.first.in_time_zone((user.utc_offset || 0) / 60).strftime("%B %d, %Y")
 
     if @recent_activity.is_present?
       mail(to: user.name_and_email,
