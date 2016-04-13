@@ -11,7 +11,8 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
       'subscribedToPersonalActivity',
       'subscribedToDailyDigest',
       'subscribedToParticipantActivity',
-      'confirmationToken'
+      'confirmationToken',
+      'isSuperAdmin'
     ]
 
     relationships: ->
