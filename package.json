@@ -48,6 +48,7 @@
     "angular-animate": "^1.4.3",
     "angular-aria": "^1.4.3",
     "angular-autoselect": "^0.3.2",
+    "angular-chart.js": "^1.0.0-alpha3",
     "angular-cookie": "ivpusic/angular-cookie#v4.0.9",
     "angular-marked": "git@github.com:Hypercubed/angular-marked.git",
     "angular-material": "^0.10.0",
