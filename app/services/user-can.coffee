@@ -34,4 +34,4 @@ global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toas
       @manageFundsForGroup(group)
 
     viewAnalyticsPage: ->
-      true
+      CurrentUser().isSuperAdmin

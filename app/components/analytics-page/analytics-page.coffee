@@ -2,6 +2,8 @@ module.exports =
   resolve:
     userValidated: ($auth) ->
       $auth.validateUser()
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/analytics'
   template: require('./analytics-page.html')
   controller: (config, CurrentUser, Error, $http, Records, $scope, UserCan) ->
