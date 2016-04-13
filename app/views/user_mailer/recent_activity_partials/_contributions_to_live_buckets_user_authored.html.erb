@@ -7,8 +7,8 @@
 
   <ul style="list-style: none">
     <% contributions_grouped_by_bucket.each do |bucket, contributions| %>
-      <% users_contributions = contributions.reject! { |c| c.user == user } || [] %>
-      <% other_contributions = contributions %>
+      <% users_contributions = contributions.select { |c| c.user == user } %>
+      <% other_contributions = contributions.select { |c| c.user != user } %>
 
       <li style="margin-bottom: 10px">
         <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %> (<%= bucket.formatted_percent_funded %> funded, <%= bucket.formatted_amount_left %> left)</b></a><br>
