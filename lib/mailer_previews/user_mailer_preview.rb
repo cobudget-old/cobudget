@@ -1,6 +1,6 @@
 class UserMailerPreview < ActionMailer::Preview
   def personal_recent_activity_email
-    current_time = DateTime.now.utc
+    current_time = DateTime.now.utc.beginning_of_hour
     user = generate_user
     group1 = Group.create(name: Faker::Company.name)
     group2 = Group.create(name: Faker::Company.name)
@@ -12,7 +12,7 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def recent_activity_digest_email
-    current_time = DateTime.now.utc
+    current_time = DateTime.now.utc.beginning_of_hour
     user = generate_user
     group1 = Group.create(name: Faker::Company.name)
     group2 = Group.create(name: Faker::Company.name)
