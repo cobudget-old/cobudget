@@ -33,7 +33,7 @@ class AnalyticsService
     end
 
     def unconfirmed_user_count
-      User.where.not(confirmed_at: nil).count
+      User.where(confirmed_at: nil).count
     end
 
     def contribution_count_data
