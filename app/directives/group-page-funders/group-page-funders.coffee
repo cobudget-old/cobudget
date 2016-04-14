@@ -28,26 +28,11 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
                   Dialog.alert({title: 'Error!'})
 
       $scope.removeMembership = (membership) ->
-        Dialog.custom
-          template: require('./remove-membership-dialog.tmpl.html')
-          scope: $scope
-          controller: ($scope, $mdDialog, Records) ->
-            $scope.member = membership.member()
-            $scope.warnings = [
-              "All of their funds will be removed from currently funding buckets",
-              "All of their funds will be removed from the group",
-              "All of their ideas will be removed from the group",
-              "All of their funding buckets will be removed from the group and money will be refunded"
-            ]
-            $scope.cancel = ->
-              $mdDialog.cancel()
-            $scope.proceed = ->
-              membership.archive().then ->
-                Dialog.alert(
-                  title: 'Success!'
-                  content: "#{$scope.member.name} was removed from #{$scope.group.name}"
-                ).then ->
-                  $window.location.reload()
+        removeMembershipDialog = require('./../../components/remove-membership-dialog/remove-membership-dialog.coffee')({
+          scope: $scope,
+          membership: membership
+        })
+        Dialog.open(removeMembershipDialog)
 
       $scope.openManageFundsDialog = (funderMembership) ->
         Dialog.custom
