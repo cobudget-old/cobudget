@@ -6,6 +6,10 @@ class CreateSubscriptionTrackers < ActiveRecord::Migration
       t.string :email_digest_delivery_frequency, default: "never"
       t.timestamps null: false
     end
+
+    User.find_each do |user|
+      SubscriptionTracker.create(user: user) unless user.subscription_tracker
+    end
   end
 
   def down
