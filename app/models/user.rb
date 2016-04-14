@@ -8,21 +8,20 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   before_validation :assign_uid_and_provider
+  after_create :create_default_subscription_tracker
 
   has_many :groups, through: :memberships
   has_many :memberships, foreign_key: "member_id", dependent: :destroy
+  has_one :subscription_tracker,                   dependent: :destroy
   has_many :allocations,                           dependent: :destroy
   has_many :comments,                              dependent: :destroy
   has_many :contributions,                         dependent: :destroy
   has_many :buckets,                               dependent: :destroy
 
-  scope :active_in_group, -> (group) { joins(:memberships).where(memberships: {archived_at: nil, group_id: group.id}) }
+  scope :with_active_memberships, -> { joins(:memberships).where(memberships: {archived_at: nil}).distinct }
 
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
-  validates_inclusion_of :subscribed_to_daily_digest, in: [true, false]
-  validates_inclusion_of :subscribed_to_personal_activity, in: [true, false]
-  validates_inclusion_of :subscribed_to_participant_activity, in: [true, false]
 
   def name_and_email
     "#{name} <#{email}>"
@@ -54,6 +53,10 @@ class User < ActiveRecord::Base
 
   def confirm!
     update(confirmation_token: nil, confirmed_at: DateTime.now.utc())
+    subscription_tracker.update(
+      subscribed_to_email_notifications: true,
+      email_digest_delivery_frequency: "weekly"
+    )
   end
 
   def confirmed?
@@ -68,9 +71,17 @@ class User < ActiveRecord::Base
     update(reset_password_token: SecureRandom.urlsafe_base64.to_s)
   end
 
+  def active_groups
+    Group.joins(:memberships).where(memberships: {member: self, archived_at: nil})
+  end
+
   private
     def assign_uid_and_provider
       self.uid = self.email
       self.provider = "email"
+    end
+
+    def create_default_subscription_tracker
+      SubscriptionTracker.create(user: self)
     end
 end

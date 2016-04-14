@@ -3,7 +3,6 @@ require 'faker'
 ### TIMEZONES
 
 utc_offsets = [
-  - 720, # baker island
   - 660, # hawaii
   - 600, # cook islands
   - 540, # alaska (anchorage)
@@ -28,43 +27,40 @@ utc_offsets = [
   + 600, # australia, queensland
   + 660, # new caledonia
   + 720, # auckland
-  + 780, # samoa
-  + 840  # line islands
+  + 780 # samoa
 ]
 
 ### USERS
 
-Allocation.destroy_all
-Bucket.destroy_all
-Comment.destroy_all
-Contribution.destroy_all
-Group.destroy_all
-Membership.destroy_all
-User.destroy_all
-
-admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc) # oaklander
-puts "generated admin account email: 'admin@example.com', password: 'password'"
-non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480, confirmed_at: Time.now.utc, joined_first_group_at: DateTime.now.utc) # oaklander
-puts "generated user account email: 'user@example.com', password: 'password'"
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, joined_first_group_at: DateTime.now.utc, is_super_admin: true) # oaklander
+admin.confirm!
+puts "generated confirmed admin account email: 'admin@example.com', password: 'password'"
+non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480, joined_first_group_at: DateTime.now.utc) # oaklander
+non_admin.confirm!
+puts "generated confirmed user account email: 'user@example.com', password: 'password'"
 
 users = []
 utc_offsets.each do |utc_offset|
-  users << User.create!(
+  user_genesis = DateTime.now.utc - rand(1..10).days
+  user = User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
     password: 'password',
     utc_offset: utc_offset,
-    confirmed_at: DateTime.now.utc,
-    joined_first_group_at: DateTime.now.utc
+    joined_first_group_at: DateTime.now.utc,
+    created_at: user_genesis
   )
+  user.confirm!
+  users << user
 end
-puts "generated 27 more fake users"
+
+puts "generated 27 more confirmed fake users"
 
 ### GROUPS
 
 groups = []
 2.times do
-  group = Group.create!(name: Faker::Company.name)
+  group = Group.create!(name: Faker::Company.name, created_at: DateTime.now.utc - rand(1..10).days)
   group.add_admin(admin)
   group.add_member(non_admin)
   groups << group
@@ -149,7 +145,7 @@ groups.each do |group|
       membership = group.memberships.sample
       member = membership.member
       member_balance = membership.total_allocations - membership.total_contributions
-      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i)
+      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i, created_at: DateTime.now.utc - rand(1..10).days)
     end
   end
 end

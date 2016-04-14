@@ -79,8 +79,8 @@ describe UsersController, :type => :controller do
           expect(@user.name).to eq("new name")
           expect(@user.confirmation_token).to be_nil
           expect(@user.confirmed_at).not_to be_nil
-          expect(@user.subscribed_to_daily_digest).to be_truthy
-          expect(@user.subscribed_to_personal_activity).to be_truthy
+          expect(@user.subscription_tracker.email_digest_delivery_frequency).to eq("weekly")
+          expect(@user.subscription_tracker.subscribed_to_email_notifications).to eq(true)
         end
 
         it "returns user as json" do
@@ -309,7 +309,6 @@ describe UsersController, :type => :controller do
       end
     end
   end
-
 
   describe "#update_password" do
     let!(:user) { create(:user, password: "password") }
