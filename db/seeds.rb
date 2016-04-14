@@ -3,7 +3,6 @@ require 'faker'
 ### TIMEZONES
 
 utc_offsets = [
-  - 720, # baker island
   - 660, # hawaii
   - 600, # cook islands
   - 540, # alaska (anchorage)
@@ -28,26 +27,17 @@ utc_offsets = [
   + 600, # australia, queensland
   + 660, # new caledonia
   + 720, # auckland
-  + 780, # samoa
-  + 840  # line islands
+  + 780 # samoa
 ]
 
 ### USERS
 
-Allocation.destroy_all
-Bucket.destroy_all
-Comment.destroy_all
-Contribution.destroy_all
-Group.destroy_all
-Membership.destroy_all
-User.destroy_all
-
-admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, is_super_admin: true) # oaklander
+admin = User.create(name: 'Admin', email: 'admin@example.com', password: 'password', utc_offset: -480, joined_first_group_at: DateTime.now.utc, is_super_admin: true) # oaklander
 admin.confirm!
-puts "generated admin account email: 'admin@example.com', password: 'password'"
-non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480) # oaklander
+puts "generated confirmed admin account email: 'admin@example.com', password: 'password'"
+non_admin = User.create(name: 'User', email: 'user@example.com', password: 'password', utc_offset: -480, joined_first_group_at: DateTime.now.utc) # oaklander
 non_admin.confirm!
-puts "generated user account email: 'user@example.com', password: 'password'"
+puts "generated confirmed user account email: 'user@example.com', password: 'password'"
 
 users = []
 utc_offsets.each do |utc_offset|
@@ -57,13 +47,14 @@ utc_offsets.each do |utc_offset|
     email: Faker::Internet.email,
     password: 'password',
     utc_offset: utc_offset,
+    joined_first_group_at: DateTime.now.utc,
     created_at: user_genesis
   )
   user.confirm!
   users << user
 end
 
-puts "generated 27 more fake users"
+puts "generated 27 more confirmed fake users"
 
 ### GROUPS
 

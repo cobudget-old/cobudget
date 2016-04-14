@@ -38,12 +38,14 @@ module CobudgetApi
       Devise::PasswordsController.skip_before_filter :authenticate_from_token!,
                                                      only: [:create, :update]
     end
-    
+
     config.active_job.queue_adapter = :delayed_job
 
     config.eager_load_paths += %W( #{config.root}/services )
     config.eager_load_paths += %W( #{config.root}/extras )
     config.eager_load_paths += %W( #{config.root}/lib/core_ext )
+
+    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
     ActiveSupport.encode_big_decimal_as_string = false
   end

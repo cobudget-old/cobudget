@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160412073353) do
     t.datetime "funding_closes_at"
     t.datetime "funded_at"
     t.datetime "live_at"
+    t.datetime "archived_at"
   end
 
   add_index "buckets", ["group_id"], name: "index_buckets_on_group_id", using: :btree
@@ -102,13 +103,23 @@ ActiveRecord::Schema.define(version: 20160412073353) do
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
   add_index "memberships", ["member_id"], name: "index_memberships_on_member_id", using: :btree
 
+  create_table "subscription_trackers", force: :cascade do |t|
+    t.integer  "user_id",                                             null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.boolean  "subscribed_to_email_notifications", default: false
+    t.string   "email_digest_delivery_frequency",   default: "never"
+  end
+
+  add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                              default: "",    null: false
-    t.string   "encrypted_password",                 default: "",    null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -121,9 +132,6 @@ ActiveRecord::Schema.define(version: 20160412073353) do
     t.string   "uid"
     t.string   "confirmation_token"
     t.integer  "utc_offset"
-    t.boolean  "subscribed_to_personal_activity",    default: false
-    t.boolean  "subscribed_to_daily_digest",         default: false
-    t.boolean  "subscribed_to_participant_activity", default: false
     t.datetime "confirmed_at"
     t.datetime "joined_first_group_at"
     t.boolean  "is_super_admin",                     default: false

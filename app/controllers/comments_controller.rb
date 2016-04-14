@@ -11,7 +11,6 @@ class CommentsController < AuthenticatedController
   def create
     comment = Comment.create(comment_params)
     if comment.valid?
-      CommentService.send_new_comment_emails(comment: comment)
       render json: [comment]
     else
       render nothing: true, status: 422

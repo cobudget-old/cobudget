@@ -10,88 +10,6 @@ class UserMailer < ActionMailer::Base
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
-  def notify_author_of_new_comment_email(comment: )
-    @comment = comment
-    @bucket = @comment.bucket
-    @author = @bucket.user
-    @commenter = @comment.user
-    @group = @bucket.group
-    mail(to: @author.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "Someone commented on your bucket.")
-  end
-
-  def notify_user_of_new_comment_email(comment: , user:)
-    @comment = comment
-    @bucket = @comment.bucket
-    @commenter = @comment.user
-    @group = @bucket.group
-    mail(to: user.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "Someone commented on #{@bucket.name}")
-  end
-
-  def notify_author_that_bucket_received_contribution(contribution: )
-    @contribution = contribution
-    @bucket = contribution.bucket
-    @funder = contribution.user
-    @group = @bucket.group
-    author = @bucket.user
-    mail(to: author.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "Someone funded your bucket - #{@contribution.formatted_amount}.")
-  end
-
-  def notify_author_that_bucket_is_funded(bucket: )
-    @bucket = bucket
-    @group = @bucket.group
-    @author = @bucket.user
-    mail(to: @author.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "Your bucket has been fully funded!")
-  end
-
-  def notify_member_with_balance_that_bucket_is_live(bucket: , member: )
-    @bucket = bucket
-    @group = @bucket.group
-    @membership = Membership.find_by(member: member, group: @group)
-    mail(to: member.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{@bucket.name} is now requesting funding!")
-  end
-
-  def notify_member_with_zero_balance_that_bucket_is_live(bucket: , member: )
-    @bucket = bucket
-    @group = @bucket.group
-    @membership = Membership.find_by(member: member, group: @group)
-    mail(to: member.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{@bucket.name} is now requesting funding!")
-  end
-
-  def notify_member_that_bucket_is_funded(bucket: , member: )
-    @bucket = bucket
-    @group = @bucket.group
-    @member_contribution_amount = Contribution.where(bucket: bucket, user: member).sum(:amount)
-    @formatted_member_contribution_amount = Money.new(@member_contribution_amount * 100, @group.currency_code).format
-    if @member_contribution_amount > 0
-      mail(to: member.name_and_email,
-           from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "You did it! #{@bucket.name} has been fully funded!")
-    else
-      mail(to: member.name_and_email,
-           from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "#{@bucket.name} has been fully funded!")
-    end
-  end
-
-  def notify_member_that_bucket_was_created(bucket: , member:)
-    @bucket = bucket
-    mail(to: member.name_and_email,
-         from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{bucket.user.name} has created a new bucket idea: #{@bucket.name}")
-  end
-
   def notify_member_that_they_received_allocation(admin: , member: , group: , amount:)
     @member = member
     @group = group
@@ -119,21 +37,47 @@ class UserMailer < ActionMailer::Base
          subject: subject)
   end
 
-  def daily_email_digest(user:)
-    @user = user
-    @formatted_date_today = DateTime.now.in_time_zone(user.utc_offset / 60).strftime("%A, %B %d")
-    if @recent_activity = UserService.fetch_recent_activity_for(user: user)
-      mail(to: user.name_and_email,
-           from: "Cobudget Updates <updates@cobudget.co>",
-           subject: "[Cobudget] Daily Summary - New activity in your groups")
-    end
-  end
-
   def confirm_account_email(user:)
     @user = user
     mail(to: user.name_and_email,
          from: "Cobudget Accounts <accounts@cobudget.co>",
          subject: "Time to set up your account!"
     )
+  end
+
+  def recent_personal_activity_email(user:)
+    @user = user
+    current_hour_utc = DateTime.now.utc.beginning_of_hour
+    time_range = (current_hour_utc - 1.hour)..current_hour_utc
+    @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
+    formatted_date = time_range.first.in_time_zone((user.utc_offset || 0) / 60).strftime("%I:%M %p (%B %d, %Y)")
+    if @recent_activity.personal_activity_present?
+      mail(to: user.name_and_email,
+           from: "Cobudget Updates <updates@cobudget.co>",
+           subject: "Activity in your Cobudget groups since #{formatted_date}"
+      )
+    end
+  end
+
+  def recent_activity_digest_email(user:)
+    @user = user
+    current_hour_utc = DateTime.now.utc.beginning_of_hour
+    if @user.subscription_tracker.email_digest_delivery_frequency == "daily"
+      time_range = (current_hour_utc - 1.day)..current_hour_utc
+      @formatted_time_period = "yesterday"
+    else
+      time_range = (current_hour_utc - 1.week)..current_hour_utc
+      @formatted_time_period = "last week"
+    end
+
+    @recent_activity = RecentActivityService.new(user: user, time_range: time_range)
+    formatted_date = time_range.first.in_time_zone((user.utc_offset || 0) / 60).strftime("%B %d, %Y")
+
+    if @recent_activity.is_present?
+      mail(to: user.name_and_email,
+           from: "Cobudget Updates <updates@cobudget.co>",
+           subject: "Activity in your Cobudget groups from #{@formatted_time_period} (#{formatted_date})"
+      )
+    end
   end
 end

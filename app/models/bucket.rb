@@ -37,6 +37,14 @@ class Bucket < ActiveRecord::Base
     "#{(total_contributions.to_f / target * 100).round}%"
   end
 
+  def formatted_amount_left
+    Money.new(amount_left * 100, currency_code).format
+  end
+
+  def amount_left
+    target - total_contributions
+  end
+
   def num_of_comments
     comments.length
   end

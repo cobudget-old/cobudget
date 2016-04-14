@@ -47,6 +47,12 @@ Rails.application.routes.draw do
 
     resources :contributions, only: [:index, :create]
 
+    resources :subscription_trackers do
+      collection do
+        post :update_email_settings
+      end
+    end
+    
     get '/analytics/report', to: 'analytics#report'
   end
 

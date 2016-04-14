@@ -1,0 +1,19 @@
+<li id="comments-on-buckets-user-authored" >
+  <% if comments_grouped_by_bucket.length > 1 %>
+    <p><b><%= comments_grouped_by_bucket.length %> of your Buckets</b> were <b>commented on</b>:</p>
+  <% else %>
+    <p><b>1 of your Buckets</b> was <b>commented on</b>:</p>
+  <% end %>
+
+  <ul style="list-style: none">
+    <% comments_grouped_by_bucket.each do |bucket, comments| %>
+      <li style="margin-bottom: 10px">
+        <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %></b></a><br>
+        <% comments.each do |comment| %>
+          <%= comment.user.name %><br>
+          "<%= comment.body %>"<br><br>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>
