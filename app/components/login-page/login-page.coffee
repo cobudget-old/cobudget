@@ -3,7 +3,8 @@ module.exports =
   template: require('./login-page.html')
   controller: ($auth, Dialog, Error, LoadBar, $location, Records, $scope, Session, ValidateAndRedirectLoggedInUser, $window) ->
 
-    ValidateAndRedirectLoggedInUser()
+    ValidateAndRedirectLoggedInUser().then ->
+      $scope.authorized = true
 
     $scope.formData = {}
     email = $location.search().email

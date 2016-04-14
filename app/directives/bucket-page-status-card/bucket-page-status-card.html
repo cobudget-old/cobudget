@@ -12,10 +12,6 @@
       <div class="bucket-page__status-flagpoint-divider" flex></div>
 
       <bucket-page-status-card-flagpoint status="funded" bucket="bucket"></bucket-page-status-card-flagpoint>
-
-      <div class="bucket-page__status-flagpoint-divider" flex></div>
-      
-      <bucket-page-status-card-flagpoint status="done" bucket="bucket"></bucket-page-status-card-flagpoint>
     </div>
 
     <div class="bucket-page__status-description" ng-show="bucket.status == 'draft'">
@@ -23,7 +19,7 @@
 
       <div ng-show='userCanStartFunding()'>
         <p><em>As an administrator or creator, you can approve this bucket for funding when it is ready</em></p>
-        <md-button class="md-raised md-primary bucket-page__start-funding-btn" ng-click='openForFunding()'>Start Funding</md-button>
+        <md-button class="md-raised md-primary bucket-page__start-funding-btn" ng-click='openForFunding()' ng-autodisable>Start Funding</md-button>
       </div>
     </div>
 
