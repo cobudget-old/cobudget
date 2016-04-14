@@ -16,6 +16,15 @@ describe "UserService" do
       @comment_to_transfer =      create(:comment,                   user: @user_to_kill)
     end
 
+    context "admin submits same user to both keep and kill" do
+      it "does not kill the user" do
+        UserService.merge_users(user_to_keep: @user_to_keep, user_to_kill: @user_to_keep)
+
+        @user_to_keep.reload
+        expect(@user_to_keep.persisted?).to be true
+      end
+    end
+
     context "transfering memebership is going to double up membership for a group," do
       before do
         @existing_membership = create(:membership, member: @user_to_keep, group: @group)

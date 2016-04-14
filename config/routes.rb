@@ -52,6 +52,8 @@ Rails.application.routes.draw do
         post :update_email_settings
       end
     end
+    
+    get '/analytics/report', to: 'analytics#report'
   end
 
   root to: redirect('/docs')
