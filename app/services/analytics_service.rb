@@ -52,8 +52,8 @@ class AnalyticsService
           id: group.id,
           created_at: group.created_at,
           last_activity_at: group.last_activity_at,
-          confirmed_member_count: group.memberships.where(archived_at: nil).count,
-          unconfirmed_member_count: group.memberships.where.not(archived_at: nil).count,
+          confirmed_member_count: group.members.where.not(confirmed_at: nil).count,
+          unconfirmed_member_count: group.members.where(confirmed_at: nil).count,
           name: group.name
         }
       end
