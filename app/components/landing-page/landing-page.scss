@@ -4,51 +4,66 @@
   width: 100%;
 }
 
-.landing-page__content {
+.landing-page__top-content-container {
+  height: 625px;
+}
+
+.landing-page__top-content-container > div {
   height: 100%;
 }
 
-.landing-page__content-container {
+.landing-page__top-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+// mobile preview
+
+.landing-page__mobile-preview {
   position: relative;
-  bottom: 5%;
-  width: 100%;
-  max-width: 500px;
 }
 
-.landing-page__dollar-logo {
-  display: block;
-  width: 160px;
-  margin: 0 auto;
+.landing-page__smartphone-img {
+  width: 300px;
+  position: relative;
+  top: 67px;
 }
 
-.landing-page__cobudget-logo {
-  display: block;
-  width: 85%;
-  margin: 0 auto;
-}
+// form
 
-.landing-page__logo-subheader {
+.landing-page__form-header {
   font-weight: 300;
-  @include fontMedLarge;
+  font-size: 34px;
   text-align: center;
-  margin: 0;
 }
 
-.landing-page__start-group-form {
+.landing-page__form-container {
+  width: 350px;
+}
+
+.landing-page__form {
+  width: 100%;
   text-align: center;
-  margin-top: 20px;
 }
 
 .landing-page__input-container {
-  width: 63%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 5px;
 }
 
 .landing-page__email-field {
-  @include cob-std-input;
+  font-size: 20px;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #B5B8BB;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background: inherit;
+  font-weight: 400;
   text-align: center;
-  width: 100%;
+  width: 220px;
 }
 
 .landing-page__email-field:focus {
@@ -62,7 +77,20 @@
 }
 
 .landing-page__submit-btn {
-  @include cob-std-submit-btn;
-  width: 57%;
-  margin-top: 3%;
+  font-size: 14px;
+  font-weight: bold;
+  background: #00B100 !important;
+  color: white !important;
+  min-height: 37px;
+  height: 37px;
+  border: none;
+  width: 180px;
+  margin-top: 10px;
+}
+
+// footer
+
+.landing-page__bottom {
+  z-index: 1000;
+  background: #222C31;
 }

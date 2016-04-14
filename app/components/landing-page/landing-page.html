@@ -1,19 +1,45 @@
-<div class="landing-page">
-  <landing-page-toolbar></landing-page-toolbar>
-  <md-content class="landing-page__content" layout="column" layout-align="center center">
-    <div class="landing-page__content-container">
-      <img class="landing-page__dollar-logo" src="./img/cobudget_icon_512px.png" alt="Cobudget" />
-      <img class="landing-page__cobudget-logo" src="./img/color_logo.svg" alt="Cobudget" />
-      <h2 class="landing-page__logo-subheader">Create more together</h2>
+<div class="landing-page" layout="column">
+  <div class="landing-page__top">
+    <div class="landing-page__header" layout="row" layout-align="end center">
+      <md-button>About</md-button>
 
-      <form novalidate name="emailForm" class="landing-page__start-group-form" ng-submit="emailForm.$valid && startGroup()">
-        <div class="landing-page__input-container">
-          <input required class="landing-page__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
-          <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
-          <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
+      <md-button>Resources</md-button>
+
+      <div class="landing-page__login-btn" aria-label="login" ng-if="!currentUser" ng-click="redirectToLoginPage()" layout="row" layout-align="center center">
+        <span class="landing-page__login-btn-label">Log in</span>
+        <div class="landing-page-toolbar-person-icon-container" layout="column" layout-align="center center">
+          <ng-md-icon icon="person"
+            size="21"
+            class="landing-page__person-icon"
+            layout="column"
+            layout-align="center center"
+          ></ng-md-icon>
         </div>
-        <md-button class="landing-page__submit-btn">start a group</md-button>
-      </form>
+      </div>
     </div>
-  </md-content>
+
+    <div class="landing-page__top-content-container">
+      <div class="landing-page__top-content" layout="row" layout-align="space-around center">
+        <div class="landing-page__mobile-preview">
+          <img src="./img/smartphone.png" class="landing-page__smartphone-img" alt="" />
+        </div>
+
+        <div class="landing-page__form-container" layout="column" layout-align="center center">
+          <h2 class="landing-page__form-header">Crowdsource and fund projects together</h2>
+          <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
+            <div class="landing-page__input-container">
+              <input required class="landing-page__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
+              <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
+              <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
+            </div>
+            <md-button class="landing-page__submit-btn">start a group</md-button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="landing-page__bottom" flex>
+  </div>
+
 </div>
