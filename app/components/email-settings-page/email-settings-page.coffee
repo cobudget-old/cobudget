@@ -7,7 +7,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   template: require('./email-settings-page.html')
   reloadOnSearch: false
-  controller: (CurrentUser, Error, $location, Records, $scope, $stateParams, Toast, UserCan) ->
+  controller: (CurrentUser, Dialog, Error, $location, Records, $scope, $stateParams, Toast, UserCan) ->
 
     if UserCan.changeEmailSettings()
       $scope.authorized = true
@@ -17,37 +17,25 @@ module.exports =
       Error.set("you can't view this page")
 
     $scope.currentUser = CurrentUser()
+    $scope.subscriptionTracker = $scope.currentUser.subscriptionTracker()
     previousGroupId = $stateParams.previous_group_id || CurrentUser().primaryGroup().id
 
-    $scope.settings = [
-      {
-        property: "subscribedToDailyDigest"
-        header: "Daily summary email."
-        description: "Each day, send an email with yesterday's unread activity in every group that you're part of."
-      },
-      {
-        property: "subscribedToPersonalActivity"
-        header: "Activity in buckets I've created."
-        description: "When you create a bucket, you are subscribed to all activity on that bucket."
-      },
-      {
-        property: "subscribedToParticipantActivity"
-        header: "Activity in buckets I've participated in."
-        description: "When you participate in a bucket, you will get all activity from that bucket mailed to you."
-      }
-    ]
+    $scope.emailDigestDeliveryFrequencyOptions = ['never', 'daily', 'weekly']
 
     $scope.cancel = ->
       $location.search('previous_group_id', null)
       $location.path("/groups/#{previousGroupId}")
 
-    $scope.done = ->
-      params = _.pick $scope.currentUser, [
-        'subscribedToDailyDigest',
-        'subscribedToPersonalActivity',
-        'subscribedToParticipantActivity'
-      ]
-      Records.users.updateProfile(params).then ->
+    $scope.attemptCancel = (emailSettingsForm) ->
+      if emailSettingsForm.$dirty
+        Dialog.confirm({title: "Discard unsaved changes?"})
+          .then ->
+            $scope.cancel()
+      else
+        $scope.cancel()
+
+    $scope.save = ->
+      Records.subscriptionTrackers.updateEmailSettings($scope.subscriptionTracker).then ->
         Toast.show('Email settings updated!')
         $scope.cancel()
 
