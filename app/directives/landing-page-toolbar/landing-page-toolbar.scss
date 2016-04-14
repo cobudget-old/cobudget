@@ -5,16 +5,16 @@
   padding-right: 10px;
 }
 
-// .landing-page__menu-icon {
+// .landing-page-toolbar__menu-icon {
 //   @include fontMedLarge;
 //   fill: white;
 // }
 
-.landing-page__login-btn {
+.landing-page-toolbar__login-btn {
   cursor: pointer;
 }
 
-.landing-page__login-btn-label {
+.landing-page-toolbar__login-btn-label {
   @include fontMedium;
 }
 
@@ -29,6 +29,6 @@
   cursor: pointer;
 }
 
-.landing-page__person-icon {
+.landing-page-toolbar__person-icon {
   fill: #D8D8D8;
 }

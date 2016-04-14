@@ -4,6 +4,51 @@
   width: 100%;
 }
 
+// header
+
+.landing-page__header {
+  padding-top: 10px;
+  padding-right: 20px;
+}
+
+.landing-page__header-btn {
+  font-size: 15px;
+  font-weight: 400;
+  color: #6E6E6E !important;
+  margin: 6px 12px !important;
+}
+
+.landing-page__login-btn {
+  border: 2px solid #ACACAC;
+  border-radius: 6px;
+  padding: 8px 15px;
+  color: #939393;
+  font-size: 15px;
+  margin-left: 29px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.landing-page__login-btn:hover {
+  border-color: transparent;
+}
+
+.landing-page__person-icon-container {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ACACAC;
+  border-radius: 50%;
+  background: white;
+  font-size: 16px;
+  margin-right: 14px;
+}
+
+.landing-page__person-icon {
+  position: relative;
+  fill: #ACACAC;
+  left: 1px;
+}
+
 .landing-page__top-content-container {
   height: 625px;
 }
