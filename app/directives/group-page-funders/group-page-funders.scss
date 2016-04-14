@@ -73,7 +73,7 @@
 
 // funder more menu
 
-.group-page__manage-funds-icon {
+.group-page__manage-funds-icon-container {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -81,6 +81,12 @@
   color: white;
   margin-right: 14px;
   margin-left: 2px;
+}
+
+.group-page__manage-funds-icon {
+  height: 20px !important;
+  position: relative;
+  bottom: 8px;
 }
 
 .group-page__funder-more-menu-item-icon {

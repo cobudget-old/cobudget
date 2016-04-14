@@ -25,6 +25,8 @@ require('angular-marked')
 require('ng-q-all-settled')
 require('ng-csv')
 require('ng-download-csv')
+require('angular-chart.js')
+require('angular-autodisable/angular-autodisable')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -45,11 +47,14 @@ global.cobudgetApp = angular.module('cobudget', [
   'hc.marked',
   'qAllSettled',
   'ngCsv',
-  'ngDownloadCsv'
+  'ngDownloadCsv',
+  'chart.js',
+  'ngAutodisable'
 ])
 .constant('config', require('app/configs/app'))
 
 require('app/configs/auth.coffee')
+require('app/configs/chart-js.coffee')
 
 require('app/routes.coffee')
 require('app/angular-record-store.coffee')

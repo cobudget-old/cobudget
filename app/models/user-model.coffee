@@ -11,11 +11,13 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
       'subscribedToPersonalActivity',
       'subscribedToDailyDigest',
       'subscribedToParticipantActivity',
-      'confirmationToken'
+      'confirmationToken',
+      'isSuperAdmin'
     ]
 
     relationships: ->
       @hasMany 'memberships', with: 'memberId'
+      @belongsTo 'subscriptionTracker'
 
     groups: () ->
       groupIds = _.map @memberships(), (membership) ->

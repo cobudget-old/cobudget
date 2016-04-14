@@ -1,0 +1,71 @@
+<div class="analytics-page" ng-if="authorized && dataLoaded">
+
+  <div class="analytics-page__chart-container">
+    <h2>cumulative user count vs time</h2>
+    <canvas
+      class="chart chart-line analytics-page__chart"
+      chart-data="[data.cumulative_user_count_data.y]"
+      chart-labels="data.cumulative_user_count_data.x"
+      chart-series="['cumulative user count']"
+    ></canvas>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="analytics-page__chart-container">
+    <h2>cumulative group count vs time</h2>
+    <canvas
+      class="chart chart-line analytics-page__chart"
+      chart-data="[data.cumulative_group_count_data.y]"
+      chart-labels="data.cumulative_group_count_data.x"
+      chart-series="['cumulative group count']"
+    ></canvas>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="analytics-page__chart-container">
+    <h2>contribution count vs time</h2>
+    <canvas
+      class="chart chart-line analytics-page__chart"
+      chart-data="[data.contribution_count_data.y]"
+      chart-labels="data.contribution_count_data.x"
+      chart-series="['contribution count']"
+    ></canvas>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="analytics-page__unconfirmed-user-count-container">
+    <h2>number of unconfirmed users right now: {{ data.unconfirmed_user_count }}</h2>
+  </div>
+
+  <md-divider></md-divider>
+
+  <h2>group data</h2>
+
+  <div ng-repeat="group in data.group_data">
+    <table class="analytics-page__group-data-table">
+      <tr>
+        <th colspan="3"> {{ group.name }} </th>
+      </tr>
+      <tr class="analytics-page__group-data-table-header">
+        <td>age</td>
+        <td>last activity</td>
+        <td>number of members</td>
+      </tr>
+      <tr>
+        <td>{{ group.created_at | timeFromNowInWords }}</td>
+        <td>{{ group.last_activity_at | timeFromNowInWords }}</td>
+        <td>{{ group.membership_count }}</td>
+      </tr>
+    </table>
+
+    <div class="analytics-page__group-admins-container">
+      <span>
+        <b>contact:</b>
+        <span ng-repeat="admin in group.admins">{{ admin.name }} ({{admin.email}}), </span>
+      </span>
+    </div>
+  </div>
+</div>

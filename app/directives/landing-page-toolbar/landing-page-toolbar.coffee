@@ -5,7 +5,9 @@ global.cobudgetApp.directive 'landingPageToolbar', () ->
     restrict: 'E'
     template: require('./landing-page-toolbar.html')
     replace: true
-    controller: ($location, $scope) ->
+    controller: (CurrentUser, $location, $scope) ->
+
+      $scope.currentUser = CurrentUser()
 
       $scope.redirectToLoginPage = ->
         $location.path('/login')

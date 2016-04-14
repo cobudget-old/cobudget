@@ -41,7 +41,7 @@
       </md-input-container>
 
       <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='openFundForm()' ng-hide="fundFormOpened">Fund</md-button>
-      <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='submitContribution()' ng-if="fundFormOpened" ng-disabled="!fundForm.$valid || contributionSubmitted">Submit</md-button>
+      <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='submitContribution()' ng-if="fundFormOpened" ng-autodisable>Submit</md-button>
     </form>
   </md-card-content>
 </md-card>

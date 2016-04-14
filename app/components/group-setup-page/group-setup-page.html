@@ -17,7 +17,7 @@
 
         <h2 class="group-setup-page__logo-subheader">Give your group a name</h2>
 
-        <form novalidate class="group-setup-page__form" name="newGroupForm" ng-submit="newGroupForm.$valid && createGroup(formData)">
+        <form novalidate class="group-setup-page__form" name="newGroupForm" ng-submit="newGroupForm.$valid && createGroup(formData)" ng-autodisable>
 
           <div class="group-setup-page__input-container">
             <input required class="group-setup-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="group name">
