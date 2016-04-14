@@ -102,6 +102,19 @@ RSpec.describe ContributionsController, type: :controller do
           expect(response).to have_http_status(:forbidden)
         end
       end
+
+      context "bucket is archived" do
+        before do
+          group.add_member(user)
+          create(:allocation, user: user, group: group, amount: 100)
+          BucketService.archive(bucket: bucket)
+          post :create, {contribution: { bucket_id: bucket.id, amount: 50 } }
+        end
+
+        it "returns http status 422" do
+          expect(response).to have_http_status(422)
+        end
+      end
     end
 
     context "user not signed in" do

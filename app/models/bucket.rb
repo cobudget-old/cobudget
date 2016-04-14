@@ -84,6 +84,10 @@ class Bucket < ActiveRecord::Base
     member.is_admin_for?(group) || user == member
   end
 
+  def archived?
+    archived_at.present?
+  end
+
   private
     def set_timestamp_if_status_updated
       if status_changed?

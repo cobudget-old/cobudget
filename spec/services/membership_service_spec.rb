@@ -14,16 +14,16 @@ describe "MembershipService" do
       expect(Membership.find_by_id(@membership).archived_at).to be_truthy
     end
 
-    it "destroys all member's draft buckets within the membership's group" do
-      create_list(:bucket, 3, user: @user, status: 'draft', group: @group)
+    it "archives all member's draft buckets within the membership's group" do
+      buckets_to_be_archived = create_list(:bucket, 3, user: @user, status: 'draft', group: @group)
 
       MembershipService.archive_membership(membership: @membership)
 
-      expect(Bucket.where(group: @group).length).to eq(0)
+      buckets_to_be_archived.each { |bucket| expect(bucket.reload.archived?).to be_truthy }
     end
 
-    it "destroys member's funding buckets, and refunds all its contributors, and sends email notifications to refunded contributors, except author" do
-      bucket = create(:bucket, group: @group, user: @user, status: 'live', target: 1000)
+    it "archives member's funding buckets, and refunds all its contributors, and sends email notifications to refunded contributors, except author" do
+      bucket_to_be_archived = create(:bucket, group: @group, user: @user, status: 'live', target: 1000)
 
       user1 = create(:user)
       membership1 = create(:membership, member: user1, group: @group)
@@ -38,21 +38,21 @@ describe "MembershipService" do
       expect(@group.balance).to eq(120)
       expect(membership2.balance).to eq(80)
 
-      contribution1 = create(:contribution, user: user1, bucket: bucket, amount: 20)
+      contribution1 = create(:contribution, user: user1, bucket: bucket_to_be_archived, amount: 20)
       expect(@group.balance).to eq(100)
       expect(membership1.balance).to eq(20)
 
-      contribution2 = create(:contribution, user: user2, bucket: bucket, amount: 30)
+      contribution2 = create(:contribution, user: user2, bucket: bucket_to_be_archived, amount: 30)
       expect(@group.balance).to eq(70)
       expect(membership2.balance).to eq(50)
 
-      contribution3 = create(:contribution, user: user2, bucket: bucket, amount: 30)
+      contribution3 = create(:contribution, user: user2, bucket: bucket_to_be_archived, amount: 30)
       expect(@group.balance).to eq(40)
       expect(membership2.balance).to eq(20)
 
       # member who is about to be deleted has also contributed to their own bucket
-      create(:allocation, user: @user, group: bucket.group, amount: 1)
-      contribution4 = create(:contribution, user: @user, bucket: bucket, amount: 1)
+      create(:allocation, user: @user, group: bucket_to_be_archived.group, amount: 1)
+      contribution4 = create(:contribution, user: @user, bucket: bucket_to_be_archived, amount: 1)
 
       ActionMailer::Base.deliveries.clear
       MembershipService.archive_membership(membership: @membership)
@@ -63,7 +63,7 @@ describe "MembershipService" do
       user_2_email = sent_emails.find { |e| e.to[0] == user2.email }
 
       expect(email_recipients).not_to include(@user.email)
-      expect(Bucket.find_by_id(bucket.id)).to be_nil
+      expect(bucket_to_be_archived.reload.archived?).to be_truthy
       expect(Contribution.find_by_id(contribution1.id)).to be_nil
       expect(Contribution.find_by_id(contribution2.id)).to be_nil
       expect(membership1.balance).to eq(40)

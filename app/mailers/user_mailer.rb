@@ -19,14 +19,15 @@ class UserMailer < ActionMailer::Base
          subject: "#{admin.name} gave you funds to spend in #{@group.name}")
   end
 
-  def notify_funder_that_bucket_was_deleted(funder: , bucket: )
+  def notify_funder_that_bucket_was_archived(funder: , bucket: )
     @bucket = bucket
     @group = @bucket.group
     refund_amount = @bucket.contributions.where(user: funder).sum(:amount)
     @formatted_refund_amount = Money.new(refund_amount * 100, @group.currency_code).format
+    action = bucket.archived? ? "archived" : "deleted"
     mail(to: funder.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{@bucket.name} was deleted")
+         subject: "#{@bucket.name} was #{action}")
   end
 
   def reset_password_email(user:)

@@ -109,6 +109,24 @@ groups.each do |group|
 end
 puts "created 5 - 7 draft buckets for both groups with 0 - 9 comments"
 
+### ARCHIVED_BUCKETS
+
+groups.each do |group|
+  rand(2..3).times do
+    bucket = group.buckets.create(
+      name: Faker::Lorem.sentence(1, false, 4),
+      user: group.members.sample,
+      description: Faker::Lorem.paragraph(3, false, 14),
+      target: [rand(0..4200), nil].sample,
+      status: "draft",
+      archived_at: DateTime.now.utc,
+      created_at: Time.zone.now - rand(1..10).days
+    )
+    rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }
+  end
+end
+puts "created 2 - 3 archived draft buckets for both groups with 0 - 9 comments"
+
 ### ALLOCATIONS
 
 groups.each do |group|

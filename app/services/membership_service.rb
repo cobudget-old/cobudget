@@ -5,16 +5,9 @@ class MembershipService
     member = membership.member
     group = membership.group
 
-    # destroy member's draft buckets
-    Bucket.where(group: group.id, user: member.id, status: 'draft').destroy_all
-
-    # destroy member's funding buckets, refund all their funders, and notify funders of refund via email
-    Bucket.where(user_id: member.id, status: 'live', group_id: group.id).each do |bucket|
-      funders = bucket.contributors(exclude_author: true)
-      funders.each do |funder|
-        UserMailer.notify_funder_that_bucket_was_deleted(funder: funder, bucket: bucket).deliver_now
-      end
-      bucket.destroy
+    # archives member's draft + live buckets
+    Bucket.where(group: group.id, user: member.id).where.not(status: "funded").find_each do |bucket|
+      BucketService.archive(bucket: bucket, exclude_author_from_email_notifications: true)
     end
 
     # destroy member's contributions on funding buckets
