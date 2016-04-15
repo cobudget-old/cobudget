@@ -1,29 +1,29 @@
 .landing-page {
-  position: fixed;
+  position: relative;
   height: 100%;
   width: 100%;
-}
-
-.landing-page__top {
-  position: relative;
   background: linear-gradient(to right top, #CBD6E4, #E4E4E4);
+  overflow: scroll;
 }
 
 .landing-page__top-content-container {
   position: relative;
-  max-height: 625px;
-  min-height: 350px;
 }
 
 .landing-page__top-content {
   max-width: 1000px;
-  height: 100%;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
   margin: 0 auto;
 }
 
 // header
 
 .landing-page__header {
+  position: absolute;
+  width: 100%;
+  top: 0;
   padding-top: 10px;
   padding-right: 20px;
 }
@@ -74,8 +74,6 @@
 
 .landing-page__smartphone-img {
   width: 300px;
-  position: relative;
-  top: 67px;
 }
 
 // form
@@ -138,36 +136,15 @@
   margin-top: 10px;
 }
 
-// footer
-
-.landing-page__bottom {
-  z-index: 1000;
-  background: #F0F0F0;
-}
-
 // mobile
 
 @media (max-width: 720px) {
   .landing-page__mobile-preview {
     display: none;
   }
-
-  .landing-page__top-content-container {
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-flex-direction: column;
-    align-items: center;
-    -webkit-align-items: center;
-    -ms-align-items: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
 }
 
 @media (max-width: 450px) {
-
   .landing-page__person-icon {
     left: 0px;
   }
@@ -191,5 +168,4 @@
   .landing-page__form-container {
     width: 300px;
   }
-
 }
