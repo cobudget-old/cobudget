@@ -21,3 +21,4 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'invite-members', require('app/components/invite-members-page/invite-members-page.coffee')
     .state 'review-bulk-invite-members', require('app/components/review-bulk-invite-members-page/review-bulk-invite-members-page.coffee')
     .state 'analytics', require('app/components/analytics-page/analytics-page.coffee')
+    .state 'resources', require('app/components/resources-page/resources-page.coffee')

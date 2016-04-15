@@ -2,7 +2,7 @@
   <div class="landing-page__header" layout="row" layout-align="end center">
     <div class="landing-page__header-btns">
       <md-button class="landing-page__header-btn">About</md-button>
-      <md-button class="landing-page__header-btn">Resources</md-button>
+      <md-button class="landing-page__header-btn" ng-click="redirectToResourcesPage()">Resources</md-button>
     </div>
 
     <md-menu class="landing-page__menu">
@@ -20,7 +20,7 @@
         </md-menu-item>
 
         <md-menu-item>
-          <md-button aria-label="resources" ng-click="">Resources</md-button>
+          <md-button aria-label="resources" ng-click="redirectToResourcesPage()">Resources</md-button>
         </md-menu-item>
       </md-menu-content>
     </md-menu>

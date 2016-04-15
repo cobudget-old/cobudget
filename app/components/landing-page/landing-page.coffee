@@ -22,4 +22,7 @@ module.exports =
     $scope.redirectToLoginPage = ->
       $location.path('/login')
 
+    $scope.redirectToResourcesPage = ->
+      $location.path('/resources')
+
     return
