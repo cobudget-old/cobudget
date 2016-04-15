@@ -70,6 +70,14 @@
   left: 1px;
 }
 
+.landing-page__menu {
+  display: none;
+}
+
+.landing-page__header-separator {
+  display: none;
+}
+
 // mobile preview
 
 .landing-page__mobile-preview {
@@ -187,24 +195,25 @@
 }
 
 @media (max-width: 450px) {
-  .landing-page__person-icon {
-    left: 0px;
+
+  .landing-page__menu {
+    display: block;
   }
 
-  .landing-page__person-icon-container {
-    margin-right: 6px;
+  .landing-page__header-btns {
+    display: none;
   }
 
-  .landing-page__login-btn {
-    padding: 5px 7px;
-    font-size: 14px;
-    margin-left: 25px;
+  .landing-page__header-separator {
+    display: flex;
   }
 
-  .landing-page__header-btn {
-    font-size: 13px;
-    margin: 0 !important;
-    padding: 0 !important;
+  .landing-page__menu {
+    margin-left: 20px;
+  }
+
+  .landing-page__menu-icon {
+    fill: #ACACAC;
   }
 
   .landing-page__form-container {
