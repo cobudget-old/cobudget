@@ -1,9 +1,9 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.directive 'landingPageToolbar', () ->
+global.cobudgetApp.directive 'setupToolbar', () ->
     restrict: 'E'
-    template: require('./landing-page-toolbar.html')
+    template: require('./setup-toolbar.html')
     replace: true
     controller: (CurrentUser, $location, $scope) ->
 

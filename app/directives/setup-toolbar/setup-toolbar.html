@@ -1,0 +1,14 @@
+<div class="setup-toolbar" layout="row" layout-align="center center">
+  <span flex></span>
+  <div class="setup-toolbar__login-btn" aria-label="login" ng-if="!currentUser" ng-click="redirectToLoginPage()" layout="row" layout-align="center center">
+    <span class="setup-toolbar__login-btn-label">Log in</span>
+    <div class="setup-toolbar__person-icon-container" layout="column" layout-align="center center">
+      <ng-md-icon icon="person"
+        size="21"
+        class="setup-toolbar__person-icon"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+    </div>
+  </div>
+</div>
