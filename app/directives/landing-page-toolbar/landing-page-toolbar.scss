@@ -16,7 +16,7 @@
 }
 
 .landing-page-toolbar__login-btn {
-  border: 2px solid #ACACAC;
+  border: 1px solid #ACACAC;
   border-radius: 6px;
   padding: 8px 15px;
   color: #939393;
@@ -54,6 +54,10 @@
   display: none;
 }
 
+.landing-page-toolbar__menu:focus {
+  outline: none;
+}
+
 .landing-page-toolbar__header-separator {
   display: none;
 }
@@ -78,8 +82,12 @@
     margin-left: 20px;
   }
 
+  .landing-page-toolbar__menu-icon-container:focus {
+    outline: none;
+  }
+
   .landing-page-toolbar__menu-icon {
-    fill: #ACACAC;
+    fill: white;
   }
 
 }

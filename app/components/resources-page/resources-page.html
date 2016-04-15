@@ -1,3 +1,20 @@
 <div class="resources-page">
-  resources
+  <landing-page-toolbar></landing-page-toolbar>
+
+  <h1 class="resources-page__header-text">Resources and Stories</h1>
+
+  <div class="resources-page__content">
+    <div layout="row" layout-align="start start" ng-repeat="article in articles">
+      <img class="resources-page__article-img" src="{{ article.imgUrl }}" />
+
+      <div>
+        <h2 class="resources-page__article-header-text">
+          <a href="{{ article.articleUrl }}" target="_blank" class="resources-page__article-link">
+            {{ article.title }}
+          </a>
+        </h2>
+        <p>{{ article.description }}</p>
+      </div>
+    </div>
+  </div>
 </div>
