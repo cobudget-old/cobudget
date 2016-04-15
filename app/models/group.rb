@@ -28,6 +28,10 @@ class Group < ActiveRecord::Base
     Money.new(balance * 100, currency_code).format
   end
 
+  def is_launched
+    members.any? && allocations.any?
+  end
+
   def last_activity_at
     last_bucket = buckets.order(updated_at: :desc).limit(1).first
     last_bucket_updated_at = last_bucket ? last_bucket.updated_at : nil
