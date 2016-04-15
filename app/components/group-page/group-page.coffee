@@ -8,11 +8,15 @@ module.exports =
   template: require('./group-page.html')
   params:
     openMembersTab: null
-  controller: (CurrentUser, Error, LoadBar, Records, $scope, $stateParams, UserCan) ->
+    firstTimeSeeingGroup: null
+  controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, UserCan) ->
     LoadBar.start()
 
     if $stateParams.openMembersTab
       $scope.tabSelected = 1
+
+    $scope.firstTimeSeeingGroup = $stateParams.firstTimeSeeingGroup
+    $scope.welcomeCardClosed = false
 
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
@@ -35,5 +39,21 @@ module.exports =
         LoadBar.stop()
         Error.set('group not found')
 
+    $scope.adminWelcomeCardDisplayed = ->
+      ($scope.firstTimeSeeingGroup && $scope.membership.isAdmin && !$scope.membership.closedAdminHelpCardAt && !$scope.welcomeCardClosed)
+
+    $scope.adminLaunchCardDisplayed = ->
+      !$scope.adminWelcomeCardDisplayed() && !$scope.group.isLaunched && !$scope.membership.closedAdminHelpCardAt
+
+    $scope.memberWelcomeCardDisplayed = ->
+      !$scope.membership.isAdmin && !$scope.membership.closedMemberHelpCardAt
+
+    $scope.closeWelcomeCard = ->
+      $scope.welcomeCardClosed = true
+
+    $scope.closeLaunchCard = ->
+      $scope.membership.remote.update $scope.membership.id,
+        membership:
+          closed_admin_help_card_at: moment()
 
     return

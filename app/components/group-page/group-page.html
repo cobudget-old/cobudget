@@ -4,13 +4,13 @@
   <group-page-toolbar></group-page-toolbar>
 
   <md-content class="group-page__content">
-    <md-card class="group-page-help__card">
+    <md-card class="group-page-help__card" ng-if="adminWelcomeCardDisplayed()">
       <div layout="row" class="group-page-help__card-container">
         <img src="./img/idea_money.svg" class="group-page-help__card-image" />
         <div layout="column" class="group-page-help__card-content">
           <h2 class="group-page-help__card-header">Welcome!</h2>
 
-          <div class="group-page-help__card-close-btn" ng-click="">&times;</div>
+          <div class="group-page-help__card-close-btn" ng-click="closeWelcomeCard()">&times;</div>
 
           <p class="group-page-help__card-description">
             This is your new group. Here, people can propose and discuss ideas for funding, and fund them once they're approved.
@@ -22,19 +22,19 @@
             <span class="group-page-help__card-steps">1/2</span>
             <span flex></span>
             <md-button class="group-page-help__card-btn">read more</md-button>
-            <md-button class="group-page-help__card-btn">next</md-button>
+            <md-button class="group-page-help__card-btn" ng-click="closeWelcomeCard()">next</md-button>
           </div>
         </div>
       </div>
     </md-card>
 
-    <md-card class="group-page-help__card">
+    <md-card class="group-page-help__card" ng-if="adminLaunchCardDisplayed()">
       <div layout="row" class="group-page-help__card-container">
         <img src="./img/rocket.svg" class="group-page-help__card-image" />
         <div layout="column" class="group-page-help__card-content">
           <h2 class="group-page-help__card-header">Get ready to launch!</h2>
 
-          <div class="group-page-help__card-close-btn" ng-click="">&times;</div>
+          <div class="group-page-help__card-close-btn" ng-click="closeLaunchCard()">&times;</div>
 
           <p class="group-page-help__card-description">
             Need some help getting things setup here? Check out our getting started guide or video (60 seconds) for a step-by-step tour.
@@ -52,7 +52,7 @@
       </div>
     </md-card>
 
-    <md-card class="group-page-help__card">
+    <md-card class="group-page-help__card" ng-if="memberWelcomeCardDisplayed()">
       <div layout="row" class="group-page-help__card-container">
         <img src="./img/idea_money.svg" class="group-page-help__card-image" />
         <div layout="column" class="group-page-help__card-content">
@@ -67,7 +67,6 @@
           <div flex></div>
 
           <div class="group-page-help__card-btns" layout="row" layout-align="center center">
-            <span class="group-page-help__card-steps">2/2</span>
             <span flex></span>
             <md-button class="group-page-help__card-btn">I've got an idea!</md-button>
           </div>
