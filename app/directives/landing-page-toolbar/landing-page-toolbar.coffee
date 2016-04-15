@@ -13,4 +13,7 @@ global.cobudgetApp.directive 'landingPageToolbar', () ->
       $scope.redirectToResourcesPage = ->
         $location.path('/resources')
 
+      $scope.redirectToAboutPage = ->
+        $location.path('/about')
+
       return

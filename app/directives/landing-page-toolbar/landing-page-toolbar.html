@@ -1,6 +1,6 @@
 <div class="landing-page-toolbar" layout="row" layout-align="end center">
   <div class="landing-page-toolbar__header-btns">
-    <md-button class="landing-page-toolbar__header-btn">About</md-button>
+    <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToAboutPage()">About</md-button>
     <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToResourcesPage()">Resources</md-button>
   </div>
 
@@ -15,7 +15,7 @@
 
     <md-menu-content>
       <md-menu-item>
-        <md-button aria-label="about" ng-click="">About</md-button>
+        <md-button aria-label="about" ng-click="redirectToAboutPage()">About</md-button>
       </md-menu-item>
 
       <md-menu-item>

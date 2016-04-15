@@ -1,0 +1,33 @@
+.about-page {
+  position: relative;
+  background: #E7E7E7;
+  height: 100%;
+  padding-top: 80px;
+}
+
+.about-page__content {
+  max-width: 750px;
+  margin: 20px auto;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.about-page__header-text {
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.about-page__return-home-link {
+  display: block;
+  margin: 0 auto;
+  color: #6E6E6E;
+  font-size: 15px;
+}
+
+@media (max-width: 600px) {
+  .about-page__header-text {
+    margin-bottom: 10px;
+    font-size: 27px;
+  }
+}
