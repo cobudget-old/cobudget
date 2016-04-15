@@ -1,7 +1,7 @@
 module.exports =
   url: '/resources'
   template: require('./resources-page.html')
-  controller: ($scope) ->
+  controller: ($location, $scope) ->
 
     $scope.articles = [
       {
@@ -11,5 +11,8 @@ module.exports =
         imgUrl: "http://i.imgur.com/zd7n4QX.png"
       }
     ]
+
+    $scope.redirectToLandingPage = ->
+      $location.path('/')
 
     return

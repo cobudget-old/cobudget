@@ -1,11 +1,11 @@
-<div class="resources-page">
+<div class="resources-page" layout="column">
   <landing-page-toolbar></landing-page-toolbar>
 
   <h1 class="resources-page__header-text">Resources and Stories</h1>
 
-  <div class="resources-page__content">
+  <div class="resources-page__content" layout="column" flex>
     <div layout="row" layout-align="start start" ng-repeat="article in articles">
-      <img class="resources-page__article-img" src="{{ article.imgUrl }}" />
+      <img class="resources-page__article-img" ng-src="{{article.imgUrl}}" />
 
       <div>
         <h2 class="resources-page__article-header-text">
@@ -13,8 +13,12 @@
             {{ article.title }}
           </a>
         </h2>
-        <p>{{ article.description }}</p>
+        <p class="resources-page__article-description-text">{{ article.description }}</p>
       </div>
     </div>
+
+    <div flex></div>
+
+    <a href="" class="resources-page__return-home-link" ng-click="redirectToLandingPage()">return home</a>
   </div>
 </div>
