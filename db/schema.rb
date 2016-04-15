@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412073353) do
+ActiveRecord::Schema.define(version: 20160415193307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,12 +92,14 @@ ActiveRecord::Schema.define(version: 20160412073353) do
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.integer  "group_id",                    null: false
-    t.integer  "member_id",                   null: false
-    t.boolean  "is_admin",    default: false, null: false
+    t.integer  "group_id",                                   null: false
+    t.integer  "member_id",                                  null: false
+    t.boolean  "is_admin",                   default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "archived_at"
+    t.datetime "closed_member_help_card_at"
+    t.datetime "closed_admin_help_card_at"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
@@ -114,12 +116,12 @@ ActiveRecord::Schema.define(version: 20160412073353) do
   add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -134,7 +136,7 @@ ActiveRecord::Schema.define(version: 20160412073353) do
     t.integer  "utc_offset"
     t.datetime "confirmed_at"
     t.datetime "joined_first_group_at"
-    t.boolean  "is_super_admin",                     default: false
+    t.boolean  "is_super_admin",         default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

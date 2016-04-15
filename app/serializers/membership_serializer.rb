@@ -5,7 +5,9 @@ class MembershipSerializer < ActiveModel::Serializer
              :created_at,
              :balance,
              :archived_at,
-             :raw_balance
+             :raw_balance,
+             :closed_admin_help_card_at,
+             :closed_member_help_card_at
 
   has_one :member, serializer: UserSerializer, root: 'users'
   has_one :group, serializer: GroupSerializer, root: 'groups'
