@@ -5,3 +5,53 @@
   margin: 0 auto;
   padding-bottom: 16px;
 }
+
+.group-page-help__card-header {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.group-page-help__card {
+  height: 140px;
+}
+
+.group-page-help__card-image {
+  width: 100px;
+  padding: 20px;
+  background: #F1F1F1;
+}
+
+.group-page-help__card-content {
+  padding: 15px;
+}
+
+.group-page-help__card-header {
+  font-size: 18px;
+}
+
+.group-page-help__card-description {
+  font-size: 13px;
+  margin: 8px auto;
+}
+
+.group-page-help__card-btns {
+}
+
+.group-page-help__card-steps {
+  letter-spacing: 2px;
+  font-size: 15px;
+  color: #B9B8B9;
+}
+
+.group-page-help__card-btn {
+  line-height: 20px !important;
+  min-height: 20px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  color: #3A51F8 !important;
+}
+
+@media (max-width: 450px) {
+
+}
