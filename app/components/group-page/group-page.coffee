@@ -43,17 +43,22 @@ module.exports =
       ($scope.firstTimeSeeingGroup && $scope.membership.isAdmin && !$scope.membership.closedAdminHelpCardAt && !$scope.welcomeCardClosed)
 
     $scope.adminLaunchCardDisplayed = ->
-      !$scope.adminWelcomeCardDisplayed() && !$scope.group.isLaunched && !$scope.membership.closedAdminHelpCardAt
+      !$scope.adminWelcomeCardDisplayed() && !$scope.group.isLaunched && !$scope.membership.closedAdminHelpCardAt && $scope.membership.isAdmin
 
     $scope.memberWelcomeCardDisplayed = ->
       !$scope.membership.isAdmin && !$scope.membership.closedMemberHelpCardAt
 
-    $scope.closeWelcomeCard = ->
+    $scope.closeAdminWelcomeCard = ->
       $scope.welcomeCardClosed = true
 
     $scope.closeLaunchCard = ->
       $scope.membership.remote.update $scope.membership.id,
         membership:
           closed_admin_help_card_at: moment()
+
+    $scope.closeMemberWelcomeCard = ->
+      $scope.membership.remote.update $scope.membership.id,
+        membership:
+          closed_member_help_card_at: moment()
 
     return
