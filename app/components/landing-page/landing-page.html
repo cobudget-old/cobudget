@@ -4,7 +4,7 @@
 
     <md-button class="landing-page__header-btn">Resources</md-button>
 
-    <div class="landing-page__login-btn" aria-label="login" ng-if="!currentUser" ng-click="redirectToLoginPage()" layout="row" layout-align="center center">
+    <div class="landing-page__login-btn" aria-label="login" ng-click="redirectToLoginPage()" layout="row" layout-align="center center">
       <div class="landing-page__person-icon-container" layout="column" layout-align="center center">
         <ng-md-icon icon="person"
           size="20"
@@ -31,8 +31,10 @@
           <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
           <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
         </div>
+
         <md-button class="landing-page__submit-btn">start a group</md-button>
-        <a href="" class="landing-page__virtual-tour-link">or take a virtual tour</a>
+
+        <a class="landing-page__virtual-tour-link" ng-click="openVirtualTourDialog()" href="">or take a virtual tour</a>
       </form>
     </div>
   </div>

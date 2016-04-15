@@ -5,6 +5,10 @@ module.exports =
 
     ValidateAndRedirectLoggedInUser()
 
+    $scope.openVirtualTourDialog = ->
+      Dialog.custom
+        template: require('./virtual-tour-dialog.tmpl.html')
+
     $scope.startGroup = ->
       LoadBar.start()
       newUser = Records.users.build($scope.formData)
@@ -14,4 +18,8 @@ module.exports =
         .catch (err) ->
           LoadBar.stop()
           $location.path('/login').search({setup_group: true, email: newUser.email})
+
+    $scope.redirectToLoginPage = ->
+      $location.path('/login')
+
     return
