@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'groupPageHelp', () ->
     restrict: 'E'
     template: require('./group-page-help.html')
     replace: true
-    controller: ($scope, $stateParams) ->
+    controller: (Dialog, $scope, $stateParams) ->
 
       $scope.firstTimeSeeingGroup = $stateParams.firstTimeSeeingGroup
       $scope.welcomeCardClosed = false
@@ -32,5 +32,8 @@ global.cobudgetApp.directive 'groupPageHelp', () ->
           membership:
             closed_member_help_card_at: moment()
 
+      $scope.openSetupTourDialog = ->
+        Dialog.custom
+          template: require('./setup-tour-dialog.tmpl.html')
 
       return
