@@ -32,7 +32,7 @@
 
 .group-page-help__card-description {
   font-size: 13px;
-  margin: 8px auto;
+  margin: 12px auto;
 }
 
 .group-page-help__card-btns {
@@ -47,11 +47,13 @@
 .group-page-help__card-btn {
   line-height: 20px !important;
   min-height: 20px !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin: 0 !important;
   color: #3A51F8 !important;
+  font-size: 13px;
 }
 
 @media (max-width: 450px) {
-
+  .group-page-help__card-image {
+    display: none;
+  }
 }
