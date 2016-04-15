@@ -1,45 +1,6 @@
 <div class="landing-page">
-  <div class="landing-page__header" layout="row" layout-align="end center">
-    <div class="landing-page__header-btns">
-      <md-button class="landing-page__header-btn">About</md-button>
-      <md-button class="landing-page__header-btn" ng-click="redirectToResourcesPage()">Resources</md-button>
-    </div>
-
-    <md-menu class="landing-page__menu">
-      <div layout="column" layout-align="center center" ng-click="$mdOpenMenu($event)">
-        <ng-md-icon icon="menu"
-        class="landing-page__menu-icon"
-        layout="column"
-        layout-align="center center"
-        ></ng-md-icon>
-      </div>
-
-      <md-menu-content>
-        <md-menu-item>
-          <md-button aria-label="about" ng-click="">About</md-button>
-        </md-menu-item>
-
-        <md-menu-item>
-          <md-button aria-label="resources" ng-click="redirectToResourcesPage()">Resources</md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
-
-    <span flex class="landing-page__header-separator"></span>
-
-    <div class="landing-page__login-btn" aria-label="login" ng-click="redirectToLoginPage()" layout="row" layout-align="center center">
-      <div class="landing-page__person-icon-container" layout="column" layout-align="center center">
-        <ng-md-icon icon="person"
-          size="20"
-          class="landing-page__person-icon"
-          layout="column"
-          layout-align="center center"
-        ></ng-md-icon>
-      </div>
-      <span class="landing-page__login-btn-label">Log in</span>
-    </div>
-  </div>
-
+  <landing-page-toolbar></landing-page-toolbar>
+  
   <div class="landing-page__top-content" layout="row" layout-align="space-around center">
     <div class="landing-page__mobile-preview">
       <img src="./img/smartphone.svg" class="landing-page__smartphone-img" alt="" />

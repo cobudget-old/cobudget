@@ -18,11 +18,5 @@ module.exports =
         .catch (err) ->
           LoadBar.stop()
           $location.path('/login').search({setup_group: true, email: newUser.email})
-
-    $scope.redirectToLoginPage = ->
-      $location.path('/login')
-
-    $scope.redirectToResourcesPage = ->
-      $location.path('/resources')
-
+          
     return

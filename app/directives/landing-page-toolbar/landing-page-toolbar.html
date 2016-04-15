@@ -1,0 +1,40 @@
+<div class="landing-page-toolbar" layout="row" layout-align="end center">
+  <div class="landing-page-toolbar__header-btns">
+    <md-button class="landing-page-toolbar__header-btn">About</md-button>
+    <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToResourcesPage()">Resources</md-button>
+  </div>
+
+  <md-menu class="landing-page-toolbar__menu">
+    <div layout="column" layout-align="center center" ng-click="$mdOpenMenu($event)">
+      <ng-md-icon icon="menu"
+      class="landing-page-toolbar__menu-icon"
+      layout="column"
+      layout-align="center center"
+      ></ng-md-icon>
+    </div>
+
+    <md-menu-content>
+      <md-menu-item>
+        <md-button aria-label="about" ng-click="">About</md-button>
+      </md-menu-item>
+
+      <md-menu-item>
+        <md-button aria-label="resources" ng-click="redirectToResourcesPage()">Resources</md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
+  <span flex class="landing-page-toolbar__header-separator"></span>
+
+  <div class="landing-page-toolbar__login-btn" aria-label="login" ng-click="redirectToLoginPage()" layout="row" layout-align="center center">
+    <div class="landing-page-toolbar__person-icon-container" layout="column" layout-align="center center">
+      <ng-md-icon icon="person"
+        size="20"
+        class="landing-page-toolbar__person-icon"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+    </div>
+    <span class="landing-page-toolbar__login-btn-label">Log in</span>
+  </div>
+</div>
