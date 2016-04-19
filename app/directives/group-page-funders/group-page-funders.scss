@@ -113,7 +113,7 @@
   margin-left: 5px;
 }
 
-.group-page__funder-balance {
+.group-page__funder-balance-btn {
   font-size: 19px;
   font-weight: 500;
   cursor: pointer;
@@ -124,6 +124,16 @@
     background: #F0F0F0;
     text-decoration: underline;
   }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.group-page__funder-balance {
+  font-size: 19px;
+  font-weight: 500;
+  padding: 2px 8px;
 
   &:focus {
     outline: none;

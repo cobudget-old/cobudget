@@ -29,8 +29,8 @@
 
           <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
             <span class="group-page__funder-balance"
-              ng-class="funderMembership.id == membership.id ? 'group-page__funder-balance-personal' : 'group-page__funder-balance-other'"
-              ng-click="openManageFundsDialog(funderMembership)"
+              ng-class="{'group-page__funder-balance-btn' : membership.isAdmin, 'group-page__funder-balance-personal' : funderMembership.id == membership.id, 'group-page__funder-balance-other' : funderMembership.id != membership.id}"
+              ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)"
             >
               {{ funderMembership.balance | currency : group.currencySymbol : 0 }}
             </span>
@@ -110,7 +110,10 @@
           </div>
 
           <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
-            <span class="group-page__funder-balance group-page__funder-balance-pending" ng-click="openManageFundsDialog(funderMembership)">
+            <span class="group-page__funder-balance group-page__funder-balance-pending"
+              ng-class="membership.isAdmin ? 'group-page__funder-balance-btn' : 'group-page__funder-balance'"
+              ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)"
+            >
               {{ funderMembership.balance | currency : group.currencySymbol : 0 }}
             </span>
           </div>
