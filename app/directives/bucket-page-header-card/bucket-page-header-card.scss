@@ -2,7 +2,7 @@
 
 .bucket-page__header-card {
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .bucket-page__meta {
@@ -30,7 +30,7 @@
 }
 
 .bucket-page__funding-target-text {
-  color: #25A1DE;
+  color: $cob-cyan;
   font-size: 13px;
 }
 

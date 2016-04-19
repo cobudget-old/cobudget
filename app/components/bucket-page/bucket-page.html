@@ -1,6 +1,5 @@
 <div class="bucket-page" ng-if="authorized">
   <group-page-toolbar></group-page-toolbar>
-  <!-- <bucket-page-toolbar></bucket-page-toolbar> -->
 
   <md-content class="bucket-page__content">
     <div layout="row" layout-align="start start">
@@ -11,17 +10,13 @@
       </div>
 
       <div layout="column" layout-align="center center" class="bucket-page__right-column">
-        <bucket-page-status-card></bucket-page-status-card>        
+        <bucket-page-status-card></bucket-page-status-card>
+        <bucket-page-manage-card ng-if="userCanManageBucket()"></bucket-page-manage-card>
       </div>
     </div>
 
-
-
     <!-- <div ng-if="!bucket.isArchived()">
       <bucket-page-progress-card ng-if="bucket.status == 'live'"></bucket-page-progress-card>
-
-    </div>
-
- -->
+    </div> -->
   </md-content>
 </div>

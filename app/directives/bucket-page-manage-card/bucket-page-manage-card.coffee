@@ -1,17 +1,14 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.directive 'bucketPageToolbar', () ->
+global.cobudgetApp.directive 'bucketPageManageCard', () ->
     restrict: 'E'
-    template: require('./bucket-page-toolbar.html')
+    template: require('./bucket-page-manage-card.html')
     replace: true
-    controller: (Dialog, LoadBar, $location, $scope) ->
+    controller: (Dialog, $scope, $location) ->
 
       $scope.edit = ->
         $location.path("/buckets/#{$scope.bucket.id}/edit")
-
-      $scope.userCanEditBucket = ->
-        $scope.bucket && !$scope.bucket.isArchived() && $scope.userCanStartFunding()
 
       $scope.archive = ->
         archiveBucketDialog = require('./../../components/archive-bucket-dialog/archive-bucket-dialog.coffee')({

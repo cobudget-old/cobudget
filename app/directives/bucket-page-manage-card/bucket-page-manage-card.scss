@@ -1,0 +1,28 @@
+.bucket-page-manage-card {
+  width: 100%;
+  margin: 0;
+}
+
+.bucket-page-manage-card__content {
+  padding: 5px 20px;
+}
+
+.bucket-page-manage-card__header {
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.bucket-page-manage-card__btn {
+  fill: $cob-blue;
+  color: $cob-blue;
+  min-width: 0;
+  width: 75px;
+  font-weight: 400;
+  font-size: 13px;
+  margin: 0;
+  margin-right: 10px;
+  padding: 0;
+  padding-top: 10px;
+}
