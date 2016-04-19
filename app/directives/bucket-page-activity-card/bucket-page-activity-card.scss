@@ -1,25 +1,30 @@
 // activity card
 
+.bucket-page__activity-card {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.bucket-page__activity-card-content {
+  padding: 12px 16px;
+}
+
 .bucket-page__activity-header {
-  @include fontLarge;
+  font-size: 17px;
   height: 25px;
 }
 
-.bucket-page__comment-count {
-  color: white;
-  position: relative;
-  @include fontSmall;
-  text-align: center;
-  bottom: 22px;
-}
-
-.bucket-page__comment-icon-active {
-  @include fontGrande;
-}
-
 .bucket-page__comment-icon-inactive {
-  @include fontGrande;
   fill: $cobudget-grey;
+}
+
+.bucket-page__comment-count {
+  @include fontTiny;
+  position: relative;
+  color: white;
+  bottom: 20px;
+  text-align: center;
+  font-weight: 500;
 }
 
 .bucket-page__comment-list {
@@ -34,11 +39,12 @@
 }
 
 .bucket-page__comment-author-name {
-  @include fontMedLarge;
+  @include fontSmall;
+  font-weight: 500;
 }
 
 .bucket-page__comment-body {
-  @include fontMedium;
+  @include fontTiny;
   @include markdown;
 
   p {
@@ -54,6 +60,7 @@
 
 .bucket-page__comment-form-card {
   background: $cobudget-light-grey;
+  margin: 0;
   padding: 10px;
 }
 
@@ -62,8 +69,8 @@
 }
 
 .bucket-page__comment-input {
-  @include fontMedium;
-  line-height: 20px !important;
+  @include fontTiny;
+  line-height: 14px !important;
   background: white !important;
   border: 0px !important;
   padding: 5px 7px !important;
@@ -91,6 +98,6 @@
 .bucket-page__submit-comment-btn {
   margin: 0;
   margin-top: 10px;
-  background: $cobudget-lime !important;
+  background: $cob-green !important;
   color: white !important;
 }
