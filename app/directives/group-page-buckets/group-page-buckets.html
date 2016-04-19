@@ -127,7 +127,7 @@
   </md-card>
 
   <md-card class="group-page__buckets-card">
-    <md-list class="group-page__buckets-list" ng-if="group.archivedBuckets().length > 0 && showArchivedBuckets">
+    <md-list class="group-page__buckets-list" ng-if="group.archivedBuckets().length > 0 && archivedBucketsShown">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
         <ng-md-icon icon="archive"
           layout="column"
@@ -137,6 +137,10 @@
         ></ng-md-icon>
 
         <md-subheader class="group-page__subheader-title">Archived</md-subheader>
+
+        <span flex></span>
+
+        <md-button class="group-page-buckets__hide-archived-buckets-btn" ng-click="hideArchivedBuckets()">Hide</md-button>
       </div>
 
       <md-divider class="group-page__buckets-divider"></md-divider>
@@ -163,22 +167,22 @@
             </div>
           </div>
 
-          <span class="group-page__bucket-subheader">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
+          <span class="group-page__bucket-subheader">{{ bucket.authorName }} - {{ bucket.createdAt | timeFromNowInWords }} ago - <b>{{ bucket.formattedStatus() }}</b></span>
         </div>
       </md-list-item>
     </md-list>
   </md-card>
 
-  <div class="group-page-buckets__archived-buckets-btn-container" layout="row" ng-if="group.archivedBuckets().length > 0">
-    <div class="group-page-buckets__archived-buckets-btn" layout="row" layout-align="center center" ng-click="toggleArchivedBuckets()">
+  <div class="group-page-buckets__show-archived-buckets-btn-container" layout="row" ng-if="group.archivedBuckets().length > 0">
+    <div class="group-page-buckets__show-archived-buckets-btn" layout="row" layout-align="center center" ng-click="showArchivedBuckets()"  ng-if="!archivedBucketsShown">
       <ng-md-icon icon="archive"
         layout="column"
         layout-align="center center"
-        class="group-page-buckets__archived-buckets-btn-icon"
+        class="group-page-buckets__show-archived-buckets-btn-icon"
       ></ng-md-icon>
 
-      <div class="group-page-buckets__archived-buckets-btn-label">
-        {{ showArchivedBuckets ? 'Hide' : 'Show' }} Archived Buckets
+      <div class="group-page-buckets__show-archived-buckets-btn-label">
+        Show Archived Buckets
       </div>
     </div>
   </div>

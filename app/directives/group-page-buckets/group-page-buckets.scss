@@ -16,10 +16,11 @@
 
 .group-page__buckets-list {
   padding-bottom: 0;
+  padding-top: 0;
 }
 
 .group-page__buckets-list-header-container {
-  padding-left: 20px;
+  padding: 5px 20px
 }
 
 .group-page__subheader-title {
@@ -144,17 +145,16 @@
   fill: rgba(0,0,0,0.35);
 }
 
-.group-page-buckets__archived-buckets-btn-container {
+.group-page-buckets__show-archived-buckets-btn-container {
   width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
   margin-top: 16px;
 }
 
-.group-page-buckets__archived-buckets-btn {
+.group-page-buckets__show-archived-buckets-btn {
   background: rgba(0,0,0,0.05);
   text-transform: none;
-  margin: 0 auto;
+  margin: 0 8px;
+  padding: 0;
   font-weight: normal;
   height: 35px;
   font-size: 14px;
@@ -165,10 +165,21 @@
   color: rgba(0,0,0,0.6);
 }
 
-.group-page-buckets__archived-buckets-btn:focus {
+.group-page-buckets__show-archived-buckets-btn:focus {
   outline: none;
 }
 
-.group-page-buckets__archived-buckets-btn-label {
+.group-page-buckets__show-archived-buckets-btn-label {
   margin-left: 10px;
+}
+
+.group-page-buckets__hide-archived-buckets-btn {
+  margin: 0;
+  border-radius: 1px;
+  background: #E9E9E9;
+  color: #909090;
+  line-height: 30px;
+  min-height: 0;
+  text-transform: none;
+  font-weight: 400;
 }

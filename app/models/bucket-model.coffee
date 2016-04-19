@@ -36,6 +36,12 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
       _.sum @contributionsByUser(user), (contribution) ->
         contribution.amount
 
+    formattedStatus: ->
+      switch @status
+        when "draft" then "idea"
+        when "live" then "funding"
+        when "funded" then "funded"
+
     amountContributedByOthers: (user) ->
       @totalContributions - @amountContributedByUser(user)
 
