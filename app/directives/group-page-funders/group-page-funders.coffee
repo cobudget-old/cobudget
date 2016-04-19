@@ -19,6 +19,12 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
           filename: filename
         DownloadCSV(params)
 
+      $scope.openResendInvitesDialog = ->
+        Dialog.confirm({
+          content: "Resend invitations to #{$scope.group.pendingMemberships().length} people?"
+        }).then ->
+          $scope.resendInvites()
+
       $scope.resendInvites = ->
         invitesSent = 0
         LoadBar.start({msg: "Resending invites (0 / #{$scope.group.pendingMemberships().length})"})
