@@ -23,6 +23,26 @@
     </div>
   </md-card>
 
+  <md-card class="group-page-help__card" ng-if="placeholderAdminWelcomeCardDisplayed()">
+    <div layout="row" class="group-page-help__card-container">
+      <img src="./img/idea_money.svg" class="group-page-help__card-image" />
+      <div layout="column" class="group-page-help__card-content">
+        <h2 class="group-page-help__card-header">Welcome!</h2>
+
+        <p class="group-page-help__card-description">
+          This is your new group. Here, people can propose and discuss ideas for funding, and fund them once they're approved.
+        </p>
+
+        <div flex></div>
+
+        <div class="group-page-help__card-btns" layout="row" layout-align="center center">
+          <span flex></span>
+          <md-button class="group-page-help__card-btn" href="https://medium.com/@Cobudget/getting-started-with-collaborative-funding-265dabef30e3#.st6w3ssjj" target="_blank">read more</md-button>
+        </div>
+      </div>
+    </div>
+  </md-card>
+
   <md-card class="group-page-help__card" ng-if="adminLaunchCardDisplayed()">
     <div layout="row" class="group-page-help__card-container">
       <img src="./img/rocket.svg" class="group-page-help__card-image" />
@@ -51,9 +71,9 @@
     <div layout="row" class="group-page-help__card-container">
       <img src="./img/idea_money.svg" class="group-page-help__card-image" />
       <div layout="column" class="group-page-help__card-content">
-        <h2 class="group-page-help__card-header">Welcome to POC21 Community!</h2>
+        <h2 class="group-page-help__card-header">Welcome to {{ group.name }}!</h2>
 
-        <div class="group-page-help__card-close-btn" ng-click="closeMemberWelcomeCard()">&times;</div>
+        <div class="group-page-help__card-close-btn" ng-click="closeMemberWelcomeCard()" ng-if="group.buckets().length > 0">&times;</div>
 
         <p class="group-page-help__card-description">
           Do you have an idea for a project you want to see happen? Add it and see what other's think!

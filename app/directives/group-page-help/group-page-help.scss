@@ -29,6 +29,7 @@
 .group-page-help__card-header {
   font-size: 18px;
   @include truncatedText;
+  margin-right: 30px;
 }
 
 .group-page-help__card-close-btn {
@@ -101,8 +102,8 @@
   }
 
   .group-page-help__card-btn {
-    font-size: 12px;
-    padding: 0 8px !important;
+    font-size: 11px;
+    padding: 0 6px !important;
   }
 
   .group-page-help__card-steps {
