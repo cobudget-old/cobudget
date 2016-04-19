@@ -11,7 +11,7 @@
         <span class="bucket-page-backers-card__contribution"
           ng-class="backer.id == currentUser.id ? 'bucket-page-backers-card__contribution-personal' : 'bucket-page-backers-card__contribution-other'"
         >
-          <b>{{ backer.contributionAmount | currency : group.currencySymbol }}</b>
+          <b>{{ backer.contributionAmount | currency : group.currencySymbol : 0 }}</b>
         </span>
 
       </li>
