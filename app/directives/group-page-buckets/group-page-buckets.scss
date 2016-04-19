@@ -73,18 +73,16 @@
 
 // comments
 
-.group-page__comment-count-container {
-  position: absolute;
-  top: 2px;
-  right: 4px;
+.group-page__bucket-comment-buffer {
+  min-width: 5px;
 }
 
-.group-page__comment-icon-active {
-  @include fontGrande;
+.group-page__comment-count-container {
+  margin-left: 4px;
+  height: 22px;
 }
 
 .group-page__comment-icon-inactive {
-  @include fontGrande;
   fill: $cobudget-grey;
 }
 
@@ -92,8 +90,9 @@
   @include fontTiny;
   position: relative;
   color: white;
-  bottom: 21px;
+  bottom: 20px;
   text-align: center;
+  font-weight: 500;
 }
 
 // live buckets
@@ -140,6 +139,10 @@
 }
 
 // archived buckets
+
+.group-page__bucket-list-archived-icon {
+  fill: rgba(0,0,0,0.35);
+}
 
 .group-page-buckets__archived-buckets-btn-container {
   width: 100%;

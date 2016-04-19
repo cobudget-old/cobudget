@@ -8,34 +8,39 @@
 
       <md-divider class="group-page__buckets-divider"></md-divider>
 
-      <md-list-item md-no-ink ng-repeat="liveBucket in group.liveBuckets()" ng-click="showBucket(liveBucket.id)" class="group-page__buckets-list-item">
+      <md-list-item md-no-ink ng-repeat="bucket in group.liveBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
-          <span class="group-page__bucket-title">{{ liveBucket.name }}</span>
+          <div layout="row" layout-align="start center">
+            <span class="group-page__bucket-title">{{ bucket.name }}</span>
+
+            <span flex class="group-page__bucket-comment-buffer"></span>
+
+            <div class="group-page__comment-count-container">
+              <ng-md-icon
+                size="22"
+                icon="messenger"
+                layout="column"
+                layout-align="center center"
+                ng-class="bucket.hasComments() ? 'group-page__comment-icon-active' : 'group-page__comment-icon-inactive'"
+              ></ng-md-icon>
+
+              <div class="group-page__comment-count" ng-if="bucket.hasComments()">
+                {{ bucket.numOfComments }}
+              </div>
+            </div>
+          </div>
 
           <div layout="row" layout-align="space-between center">
-            <span class="group-page__bucket-subheader">{{ liveBucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
+            <span class="group-page__bucket-subheader">{{ bucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
 
-            <span ng-show="liveBucket.amountContributedByUser(currentUser) > 0" class="group-page__live-bucket-personal-contribution">
-              You gave {{ liveBucket.amountContributedByUser(currentUser) | currency : group.currencySymbol : 0 }}
+            <span ng-show="bucket.amountContributedByUser(currentUser) > 0" class="group-page__live-bucket-personal-contribution">
+              You gave {{ bucket.amountContributedByUser(currentUser) | currency : group.currencySymbol : 0 }}
             </span>
           </div>
 
           <div class="group-page__progress-bar-container">
-            <div class="group-page__progress-bar-primary" style="width: {{ liveBucket.percentContributedByOthers(currentUser) }}%"></div>
-            <div class="group-page__progress-bar-secondary" style="width: {{ liveBucket.percentContributedByUser(currentUser) + liveBucket.percentContributedByOthers(currentUser) }}%"></div>
-          </div>
-
-          <div class="group-page__comment-count-container">
-            <ng-md-icon
-            icon="messenger"
-            layout="column"
-            layout-align="center center"
-            ng-class="liveBucket.hasComments() ? 'group-page__comment-icon-active' : 'group-page__comment-icon-inactive'"
-            ></ng-md-icon>
-
-            <div class="group-page__comment-count" ng-if="liveBucket.hasComments()">
-              {{ liveBucket.numOfComments }}
-            </div>
+            <div class="group-page__progress-bar-primary" style="width: {{ bucket.percentContributedByOthers(currentUser) }}%"></div>
+            <div class="group-page__progress-bar-secondary" style="width: {{ bucket.percentContributedByUser(currentUser) + bucket.percentContributedByOthers(currentUser) }}%"></div>
           </div>
         </div>
       </md-list-item>
@@ -51,23 +56,29 @@
 
       <md-divider class="group-page__buckets-divider"></md-divider>
 
-      <md-list-item md-no-ink ng-repeat="draftBucket in group.draftBuckets()" ng-click="showBucket(draftBucket.id)" class="group-page__buckets-list-item">
-        <div layout="column" flex class="group-page__draft-container">
-          <span class="group-page__bucket-title">{{ draftBucket.name }}</span>
-          <span class="group-page__bucket-subheader">created by {{ draftBucket.authorName }} {{ draftBucket.createdAt | timeFromNowInWords }} ago</span>
+      <md-list-item md-no-ink ng-repeat="bucket in group.draftBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
+        <div layout="column" flex class="group-page__bucket-container">
+          <div layout="row" layout-align="start center">
+            <span class="group-page__bucket-title">{{ bucket.name }}</span>
 
-          <div class="group-page__comment-count-container">
-            <ng-md-icon
-            icon="messenger"
-            layout="column"
-            layout-align="center center"
-            ng-class="draftBucket.hasComments() ? 'group-page__comment-icon-active' : 'group-page__comment-icon-inactive'"
-            ></ng-md-icon>
+            <span flex class="group-page__bucket-comment-buffer"></span>
 
-            <div class="group-page__comment-count" ng-if="draftBucket.hasComments()">
-              {{ draftBucket.numOfComments }}
+            <div class="group-page__comment-count-container">
+              <ng-md-icon
+                size="22"
+                icon="messenger"
+                layout="column"
+                layout-align="center center"
+                ng-class="bucket.hasComments() ? 'group-page__comment-icon-active' : 'group-page__comment-icon-inactive'"
+              ></ng-md-icon>
+
+              <div class="group-page__comment-count" ng-if="bucket.hasComments()">
+                {{ bucket.numOfComments }}
+              </div>
             </div>
           </div>
+
+          <span class="group-page__bucket-subheader">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
         </div>
       </md-list-item>
     </md-list>
@@ -87,10 +98,29 @@
 
       <md-divider class="group-page__buckets-divider"></md-divider>
 
-      <md-list-item md-no-ink ng-repeat="fundedBucket in group.fundedBuckets()" ng-click="showBucket(fundedBucket.id)" class="group-page__buckets-list-item">
+      <md-list-item md-no-ink ng-repeat="bucket in group.fundedBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
-          <span class="group-page__bucket-title">{{ fundedBucket.name }}</span>
-          <span class="group-page__bucket-subheader">created by {{ fundedBucket.authorName }} {{ fundedBucket.createdAt | timeFromNowInWords }} ago</span>
+          <div layout="row" layout-align="start center">
+            <span class="group-page__bucket-title">{{ bucket.name }}</span>
+
+            <span flex class="group-page__bucket-comment-buffer"></span>
+
+            <div class="group-page__comment-count-container">
+              <ng-md-icon
+                size="22"
+                icon="messenger"
+                layout="column"
+                layout-align="center center"
+                ng-class="bucket.hasComments() ? 'group-page__comment-icon-active' : 'group-page__comment-icon-inactive'"
+              ></ng-md-icon>
+
+              <div class="group-page__comment-count" ng-if="bucket.hasComments()">
+                {{ bucket.numOfComments }}
+              </div>
+            </div>
+          </div>
+
+          <span class="group-page__bucket-subheader">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
         </div>
       </md-list-item>
     </md-list>
@@ -99,15 +129,41 @@
   <md-card class="group-page__buckets-card">
     <md-list class="group-page__buckets-list" ng-if="group.archivedBuckets().length > 0 && showArchivedBuckets">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
+        <ng-md-icon icon="archive"
+          layout="column"
+          layout-align="center center"
+          size="27"
+          class="group-page__bucket-list-icon group-page__bucket-list-archived-icon"
+        ></ng-md-icon>
+
         <md-subheader class="group-page__subheader-title">Archived</md-subheader>
       </div>
 
       <md-divider class="group-page__buckets-divider"></md-divider>
 
-      <md-list-item md-no-ink ng-repeat="archivedBucket in group.archivedBuckets()" ng-click="showBucket(archivedBucket.id)" class="group-page__buckets-list-item">
+      <md-list-item md-no-ink ng-repeat="bucket in group.archivedBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
-          <span class="group-page__bucket-title">{{ archivedBucket.name }}</span>
-          <span class="group-page__bucket-subheader">created by {{ archivedBucket.authorName }} {{ archivedBucket.createdAt | timeFromNowInWords }} ago</span>
+          <div layout="row" layout-align="start center">
+            <span class="group-page__bucket-title">{{ bucket.name }}</span>
+
+            <span flex class="group-page__bucket-comment-buffer"></span>
+
+            <div class="group-page__comment-count-container">
+              <ng-md-icon
+                size="22"
+                icon="messenger"
+                layout="column"
+                layout-align="center center"
+                ng-class="bucket.hasComments() ? 'group-page__comment-icon-active' : 'group-page__comment-icon-inactive'"
+              ></ng-md-icon>
+
+              <div class="group-page__comment-count" ng-if="bucket.hasComments()">
+                {{ bucket.numOfComments }}
+              </div>
+            </div>
+          </div>
+
+          <span class="group-page__bucket-subheader">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
         </div>
       </md-list-item>
     </md-list>
