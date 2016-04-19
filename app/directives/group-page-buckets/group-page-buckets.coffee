@@ -14,4 +14,3 @@ global.cobudgetApp.directive 'groupPageBuckets', () ->
         $scope.showArchivedBuckets = !$scope.showArchivedBuckets
 
       return
-      

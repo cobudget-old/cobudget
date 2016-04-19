@@ -107,12 +107,13 @@
 }
 
 .group-page md-ink-bar {
-  background: $cobudget-red;
+  background: $cob-red;
 }
 
 // create-bucket-fab
 
 .group-page-header__create-bucket-fab {
+  background: $cob-red !important;
   position: absolute;
   bottom: -28px;
   right: 15px;

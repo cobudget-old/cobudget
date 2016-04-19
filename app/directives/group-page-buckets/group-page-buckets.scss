@@ -14,79 +14,64 @@
   margin-bottom: 5px;
 }
 
+.group-page__buckets-list {
+  padding-bottom: 0;
+}
+
+.group-page__buckets-list-header-container {
+  padding-left: 20px;
+}
+
 .group-page__subheader-title {
-  color: $grey-on-white;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  color: black;
+  margin-left: 4px;
+  font-size: 15px !important;
 }
 
-// live buckets
-
-.group-page__live-bucket-container {
-  min-width: 0;
-  padding: 3px 0;
+.group-page__bucket-list-icon {
+  width: 27px;
+  height: 27px;
 }
 
-.group-page__live-bucket-title {
+.group-page__buckets-list-item {
+  transition: 0.5s;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .md-button {
+    background: transparent !important;
+  }
+
+  &:hover {
+    background: #EFEFEF;
+  }
+}
+
+.group-page__buckets-divider {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.group-page__bucket-title {
   @include fontMedLarge;
   @include truncatedText;
+  margin-bottom: 4px;
 }
 
-.group-page__live-bucket-funding {
+.group-page__bucket-subheader {
   @include fontSmall;
   color: $grey-on-white;
+  margin-bottom: 4px;
 }
 
-.group-page__live-bucket-personal-contribution {
-  @include fontSmall;
-  color: $cobudget-green;
-}
-
-.group-page__progress-bar-container {
-  position: relative;
-  height: 5px;
-  background: $cobudget-grey;
-  z-index: 0;
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.group-page__progress-bar-primary {
-  position: absolute;
-  height: 100%;
-  left: 0;
-  background: $cobudget-orange;
-  z-index: 2;
-  width: 0%;
-  transition: 0.5s;
-}
-
-.group-page__progress-bar-secondary {
-  position: absolute;
-  height: 100%;
-  left: 0;
-  background: $cobudget-green;
-  z-index: 1;
-  width: 0%;
-  transition: 0.5s;
-}
-
-// drafts
-
-.group-page__draft-container {
+.group-page__bucket-container {
   position: relative;
   min-width: 0;
 }
 
-.group-page__draft-title {
-  @include fontMedLarge;
-  @include truncatedText;
-  padding-right: 35px;
-}
-
-.group-page__draft-author {
-  @include fontSmall;
-  color: $grey-on-white;
-}
+// comments
 
 .group-page__comment-count-container {
   position: absolute;
@@ -111,20 +96,47 @@
   text-align: center;
 }
 
+// live buckets
+
+.group-page__live-bucket-personal-contribution {
+  @include fontSmall;
+  color: $cob-green;
+}
+
+.group-page__progress-bar-container {
+  position: relative;
+  height: 5px;
+  background: $cobudget-grey;
+  z-index: 0;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.group-page__progress-bar-primary {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  background: $cob-yellow;
+  z-index: 2;
+  width: 0%;
+  transition: 0.5s;
+}
+
+.group-page__progress-bar-secondary {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  background: $cob-green;
+  z-index: 1;
+  width: 0%;
+  transition: 0.5s;
+}
+
 // funded buckets
 
-.group-page__funded-bucket-container {
-  min-width: 0;
-}
-
-.group-page__funded-bucket-title {
-  @include fontMedLarge;
-  @include truncatedText;
-}
-
-.group-page__funded-bucket-author {
-  @include fontSmall;
-  color: $grey-on-white;
+.group-page__bucket-list-funded-icon {
+  fill: $cob-green;
 }
 
 // archived buckets

@@ -16,14 +16,14 @@
 }
 
 .loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle {
-  border-left-color: $cobudget-orange;
+  border-left-color: $cob-yellow;
 }
 
 .loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-right-color: $cobudget-green;
+  border-right-color: $cob-green;
 }
 
-.loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle, 
+.loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle,
 .loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-top-color: $cobudget-orange;
+  border-top-color: $cob-yellow;
 }
