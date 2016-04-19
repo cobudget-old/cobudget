@@ -6,7 +6,7 @@
 
 .login-page__heading {
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -46,7 +46,7 @@
 
 .login-page__form {
   margin-top: 30px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -81,7 +81,6 @@
   line-height: 30px;
   min-height: 30px;
   margin: 0;
-  margin-bottom: 5px;
   color: $cob-blue;
   text-transform: none;
   font-size: 13px;
@@ -92,5 +91,5 @@
   max-width: 300px;
   width: 100%;
   margin: 0;
-  margin-top: 7px;
+  margin-top: 2px;
 }
