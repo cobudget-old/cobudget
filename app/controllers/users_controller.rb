@@ -28,6 +28,13 @@ class UsersController < AuthenticatedController
     end
   end
 
+  api :POST, '/users/request_reconfirmation'
+  def request_reconfirmation
+    current_user.generate_confirmation_token! unless current_user.confirmed?
+    UserMailer.confirm_account_email(user: current_user).deliver_later
+    render nothing: true
+  end
+
   api :POST, '/users/update_profile'
   def update_profile
     current_user.update(user_params)
