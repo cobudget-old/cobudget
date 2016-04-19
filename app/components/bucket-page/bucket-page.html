@@ -13,12 +13,9 @@
 
       <div layout="column" layout-align="center center" class="bucket-page__right-column">
         <bucket-page-status-card ng-if="bucket.status != 'live'"></bucket-page-status-card>
+        <bucket-page-progress-card ng-if="!bucket.isArchived() && bucket.status == 'live'"></bucket-page-progress-card>
         <bucket-page-manage-card ng-if="userCanManageBucket()"></bucket-page-manage-card>
       </div>
     </div>
-
-    <!-- <div ng-if="!bucket.isArchived()">
-      <bucket-page-progress-card ng-if="bucket.status == 'live'"></bucket-page-progress-card>
-    </div> -->
   </md-content>
 </div>
