@@ -6,6 +6,7 @@
 
 .bucket-page-manage-card__content {
   padding: 5px 20px;
+  padding-bottom: 15px;
 }
 
 .bucket-page-manage-card__header {
@@ -16,8 +17,8 @@
 }
 
 .bucket-page-manage-card__btn {
-  fill: $cob-blue;
-  color: $cob-blue;
+  fill: #4F4F4F;
+  color: #4F4F4F;
   min-width: 0;
   width: 75px;
   font-weight: 400;
@@ -26,4 +27,5 @@
   margin-right: 10px;
   padding: 0;
   padding-top: 10px;
+  border: 1px solid #C7C7C7;
 }
