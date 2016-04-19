@@ -1,9 +1,23 @@
 .bucket-page__content {
+  position: relative;
+  bottom: 135px;
+  z-index: 1;
   max-width: 720px;
   margin: 0 auto;
   padding-bottom: 10px;
-  top: $large-height;
   background: transparent;
+}
+
+.bucket-page__group-btn {
+  color: #8F9598;
+  font-size: 12px;
+  text-transform: none;
+  background: #3A4448;
+  min-height: 30px;
+  height: 30px;
+  line-height: normal;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .bucket-page__left-column {

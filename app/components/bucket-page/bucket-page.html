@@ -2,6 +2,8 @@
   <group-page-toolbar></group-page-toolbar>
 
   <md-content class="bucket-page__content">
+    <md-button class="bucket-page__group-btn" ng-click="back()">{{ group.name }}</md-button>
+
     <div layout="row" layout-align="start start">
       <div layout="column" layout-align="center center" class="bucket-page__left-column">
         <bucket-page-header-card></bucket-page-header-card>
