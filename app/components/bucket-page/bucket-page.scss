@@ -1,5 +1,5 @@
 .bucket-page__content {
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
   padding-bottom: 10px;
   top: $large-height;
@@ -7,12 +7,10 @@
 }
 
 .bucket-page__left-column {
-  border: 1px solid black;
   width: 420px;
   padding: 8px;
 }
 
 .bucket-page__right-column {
-  border: 1px solid black;
-  width: 220px;
+  width: 300px;
 }
