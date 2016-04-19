@@ -22,6 +22,4 @@ global.cobudgetApp.directive 'bucketPageManageCard', () ->
         })
         Dialog.open(finishBucketDialog)
 
-      $scope.finish()
-
       return
