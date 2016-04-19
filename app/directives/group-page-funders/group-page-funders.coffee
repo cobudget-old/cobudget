@@ -5,11 +5,34 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
     restrict: 'E'
     template: require('./group-page-funders.html')
     replace: true
-    controller: (Dialog, LoadBar, Records, $scope, Toast, $window) ->
+    controller: (config, Dialog, DownloadCSV, LoadBar, $q, Records, $scope, Toast, $window) ->
 
       $scope.toggleMemberAdmin = (membership) ->
         membership.isAdmin = !membership.isAdmin
         membership.save()
+
+      $scope.downloadCSV = ->
+        timestamp = moment().format('YYYY-MM-DD-HH-mm-ss')
+        filename = "#{$scope.group.name}-member-data-#{timestamp}"
+        params =
+          url: "#{config.apiPrefix}/memberships.csv?group_id=#{$scope.group.id}"
+          filename: filename
+        DownloadCSV(params)
+
+      $scope.resendInvites = ->
+        invitesSent = 0
+        LoadBar.start({msg: "Resending invites (0 / #{$scope.group.pendingMemberships().length})"})
+        promises = []
+        _.each $scope.group.pendingMemberships(), (membership) ->
+          promise = Records.memberships.invite(membership)
+          promise.finally ->
+            invitesSent = invitesSent + 1
+            LoadBar.updateMsg("Resending invites (#{invitesSent} / #{$scope.group.pendingMemberships().length})")
+          promises.push(promise)
+
+        $q.allSettled(promises).finally ->
+          Toast.show("#{promises.length} invitations sent!")
+          LoadBar.stop()
 
       # TODO: refactor
       $scope.inviteAgain = (membership) ->
