@@ -60,6 +60,6 @@ class BucketsController < AuthenticatedController
     end
 
     def bucket_params_update
-      params.require(:bucket).permit(:name, :description, :target)
+      params.require(:bucket).permit(:name, :description, :target, :status)
     end
 end
