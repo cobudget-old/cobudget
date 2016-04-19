@@ -64,12 +64,15 @@
 .group-page__bucket-subheader {
   @include fontSmall;
   color: $grey-on-white;
-  margin-bottom: 4px;
 }
 
 .group-page__bucket-container {
   position: relative;
   min-width: 0;
+}
+
+.group-page__bucket-header-container {
+  margin-bottom: 1px;
 }
 
 // comments
@@ -109,7 +112,7 @@
   background: $cobudget-grey;
   z-index: 0;
   width: 100%;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 5px;
 }
 
@@ -182,4 +185,18 @@
   min-height: 0;
   text-transform: none;
   font-weight: 400;
+}
+
+@media (max-width: 380px) {
+  .group-page__bucket-title {
+    @include fontMedium;
+  }
+
+  .group-page__bucket-subheader {
+    @include fontTiny;
+  }
+
+  .group-page__live-bucket-personal-contribution {
+    @include fontTiny;
+  }
 }

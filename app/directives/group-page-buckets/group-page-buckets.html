@@ -10,7 +10,7 @@
 
       <md-list-item md-no-ink ng-repeat="bucket in group.liveBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
-          <div layout="row" layout-align="start center">
+          <div layout="row" layout-align="start center" class="group-page__bucket-header-container">
             <span class="group-page__bucket-title">{{ bucket.name }}</span>
 
             <span flex class="group-page__bucket-comment-buffer"></span>
@@ -31,7 +31,7 @@
           </div>
 
           <div layout="row" layout-align="space-between center">
-            <span class="group-page__bucket-subheader">{{ bucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</span>
+            <span class="group-page__bucket-subheader">{{ bucket.totalContributions | currency : group.currencySymbol : 0 }} funded - <b>{{ bucket.amountRemaining() | currency : group.currencySymbol : 0  }} to go</b></span>
 
             <span ng-show="bucket.amountContributedByUser(currentUser) > 0" class="group-page__live-bucket-personal-contribution">
               You gave {{ bucket.amountContributedByUser(currentUser) | currency : group.currencySymbol : 0 }}
@@ -58,7 +58,7 @@
 
       <md-list-item md-no-ink ng-repeat="bucket in group.draftBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
-          <div layout="row" layout-align="start center">
+          <div layout="row" layout-align="start center" class="group-page__bucket-header-container">
             <span class="group-page__bucket-title">{{ bucket.name }}</span>
 
             <span flex class="group-page__bucket-comment-buffer"></span>
@@ -78,7 +78,7 @@
             </div>
           </div>
 
-          <span class="group-page__bucket-subheader">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
+          <span class="group-page__bucket-subheader">{{ bucket.authorName }} - {{ bucket.createdAt | timeFromNowInWords }} ago</span>
         </div>
       </md-list-item>
     </md-list>
@@ -100,7 +100,7 @@
 
       <md-list-item md-no-ink ng-repeat="bucket in group.fundedBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
-          <div layout="row" layout-align="start center">
+          <div layout="row" layout-align="start center" class="group-page__bucket-header-container">
             <span class="group-page__bucket-title">{{ bucket.name }}</span>
 
             <span flex class="group-page__bucket-comment-buffer"></span>
@@ -120,7 +120,7 @@
             </div>
           </div>
 
-          <span class="group-page__bucket-subheader">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</span>
+          <span class="group-page__bucket-subheader">{{ bucket.authorName }} - {{ bucket.totalContributions | currency : group.currencySymbol : 0 }}</span>
         </div>
       </md-list-item>
     </md-list>
@@ -147,7 +147,7 @@
 
       <md-list-item md-no-ink ng-repeat="bucket in group.archivedBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
-          <div layout="row" layout-align="start center">
+          <div layout="row" layout-align="start center" class="group-page__bucket-header-container">
             <span class="group-page__bucket-title">{{ bucket.name }}</span>
 
             <span flex class="group-page__bucket-comment-buffer"></span>
