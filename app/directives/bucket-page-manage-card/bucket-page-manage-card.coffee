@@ -16,4 +16,10 @@ global.cobudgetApp.directive 'bucketPageManageCard', () ->
         })
         Dialog.open(archiveBucketDialog)
 
+      $scope.finish = ->
+        finishBucketDialog = require('./../../components/finish-bucket-dialog/finish-bucket-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(finishBucketDialog)
+
       return

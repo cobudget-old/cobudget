@@ -1,0 +1,85 @@
+.finish-bucket-dialog {
+  width: 80%;
+  max-width: 420px;
+}
+
+.finish-bucket-dialog__header {
+  text-align: center;
+  padding: 15px !important;
+}
+
+.finish-bucket-dialog__header-text {
+  margin-top: 5px;
+  font-weight: bold;
+  color: $cob-green;
+  font-size: 18px;
+}
+
+.finish-bucket-dialog__icon {
+  fill: $cob-green;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.finish-bucket-dialog__final-caution {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: $grey-on-white;
+  margin-top: 13px;
+}
+
+.finish-bucket-dialog__details-container {
+  padding: 0 20px 10px 20px !important;
+}
+
+.finish-bucket-dialog__details {
+  color: gray;
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.finish-bucket-dialog__proceed-btn {
+  color: white !important;
+  background: $cob-green !important;
+}
+
+.finish-bucket-dialog__cancel-btn {
+  color: $grey-on-white !important;
+  background: transparent !important;
+}
+
+.finish-bucket-dialog__btns-horizontal-layout, .finish-bucket-dialog__btns-vertical-layout {
+  position: relative;
+  width: 100%;
+}
+
+.finish-bucket-dialog__btns {
+  padding-right: 16px !important;
+}
+
+.finish-bucket-dialog__btn {
+  margin: 0 !important;
+  margin-bottom: 15px !important;
+}
+
+
+@media (max-width: 390px) {
+  .finish-bucket-dialog__btns-horizontal-layout {
+    display: none;
+  }
+
+  .finish-bucket-dialog__btn {
+    width: 100%;
+  }
+}
+
+@media (min-width: 390px) {
+  .finish-bucket-dialog__btns-vertical-layout {
+    display: none;
+  }
+
+  .finish-bucket-dialog__btn {
+    margin-left: 10px !important;
+  }
+}
