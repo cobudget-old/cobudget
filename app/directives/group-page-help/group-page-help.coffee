@@ -19,6 +19,9 @@ global.cobudgetApp.directive 'groupPageHelp', () ->
       $scope.memberWelcomeCardDisplayed = ->
         !$scope.membership.isAdmin && !$scope.membership.closedMemberHelpCardAt
 
+      $scope.placeholderAdminWelcomeCardDisplayed = ->
+        $scope.membership.isAdmin && $scope.group.buckets().length == 0 && !$scope.adminWelcomeCardDisplayed() && !$scope.adminLaunchCardDisplayed()
+
       $scope.closeAdminWelcomeCard = ->
         $scope.welcomeCardClosed = true
 
