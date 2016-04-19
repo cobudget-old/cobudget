@@ -1,13 +1,17 @@
-<md-toolbar class="group-page__toolbar">
-  <div class="md-toolbar-tools group-page__menu-bar">
-    <md-button class="md-icon-button" aria-label="Settings" ng-click="openSidenav()">
-      <ng-md-icon icon="menu"
-        class="group-page__menu-icon"
-        layout="column"
-        layout-align="center center"
-      ></ng-md-icon>
-    </md-button>
+<div class="group-page-toolbar__container">
+  <md-toolbar class="group-page-toolbar">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="openSidenav()">
+        <ng-md-icon icon="menu"
+          class="group-page-toolbar__menu-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+      </md-button>
 
-    <toolbar-dropdown-menu></toolbar-dropdown-menu>
-  </div>
-</md-toolbar>
+      <toolbar-dropdown-menu></toolbar-dropdown-menu>
+    </div>
+  </md-toolbar>
+
+  <group-page-sidenav></group-page-sidenav>
+</div>

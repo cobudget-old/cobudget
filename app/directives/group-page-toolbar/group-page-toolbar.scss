@@ -1,6 +1,6 @@
 // toolbar heading
 
-.group-page__toolbar {
+.group-page-toolbar {
   position: relative;
   background: linear-gradient(0deg, rgba(36,50,57,1), rgba(36,50,57,0.92));
   color: white;
@@ -8,7 +8,7 @@
   z-index: 0;
 }
 
-.group-page__menu-icon {
+.group-page-toolbar__menu-icon {
   @include fontGrande;
   fill: white;
 }
