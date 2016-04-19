@@ -1,90 +1,163 @@
-<div class="group-page__funders-content">
-  <md-list class="group-page__funders">
-    <md-list-item ng-repeat="funderMembership in group.memberships()">
-      <div layout="row" layout-align="center center" class="group-page__funder-container">
-        <div class="group-page__funder-avatar" layout="column" layout-align="center center">
-          <div>{{ funderMembership.member().name[0] | uppercase }}</div>
-        </div>
+<div class="group-page__funders">
+  <md-card ng-if="group.settledMemberships().length > 0" class="group-page__funders-card">
+    <div layout="row" layout-align="start center" class="group-page__funders-subheader-container">
+      <h2 class="group-page__funders-subheader">Members</h2>
 
-        <div layout="column" layout-align="center start" class="group-page__funder-name-container" flex>
-          <span class="group-page__funder-name">{{ funderMembership.member().name }}</span>
-          <span class="group-page__funder-admin-label" ng-if="!funderMembership.isPending() && funderMembership.isAdmin">(admin)</span>
-          <span class="group-page__funder-admin-label" ng-if="funderMembership.isPending()">
-            <ng-md-icon icon="mail" size="17" class="group-page__funder-invited-icon"></ng-md-icon>
-            <span class="group-page__funder-invited-label">Invited</span>
-          </span>
-        </div>
+      <span flex></span>
 
-        <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
-          <span class="group-page__funder-balance">{{ funderMembership.balance | currency : group.currencySymbol : 0 }}</span>
-        </div>
-
-        <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
-          <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
-            <ng-md-icon
-              icon="more_vert"
-              layout="column"
-              layout-align="center center"
-              class="group-page__funder-more-button-icon"
-            ></ng-md-icon>
-          </md-button>
-
-          <md-menu-content width="3">
-            <md-menu-item>
-              <md-button ng-click="openManageFundsDialog(funderMembership)">
-                <div layout="row" layout-align="start center">
-                  <div layout="column" layout-align="center center" class="group-page__manage-funds-icon-container">
-                    <div class="group-page__manage-funds-icon">{{ group.currencySymbol }}</div>
-                  </div>
-                  <span md-menu-align-target class="group-page__funder-more-menu-item-label">Manage Funds</span>
-                </div>
-              </md-button>
-            </md-menu-item>
-
-            <md-menu-item>
-              <md-button ng-click="toggleMemberAdmin(funderMembership)" ng-autodisable>
-                <div layout="row" layout-align="start center">
-                  <ng-md-icon
-                    icon="portrait"
-                    layout="column"
-                    layout-align="center center"
-                    class="group-page__funder-more-menu-item-icon"
-                  ></ng-md-icon>
-                  <span md-menu-align-target class="group-page__funder-more-menu-item-label">{{ funderMembership.isAdmin ? "Undo" : "Make" }} Admin</span>
-                </div>
-              </md-button>
-            </md-menu-item>
-
-            <md-menu-item>
-              <md-button ng-click="inviteAgain(funderMembership)">
-                <div layout="row" layout-align="start center">
-                  <ng-md-icon
-                    icon="mail"
-                    layout="column"
-                    layout-align="center center"
-                    class="group-page__funder-more-menu-item-icon"
-                  ></ng-md-icon>
-                  <span md-menu-align-target class="group-page__funder-more-menu-item-label">Invite Again</span>
-                </div>
-              </md-button>
-            </md-menu-item>
-
-            <md-menu-item ng-if="funderMembership.id != membership.id">
-              <md-button ng-click="removeMembership(funderMembership)">
-                <div layout="row" layout-align="start center">
-                  <ng-md-icon
-                    icon="cancel"
-                    layout="column"
-                    layout-align="center center"
-                    class="group-page__funder-more-menu-item-icon"
-                  ></ng-md-icon>
-                  <span md-menu-align-target class="group-page__funder-more-menu-item-label">Remove User</span>
-                </div>
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
+      <div class="group-page__funders-admin-btn" layout="row" layout-align="center center" ng-click="">
+        <div class="group-page__funders-admin-btn-label">Download as CSV</div>
       </div>
-    </md-list-item>
-  </md-list>
+    </div>
+
+    <md-divider class="group-page__funders-subheader-divider"></md-divider>
+
+    <md-list class="group-page__funders-list">
+      <md-list-item ng-repeat="funderMembership in group.settledMemberships()">
+        <div layout="row" layout-align="center center" class="group-page__funder-container">
+          <div class="group-page__funder-avatar" layout="column" layout-align="center center">
+            <div>{{ funderMembership.member().name[0] | uppercase }}</div>
+          </div>
+
+          <div layout="column" layout-align="center start" class="group-page__funder-name-container" flex>
+            <span class="group-page__funder-name">{{ funderMembership.member().name }}</span>
+            <span class="group-page__funder-admin-label" ng-if="funderMembership.isAdmin">(admin)</span>
+          </div>
+
+          <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
+            <span class="group-page__funder-balance">{{ funderMembership.balance | currency : group.currencySymbol : 0 }}</span>
+          </div>
+
+          <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
+            <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+              <ng-md-icon
+                icon="more_vert"
+                layout="column"
+                layout-align="center center"
+                class="group-page__funder-more-button-icon"
+              ></ng-md-icon>
+            </md-button>
+
+            <md-menu-content width="3">
+              <md-menu-item>
+                <md-button ng-click="toggleMemberAdmin(funderMembership)" ng-autodisable>
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="portrait"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page__funder-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page__funder-more-menu-item-label">{{ funderMembership.isAdmin ? "Undo" : "Make" }} Admin</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+              <md-menu-item ng-if="funderMembership.id != membership.id">
+                <md-button ng-click="removeMembership(funderMembership)">
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="cancel"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page__funder-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page__funder-more-menu-item-label">Remove User</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-card>
+
+  <md-card ng-if="group.pendingMemberships().length > 0" class="group-page__funders-card">
+    <div layout="row" layout-align="start center" class="group-page__funders-subheader-container">
+      <h2 class="group-page__funders-subheader">Pending Invites</h2>
+
+      <span flex></span>
+
+      <div class="group-page__funders-admin-btn" layout="row" layout-align="center center" ng-click="">
+        <div class="group-page__funders-admin-btn-label">Resend Invites</div>
+      </div>
+    </div>
+
+    <md-divider class="group-page__funders-subheader-divider"></md-divider>
+
+    <md-list class="group-page__funders-list">
+      <md-list-item ng-repeat="funderMembership in group.pendingMemberships()">
+        <div layout="row" layout-align="center center" class="group-page__funder-container">
+          <div class="group-page__funder-avatar" layout="column" layout-align="center center">
+            <div>{{ funderMembership.member().name[0] | uppercase }}</div>
+          </div>
+
+          <div layout="column" layout-align="center start" class="group-page__funder-name-container" flex>
+            <span class="group-page__funder-name">{{ funderMembership.member().name }}</span>
+            <span class="group-page__funder-admin-label" ng-if="funderMembership.isAdmin">(admin)</span>
+          </div>
+
+          <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
+            <span class="group-page__funder-balance">{{ funderMembership.balance | currency : group.currencySymbol : 0 }}</span>
+          </div>
+
+          <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
+            <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+              <ng-md-icon
+                icon="more_vert"
+                layout="column"
+                layout-align="center center"
+                class="group-page__funder-more-button-icon"
+              ></ng-md-icon>
+            </md-button>
+
+            <md-menu-content width="3">
+              <md-menu-item>
+                <md-button ng-click="toggleMemberAdmin(funderMembership)" ng-autodisable>
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="portrait"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page__funder-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page__funder-more-menu-item-label">{{ funderMembership.isAdmin ? "Undo" : "Make" }} Admin</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+              <md-menu-item>
+                <md-button ng-click="inviteAgain(funderMembership)">
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="mail"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page__funder-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page__funder-more-menu-item-label">Invite Again</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+              <md-menu-item ng-if="funderMembership.id != membership.id">
+                <md-button ng-click="removeMembership(funderMembership)">
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="cancel"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page__funder-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page__funder-more-menu-item-label">Remove User</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-card>
 </div>

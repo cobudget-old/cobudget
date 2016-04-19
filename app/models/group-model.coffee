@@ -27,6 +27,14 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
         bucket.archivedAt
       sortedBuckets.reverse()
 
+    pendingMemberships: ->
+      _.filter @memberships(), (membership) ->
+        membership.isPending()
+
+    settledMemberships: ->
+      _.filter @memberships(), (membership) ->
+        !membership.isPending()
+
     # hasManyThrough doesn't yet exist quite yet
     members: ->
       _.map @memberships(), (membership) ->

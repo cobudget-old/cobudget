@@ -1,9 +1,48 @@
 // funders
 
-.group-page__funders {
+.group-page__funders-card {
+  margin-bottom: 35px;
+}
+
+.group-page__funders-list {
   padding-left: 16px;
   padding-right: 16px;
 }
+
+.group-page__funders-subheader-container {
+  padding: 15px 25px;
+}
+
+.group-page__funders-subheader {
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  color: black;
+  margin: 0;
+  font-size: 15px !important;
+}
+
+.group-page__funders-subheader-divider {
+  margin-top: 0 !important;
+}
+
+.group-page__funders-admin-btn {
+  border: 0;
+  height: 30px;
+  padding: 5px 10px;
+  color: black;
+  font-weight: 400;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid #8C8C8C;
+  transition: 0.5s;
+
+  &:hover {
+    border-color: transparent;
+  }
+}
+
+
+// funder
 
 .group-page__funder-container {
   margin-bottom: 10px;

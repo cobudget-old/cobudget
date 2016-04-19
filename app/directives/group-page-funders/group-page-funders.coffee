@@ -11,6 +11,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
         membership.isAdmin = !membership.isAdmin
         membership.save()
 
+      # TODO: refactor
       $scope.inviteAgain = (membership) ->
         Dialog.custom
           template: require('./reinvite-user-dialog.tmpl.html')
@@ -34,6 +35,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
         })
         Dialog.open(removeMembershipDialog)
 
+      # TODO: refactor
       $scope.openManageFundsDialog = (funderMembership) ->
         Dialog.custom
           scope: $scope
