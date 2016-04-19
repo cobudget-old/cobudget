@@ -27,11 +27,13 @@
   @include fontSmall;
   margin: 0;
   margin-bottom: 5px;
+  color: #757575;
 }
 
 .bucket-page__status-description {
   font-size: 11px;
   margin: 0;
+  color: #333333;
 }
 
 .bucket-page__start-funding-btn {
@@ -48,4 +50,15 @@
 
 .bucket-page__start-funding-btn:not([disabled]):hover {
   background-color: $cob-green;
+}
+
+// funded bucket
+
+.bucket-page-status-card__funded-icon {
+  fill: $cob-green;
+  margin-right: 15px;
+}
+
+.bucket-page-status-card__funded-status-container {
+  margin-bottom: 10px;
 }

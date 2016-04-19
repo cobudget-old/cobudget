@@ -2,9 +2,9 @@
   <md-card-content class="bucket-page__status-card-content">
     <div class="bucket-page__status-header">Status</div>
 
-    <div ng-if="bucket.status == 'funded' || !bucket.isArchived()">
+    <div ng-if="!bucket.isArchived()">
       <div ng-if="bucket.status == 'draft'">
-        <div ng-show="bucket.status == 'draft'" layout="row" layout-align="start center">
+        <div layout="row" layout-align="start center">
           <img ng-src="./img/lightbulb.svg" alt="lightbulb" class="bucket-page__idea-icon"/>
           <div>
             <h3 class="bucket-page__status">Idea</h3>
@@ -20,6 +20,22 @@
         >
           Start Funding
         </md-button>
+      </div>
+
+      <div ng-if="bucket.status == 'funded'">
+        <div layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
+          <ng-md-icon icon="check_circle"
+            layout="column"
+            layout-align="center center"
+            size="35"
+            class="bucket-page-status-card__funded-icon"
+          ></ng-md-icon>
+
+          <div>
+            <h3 class="bucket-page__status">Funded</h3>
+            <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.target | currency : group.currencySymbol : 0 }} on {{ moment(bucket.fundedAt) | exactDateWithTime }}</em></p>
+          </div>
+        </div>
       </div>
     </div>
 
