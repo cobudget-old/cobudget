@@ -39,8 +39,20 @@
       </div>
     </div>
 
-    <div class="bucket-page__status-description" ng-if="bucket.isArchived()">
-      <p><em>This bucket was archived on {{ moment.bucket.archivedAt | exactDateWithTime }}</em></p>
+    <div ng-if="bucket.isArchived">
+      <div layout="row" layout-align="start center" class="bucket-page-status-card__archived-status-container">
+        <ng-md-icon icon="archive"
+          layout="column"
+          layout-align="center center"
+          size="35"
+          class="bucket-page-status-card__archived-icon"
+        ></ng-md-icon>
+
+        <div>
+          <h3 class="bucket-page__status">Archived</h3>
+          <p class="bucket-page__status-description"><em>This bucket was archived on {{ moment.bucket.archivedAt | exactDateWithTime }}</em></p>
+        </div>
+      </div>
     </div>
   </md-card-content>
 </md-card>

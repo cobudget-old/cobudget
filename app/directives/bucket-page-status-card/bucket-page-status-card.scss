@@ -62,3 +62,14 @@
 .bucket-page-status-card__funded-status-container {
   margin-bottom: 10px;
 }
+
+// archived bucket
+
+.bucket-page-status-card__archived-icon {
+  fill: rgba(0,0,0,0.35);
+  margin-right: 15px;
+}
+
+.bucket-page-status-card__archived-status-container {
+  margin-bottom: 10px;
+}
