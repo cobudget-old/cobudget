@@ -7,6 +7,7 @@ global.cobudgetApp.directive 'bucketPageBackersCard', () ->
     replace: true
     scope:
       contributions: '='
+      currentUser: '='
     controller: ($scope) ->
       groupedContributions = _.groupBy $scope.contributions, 'userId'
 
@@ -14,6 +15,6 @@ global.cobudgetApp.directive 'bucketPageBackersCard', () ->
         callback = (sum, contribution) ->
           sum + contribution.amount
         totalContributionAmount = _.reduce contributions, callback, 0
-        {name: contributions[0].user().name, contributionAmount: totalContributionAmount}
+        {id: contributions[0].user().id, name: contributions[0].user().name, contributionAmount: totalContributionAmount}
 
       return

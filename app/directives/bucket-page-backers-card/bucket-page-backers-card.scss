@@ -1,14 +1,36 @@
-.bucket-page__backers-card {
-  background: $cobudget-light-grey;
+.bucket-page-backers-card {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 16px;
 }
 
-.bucket-page__backers-header {
-  @include fontLarge;
-  margin-bottom: 20px;
+.bucket-page-backers-card__content {
+  padding: 12px 16px;
 }
 
-.bucket-page__backers-card-backers-list {
+.bucket-page-backers-card__header {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.bucket-page-backers-card__list {
   padding-left: 0;
   list-style: none;
   font-size: 14px;
+}
+
+.bucket-page-backers-card__name {
+  @include fontTiny;
+}
+
+.bucket-page-backers-card__contribution {
+  @include fontTiny;
+}
+
+.bucket-page-backers-card__contribution-personal {
+  color: $cob-green;
+}
+
+.bucket-page-backers-card__contribution-other {
+  color: $cob-yellow;
 }
