@@ -20,14 +20,14 @@
 }
 
 .loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle {
-  border-left-color: $cob-red;
+  border-left-color: $cob-cyan;
 }
 
 .loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-right-color: $cob-red;
+  border-right-color: $cob-cyan;
 }
 
 .loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle,
 .loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-top-color: $cob-red;
+  border-top-color: $cob-cyan;
 }
