@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415193307) do
+ActiveRecord::Schema.define(version: 20160419140651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,12 +83,32 @@ ActiveRecord::Schema.define(version: 20160415193307) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "events", force: :cascade do |t|
+    t.string   "kind",           limit: 255
+    t.integer  "eventable_id"
+    t.string   "eventable_type"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "sequence_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id", using: :btree
+  add_index "events", ["group_id", "sequence_id"], name: "index_events_on_group_id_and_sequence_id", unique: true, using: :btree
+  add_index "events", ["group_id"], name: "index_events_on_group_id", using: :btree
+  add_index "events", ["sequence_id"], name: "index_events_on_sequence_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "currency_symbol", default: "$"
     t.string   "currency_code",   default: "USD"
+    t.string   "customer_id"
+    t.datetime "trial_end"
+    t.string   "plan"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -107,10 +127,10 @@ ActiveRecord::Schema.define(version: 20160415193307) do
 
   create_table "subscription_trackers", force: :cascade do |t|
     t.integer  "user_id",                                             null: false
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
     t.boolean  "subscribed_to_email_notifications", default: false
     t.string   "email_digest_delivery_frequency",   default: "never"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
   end
 
   add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
@@ -141,5 +161,15 @@ ActiveRecord::Schema.define(version: 20160415193307) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "webhooks", force: :cascade do |t|
+    t.integer "hookable_id"
+    t.string  "hookable_type"
+    t.string  "kind",                       null: false
+    t.string  "uri",                        null: false
+    t.text    "event_types",   default: [],              array: true
+  end
+
+  add_index "webhooks", ["hookable_type", "hookable_id"], name: "index_webhooks_on_hookable_type_and_hookable_id", using: :btree
 
 end

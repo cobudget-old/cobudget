@@ -5,5 +5,7 @@ class GroupSerializer < ActiveModel::Serializer
              :balance,
              :currency_symbol,
              :currency_code,
-             :is_launched
+             :is_launched,
+             :plan,
+             :trial_end
 end

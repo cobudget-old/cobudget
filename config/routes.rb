@@ -24,7 +24,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :groups, only: [:index, :show, :create, :update]
+
+    resources :groups, only: [:index, :show, :create, :update] do
+      member do
+        post :add_card
+        post :extend_trial
+      end
+    end
 
     resources :comments, only: [:index, :create]
 
