@@ -12,6 +12,16 @@
       <span class="bucket-page__funding-target-text">Funding Target : {{ bucket.target | currency : group.currencySymbol : 0  }}</span>
     </div>
 
+    <div layout="row" layout-align="start center" ng-if="bucket.status == 'funded'" class="bucket-page-header-card__accepted-funding-container">
+      <ng-md-icon icon="check_circle"
+        layout="column"
+        layout-align="center center"
+        class="bucket-page-header-card__funded-icon"
+      ></ng-md-icon>
+
+      <span class="bucket-page__accepted-funding-text">Accepted Funding : {{ bucket.totalContributions | currency : group.currencySymbol : 0  }}</span>
+    </div>
+
     <div class="bucket-page__description-text-container">
       <p class="bucket-page__description-text" ng-bind-html="filteredBucketDescription()"></p>
     </div>
