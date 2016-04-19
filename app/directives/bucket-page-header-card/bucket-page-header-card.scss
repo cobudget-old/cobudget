@@ -1,68 +1,46 @@
 // header card meta
 
-.bucket-page__content {
-  max-width: 640px;
-  margin: 0 auto;
-  padding-bottom: 10px;
-  top: $large-height;
-}
-
 .bucket-page__header-card {
-  background: $cobudget-whitesmoke;
+  margin: 0;
 }
 
 .bucket-page__meta {
-  margin-top: $large-height;
-  background: rgba(0,0,0,0.7);
-  color: white;
+  color: black;
+  padding: 12px 22px;
 }
 
 .bucket-page__title {
   @include fontGrande;
+  margin-top: 3px;
   margin-bottom: 10px;
 }
 
 .bucket-page__author {
   @include fontTiny;
-  color: $cobudget-grey;
+  color: #838383;
 }
 
 // header card description
 
-.bucket-page__description {
-  background: $cobudget-light-grey;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.bucket-page__funding-target-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
 }
 
-.bucket-page__description-header {
-  @include fontMedLarge;
+.bucket-page__funding-target-text {
+  color: #25A1DE;
+  font-size: 13px;
+}
+
+.bucket-page__description {
+  padding: 12px 22px;
 }
 
 .bucket-page__description-text {
-  // max-height: 150px;
-  @include fontSmall;
+  @include fontTiny;
   margin-top: 10px;
   margin-bottom: 10px;
   @include wordWrap;
   @include markdown;
-  // overflow: hidden;
-}
-
-// .bucket-page__description-text-container {
-//   position: relative;
-// }
-
-// .bucket-page__description-text-overlay {
-//   position: absolute;
-//   width: 100%;
-//   height: 100px;
-//   bottom: 0;
-//   background: linear-gradient(transparent, $cobudget-light-grey);
-// }
-
-.bucket-page__more-button {
-  @include fontMedium;
-  margin: 0;
-  padding: 0;
 }

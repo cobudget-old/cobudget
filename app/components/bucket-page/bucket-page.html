@@ -1,13 +1,28 @@
 <div class="bucket-page" ng-if="authorized">
-  <bucket-page-toolbar></bucket-page-toolbar>
+  <group-page-toolbar></group-page-toolbar>
+  <!-- <bucket-page-toolbar></bucket-page-toolbar> -->
 
   <md-content class="bucket-page__content">
-    <bucket-page-header-card></bucket-page-header-card>
-    <div ng-if="!bucket.isArchived()">
-      <bucket-page-progress-card ng-if="bucket.status == 'live'"></bucket-page-progress-card>
-      <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions.length > 0" contributions="contributions"></bucket-page-backers-card>
+    <div layout="row" layout-align="start start">
+      <div layout="column" layout-align="center center" class="bucket-page__left-column">
+        <bucket-page-header-card></bucket-page-header-card>
+        <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions.length > 0" contributions="contributions"></bucket-page-backers-card>
+        <bucket-page-activity-card></bucket-page-activity-card>
+      </div>
+
+      <div layout="column" layout-align="center center" class="bucket-page__right-column">
+
+      </div>
     </div>
+
+
+
+    <!-- <div ng-if="!bucket.isArchived()">
+      <bucket-page-progress-card ng-if="bucket.status == 'live'"></bucket-page-progress-card>
+
+    </div>
+
     <bucket-page-status-card></bucket-page-status-card>
-    <bucket-page-activity-card></bucket-page-activity-card>
+ -->
   </md-content>
 </div>
