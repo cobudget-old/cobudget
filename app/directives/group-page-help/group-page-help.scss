@@ -29,6 +29,7 @@
 .group-page-help__card-header {
   font-size: 18px;
   @include truncatedText;
+  margin-right: 30px;
 }
 
 .group-page-help__card-close-btn {
