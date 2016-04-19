@@ -16,7 +16,7 @@
 
 .group-page-header__free-trial-btn {
   color: #8F9598;
-  font-size: 12px;
+  font-size: 13px;
   text-transform: none;
   background: #3A4448;
   min-height: 30px;
@@ -42,7 +42,7 @@
 }
 
 .group-page-header__funds-overview-header {
-  @include fontTiny;
+  font-size: 13px;
   margin-bottom: 5px;
 }
 

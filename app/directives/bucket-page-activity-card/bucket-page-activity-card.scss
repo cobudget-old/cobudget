@@ -45,12 +45,12 @@
 }
 
 .bucket-page__comment-author-name {
-  @include fontSmall;
+  font-size: 14px;
   font-weight: 500;
 }
 
 .bucket-page__comment-body {
-  @include fontTiny;
+  font-size: 13px;
   @include markdown;
 
   p {
@@ -74,7 +74,7 @@
 }
 
 .bucket-page__comment-input {
-  @include fontTiny;
+  font-size: 13px !important;
   line-height: 14px !important;
   background: white !important;
   border: 0px !important;
@@ -89,7 +89,7 @@
 
 .bucket-page__comment-form-markdown-link {
   position: relative;
-  font-size: 12px;
+  font-size: 13px;
   top: 2px;
   left: 2px;
   color: rgba(0,0,0,0.35);

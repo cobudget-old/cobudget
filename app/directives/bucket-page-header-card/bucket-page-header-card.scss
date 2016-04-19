@@ -19,7 +19,7 @@
 }
 
 .bucket-page__author {
-  @include fontTiny;
+  font-size: 13px;
   color: #838383;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .bucket-page__description-text {
-  @include fontTiny;
+  font-size: 13px;
   margin-top: 10px;
   margin-bottom: 10px;
   @include wordWrap;
