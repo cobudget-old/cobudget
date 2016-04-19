@@ -7,13 +7,13 @@
     <div layout="row" layout-align="start start" class="bucket-page__desktop-layout-container">
       <div layout="column" layout-align="center center" class="bucket-page__left-column">
         <bucket-page-header-card></bucket-page-header-card>
-        <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions.length > 0" contributions="contributions" current-user="currentUser"></bucket-page-backers-card>
         <bucket-page-activity-card></bucket-page-activity-card>
       </div>
 
       <div layout="column" layout-align="center center" class="bucket-page__right-column">
         <bucket-page-status-card ng-if="bucket.status != 'live'"></bucket-page-status-card>
         <bucket-page-progress-card ng-if="!bucket.isArchived() && bucket.status == 'live'"></bucket-page-progress-card>
+        <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions.length > 0" contributions="contributions" current-user="currentUser"></bucket-page-backers-card>
         <bucket-page-manage-card ng-if="userCanManageBucket()"></bucket-page-manage-card>
       </div>
     </div>
@@ -21,9 +21,9 @@
     <div layout="column" layout-align="center center" class="bucket-page__mobile-layout-container">
       <bucket-page-header-card></bucket-page-header-card>
       <bucket-page-manage-card ng-if="userCanManageBucket()"></bucket-page-manage-card>
-      <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions.length > 0" contributions="contributions" current-user="currentUser"></bucket-page-backers-card>
       <bucket-page-status-card ng-if="bucket.status != 'live'"></bucket-page-status-card>
       <bucket-page-progress-card ng-if="!bucket.isArchived() && bucket.status == 'live'"></bucket-page-progress-card>
+      <bucket-page-backers-card ng-if="bucket.status != 'draft' && contributions.length > 0" contributions="contributions" current-user="currentUser"></bucket-page-backers-card>
       <bucket-page-activity-card></bucket-page-activity-card>
     </div>
   </md-content>
