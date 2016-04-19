@@ -167,7 +167,10 @@
             </div>
           </div>
 
-          <span class="group-page__bucket-subheader">{{ bucket.authorName }} - {{ bucket.createdAt | timeFromNowInWords }} ago - <b>{{ bucket.formattedStatus() }}</b></span>
+          <span class="group-page__bucket-subheader">
+            {{ bucket.authorName }} - {{ bucket.createdAt | timeFromNowInWords }} ago
+            <span ng-if="bucket.status == 'funded'">- <b>funded</b></span>
+          </span>
         </div>
       </md-list-item>
     </md-list>
