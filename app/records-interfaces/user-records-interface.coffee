@@ -11,6 +11,9 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
     requestPasswordReset: (params) ->
       @remote.post('request_password_reset', params)
 
+    requestReconfirmation: ->
+      @remote.post('request_reconfirmation', {})
+
     resetPassword: (params) ->
       @remote.post('reset_password', params)
 

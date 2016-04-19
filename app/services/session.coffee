@@ -1,7 +1,7 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'Session', ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Records) ->
+global.cobudgetApp.factory 'Session', ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Records, $state) ->
   new class Session
     create: (formData, options = {}) ->
       promise = $auth.submitLogin(formData)
@@ -16,8 +16,18 @@ global.cobudgetApp.factory 'Session', ($auth, CurrentUser, Dialog, LoadBar, $loc
             LoadBar.stop()
             switch options.redirectTo
               when 'group'
+                # here is where we would likely intercept if user wasn't confirmed
                 if CurrentUser().hasMemberships()
-                  $location.path("/groups/#{CurrentUser().primaryGroup().id}")
+                  if CurrentUser().isConfirmed()
+                    $location.path("/groups/#{CurrentUser().primaryGroup().id}")
+                  else
+                    LoadBar.start()
+                    Records.users.requestReconfirmation().then =>
+                      @clear()
+                      $state.go('login', {email: CurrentUser().email})
+                      LoadBar.stop()
+                      content = "You have not yet confirmed your email address. We've sent another email to #{CurrentUser().email}. Please check your inbox to continue."
+                      Dialog.alert(title: 'error!', content: content)
                 else
                   @clear().then ->
                     $location.path('/')
