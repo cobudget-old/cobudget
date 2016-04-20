@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
     restrict: 'E'
     template: require('./group-page-header.html')
     replace: true
-    controller: ($location, $mdBottomSheet, $scope) ->
+    controller: ($location, $mdBottomSheet, $scope, $window) ->
 
       $scope.createBucket = ->
         $location.path('/buckets/new').search('group_id', $scope.group.id)
@@ -33,5 +33,9 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
               {label: 'Cancel', onClick: $mdBottomSheet.cancel, icon: 'cancel'}
             ]
         })
+
+      $scope.redirectToDonationPage = ->
+        $window.location.href = 'https://www.tilt.com/tilts/cobudget-beta-donations'
+
 
       return
