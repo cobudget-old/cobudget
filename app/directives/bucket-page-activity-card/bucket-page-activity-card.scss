@@ -50,6 +50,7 @@
 }
 
 .bucket-page__comment-body {
+  position: relative;
   font-size: 15px;
   @include markdown;
 
