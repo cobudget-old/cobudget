@@ -11,20 +11,15 @@
         <div class="bucket-page-progress-card__progress-bar-secondary" style="width: {{ bucket.percentContributedByOthers(currentUser) + bucket.percentContributedByUser(currentUser) + percentContributed() }}%"></div>
       </div>
 
-      <div layout="row" class="bucket-page-progress-card__progress-info">
-        <div flex="25">
+      <div layout="row" class="bucket-page-progress-card__progress-info" layout-align="start center">
+        <div class="bucket-page-progress-card__progress-value-container">
           <span class="bucket-page-progress-card__progress-amount">{{ bucket.numOfContributors }}</span>
           <span class="bucket-page-progress-card__progress-unit">backers</span>
         </div>
 
-        <div flex>
+        <div class="bucket-page-progress-card__progress-value-container">
           <span class="bucket-page-progress-card__progress-amount">{{ totalAmountFunded() | currency : group.currencySymbol : 0 }}</span>
           <span class="bucket-page-progress-card__progress-unit">pledged of {{ bucket.target | currency : group.currencySymbol : 0 }}</span>
-        </div>
-
-        <div flex="25" ng-show="bucket.fundingClosesAt">
-          <span class="bucket-page-progress-card__progress-amount">{{ bucket.fundingClosesAt | timeToNowAmount }}</span>
-          <span class="bucket-page-progress-card__progress-unit">{{ bucket.fundingClosesAt | timeToNowUnits }} left</span>
         </div>
       </div>
     </div>

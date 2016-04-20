@@ -19,7 +19,7 @@
 }
 
 .bucket-page__author {
-  font-size: 13px;
+  font-size: 15px;
   color: #838383;
 }
 
@@ -45,7 +45,7 @@
 
 .bucket-page__funding-target-text {
   color: $cob-cyan;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .bucket-page-header-card__accepted-funding-container {
@@ -54,7 +54,7 @@
 
 .bucket-page__accepted-funding-text {
   color: $cob-green;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .bucket-page__description {
@@ -62,7 +62,7 @@
 }
 
 .bucket-page__description-text {
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
   @include wordWrap;

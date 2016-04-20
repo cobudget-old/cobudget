@@ -27,7 +27,7 @@
 }
 
 .bucket-page-progress-card__progress-header-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -64,14 +64,18 @@
   margin-bottom: 10px;
 }
 
+.bucket-page-progress-card__progress-value-container {
+  margin-right: 20px;
+}
+
 .bucket-page-progress-card__progress-amount {
   display: block;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .bucket-page-progress-card__progress-unit {
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   color: $grey-on-white;
 }
 
@@ -123,8 +127,8 @@
   width: 100%;
   height: 35px;
   min-height: 35px;
-  line-height: 13px;
-  font-size: 13px;
+  line-height: 15px;
+  font-size: 15px;
   font-weight: 600;
   margin: 0;
   margin-bottom: 13px;
