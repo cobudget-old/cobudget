@@ -11,7 +11,6 @@ class GroupsController < AuthenticatedController
   def create
     group = Group.create(group_params)
     group.add_admin(current_user)
-    group.add_customer(current_user.email)
     render json: [group]
   end
 
@@ -30,6 +29,17 @@ class GroupsController < AuthenticatedController
     group = Group.find(params[:id])
     group.update(group_params)
     render json: [group]
+  end
+
+  api :POST, '/groups/:id/add_customer', 'Add a credit card that pays for the group'
+  def add_customer
+    group = Group.find(params[:id])
+    if current_user.is_admin_for(group)
+      group.add_customer(current_user.email)
+      render json: [group]
+    else
+      render nothing: true, status: 403
+    end
   end
 
   api :POST, '/groups/:id/add_card', 'Add a credit card that pays for the group'

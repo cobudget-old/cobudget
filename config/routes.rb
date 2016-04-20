@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
     resources :groups, only: [:index, :show, :create, :update] do
       member do
+        post :add_customer
         post :add_card
         post :extend_trial
       end
