@@ -14,14 +14,21 @@
   margin-bottom: 0 !important;
 }
 
-.group-page-header__free-trial-btn {
-  color: #8F9598;
+.group-page-header__donate-btn {
+  color: #9CA2A5;
   font-size: 13px;
   text-transform: none;
-  background: #3A4448;
+  background: #404D52;
   min-height: 30px;
   height: 30px;
   line-height: normal;
+  min-width: 0;
+  width: 100px;
+}
+
+.group-page-header__heart-icon {
+  fill: #D2004D;
+  margin-right: 8px;
 }
 
 // first row
