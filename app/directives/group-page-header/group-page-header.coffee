@@ -34,8 +34,4 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
             ]
         })
 
-      $scope.redirectToDonationPage = ->
-        $window.location.href = 'https://www.tilt.com/tilts/cobudget-beta-donations'
-
-
       return
