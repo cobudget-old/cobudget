@@ -1,6 +1,6 @@
 <div class="group-page__buckets-content">
-  <md-card class="group-page__buckets-card">
-    <md-list class="group-page__buckets-list" ng-if="group.liveBuckets().length > 0">
+  <md-card class="group-page__buckets-card" ng-if="group.liveBuckets().length > 0">
+    <md-list class="group-page__buckets-list">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
         <img ng-src="./img/blue_dollar.svg" alt="blue dollar bill" class="group-page__bucket-list-icon"/>
         <md-subheader class="group-page__subheader-title">Funding Now</md-subheader>
@@ -47,8 +47,8 @@
     </md-list>
   </md-card>
 
-  <md-card class="group-page__buckets-card">
-    <md-list class="group-page__buckets-list" ng-if="group.draftBuckets().length > 0">
+  <md-card class="group-page__buckets-card" ng-if="group.draftBuckets().length > 0">
+    <md-list class="group-page__buckets-list">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
         <img ng-src="./img/lightbulb.svg" alt="lightbulb" class="group-page__bucket-list-icon"/>
         <md-subheader class="group-page__subheader-title">Ideas</md-subheader>
@@ -84,8 +84,8 @@
     </md-list>
   </md-card>
 
-  <md-card class="group-page__buckets-card">
-    <md-list class="group-page__buckets-list" ng-if="group.fundedBuckets().length > 0">
+  <md-card class="group-page__buckets-card" ng-if="group.fundedBuckets().length > 0">
+    <md-list class="group-page__buckets-list">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
         <ng-md-icon icon="check_circle"
           layout="column"
@@ -126,8 +126,8 @@
     </md-list>
   </md-card>
 
-  <md-card class="group-page__buckets-card">
-    <md-list class="group-page__buckets-list" ng-if="group.archivedBuckets().length > 0 && archivedBucketsShown">
+  <md-card class="group-page__buckets-card" ng-if="group.archivedBuckets().length > 0 && archivedBucketsShown">
+    <md-list class="group-page__buckets-list">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
         <ng-md-icon icon="archive"
           layout="column"
