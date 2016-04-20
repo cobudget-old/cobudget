@@ -35,9 +35,9 @@ global.cobudgetApp.directive 'groupPageHelp', () ->
           membership:
             closed_member_help_card_at: moment()
 
-      $scope.openSetupTourDialog = ->
-        Dialog.custom
-          template: require('./setup-tour-dialog.tmpl.html')
+      # $scope.openSetupTourDialog = ->
+        # Dialog.custom
+        #   template: require('./setup-tour-dialog.tmpl.html')
 
       $scope.redirectToCreateBucketPage = ->
         $location.path('/buckets/new').search('group_id', $scope.group.id)
