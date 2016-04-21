@@ -3,11 +3,15 @@
 
   <div class="landing-page__top-content" layout="row" layout-align="space-around center">
     <div class="landing-page__mobile-preview">
-      <img src="./img/smartphone.svg" class="landing-page__smartphone-img" alt="" />
+      <object class="landing-page__smartphone-img" type="image/svg+xml" data="/img/phone_new.svg"></object>
     </div>
 
     <div class="landing-page__form-container" layout="column" layout-align="center center">
-      <h2 class="landing-page__form-header">Crowdsource and fund projects together</h2>
+      <img class="landing-page__logo" ng-src="/img/color_logo.svg" alt=""/>
+
+      <h2 class="landing-page__form-header">Crowdsource and fund projects</h2>
+
+      <h3 class="landing-page__form-subheader">Activate <span class="landing-page__form-subheader-faded">hidden</span> talent</h3>
 
       <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
         <div class="landing-page__input-container">

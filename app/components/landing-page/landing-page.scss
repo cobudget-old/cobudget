@@ -30,15 +30,33 @@
 
 // form
 
+.landing-page__logo {
+  max-width: 300px;
+  margin-bottom: 15px;
+}
+
 .landing-page__form-header {
   font-weight: 300;
   font-size: 34px;
   text-align: center;
   margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.landing-page__form-subheader {
+  color: #68696B;
+  font-weight: 400;
+  font-size: 24px;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.landing-page__form-subheader-faded {
+  color: #AEB0B3;
 }
 
 .landing-page__form-container {
-  width: 350px;
+  width: 475px;
 }
 
 .landing-page__form {
@@ -64,6 +82,7 @@
   font-weight: 400;
   text-align: center;
   width: 220px;
+  margin-bottom: 5px;
 }
 
 .landing-page__email-field:focus {
@@ -122,8 +141,22 @@
 
 // mobile
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .landing-page__mobile-preview {
+    display: none;
+  }
+
+  .landing-page-toolbar__logo-link {
+    display: none;
+  }
+
+  .landing-page-toolbar__logo-link-buffer {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .landing-page__logo {
     display: none;
   }
 }

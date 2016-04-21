@@ -8,6 +8,18 @@
   padding-right: 20px;
 }
 
+.landing-page-toolbar__logo {
+  width: 150px;
+  margin-left: 25px;
+  height: 35px;
+}
+
+.landing-page-toolbar__logo-link {
+  &:focus {
+    outline: none;
+  }
+}
+
 .landing-page-toolbar__header-btn {
   font-size: 15px;
   font-weight: 400;
