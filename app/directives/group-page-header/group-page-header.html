@@ -1,0 +1,112 @@
+<div class="group-page-header">
+  <md-button class="group-page-header__donate-btn" href="https://www.tilt.com/tilts/cobudget-beta-donations" target="_blank">
+    <div layout="row" layout-align="center center">
+      <ng-md-icon icon="favorite"
+        size="20"
+        class="group-page-header__heart-icon"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+
+      <span>Donate!</span>
+    </div>
+  </md-button>
+
+  <md-card class="group-page-header-card">
+    <div class="group-page-header__content" layout="column">
+      <div class="group-page-header__first-row" layout="row" layout-align="start center">
+        <h1 class="group-page-header__group-name">
+          {{ group.name }}
+        </h1>
+
+        <span flex></span>
+
+        <div class="group-page-header__settings-btn">
+        </div>
+      </div>
+
+      <div class="group-page-header__second-row" layout="row" layout-align="center end">
+        <div layout="column" layout-align="center start" class="group-page-header__funds-overview-container">
+          <div class="group-page-header__funds-overview-header">Available Funds</div>
+          <div layout="row" layout-align="center center" class="group-page-header__funds-overview-content" >
+            <div layout="row" class="group-page-header__personal-funds-container">
+              <ng-md-icon icon="person"
+                class="group-page-header__funds-icon"
+                layout="column"
+                layout-align="center center"
+              ></ng-md-icon>
+              <div layout="column" layout-align="center center">
+                <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}</span>
+              </div>
+            </div>
+
+            <div layout="row" class="group-page-header__group-funds-container">
+              <ng-md-icon icon="group"
+                class="group-page-header__funds-icon"
+                layout="column"
+                layout-align="center center"
+              ></ng-md-icon>
+              <div layout="column" layout-align="center center">
+                <span class="group-page-header__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div flex></div>
+
+        <div layout="row" layout-align="center center" ng-if="currentUser.isAdminOf(group)">
+          <div class="group-page-header__admin-btn" layout="row" layout-align="center center" ng-click="openInvitePeople()">
+            <ng-md-icon icon="person_add"
+              size="19"
+              layout="column"
+              layout-align="center center"
+            ></ng-md-icon>
+            <div class="group-page-header__invite-people-btn-label">Invite People</div>
+          </div>
+
+          <div class="group-page-header__admin-btn" layout="row" layout-align="center center" ng-click="openManageFunds()">
+            <ng-md-icon icon="attach_money"
+              size="19"
+              layout="column"
+              layout-align="center center"
+            ></ng-md-icon>
+            <div class="group-page-header__manage-funds-btn-label">Manage Funds</div>
+          </div>
+
+          <div class="group-page-header__admin-more-btn" ng-click="openBottomSheet()">
+            <ng-md-icon icon="more_vert"
+              size="27"
+              layout="column"
+              layout-align="center center"
+            ></ng-md-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <md-divider class="group-page-header__horizontal-divider"></md-divider>
+
+    <md-tabs class="group-page-header__tabs" md-stretch-tabs="never" md-dynamic-height md-selected="tabSelected">
+      <md-tab md-on-select="selectTab(0)">
+        <md-tab-label>
+          <span class="group-page-header__tab-label">All Buckets</span>
+        </md-tab-label>
+      </md-tab>
+      <md-tab md-on-select="selectTab(1)">
+        <md-tab-label>
+          <span class="group-page-header__tab-label">Funders</span>
+        </md-tab-label>
+      </md-tab>
+    </md-tabs>
+
+    <md-button class="md-fab group-page-header__create-bucket-fab" aria-label= "create" ng-click="createBucket()">
+      <ng-md-icon icon="add"
+        size="27"
+        class="group-page-header__create-bucket-fab-icon"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+    </md-button>
+  </md-card>
+</div>

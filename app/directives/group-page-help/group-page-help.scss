@@ -1,0 +1,114 @@
+.group-page-help__card-header {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.group-page-help__card {
+  position: relative;
+  height: 140px;
+  margin-bottom: 20px;
+}
+
+.group-page-help__card-container {
+  height: 100%;
+}
+
+.group-page-help__card-image {
+  width: 100px;
+  padding: 20px;
+  background: #F1F1F1;
+}
+
+.group-page-help__card-content {
+  position: relative;
+  padding: 15px;
+  width: 100%;
+}
+
+.group-page-help__card-header {
+  font-size: 18px;
+  @include truncatedText;
+  margin-right: 30px;
+}
+
+.group-page-help__card-close-btn {
+  position: absolute;
+  font-size: 30px;
+  right: 15px;
+  top: 2px;
+  color: #AFAFAF;
+  cursor: pointer;
+}
+
+.group-page-help__card-close-btn:focus {
+  outline: none;
+}
+
+.group-page-help__card-description {
+  font-size: 13px;
+  margin: 0;
+  margin-top: 10px;
+  padding-right: 20px;
+}
+
+.group-page-help__card-btns {
+}
+
+.group-page-help__card-steps {
+  letter-spacing: 2px;
+  font-size: 15px;
+  color: #B9B8B9;
+}
+
+.group-page-help__card-btn {
+  line-height: 20px !important;
+  min-height: 20px !important;
+  margin: 0 !important;
+  color: #3A51F8 !important;
+  font-size: 13px;
+  min-width: 0 !important;
+  padding: 0 12px !important;
+}
+
+// setup tour dialog
+
+.group-page-help__setup-tour-dialog {
+  width: 80%;
+}
+
+.group-page-help__video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.group-page-help__video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 520px) {
+
+  .group-page-help__card-content {
+    padding: 12px;
+  }
+
+  .group-page-help__card-image {
+    display: none;
+  }
+
+  // .group-page-help__card-btn {
+  //   font-size: 11px;
+  //   padding: 0 6px !important;
+  // }
+
+  // .group-page-help__card-steps {
+  //   font-size: 12px;
+  //   letter-spacing: 1px;
+  // }
+
+}

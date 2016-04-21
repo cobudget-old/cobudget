@@ -5,6 +5,7 @@
   width: 100%;
   transform: translate(-50%,-50%);
   text-align: center;
+  z-index: 1000;
 }
 
 .error-page__shrug {
@@ -13,4 +14,10 @@
 
 .error-page__message {
   font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.error-page__back-link {
+  font-size: 14px;
+  color: $cob-blue;
 }

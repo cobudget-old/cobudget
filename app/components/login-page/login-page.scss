@@ -1,41 +1,95 @@
-.login-page__toolbar {
-  background: $cobudget-gunmetal;
-  color: white;
-}
-
-.login-page__content {
-  max-width: 640px;
-  margin: 0 auto;
+.login-page {
+  position: relative;
+  height: 100%;
+  background: white;
 }
 
 .login-page__heading {
-  @include fontGrande;
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.login-page__login-form {
-  margin-bottom: 18px;
+.login-page__logo {
+  display: block;
+  width: 63%;
+  max-width: 300px;
+  margin: 30px auto;
+  margin-bottom: 20px;
 }
 
-.login-page__login-btn {
-  margin: 0;
-  border: 1px solid $cobudget-gunmetal;
+.login-page__content {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.login-page__content-card {
+  background: #FBFBFB;
+}
+
+.login-page__person-icon-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #D8D8D8;
+  background: white;
+  font-size: 16px;
+  margin: 15px auto;
+  cursor: pointer;
+}
+
+.login-page__person-icon {
+  fill: #D8D8D8;
+}
+
+.login-page__form {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.login-page__input-container {
+  max-width: 300px;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.login-page__input-field {
+  @include cob-std-input;
+  background: white;
   width: 100%;
-  margin-top: 10px;
+}
+
+.login-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+  text-align: left;
+  padding-left: 2px;
 }
 
 .login-page__buttons-container {
-  position: relative;
-  float: right;
+  margin: 0 auto;
+  max-width: 300px;
 }
 
 .login-page__forgot-password-btn {
-  width: 100%;
-  text-align: right;
-  display: block;
-  font-size: 12px;
   background: none;
   line-height: 30px;
   min-height: 30px;
   margin: 0;
-  margin-bottom: 5px;
+  color: $cob-blue;
+  text-transform: none;
+  font-size: 13px;
+}
+
+.login-page__submit-btn {
+  @include cob-std-submit-btn;
+  max-width: 300px;
+  width: 100%;
+  margin: 0;
+  margin-top: 2px;
 }

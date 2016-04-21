@@ -1,14 +1,20 @@
-<md-card class="bucket-page__backers-card">
-  <md-card-content class="bucket-page__backers-card-content">
-    <div class="bucket-page__status-header">Backers</div>
-    </div>
+<md-card class="bucket-page-backers-card">
+  <md-card-content class="bucket-page-backers-card__content">
+    <div class="bucket-page-backers-card__header">Backers</div>
 
-    <p>
-      <ul class="bucket-page__backers-card-backers-list">
-        <li ng-repeat="backer in backers">
-          <b>{{ backer.name }}</b>: {{ backer.contributionAmount | currency : group.currencySymbol }}
-        </li>
-      </ul>
-    </p>
+    <ul class="bucket-page-backers-card__list">
+      <li ng-repeat="backer in backers">
+        <span class="bucket-page-backers-card__name">
+          {{ backer.name }}:
+        </span>
+
+        <span class="bucket-page-backers-card__contribution"
+          ng-class="backer.id == currentUser.id ? 'bucket-page-backers-card__contribution-personal' : 'bucket-page-backers-card__contribution-other'"
+        >
+          <b>{{ backer.contributionAmount | currency : group.currencySymbol : 0 }}</b>
+        </span>
+
+      </li>
+    </ul>
   </md-card-content>
 </md-card>

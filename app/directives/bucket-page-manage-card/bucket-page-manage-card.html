@@ -1,0 +1,33 @@
+<md-card class="bucket-page-manage-card">
+  <md-card-content class="bucket-page-manage-card__content">
+    <div class="bucket-page-manage-card__header">Manage</div>
+    <div layout="row" layout-align="start center">
+      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="edit()">
+        <ng-md-icon icon="edit"
+          size="20"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        Edit
+      </md-button>
+
+      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="archive()">
+        <ng-md-icon icon="archive"
+          size="20"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        Archive
+      </md-button>
+
+      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="finish()" ng-if="bucket.status == 'live'">
+        <ng-md-icon icon="check_circle"
+          size="20"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        Finish
+      </md-button>
+    </div>
+  </md-card-content>
+</md-card>

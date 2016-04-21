@@ -4,25 +4,26 @@
     <div class="bucket-page__author">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</div>
   </md-card-content>
 
+  <md-divider></md-divider>
+
   <md-card-content class="bucket-page__description">
-    <div layout="row" ng-if="bucket.target > 0">
-      <span class="bucket-page__description-header">Funding Target</span>
-      <span flex="10"></span>
-      <span class="bucket-page__description-header" flex>{{ bucket.target | currency : group.currencySymbol : 0  }}</span>
+    <div layout="row" layout-align="start center" ng-if="bucket.target > 0">
+      <img ng-src="./img/blue_dollar.svg" alt="blue dollar bill" class="bucket-page__funding-target-icon"/>
+      <span class="bucket-page__funding-target-text">Funding Target : {{ bucket.target | currency : group.currencySymbol : 0  }}</span>
+    </div>
+
+    <div layout="row" layout-align="start center" ng-if="bucket.status == 'funded'" class="bucket-page-header-card__accepted-funding-container">
+      <ng-md-icon icon="check_circle"
+        layout="column"
+        layout-align="center center"
+        class="bucket-page-header-card__funded-icon"
+      ></ng-md-icon>
+
+      <span class="bucket-page__accepted-funding-text">Accepted Funding : {{ bucket.totalContributions | currency : group.currencySymbol : 0  }}</span>
     </div>
 
     <div class="bucket-page__description-text-container">
-      <p class="bucket-page__description-text" ng-bind-html="filteredBucketDescription()"></p>
-      <!-- <div class="bucket-page__description-text-overlay"></div> -->
+      <p class="bucket-page__description-text" marked="bucket.description"></p>
     </div>
-
-   <!--  <md-button 
-      md-no-ink 
-      ng-if="bucket.description.length > 200"
-      class="md-primary bucket-page__more-button" 
-      ng-click="toggleMore()"
-    >{{ moreButtonText() }}</md-button>           -->
-
   </md-card-content>
-
 </md-card>

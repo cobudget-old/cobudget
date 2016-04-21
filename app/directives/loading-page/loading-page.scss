@@ -8,6 +8,10 @@
   z-index: 1000;
 }
 
+.loading-page__msg {
+  margin-bottom: 20px;
+}
+
 .loading-page__load-bar {
   position: fixed;
   top: 50%;
@@ -16,14 +20,14 @@
 }
 
 .loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle {
-  border-left-color: $cobudget-orange;
+  border-left-color: $cob-cyan;
 }
 
 .loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-right-color: $cobudget-green;
+  border-right-color: $cob-cyan;
 }
 
-.loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle, 
+.loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle,
 .loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
-  border-top-color: $cobudget-orange;
+  border-top-color: $cob-cyan;
 }

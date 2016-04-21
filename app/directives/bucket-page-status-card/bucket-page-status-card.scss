@@ -2,33 +2,76 @@
 
 .bucket-page__status-card {
   background: $cobudget-light-grey;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.bucket-page__status-card-content {
+  padding: 10px 20px;
 }
 
 .bucket-page__status-header {
-  @include fontLarge;
-  margin-bottom: 20px;
+  font-size: 18px;
+  margin-bottom: 17px;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
-.bucket-page__status-flagpoints {
-  margin-bottom: 20px;
+.bucket-page__idea-icon {
+  margin-right: 15px;
+  width: 50px;
 }
 
-.bucket-page__status-flagpoint-divider {
-  position: relative;
-  height: 3px;
-  background: $cobudget-grey;
-  bottom: 10px;
+.bucket-page__status {
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 5px;
+  color: #757575;
 }
 
 .bucket-page__status-description {
-  @include fontTiny;
+  font-size: 14px;
+  margin: 0;
+  color: #333333;
 }
 
 .bucket-page__start-funding-btn {
-  background-color: $cobudget-lime !important;
-  margin-left: 0 !important;
+  background-color: $cob-green !important;
+  width: 100%;
+  height: 35px;
+  min-height: 35px;
+  line-height: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 3px;
 }
 
 .bucket-page__start-funding-btn:not([disabled]):hover {
-  background-color: $cobudget-lime;
+  background-color: $cob-green;
+}
+
+// funded bucket
+
+.bucket-page-status-card__funded-icon {
+  fill: $cob-green;
+  margin-right: 15px;
+}
+
+.bucket-page-status-card__funded-status-container {
+  margin-bottom: 10px;
+}
+
+// archived bucket
+
+.bucket-page-status-card__archived-icon {
+  fill: rgba(0,0,0,0.35);
+  margin-right: 15px;
+}
+
+.bucket-page-status-card__archived-status-container {
+  margin-bottom: 10px;
 }

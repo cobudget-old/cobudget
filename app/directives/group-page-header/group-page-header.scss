@@ -1,0 +1,169 @@
+.group-page-header {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.group-page-header__content {
+  margin-bottom: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.group-page-header__horizontal-divider {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.group-page-header__donate-btn {
+  color: #9CA2A5;
+  font-size: 13px;
+  text-transform: none;
+  background: #404D52;
+  min-height: 30px;
+  height: 30px;
+  line-height: 30px;
+  min-width: 0;
+  width: 100px;
+}
+
+.group-page-header__heart-icon {
+  fill: #D2004D;
+  margin-right: 8px;
+}
+
+// first row
+
+.group-page-header__group-name {
+  @include fontGrande;
+  @include truncatedText;
+  font-weight: 400;
+  margin-bottom: 10px;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+// second row
+
+.group-page-header__second-row {
+  height: $medium-height;
+}
+
+.group-page-header__funds-overview-header {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.group-page-header__personal-funds-container {
+  margin-right: 20px;
+}
+
+.group-page-header__funds-icon {
+  @include fontGrande;
+  margin-right: 10px;
+  fill: black;
+}
+
+.group-page-header__funds-overview-amount {
+  @include fontGrande;
+}
+
+.group-page-header__admin-btn {
+  border: 0;
+  height: 30px;
+  padding: 5px 10px;
+  color: black;
+  font-weight: 400;
+  font-size: 13px;
+  margin-left: 5px;
+  cursor: pointer;
+  border: 1px solid #8C8C8C;
+  transition: 0.5s;
+
+  &:hover {
+    border-color: transparent;
+  }
+}
+
+.group-page-header__invite-people-btn-label {
+  margin-left: 9px;
+}
+
+.group-page-header__manage-funds-btn-label {
+  margin-left: 6px;
+}
+
+.group-page-header__admin-more-btn {
+  cursor: pointer;
+}
+
+.group-page-header__tabs {
+  @include fontMedium;
+  background: transparent;
+  height: $medium-height;
+}
+
+.group-page-header__tabs md-tabs-wrapper {
+  background: rgba(0,0,0,0);
+}
+
+.group-page-header__tab-label {
+  @include fontMedium;
+  text-transform: none;
+  color: black;
+  font-weight: 400;
+}
+
+.group-page md-ink-bar {
+  background: $cob-red;
+}
+
+// create-bucket-fab
+
+.group-page-header__create-bucket-fab {
+  background: $cob-red !important;
+  position: absolute;
+  bottom: -33px;
+  right: 20px;
+  width: 55px !important;
+  height: 55px !important;
+}
+
+.group-page-header__create-bucket-fab-icon {
+  fill: white;
+}
+
+// bottom sheet
+
+.group-page-header__bottom-sheet-icon {
+  fill: #454545;
+  margin-right: 12px;
+}
+
+// media
+
+@media (max-width: 420px) {
+  .group-page-header__group-name {
+    @include fontLarge;
+  }
+
+  .group-page-header__content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .group-page-header__funds-overview-amount {
+    @include fontLarge;
+  }
+}
+
+@media (max-width: 670px) {
+  .group-page-header__admin-btn {
+    display: none;
+  }
+}
+
+@media (min-width: 670px) {
+  .group-page-header__admin-more-btn {
+    display: none;
+  }
+}

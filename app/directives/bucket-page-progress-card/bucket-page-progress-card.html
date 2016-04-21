@@ -1,47 +1,49 @@
-<md-card class="bucket-page__progress-card">
-  <md-card-content class="bucket-page__progress-card-content">
-    <span class="bucket-page__progress-header">Progress</span>
+<md-card class="bucket-page-progress-card">
+  <md-card-content class="bucket-page-progress-card__content">
+    <div class="bucket-page-progress-card__top">
+      <div layout="row" layout-align="start center" class="bucket-page-progress-card__progress-header">
+        <img ng-src="./img/blue_dollar.svg" alt="blue dollar" class="bucket-page-progress-card__dollar-icon"/>
+        <span class="bucket-page-progress-card__progress-header-text">Progress</span>
+      </div>
 
-    <div class="bucket-page__progress-bar-container">
-      <div class="bucket-page__progress-bar-primary" style="width: {{ bucket.percentContributedByOthers(currentUser) }}%"></div>
-      <div class="bucket-page__progress-bar-secondary" style="width: {{ bucket.percentContributedByOthers(currentUser) + bucket.percentContributedByUser(currentUser) + percentContributed() }}%"></div>
+      <div class="bucket-page-progress-card__progress-bar-container">
+        <div class="bucket-page-progress-card__progress-bar-primary" style="width: {{ bucket.percentContributedByOthers(currentUser) }}%"></div>
+        <div class="bucket-page-progress-card__progress-bar-secondary" style="width: {{ bucket.percentContributedByOthers(currentUser) + bucket.percentContributedByUser(currentUser) + percentContributed() }}%"></div>
+      </div>
+
+      <div layout="row" class="bucket-page-progress-card__progress-info" layout-align="start center">
+        <div class="bucket-page-progress-card__progress-value-container">
+          <span class="bucket-page-progress-card__progress-amount">{{ bucket.numOfContributors }}</span>
+          <span class="bucket-page-progress-card__progress-unit">backers</span>
+        </div>
+
+        <div class="bucket-page-progress-card__progress-value-container">
+          <span class="bucket-page-progress-card__progress-amount">{{ totalAmountFunded() | currency : group.currencySymbol : 0 }}</span>
+          <span class="bucket-page-progress-card__progress-unit">pledged of {{ bucket.target | currency : group.currencySymbol : 0 }}</span>
+        </div>
+      </div>
     </div>
 
-    <div layout="row" class="bucket-page__progress-info">
-      <div flex="25">
-        <span class="bucket-page__progress-amount">{{ bucket.numOfContributors }}</span>
-        <span class="bucket-page__progress-unit">backers</span>
-      </div>
+    <md-divider></md-divider>
 
-      <div flex>
-        <span class="bucket-page__progress-amount">{{ totalAmountFunded() | currency : group.currencySymbol : 0 }}</span>
-        <span class="bucket-page__progress-unit">pledged of {{ bucket.target | currency : group.currencySymbol : 0 }}</span>
-      </div>
 
-      <div flex="25" ng-show="bucket.fundingClosesAt">
-        <span class="bucket-page__progress-amount">{{ bucket.fundingClosesAt | timeToNowAmount }}</span>
-        <span class="bucket-page__progress-unit">{{ bucket.fundingClosesAt | timeToNowUnits }} left</span>
-      </div>
-    </div>
-
-    <form class="bucket-page__fund-form" layout="row" ng-if="membership.balance > 0" name="fundForm">
-      <md-input-container class="bucket-page__fund-form-input-container" ng-if="fundFormOpened">
-        <label>Amount</label>
-        <input class="bucket-page__fund-form-amount-input"
+    <form novalidate class="bucket-page-progress-card__fund-form" ng-if="membership.balance > 0" name="fundForm">
+      <div class="bucket-page-progress-card__input-container">
+        <label class="bucket-page-progress-card__input-label" for="amount"><b>Your Contribution</b> (you have <b class="bucket-page-progress-card__personal-funds-left">{{ membership.balance - newContribution.amount | currency : group.currencySymbol : 0 }}</b> left)</label>
+        <input class="bucket-page-progress-card__text-input"
           type="number"
           name="amount"
-          ng-required
+          required
           min="1"
           pattern="[0-9]*"
           ng-model="newContribution.amount"
           ng-change="normalizeContributionAmount()"
-          focus-if
+          placeholder="5, 10, 15"
           only-digits
-        >
-      </md-input-container>
+        />
+      </div>
 
-      <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='openFundForm()' ng-hide="fundFormOpened">Fund</md-button>
-      <md-button class="md-raised md-primary bucket-page__fund-btn" ng-click='submitContribution()' ng-if="fundFormOpened" ng-autodisable>Submit</md-button>
+      <md-button class="md-raised md-primary bucket-page-progress-card__fund-btn" ng-click='submitContribution()' ng-disabled="fundForm.$pristine || fundForm.$invalid" ng-autodisable>Contribute Now</md-button>
     </form>
   </md-card-content>
 </md-card>

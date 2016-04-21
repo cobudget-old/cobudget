@@ -38,4 +38,7 @@ module.exports =
       Toast.hide()
       $location.path("/groups/#{$scope.group.id}")
 
+    $scope.userCanManageBucket = ->
+      $scope.bucket && !$scope.bucket.isArchived() && ($scope.membership.isAdmin || $scope.bucket.author().id == $scope.membership.member().id)
+
     return

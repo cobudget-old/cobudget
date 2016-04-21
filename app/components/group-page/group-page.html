@@ -1,9 +1,9 @@
 <div class="group-page" ng-if="authorized">
-  <group-page-sidenav></group-page-sidenav>
-  
   <group-page-toolbar></group-page-toolbar>
 
   <md-content class="group-page__content">
+    <group-page-header></group-page-header>
+    <group-page-help></group-page-help>
     <group-page-buckets ng-if="tabSelected == 0"></group-page-buckets>
     <group-page-funders ng-if="tabSelected == 1"></group-page-funders>
   </md-content>

@@ -6,9 +6,11 @@ module.exports =
   resolve:
     userValidated: ($auth) ->
       $auth.validateUser()
+    membershipsLoaded: ->
+      global.cobudgetApp.membershipsLoaded
   url: '/setup_group'
   template: require('./group-setup-page.html')
-  controller: (LoadBar, $location, Records, $scope) ->
+  controller: (LoadBar, Records, $scope, $state) ->
 
     $scope.createGroup = (formData) ->
       LoadBar.start()
@@ -16,5 +18,5 @@ module.exports =
         Records.memberships.fetchMyMemberships().then (data) ->
           newGroup = _.find data.groups, (group) ->
             group.name == formData.name
-          $location.path("/groups/#{newGroup.id}")
+          $state.go('group', {groupId: newGroup.id, firstTimeSeeingGroup: true})
           LoadBar.stop()

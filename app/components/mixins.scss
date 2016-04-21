@@ -18,6 +18,12 @@ $cobudget-gunmetal: #243239;
 $cobudget-dark-grey: #454545;
 $cobudget-pink: #FF85B7;
 
+$cob-yellow: #FFCB2A;
+$cob-cyan: #2BABE2;
+$cob-blue: #3B57F3;
+$cob-green: #15B805;
+$cob-red: #F50057;
+
 $small-height: 36px;
 $medium-height: 48px;
 $large-height: 60px;
@@ -70,6 +76,10 @@ $large-height: 60px;
 @mixin markdown {
   h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 

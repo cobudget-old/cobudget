@@ -8,7 +8,8 @@ module.exports =
   template: require('./group-page.html')
   params:
     openMembersTab: null
-  controller: (CurrentUser, Error, LoadBar, Records, $scope, $stateParams, UserCan) ->
+    firstTimeSeeingGroup: null
+  controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, UserCan) ->
     LoadBar.start()
 
     if $stateParams.openMembersTab

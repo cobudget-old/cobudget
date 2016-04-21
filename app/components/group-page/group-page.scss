@@ -1,7 +1,19 @@
 // content
 
+.group-page {
+  position: relative;
+  background: #EAEAEA;
+  height: 100%;
+}
+
 .group-page__content {
   max-width: 640px;
   margin: 0 auto;
+  background: transparent;
   padding-bottom: 16px;
+  position: relative;
+  top: 76px;
+  z-index: 1;
+  padding-left: 4px;
+  padding-right: 4px;
 }

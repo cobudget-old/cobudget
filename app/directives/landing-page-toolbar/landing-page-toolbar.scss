@@ -1,34 +1,105 @@
-.landing-page__toolbar {
-  background: $cobudget-gunmetal;
-  color: white;
-  height: 55px;
-  padding-right: 10px;
+// header
+
+.landing-page-toolbar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  padding-top: 10px;
+  padding-right: 20px;
 }
 
-// .landing-page__menu-icon {
-//   @include fontMedLarge;
-//   fill: white;
-// }
+.landing-page-toolbar__logo {
+  width: 150px;
+  margin-left: 25px;
+  height: 35px;
+}
 
-.landing-page__login-btn {
+.landing-page-toolbar__logo-link {
+  &:focus {
+    outline: none;
+  }
+}
+
+.landing-page-toolbar__header-btn {
+  font-size: 15px;
+  font-weight: 400;
+  color: #6E6E6E !important;
+  margin: 6px 12px !important;
+}
+
+.landing-page-toolbar__login-btn {
+  border: 1px solid #ACACAC;
+  border-radius: 6px;
+  padding: 8px 15px;
+  color: #939393;
+  font-size: 15px;
+  margin-left: 29px;
   cursor: pointer;
+  transition: 0.5s;
 }
 
-.landing-page__login-btn-label {
-  @include fontMedium;
+.landing-page-toolbar__login-btn:focus {
+  outline: none;
 }
 
-.landing-page__toolbar-person-icon-container {
+.landing-page-toolbar__login-btn:hover {
+  border-color: transparent;
+}
+
+.landing-page-toolbar__person-icon-container {
   width: 25px;
   height: 25px;
+  border: 1px solid #ACACAC;
   border-radius: 50%;
   background: white;
   font-size: 16px;
-  margin-left: 10px;
-  margin-right: 5px;
-  cursor: pointer;
+  margin-right: 14px;
 }
 
-.landing-page__person-icon {
-  fill: #D8D8D8;
+.landing-page-toolbar__person-icon {
+  position: relative;
+  fill: #ACACAC;
+  left: 1px;
+}
+
+.landing-page-toolbar__menu {
+  display: none;
+}
+
+.landing-page-toolbar__menu:focus {
+  outline: none;
+}
+
+.landing-page-toolbar__header-separator {
+  display: none;
+}
+
+// media
+
+@media (max-width: 450px) {
+
+  .landing-page-toolbar__menu {
+    display: block;
+  }
+
+  .landing-page-toolbar__header-btns {
+    display: none;
+  }
+
+  .landing-page-toolbar__header-separator {
+    display: flex;
+  }
+
+  .landing-page-toolbar__menu {
+    margin-left: 20px;
+  }
+
+  .landing-page-toolbar__menu-icon-container:focus {
+    outline: none;
+  }
+
+  .landing-page-toolbar__menu-icon {
+    fill: white;
+  }
+
 }
