@@ -68,6 +68,7 @@ module.exports =
     $scope.cancel = ->
       $location.path("/groups/#{groupId}")
 
+    # TODO: eww - definitely refactor
     $scope.confirmBulkAllocations = ->
       $scope.uploadStatus = 'pending'
       promises = _.map $scope.people, (person) ->
@@ -75,21 +76,30 @@ module.exports =
 
       _.each $scope.newMembers, (newMember) ->
         newMember.status = 'pending'
-        params = {group_id: groupId, email: newMember.email}
-        Records.memberships.remote.create(params).then (data) ->
-          params = {groupId: groupId, userId: data.users[0].id, amount: newMember.allocation_amount}
-          allocation = Records.allocations.build(params)
-          allocation.save().then ->
-            newMembership = data.memberships[0]
+        membershipParams = {group_id: groupId, email: newMember.email}
+        Records.memberships.remote.create(membershipParams).then (data) ->
+          newMembership = data.memberships[0]
+          if newMember.allocation_amount > 0
+            allocationParams = {groupId: groupId, userId: data.users[0].id, amount: newMember.allocation_amount}
+            allocation = Records.allocations.build(allocationParams)
+            allocation.save().then ->
+              Records.memberships.invite(newMembership).then ->
+                newMember.status = 'complete'
+                newMember.deferred.resolve()
+          else
             Records.memberships.invite(newMembership).then ->
               newMember.status = 'complete'
               newMember.deferred.resolve()
 
       _.each $scope.existingMembers, (existingMember) ->
         existingMember.status = 'pending'
-        params = {groupId: groupId, userId: existingMember.id, amount: existingMember.allocation_amount}
-        allocation = Records.allocations.build(params)
-        allocation.save().then ->
+        if existingMember.allocation_amount > 0
+          params = {groupId: groupId, userId: existingMember.id, amount: existingMember.allocation_amount}
+          allocation = Records.allocations.build(params)
+          allocation.save().then ->
+            existingMember.status = 'complete'
+            existingMember.deferred.resolve()
+        else
           existingMember.status = 'complete'
           existingMember.deferred.resolve()
 
