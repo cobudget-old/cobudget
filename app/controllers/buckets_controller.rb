@@ -1,8 +1,8 @@
 class BucketsController < AuthenticatedController
   api :GET, '/buckets?group_id'
   def index
-    group = Group.find(params[:group_id])
-    render json: group.buckets
+    buckets = Bucket.where(group_id: params[:group_id])
+    render json: buckets
   end
 
   api :GET, '/buckets/:id', 'Full details of bucket'

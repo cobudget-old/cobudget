@@ -26,7 +26,7 @@ class Bucket < ActiveRecord::Base
   end
 
   def num_of_contributors
-    contributions.map { |c| c.user_id }.uniq.length
+    Contribution.where(bucket_id: id).group(:user_id).count.length
   end
 
   def funded?

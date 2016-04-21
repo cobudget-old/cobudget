@@ -3,7 +3,7 @@ class GroupsController < AuthenticatedController
 
   api :GET, '/groups', 'List groups'
   def index
-    groups = current_user.memberships.map { |m| m.group }
+    groups = Group.joins(:memberships).where(memberships: {member_id: current_user.id})
     render json: groups
   end
 
