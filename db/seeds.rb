@@ -86,7 +86,6 @@ groups.each do |group|
       target: rand(0..1000),
       status: 'live',
       created_at: Time.zone.now - rand(1..10).days,
-      funding_closes_at: Time.zone.now + rand(10..30).days,
       live_at: Time.now.utc
     )
     rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }

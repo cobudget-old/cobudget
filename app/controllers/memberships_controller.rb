@@ -82,7 +82,7 @@ class MembershipsController < AuthenticatedController
 
   private
     def membership_params
-      params.require(:membership).permit(:is_admin)
+      params.require(:membership).permit(:is_admin, :closed_admin_help_card_at, :closed_member_help_card_at)
     end
 
     def membership

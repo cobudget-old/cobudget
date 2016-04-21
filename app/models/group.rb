@@ -16,6 +16,37 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def add_customer(email)
+    customer = Stripe::Customer.create(
+      :description => "Customer for Group " + self.id.to_s,
+      :email => email,
+      :plan => 1
+    )
+    self.customer_id = customer.id
+    self.trial_end = Time.at(customer.subscriptions.data[0].trial_end)
+    self.plan = "paid"
+    self.save
+  end
+
+  def add_card(email, token)
+    customer = Stripe::Customer.retrieve(self.customer_id)
+    customer.source = token
+    customer.email = email
+    customer.save
+  end
+
+  def extend_trial
+    # the number of seconds in thirty days
+    thirty_days =  60 * 24 * 30
+
+    customer = Stripe::Customer.retrieve(self.customer_id)
+    sub = Stripe::Subscription.retrieve(customer.subscriptions.data[0].id)
+    sub.trial_end = sub.trial_end + thirty_days
+    sub.save 
+    self.trial_end = Time.at(sub.trial_end)
+    self.save
+  end
+
   def add_member(user)
     memberships.create!(member: user, is_admin: false)
   end
@@ -26,6 +57,10 @@ class Group < ActiveRecord::Base
 
   def formatted_balance
     Money.new(balance * 100, currency_code).format
+  end
+
+  def is_launched
+    members.any? && allocations.any?
   end
 
   def last_activity_at

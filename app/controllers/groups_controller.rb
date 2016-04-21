@@ -31,8 +31,41 @@ class GroupsController < AuthenticatedController
     render json: [group]
   end
 
+  api :POST, '/groups/:id/add_customer', 'Add a credit card that pays for the group'
+  def add_customer
+    group = Group.find(params[:id])
+    if current_user.is_admin_for(group)
+      group.add_customer(current_user.email)
+      render json: [group]
+    else
+      render nothing: true, status: 403
+    end
+  end
+
+  api :POST, '/groups/:id/add_card', 'Add a credit card that pays for the group'
+  def add_card
+    group = Group.find(params[:id])
+    if current_user.is_admin_for?(group)
+      group.add_card(params[:stripeEmail], params[:stripeToken])
+      render status: 200, nothing: true
+    else
+      render status: 403, nothing: true
+    end
+  end
+
+  api :POST, '/groups/:id/extend_trial', 'Extend the group trial by 30 days'
+  def extend_trial
+    group = Group.find(params[:id])
+    if current_user.is_admin_for?(group)
+      group.extend_trial()
+      render status: 200, nothing: true
+    else
+      render status: 403, nothing: true
+    end
+  end
+
   private
     def group_params
-      params.require(:group).permit(:name, :currency_code)
+      params.require(:group).permit(:name, :currency_code, :plan)
     end
 end
