@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/analytics'
   template: require('./group-analytics-page.html')
-  controller: (config, CurrentUser, Error, $http, Records, $scope, $stateParams, UserCan) ->
+  controller: (config, CurrentUser, Error, $http, Records, $scope, $state, $stateParams, UserCan) ->
 
     groupId = parseInt($stateParams.groupId)
     Records.groups.findOrFetchById(groupId)
@@ -21,5 +21,8 @@ module.exports =
         else
           $scope.authorized = false
           Error.set("you can't view this page")
+
+    $scope.back = ->
+      $state.go('group', {groupId: groupId})
 
     return
