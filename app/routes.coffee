@@ -23,3 +23,4 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'analytics', require('app/components/analytics-page/analytics-page.coffee')
     .state 'resources', require('app/components/resources-page/resources-page.coffee')
     .state 'about', require('app/components/about-page/about-page.coffee')
+    .state 'group-analytics', require('app/components/group-analytics-page/group-analytics-page.coffee')
