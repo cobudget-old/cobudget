@@ -62,7 +62,8 @@ Rails.application.routes.draw do
       end
     end
 
-    get '/analytics/report', to: 'analytics#report'
+    get "/analytics/report", to: "analytics#report"
+    get "/groups/:id/analytics", to: "analytics#group_report"
   end
 
   root to: redirect('/docs')

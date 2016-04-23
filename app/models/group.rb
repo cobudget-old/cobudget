@@ -1,4 +1,4 @@
-class Group < ActiveRecord::Base
+  class Group < ActiveRecord::Base
   has_many :buckets, dependent: :destroy
   has_many :allocations, dependent: :destroy
   has_many :memberships
@@ -42,7 +42,7 @@ class Group < ActiveRecord::Base
     customer = Stripe::Customer.retrieve(self.customer_id)
     sub = Stripe::Subscription.retrieve(customer.subscriptions.data[0].id)
     sub.trial_end = sub.trial_end + thirty_days
-    sub.save 
+    sub.save
     self.trial_end = Time.at(sub.trial_end)
     self.save
   end
