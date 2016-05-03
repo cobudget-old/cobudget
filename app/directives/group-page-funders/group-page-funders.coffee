@@ -9,7 +9,10 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
 
       $scope.toggleMemberAdmin = (membership) ->
         membership.isAdmin = !membership.isAdmin
-        membership.save()
+        params =
+          membership:
+            is_admin: membership.isAdmin
+        membership.remote.update(membership.id, params)
 
       $scope.downloadCSV = ->
         timestamp = moment().format('YYYY-MM-DD-HH-mm-ss')
