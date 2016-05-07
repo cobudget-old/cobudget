@@ -33,7 +33,7 @@
 
           <div>
             <h3 class="bucket-page__status">Funded</h3>
-            <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.target | currency : group.currencySymbol : 0 }} on {{ moment(bucket.fundedAt) | exactDateWithTime }}</em></p>
+            <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.target | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
 
         <div>
           <h3 class="bucket-page__status">Archived</h3>
-          <p class="bucket-page__status-description"><em>This bucket was archived on {{ moment.bucket.archivedAt | exactDateWithTime }}</em></p>
+          <p class="bucket-page__status-description"><em>This bucket was archived on {{ bucket.archivedAt | exactDateWithTime }}</em></p>
         </div>
       </div>
     </div>
