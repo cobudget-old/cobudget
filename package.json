@@ -14,7 +14,7 @@
     "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
     "build": "gulp build",
     "develop": "gulp develop",
-    "set-remote": "git remote add deploy-beta git@github.com:cobudget/beta.cobudget.co",
+    "set-remote": "git remote add deploy-beta git@github.com:cobudget/cobudget.co",
     "deploy-cname": "cp app/assets/CNAME.deploy app/assets/CNAME",
     "deploy-push": "git push deploy-beta gh-pages -f",
     "deploy": "(export NODE_ENV=production; npm run deploy-cname && gulp branch && npm run deploy-push)",
