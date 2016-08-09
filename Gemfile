@@ -4,9 +4,6 @@ gem 'rails', '~> 4.2.3'
 gem 'rails-api'
 gem 'spring', :group => :development
 
-# payments
-gem 'stripe'
-
 # persistance
 gem 'pg'
 gem 'foreigner'
@@ -20,7 +17,6 @@ gem 'responders', '~> 2.0'
 
 # model utilities
 gem 'money-rails'
-gem 'redcarpet'
 
 # auth
 gem 'devise', '~> 3.5.2'
@@ -41,8 +37,7 @@ gem 'airbrake'
 gem 'faker'
 gem 'factory_girl_rails'
 
-# analytics
-gem 'groupdate'
+gem 'redcarpet'
 
 group :development do
   gem 'capistrano', '2.15.5'
@@ -57,6 +52,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem 'timecop'
+  gem 'faker'
+  gem 'factory_girl_rails'
 end
 
 group :production do
