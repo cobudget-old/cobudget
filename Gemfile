@@ -33,6 +33,8 @@ gem 'sinatra', :require => nil
 # error tracking
 gem 'airbrake'
 
+gem 'newrelic_rpm'
+
 gem 'redcarpet'
 
 group :development do
