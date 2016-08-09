@@ -33,10 +33,6 @@ gem 'sinatra', :require => nil
 # error tracking
 gem 'airbrake'
 
-# using faker and factory girl to generate fake users for staging app, will put back in group :development, :test when in production
-gem 'faker'
-gem 'factory_girl_rails'
-
 gem 'redcarpet'
 
 group :development do
