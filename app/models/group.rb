@@ -51,8 +51,16 @@
     memberships.create!(member: user, is_admin: false)
   end
 
+  def total_allocations
+    allocations.sum(:amount)
+  end
+
+  def total_contributions
+    Contribution.where(bucket_id: buckets.map(&:id)).sum(:amount)
+  end
+
   def balance
-    memberships.map { |m| m.balance }.reduce(:+) || 0
+    (total_allocations - total_contributions).floor || 0
   end
 
   def formatted_balance
