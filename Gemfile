@@ -20,6 +20,7 @@ gem 'responders', '~> 2.0'
 
 # model utilities
 gem 'money-rails'
+gem 'groupdate'
 
 # auth
 gem 'devise', '~> 3.5.2'
