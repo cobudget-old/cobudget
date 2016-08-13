@@ -289,6 +289,3 @@ DEPENDENCIES
   spring
   stripe
   timecop
-
-BUNDLED WITH
-   1.11.2
