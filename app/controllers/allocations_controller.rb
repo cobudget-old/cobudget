@@ -9,8 +9,8 @@ class AllocationsController < AuthenticatedController
 
   api :POST, '/allocations/upload_review'
   def upload_review
-    file = params[:csv].tempfile
-    csv = CSV.read(file)
+    file = File.read(params[:csv].tempfile).gsub(";", ",")
+    csv = CSV.parse(file, col_sep: ',')
     group = Group.find(params[:group_id])
     render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
 

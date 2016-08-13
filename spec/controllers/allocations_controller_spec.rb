@@ -8,6 +8,7 @@ RSpec.describe AllocationsController, type: :controller do
   let(:totally_fucked_csv) { fixture_file_upload('bulk-allocation-csvs/totally-fucked-csv.csv', 'text/csv') }
   let(:empty_csv) { fixture_file_upload('bulk-allocation-csvs/empty-csv.csv', 'text/csv') }
   let(:enormous_debt_csv) { fixture_file_upload('bulk-allocation-csvs/enormous-debt-csv.csv', 'text/csv') }
+  let(:csv_with_semicolons) { fixture_file_upload('bulk-allocation-csvs/csv-with-semicolons.csv', 'text/csv') }
 
   describe "#upload_review" do
     context "user is group admin" do
@@ -29,6 +30,29 @@ RSpec.describe AllocationsController, type: :controller do
         end
 
         it "returns review data as json" do
+          expect(parsed(response)).to eq({
+            "data" => [
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => true }
+            ]
+          })
+        end
+      end
+
+      context "csv uses semicolons as column separators instead of commas" do
+        before do
+          @group = @membership.group
+          @person0 = create(:user, email: "person0@example.com", name: "Person0")
+          create(:membership, member: @person0, group: @group)
+          post :upload_review, {group_id: @membership.group_id, csv: csv_with_semicolons}
+        end
+
+        it "returns http status 'ok'" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "reformats the csv, parses it normally, and returns review data as json" do
           expect(parsed(response)).to eq({
             "data" => [
               {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
