@@ -34,6 +34,16 @@ class MembershipService
       errors << "csv is empty"
     else
       errors << "too many columns" if csv.first.length > 1
+
+      emails = csv.map { |row| row[0] }
+      duplicate_emails = emails.select{ |e| emails.count(e) > 1 }.uniq
+
+      if duplicate_emails.any?
+        duplicate_emails.each do |email|
+          errors << "duplicate email address: #{email}"
+        end
+      end
+
       csv.each_with_index do |row, index|
         email = row[0]
         errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)

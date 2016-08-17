@@ -9,6 +9,7 @@ RSpec.describe AllocationsController, type: :controller do
   let(:empty_csv) { fixture_file_upload('bulk-allocation-csvs/empty-csv.csv', 'text/csv') }
   let(:enormous_debt_csv) { fixture_file_upload('bulk-allocation-csvs/enormous-debt-csv.csv', 'text/csv') }
   let(:csv_with_semicolons) { fixture_file_upload('bulk-allocation-csvs/csv-with-semicolons.csv', 'text/csv') }
+  let(:duplicate_emails_csv) { fixture_file_upload('bulk-allocation-csvs/duplicate-emails-csv.csv', 'text/csv') }
 
   describe "#upload_review" do
     context "user is group admin" do
@@ -95,6 +96,20 @@ RSpec.describe AllocationsController, type: :controller do
         it "return http status 'unprocessable'" do
           post :upload_review, {group_id: @membership.group_id, csv: enormous_debt_csv}
           expect(response).to have_http_status(422)
+        end
+      end
+
+      context "csv contains duplicate email addresses" do
+        before do
+          post :upload_review, {group_id: @membership.group_id, csv: duplicate_emails_csv}
+        end
+
+        it "returns http status 'unprocessable'" do
+          expect(response).to have_http_status(422)
+        end
+
+        it "returns an error for each duplicate" do
+          expect(parsed(response)["errors"].length).to eq(2)
         end
       end
     end
