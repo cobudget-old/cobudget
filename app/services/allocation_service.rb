@@ -6,7 +6,7 @@ class AllocationService
     else
       errors << "too many columns" if csv.first.length > 2
 
-      emails = csv.map { |row| row[0] }
+      emails = csv.map { |row| row[0].downcase }
       duplicate_emails = emails.select{ |e| emails.count(e) > 1 }.uniq
 
       if duplicate_emails.any?
@@ -16,7 +16,7 @@ class AllocationService
       end
 
       csv.each_with_index do |row, index|
-        email = row[0]
+        email = row[0].downcase
         allocation_amount = row[1]
         errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
         errors << "non-number allocation amount '#{allocation_amount}' for email: #{email}" unless is_number?(allocation_amount)
@@ -32,7 +32,7 @@ class AllocationService
 
   def self.generate_csv_upload_preview(csv:, group:)
     csv.map do |row|
-      email = row[0]
+      email = row[0].downcase
       allocation_amount = row[1]
       user = User.find_by_email(email)
       {
