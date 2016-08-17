@@ -11,7 +11,7 @@ class Membership < ActiveRecord::Base
   after_create :update_member_if_this_is_their_first_membership
 
   def total_allocations
-    group.allocations.where(user_id: member_id).sum(:amount)
+    Allocation.where(user_id: member_id, group_id: group_id).sum(:amount)
   end
 
   def total_contributions
