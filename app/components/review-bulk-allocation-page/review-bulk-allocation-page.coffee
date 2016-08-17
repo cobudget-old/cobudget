@@ -76,7 +76,7 @@ module.exports =
 
       _.each $scope.newMembers, (newMember) ->
         newMember.status = 'pending'
-        membershipParams = {group_id: groupId, email: newMember.email}
+        membershipParams = {group_id: groupId, email: newMember.email.toLowerCase()}
         Records.memberships.remote.create(membershipParams).then (data) ->
           newMembership = data.memberships[0]
           if newMember.allocation_amount > 0
