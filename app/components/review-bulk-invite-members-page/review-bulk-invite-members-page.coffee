@@ -63,7 +63,7 @@ module.exports =
 
       _.each $scope.newMembers, (newMember) ->
         newMember.status = 'pending'
-        params = {group_id: groupId, email: newMember.email}
+        params = {group_id: groupId, email: newMember.email.toLowerCase()}
         Records.memberships.remote.create(params).then (data) ->
           newMembership = data.memberships[0]
           Records.memberships.invite(newMembership).then ->
