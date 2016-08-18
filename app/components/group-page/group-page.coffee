@@ -24,7 +24,6 @@ module.exports =
           $scope.group = group
           $scope.currentUser = CurrentUser()
           $scope.membership = group.membershipFor(CurrentUser())
-          Records.memberships.fetchByGroupId(groupId)
           Records.buckets.fetchByGroupId(groupId).then ->
             LoadBar.stop()
           Records.contributions.fetchByGroupId(groupId)
