@@ -19,15 +19,15 @@
   transform: translate(-50%,-50%);
 }
 
-.loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle {
+md-progress-circular .md-inner .md-left .md-half-circle {
   border-left-color: $cob-cyan;
 }
 
-.loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
+md-progress-circular .md-inner .md-right .md-half-circle {
   border-right-color: $cob-cyan;
 }
 
-.loading-page__load-bar md-progress-circular .md-inner .md-left .md-half-circle,
-.loading-page__load-bar md-progress-circular .md-inner .md-right .md-half-circle {
+md-progress-circular .md-inner .md-left .md-half-circle,
+md-progress-circular .md-inner .md-right .md-half-circle {
   border-top-color: $cob-cyan;
 }
