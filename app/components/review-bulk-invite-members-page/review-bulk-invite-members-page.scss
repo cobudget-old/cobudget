@@ -35,6 +35,17 @@
 .review-bulk-invite-members-page__upload-pending-icon {
   fill: white;
   margin-right: 10px;
+  -webkit-animation: spin 1s linear infinite;
+  -webkit-animation-direction: reverse;
+  -moz-animation: spin 1s linear infinite;
+  -moz-animation-direction: reverse;
+  animation: spin 1s linear infinite;
+  animation-direction: reverse;
+}
+
+.review-bulk-invite-members-page__upload-complete-icon {
+  fill: white;
+  margin-right: 10px;  
 }
 
 // content
