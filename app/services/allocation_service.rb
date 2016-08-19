@@ -6,15 +6,6 @@ class AllocationService
     else
       errors << "too many columns" if csv.first.length > 2
 
-      emails = csv.map { |row| row[0].downcase }
-      duplicate_emails = emails.select{ |e| emails.count(e) > 1 }.uniq
-
-      if duplicate_emails.any?
-        duplicate_emails.each do |email|
-          errors << "duplicate email address: #{email}"
-        end
-      end
-
       csv.each_with_index do |row, index|
         email = row[0].downcase
         allocation_amount = row[1]
@@ -31,15 +22,14 @@ class AllocationService
   end
 
   def self.generate_csv_upload_preview(csv:, group:)
-    csv.map do |row|
-      email = row[0].downcase
-      allocation_amount = row[1]
+    csv.group_by { |row| row[0].downcase }.map do |email, rows|
+      allocation_amount = rows.sum { |row| row[1].to_f }
       user = User.find_by_email(email)
       {
         id: user && user.is_member_of?(group) ? user.id : "",
         email: email,
         name: user && user.is_member_of?(group) ? user.name : "",
-        allocation_amount: allocation_amount,
+        allocation_amount: allocation_amount.round(2),
         new_member: !user || !user.is_member_of?(group)
       }
     end
