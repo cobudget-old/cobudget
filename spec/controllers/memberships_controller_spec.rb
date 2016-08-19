@@ -435,12 +435,13 @@ describe MembershipsController, :type => :controller do
           post :upload_review, {group_id: @membership.group_id, csv: duplicate_emails_csv}
         end
 
-        it "returns http status 'unprocessable'" do
-          expect(response).to have_http_status(422)
+        it "returns http status 'ok'" do
+          expect(response).to have_http_status(:ok)
         end
 
-        it "returns an error for each duplicate" do
-          expect(parsed(response)["errors"].length).to eq(2)
+        it "returns review data, with unique email addresses and their summed allocation_amounts" do
+          data = parsed(response)["data"]
+          expect(data.length).to eq(3)
         end
       end
     end

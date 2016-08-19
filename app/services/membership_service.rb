@@ -35,15 +35,6 @@ class MembershipService
     else
       errors << "too many columns" if csv.first.length > 1
 
-      emails = csv.map { |row| row[0].downcase }
-      duplicate_emails = emails.select{ |e| emails.count(e) > 1 }.uniq
-
-      if duplicate_emails.any?
-        duplicate_emails.each do |email|
-          errors << "duplicate email address: #{email}"
-        end
-      end
-
       csv.each_with_index do |row, index|
         email = row[0].downcase
         errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
@@ -53,7 +44,7 @@ class MembershipService
   end
 
   def self.generate_csv_upload_preview(csv:, group:)
-    csv.map do |row|
+    csv.uniq { |row| row[0] }.map do |row|
       email = row[0].downcase
       user = User.find_by_email(email)
       {
