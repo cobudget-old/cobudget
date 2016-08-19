@@ -33,9 +33,9 @@ RSpec.describe AllocationsController, type: :controller do
         it "returns review data as json" do
           expect(parsed(response)).to eq({
             "data" => [
-              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
-              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => true },
-              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => true }
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => 0.01, "new_member" => false},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => 0.1, "new_member" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => 1.0, "new_member" => true }
             ]
           })
         end
@@ -56,11 +56,29 @@ RSpec.describe AllocationsController, type: :controller do
         it "reformats the csv, parses it normally, and returns review data as json" do
           expect(parsed(response)).to eq({
             "data" => [
-              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => "0.01", "new_member" => false},
-              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => "0.10", "new_member" => true },
-              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => "1.00", "new_member" => true }
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => 0.01, "new_member" => false},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => 0.10, "new_member" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => 1.00, "new_member" => true }
             ]
           })
+        end
+      end
+
+      context "csv contains duplicate email addresses" do
+        before do
+          post :upload_review, {group_id: @membership.group_id, csv: duplicate_emails_csv}
+        end
+
+        it "returns http status 'ok'" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "returns review data, with unique email addresses and their summed allocation_amounts" do
+          data = parsed(response)["data"]
+          expect(data.length).to eq(3)
+          expect(data[0]["allocation_amount"]).to eq(600)
+          expect(data[1]["allocation_amount"]).to eq(400.54)
+          expect(data[2]["allocation_amount"]).to eq(200)
         end
       end
 
@@ -96,20 +114,6 @@ RSpec.describe AllocationsController, type: :controller do
         it "return http status 'unprocessable'" do
           post :upload_review, {group_id: @membership.group_id, csv: enormous_debt_csv}
           expect(response).to have_http_status(422)
-        end
-      end
-
-      context "csv contains duplicate email addresses" do
-        before do
-          post :upload_review, {group_id: @membership.group_id, csv: duplicate_emails_csv}
-        end
-
-        it "returns http status 'unprocessable'" do
-          expect(response).to have_http_status(422)
-        end
-
-        it "returns an error for each duplicate" do
-          expect(parsed(response)["errors"].length).to eq(2)
         end
       end
     end
