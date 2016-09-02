@@ -33,10 +33,17 @@ describe MembershipsController, :type => :controller do
           expect(response).to have_http_status(:success)
         end
 
-        it "returns a csv file of active memberships" do
+        it "returns a csv file of emails and raw_balances for each active membership" do
           expect(response.header["Content-Type"]).to include("text/csv")
           expect(response.header["Content-Disposition"]).to include("attachment; filename=")
-          expect(CSV.parse(response.body).length).to eq(6)
+          parsed_csv = CSV.parse(response.body)
+          expect(parsed_csv.length).to eq(6)
+          parsed_csv.each do |row|
+            email = row[0]
+            raw_balance_as_float = row[1].to_f
+            membership = User.find_by_email(email).membership_for(group)
+            expect(membership.raw_balance.to_f).to eq(raw_balance_as_float)
+          end
         end
       end
     end

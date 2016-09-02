@@ -23,7 +23,7 @@ class MembershipService
   def self.generate_csv(memberships:)
     CSV.generate do |csv|
       memberships.each do |membership|
-        csv << [membership.member.email, membership.balance.to_f]
+        csv << [membership.member.email, membership.raw_balance.to_f]
       end
     end
   end
