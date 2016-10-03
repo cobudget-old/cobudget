@@ -22,7 +22,7 @@ class MembershipsController < AuthenticatedController
 
   api :POST, '/memberships?group_id&email&name'
   def create
-    user = User.find_by_email(params[:email]) || User.create_with_confirmation_token(email: params[:email], name: params[:name])
+    user = User.find_by_email(params[:email].downcase) || User.create_with_confirmation_token(email: params[:email], name: params[:name])
     render nothing: true, status: 400 and return unless user.valid?
     if membership = Membership.find_by(member: user, group: group)
       if membership.active?
