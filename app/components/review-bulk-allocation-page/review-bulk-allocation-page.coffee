@@ -79,7 +79,7 @@ module.exports =
         membershipParams = {group_id: groupId, email: newMember.email.toLowerCase()}
         Records.memberships.remote.create(membershipParams).then (data) ->
           newMembership = data.memberships[0]
-          if newMember.allocation_amount > 0
+          if newMember.allocation_amount != 0
             allocationParams = {groupId: groupId, userId: data.users[0].id, amount: newMember.allocation_amount}
             allocation = Records.allocations.build(allocationParams)
             allocation.save().then ->
@@ -93,7 +93,7 @@ module.exports =
 
       _.each $scope.existingMembers, (existingMember) ->
         existingMember.status = 'pending'
-        if existingMember.allocation_amount > 0
+        if existingMember.allocation_amount != 0
           params = {groupId: groupId, userId: existingMember.id, amount: existingMember.allocation_amount}
           allocation = Records.allocations.build(params)
           allocation.save().then ->
