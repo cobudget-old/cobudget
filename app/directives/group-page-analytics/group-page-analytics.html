@@ -61,5 +61,26 @@
                     column-type="pie"/>
         <chart-pie expand="true"/>
       </c3chart>
+
+    </md-list>
+  </md-card>
+
+
+  <md-card class="group-page__analytics-card" ng-if="group.fundedBuckets().length > 0">
+    <md-list class="group-page__analytics-list">
+      <div layout="row" layout-align="start center" class="group-page__analytics-list-header-container">
+        <md-subheader class="group-page__subheader-title">Available funds by user</md-subheader>
+      </div>
+
+      <md-divider class="group-page__analytics-divider"></md-divider>
+
+      <div ng-if="fundersLoaded">
+        <c3chart bindto-id="pie-plot4-chart">
+          <chart-column ng-repeat="funderMembership in group.settledMemberships()" column-id="{{funderMembership.member().name}}"
+                      column-values="{{funderMembership.balance}}"
+                      column-type="pie"/>
+          <chart-pie expand="true"/>
+        </c3chart>
+      </div>
     </md-list>
   </md-card>
