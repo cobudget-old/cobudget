@@ -22,3 +22,5 @@
 /coverage
 
 dump.rb
+
+npm-debug.log
