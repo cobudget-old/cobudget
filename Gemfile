@@ -63,4 +63,4 @@ group :production do
   gem 'delayed-plugins-airbrake'
 end
 
-ruby "2.2.1"
+ruby "2.4.0"
