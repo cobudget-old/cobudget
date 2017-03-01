@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.7'
+# gem 'rails', '~> 5.0.0'
 gem 'rails-api'
 gem 'spring', :group => :development
 
@@ -25,7 +26,7 @@ gem 'groupdate'
 # auth
 gem 'devise', '~> 4.2.0'
 gem 'pundit'
-gem 'devise_token_auth', '~> 0.1.37'
+gem 'devise_token_auth', '~> 0.1.40'
 gem 'omniauth'
 
 # server
