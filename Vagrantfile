@@ -67,9 +67,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs
-    git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.4.0 /usr/local; ruby -v
+    git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.3.3 /usr/local; ruby -v
     gem install bundler
-    apt-get install -y postgresql-server-dev-9.5 postgresql-client-9.5
+    apt-get install -y postgresql postgresql-server-dev-9.5
     sudo -u postgres createuser ubuntu -s
     gem install mailcatcher
   SHELL

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.3'
+gem 'rails', '~> 4.2.7'
 gem 'rails-api'
 gem 'spring', :group => :development
 
@@ -63,4 +63,4 @@ group :production do
   gem 'delayed-plugins-airbrake'
 end
 
-ruby "2.4.0"
+ruby "2.3.3"
