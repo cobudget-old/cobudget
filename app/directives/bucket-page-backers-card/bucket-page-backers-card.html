@@ -16,5 +16,11 @@
 
       </li>
     </ul>
+    <c3chart bindto-id="pie-plot5-chart">
+      <chart-column ng-repeat="backer in backers" column-id="{{backer.name}}"
+                  column-values="{{backer.contributionAmount}}"
+                  column-type="pie"/>
+      <chart-pie expand="true"/>
+    </c3chart>
   </md-card-content>
 </md-card>

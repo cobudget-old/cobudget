@@ -53,10 +53,10 @@
       <md-divider class="group-page__analytics-divider"></md-divider>
 
       <c3chart bindto-id="pie-plot1-chart">
-        <chart-column column-id="Total amount in group ({{group.currencySymbol}})"
-                    column-values={{group.balance}}
+        <chart-column column-id="Total unspent amount in group ({{group.currencySymbol}})"
+                    column-values="{{group.balance - membership.balance}}"
                     column-type="pie"/>
-        <chart-column column-id="Your amount in group ({{group.currencySymbol}})"
+        <chart-column column-id="Your unspent amount in group ({{group.currencySymbol}})"
                     column-values={{membership.balance}}
                     column-type="pie"/>
         <chart-pie expand="true"/>

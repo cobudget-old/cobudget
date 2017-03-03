@@ -10,6 +10,8 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
       $scope.createBucket = ->
         $location.path('/buckets/new').search('group_id', $scope.group.id)
 
+      $scope.tabSelected = 0
+
       $scope.selectTab = (tabNum) ->
         $scope.tabSelected = parseInt tabNum
 
