@@ -1,0 +1,38 @@
+<md-dialog aria-label="paid bucket dialog" class="paid-bucket-dialog">
+  <md-dialog-content class="sticky-container">
+
+    <div class="paid-bucket-dialog__header" layout="column" layout-align="center center">
+      <ng-md-icon icon="warning"
+        layout="column"
+        layout-align="center center"
+        ng-class="bucket.status == 'live' ? 'paid-bucket-dialog__red-warning-icon' : 'paid-bucket-dialog__yellow-warning-icon'"
+        size="35"
+      ></ng-md-icon>
+
+      <div class="paid-bucket-dialog__header-text">
+        Have you paid out this bucket?
+      </div>
+    </div>
+
+    <md-divider ng-if="bucket.status == 'live'"></md-divider>
+
+    <div class="paid-bucket-dialog__details-container">
+      <p class="paid-bucket-dialog__details" ng-if="bucket.status == 'live'">
+        If you confirm, this bucket will be marked as paid.
+      </p>
+
+      <div class="paid-bucket-dialog__final-caution">
+        Caution: This cannot be undone
+      </div>
+    </div>
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button class="paid-bucket-dialog__btn paid-bucket-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button
+      class="md-raised paid-bucket-dialog__btn paid-bucket-dialog__proceed-btn"
+      ng-class="bucket.status == 'live' ? 'paid-bucket-dialog__red-proceed-btn' : 'paid-bucket-dialog__yellow-proceed-btn'"
+      ng-click="proceed()"
+    >yes, this bucket has been paid</md-button>
+  </div>
+</md-dialog>
