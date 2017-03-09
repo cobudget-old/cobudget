@@ -15,5 +15,6 @@ class BucketSerializer < ActiveModel::Serializer
              :live_at,
              :num_of_comments,
              :author_name,
-             :archived_at
+             :archived_at,
+             :paid_at
 end
