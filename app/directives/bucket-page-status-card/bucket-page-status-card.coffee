@@ -6,7 +6,7 @@ global.cobudgetApp.directive 'bucketPageStatusCard', () ->
     template: require('./bucket-page-status-card.html')
     replace: true
     controller: ($scope, Toast, Dialog) ->
-      
+
       $scope.openForFunding = ->
         if $scope.bucket.target
           $scope.bucket.openForFunding().then ->
@@ -17,3 +17,9 @@ global.cobudgetApp.directive 'bucketPageStatusCard', () ->
             title: 'hi friend ~~'
             content: 'an estimated funding target must be specified before funding starts'
             ok: 'oh, ok!'
+
+      $scope.paid = ->
+        paidBucketDialog = require('./../../components/paid-bucket-dialog/paid-bucket-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(paidBucketDialog)

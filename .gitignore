@@ -10,3 +10,5 @@ phantomjsdriver.log
 *.swp
 /config
 /app/assets/CNAME
+.ruby-version
+yarn.lock

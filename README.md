@@ -10,11 +10,16 @@ cobudget's user interface. for more information on the project as a whole, check
 
 ### install
 
-install node and npm: https://github.com/joyent/node/wiki/installation 
+install node and npm and bower if you don't have them, then run npm install
 
 ```
 git clone https://github.com/cobudget/cobudget-ui
 cd cobudget-ui
+install/upgrade to latest npm: install: https://nodejs.org/en/download/ or update: npm update npm -g
+install node using, eg., nvm: 
+    install nvm: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh
+    nvm install node
+npm install -g bower
 npm install
 ```
 

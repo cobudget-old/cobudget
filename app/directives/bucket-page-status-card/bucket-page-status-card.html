@@ -36,6 +36,28 @@
             <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.target | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
           </div>
         </div>
+        <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
+          <ng-md-icon icon="credit_card"
+            layout="column"
+            layout-align="center center"
+            size="35"
+            class="bucket-page-status-card__funded-icon"
+          ></ng-md-icon>
+
+          <div>
+            <h3 class="bucket-page__status">Paid</h3>
+            <p class="bucket-page__status-description"><em>This bucket was marked as paid on {{ bucket.paidAt | exactDateWithTime }}</em></p>
+          </div>
+        </div>
+        <md-button
+        ng-if="!bucket.paidAt && userCanManageBucket()"
+        class="md-raised md-primary bucket-page__start-funding-btn"
+        ng-click='paid()'
+        ng-autodisable
+        ng-show='userCanManageBucket()'
+        >
+        Mark bucket as paid
+        </md-button>
       </div>
     </div>
 
@@ -51,6 +73,32 @@
         <div>
           <h3 class="bucket-page__status">Archived</h3>
           <p class="bucket-page__status-description"><em>This bucket was archived on {{ bucket.archivedAt | exactDateWithTime }}</em></p>
+        </div>
+      </div>
+      <div ng-if="bucket.status == 'funded'" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
+        <ng-md-icon icon="check_circle"
+          layout="column"
+          layout-align="center center"
+          size="35"
+          class="bucket-page-status-card__funded-icon"
+        ></ng-md-icon>
+
+        <div>
+          <h3 class="bucket-page__status">Funded</h3>
+          <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.target | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
+        </div>
+      </div>
+      <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
+        <ng-md-icon icon="credit_card"
+          layout="column"
+          layout-align="center center"
+          size="35"
+          class="bucket-page-status-card__funded-icon"
+        ></ng-md-icon>
+
+        <div>
+          <h3 class="bucket-page__status">Paid</h3>
+          <p class="bucket-page__status-description"><em>This bucket was marked as paid on {{ bucket.paidAt | exactDateWithTime }}</em></p>
         </div>
       </div>
     </div>

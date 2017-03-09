@@ -98,7 +98,7 @@
 
       <md-divider class="group-page__buckets-divider"></md-divider>
 
-      <md-list-item md-no-ink ng-repeat="bucket in group.fundedBuckets()" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
+      <md-list-item md-no-ink ng-repeat="bucket in group.fundedBuckets() | orderBy: '-paidAt'" ng-click="showBucket(bucket.id)" class="group-page__buckets-list-item">
         <div layout="column" flex class="group-page__bucket-container">
           <div layout="row" layout-align="start center" class="group-page__bucket-header-container">
             <span class="group-page__bucket-title">{{ bucket.name }}</span>
@@ -120,7 +120,10 @@
             </div>
           </div>
 
-          <span class="group-page__bucket-subheader">{{ bucket.authorName }} - {{ bucket.totalContributions | currency : group.currencySymbol : 0 }}</span>
+          <span class="group-page__bucket-subheader">
+            {{ bucket.authorName }} - {{ bucket.totalContributions | currency : group.currencySymbol : 0 }}
+            <span ng-if="bucket.paidAt">&#183; <b>paid</b></span>
+          </span>
         </div>
       </md-list-item>
     </md-list>
@@ -169,7 +172,8 @@
 
           <span class="group-page__bucket-subheader">
             {{ bucket.authorName }} - {{ bucket.createdAt | timeFromNowInWords }} ago
-            <span ng-if="bucket.status == 'funded'">- <b>funded</b></span>
+            <span ng-if="bucket.status == 'funded'">&#183; <b>funded</b></span>
+            <span ng-if="bucket.paidAt">&#183; <b>paid</b></span>
           </span>
         </div>
       </md-list-item>
