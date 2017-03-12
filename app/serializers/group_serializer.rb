@@ -7,5 +7,6 @@ class GroupSerializer < ActiveModel::Serializer
              :currency_code,
              :is_launched,
              :plan,
-             :trial_end
+             :trial_end,
+             :total_contributions
 end
