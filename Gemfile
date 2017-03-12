@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.7'
+gem 'rails'
 gem 'rails-api'
 gem 'spring', :group => :development
 
@@ -16,16 +16,16 @@ gem 'apipie-rails'
 gem 'active_model_serializers', '~> 0.8.0'
 gem 'activesupport-json_encoder'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'responders', '~> 2.0'
+gem 'responders'
 
 # model utilities
 gem 'money-rails'
 gem 'groupdate'
 
 # auth
-gem 'devise', '~> 4.2.0'
+gem 'devise'
 gem 'pundit'
-gem 'devise_token_auth', '~> 0.1.37'
+gem 'devise_token_auth'
 gem 'omniauth'
 
 # server
@@ -48,7 +48,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'database_cleaner'
