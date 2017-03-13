@@ -10,12 +10,13 @@ cobudget's user interface. For more information on the project as a whole, check
 
 ## Install
 
-## Install npm and bower
+### Install npm and bower
 
 If you don't have node, npm and bower already, please install these.
 
 Install node and npm from the [node.js homepage](https://nodejs.org)
-Install bower: `np install -g bower`
+
+Install bower: `npm install -g bower`
 
 ### Download and install cobudget-ui
 
@@ -47,11 +48,13 @@ Build and start server using live reload: `npm run develop`
 
 Build once and start static server: `npm start`
 
+Connect to the front end on [http://localhost:9000](http://localhost:9000)
+
 ## Deploy
 
 The deployment to production and stage is done by pushing to github pages. 
 
-First configure `git` to remember deploy destinations. This needd only to be done once.
+First configure `git` to remember deploy destinations. This is only needed once.
 
 For stage: `npm run set-remote-stage`
 
