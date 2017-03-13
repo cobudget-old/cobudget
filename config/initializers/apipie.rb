@@ -5,6 +5,7 @@ Apipie.configure do |config|
   config.doc_base_url            = "/docs"
   # where is your API defined?
   config.api_controllers_matcher = "#{Rails.root}/app/controllers/*.rb"
+  config.default_version         = "1.0.2"
 end
 
 class IntegerValidator < Apipie::Validator::BaseValidator
