@@ -26,7 +26,6 @@ require('angular-truncate-2')
 require('angular-marked')
 require('ng-q-all-settled')
 require('ng-csv')
-require('ng-download-csv')
 require('angular-chart.js')
 require('angular-autodisable/angular-autodisable')
 require('c3-angular')
@@ -50,7 +49,6 @@ global.cobudgetApp = angular.module('cobudget', [
   'hc.marked',
   'qAllSettled',
   'ngCsv',
-  'ngDownloadCsv',
   'chart.js',
   'ngAutodisable',
   'gridshore.c3js.chart'
