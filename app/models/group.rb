@@ -65,10 +65,18 @@
       buckets.map {|b| b.status == 'funded' ? b.target : 0 }.sum
   end
 
+  def waiting_for_payment
+      buckets.map {|b| b.status == 'funded' && b.paid_at.nil? ? b.target : 0 }.sum
+  end
+
+  def total_paid
+      buckets.map {|b| b.paid_at ? b.target : 0 }.sum
+  end
+
   def total_in_circulation
-      # amount of money contributed to partially funded buckets, and
-      # uncontributed
-      total_allocations - total_in_funded
+      # amount of money unspent, in partially funded buckets, and in funded but
+      # unpaid buckets.
+      total_allocations - total_paid
   end
 
   def balance
