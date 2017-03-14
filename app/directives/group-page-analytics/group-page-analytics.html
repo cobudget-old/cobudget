@@ -19,10 +19,10 @@
                   layout-align="center center"
               ></ng-md-icon>
               <div layout="column" layout-align="center center">
-                <span class="group-page-header__stats-overview-amount">{{ group.totalInFunded | currency : group.currencySymbol : 0 }}</span>
+                <span class="group-page-header__stats-overview-amount">{{ group.waitingForPayment | currency : group.currencySymbol : 0 }}</span>
               </div>
           </div>
-          <div layout="row" class="group-page-header__stats-overview-label">Funded Buckets All Time</div>
+          <div layout="row" class="group-page-header__stats-overview-label">Waiting for Payment</div>
         </div>
 
         <div>
@@ -33,10 +33,10 @@
                   layout-align="center center"
               ></ng-md-icon>
               <div layout="column" layout-align="center center">
-                <span class="group-page-header__stats-overview-amount">{{ group.totalAllocations | currency : group.currencySymbol : 0 }}</span>
+                <span class="group-page-header__stats-overview-amount">{{ group.totalInCirculation | currency : group.currencySymbol : 0 }}</span>
               </div>
           </div>
-          <div class="group-page-header__stats-overview-label">All Allocations</div>
+          <div class="group-page-header__stats-overview-label">Balance in Group</div>
         </div>
 
       </div>
