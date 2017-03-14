@@ -25,10 +25,13 @@ class AllocationsController < AuthenticatedController
   api :POST, '/allocations?membership_id&amount'
   def create
     group = Group.find(allocation_params[:group_id])
+    user = User.find(allocation_params[:user_id])
+    amount = allocation_params[:amount]
     render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
 
     allocation = Allocation.new(allocation_params)
     if allocation.save
+      UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_now
       render json: [allocation], status: 201
     else
       render status: 400, nothing: true
