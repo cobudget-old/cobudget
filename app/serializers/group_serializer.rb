@@ -9,7 +9,7 @@ class GroupSerializer < ActiveModel::Serializer
              :plan,
              :trial_end, 
              :total_in_circulation,
-             :waiting_for_payment,
+             :ready_to_pay_total,
              :total_in_funded, 
              :total_allocations,
              :total_contributions
