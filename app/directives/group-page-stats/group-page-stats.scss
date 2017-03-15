@@ -1,10 +1,10 @@
 // buckets
 
-.group-page__analytics-card {
+.group-page__stats-card {
   margin-bottom: 35px;
 }
 
-.group-page__analytics-content {
+.group-page__stats-content {
   position: relative;
   width: 100%;
 }
@@ -14,12 +14,12 @@
   margin-bottom: 5px;
 }
 
-.group-page__analytics-list {
+.group-page__stats-list {
   padding-bottom: 0;
   padding-top: 0;
 }
 
-.group-page__analytics-list-header-container {
+.group-page__stats-list-header-container {
   padding: 5px 20px
 }
 
@@ -31,12 +31,12 @@
   font-size: 15px !important;
 }
 
-.group-page__analytic-list-icon {
+.group-page__stats-list-icon {
   width: 27px;
   height: 27px;
 }
 
-.group-page__analytics-list-item {
+.group-page__stats-list-item {
   transition: 0.5s;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -50,34 +50,34 @@
   }
 }
 
-.group-page__analytics-divider {
+.group-page__stats-divider {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
 
-.group-page__analytic-title {
+.group-page__stats-title {
   @include fontMedLarge;
   @include truncatedText;
   margin-bottom: 4px;
 }
 
-.group-page__analytic-subheader {
+.group-page__stats-subheader {
   @include fontSmall;
   color: $grey-on-white;
 }
 
-.group-page__analytic-container {
+.group-page__stats-container {
   position: relative;
   min-width: 0;
 }
 
-.group-page__analytic-header-container {
+.group-page__stats-header-container {
   margin-bottom: 1px;
 }
 
 // comments
 
-.group-page__analytic-comment-buffer {
+.group-page__stats-comment-buffer {
   min-width: 5px;
 }
 
@@ -138,13 +138,13 @@
 
 // funded buckets
 
-.group-page__analytic-list-funded-icon {
+.group-page__stats-list-funded-icon {
   fill: $cob-green;
 }
 
 // archived buckets
 
-.group-page__analytic-list-archived-icon {
+.group-page__stats-list-archived-icon {
   fill: rgba(0,0,0,0.35);
 }
 
@@ -189,11 +189,11 @@
 }
 
 @media (max-width: 380px) {
-  .group-page__analytic-title {
+  .group-page__stats-title {
     @include fontMedium;
   }
 
-  .group-page__analytic-subheader {
+  .group-page__stats-subheader {
     @include fontTiny;
   }
 

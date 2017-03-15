@@ -1,33 +1,33 @@
-<div class="group-page__analytics-content">
+<div class="group-page__stats-content">
 
-  <md-card class="group-page__analytics-card">
-    <md-list class="group-page__analytics-list">
+  <md-card class="group-page__stats-card">
+    <md-list class="group-page__stats-list">
 
-      <div layout="row" layout-align="start center" class="group-page__analytics-list-header-container">
+      <div layout="row" layout-align="start center" class="group-page__stats-list-header-container">
         <md-subheader class="group-page__subheader-title">Group Totals</md-subheader>
       </div>
 
-      <md-divider class="group-page__analytics-divider"></md-divider>
+      <md-divider class="group-page__stats-divider"></md-divider>
 
       <div layout="row" layout-align="space-around center" layout-margin class="group-page-header__stats-overview-container">
 
         <div>
           <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
-              <ng-md-icon icon="check_circle"
+              <ng-md-icon icon="payment"
                 class="group-page-header__funds-icon"
                   layout="column"
                   layout-align="center center"
               ></ng-md-icon>
               <div layout="column" layout-align="center center">
-                <span class="group-page-header__stats-overview-amount">{{ group.waitingForPayment | currency : group.currencySymbol : 0 }}</span>
+                <span class="group-page-header__stats-overview-amount">{{ group.readyToPayTotal | currency : group.currencySymbol : 0 }}</span>
               </div>
           </div>
-          <div layout="row" class="group-page-header__stats-overview-label">Waiting for Payment</div>
+          <div layout="row" class="group-page-header__stats-overview-label">Ready to Pay</div>
         </div>
 
         <div>
           <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
-              <ng-md-icon icon="access_time"
+              <ng-md-icon icon="account_balance"
                 class="group-page-header__funds-icon"
                   layout="column"
                   layout-align="center center"
@@ -44,13 +44,13 @@
     </md-list>
   </md-card>
 
-  <md-card class="group-page__analytics-card" ng-if="group.liveBuckets().length > 0">
-    <md-list class="group-page__analytics-list">
-      <div layout="row" layout-align="start center" class="group-page__analytics-list-header-container">
+  <md-card class="group-page__stats-card" ng-if="group.liveBuckets().length > 0">
+    <md-list class="group-page__stats-list">
+      <div layout="row" layout-align="start center" class="group-page__stats-list-header-container">
         <md-subheader class="group-page__subheader-title">Money Distribution</md-subheader>
       </div>
 
-      <md-divider class="group-page__analytics-divider"></md-divider>
+      <md-divider class="group-page__stats-divider"></md-divider>
 
       <c3chart bindto-id="pie-plot1-chart">
         <chart-column column-id="Total amount in group ({{group.currencySymbol}})"
@@ -65,13 +65,13 @@
     </md-list>
   </md-card>
 
-  <md-card class="group-page__analytics-card" ng-if="group.draftBuckets().length > 0">
-    <md-list class="group-page__analytics-list">
-      <div layout="row" layout-align="start center" class="group-page__analytics-list-header-container">
+  <md-card class="group-page__stats-card" ng-if="group.draftBuckets().length > 0">
+    <md-list class="group-page__stats-list">
+      <div layout="row" layout-align="start center" class="group-page__stats-list-header-container">
         <md-subheader class="group-page__subheader-title">Bucket Breakdown</md-subheader>
       </div>
 
-      <md-divider class="group-page__analytics-divider"></md-divider>
+      <md-divider class="group-page__stats-divider"></md-divider>
 
       <c3chart bindto-id="pie-plot2-chart">
         <chart-column column-id="Live"
@@ -89,13 +89,13 @@
     </md-list>
   </md-card>
 
-  <md-card class="group-page__analytics-card" ng-if="group.fundedBuckets().length > 0">
-    <md-list class="group-page__analytics-list">
-      <div layout="row" layout-align="start center" class="group-page__analytics-list-header-container">
+  <md-card class="group-page__stats-card" ng-if="group.fundedBuckets().length > 0">
+    <md-list class="group-page__stats-list">
+      <div layout="row" layout-align="start center" class="group-page__stats-list-header-container">
         <md-subheader class="group-page__subheader-title">Stale Money</md-subheader>
       </div>
 
-      <md-divider class="group-page__analytics-divider"></md-divider>
+      <md-divider class="group-page__stats-divider"></md-divider>
 
       <c3chart bindto-id="pie-plot3-chart">
         <chart-column column-id="{{group.currencySymbol}}{{group.balance}} Unspent"
@@ -111,13 +111,13 @@
   </md-card>
 
 
-  <md-card class="group-page__analytics-card" ng-if="group.fundedBuckets().length > 0">
-    <md-list class="group-page__analytics-list">
-      <div layout="row" layout-align="start center" class="group-page__analytics-list-header-container">
+  <md-card class="group-page__stats-card" ng-if="group.fundedBuckets().length > 0">
+    <md-list class="group-page__stats-list">
+      <div layout="row" layout-align="start center" class="group-page__stats-list-header-container">
         <md-subheader class="group-page__subheader-title">Available funds by user</md-subheader>
       </div>
 
-      <md-divider class="group-page__analytics-divider"></md-divider>
+      <md-divider class="group-page__stats-divider"></md-divider>
 
       <div ng-if="fundersLoaded">
         <c3chart bindto-id="pie-plot4-chart">

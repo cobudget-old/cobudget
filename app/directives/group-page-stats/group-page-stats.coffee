@@ -1,9 +1,9 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.directive 'groupPageAnalytics', () ->
+global.cobudgetApp.directive 'groupPageStats', () ->
     restrict: 'E'
-    template: require('./group-page-analytics.html')
+    template: require('./group-page-stats.html')
     replace: true
     controller: ($scope, $location, Records) ->
 
