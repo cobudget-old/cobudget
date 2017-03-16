@@ -7,6 +7,9 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
     replace: true
     controller: (config, Dialog, DownloadCSV, LoadBar, $q, Records, $scope, Toast, $window) ->
 
+      #Records.allocations.fetchByGroupId($scope.group.id).then ->
+      #  $scope.allocationsLoaded = true
+
       Records.memberships.fetchByGroupId($scope.group.id).then ->
         $scope.fundersLoaded = true
 

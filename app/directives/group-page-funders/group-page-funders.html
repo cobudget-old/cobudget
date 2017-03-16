@@ -3,7 +3,20 @@
     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
   </div>
 
+  <div>
+      <md-card ng-if="group.allocations()" class="group-page__funders-card-graph">
+        {{group.allocations().length}}
+      <md-list class="group-page__allocations-list">
+        <md-list-item ng-repeat="allocation in group.allocations()">
+            {{allocation.amount}}
+        </md-list-item>
+      </md-list>
+    </md-card>
+  </div>
+
+
   <div ng-if="fundersLoaded">
+
     <md-card ng-if="group.settledMemberships().length > 0" class="group-page__funders-card">
       <div layout="row" layout-align="start center" class="group-page__funders-subheader-container">
         <h2 class="group-page__funders-subheader">Members</h2>
