@@ -3,8 +3,8 @@
   <md-card class="group-page__stats-card">
     <md-list class="group-page__stats-list">
 
-      <div layout="row" layout-align="start center" class="group-page__stats-list-header-container">
-        <md-subheader class="group-page__subheader-title">Group Totals</md-subheader>
+      <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
+        <h2 class="group-page__stats-subheader">Group Totals</h2>
       </div>
 
       <md-divider class="group-page__stats-divider"></md-divider>
@@ -12,6 +12,7 @@
       <div layout="row" layout-align="space-around center" layout-margin class="group-page-header__stats-overview-container">
 
         <div>
+          <div layout="row" class="group-page-header__stats-overview-label">Ready to Pay</div>
           <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
               <ng-md-icon icon="payment"
                 class="group-page-header__funds-icon"
@@ -22,10 +23,10 @@
                 <span class="group-page-header__stats-overview-amount">{{ group.readyToPayTotal | currency : group.currencySymbol : 0 }}</span>
               </div>
           </div>
-          <div layout="row" class="group-page-header__stats-overview-label">Ready to Pay</div>
         </div>
 
         <div>
+          <div class="group-page-header__stats-overview-label">Balance in Group</div>
           <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
               <ng-md-icon icon="account_balance"
                 class="group-page-header__funds-icon"
@@ -36,11 +37,9 @@
                 <span class="group-page-header__stats-overview-amount">{{ group.totalInCirculation | currency : group.currencySymbol : 0 }}</span>
               </div>
           </div>
-          <div class="group-page-header__stats-overview-label">Balance in Group</div>
         </div>
 
       </div>
 
     </md-list>
   </md-card>
-
