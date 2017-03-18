@@ -1,5 +1,11 @@
 ### @ngInject ###
 
+# Since Angular 1.6 the default hash-prefix used for $location has changed from the empty string
+# to the bank ('!'). Since we're sending out links with only the hash, this needs to be set 
+# to the empty string 
+global.cobudgetApp.config(['$locationProvider', ($locationProvider) -> 
+  $locationProvider.hashPrefix('')])
+
 global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise '/'
   $stateProvider
