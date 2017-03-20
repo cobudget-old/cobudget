@@ -14,7 +14,7 @@
       <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
 
       <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
-        <c3chart bindto-id="chart1">
+        <c3chart bindto-id="chart1" padding-right="10">
           <chart-legend show-legend="false">
           <chart-column column-id="data-1"
             column-values= "{{ group.allocationAmountsAsList() }}"
