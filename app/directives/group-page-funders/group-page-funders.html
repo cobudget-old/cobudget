@@ -13,6 +13,15 @@
 
       <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
 
+      <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
+        <c3chart bindto-id="chart1">
+          <chart-legend show-legend="false">
+          <chart-column column-id="data-1"
+            column-values= "{{ group.allocationAmountsAsList() }}"
+            column-type="area"/>
+        </c3chart>
+      </div>
+
       <md-list class="group-page__allocation-list">
         <md-list-item ng-repeat="allocation in group.allocations() | orderBy: '-createdAt'">
             <div layout="column" layout-align="start start" class="group-page__allocation-date" flex>

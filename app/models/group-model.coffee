@@ -21,6 +21,13 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     fundedBuckets: ->
       @getActiveBuckets('funded', 'fundedAt')
 
+    allocationAmountsAsList: ->
+      total = 0
+      _lst = _.map @allocations(), (allocation) ->
+        allocation.amount + total
+        total += allocation.amount
+      _lst.toString()
+
     archivedBuckets: ->
       buckets = _.filter @buckets(), (bucket) ->
         bucket.isArchived()
