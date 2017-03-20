@@ -44,10 +44,6 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       _.first _.filter @memberships(), (membership) ->
         membership.memberId == member.id
 
-    bucketsWaitingForPayment: ->
-      _.filter @buckets(), (bucket) ->
-        bucket.fundedAt && !bucket.paidAt
-
     # private
     filterActiveBucketsByStatus: (status) ->
       _.filter @buckets(), (bucket) ->

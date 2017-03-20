@@ -7,8 +7,4 @@ global.cobudgetApp.directive 'groupPageStats', () ->
     replace: true
     controller: ($scope, $location) ->
 
-     $scope.showBucket = (bucketId) ->
-       $location.path("/buckets/#{bucketId}")
-
-
       return
