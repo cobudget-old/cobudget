@@ -4,11 +4,28 @@
   </div>
 
   <div ng-if="allocationsLoaded">
-    <md-card ng-if="group.allocations().length > 0" class="group-page__funders-card-graph">
-      {{group.allocations().length}}
-      <md-list class="group-page__allocations-list">
-        <md-list-item ng-repeat="allocation in group.allocations()">
-            {{allocation.amount}}
+    <md-card ng-if="group.allocations().length > 0" class="group-page__allocation-history-card">
+
+      <div layout="row" layout-align="start center" class="group-page__allocation-history-subheader-container">
+        <h2 class="group-page__allocation-history-subheader">Group Allocation History</h2>
+        <span flex></span>
+      </div>
+
+      <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
+
+      <md-list class="group-page__allocation-list">
+        <md-list-item ng-repeat="allocation in group.allocations() | orderBy: '-createdAt'">
+            <div layout="column" layout-align="start start" class="group-page__allocation-date" flex>
+                {{allocation.createdAt | exactDate }}
+            </div>
+            <div layout="column" layout-align="center start" class="group-page__allocation-user" flex>
+                {{allocation.user().name }}
+            </div>
+            <div layout="column" layout-align="end start" class="group-page__allocation-amount-container" flex>
+              <span class="group-page__allocation-amount">
+                {{ allocation.amount | currency : group.currencySymbol : 2 }}
+              </span>
+            </div>
         </md-list-item>
       </md-list>
     </md-card>
