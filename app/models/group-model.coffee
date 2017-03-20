@@ -21,12 +21,45 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     fundedBuckets: ->
       @getActiveBuckets('funded', 'fundedAt')
 
-    allocationAmountsAsList: ->
-      total = 0
-      _lst = _.map @allocations(), (allocation) ->
-        allocation.amount + total
-        total += allocation.amount
-      _lst.toString()
+    balanceOverTime: ->
+      paidBuckets = _.filter @buckets(), (bucket) ->
+        bucket.isPaid() 
+      
+      paymentsByDate = _.map paidBuckets, (bucket) ->
+        {
+          'date': bucket.paidAt
+          'amount': bucket.totalContributions
+        }
+      console.log(paymentsByDate)
+
+      allocationsByDate = _.map @allocations(), (allocation) -> 
+        {
+          'date': allocation.createdAt
+          'amount': allocation.amount + balance
+        }
+      console.log(allocationsByDate)
+
+      allTransactions = paymentsByDate.concat allocationsByDate
+
+      transactionsByDate = _.sortBy allTransactions, (tx) ->
+        tx.date
+
+      balance = 0
+      balanceByDate = _.map transactionsByDate, (tx) ->
+        balance += tx.amount
+        { 
+          'date' : tx.date
+          'balance' : tx.amount + balance
+        }
+      
+      dateList = _.map balanceByDate, (tx) ->
+        tx.date
+      
+      balanceList = _.map balanceByDate, (tx) ->
+        tx.balance
+      
+      {'dates': dateList.toString(), 'balances': balanceList.toString()}
+
 
     archivedBuckets: ->
       buckets = _.filter @buckets(), (bucket) ->

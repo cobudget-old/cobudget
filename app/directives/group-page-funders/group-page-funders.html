@@ -17,11 +17,12 @@
         <c3chart bindto-id="chart1" padding-right="10">
           <chart-legend show-legend="false">
           <chart-column column-id="data-1"
-            column-values= "{{ group.allocationAmountsAsList() }}"
+            column-values= "{{ group.balanceOverTime().balances }}"
             column-type="area"/>
         </c3chart>
       </div>
 
+      <div>{{ group.balanceOverTime() }}</div>
       <md-list class="group-page__allocation-list">
         <md-list-item ng-repeat="allocation in group.allocations() | orderBy: '-createdAt'">
             <div layout="column" layout-align="start start" class="group-page__allocation-date" flex>
