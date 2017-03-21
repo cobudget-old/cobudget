@@ -33,7 +33,7 @@
 
           <div>
             <h3 class="bucket-page__status">Funded</h3>
-            <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.target | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
+            <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.totalContributions | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
           </div>
         </div>
         <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
@@ -85,7 +85,7 @@
 
         <div>
           <h3 class="bucket-page__status">Funded</h3>
-          <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.target | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
+          <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.totalContributions | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
         </div>
       </div>
       <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">

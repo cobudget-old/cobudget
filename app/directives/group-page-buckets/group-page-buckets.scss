@@ -66,6 +66,13 @@
   color: $grey-on-white;
 }
 
+.group-page__bucket-awaiting-payment-badge {
+  background-color: #F99400;
+  color: white;
+  padding: 0 5px 2px 5px;
+  border-radius: 2px;
+}
+
 .group-page__bucket-container {
   position: relative;
   min-width: 0;

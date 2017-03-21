@@ -1,0 +1,83 @@
+// buckets
+
+.group-page__stats-card {
+  margin-bottom: 35px;
+}
+
+.group-page__stats-content {
+  position: relative;
+  width: 100%;
+}
+
+.group-page md-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.group-page__stats-list {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.group-page__stats-subheader-container {
+  padding: 5px 20px;
+}
+
+.group-page__stats-subheader {
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0;
+  font-size: 15px !important;
+}
+
+.group-page__stats-list-icon {
+  width: 27px;
+  height: 27px;
+}
+
+.group-page-header__stats-overview-container {
+  margin: 25px;
+}
+
+.group-page-header__stats-overview-label {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.group-page__stats-divider {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.group-page__stats-title {
+  @include fontMedLarge;
+  @include truncatedText;
+  margin-bottom: 4px;
+}
+
+.group-page__stats-subheader {
+  @include fontSmall;
+}
+
+.group-page__stats-container {
+  position: relative;
+  min-width: 0;
+}
+
+.group-page__stats-header-container {
+  margin-bottom: 1px;
+}
+
+@media (max-width: 380px) {
+  .group-page__stats-title {
+    @include fontMedium;
+  }
+
+  .group-page__stats-subheader {
+    @include fontTiny;
+  }
+
+  .group-page__live-bucket-personal-contribution {
+    @include fontTiny;
+  }
+}

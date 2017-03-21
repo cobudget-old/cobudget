@@ -123,6 +123,9 @@
           <span class="group-page__bucket-subheader">
             {{ bucket.authorName }} - {{ bucket.totalContributions | currency : group.currencySymbol : 0 }}
             <span ng-if="bucket.paidAt">&#183; <b>paid</b></span>
+            <span ng-if="!bucket.paidAt">&#183;
+              <b class="group-page__bucket-awaiting-payment-badge">awaiting payment</b>
+            </span>
           </span>
         </div>
       </md-list-item>
