@@ -42,19 +42,43 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       transactionsByDate = _.sortBy allTransactions, (tx) ->
         tx.date
 
-      balance = 0
-      balanceByDate = _.map transactionsByDate, (tx) ->
-        balance += tx.amount
-        {
-          'date' : tx.date
-          'balance' : tx.amount + balance
-        }
+      balanceByDate = {}
+      runningBalance = 0
+      for item in transactionsByDate
+        d = moment(item['date']).format('l')
+        balanceByDate[d] = if balanceByDate[d] then balanceByDate[d] else runningBalance
+        balanceByDate[d] += item.amount
+        runningBalance += item.amount
+      
+      console.log('original')
+      console.log(balanceByDate)
 
-      dateList = _.map balanceByDate, (tx) ->
-        moment(tx.date).format('l')
+      currentDate = moment(transactionsByDate[0].date).startOf('day')
+      endDate = moment().startOf('day')
+      while (currentDate.add(1, 'days').diff(endDate) < 0)
+        # if there were no transaction on this date, copy the balance from the
+        # previous date.  there should always be a balance on the initial date
+        if not balanceByDate[currentDate.format('l')]
+          today = currentDate.format('l')
+          yesterday = currentDate.clone().subtract(1, 'days').format('l')
+          balanceByDate[today] = balanceByDate[yesterday] 
+          console.log(balanceByDate[today])
 
-      balanceList = _.map balanceByDate, (tx) ->
-        parseInt(tx.balance)
+      console.log('expanded')
+      console.log(balanceByDate)
+      
+      balanceByDateList = []
+      for k, v of balanceByDate
+        balanceByDateList.push {'date': k, 'amount': v}
+      
+      balanceByDateSorted = _.sortBy balanceByDateList, (item) ->
+        item.date
+
+      dateList = _.map balanceByDateSorted, (item) ->
+        item.date
+        
+      balanceList = _.map balanceByDateSorted, (item) ->
+        item.amount
 
       {'dates': dateList.toString(), 'balances': balanceList.toString()}
 
