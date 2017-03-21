@@ -9,6 +9,28 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
 
       Records.allocations.fetchByGroupId($scope.group.id).then ->
         $scope.allocationsLoaded = true
+        data = $scope.group.balanceOverTime()
+        $scope.chartConfig = {
+          chart: {
+              zoomType: 'x'
+          },
+          title: {
+              text: 'Allocation History'
+          },
+          xAxis: {
+              type: 'datetime'
+          },
+          yAxis: {
+              title: {
+                  text: 'Allocations ('+$scope.group.currencySymbol+')'
+              }
+          },
+          series: [{
+              type: 'area',
+              name: 'Balance ('+$scope.group.currencySymbol+')',
+              data: data
+          }]
+        }
 
       Records.memberships.fetchByGroupId($scope.group.id).then ->
         $scope.fundersLoaded = true
@@ -72,6 +94,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
           membership: membership
         })
         Dialog.open(removeMembershipDialog)
+
 
       # TODO: refactor
       $scope.openManageFundsDialog = (funderMembership) ->
