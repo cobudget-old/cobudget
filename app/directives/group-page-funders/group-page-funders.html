@@ -14,11 +14,26 @@
       <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
 
       <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
-        <c3chart bindto-id="chart1" padding-right="10">
+        <c3chart bindto-id="chart1" padding-right="10" enable-zoom="true">
           <chart-legend show-legend="false">
-          <chart-column column-id="data-1"
+          <chart-column column-id="x"
+            column-values="{{ group.balanceOverTime().dates }}"/>
+          <chart-column column-id="Balance"
             column-values= "{{ group.balanceOverTime().balances }}"
             column-type="area"/>
+          <chart-axes values-x="x" y="data-1">
+            <chart-axis-x axis-id="x" axis-type="timeseries"/>
+          </chart-axes>
+          <chart-axis>
+            <chart-axis-x axis-position="outer-center"
+                  axis-label="Date"
+                  axis-type="category">
+                  <chart-axis-x-tick tick-format="%Y-%m-%d"/>
+            </chart-axis-x>
+            <chart-axis-y
+                  axis-label="Allocated funds ({{group.currencySymbol}})">
+            </chart-axis-y>
+          </chart-axis>
         </c3chart>
       </div>
 

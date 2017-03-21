@@ -23,21 +23,19 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
 
     balanceOverTime: ->
       paidBuckets = _.filter @buckets(), (bucket) ->
-        bucket.isPaid() 
-      
+        bucket.isPaid()
+
       paymentsByDate = _.map paidBuckets, (bucket) ->
         {
           'date': bucket.paidAt
-          'amount': bucket.totalContributions
+          'amount': bucket.totalContributions * -1
         }
-      console.log(paymentsByDate)
 
-      allocationsByDate = _.map @allocations(), (allocation) -> 
+      allocationsByDate = _.map @allocations(), (allocation) ->
         {
           'date': allocation.createdAt
-          'amount': allocation.amount + balance
+          'amount': allocation.amount
         }
-      console.log(allocationsByDate)
 
       allTransactions = paymentsByDate.concat allocationsByDate
 
@@ -47,17 +45,17 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       balance = 0
       balanceByDate = _.map transactionsByDate, (tx) ->
         balance += tx.amount
-        { 
+        {
           'date' : tx.date
           'balance' : tx.amount + balance
         }
-      
+
       dateList = _.map balanceByDate, (tx) ->
-        tx.date
-      
+        moment(tx.date).format('l')
+
       balanceList = _.map balanceByDate, (tx) ->
-        tx.balance
-      
+        parseInt(tx.balance)
+
       {'dates': dateList.toString(), 'balances': balanceList.toString()}
 
 
