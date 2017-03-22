@@ -43,7 +43,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       balance = 0
       balanceByDate = _.map transactionsByDate, (item) ->
         balance += item[1]
-        [item[0], item[1]+balance]
+        [item[0], parseInt(item[1]+balance)]
 
       balanceByDate
 
