@@ -4,54 +4,68 @@
 [![Code Climate](https://codeclimate.com/github/cobudget/cobudget-ui/badges/gpa.svg)](https://codeclimate.com/github/cobudget/cobudget-ui)
 
 
-cobudget's user interface. for more information on the project as a whole, check out the [top-level repo](https://github.com/cobudget/cobudget)
+cobudget's user interface. For more information on the project as a whole, check out the [top-level repo](https://github.com/cobudget/cobudget)
 
 ---
 
-### install
+## Install
 
-install node and npm and bower if you don't have them, then run npm install
+### Install npm and bower
+
+If you don't have node, npm and bower already, please install these.
+
+Install node and npm from the [node.js homepage](https://nodejs.org)
+
+Install bower: `npm install -g bower`
+
+### Download and install cobudget-ui
 
 ```
 git clone https://github.com/cobudget/cobudget-ui
 cd cobudget-ui
-install/upgrade to latest npm: install: https://nodejs.org/en/download/ or update: npm update npm -g
-install node using, eg., nvm: 
-    install nvm: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | zsh
-    nvm install node
-npm install -g bower
 npm install
 ```
 
-### configure
+### Configuration
 
-to configure `production` and other environments, copy `config/development.coffee` to `config/production.coffee` and change properties as appropriate. if you need to access other environment variables, use `process.env.var_name`, as the config is simply coffeescript.
+The cobudget frontend needs to know where to find the backend. Currently it's configured for three different backends:
 
-### run
+* `development`: Will connect to a backend running locally on your development machine.
+* `staging`: Will connect to the backend running on the current cobudget staging server.
+* `production`: Will connect to the backend running on the current cobudget production server.
 
-*build on watch and start livereload server:*
+Choose which backend to connect to using the environment variable `NODE_ENV`
 
-```
-npm run develop
-```
+`$ export NODE_ENV=staging`
 
-*build once and start static server:*
+If NODE_ENV is not set it will default to using `development`
 
-```
-npm start
-```
+The actual connection strings is placed in the js files in the `config` directory
 
-### deploy
+### Build and run
 
-*stage (push to this repo's gh-pages)*
+Build and start server using live reload: `npm run develop`
 
-```
-npm run stage
-```
+Build once and start static server: `npm start`
 
-*deploy (push to prod repo's gh-pages)*
+Connect to the front end on [http://localhost:9000](http://localhost:9000)
 
-```
-npm run set-remote
-npm run deploy
-```
+## Deploy
+
+The deployment to production and stage is done by pushing to github pages. 
+
+First configure `git` to remember deploy destinations. This is only needed once.
+
+For stage: `npm run set-remote-stage`
+
+For production: `npm run set-remote`
+
+### Actual deployment
+
+Deploy to stage: `npm run stage`
+
+The deployed frontend will be configured to connect to the backend stage environment.
+
+Deploy to production: `npm run deploy`
+
+The deployed frontend will be configured to connect to the backend production environment.
