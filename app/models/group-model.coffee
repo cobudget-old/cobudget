@@ -21,9 +21,33 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     fundedBuckets: ->
       @getActiveBuckets('funded', 'fundedAt')
 
+    allTransactions: ->
+      paidBuckets = _.filter @buckets(), (bucket) ->
+        bucket.isPaid()
+
+      paymentsByDate = _.map paidBuckets, (bucket) ->
+        {
+          'createdAt':bucket.paidAt
+          'amount': bucket.totalContributions * -1
+          'user': bucket.authorName
+          'type': 'Payout'
+        }
+
+      allocationsByDate = _.map @allocations(), (allocation) ->
+        {
+          'createdAt': allocation.createdAt
+          'amount': allocation.amount
+          'user': allocation.user().name
+          'type': 'Allocation'
+        }
+
+      transactionsByDate = paymentsByDate.concat allocationsByDate
+
+      transactionsByDate
+
     balanceOverTime: ->
       # balance over time combines money in (allocations) and money out (paid
-      # buckets). 
+      # buckets).
       paidBuckets = _.filter @buckets(), (bucket) ->
         bucket.isPaid()
 
@@ -51,7 +75,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       for _date, _amt of aggregateByDate
         unixDate = parseInt(moment(_date, "MM/DD/YYYY").format('x'))
         aggregateByDateList.push [unixDate, _amt]
-      
+
       # sort it again...
       aggregateByDateSorted = _.sortBy aggregateByDateList, (tx) ->
         tx[0]

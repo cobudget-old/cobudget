@@ -1,6 +1,6 @@
 // funders
 
-.group-page__funders-card, .group-page__allocation-history-card {
+.group-page__funders-card {
   margin-bottom: 35px;
 }
 
@@ -8,16 +8,16 @@
   margin: 100px auto;
 }
 
-.group-page__funders-list, .group-page__allocation-list {
+.group-page__funders-list {
   padding-left: 16px;
   padding-right: 16px;
 }
 
-.group-page__funders-subheader-container, .group-page__allocation-history-subheader-container {
+.group-page__funders-subheader-container {
   padding: 15px 25px;
 }
 
-.group-page__funders-subheader, .group-page__allocation-history-subheader {
+.group-page__funders-subheader {
   font-weight: 400 !important;
   letter-spacing: 0.02em !important;
   color: black;
@@ -25,7 +25,7 @@
   font-size: 15px !important;
 }
 
-.group-page__funders-subheader-divider, .group-page__allocation-history-subheader-divider {
+.group-page__funders-subheader-divider {
   margin-top: 0 !important;
 }
 
@@ -47,11 +47,6 @@
   &:focus {
     outline: none;
   }
-}
-
-highchart {
-  width: 100%;
-  display: block;
 }
 
 .group-page__funder-balance-dollar-icon {
@@ -92,17 +87,12 @@ highchart {
   margin-right: 10px;
 }
 
-.group-page__funder-name-container, .group-page__allocation-amount-container {
+.group-page__funder-name-container {
   min-width: 0;
 }
 
-.group-page__funder-name, .group-page__allocation-date, .group-page__allocation-user {
+.group-page__funder-name {
   width: 100%;
-  @include truncatedText;
-  @include fontMedium;
-}
-
-.group-page__allocation-amount {
   @include truncatedText;
   @include fontMedium;
 }
@@ -371,7 +361,7 @@ highchart {
     font-size: 14px;
   }
 
-  .group-page__funder-name, .group-page__allocation-date, .group-page__allocation-user, .group-page__allocation-amount {
+  .group-page__funder-name {
     @include fontSmall;
   }
 

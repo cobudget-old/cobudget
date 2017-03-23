@@ -50,3 +50,48 @@
 
     </md-list>
   </md-card>
+
+  <div ng-if="allocationsLoaded">
+    <md-card class="group-page__allocation-history-card">
+
+      <div layout="row" layout-align="start center" class="group-page__allocation-history-subheader-container">
+        <h2 class="group-page__allocation-history-subheader">Group Transaction History</h2>
+        <span flex></span>
+      </div>
+
+      <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
+
+
+      <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
+        <highchart id="allocation-history" config="chartConfig"></highchart>
+      </div>
+
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <span>Transaction List</span>
+        </div>
+      </md-toolbar>
+
+      <md-table-container>
+        <table md-table multiple ng-model="allTransactions">
+          <thead md-head md-order="initialOrder">
+            <tr md-row>
+              <th md-column md-order-by="createdAt">Date</th>
+              <th md-column md-order-by="user">Name</th>
+              <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
+              <th md-column md-order-by="type">Type</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder">
+              <td md-cell>{{transaction.createdAt | exactDate}}</td>
+              <td md-cell>{{transaction.user}}</td>
+              <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
+              <td md-cell ng-if="transaction.type == 'Payout'" class="group-page__allocation-history-type-payout">{{transaction.type}}</td>
+              <td md-cell ng-if="transaction.type == 'Allocation'" class="group-page__allocation-history-type-allocation">{{transaction.type}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </md-card>
+  </div>
