@@ -22,26 +22,43 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @getActiveBuckets('funded', 'fundedAt')
 
     balanceOverTime: ->
+      # balance over time combines money in (allocations) and money out (paid
+      # buckets). 
       paidBuckets = _.filter @buckets(), (bucket) ->
         bucket.isPaid()
 
       paymentsByDate = _.map paidBuckets, (bucket) ->
         [
-          parseInt(moment(bucket.paidAt).format('x')), bucket.totalContributions * -1
+          bucket.paidAt, bucket.totalContributions * -1
         ]
 
       allocationsByDate = _.map @allocations(), (allocation) ->
         [
-          parseInt(moment(allocation.createdAt).format('x')), allocation.amount
+          allocation.createdAt, allocation.amount
         ]
 
-      allTransactions = paymentsByDate.concat allocationsByDate
+      transactionsByDate = paymentsByDate.concat allocationsByDate
 
-      transactionsByDate = _.sortBy allTransactions, (tx) ->
+      # aggregate all txs for a given date
+      aggregateByDate = {}
+      for item in transactionsByDate
+        d = moment(item[0]).format('l')
+        aggregateByDate[d] = if not aggregateByDate[d] then 0 else aggregateByDate[d]
+        aggregateByDate[d] += item[1]
+
+      # turn it back into a list, and convert date back to unix epoch
+      aggregateByDateList = []
+      for _date, _amt of aggregateByDate
+        unixDate = moment(_date, "MM/DD/YYYY").format('x')
+        aggregateByDateList.push [unixDate, _amt]
+      
+      # sort it again...
+      aggregateByDateSorted = _.sortBy aggregateByDateList, (tx) ->
         tx[0]
 
+      # *then* convert it to balance
       balance = 0
-      balanceByDate = _.map transactionsByDate, (item) ->
+      balanceByDate = _.map aggregateByDateSorted, (item) ->
         balance += item[1]
         [item[0], parseInt(balance)]
 
