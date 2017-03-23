@@ -49,7 +49,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       # turn it back into a list, and convert date back to unix epoch
       aggregateByDateList = []
       for _date, _amt of aggregateByDate
-        unixDate = moment(_date, "MM/DD/YYYY").format('x')
+        unixDate = parseInt(moment(_date, "MM/DD/YYYY").format('x'))
         aggregateByDateList.push [unixDate, _amt]
       
       # sort it again...
