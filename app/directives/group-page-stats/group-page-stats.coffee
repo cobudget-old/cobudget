@@ -11,6 +11,8 @@ global.cobudgetApp.directive 'groupPageStats', () ->
         $scope.allocationsLoaded = true
         $scope.allTransactions = $scope.group.allTransactions()
         $scope.initialOrder = '-createdAt'
+        $scope.transactionLimit = 10
+        $scope.startingPage = 1
         data = $scope.group.balanceOverTime()
         $scope.chartConfig = {
           chart: {
