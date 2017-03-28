@@ -17,16 +17,24 @@ global.cobudgetApp.directive 'groupPageStats', () ->
               zoomType: 'x'
           },
           title: {
-              text: 'Transactions by Date'
+              text: null
           },
           xAxis: {
               type: 'datetime'
           },
           yAxis: {
               title: {
-                  text: 'Allocations ('+$scope.group.currencySymbol+')'
+                  text: 'Balance ('+$scope.group.currencySymbol+')'
               }
           },
+          legend: {
+            enabled: false
+          },
+          tooltip: {
+            xDateFormat: '%e. %b %Y',
+            shared: true
+          },
+          colors: ['#1EA9E3'],
           series: [{
               type: 'area',
               name: 'Balance ('+$scope.group.currencySymbol+')',

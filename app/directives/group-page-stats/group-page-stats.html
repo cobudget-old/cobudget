@@ -4,13 +4,6 @@
     <md-list class="group-page__stats-list">
 
       <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
-        <ng-md-icon icon="star"
-          layout="column"
-          layout-align="center center"
-          size="27"
-          class="group-page__bucket-list-icon group-page__bucket-list-archived-icon"
-        ></ng-md-icon>
-
         <md-subheader class="group-page__subheader-title">Group Totals</md-subheader>
       </div>
 
@@ -66,12 +59,6 @@
         <highchart id="allocation-history" config="chartConfig"></highchart>
       </div>
 
-      <md-toolbar class="md-table-toolbar md-default">
-        <div class="md-toolbar-tools">
-          <span>Transaction List</span>
-        </div>
-      </md-toolbar>
-
       <md-table-container>
         <table md-table multiple ng-model="allTransactions">
           <thead md-head md-order="initialOrder">
@@ -84,7 +71,7 @@
           </thead>
           <tbody md-body>
             <tr md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder">
-              <td md-cell>{{transaction.createdAt | exactDate}}</td>
+              <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
               <td md-cell>{{transaction.user}}</td>
               <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
               <td md-cell ng-if="transaction.type == 'Payout'" class="group-page__allocation-history-type-payout">{{transaction.type}}</td>
