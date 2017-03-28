@@ -65,17 +65,19 @@
             <tr md-row>
               <th md-column md-order-by="createdAt">Date</th>
               <th md-column md-order-by="user">Name</th>
-              <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
               <th md-column md-order-by="type">Type</th>
+              <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
+              <th md-column md-order-by="balance">Balance ({{group.currencySymbol}})</th>
             </tr>
           </thead>
           <tbody md-body>
             <tr md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
               <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
               <td md-cell>{{transaction.user}}</td>
-              <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
               <td md-cell ng-if="transaction.type == 'Payout'" class="group-page__allocation-history-type-payout">{{transaction.type}}</td>
               <td md-cell ng-if="transaction.type == 'Allocation'" class="group-page__allocation-history-type-allocation">{{transaction.type}}</td>
+              <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
+              <td md-cell>{{transaction.balance | currency : group.currencySymbol : 2}}</td>
             </tr>
           </tbody>
         </table>
