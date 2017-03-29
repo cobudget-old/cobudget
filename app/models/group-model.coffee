@@ -46,7 +46,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       runningBalance = 0
       for item in transactionsByDate
         runningBalance += item.amount
-        item['balance'] = parseInt(runningBalance)
+        item['balance'] = runningBalance
 
       transactionsByDate
 
