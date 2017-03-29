@@ -66,8 +66,8 @@
   color: $grey-on-white;
 }
 
-.group-page__bucket-awaiting-payment-badge {
-  background-color: #F99400;
+.group-page__bucket-unpaid-badge {
+  background-color: $grey-on-white;
   color: white;
   padding: 0 5px 2px 5px;
   border-radius: 2px;
