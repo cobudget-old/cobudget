@@ -50,3 +50,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     isArchived: ->
       !!@archivedAt
+
+    isPaid: ->
+      !!@paidAt
+

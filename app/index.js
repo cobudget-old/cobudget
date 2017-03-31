@@ -6,6 +6,7 @@ global.morph = require('morph')
 global.listify = require('listify')
 global.isEmptyObject = require('is-empty-object')
 global.browser = require('bowser')
+global.Highcharts = require('highcharts')
 
 require('angular')
 require('angular-ui-router')
@@ -26,6 +27,8 @@ require('ng-q-all-settled')
 require('ng-csv')
 require('angular-chart.js')
 require('angular-autodisable/angular-autodisable')
+require('highcharts-ng')
+require('angular-material-data-table')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -47,7 +50,9 @@ global.cobudgetApp = angular.module('cobudget', [
   'qAllSettled',
   'ngCsv',
   'chart.js',
-  'ngAutodisable'
+  'ngAutodisable',
+  'highcharts-ng',
+  'md.data.table'
 ])
 .constant('config', require('app/configs/app'))
 

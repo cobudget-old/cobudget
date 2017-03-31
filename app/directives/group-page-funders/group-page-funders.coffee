@@ -70,6 +70,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
         })
         Dialog.open(removeMembershipDialog)
 
+
       # TODO: refactor
       $scope.openManageFundsDialog = (funderMembership) ->
         Dialog.custom

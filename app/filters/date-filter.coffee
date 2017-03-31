@@ -21,3 +21,11 @@ global.cobudgetApp.filter 'timeToNowUnits', ->
 global.cobudgetApp.filter 'exactDateWithTime', ->
   (date) ->
     moment(date).format('dddd MMMM Do [at] h:mm a')
+
+global.cobudgetApp.filter 'exactDate', ->
+  (date) ->
+    moment(date).format('dddd MMMM Do')
+
+global.cobudgetApp.filter 'exactDateShort', ->
+  (date) ->
+    moment(date).format('MMMM Do')
