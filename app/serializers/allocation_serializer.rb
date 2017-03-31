@@ -3,7 +3,8 @@ class AllocationSerializer < ActiveModel::Serializer
   attributes :id,
              :amount,
              :group_id,
-             :user_id
+             :user_id, 
+             :created_at
   has_one :user
   has_one :group
 end
