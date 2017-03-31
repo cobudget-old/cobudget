@@ -79,6 +79,14 @@ highchart {
   display: none;
 }
 
+.group-page__allocation-history-type-allocation {
+  color: #00BC8F !important;
+}
+
+.group-page__allocation-history-type-payout {
+  color: #FF5250 !important;
+}
+
 @media (max-width: 380px) {
   .group-page__stats-title {
     @include fontMedium;
