@@ -98,9 +98,9 @@
           <span class="group-page-header__tab-label">Funders</span>
         </md-tab-label>
       </md-tab>
-      <md-tab md-on-select="selectTab(2)">
+      <md-tab md-on-select="selectTab(2)" ng-if="currentUser.isAdminOf(group)">
         <md-tab-label>
-          <span class="group-page-header__tab-label">Stats</span>
+          <span class="group-page-header__tab-label">Admin</span>
         </md-tab-label>
       </md-tab>
     </md-tabs>
