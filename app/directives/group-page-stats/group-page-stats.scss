@@ -87,6 +87,11 @@ highchart {
   color: #FF5250 !important;
 }
 
+//condense md-data-table
+table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
+    padding: 0 24px 0 0;
+}
+
 @media (max-width: 380px) {
   .group-page__stats-title {
     @include fontMedium;

@@ -28,4 +28,4 @@ global.cobudgetApp.filter 'exactDate', ->
 
 global.cobudgetApp.filter 'exactDateShort', ->
   (date) ->
-    moment(date).format('MMMM Do')
+    moment(date).format('D-MMM-YY')
