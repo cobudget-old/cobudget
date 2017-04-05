@@ -1,0 +1,25 @@
+<md-dialog aria-label="refund bucket dialog" class="refund-bucket-dialog">
+  <md-dialog-content class="sticky-container">
+
+    <div class="refund-bucket-dialog__header" layout="column" layout-align="center center">
+      <ng-md-icon icon="warning"
+        layout="column"
+        layout-align="center center"
+        class="refund-bucket-dialog__red-warning-icon"
+        size="35"
+      ></ng-md-icon>
+
+      <div class="refund-bucket-dialog__header-text">
+        Do you want the money in this bucket to be refunded to the funders?
+      </div>
+    </div>
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button class="refund-bucket-dialog__btn refund-bucket-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button
+      class="md-raised refund-bucket-dialog__btn refund-bucket-dialog__proceed-btn refund-bucket-dialog__red-proceed-btn"
+      ng-click="proceed()"
+    >yes, refund this bucket</md-button>
+  </div>
+</md-dialog>

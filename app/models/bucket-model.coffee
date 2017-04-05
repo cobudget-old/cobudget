@@ -53,4 +53,3 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
 
     isPaid: ->
       !!@paidAt
-

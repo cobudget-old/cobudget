@@ -41,4 +41,7 @@ module.exports =
     $scope.userCanManageBucket = ->
       $scope.bucket && !$scope.bucket.isArchived() && ($scope.membership.isAdmin || $scope.bucket.author().id == $scope.membership.member().id)
 
+    $scope.userCanPayBucket = ->
+      $scope.bucket && ($scope.membership.isAdmin || $scope.bucket.author().id == $scope.membership.member().id)
+
     return
