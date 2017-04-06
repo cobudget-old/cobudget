@@ -6,9 +6,7 @@ class BucketService
         UserMailer.notify_funder_that_bucket_was_archived(funder: funder, bucket: bucket).deliver_now
       end
       bucket.contributions.destroy_all
-      if bucket.status == 'funded'
-        bucket.update(status: 'refunded')
-      end
+      bucket.update(status: 'refunded')
     end
   end
 end
