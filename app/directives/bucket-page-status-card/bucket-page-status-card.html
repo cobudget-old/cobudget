@@ -72,10 +72,7 @@
 
         <div>
           <h3 class="bucket-page__status">Archived</h3>
-          <p class="bucket-page__status-description"><em>
-            This bucket was archived on {{ bucket.archivedAt | exactDateWithTime }}.
-            <span ng-if="bucket.status == 'refunded'">Funds were returned to funders.</span>
-          </em></p>
+          <p class="bucket-page__status-description"><em>This bucket was archived on {{ bucket.archivedAt | exactDateWithTime }}</em></p>
         </div>
       </div>
       <div ng-if="bucket.status == 'funded'" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
