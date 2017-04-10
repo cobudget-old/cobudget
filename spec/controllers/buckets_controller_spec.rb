@@ -400,7 +400,7 @@ RSpec.describe BucketsController, type: :controller do
           @memberships = contributions.map { |contribution| contribution.user.membership_for(group) }
           BucketService.archive(bucket: bucket)
           bucket.update(status: "funded")
-          post :archive, { id: bucket.id }          
+          post :archive, { id: bucket.id }
           bucket.reload
         end
 
@@ -495,6 +495,10 @@ RSpec.describe BucketsController, type: :controller do
 
         it "sets paid_at on bucket" do
           expect(bucket.paid_at).not_to be_nil
+        end
+
+        it "make sure archived_at is null" do
+          expect(bucket.archived_at).to be_nil
         end
 
         it "returns bucket as json" do
