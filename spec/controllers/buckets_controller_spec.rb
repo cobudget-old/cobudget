@@ -434,7 +434,10 @@ RSpec.describe BucketsController, type: :controller do
   describe "#paid" do
     describe "permissions" do
       context "user signed in" do
-        before { request.headers.merge!(user.create_new_auth_token) }
+        before {
+          request.headers.merge!(user.create_new_auth_token)
+          bucket.update(status: "funded")
+        }
 
         context "user is group member" do
           let!(:membership) { create(:membership, group: group, member: user) }
@@ -484,6 +487,18 @@ RSpec.describe BucketsController, type: :controller do
         group.add_member(user)
         bucket.update(user: user)
         request.headers.merge!(user.create_new_auth_token)
+      end
+
+      context "live bucket" do
+        before do
+          bucket.update(status: "live")
+          post :paid, { id: bucket.id }
+          bucket.reload
+        end
+
+        it "returns http status 'forbidden'" do
+          expect(response).to have_http_status(:forbidden)
+        end
       end
 
       context "funded bucket" do
