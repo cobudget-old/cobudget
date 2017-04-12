@@ -126,11 +126,50 @@ groups.each do |group|
 end
 puts "created 2 - 3 archived draft buckets for both groups with 0 - 9 comments"
 
+### FUNDED BUCKETS
+
+groups.each do |group|
+  rand(2..3).times do
+    bucket = group.buckets.create(
+      name: Faker::Lorem.sentence(1, false, 4),
+      user: group.members.sample,
+      description: Faker::Lorem.paragraph(3, false, 14),
+      target: rand(0..1000),
+      status: 'funded',
+      created_at: Time.zone.now - rand(1..10).days,
+      live_at: Time.now.utc,
+      funded_at: Time.now.utc
+    )
+    rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }
+  end
+end
+puts "created 2 - 3 funded buckets for both groups with 0 - 9 comments"
+
+
+### ARCHIVED_FUNDED_BUCKETS (for legacy apps)
+
+groups.each do |group|
+  rand(2..3).times do
+    bucket = group.buckets.create(
+      name: Faker::Lorem.sentence(1, false, 4),
+      user: group.members.sample,
+      description: Faker::Lorem.paragraph(3, false, 14),
+      target: [rand(0..4200)].sample,
+      status: "funded",
+      created_at: Time.zone.now - rand(1..10).days,
+      live_at: Time.now.utc,
+      funded_at: Time.now.utc
+    )
+    rand(10).times { bucket.comments.create(user: group.members.sample, body: Faker::Lorem.sentence) }
+  end
+end
+puts "created 2 - 3 archived funded buckets for both groups with 0 - 9 comments"
+
 ### ALLOCATIONS
 
 groups.each do |group|
   group.members.each do |member|
-    rand(1..4).times { group.allocations.create(user: member, amount: rand(0.0..300.0)) }
+    rand(1..4).times { group.allocations.create(user: member, amount: rand(0.0..300.0), created_at:  DateTime.now.utc - rand(1..100).days)}
   end
 end
 puts "created 1 - 4 allocations for each member in each group"
@@ -149,6 +188,19 @@ groups.each do |group|
   end
 end
 
-puts "created 0 - 4 contributions for each live bucket in each group"
+groups.each do |group|
+  group.buckets.where(status: 'funded').each do |bucket|
+    rand(0..4).times do
+      bucket_target = bucket.target
+      membership = group.memberships.sample
+      member = membership.member
+      member_balance = membership.total_allocations - membership.total_contributions
+      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i, created_at: DateTime.now.utc - rand(1..10).days)
+    end
+    bucket.update(archived_at: DateTime.now.utc)
+  end
+end
+
+puts "created 0 - 4 contributions for each live and funded bucket in each group"
 
 puts 'Seed: Complete!'

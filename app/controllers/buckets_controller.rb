@@ -54,21 +54,12 @@ class BucketsController < AuthenticatedController
     render json: [bucket], status: 200
   end
 
-  api :POST, '/buckets/:id/unarchive'
-  def unarchive
-    bucket = Bucket.find(params[:id])
-    group = bucket.group
-    render nothing: true, status: 403 and return unless (current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)
-    bucket.update(archived_at: nil)
-    render json: [bucket], status: 200
-  end
-
   api :POST, '/buckets/:id/paid'
   def paid
     bucket = Bucket.find(params[:id])
     group = bucket.group
-    render nothing: true, status: 403 and return unless (current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)
-    bucket.update(paid_at: Time.now.utc)
+    render nothing: true, status: 403 and return unless bucket.status == 'funded' && ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group))
+    bucket.update(paid_at: Time.now.utc, archived_at: nil)
     render json: [bucket], status: 200
   end
 

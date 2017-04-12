@@ -357,8 +357,9 @@ RSpec.describe BucketsController, type: :controller do
 
       context "funded bucket" do
         before do
-          bucket.update(target: 200)
-          @contribution = create(:contribution, bucket: bucket, amount: 200)
+          bucket.update(status: "funded")
+          contributions = create_list(:contribution, 2, bucket: bucket, amount: 100)
+          @memberships = contributions.map { |contribution| contribution.user.membership_for(group) }
           post :archive, { id: bucket.id }
           bucket.reload
         end
@@ -367,17 +368,174 @@ RSpec.describe BucketsController, type: :controller do
           expect(bucket.archived_at).not_to be_nil
         end
 
-        it "does not return funds back to funders" do
-          expect(bucket.total_contributions).to eq(200)
-          expect(@contribution.user.membership_for(group).balance).to eq(0)
+        it "updates bucket status to refunded" do
+          expect(bucket.status).to eq("refunded")
         end
 
-        it "does not send refund notification emails to funders" do
-          expect(ActionMailer::Base.deliveries).to be_empty
+        it "returns funds back to funders" do
+          @memberships.each do |membership|
+            expect(membership.reload.balance).to eq(100)
+          end
+
+          expect(bucket.total_contributions).to eq(0)
+        end
+
+        it "sends refund notification emails to funders" do
+          sent_emails = ActionMailer::Base.deliveries
+          recipients = sent_emails.map { |email| email.to.first }
+          contributor_emails = @memberships.map { |membership| membership.member.email }
+          expect(recipients).to match_array(contributor_emails)
+          expect(sent_emails.first.body).to include("archived")
         end
 
         it "returns bucket as json" do
           expect(parsed(response)["buckets"][0]["id"]).to eq(bucket.id)
+        end
+      end
+
+      context "funded, archived bucket" do
+        # this is to support legacy funded, archived buckets
+        before do
+          contributions = create_list(:contribution, 2, bucket: bucket, amount: 100)
+          @memberships = contributions.map { |contribution| contribution.user.membership_for(group) }
+          BucketService.archive(bucket: bucket)
+          bucket.update(status: "funded")
+          post :archive, { id: bucket.id }
+          bucket.reload
+        end
+
+        it "updates bucket status to refunded" do
+          expect(bucket.status).to eq("refunded")
+        end
+
+        it "returns funds back to funders" do
+          @memberships.each do |membership|
+            expect(membership.reload.balance).to eq(100)
+          end
+
+          expect(bucket.total_contributions).to eq(0)
+        end
+
+        it "sends refund notification emails to funders" do
+          sent_emails = ActionMailer::Base.deliveries
+          recipients = sent_emails.map { |email| email.to.first }
+          contributor_emails = @memberships.map { |membership| membership.member.email }
+          expect(recipients).to match_array(contributor_emails)
+          expect(sent_emails.first.body).to include("archived")
+        end
+
+        it "returns bucket as json" do
+          expect(parsed(response)["buckets"][0]["id"]).to eq(bucket.id)
+        end
+      end
+    end
+  end
+
+  describe "#paid" do
+    describe "permissions" do
+      context "user signed in" do
+        before {
+          request.headers.merge!(user.create_new_auth_token)
+          bucket.update(status: "funded")
+        }
+
+        context "user is group member" do
+          let!(:membership) { create(:membership, group: group, member: user) }
+
+          context "user is admin" do
+            it "returns http status 'success'" do
+              membership.update(is_admin: true)
+              post :paid, { id: bucket.id }
+              expect(response).to have_http_status(:success)
+            end
+          end
+
+          context "user is bucket author" do
+            it "returns http status 'success'" do
+              bucket.update(user: user)
+              post :paid, { id: bucket.id }
+              expect(response).to have_http_status(:success)
+            end
+          end
+
+          context "user is neither bucket author or admin" do
+            it "returns http status 'forbidden'" do
+              post :paid, { id: bucket.id }
+              expect(response).to have_http_status(:forbidden)
+            end
+          end
+        end
+
+        context "user is not group member" do
+          it "returns http status 'forbidden'" do
+            post :paid, { id: bucket.id }
+            expect(response).to have_http_status(:forbidden)
+          end
+        end
+      end
+
+      context "user not signed in" do
+        it "returns http status 'unauthorized'" do
+          post :paid, { id: bucket.id }
+          expect(response).to have_http_status(:unauthorized)
+        end
+      end
+    end
+
+    context "behavior" do
+      before do
+        group.add_member(user)
+        bucket.update(user: user)
+        request.headers.merge!(user.create_new_auth_token)
+      end
+
+      context "live bucket" do
+        before do
+          bucket.update(status: "live")
+          post :paid, { id: bucket.id }
+          bucket.reload
+        end
+
+        it "returns http status 'forbidden'" do
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
+
+      context "funded bucket" do
+        before do
+          bucket.update(status: "funded")
+          post :paid, { id: bucket.id }
+          bucket.reload
+        end
+
+        it "sets paid_at on bucket" do
+          expect(bucket.paid_at).not_to be_nil
+        end
+
+        it "make sure archived_at is null" do
+          expect(bucket.archived_at).to be_nil
+        end
+
+        it "returns bucket as json" do
+          expect(parsed(response)["buckets"][0]["id"]).to eq(bucket.id)
+        end
+      end
+
+      context "funded, archived bucket" do
+        # this is to support legacy funded, archived buckets
+        before do
+          BucketService.archive(bucket: bucket)
+          bucket.update(status: "funded")
+          post :paid, { id: bucket.id }
+          bucket.reload
+        end
+
+        it "sets paid_at" do
+          expect(bucket.paid_at).not_to be_nil
+        end
+
+        it "removes archived_at on bucket" do
+          expect(bucket.archived_at).to be_nil
         end
       end
     end
