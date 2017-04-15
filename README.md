@@ -8,8 +8,6 @@ A collaborative funding tool for crowds with purpose. [See how it works!](https:
 
 [Hosting repo](https://github.com/cobudget/cobudget.co) - GitHub Pages
 
-[Roadmap Trello board](https://trello.com/b/Ca4BpYOz/cobudget-sprint-board)
-
 [Contribute to our reading list!](https://github.com/cobudget/reading-list)
 
 ### Licensing
