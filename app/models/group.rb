@@ -52,6 +52,7 @@
   end
 
   def total_allocations
+    # total allocations to this group over all time
     allocations.sum(:amount)
   end
 
@@ -59,7 +60,27 @@
     Contribution.where(bucket_id: buckets.map(&:id)).sum(:amount)
   end
 
+  def total_in_funded
+      # amount of money in funded buckets
+      buckets.map {|b| b.status == 'funded' ? b.target : 0 }.sum
+  end
+
+  def ready_to_pay_total
+      buckets.map {|b| b.status == 'funded' && b.archived_at.nil? && b.paid_at.nil? ? b.total_contributions : 0 }.sum
+  end
+
+  def total_paid
+      buckets.map {|b| b.paid_at ? b.total_contributions : 0 }.sum
+  end
+
+  def total_in_circulation
+      # amount of money unspent, in partially funded buckets, and in funded but
+      # unpaid buckets.
+      total_allocations - total_paid
+  end
+
   def balance
+    # remaining to be spent
     (total_allocations - total_contributions).floor || 0
   end
 
