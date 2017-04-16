@@ -34,9 +34,6 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'sinatra', :require => nil
 
-# error tracking
-gem 'airbrake'
-
 gem 'newrelic_rpm'
 
 gem 'redcarpet'
@@ -60,7 +57,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'delayed-plugins-airbrake'
 end
 
 ruby "2.4.0"
