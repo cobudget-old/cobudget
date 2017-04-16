@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       member do
         post :open_for_funding
         post :archive
+        post :paid
       end
     end
 
