@@ -1,6 +1,6 @@
 <div class="analytics-page" ng-if="authorized && dataLoaded">
 
-  <!-- <div class="analytics-page__chart-container">
+  <div class="analytics-page__chart-container">
     <h2>cumulative user count vs time</h2>
     <canvas
       class="chart chart-line analytics-page__chart"
@@ -32,7 +32,7 @@
       chart-labels="data.contribution_count_data.x"
       chart-series="['contribution count']"
     ></canvas>
-  </div> -->
+  </div>
 
   <md-divider></md-divider>
 
@@ -47,6 +47,8 @@
   <button ng-click="sortBy('confirmed_member_count')">sort by confirmed member count</button>
   <button ng-click="sortBy('funded_bucket_count')">sort by funded bucket count</button>
   <button ng-click="sortBy('total_allocations')">sort by total allocations</button>
+  <button ng-click="sortBy('total_in_funded')">sort by total in funded buckets</button>
+
 
 
   <div ng-repeat="group in data.group_data | orderBy:propertyName:reverse">
@@ -61,6 +63,7 @@
         <td>unconfirmed member count</td>
         <td>funded bucket count</td>
         <td>total allocations</td>
+        <td>total in funded buckets</td>
       </tr>
       <tr>
         <td>{{ group.created_at | timeFromNowInWords }}</td>
@@ -69,6 +72,7 @@
         <td>{{ group.unconfirmed_member_count }}</td>
         <td>{{ group.funded_bucket_count }}</td>
         <td>{{ group.total_allocations | currency : group.currencySymbol : 0 }}</td>
+        <td>{{ group.total_in_funded | currency : group.currencySymbol : 0 }}</td>
       </tr>
     </table>
 
