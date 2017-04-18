@@ -27,11 +27,15 @@ class AllocationsController < AuthenticatedController
     group = Group.find(allocation_params[:group_id])
     user = User.find(allocation_params[:user_id])
     amount = allocation_params[:amount]
+    notify = allocation_params[:notify]
+    params[:allocation].delete(:notify)
     render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
 
     allocation = Allocation.new(allocation_params)
     if allocation.save
-      UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_now
+      if notify && (amount > 0)
+        UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_now
+      end
       render json: [allocation], status: 201
     else
       render status: 400, nothing: true
@@ -40,6 +44,6 @@ class AllocationsController < AuthenticatedController
 
   private
     def allocation_params
-      params.require(:allocation).permit(:group_id, :user_id, :amount)
+      params.require(:allocation).permit(:group_id, :user_id, :amount, :notify)
     end
 end

@@ -4,7 +4,7 @@ class AllocationService
     if csv.nil? || csv.empty?
       errors << "csv is empty"
     else
-      errors << "too many columns" if csv.first.length > 2
+      errors << "too many columns" if csv.first.length > 3
 
       csv.each_with_index do |row, index|
         email = row[0].downcase
@@ -28,13 +28,16 @@ class AllocationService
   def self.generate_csv_upload_preview(csv:, group:)
     csv.group_by { |row| row[0].downcase }.map do |email, rows|
       allocation_amount = rows.sum { |row| row[1].to_f }
+      notify = rows[0][2]
+      notify = !!(if notify == 'false' then false else true end)
       user = User.find_by_email(email)
       {
         id: user && user.is_member_of?(group) ? user.id : "",
         email: email,
         name: user && user.is_member_of?(group) ? user.name : "",
         allocation_amount: allocation_amount.round(2),
-        new_member: !user || !user.is_member_of?(group)
+        new_member: !user || !user.is_member_of?(group),
+        notify: notify
       }
     end
   end
