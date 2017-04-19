@@ -19,7 +19,6 @@ cd cobudget-api
 bundle install
 
 gem install mailcatcher
-mailcatcher
 ```
 
 ### configure
@@ -35,9 +34,15 @@ bundle exec rake jobs:work
 
 ### run
 
+Start the mailcatcher, start the server that handles delayed mail delivery and start the webserver
+
 ```
+mailcatcher
+bin/delayed_job start
 bundle exec rails s
 ```
+
+The mail can be inspected at localhost:1080
 
 ### test
 
@@ -80,3 +85,15 @@ bundle exec rake db:setup`
 ```
 bundle exec rspec
 ```
+
+### Run the server
+
+Start the mailcatcher, start the server that handles delayed mail delivery and start the webserver
+
+```
+mailcatcher
+bin/delayed_job start
+bundle exec rails s
+```
+
+The mail can be inspected at localhost:1080
