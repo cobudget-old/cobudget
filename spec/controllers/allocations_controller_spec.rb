@@ -33,9 +33,9 @@ RSpec.describe AllocationsController, type: :controller do
         it "returns review data as json" do
           expect(parsed(response)).to eq({
             "data" => [
-              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => 0.01, "new_member" => false},
-              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => 0.1, "new_member" => true },
-              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => 1.0, "new_member" => true }
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => 0.01, "new_member" => false, "notify" => true},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => 0.1, "new_member" => true, "notify" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => 1.0, "new_member" => true, "notify" => true }
             ]
           })
         end
@@ -56,9 +56,9 @@ RSpec.describe AllocationsController, type: :controller do
         it "reformats the csv, parses it normally, and returns review data as json" do
           expect(parsed(response)).to eq({
             "data" => [
-              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => 0.01, "new_member" => false},
-              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => 0.10, "new_member" => true },
-              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => 1.00, "new_member" => true }
+              {"id" => @person0.id, "email" => "person0@example.com", "name" => "Person0", "allocation_amount" => 0.01, "new_member" => false, "notify" => true},
+              {"id" => "",          "email" => "person1@example.com", "name" => ""       , "allocation_amount" => 0.10, "new_member" => true, "notify" => true },
+              {"id" => "",          "email" => "person2@example.com", "name" => ""       , "allocation_amount" => 1.00, "new_member" => true, "notify" => true }
             ]
           })
         end
@@ -96,7 +96,7 @@ RSpec.describe AllocationsController, type: :controller do
         end
       end
 
-      context "csv has more than two columns" do
+      context "csv has more than three columns" do
         it "returns http status 'unprocessable'" do
           post :upload_review, {group_id: @membership.group_id, csv: csv_with_too_many_columns}
           expect(response).to have_http_status(422)
