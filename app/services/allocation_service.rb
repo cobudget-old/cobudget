@@ -29,7 +29,7 @@ class AllocationService
     csv.group_by { |row| row[0].downcase }.map do |email, rows|
       allocation_amount = rows.sum { |row| row[1].to_f }
       notify = rows[0][2]
-      notify = !!(if notify == 'false' then false else true end)
+      notify = !!(if notify == 'false' || notify == ' false' then false else true end)
       user = User.find_by_email(email)
       {
         id: user && user.is_member_of?(group) ? user.id : "",
