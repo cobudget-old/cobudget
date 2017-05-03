@@ -22,4 +22,16 @@ global.cobudgetApp.directive 'bucketPageManageCard', () ->
         })
         Dialog.open(finishBucketDialog)
 
+      $scope.paid = ->
+        paidBucketDialog = require('./../../components/paid-bucket-dialog/paid-bucket-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(paidBucketDialog)
+
+      $scope.refund = ->
+        refundBucketDialog = require('./../../components/refund-bucket-dialog/refund-bucket-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(refundBucketDialog)
+
       return
