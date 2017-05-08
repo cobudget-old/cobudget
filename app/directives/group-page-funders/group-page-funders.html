@@ -47,7 +47,9 @@
                 layout="column"
                 layout-align="center center"
                 class="group-page__funder-add-button-icon"
-              ></ng-md-icon>
+              >
+                <md-tooltip md-direction="top">Manage {{funderMembership.member().name}}'s funds</md-tooltip>
+              </ng-md-icon>
             </md-button>
 
             <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
@@ -131,6 +133,17 @@
                 {{ funderMembership.balance | currency : group.currencySymbol : 0 }}
               </span>
             </div>
+
+            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
+              <ng-md-icon
+                icon="add_circle_outline"
+                layout="column"
+                layout-align="center center"
+                class="group-page__funder-add-button-icon"
+              >
+                <md-tooltip md-direction="top">Manage {{funderMembership.member().name}}'s funds</md-tooltip>
+              </ng-md-icon>
+            </md-button>
 
             <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
               <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
