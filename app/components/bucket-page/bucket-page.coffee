@@ -39,6 +39,6 @@ module.exports =
       $location.path("/groups/#{$scope.group.id}")
 
     $scope.userCanManageBucket = ->
-      $scope.bucket && !$scope.bucket.paidAt && $scope.bucket.status != 'refunded' && !($scope.bucket.archivedAt && $scope.bucket.status == 'draft') && ($scope.membership.isAdmin || $scope.bucket.author().id == $scope.membership.member().id)
+      $scope.bucket && !$scope.bucket.paidAt && $scope.bucket.status != 'refunded' && !($scope.bucket.archivedAt && $scope.bucket.status == 'draft') && !($scope.bucket.archivedAt && $scope.bucket.status == 'live') && ($scope.membership.isAdmin || $scope.bucket.author().id == $scope.membership.member().id)
 
     return
