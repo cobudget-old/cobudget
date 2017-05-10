@@ -41,7 +41,7 @@
               </span>
             </div>
 
-            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
+            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
               <ng-md-icon
                 icon="add_circle_outline"
                 layout="column"
@@ -134,7 +134,7 @@
               </span>
             </div>
 
-            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
+            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
               <ng-md-icon
                 icon="add_circle_outline"
                 layout="column"
