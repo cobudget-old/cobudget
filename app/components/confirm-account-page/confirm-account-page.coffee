@@ -7,10 +7,9 @@ module.exports =
   url: '/confirm_account?confirmation_token&setup_group'
   template: require('./confirm-account-page.html')
   reloadOnSearch: false
-  controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Session, Toast, CurrentUser) ->
+  controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Session, Toast) ->
     $scope.confirmationToken = $stateParams.confirmation_token
     $scope.setupGroup = $stateParams.setup_group
-    console.log(Records.users)
 
     $scope.confirmAccount = (formData) ->
       LoadBar.start()
