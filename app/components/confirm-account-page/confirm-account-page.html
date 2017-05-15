@@ -16,8 +16,11 @@
         </div>
 
         <h2 class="confirm-account-page__logo-subheader">Let's set up your account</h2>
-
         <form novalidate class="confirm-account-page__form" name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)" ng-autodisable>
+
+          <div class="confirm-account-page__input-container">
+            <input disabled class="confirm-account-page__input-field" name="email" type="text" ng-model="email">
+          </div>
 
           <div class="confirm-account-page__input-container">
             <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="your display name" autocomplete="off">
@@ -31,7 +34,7 @@
           </div>
 
           <div class="confirm-account-page__input-container">
-            <input class="confirm-account-page__input-field" required name="password" type="password" ng-model="formData.passwordConfirm" placeholder="confirm password" autocomplete="off">
+            <input class="confirm-account-page__input-field" required type="password" ng-model="formData.passwordConfirm" placeholder="confirm password" autocomplete="off">
             <div ng-if="formData.password != formData.passwordConfirm && formData.passwordConfirm.length" class="confirm-account-page__input-error">Passwords don't match.</div>
           </div>
 

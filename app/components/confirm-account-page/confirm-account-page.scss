@@ -30,7 +30,6 @@
   background: white;
   font-size: 16px;
   margin: 15px auto;
-  cursor: pointer;
 }
 
 .confirm-account-page__person-icon {
@@ -62,6 +61,11 @@
   @include cob-std-input;
   background: white;
   width: 100%;
+}
+
+.confirm-account-page__input-field:disabled {
+  cursor: not-allowed;
+  background: $cobudget-light-grey;
 }
 
 .confirm-account-page__input-error {
