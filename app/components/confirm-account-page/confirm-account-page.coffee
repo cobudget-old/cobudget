@@ -4,11 +4,12 @@ module.exports =
   resolve:
     clearSession: (Session) ->
       Session.clear()
-  url: '/confirm_account?confirmation_token&setup_group'
+  url: '/confirm_account?confirmation_token&setup_group&email'
   template: require('./confirm-account-page.html')
   reloadOnSearch: false
   controller: ($scope, $auth, LoadBar, $location, $stateParams, Records, Session, Toast) ->
     $scope.confirmationToken = $stateParams.confirmation_token
+    $scope.email = $stateParams.email
     $scope.setupGroup = $stateParams.setup_group
 
     $scope.confirmAccount = (formData) ->
