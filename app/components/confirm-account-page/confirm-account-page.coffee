@@ -12,6 +12,8 @@ module.exports =
     $scope.email = $stateParams.email
     $scope.name = $stateParams.name
     $scope.setupGroup = $stateParams.setup_group
+    $scope.formData = []
+    $scope.formData.name = $stateParams.name
 
     $scope.confirmAccount = (formData) ->
       LoadBar.start()
