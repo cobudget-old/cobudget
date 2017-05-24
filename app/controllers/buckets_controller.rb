@@ -1,13 +1,13 @@
 class BucketsController < AuthenticatedController
   api :GET, '/buckets?group_id'
   def index
-    buckets = Bucket.where(group_id: params[:group_id])
+    buckets = Bucket.with_totals.where(group_id: params[:group_id])
     render json: buckets
   end
 
   api :GET, '/buckets/:id', 'Full details of bucket'
   def show
-    bucket = Bucket.find(params[:id])
+    bucket = Bucket.with_totals.find(params[:id])
     render json: [bucket]
   end
 
@@ -25,7 +25,7 @@ class BucketsController < AuthenticatedController
 
   api :PATCH, '/buckets/:id', 'Update a bucket'
   def update
-    bucket = Bucket.find(params[:id])
+    bucket = Bucket.with_totals.find(params[:id])
     render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && !bucket.archived?
     bucket.update_attributes(bucket_params_update)
     if bucket.save
@@ -39,7 +39,7 @@ class BucketsController < AuthenticatedController
 
   api :POST, '/buckets/:id/open_for_funding'
   def open_for_funding
-    bucket = Bucket.find(params[:id])
+    bucket = Bucket.with_totals.find(params[:id])
     render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && !bucket.archived?
     bucket.update(status: "live")
     render json: [bucket]
@@ -47,7 +47,7 @@ class BucketsController < AuthenticatedController
 
   api :POST, '/buckets/:id/archive'
   def archive
-    bucket = Bucket.find(params[:id])
+    bucket = Bucket.with_totals.find(params[:id])
     group = bucket.group
     render nothing: true, status: 403 and return unless (current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)
     BucketService.archive(bucket: bucket)
@@ -56,7 +56,7 @@ class BucketsController < AuthenticatedController
 
   api :POST, '/buckets/:id/paid'
   def paid
-    bucket = Bucket.find(params[:id])
+    bucket = Bucket.with_totals.find(params[:id])
     group = bucket.group
     render nothing: true, status: 403 and return unless bucket.status == 'funded' && ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group))
     bucket.update(paid_at: Time.now.utc, archived_at: nil)

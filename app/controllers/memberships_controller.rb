@@ -86,7 +86,7 @@ class MembershipsController < AuthenticatedController
     end
 
     def membership
-      @membership ||= Membership.find_by_id(params[:id])
+      @membership ||= Membership.with_totals.find_by_id(params[:id])
     end
 
     def group

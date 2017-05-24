@@ -6,9 +6,9 @@ class Membership < ActiveRecord::Base
   validates :member_id, presence: true, uniqueness: { scope: :group_id }
 
   scope :with_totals, -> {
-    joins('LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations 
-           FROM allocations 
-           GROUP BY user_id, group_id) AS alloc 
+    joins('LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations
+           FROM allocations
+           GROUP BY user_id, group_id) AS alloc
            ON memberships.member_id = alloc.user_id AND memberships.group_id = alloc.group_id
            LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contributions
            FROM contributions, buckets
@@ -17,7 +17,6 @@ class Membership < ActiveRecord::Base
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id')
     .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations, 
             COALESCE(contrib.total_contributions,0) AS total_contributions')
-
   }
 
   scope :archived, -> { where.not(archived_at: nil) }

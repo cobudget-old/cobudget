@@ -66,11 +66,11 @@
   end
 
   def ready_to_pay_total
-      buckets.map {|b| b.status == 'funded' && b.archived_at.nil? && b.paid_at.nil? ? b.total_contributions : 0 }.sum
+      buckets.with_totals.map {|b| b.status == 'funded' && b.archived_at.nil? && b.paid_at.nil? ? b.total_contributions : 0 }.sum
   end
 
   def total_paid
-      buckets.map {|b| b.paid_at ? b.total_contributions : 0 }.sum
+      buckets.with_totals.map {|b| b.paid_at ? b.total_contributions : 0 }.sum
   end
 
   def total_in_circulation

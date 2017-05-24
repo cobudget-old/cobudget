@@ -13,9 +13,31 @@ class Bucket < ActiveRecord::Base
 
   before_save :set_timestamp_if_status_updated
 
-  def total_contributions
-    contributions.sum(:amount)
-  end
+  # scope :with_totals, -> {
+  #   joins('LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations
+  #          FROM allocations
+  #          GROUP BY user_id, group_id) AS alloc
+  #          ON memberships.member_id = alloc.user_id AND memberships.group_id = alloc.group_id
+  #          LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contributions
+  #          FROM contributions, buckets
+  #          WHERE contributions.bucket_id = buckets.id
+  #          GROUP BY contributions.user_id, buckets.group_id) as contrib
+  #          ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id')
+  #   .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations, 
+  #           COALESCE(contrib.total_contributions,0) AS total_contributions')
+  # }
+
+  scope :with_totals, -> {
+    joins('LEFT JOIN (SELECT bucket_id, sum(amount) AS total
+           FROM contributions
+           GROUP BY bucket_id) AS contrib
+           ON buckets.id = contrib.bucket_id')
+    .select('buckets.*, COALESCE(contrib.total,0) AS total_contributions')
+  }
+
+#  def total_contributions
+#    contributions.sum(:amount)
+#  end
 
   def formatted_total_contributions
     Money.new(total_contributions * 100, currency_code).format
