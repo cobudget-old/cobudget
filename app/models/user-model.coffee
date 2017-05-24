@@ -8,6 +8,7 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
 
     @serializableAttributes: [
       'email',
+      'name',
       'subscribedToPersonalActivity',
       'subscribedToDailyDigest',
       'subscribedToParticipantActivity',
