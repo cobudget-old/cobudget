@@ -8,11 +8,25 @@ cobudget's backend api. for more information on the project as a whole, check ou
 **don't push to master - feature branches and pull requests please.**
 
 ---
+## System setup/prerequisites
+
+### set up heroku
+add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"; 
+curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -; apt-get update; apt-get install heroku
+
+### system dependencies
+
+`apt-get update; apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs`                                                                                                                                                                                          
+apt-get install -y postgresql postgresql-server-dev-9.5
+sudo -u postgres createuser <your username> -s
+
+### get your ruby organized
+git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.4.0 /usr/local; ruby -v
+gem install bundler
 
 ## Traditional development environment setup
 
 ### install
-
 ```
 git clone https://github.com/cobudget/cobudget-api
 cd cobudget-api
@@ -23,7 +37,7 @@ gem install mailcatcher
 
 ### configure
 
-edit `config/database.yml`.
+`cp config/database.example.yml config/database.yml`.
 
 ### setup
 
