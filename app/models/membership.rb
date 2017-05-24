@@ -5,19 +5,25 @@ class Membership < ActiveRecord::Base
   validates :group_id, presence: true
   validates :member_id, presence: true, uniqueness: { scope: :group_id }
 
+  scope :with_totals, -> {
+    joins('LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations 
+           FROM allocations 
+           GROUP BY user_id, group_id) AS alloc 
+           ON memberships.member_id = alloc.user_id AND memberships.group_id = alloc.group_id
+           LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contributions
+           FROM contributions, buckets
+           WHERE contributions.bucket_id = buckets.id
+           GROUP BY contributions.user_id, buckets.group_id) as contrib
+           ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id')
+    .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations, 
+            COALESCE(contrib.total_contributions,0) AS total_contributions')
+
+  }
+
   scope :archived, -> { where.not(archived_at: nil) }
   scope :active, -> { where(archived_at: nil) }
 
   after_create :update_member_if_this_is_their_first_membership
-
-  def total_allocations
-    Allocation.where(user_id: member_id, group_id: group_id).sum(:amount)
-  end
-
-  def total_contributions
-    group_bucket_ids = group.bucket_ids
-    Contribution.where(bucket_id: group_bucket_ids, user_id: member_id).sum(:amount)
-  end
 
   def raw_balance
     total_allocations - total_contributions

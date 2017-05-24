@@ -62,7 +62,7 @@
 
   def total_in_funded
       # amount of money in funded buckets
-      buckets.map {|b| b.status == 'funded' ? b.target : 0 }.sum
+      buckets.sum("CASE WHEN status = 'funded' THEN target ELSE 0 END")
   end
 
   def ready_to_pay_total

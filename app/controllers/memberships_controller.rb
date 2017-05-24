@@ -7,7 +7,7 @@ class MembershipsController < AuthenticatedController
   api :GET, 'memberships?group_id', 'Get memberships for a particular group'
   def index
     respond_to do |format|
-      memberships = group.memberships.active
+      memberships = group.memberships.includes(member: [:subscription_tracker]).with_totals.active
       format.json do
         render json: memberships
       end
@@ -44,7 +44,7 @@ class MembershipsController < AuthenticatedController
 
   api :GET, 'memberships/my_memberships', 'Get memberships for the current_user'
   def my_memberships
-    render json: Membership.where(member_id: current_user.id).active
+    render json: Membership.with_totals.where(member_id: current_user.id).active
   end
 
   api :POST, '/memberships/:id/invite'
