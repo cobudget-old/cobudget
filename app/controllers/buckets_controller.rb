@@ -1,7 +1,7 @@
 class BucketsController < AuthenticatedController
   api :GET, '/buckets?group_id'
   def index
-    buckets = Bucket.includes(:group, :user).with_totals.where(group_id: params[:group_id])
+    buckets = Bucket.includes(:group, user: [:subscription_tracker]).with_totals.where(group_id: params[:group_id])
     render json: buckets
   end
 
