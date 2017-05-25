@@ -14,16 +14,21 @@ class Bucket < ActiveRecord::Base
   before_save :set_timestamp_if_status_updated
 
   scope :with_totals, -> {
-    joins('LEFT JOIN (SELECT bucket_id, sum(amount) AS total, count(DISTINCT user_id) AS count_contrib
+    joins("LEFT JOIN (SELECT bucket_id, sum(amount) AS total, count(DISTINCT user_id) AS count_contrib
            FROM contributions
            GROUP BY bucket_id) AS contrib
            ON buckets.id = contrib.bucket_id
            LEFT JOIN (SELECT bucket_id, count(*) as count_comments
            FROM comments
            GROUP BY bucket_id) AS com
-           ON buckets.id = com.bucket_id')
-    .select('buckets.*, COALESCE(contrib.total,0) AS total_contributions, 
-             count_contrib AS num_of_contributors, count_comments AS num_of_comments')
+           ON buckets.id = com.bucket_id
+           JOIN memberships 
+           ON buckets.user_id = memberships.member_id AND buckets.group_id = memberships.group_id
+           JOIN users
+           ON buckets.user_id = users.id")
+    .select("buckets.*, COALESCE(contrib.total,0) AS total_contributions, 
+             count_contrib AS num_of_contributors, count_comments AS num_of_comments,
+             (CASE WHEN memberships.archived_at IS NULL THEN users.name ELSE '[removed user]' END) AS author_name")
   }
 
   def formatted_total_contributions
@@ -76,10 +81,10 @@ class Bucket < ActiveRecord::Base
     participants(exclude_author: exclude_author, type: :commenters)
   end
 
-  def author_name
-    membership = user.membership_for(group)
-    !membership || membership.archived? ? "[removed user]" : user.name
-  end
+  # def author_name
+  #   membership = user.membership_for(group)
+  #   !membership || membership.archived? ? "[removed user]" : user.name
+  # end
 
   def is_editable_by?(member)
     member.is_admin_for?(group) || user == member
