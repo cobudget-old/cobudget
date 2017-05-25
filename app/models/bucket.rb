@@ -13,31 +13,18 @@ class Bucket < ActiveRecord::Base
 
   before_save :set_timestamp_if_status_updated
 
-  # scope :with_totals, -> {
-  #   joins('LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations
-  #          FROM allocations
-  #          GROUP BY user_id, group_id) AS alloc
-  #          ON memberships.member_id = alloc.user_id AND memberships.group_id = alloc.group_id
-  #          LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contributions
-  #          FROM contributions, buckets
-  #          WHERE contributions.bucket_id = buckets.id
-  #          GROUP BY contributions.user_id, buckets.group_id) as contrib
-  #          ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id')
-  #   .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations, 
-  #           COALESCE(contrib.total_contributions,0) AS total_contributions')
-  # }
-
   scope :with_totals, -> {
-    joins('LEFT JOIN (SELECT bucket_id, sum(amount) AS total
+    joins('LEFT JOIN (SELECT bucket_id, sum(amount) AS total, count(DISTINCT user_id) AS count_contrib
            FROM contributions
            GROUP BY bucket_id) AS contrib
-           ON buckets.id = contrib.bucket_id')
-    .select('buckets.*, COALESCE(contrib.total,0) AS total_contributions')
+           ON buckets.id = contrib.bucket_id
+           LEFT JOIN (SELECT bucket_id, count(*) as count_comments
+           FROM comments
+           GROUP BY bucket_id) AS com
+           ON buckets.id = com.bucket_id')
+    .select('buckets.*, COALESCE(contrib.total,0) AS total_contributions, 
+             count_contrib AS num_of_contributors, count_comments AS num_of_comments')
   }
-
-#  def total_contributions
-#    contributions.sum(:amount)
-#  end
 
   def formatted_total_contributions
     Money.new(total_contributions * 100, currency_code).format
@@ -45,10 +32,6 @@ class Bucket < ActiveRecord::Base
 
   def formatted_target
     Money.new(target * 100, currency_code).format
-  end
-
-  def num_of_contributors
-    Contribution.where(bucket_id: id).group(:user_id).count.length
   end
 
   def funded?
@@ -65,10 +48,6 @@ class Bucket < ActiveRecord::Base
 
   def amount_left
     target - total_contributions
-  end
-
-  def num_of_comments
-    comments.length
   end
 
   def description_as_markdown
