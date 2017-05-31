@@ -15,14 +15,27 @@ class Membership < ActiveRecord::Base
            WHERE contributions.bucket_id = buckets.id
            GROUP BY contributions.user_id, buckets.group_id) as contrib
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id')
-    .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations, 
-            COALESCE(contrib.total_contributions,0) AS total_contributions')
+    .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations_db, 
+            COALESCE(contrib.total_contributions,0) AS total_contributions_db')
   }
 
   scope :archived, -> { where.not(archived_at: nil) }
   scope :active, -> { where(archived_at: nil) }
 
   after_create :update_member_if_this_is_their_first_membership
+
+  def total_allocations
+    has_attribute?(:total_allocations_db) ? total_allocations_db : Allocation.where(user_id: member_id, group_id: group_id).sum(:amount)
+  end
+
+  def total_contributions
+    has_attribute?(:total_contributions_db) ? total_contributions_db : get_total_contributions
+  end
+
+  def get_total_contributions
+    group_bucket_ids = group.bucket_ids
+    Contribution.where(bucket_id: group_bucket_ids, user_id: member_id).sum(:amount)
+  end
 
   def raw_balance
     total_allocations - total_contributions

@@ -26,10 +26,16 @@ class Bucket < ActiveRecord::Base
            ON buckets.user_id = memberships.member_id AND buckets.group_id = memberships.group_id
            JOIN users
            ON buckets.user_id = users.id")
-    .select("buckets.*, COALESCE(contrib.total,0) AS total_contributions, 
-             count_contrib AS num_of_contributors, count_comments AS num_of_comments,
-             (CASE WHEN memberships.archived_at IS NULL THEN users.name ELSE '[removed user]' END) AS author_name")
+    .select("buckets.*, 
+             COALESCE(contrib.total,0) AS total_contributions_db, 
+             COALESCE(count_contrib,0) AS num_of_contributors_db, 
+             COALESCE(count_comments,0) AS num_of_comments_db,
+             (CASE WHEN memberships.archived_at IS NULL THEN users.name ELSE '[removed user]' END) AS author_name_db")
   }
+
+  def total_contributions
+    has_attribute?(:total_contributions_db) ? total_contributions_db : contributions.sum(:amount)
+  end
 
   def formatted_total_contributions
     Money.new(total_contributions * 100, currency_code).format
@@ -37,6 +43,10 @@ class Bucket < ActiveRecord::Base
 
   def formatted_target
     Money.new(target * 100, currency_code).format
+  end
+
+  def num_of_contributors
+    has_attribute?(:num_of_contributors_db) ? num_of_contributors_db : Contribution.where(bucket_id: id).group(:user_id).count.length
   end
 
   def funded?
@@ -53,6 +63,10 @@ class Bucket < ActiveRecord::Base
 
   def amount_left
     target - total_contributions
+  end
+
+  def num_of_comments
+    has_attribute?(:num_of_comments_db) ? num_of_contributors_db : comments.length
   end
 
   def description_as_markdown
@@ -81,10 +95,14 @@ class Bucket < ActiveRecord::Base
     participants(exclude_author: exclude_author, type: :commenters)
   end
 
-  # def author_name
-  #   membership = user.membership_for(group)
-  #   !membership || membership.archived? ? "[removed user]" : user.name
-  # end
+  def author_name
+    has_attribute?(:author_name_db) ? author_name_db : get_author_name
+  end
+
+  def get_author_name
+    membership = user.membership_for(group)
+    !membership || membership.archived? ? "[removed user]" : user.name
+  end
 
   def is_editable_by?(member)
     member.is_admin_for?(group) || user == member
