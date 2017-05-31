@@ -13,8 +13,28 @@ class Bucket < ActiveRecord::Base
 
   before_save :set_timestamp_if_status_updated
 
+  scope :with_totals, -> {
+    joins("LEFT JOIN (SELECT bucket_id, sum(amount) AS total, count(DISTINCT user_id) AS count_contrib
+           FROM contributions
+           GROUP BY bucket_id) AS contrib
+           ON buckets.id = contrib.bucket_id
+           LEFT JOIN (SELECT bucket_id, count(*) as count_comments
+           FROM comments
+           GROUP BY bucket_id) AS com
+           ON buckets.id = com.bucket_id
+           JOIN memberships 
+           ON buckets.user_id = memberships.member_id AND buckets.group_id = memberships.group_id
+           JOIN users
+           ON buckets.user_id = users.id")
+    .select("buckets.*, 
+             COALESCE(contrib.total,0) AS total_contributions_db, 
+             COALESCE(count_contrib,0) AS num_of_contributors_db, 
+             COALESCE(count_comments,0) AS num_of_comments_db,
+             (CASE WHEN memberships.archived_at IS NULL THEN users.name ELSE '[removed user]' END) AS author_name_db")
+  }
+
   def total_contributions
-    contributions.sum(:amount)
+    has_attribute?(:total_contributions_db) ? total_contributions_db : contributions.sum(:amount)
   end
 
   def formatted_total_contributions
@@ -26,7 +46,7 @@ class Bucket < ActiveRecord::Base
   end
 
   def num_of_contributors
-    Contribution.where(bucket_id: id).group(:user_id).count.length
+    has_attribute?(:num_of_contributors_db) ? num_of_contributors_db : Contribution.where(bucket_id: id).group(:user_id).count.length
   end
 
   def funded?
@@ -46,7 +66,7 @@ class Bucket < ActiveRecord::Base
   end
 
   def num_of_comments
-    comments.length
+    has_attribute?(:num_of_comments_db) ? num_of_contributors_db : comments.length
   end
 
   def description_as_markdown
@@ -76,6 +96,10 @@ class Bucket < ActiveRecord::Base
   end
 
   def author_name
+    has_attribute?(:author_name_db) ? author_name_db : get_author_name
+  end
+
+  def get_author_name
     membership = user.membership_for(group)
     !membership || membership.archived? ? "[removed user]" : user.name
   end

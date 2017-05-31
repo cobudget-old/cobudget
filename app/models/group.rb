@@ -62,15 +62,16 @@
 
   def total_in_funded
       # amount of money in funded buckets
-      buckets.map {|b| b.status == 'funded' ? b.target : 0 }.sum
+      buckets.where("status = 'funded'").sum("target")
   end
 
   def ready_to_pay_total
-      buckets.map {|b| b.status == 'funded' && b.archived_at.nil? && b.paid_at.nil? ? b.total_contributions : 0 }.sum
+      buckets.with_totals.where("status = 'funded' AND buckets.archived_at IS NULL AND paid_at IS NULL").sum("contrib.total")
   end
 
   def total_paid
-      buckets.map {|b| b.paid_at ? b.total_contributions : 0 }.sum
+      # buckets.with_totals.map {|b| b.paid_at ? b.total_contributions : 0 }.sum
+      buckets.with_totals.where("paid_at IS NOT NULL").sum("contrib.total")
   end
 
   def total_in_circulation
