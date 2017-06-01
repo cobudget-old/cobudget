@@ -1,0 +1,45 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 group-page__notifications" md-component-id="right">
+  <md-toolbar class="group-page__notifications-toolbar">
+    <div layout="column" layout-align="space-between start" class="group-page__user-avatar-container">
+      <div layout="row" layout-align="start center">
+        <div class="group-page__notification-header">
+          Notifications
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <md-content class="group-page__notifications-content">
+    <div layout="row" layout-align="start center" class="group-page__notifications-option">
+      <ng-md-icon icon="group"
+        class="group-page__notifications-option-icon"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+
+      <div class="group-page__notifications-option-subheader">My Groups</div>
+    </div>
+
+    <md-divider></md-divider>
+
+    <md-list-item ng-repeat="group in accessibleGroups()" ng-click="redirectToGroupPage(group.id)">
+      <div layout="row" layout-align="start center">
+        <div class="group-page__notifications-group-name">{{ group.name | characters:25:false }}</div>
+      </div>
+    </md-list-item>
+
+    <md-divider></md-divider>
+
+    <md-list-item ng-click="redirectToGroupSetupPage()">
+      <div layout="row" layout-align="center center">
+        <ng-md-icon icon="person_add"
+          class="group-page__notifications-create-group-btn-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+
+        <div class="group-page__notifications-create-group-btn-text">Create new group</div>
+      </div>
+    </md-list-item>
+  </md-content>
+</md-sidenav>

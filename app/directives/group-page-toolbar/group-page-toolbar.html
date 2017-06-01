@@ -10,8 +10,17 @@
       </md-button>
 
       <toolbar-dropdown-menu></toolbar-dropdown-menu>
+
+      <md-button class="md-icon-button" aria-label="Notifications" ng-click="openNotifications()">
+        <ng-md-icon icon="info"
+        class="group-page-toolbar__menu-icon"
+        layout="column"
+        layout-align="center center"
+        ></ng-md-icon>
+      </md-button>
     </div>
   </md-toolbar>
 
   <group-page-sidenav></group-page-sidenav>
+  <group-page-notifications></group-page-notifications>
 </div>
