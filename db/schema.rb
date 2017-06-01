@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304013843) do
+ActiveRecord::Schema.define(version: 20170601185750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "allocations", force: :cascade do |t|
     t.datetime "created_at"
@@ -26,6 +27,25 @@ ActiveRecord::Schema.define(version: 20170304013843) do
 
   add_index "allocations", ["group_id"], name: "index_allocations_on_group_id", using: :btree
   add_index "allocations", ["user_id"], name: "index_allocations_on_user_id", using: :btree
+
+  create_table "announcement_trackers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "announcement_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "announcement_trackers", ["announcement_id"], name: "index_announcement_trackers_on_announcement_id", using: :btree
+  add_index "announcement_trackers", ["user_id"], name: "index_announcement_trackers_on_user_id", using: :btree
+
+  create_table "announcements", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "expired_at"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "buckets", force: :cascade do |t|
     t.datetime "created_at"
@@ -47,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170304013843) do
   add_index "buckets", ["user_id"], name: "index_buckets_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.string   "body",       null: false
+    t.text     "body",       null: false
     t.integer  "user_id"
     t.integer  "bucket_id"
     t.datetime "created_at", null: false
@@ -84,23 +104,6 @@ ActiveRecord::Schema.define(version: 20170304013843) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "events", force: :cascade do |t|
-    t.string   "kind",           limit: 255
-    t.integer  "eventable_id"
-    t.string   "eventable_type"
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.integer  "sequence_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "events", ["eventable_type", "eventable_id"], name: "index_events_on_eventable_type_and_eventable_id", using: :btree
-  add_index "events", ["group_id", "sequence_id"], name: "index_events_on_group_id_and_sequence_id", unique: true, using: :btree
-  add_index "events", ["group_id"], name: "index_events_on_group_id", using: :btree
-  add_index "events", ["sequence_id"], name: "index_events_on_sequence_id", using: :btree
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
-
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -121,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170304013843) do
     t.datetime "archived_at"
     t.datetime "closed_member_help_card_at"
     t.datetime "closed_admin_help_card_at"
+    t.datetime "viewed_at"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
@@ -162,15 +166,5 @@ ActiveRecord::Schema.define(version: 20170304013843) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "webhooks", force: :cascade do |t|
-    t.integer "hookable_id"
-    t.string  "hookable_type"
-    t.string  "kind",                       null: false
-    t.string  "uri",                        null: false
-    t.text    "event_types",   default: [],              array: true
-  end
-
-  add_index "webhooks", ["hookable_type", "hookable_id"], name: "index_webhooks_on_hookable_type_and_hookable_id", using: :btree
 
 end
