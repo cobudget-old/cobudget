@@ -2,16 +2,13 @@
   <landing-page-toolbar></landing-page-toolbar>
 
   <div class="landing-page__top-content" layout="row" layout-align="space-around center">
-    <div class="landing-page__mobile-preview">
-      <object class="landing-page__smartphone-img" type="image/svg+xml" data="/img/phone_new.svg"></object>
-    </div>
 
     <div class="landing-page__form-container" layout="column" layout-align="center center">
       <img class="landing-page__logo" ng-src="/img/color_logo.svg" alt=""/>
 
-      <h2 class="landing-page__form-header">Crowdsource and fund projects</h2>
+      <h2 class="landing-page__form-header">Collaborative funding</h2>
 
-      <h3 class="landing-page__form-subheader">Activate <span class="landing-page__form-subheader-faded">hidden</span> talent</h3>
+      <h3 class="landing-page__form-subheader">Cobudget helps groups allocate funds</h3>
 
       <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
         <div class="landing-page__input-container">
@@ -20,10 +17,14 @@
           <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
         </div>
 
-        <md-button class="landing-page__submit-btn">start a group</md-button>
+        <md-button class="landing-page__submit-btn">create group</md-button>
 
         <a ng-if="false" class="landing-page__virtual-tour-link" ng-click="openVirtualTourDialog()" href="">or take a virtual tour</a>
       </form>
+    </div>
+
+    <div class="landing-page__mobile-preview">
+      <object class="landing-page__smartphone-img" type="image/svg+xml" data="/img/phone_new.svg"></object>
     </div>
   </div>
 </div>
