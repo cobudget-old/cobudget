@@ -10,7 +10,7 @@ global.cobudgetApp.directive 'groupPageToolbar', () ->
       $scope.openSidenav = ->
         $rootScope.$broadcast('open sidenav')
 
-      $scope.openNotifications = ->
-        $rootScope.$broadcast('open notifications')
+      $scope.openAnnouncements = ->
+        $rootScope.$broadcast('open announcements')
 
       return

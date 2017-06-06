@@ -1,0 +1,53 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 group-page__announcements" md-component-id="right">
+  <md-toolbar class="group-page__announcements-toolbar">
+    <div layout="column" layout-align="space-between start" class="group-page__user-avatar-container">
+      <div layout="row" layout-align="start center">
+        <div class="group-page__announcements-header">
+          Announcements
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <md-content class="group-page__announcements-content">
+
+    <md-card class="group-page-announcements__card-unread" ng-repeat="announcement in announcements">
+      <div layout="row" class="group-page-announcements__card-container">
+        <div layout="column" class="group-page-announcements__card-content">
+          <h2 class="group-page-announcements__card-header">Welcome!</h2>
+
+          <p class="group-page-announcements__card-description">
+            This is your new group. Here, people can propose and discuss ideas for funding, and fund them once they're approved.
+          </p>
+
+          <div flex></div>
+
+          <div class="group-page-announcements__card-btns" layout="row" layout-align="center center">
+            <span flex></span>
+            <md-button class="group-page-announcements__card-btn" href="{{}}">read more</md-button>
+          </div>
+        </div>
+      </div>
+    </md-card>
+
+    <md-card class="group-page-announcements__card">
+      <div layout="row" class="group-page-announcements__card-container">
+        <div layout="column" class="group-page-announcements__card-content">
+          <h2 class="group-page-announcements__card-header">Welcome!</h2>
+
+          <p class="group-page-announcements__card-description">
+            This is your new group. Here, people can propose and discuss ideas for funding, and fund them once they're approved.
+          </p>
+
+          <div flex></div>
+
+          <div class="group-page-announcements__card-btns" layout="row" layout-align="center center">
+            <span flex></span>
+            <md-button class="group-page-announcements__card-btn" href="{{}}">read more</md-button>
+          </div>
+        </div>
+      </div>
+    </md-card>
+
+  </md-content>
+</md-sidenav>

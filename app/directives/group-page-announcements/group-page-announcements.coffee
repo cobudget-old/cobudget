@@ -1,16 +1,16 @@
 null
 
 ### @ngInject ###
-global.cobudgetApp.directive 'groupPageNotifications', () ->
+global.cobudgetApp.directive 'groupPageAnnouncements', () ->
     restrict: 'E'
-    template: require('./group-page-notifications.html')
+    template: require('./group-page-announcements.html')
     replace: true
     controller: ($scope, $state, CurrentUser, $mdSidenav, $location, Toast) ->
 
-      $scope.$on 'open notifications', ->
+      $scope.$on 'open announcements', ->
         $mdSidenav('right').open()
 
-      $scope.$on 'open notifications', ->
+      $scope.$on 'open announcements', ->
         $mdSidenav('right').open()
 
       $scope.accessibleGroups = ->
@@ -21,6 +21,12 @@ global.cobudgetApp.directive 'groupPageNotifications', () ->
           $mdSidenav('right').close()
         else
           $location.path("/groups/#{groupId}")
+
+      $scope.currentUser = CurrentUser()
+      $scope.announcements = $scope.currentUser.announcements()
+      # $scope.announcements = []
+      console.log $scope.currentUser
+      console.log($scope.announcements)
 
       $scope.redirectToGroupSetupPage = ->
         $location.path('/setup_group')
