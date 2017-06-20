@@ -29,3 +29,7 @@ input[type=number] {
 md-dialog-content {
   word-wrap: break-word;
 }
+
+md-backdrop.md-click-catcher {
+    position: fixed;
+}
