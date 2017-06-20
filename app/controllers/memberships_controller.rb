@@ -47,7 +47,7 @@ class MembershipsController < AuthenticatedController
     memberships = Membership.with_totals.where(member_id: current_user.id).active
     user = User.find(current_user.id)
     announcements = user.announcements.where('expired_at > ?', DateTime.now)
-    render json: [memberships, announcements]
+    render json: memberships
   end
 
   api :POST, '/memberships/:id/invite'

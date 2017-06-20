@@ -4,5 +4,6 @@ class AnnouncementSerializer < ActiveModel::Serializer
              :title,
              :body,
              :url,
-             :created_at
+             :created_at,
+             :user_ids
 end

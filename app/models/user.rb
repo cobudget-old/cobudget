@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :announcement_trackers,                 dependent: :destroy
   has_many :announcements, through: :announcement_trackers
 
+  scope :with_active_announcements, -> { joins(:announcements).where(announcements: {title: nil}) }
   scope :with_active_memberships, -> { joins(:memberships).where(memberships: {archived_at: nil}).distinct }
 
   validates :name, presence: true
