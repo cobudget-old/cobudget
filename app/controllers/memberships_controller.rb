@@ -44,10 +44,7 @@ class MembershipsController < AuthenticatedController
 
   api :GET, 'memberships/my_memberships', 'Get memberships for the current_user'
   def my_memberships
-    memberships = Membership.with_totals.where(member_id: current_user.id).active
-    user = User.find(current_user.id)
-    announcements = user.announcements.where('expired_at > ?', DateTime.now)
-    render json: memberships
+    render json: Membership.with_totals.where(member_id: current_user.id).active
   end
 
   api :POST, '/memberships/:id/invite'
