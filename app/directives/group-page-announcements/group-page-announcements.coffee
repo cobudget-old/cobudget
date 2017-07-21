@@ -5,7 +5,7 @@ global.cobudgetApp.directive 'groupPageAnnouncements', () ->
     restrict: 'E'
     template: require('./group-page-announcements.html')
     replace: true
-    controller: ($scope, $state, CurrentUser, $mdSidenav, $location, Toast) ->
+    controller: ($scope, $state, CurrentUser, Records, $mdSidenav, $location, Toast) ->
 
       $scope.$on 'open announcements', ->
         $mdSidenav('right').open()
@@ -23,7 +23,7 @@ global.cobudgetApp.directive 'groupPageAnnouncements', () ->
           $location.path("/groups/#{groupId}")
 
       $scope.currentUser = CurrentUser()
-      $scope.announcements = $scope.currentUser.announcements()
+      $scope.announcements = Records.announcements.find({})
       # $scope.announcements = []
       console.log $scope.currentUser
       console.log($scope.announcements)

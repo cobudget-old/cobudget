@@ -11,13 +11,15 @@
 
   <md-content class="group-page__announcements-content">
 
-    <md-card class="group-page-announcements__card-unread" ng-repeat="announcement in announcements">
+    <md-card
+    ng-class="announcement.seen ? 'group-page-announcements__card' : 'group-page-announcements__card-unread'"
+    ng-repeat="announcement in announcements">
       <div layout="row" class="group-page-announcements__card-container">
         <div layout="column" class="group-page-announcements__card-content">
-          <h2 class="group-page-announcements__card-header">Welcome!</h2>
+          <h2 class="group-page-announcements__card-header">{{announcement.title}}</h2>
 
           <p class="group-page-announcements__card-description">
-            This is your new group. Here, people can propose and discuss ideas for funding, and fund them once they're approved.
+            {{announcement.body}}
           </p>
 
           <div flex></div>
@@ -29,25 +31,5 @@
         </div>
       </div>
     </md-card>
-
-    <md-card class="group-page-announcements__card">
-      <div layout="row" class="group-page-announcements__card-container">
-        <div layout="column" class="group-page-announcements__card-content">
-          <h2 class="group-page-announcements__card-header">Welcome!</h2>
-
-          <p class="group-page-announcements__card-description">
-            This is your new group. Here, people can propose and discuss ideas for funding, and fund them once they're approved.
-          </p>
-
-          <div flex></div>
-
-          <div class="group-page-announcements__card-btns" layout="row" layout-align="center center">
-            <span flex></span>
-            <md-button class="group-page-announcements__card-btn" href="{{}}">read more</md-button>
-          </div>
-        </div>
-      </div>
-    </md-card>
-
   </md-content>
 </md-sidenav>
