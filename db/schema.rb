@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 20170601185750) do
     t.datetime "archived_at"
     t.datetime "closed_member_help_card_at"
     t.datetime "closed_admin_help_card_at"
-    t.datetime "viewed_at"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
