@@ -10,6 +10,8 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
     global.cobudgetApp.currentUserId = user.id
     Records.memberships.fetchMyMemberships().then (data) ->
       membershipsLoadedDeferred.resolve(data)
+    Records.announcements.fetch({}).then (data) ->
+      console.log('this is the announcements', data)
 
   $rootScope.$on 'auth:login-error', (ev, reason) ->
     Dialog.alert(title: 'error!', content: reason.errors[0])
