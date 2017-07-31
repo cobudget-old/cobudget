@@ -24,9 +24,7 @@ global.cobudgetApp.directive 'groupPageAnnouncements', () ->
 
       $scope.currentUser = CurrentUser()
       $scope.announcements = Records.announcements.find({})
-      # $scope.announcements = []
-      console.log $scope.currentUser
-      console.log($scope.announcements)
+      $scope.activeAnnoucements = Records.announcements.find({'seen':{ '$eq' : null }})
 
       $scope.redirectToGroupSetupPage = ->
         $location.path('/setup_group')
