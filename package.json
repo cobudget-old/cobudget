@@ -52,7 +52,7 @@
     "angular-chart.js": "^1.0.0-alpha3",
     "angular-cookie": "ivpusic/angular-cookie#v4.0.9",
     "angular-marked": "Hypercubed/angular-marked",
-    "angular-material": "^0.10.1",
+    "angular-material": "1.1.4",
     "angular-material-data-table": "^0.10.10",
     "angular-material-icons": "^0.7.1",
     "angular-messages": "=1.6.1",
