@@ -1,49 +1,16 @@
 <div class="analytics-page" ng-if="authorized && dataLoaded">
 
-  <div class="analytics-page__chart-container">
-    <h2>cumulative user count vs time</h2>
-    <canvas
-      class="chart chart-line analytics-page__chart"
-      chart-data="[data.cumulative_user_count_data.y]"
-      chart-labels="data.cumulative_user_count_data.x"
-      chart-series="['cumulative user count']"
-    ></canvas>
-  </div>
-
-  <md-divider></md-divider>
-
-  <div class="analytics-page__chart-container">
-    <h2>cumulative group count vs time</h2>
-    <canvas
-      class="chart chart-line analytics-page__chart"
-      chart-data="[data.cumulative_group_count_data.y]"
-      chart-labels="data.cumulative_group_count_data.x"
-      chart-series="['cumulative group count']"
-    ></canvas>
-  </div>
-
-  <md-divider></md-divider>
-
-  <div class="analytics-page__chart-container">
-    <h2>contribution count vs time</h2>
-    <canvas
-      class="chart chart-line analytics-page__chart"
-      chart-data="[data.contribution_count_data.y]"
-      chart-labels="data.contribution_count_data.x"
-      chart-series="['contribution count']"
-    ></canvas>
-  </div>
-
-  <md-divider></md-divider>
-
   <div class="analytics-page__unconfirmed-user-count-container">
     <h2>number of unconfirmed users right now: {{ data.unconfirmed_user_count }}</h2>
+    <h2>number of confirmed users right now: {{ data.confirmed_user_count }}</h2>
   </div>
 
   <md-divider></md-divider>
 
   <h2>group data</h2>
 
+  <button ng-click="sortBy('created_at')">sort by age</button>
+  <button ng-click="sortBy('last_activity_at')">sort by last activity</button>
   <button ng-click="sortBy('confirmed_member_count')">sort by confirmed member count</button>
   <button ng-click="sortBy('funded_bucket_count')">sort by funded bucket count</button>
   <button ng-click="sortBy('total_allocations')">sort by total allocations</button>

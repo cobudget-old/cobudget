@@ -1,5 +1,5 @@
 module.exports =
-  url: '/about'
+  url: '/about1'
   template: require('./about-page.html')
   controller: ($location, $scope) ->
 
