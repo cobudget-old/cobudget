@@ -67,6 +67,8 @@ Rails.application.routes.draw do
     get "/groups/:id/analytics", to: "analytics#group_report"
 
     get "/announcements", to: "announcements#index"
+    post "/announcements/seen", to: "announcements#seen"
+
   end
 
   root to: redirect('/docs')

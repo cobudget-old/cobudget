@@ -4,4 +4,10 @@ class AnnouncementsController < AuthenticatedController
     render json: Announcement.tracked(current_user)
   end
 
+  api :POST, '/announcements/seen', 'Mark announcements as read'
+  def seen
+    # this is where we add the tracking information
+    render json: Announcement.all
+  end
+
 end
