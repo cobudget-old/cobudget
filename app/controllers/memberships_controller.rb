@@ -42,9 +42,30 @@ class MembershipsController < AuthenticatedController
     render json: [membership], status: 200
   end
 
-  api :GET, 'memberships/my_memberships', 'Get memberships for the current_user'
+  api :GET, 'memberships/my_memberships?group_id', 'Get memberships for the current_user'
   def my_memberships
-    render json: Membership.with_totals.where(member_id: current_user.id).active
+    memberships = Membership.with_totals.where(member_id: current_user.id).active
+    if current_user.is_super_admin && (params.key?(:group_id) && params[:group_id] != "null") && 
+      group = Group.find(params[:group_id])
+      print "*******************************\n\n"
+      print "*******************************\n\n"
+      print "*******************************\n\n"
+      print "*******************************\n\n"
+      print "*******************************\n\n"
+      print group
+      m = memberships.select { |m| m.group_id == group.id}.first
+      # admin is not already a member of this group, make a fake membership
+      if not m 
+        fake_membership = memberships.first.dup
+        fake_membership.is_admin = true
+        fake_membership.total_contributions_db = 0
+        fake_membership.total_allocations_db = 0
+        m = fake_membership.dup
+        m.group_id = group.id
+        memberships.push(m)
+      end
+    end
+    render json: memberships
   end
 
   api :POST, '/memberships/:id/invite'
