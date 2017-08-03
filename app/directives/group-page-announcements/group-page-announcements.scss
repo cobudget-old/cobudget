@@ -2,11 +2,10 @@
   width: 256px;
   min-width: 256px;
   position: fixed;
-  background: #EAEAEA;
 }
 
 .group-page__announcements-toolbar {
-  background: $cobudget-happy-blue;
+  background: $cobudget-happy-blue !important;
   color: white;
 }
 
@@ -19,7 +18,6 @@
 
 .group-page__announcements-content {
   padding-top: 20px;
-  background: #EAEAEA;
 }
 
 .group-page-announcements__card-unread {

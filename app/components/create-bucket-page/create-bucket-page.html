@@ -8,26 +8,21 @@
           layout-align="center center"
         ></ng-md-icon>
       </md-button>
-      <span class="create-bucket-page__header-text">New Idea</span>
+      <span class="create-bucket-page__header-text">New Bucket</span>
       <span flex></span>
-      <md-button class="md-icon-button create-bucket-page__done-button" aria-label="done" ng-click="done()" ng-autodisable>
-        <div layout="column" layout-align="center center">
-          <span class="create-bucket-page__done-button-text">Done</span>
-        </div>
-      </md-button>
     </div>
   </md-toolbar>
 
   <md-content class="create-bucket-page__content">
     <div>
-      <md-subheader class="create-bucket-page__subheader-title">You're about to propose an idea</md-subheader>
+      <h4 class="create-bucket-page__subheader-title">You're about to propose a bucket</h4>
     </div>
 
     <div>
-      <md-subheader class="create-bucket-page__subheader-text">Members in your group can comment on your idea, and when you're ready you can request funding.</md-subheader>
+      <p class="create-bucket-page__subheader-text">Members in your group can comment on your bucket, and when you're ready you can request funding.</p>
     </div>
 
-    <form name='bucketForm' class="create-bucket-page__form">
+    <form name="bucketForm" class="create-bucket-page__form" ng-submit="done()">
       <md-input-container>
         <label>Title</label>
         <input required name="name" type="text" ng-model="bucket.name">
@@ -66,6 +61,10 @@
           <div ng-message="min">Bucket target must be greater than zero</div>
         </div>
       </md-input-container>
+
+      <div layout="column" layout-align="center space-between">
+        <md-button type="submit" class="create-bucket-page__btn create-bucket-page__confirm-btn">Create bucket</md-button>
+      </div>
     </form>
   </md-content>
 </div>

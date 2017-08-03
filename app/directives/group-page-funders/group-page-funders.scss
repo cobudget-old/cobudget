@@ -174,19 +174,15 @@
   padding: 0;
 }
 
-.group-page__funder-more-button {
-  // width: 15px !important;
+.group-page__funder-more-button, .group-page__funder-add-button  {
+  width: auto !important;
   margin: 0 !important;
-  cursor: pointer;
+  padding: 0 !important;
+  // cursor: pointer;
 }
 
 .group-page__funder-more-button-icon {
   fill: rgba(0,0,0,0.40);
-}
-
-.group-page__funder-add-button {
-  // width: 22px !important;
-  margin: 0 !important;
 }
 
 .group-page__funder-add-button-icon {
