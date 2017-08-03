@@ -9,28 +9,22 @@
         ></ng-md-icon>
       </md-button>
       <span class="edit-bucket-page__header-text">Edit {{ bucket.status == 'draft' ? 'Idea' : 'Bucket' }}</span>
-      <span flex></span>
-      <md-button class="md-icon-button edit-bucket-page__done-button" aria-label="done" ng-click="done(bucketForm)" ng-autodisable>
-        <div layout="column" layout-align="center center">
-          <span class="edit-bucket-page__done-button-text">Done</span>
-        </div>
-      </md-button>
     </div>
   </md-toolbar>
 
   <md-content class="edit-bucket-page__content">
     <div>
-      <md-subheader class="edit-bucket-page__subheader-title">You're about to edit a {{ bucket.status == 'draft' ? 'bucket idea' : 'bucket' }}</md-subheader>
+      <h4 class="edit-bucket-page__subheader-title">You're about to edit a {{ bucket.status == 'draft' ? 'bucket idea' : 'bucket' }}</h4>
     </div>
 
     <div>
-      <md-subheader class="edit-bucket-page__subheader-text">
+      <p class="edit-bucket-page__subheader-text">
         You can continue to edit this {{ bucket.status == 'draft' ? 'idea' : 'bucket' }}, propose it to your peers, and get feedback.
         <span ng-if="bucket.status == 'draft'">When you're ready, you can request funding.</span>
-      </md-subheader>
+      </p>
     </div>
 
-    <form name='bucketForm' class="edit-bucket-page__form">
+    <form name='bucketForm' class="edit-bucket-page__form" ng-submit="done(bucketForm)">
       <md-input-container>
         <label>Title</label>
         <input required name="name" type="text" ng-model="bucket.name">
@@ -58,6 +52,10 @@
           <div ng-message="min">Bucket target must be greater than zero</div>
         </div>
       </md-input-container>
+
+      <div layout="column" layout-align="center space-between">
+        <md-button type="submit" class="edit-bucket-page__btn edit-bucket-page__confirm-btn">Edit bucket</md-button>
+      </div>
     </form>
   </md-content>
 </div>
