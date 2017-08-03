@@ -8,7 +8,22 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
 
   $rootScope.$on 'auth:validation-success', (ev, user) ->
     global.cobudgetApp.currentUserId = user.id
-    Records.memberships.fetchMyMemberships().then (data) ->
+    path_components = $location.path().split('/')
+    if path_components[1] == "groups"
+      groupId = path_components[2]
+    else if path_components[1] == "buckets"
+      bucketId = parseInt path_components[2]
+      console.log("bucketId")
+      console.log(bucketId)
+      Records.buckets.findOrFetchById(bucketId).then(bucket) ->
+        console.log("bucket")
+        console.log(bucket)
+        groupId = bucket.group().id
+    else
+      groupId = null
+    console.log("groupId")
+    console.log(groupId)
+    Records.memberships.fetchMyMemberships(groupId).then (data) ->
       membershipsLoadedDeferred.resolve(data)
 
   $rootScope.$on 'auth:login-error', (ev, reason) ->

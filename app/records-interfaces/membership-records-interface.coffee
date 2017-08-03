@@ -9,9 +9,11 @@ global.cobudgetApp.factory 'MembershipRecordsInterface', (config, BaseRecordsInt
       @baseConstructor recordStore
       @remote.apiPrefix = config.apiPrefix
 
-    fetchMyMemberships: ->
+    fetchMyMemberships: (groupId) ->
       @fetch
         path: 'my_memberships'
+        params:
+          group_id: groupId
 
     fetchByGroupId: (groupId) ->
       @fetch
