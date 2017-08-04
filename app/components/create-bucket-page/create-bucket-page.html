@@ -44,7 +44,7 @@
       <md-input-container>
         <label>Group</label>
         <md-select required name="groupId" ng-model="bucket.groupId">
-          <md-option required ng-repeat="group in accessibleGroups" value="{{group.id}}">
+          <md-option required ng-repeat="group in accessibleGroups" ng-value="group.id">
             {{group.name}}
           </md-option>
         </md-select>

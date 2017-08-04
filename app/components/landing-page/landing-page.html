@@ -13,7 +13,7 @@
       <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
         <div class="landing-page__input-container">
           <input required class="landing-page__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
-          <md-button class="landing-page__submit-btn">create group</md-button>
+          <md-button class="landing-page__submit-btn" type="submit">create group</md-button>
           <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
           <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
         </div>
