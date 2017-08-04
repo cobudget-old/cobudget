@@ -2,7 +2,12 @@
   <md-card class="group-page__buckets-card" ng-if="group.liveBuckets().length > 0">
     <md-list class="group-page__buckets-list">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
-        <img ng-src="./img/blue_dollar.svg" alt="blue dollar bill" class="group-page__bucket-list-icon"/>
+        <ng-md-icon icon="attach_money"
+          layout="column"
+          layout-align="center center"
+          size="27"
+          class="group-page__bucket-list-icon"
+        ></ng-md-icon>
         <h2 class="group-page__subheader-title">Funding Now</h2>
       </div>
 
@@ -50,7 +55,12 @@
   <md-card class="group-page__buckets-card" ng-if="group.draftBuckets().length > 0">
     <md-list class="group-page__buckets-list">
       <div layout="row" layout-align="start center" class="group-page__buckets-list-header-container">
-        <img ng-src="./img/lightbulb.svg" alt="lightbulb" class="group-page__bucket-list-icon"/>
+        <ng-md-icon icon="lightbulb_outline"
+          layout="column"
+          layout-align="center center"
+          size="27"
+          class="group-page__bucket-list-icon"
+        ></ng-md-icon>
         <h2 class="group-page__subheader-title">Ideas</h2>
       </div>
 
@@ -91,7 +101,7 @@
           layout="column"
           layout-align="center center"
           size="27"
-          class="group-page__bucket-list-icon group-page__bucket-list-funded-icon"
+          class="group-page__bucket-list-icon"
         ></ng-md-icon>
         <h2 class="group-page__subheader-title">Funded</h2>
       </div>
