@@ -5,7 +5,11 @@
     <div ng-if="!bucket.isArchived()">
       <div ng-if="bucket.status == 'draft'">
         <div layout="row" layout-align="start center">
-          <img ng-src="./img/lightbulb.svg" alt="lightbulb" class="bucket-page__idea-icon"/>
+          <ng-md-icon icon="lightbulb_outline"
+            layout="column"
+            size="44"
+            class="group-page__idea-icon"
+          ></ng-md-icon>
           <div>
             <h3 class="bucket-page__status">Idea</h3>
             <p class="bucket-page__status-description"><em>This bucket idea is still being discussed and designed</em></p>
@@ -26,8 +30,7 @@
         <div layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
           <ng-md-icon icon="check_circle"
             layout="column"
-            layout-align="center center"
-            size="35"
+            size="44"
             class="bucket-page-status-card__funded-icon"
           ></ng-md-icon>
 
@@ -39,8 +42,7 @@
         <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
           <ng-md-icon icon="credit_card"
             layout="column"
-            layout-align="center center"
-            size="35"
+            size="44"
             class="bucket-page-status-card__funded-icon"
           ></ng-md-icon>
 
@@ -56,8 +58,7 @@
       <div layout="row" layout-align="start center" class="bucket-page-status-card__archived-status-container">
         <ng-md-icon icon="archive"
           layout="column"
-          layout-align="center center"
-          size="35"
+          size="44"
           class="bucket-page-status-card__archived-icon"
         ></ng-md-icon>
 
@@ -69,8 +70,7 @@
       <div ng-if="bucket.status == 'funded'" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
         <ng-md-icon icon="check_circle"
           layout="column"
-          layout-align="center center"
-          size="35"
+          size="44"
           class="bucket-page-status-card__funded-icon"
         ></ng-md-icon>
 
@@ -82,8 +82,7 @@
       <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
         <ng-md-icon icon="credit_card"
           layout="column"
-          layout-align="center center"
-          size="35"
+          size="44"
           class="bucket-page-status-card__funded-icon"
         ></ng-md-icon>
 

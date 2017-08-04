@@ -8,7 +8,11 @@
 
   <md-card-content class="bucket-page__description">
     <div layout="row" layout-align="start center" ng-if="bucket.target > 0">
-      <img ng-src="./img/blue_dollar.svg" alt="blue dollar bill" class="bucket-page__funding-target-icon"/>
+      <ng-md-icon icon="forward"
+        layout="column"
+        layout-align="center center"
+        class="bucket-page-header-card__funding-icon"
+      ></ng-md-icon>
       <span class="bucket-page__funding-target-text">Funding Target : {{ bucket.target | currency : group.currencySymbol : 0  }}</span>
     </div>
 
