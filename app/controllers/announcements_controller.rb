@@ -6,8 +6,14 @@ class AnnouncementsController < AuthenticatedController
 
   api :POST, '/announcements/seen', 'Mark announcements as read'
   def seen
-    # this is where we add the tracking information
-    render json: Announcement.all
+    tracker = AnnouncementTracker.find(current_user.id)
+    render status: 403, nothing: true and return unless tracker.is_editable_by?(current_user)
+    tracker.update_attributes(params.require(:last_seen))
+    if tracker.save
+      render json: [tracker]
+    else
+      render json: {errors: tracker.error.full_messages}, status: 400
+    end
   end
 
 end
