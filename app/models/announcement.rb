@@ -1,13 +1,12 @@
 class Announcement < ActiveRecord::Base
 
   scope :tracked, -> (user) {
-     from("announcements, announcement_trackers").
-     where("user_id = ? and (expired_at is NULL or expired_at > ?)", user.id, Time.now).
+     where("expired_at is NULL or expired_at > ?", Time.now).
      order(created_at: :desc).
-     select("announcements.*, last_seen")
+     select("announcements.*, (SELECT last_seen from announcement_trackers where user_id = #{user.id})")
   }
 
   def seen
-    has_attribute?(:last_seen) ? last_seen >= created_at : false
+    has_attribute?(:last_seen) ? (last_seen ? last_seen >= created_at : false) : false
   end
 end
