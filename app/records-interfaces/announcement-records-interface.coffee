@@ -5,5 +5,5 @@ global.cobudgetApp.factory 'AnnouncementRecordsInterface', (config, BaseRecordsI
       @baseConstructor recordStore
       @remote.apiPrefix = config.apiPrefix
 
-    seen: ->
-      @remote.post('seen')
+    seen: (params) ->
+      @remote.post('seen', params)

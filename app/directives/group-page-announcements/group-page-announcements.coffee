@@ -11,7 +11,8 @@ global.cobudgetApp.directive 'groupPageAnnouncements', () ->
         $mdSidenav('right').open()
         $mdSidenav('right').onClose ->
           console.log 'closing'
-          Records.announcements.seen().then ->
+          mostRecentDate = $scope.announcements[0].createdAt
+          Records.announcements.seen({date: mostRecentDate}).then ->
             # $scope.activeAnnoucements = Records.announcements.find({'seen':{ '$eq' : null }})
             # $scope.activeAnnoucements[0].seen = 'hi'
             # Records.annoucements.find({'seen':{ '$eq' : null }})
