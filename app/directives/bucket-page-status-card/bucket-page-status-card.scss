@@ -17,9 +17,13 @@
   font-weight: 500;
 }
 
-.bucket-page-status-card__idea-icon, .bucket-page-status-card__funding-icon {
+.bucket-page-status-card__idea-icon {
   margin-right: 15px;
-  fill: rgba(0,0,0,0.35);
+}
+
+.bucket-page-status-card__funding-icon {
+  width: 44px;
+  margin-right: 15px;
 }
 
 .bucket-page__status {
@@ -56,8 +60,8 @@
 // funded bucket
 
 .bucket-page-status-card__funded-icon {
+  width: 44px;
   margin-right: 15px;
-  fill: rgba(0,0,0,0.35);
 }
 
 .bucket-page-status-card__funded-status-container {
@@ -96,7 +100,6 @@
 
 .bucket-page-status-card__cancelled-icon {
   margin-right: 15px;
-  fill: rgba(0,0,0,0.35);
 }
 
 .bucket-page-status-card__cancelled-status-container {
