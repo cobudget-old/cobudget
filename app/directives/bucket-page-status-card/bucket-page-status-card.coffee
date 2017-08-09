@@ -25,7 +25,7 @@ global.cobudgetApp.directive 'bucketPageStatusCard', () ->
         Dialog.open(finishBucketDialog)
 
       $scope.complete = ->
-        paidBucketDialog = require('./../../components/paid-bucket-dialog/paid-bucket-dialog.coffee')({
+        completeBucketDialog = require('./../../components/complete-bucket-dialog/complete-bucket-dialog.coffee')({
           scope: $scope
         })
-        Dialog.open(paidBucketDialog)
+        Dialog.open(completeBucketDialog)

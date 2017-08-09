@@ -26,7 +26,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
     cancel: ->
       @remote.postMember(@id, 'archive')
 
-    paid: ->
+    complete: ->
       @remote.postMember(@id, 'paid')
 
     hasComments: ->
@@ -51,5 +51,5 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
     isArchived: ->
       !!@archivedAt && !@paidAt
 
-    isPaid: ->
+    iscomplete: ->
       !!@paidAt
