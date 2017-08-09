@@ -1,0 +1,38 @@
+<md-dialog aria-label="cancel bucket dialog" class="cancel-bucket-dialog">
+  <md-dialog-content class="sticky-container">
+
+    <div class="cancel-bucket-dialog__header" layout="column" layout-align="center center">
+      <ng-md-icon icon="warning"
+        layout="column"
+        layout-align="center center"
+        ng-class="bucket.status == 'live' || bucket.status == 'funded' ? 'cancel-bucket-dialog__red-warning-icon' : 'cancel-bucket-dialog__yellow-warning-icon'"
+        size="35"
+      ></ng-md-icon>
+
+      <div class="cancel-bucket-dialog__header-text">
+        Are you sure you want to cancel this bucket?
+      </div>
+    </div>
+
+    <md-divider ng-if="bucket.status == 'live' || bucket.status == 'funded'"></md-divider>
+
+    <div class="cancel-bucket-dialog__details-container">
+      <p class="cancel-bucket-dialog__details" ng-if="bucket.status == 'live' || bucket.status == 'funded'">
+        If you confirm, the money that has already been given to this bucket will be returned to its funders.
+      </p>
+
+      <div class="cancel-bucket-dialog__final-caution">
+        Caution: This cannot be undone
+      </div>
+    </div>
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button class="cancel-bucket-dialog__btn cancel-bucket-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button
+      class="md-raised cancel-bucket-dialog__btn cancel-bucket-dialog__proceed-btn"
+      ng-class="bucket.status == 'live' || bucket.status == 'funded' ? 'cancel-bucket-dialog__red-proceed-btn' : 'cancel-bucket-dialog__yellow-proceed-btn'"
+      ng-click="proceed()"
+    >yes, cancel it</md-button>
+  </div>
+</md-dialog>

@@ -9,7 +9,7 @@ module.exports = (params) ->
     $scope.proceed = ->
       $scope.cancel()
       LoadBar.start()
-      $scope.bucket.archive()
+      $scope.bucket.cancel()
         .then ->
           groupId = $scope.bucket.groupId
           Toast.show('Bucket refunded!')

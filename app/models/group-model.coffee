@@ -21,6 +21,9 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     fundedBuckets: ->
       @getActiveBuckets('funded', 'fundedAt')
 
+    completedBuckets: ->
+      @paidBuckets()
+
     allTransactions: ->
       paymentsByDate = _.map @paidBuckets(), (bucket) ->
         {
@@ -94,9 +97,9 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       _.filter @buckets(), (bucket) ->
         bucket.isPaid()
 
-    archivedBuckets: ->
+    cancelledBuckets: ->
       buckets = _.filter @buckets(), (bucket) ->
-        bucket.isArchived()
+        bucket.isArchived() && !bucket.isPaid()
       sortedBuckets = _.sortBy buckets, (bucket) ->
         bucket.archivedAt
       sortedBuckets.reverse()
@@ -121,7 +124,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     # private
     filterActiveBucketsByStatus: (status) ->
       _.filter @buckets(), (bucket) ->
-        bucket.status == status && !bucket.isArchived()
+        bucket.status == status && !bucket.isArchived() && !bucket.isPaid()
 
     getActiveBuckets: (status, datePropToSortBy) ->
       filteredBuckets = @filterActiveBucketsByStatus(status)

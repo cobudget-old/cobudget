@@ -17,3 +17,15 @@ global.cobudgetApp.directive 'bucketPageStatusCard', () ->
             title: 'hi friend ~~'
             content: 'an estimated funding target must be specified before funding starts'
             ok: 'oh, ok!'
+
+      $scope.acceptFunding = ->
+        finishBucketDialog = require('./../../components/finish-bucket-dialog/finish-bucket-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(finishBucketDialog)
+
+      $scope.complete = ->
+        paidBucketDialog = require('./../../components/paid-bucket-dialog/paid-bucket-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(paidBucketDialog)

@@ -11,31 +11,13 @@
         Edit
       </md-button>
 
-      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="archive()" ng-if="!bucket.archivedAt">
-        <ng-md-icon icon="archive"
+      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="cancel()" ng-if="!bucket.archivedAt">
+        <ng-md-icon icon="cancel"
           size="20"
           layout="column"
           layout-align="center center"
         ></ng-md-icon>
-        Archive
-      </md-button>
-
-      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="finish()" ng-if="bucket.status == 'live'">
-        <ng-md-icon icon="check_circle"
-          size="20"
-          layout="column"
-          layout-align="center center"
-        ></ng-md-icon>
-        Finish
-      </md-button>
-
-      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="paid()" ng-if="!bucket.paidAt && bucket.status == 'funded'">
-        <ng-md-icon icon="credit_card"
-          size="20"
-          layout="column"
-          layout-align="center center"
-        ></ng-md-icon>
-        Paid
+        Cancel
       </md-button>
 
       <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="refund()" ng-if="bucket.isArchived() && bucket.status == 'funded'">
