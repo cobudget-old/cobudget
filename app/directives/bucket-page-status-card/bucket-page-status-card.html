@@ -109,6 +109,15 @@
           <p class="bucket-page__status-description"><em>This bucket was marked as complete on {{ bucket.paidAt | exactDateWithTime }}</em></p>
         </div>
       </div>
+
+      <md-button
+        class="md-raised md-primary bucket-page__complete-btn"
+        ng-click='complete()'
+        ng-autodisable
+        ng-show='userCanManageBucket()'
+      >
+        Complete
+      </md-button>
     </div>
   </md-card-content>
 </md-card>
