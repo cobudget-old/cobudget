@@ -34,7 +34,7 @@
 // help text
 
 .edit-bucket-page__subheader-title {
-  color: $cobudget-blue;
+  color: $cob-red;
   padding: 0 10px;
 }
 
@@ -79,6 +79,6 @@
 }
 
 .edit-bucket-page__confirm-btn {
-  background: #4A90E2 !important;
+  background: $cob-red !important;
   color: white;
 }

@@ -14,19 +14,19 @@
 
   <md-content class="edit-bucket-page__content">
     <div>
-      <h4 class="edit-bucket-page__subheader-title">You're about to edit a {{ bucket.status == 'draft' ? 'bucket idea' : 'bucket' }}</h4>
+      <h4 class="edit-bucket-page__subheader-title">You're about to edit a bucket</h4>
     </div>
 
     <div>
       <p class="edit-bucket-page__subheader-text">
-        You can continue to edit this {{ bucket.status == 'draft' ? 'idea' : 'bucket' }}, propose it to your peers, and get feedback.
+        You can continue to edit this bucket, propose it to your peers, and get feedback.
         <span ng-if="bucket.status == 'draft'">When you're ready, you can request funding.</span>
       </p>
     </div>
 
     <form name='bucketForm' class="edit-bucket-page__form" ng-submit="done(bucketForm)">
       <md-input-container>
-        <label>Title</label>
+        <label>Bucket title</label>
         <input required name="name" type="text" ng-model="bucket.name">
         <div ng-messages="bucketForm.name.$error">
           <div ng-message="required">This is required.</div>

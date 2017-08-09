@@ -5,27 +5,25 @@
 }
 
 .group-page__announcements-toolbar {
-  background: $cobudget-happy-blue !important;
-  color: white;
+  background: white !important;
+  color: black !important;
 }
 
 .group-page__announcements-header {
   @include fontMedium;
   padding-top: 15px;
   padding-bottom: 15px;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .group-page__announcements-content {
   padding-top: 20px;
 }
 
-.group-page-announcements__card-unread {
-  // box-shadow: 0px 3px 1px -2px rgba(255, 64, 129, 0.14),
-  //             0px 2px 2px 0px rgba(255, 64, 129, 0.098),
-  //             0px 1px 5px 0px rgba(255, 64, 129, 0.084);
-  // border: 2px solid $cob-red;
-  box-shadow: inset 0px 0px 2px 2px $cob-red;
+.group-page-announcements__card-container-unread {
+  // border-left: 4px solid $cob-red;
+  box-shadow: inset 10px -6px 0px -6px $cob-red;
 }
 
 .group-page-announcements__card-content {
@@ -35,12 +33,11 @@
 }
 
 .group-page-announcements__card-header {
-  font-size: 18px;
+  font-size: 16px;
   @include truncatedText;
   margin-right: 30px;
   margin: 0;
   font-weight: 400;
-  font-size: 20px;
 }
 
 .group-page-announcements__card-description {
@@ -53,7 +50,7 @@
   line-height: 20px !important;
   min-height: 20px !important;
   margin: 0 !important;
-  color: #3A51F8 !important;
+  color: $cob-cyan !important;
   font-size: 13px;
   min-width: 0 !important;
   padding: 0 12px !important;

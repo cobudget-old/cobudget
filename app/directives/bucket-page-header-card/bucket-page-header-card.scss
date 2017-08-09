@@ -43,7 +43,8 @@
 }
 
 .bucket-page__funding-target-text {
-  color: $cob-cyan;
+  color: $cob-red;
+  font-weight: bold;
   font-size: 15px;
 }
 
@@ -54,6 +55,7 @@
 .bucket-page__accepted-funding-text {
   color: $cob-green;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .bucket-page__description {

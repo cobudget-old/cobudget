@@ -3,18 +3,21 @@
     <div layout="column" layout-align="space-between start" class="group-page__user-avatar-container">
       <div layout="row" layout-align="start center">
         <div class="group-page__announcements-header">
-          Announcements
+          What's New
         </div>
       </div>
     </div>
   </md-toolbar>
 
+  <md-divider></md-divider>
+
   <md-content class="group-page__announcements-content">
 
     <md-card
-    ng-class="announcement.seen ? 'group-page-announcements__card' : 'group-page-announcements__card-unread'"
+    class="group-page-announcements__card"
     ng-repeat="announcement in announcements">
-      <div layout="row" class="group-page-announcements__card-container">
+      <div layout="row" class="group-page-announcements__card-container"
+      ng-class="announcement.seen ? 'group-page-announcements__card-container' : 'group-page-announcements__card-container-unread'">
         <div layout="column" class="group-page-announcements__card-content">
           <h2 class="group-page-announcements__card-header">{{announcement.title}}</h2>
 

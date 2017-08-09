@@ -99,10 +99,6 @@
   font-size: 13px;
 }
 
-.bucket-page-progress-card__personal-funds-left {
-  color: $cob-green;
-}
-
 .bucket-page-progress-card__text-input {
   display: block;
   border: 1px solid #8C8C8C;
@@ -123,7 +119,7 @@
 }
 
 .bucket-page-progress-card__fund-btn {
-  background-color: $cob-green !important;
+  background-color: $cob-red !important;
   width: 100%;
   height: 35px;
   min-height: 35px;

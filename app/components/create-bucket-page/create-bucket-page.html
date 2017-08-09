@@ -23,7 +23,7 @@
 
     <form name="bucketForm" class="create-bucket-page__form" ng-submit="done()">
       <md-input-container>
-        <label>Title</label>
+        <label>Bucket name</label>
         <input required name="name" type="text" ng-model="bucket.name">
         <div ng-messages="bucketForm.name.$error" ng-if="bucketForm.name.$dirty || formSubmitted">
           <div ng-message="required">This is required.</div>
