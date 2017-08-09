@@ -8,7 +8,7 @@
           <ng-md-icon icon="lightbulb_outline"
             layout="column"
             size="44"
-            class="group-page__idea-icon"
+            class="bucket-page-status-card__idea-icon"
           ></ng-md-icon>
           <div>
             <h3 class="bucket-page__status">Idea</h3>
@@ -28,10 +28,10 @@
 
       <div ng-if="bucket.status == 'live'">
         <div layout="row" layout-align="start center">
-          <ng-md-icon icon="lightbulb_outline"
+          <ng-md-icon icon="account_balance"
             layout="column"
             size="44"
-            class="group-page__idea-icon"
+            class="bucket-page-status-card__funding-icon"
           ></ng-md-icon>
           <div>
             <h3 class="bucket-page__status">Funding now</h3>
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
-          <ng-md-icon icon="credit_card"
+          <ng-md-icon icon="done_all"
             layout="column"
             size="44"
             class="bucket-page-status-card__funded-icon"
@@ -112,7 +112,7 @@
         </div>
       </div>
       <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
-        <ng-md-icon icon="credit_card"
+        <ng-md-icon icon="done_all"
           layout="column"
           size="44"
           class="bucket-page-status-card__funded-icon"

@@ -1,7 +1,6 @@
 // status card
 
 .bucket-page__status-card {
-  background: $cobudget-light-grey;
   width: 100%;
   margin: 0;
   margin-bottom: 16px;
@@ -18,9 +17,9 @@
   font-weight: 500;
 }
 
-.bucket-page__idea-icon {
+.bucket-page-status-card__idea-icon, .bucket-page-status-card__funding-icon {
   margin-right: 15px;
-  width: 50px;
+  fill: rgba(0,0,0,0.35);
 }
 
 .bucket-page__status {
@@ -56,8 +55,9 @@
 
 // funded bucket
 
-.bucket-page-status-card__funded-icon, .group-page__idea-icon {
+.bucket-page-status-card__funded-icon {
   margin-right: 15px;
+  fill: rgba(0,0,0,0.35);
 }
 
 .bucket-page-status-card__funded-status-container {
@@ -95,8 +95,8 @@
 // cancelled bucket
 
 .bucket-page-status-card__cancelled-icon {
-  fill: rgba(0,0,0,0.35);
   margin-right: 15px;
+  fill: rgba(0,0,0,0.35);
 }
 
 .bucket-page-status-card__cancelled-status-container {
