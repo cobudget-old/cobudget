@@ -9,7 +9,7 @@ class AnnouncementsController < AuthenticatedController
     tracker = AnnouncementTracker.find_or_create_by(user_id: current_user.id)
     tracker.update_attributes({last_seen: params.require(:last_seen)})
     if tracker.save
-      render json: [tracker]
+      render json: {announcement_tracker:[tracker]}
     else
       render json: {errors: tracker.error.full_messages}, status: 400
     end
