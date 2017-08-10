@@ -12,9 +12,9 @@
 
 .group-page-toolbar__menu-icon {
   @include fontGrande;
-  fill: white;
+  color: white;
 }
 
 .group-page-toolbar__menu-icon-active {
-  fill: $cob-red;
+  color: $cob-red;
 }
