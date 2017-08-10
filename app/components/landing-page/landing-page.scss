@@ -9,7 +9,6 @@
 }
 
 .landing-page__top-content {
-  max-width: 1000px;
   position: relative;
   margin: 0 auto;
   z-index: 2;
@@ -49,6 +48,13 @@
 .landing-page__logo {
   max-width: 300px;
   margin-bottom: 15px;
+}
+
+.landing-page__beta {
+  font-size: 14px;
+  top: 9px;
+  position: absolute;
+  left: 292px;
 }
 
 .landing-page__form-header {
@@ -111,17 +117,18 @@
 }
 
 .landing-page__beta-text {
-    margin-bottom: 5px;
-    color: $grey-on-white;
+  margin-bottom: 5px;
+  color: $grey-on-white;
 }
 
 .landing-page__signin-text {
-    margin-top: 5px;
-    color: $grey-on-white;
+  margin-top: 5px;
+  color: $grey-on-white;
+  font-size: 12px;
 }
 
 .landing-page__signin-text a {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .landing-page__submit-btn {
@@ -182,7 +189,7 @@
 }
 
 @media (min-width: 900px) {
-  .landing-page__logo {
+  .landing-page__logo, .landing-page__beta {
     display: none;
   }
 }
@@ -190,6 +197,11 @@
 @media (max-width: 900px) {
   .landing-page__top-content {
     margin-top: 100px;
+  }
+
+  .landing-page__form-header {
+    font-size: 50px;
+    line-height: 50px;
   }
 }
 
@@ -215,11 +227,6 @@
 
   .landing-page__menu {
     margin-left: 20px;
-  }
-
-  .landing-page__form-header {
-    font-size: 50px;
-    line-height: 50px;
   }
 
   .landing-page__menu-icon {
