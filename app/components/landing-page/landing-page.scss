@@ -22,10 +22,6 @@
   margin-top: 50px;
 }
 
-.landing-page__footer-content-link {
-  color: $cob-yellow;
-}
-
 .landing-page-footer__content-btn {
   font-size: 15px;
   font-weight: 400;
@@ -56,14 +52,15 @@
 }
 
 .landing-page__form-header {
-  font-size: 50px;
+  font-size: 94px;
   margin-top: 0;
   margin-bottom: 15px;
+  line-height: 90px;
 }
 
 .landing-page__form-subheader {
   font-weight: 500;
-  font-size: 30px;
+  font-size: 20px;
   margin: 0;
   margin-bottom: 15px;
 }
@@ -113,18 +110,27 @@
   color: red;
 }
 
+.landing-page__beta-text {
+    margin-bottom: 5px;
+    color: $grey-on-white;
+}
+
+.landing-page__signin-text {
+    margin-top: 5px;
+    color: $grey-on-white;
+}
+
+.landing-page__signin-text a {
+    cursor: pointer;
+}
+
 .landing-page__submit-btn {
-  font-size: 14px;
-  font-weight: bold;
-  background: #00B100 !important;
-  color: white !important;
+  font-size: 16px;
+  font-weight: 600;
+  background: $cob-red !important;
   min-height: 37px;
-  height: 37px;
-  border: none;
-  width: 180px;
-  margin-top: 5px;
   margin-left: 0;
-  top: -2px;
+  padding: 14px 32px;
 }
 
 // virtual tour dialog
@@ -209,6 +215,11 @@
 
   .landing-page__menu {
     margin-left: 20px;
+  }
+
+  .landing-page__form-header {
+    font-size: 50px;
+    line-height: 50px;
   }
 
   .landing-page__menu-icon {

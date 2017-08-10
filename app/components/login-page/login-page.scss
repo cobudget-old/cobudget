@@ -87,7 +87,7 @@
 }
 
 .login-page__submit-btn {
-  @include cob-std-submit-btn;
+  background: $cob-red !important;
   max-width: 300px;
   width: 100%;
   margin: 0;
