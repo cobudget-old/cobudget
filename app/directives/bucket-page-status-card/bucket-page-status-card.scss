@@ -41,7 +41,7 @@
 }
 
 .bucket-page__start-funding-btn, .bucket-page__complete-btn {
-  background-color: $cob-red !important;
+  background-color: $cob-pink !important;
   width: 100%;
   height: 35px;
   min-height: 35px;
@@ -54,7 +54,7 @@
 }
 
 .bucket-page__start-funding-btn:not([disabled]):hover, .bucket-page__complete-btn:not([disabled]):hover {
-  background-color: $cob-red;
+  background-color: $cob-pink;
 }
 
 // funded bucket
@@ -84,7 +84,7 @@
 // funded bucket
 
 .bucket-page__complete-btn, .bucket-page__complete-btn {
-  background-color: $cob-red !important;
+  background-color: $cob-pink !important;
   width: 100%;
   height: 35px;
   min-height: 35px;
