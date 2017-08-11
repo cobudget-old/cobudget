@@ -229,16 +229,18 @@
 }
 
 .group-page__manage-funds-options {
-  padding: 24px;
+  padding: 24px 44px;
   padding-top: 30px !important;
 }
 
 .group-page__manage-funds-add-btn {
   background: $cob-green !important;
+  margin-right: 0;
 }
 
 .group-page__manage-funds-change-btn {
   background: $cob-green !important;
+  margin-left: 0;
 }
 
 .group-page__manage-funds-calculation {
