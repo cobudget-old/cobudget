@@ -27,7 +27,7 @@ module.exports =
       Records.groups.findOrFetchById(groupId).then (group) ->
         group.currencyCode = currencyCode
         group.save()
-        Toast.show('You updated the currency')
+        Toast.show('You updated '+group.name)
 
     $scope.viewGroup = (groupId) ->
       $location.path("/groups/#{groupId}")

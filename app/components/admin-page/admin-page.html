@@ -23,21 +23,33 @@
               <div class="admin-page__group-info" layout="row" layout-align="start center">
                 <div class="admin-page__group-name">
                   {{ group.name }}
+                  <span class="admin-page__group-link">
+                    <md-button class="md-icon-button" ng-click="viewGroup(group.id)" aria-label="go to">
+                      <ng-md-icon icon="reply"
+                        class="admin-page__group-link-icon"
+                        layout="column"
+                        layout-align="center center"
+                      ></ng-md-icon>
+                    </md-button>
+                  </span>
                 </div>
               </div>
-              <small class="admin-page__group-link"><a ng-click="viewGroup(group.id)">go to group</a></small>
 
               <div class="admin-page__group-options">
                 <span>
-                  <md-input-container class='admin-page__currency-code-input'>
-                    <form ng-submit="updateGroupCurrency(group.id, group.currencyCode)" layout="row" layout-align="start center">
+                  <form ng-submit="updateGroupCurrency(group.id, group.currencyCode)">
+                    <md-input-container class='admin-page__currency-code-input'>
+                      <label>Name</label>
+                      <input ng-model="group.name">
+                    </md-input-container>
+                    <md-input-container class='admin-page__currency-code-input'>
                       <label>Currency</label>
                       <md-select ng-model="group.currencyCode">
                         <md-option ng-repeat="currency in currencies" value="{{currency.code}}">{{ currency.code + " - " + currency.symbol }}</md-option>
                       </md-select>
-                      <md-button class="md-raised md-primary admin-page__form-btn" type="submit">update</md-button>
-                    </form>
-                  </md-input-container>
+                    </md-input-container>
+                    <md-button class="md-raised md-primary admin-page__form-btn" type="submit">update</md-button>
+                  </form>
                 </span>
               </div>
             </div>
