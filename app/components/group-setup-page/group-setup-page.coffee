@@ -22,8 +22,10 @@ module.exports =
           LoadBar.stop()
 
     $scope.currencies = [
-      { code: 'USD', symbol: '$', default: true },
+      { code: 'USD', symbol: '$' },
       { code: 'NZD', symbol: '$' },
       { code: 'GBP', symbol: '£' },
-      { code: 'EUR', symbol: '€' }
+      { code: 'EUR', symbol: '€' },
+      { code: 'CHF', symbol: 'CHF' },
+      { code: 'JPY', symbol: '¥' }
     ]

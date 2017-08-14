@@ -12,7 +12,9 @@ module.exports =
       { code: 'USD', symbol: '$' },
       { code: 'NZD', symbol: '$' },
       { code: 'GBP', symbol: '£' },
-      { code: 'EUR', symbol: '€' }
+      { code: 'EUR', symbol: '€' },
+      { code: 'CHF', symbol: 'CHF' },
+      { code: 'JPY', symbol: '¥' }
     ]
 
     if UserCan.viewAdminPanel()
