@@ -4,28 +4,35 @@ module.exports =
       $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-  url: '/admin'
+  url: '/groups/:groupId/admin'
   template: require('./admin-page.html')
-  controller: (CurrentUser, Error, $location, Records, $scope, UserCan, Toast) ->
+  controller: (CurrentUser, Error, $location, Records, $scope, UserCan, Toast, $stateParams) ->
+
+    groupId = parseInt($stateParams.groupId)
+
+    Records.groups.findOrFetchById(groupId)
+      .then (group) ->
+        if CurrentUser().isAdminOf(group)
+          $scope.authorized = true
+          Error.clear()
+          $scope.group = group
+        else
+          $scope.authorized = false
+          Error.set("you can't view this page")
+      .catch ->
+        Error.set('group not found')
 
     $scope.currencies = [
       { code: 'USD', symbol: '$' },
       { code: 'NZD', symbol: '$' },
       { code: 'GBP', symbol: '£' },
-      { code: 'EUR', symbol: '€' }
+      { code: 'EUR', symbol: '€' },
+      { code: 'CHF', symbol: 'CHF' },
+      { code: 'JPY', symbol: '¥' }
     ]
 
-    if UserCan.viewAdminPanel()
-      $scope.authorized = true
-      Error.clear()
-      $scope.accessibleGroups = CurrentUser().administeredGroups()
-    else
-      $scope.authorized = false
-      Error.set("you can't view this page")
-
-    $scope.updateGroupCurrency = (groupId, currencyCode) ->
+    $scope.updateGroup = () ->
       Records.groups.findOrFetchById(groupId).then (group) ->
-        group.currencyCode = currencyCode
         group.save()
         Toast.show('You updated '+group.name)
 

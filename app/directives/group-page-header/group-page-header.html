@@ -60,23 +60,6 @@
         <div flex></div>
 
         <div layout="row" layout-align="center center" ng-if="currentUser.isAdminOf(group)">
-          <div class="group-page-header__admin-btn" layout="row" layout-align="center center" ng-click="openInvitePeople()">
-            <ng-md-icon icon="person_add"
-              size="19"
-              layout="column"
-              layout-align="center center"
-            ></ng-md-icon>
-            <div class="group-page-header__invite-people-btn-label">Invite People</div>
-          </div>
-
-          <div class="group-page-header__admin-btn" layout="row" layout-align="center center" ng-click="openManageFunds()">
-            <ng-md-icon icon="account_balance"
-              size="19"
-              layout="column"
-              layout-align="center center"
-            ></ng-md-icon>
-            <div class="group-page-header__manage-funds-btn-label">Manage Funds</div>
-          </div>
 
           <div class="group-page-header__admin-more-btn" ng-click="openBottomSheet()">
             <ng-md-icon icon="more_vert"
@@ -85,6 +68,65 @@
               layout-align="center center"
             ></ng-md-icon>
           </div>
+
+          <md-menu md-offset="0 -7" class="group-page-header__admin-more-menu" ng-if="currentUser.isAdminOf(group)">
+            <md-button class="md-icon-button group-page-header__admin-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+              <ng-md-icon
+                icon="more_vert"
+                layout="column"
+                layout-align="center center"
+                class="group-page-header__admin-more-button-icon"
+              >
+                <md-tooltip md-direction="top">Manage {{group.name}}</md-tooltip>
+              </ng-md-icon>
+            </md-button>
+
+            <md-menu-content width="3">
+              <md-menu-item>
+                <md-button ng-click="openManageFunds()">
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="account_balance"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page-header__admin-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page-header__admin-more-menu-item-label">Manage Funds</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+              <md-menu-item>
+                <md-button ng-click="openInvitePeople()">
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="person_add"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page-header__admin-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page-header__admin-more-menu-item-label">Invite People</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+              <md-menu-item>
+                <md-button ng-click="openAdminPanel()">
+                  <div layout="row" layout-align="start center">
+                    <ng-md-icon
+                      icon="edit"
+                      layout="column"
+                      layout-align="center center"
+                      class="group-page-header__admin-more-menu-item-icon"
+                    ></ng-md-icon>
+                    <span md-menu-align-target class="group-page-header__admin-more-menu-item-label">Admin</span>
+                  </div>
+                </md-button>
+              </md-menu-item>
+
+            </md-menu-content>
+          </md-menu>
+
         </div>
       </div>
     </div>
@@ -102,9 +144,9 @@
           <span class="group-page-header__tab-label">Funders</span>
         </md-tab-label>
       </md-tab>
-      <md-tab md-on-select="selectTab(2)" ng-if="currentUser.isAdminOf(group)">
+      <md-tab md-on-select="selectTab(2)">
         <md-tab-label>
-          <span class="group-page-header__tab-label">Admin</span>
+          <span class="group-page-header__tab-label">Activity</span>
         </md-tab-label>
       </md-tab>
     </md-tabs>

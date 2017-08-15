@@ -23,6 +23,10 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
         $location.path("/groups/#{$scope.group.id}/manage_funds")
         $mdBottomSheet.cancel()
 
+      $scope.openAdminPanel = ->
+        $location.path("/groups/#{$scope.group.id}/admin")
+        $mdBottomSheet.cancel()
+
       $scope.openBottomSheet = ->
         $mdBottomSheet.show({
           preserveScope: true
@@ -32,6 +36,7 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
             $scope.adminActions = [
               {label: 'Invite Members', onClick: $scope.openInvitePeople, icon: 'person_add'},
               {label: 'Manage Funds', onClick: $scope.openManageFunds, icon: 'account_balance'},
+              {label: 'Admin', onClick: $scope.openAdminPanel, icon: 'edit'},
               {label: 'Cancel', onClick: $mdBottomSheet.cancel, icon: 'cancel'}
             ]
         })

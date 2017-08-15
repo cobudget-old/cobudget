@@ -15,6 +15,7 @@
 
 .admin-page__form-btn {
   background: $cob-pink !important;
+  margin: 10px 0;
 }
 
 .admin-page__group-list-subheader {
@@ -28,6 +29,14 @@
 
 .admin-page__group-options {
   margin-top: 10px;
+}
+
+.admin-page__group-options md-input-container {
+  display: block;
+}
+
+.admin-page__form {
+  padding: 10px;
 }
 
 .admin-page__group-list {
