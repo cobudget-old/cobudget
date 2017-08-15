@@ -70,7 +70,7 @@
           </div>
 
           <md-menu md-offset="-50 20" md-position-mode="target-right target" class="group-page-header__admin-more-menu" ng-if="currentUser.isAdminOf(group)">
-            <md-button class="md-icon-button group-page-header__admin-more-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+            <md-button class="md-icon-button group-page-header__admin-more-button" aria-label="More" ng-click="$mdMenu.open($event)">
               <ng-md-icon
                 icon="more_vert"
                 layout="column"
