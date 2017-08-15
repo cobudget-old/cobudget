@@ -14,7 +14,7 @@
         <bucket-page-manage-card ng-if="userCanManageBucket() && !bucket.paidAt"></bucket-page-manage-card>
         <bucket-page-status-card></bucket-page-status-card>
         <bucket-page-progress-card ng-if="!bucket.isArchived() && bucket.status == 'live'"></bucket-page-progress-card>
-        <bucket-page-backers-card ng-if="bucket.status != 'draft' && bucket.status != 'refunded' && contributions.length > 0" contributions="contributions" current-user="currentUser"></bucket-page-backers-card>
+        <bucket-page-backers-card ng-if="bucket.status != 'draft' && bucket.status != 'refunded' && contributions.length > 0" contributions="contributions" current-user="currentUser" group="group"></bucket-page-backers-card>
       </div>
     </div>
 
