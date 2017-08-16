@@ -4,7 +4,7 @@ module.exports =
       $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-  url: '/groups/:groupId/admin'
+  url: '/groups/:groupId/settings'
   template: require('./admin-page.html')
   controller: (CurrentUser, Error, $location, Records, $scope, UserCan, Toast, $stateParams) ->
 
