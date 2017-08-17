@@ -93,7 +93,7 @@
             <tr ng-if="allTransactions.length > 0" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
               <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
               <td md-cell>{{transaction.user}}</td>
-              <td md-cell ng-if="transaction.type == 'Payout'" class="group-page__allocation-history-type-payout">{{transaction.type}}</td>
+              <td md-cell ng-if="transaction.type == 'Complete'" class="group-page__allocation-history-type-complete">{{transaction.type}}</td>
               <td md-cell ng-if="transaction.type == 'Allocation'" class="group-page__allocation-history-type-allocation">{{transaction.type}}</td>
               <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
               <td md-cell>{{transaction.balance | currency : group.currencySymbol : 2}}</td>

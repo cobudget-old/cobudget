@@ -16,4 +16,4 @@ global.cobudgetApp.factory 'MembershipModel', (BaseModel) ->
       !@member().isConfirmed()
 
     cancel: ->
-      @remote.postMember(@id, 'cancel')
+      @remote.postMember(@id, 'archive')

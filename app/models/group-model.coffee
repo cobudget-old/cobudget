@@ -30,7 +30,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
           'createdAt':bucket.paidAt
           'amount': bucket.totalContributions * -1
           'user': bucket.authorName
-          'type': 'Payout'
+          'type': 'Complete'
         }
 
       allocationsByDate = _.map @allocations(), (allocation) ->

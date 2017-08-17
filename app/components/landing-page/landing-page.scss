@@ -9,7 +9,6 @@
 }
 
 .landing-page__top-content {
-  position: relative;
   margin: 0 auto;
   z-index: 2;
 }
@@ -48,13 +47,13 @@
 .landing-page__logo {
   max-width: 300px;
   margin-bottom: 15px;
+  margin-left: -13px;
 }
 
 .landing-page__beta {
   font-size: 14px;
-  top: 9px;
-  position: absolute;
-  left: 292px;
+  margin-left: -10px;
+  margin-top: 5px;
 }
 
 .landing-page__form-header {
