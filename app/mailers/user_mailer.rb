@@ -24,7 +24,7 @@ class UserMailer < ActionMailer::Base
     @group = @bucket.group
     refund_amount = @bucket.contributions.where(user: funder).sum(:amount)
     @formatted_refund_amount = Money.new(refund_amount * 100, @group.currency_code).format
-    action = bucket.archived? ? "archived" : "deleted"
+    action = bucket.archived? ? "cancelled" : "deleted"
     mail(to: funder.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "#{@bucket.name} was #{action}")
