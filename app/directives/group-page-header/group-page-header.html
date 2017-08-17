@@ -35,7 +35,7 @@
                 layout="column"
                 layout-align="center center"
               >
-                <md-tooltip md-direction="top">Your funds in {{ group.name }}</md-tooltip>
+                <md-tooltip md-direction="top">Your funds</md-tooltip>
               </ng-md-icon>
               <div layout="column" layout-align="center center">
                 <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}</span>
@@ -48,7 +48,7 @@
                 layout="column"
                 layout-align="center center"
               >
-                <md-tooltip md-direction="top">Total unspent funds in {{ group.name }}</md-tooltip>
+                <md-tooltip md-direction="top">Total unspent funds</md-tooltip>
               </ng-md-icon>
               <div layout="column" layout-align="center center">
                 <span class="group-page-header__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
