@@ -36,7 +36,7 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
             $scope.adminActions = [
               {label: 'Invite Members', onClick: $scope.openInvitePeople, icon: 'person_add'},
               {label: 'Manage Funds', onClick: $scope.openManageFunds, icon: 'account_balance'},
-              {label: 'Settings', onClick: $scope.openGroupSettings, icon: 'edit'},
+              {label: 'Settings', onClick: $scope.openGroupSettings, icon: 'settings'},
               {label: 'Cancel', onClick: $mdBottomSheet.cancel, icon: 'cancel'}
             ]
         })
