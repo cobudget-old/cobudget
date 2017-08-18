@@ -19,6 +19,7 @@
       <div layout="row" class="group-page-announcements__card-container"
       ng-class="announcement.seen ? 'group-page-announcements__card-container' : 'group-page-announcements__card-container-unread'">
         <div layout="column" class="group-page-announcements__card-content">
+          <p class="group-page-announcements__card-date">{{announcement.createdAt | exactDateNoWeek}}</p>
           <h2 class="group-page-announcements__card-header">{{announcement.title}}</h2>
 
           <p class="group-page-announcements__card-description">

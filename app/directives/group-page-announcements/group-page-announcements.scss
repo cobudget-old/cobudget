@@ -32,12 +32,17 @@
   width: 100%;
 }
 
+.group-page-announcements__card-date {
+  color: $grey-on-white;
+  font-size: 12px;
+  margin: 5px 0;
+}
+
 .group-page-announcements__card-header {
-  font-size: 16px;
+  font-size: 18px;
   @include truncatedText;
-  margin-right: 30px;
   margin: 0;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .group-page-announcements__card-description {
