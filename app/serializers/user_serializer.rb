@@ -6,7 +6,8 @@ class UserSerializer < ActiveModel::Serializer
              :utc_offset,
              :confirmed_at,
              :joined_first_group_at,
-             :is_super_admin
+             :is_super_admin,
+             :last_sign_in_at
 
   has_one :subscription_tracker
 end
