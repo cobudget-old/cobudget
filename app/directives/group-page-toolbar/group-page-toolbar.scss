@@ -4,7 +4,7 @@
   position: absolute;
   top: 0;
   width: 100%;
-  background: linear-gradient(0deg, rgba(36,50,57,1), rgba(36,50,57,0.92));
+  background-color: $cobudget-gunmetal !important;
   color: white;
   height: 200px;
   z-index: 0;
@@ -12,5 +12,12 @@
 
 .group-page-toolbar__menu-icon {
   @include fontGrande;
+  color: white;
   fill: white;
+  font-size: 1.7em !important;
+}
+
+.group-page-toolbar__menu-icon-active {
+  color: $cob-pink;
+  font-size: 1.7em !important;
 }

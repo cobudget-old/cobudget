@@ -8,11 +8,6 @@
   margin: 100px auto;
 }
 
-.group-page__funders-list {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
 .group-page__funders-subheader-container {
   padding: 15px 25px;
 }
@@ -174,19 +169,19 @@
   padding: 0;
 }
 
-.group-page__funder-more-button {
-  width: 15px !important;
-  margin-left: 0 6px !important;
-  cursor: pointer;
-}
-
-.group-page__funder-more-button-icon {
-  width: 15px;
-  fill: rgba(0,0,0,0.40);
+.group-page__funder-more-button, .group-page__funder-add-button  {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .group-page__funder-add-button {
-  width: 22px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+}
+
+.group-page__funder-more-button-icon {
+  fill: rgba(0,0,0,0.40);
 }
 
 .group-page__funder-add-button-icon {
@@ -194,22 +189,6 @@
 }
 
 // funder more menu
-
-.group-page__manage-funds-icon-container {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: $cobudget-dark-grey;
-  color: white;
-  margin-right: 14px;
-  margin-left: 2px;
-}
-
-.group-page__manage-funds-icon {
-  height: 20px !important;
-  position: relative;
-  bottom: 8px;
-}
 
 .group-page__funder-more-menu-item-icon {
   margin-right: 12px;
@@ -249,42 +228,22 @@
 }
 
 .group-page__manage-funds-options {
+  padding: 24px 44px;
   padding-top: 30px !important;
 }
 
-.group-page__manage-funds-option-container-disabled {
-  border-color: $cobudget-grey;
-  color: $cobudget-grey;
-  fill: $cobudget-grey;
+.group-page__manage-funds-add-btn {
+  background: $cob-green !important;
+  margin-right: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
-.group-page__manage-funds-option-container-add {
-  border-color: $cobudget-green;
-  color: $cobudget-green;
-  fill: $cobudget-green;
-}
-
-.group-page__manage-funds-option-container-change {
-  border-color: $cobudget-pink;
-  color: $cobudget-pink;
-  fill: $cobudget-pink;
-}
-
-.group-page__manage-funds-option-icon-container {
-  border-width: 3px;
-  border-style: solid;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 12px;
-}
-
-.group-page__manage-funds-change-icon > svg {
-  width: 16px;
-}
-
-.group-page__manage-funds-option-label {
-  font-size: 15px;
+.group-page__manage-funds-change-btn {
+  background: $cob-green !important;
+  margin-left: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .group-page__manage-funds-calculation {
@@ -313,7 +272,7 @@
 }
 
 .group-page__manage-funds-input {
-  width: 80px;
+  width: 80px !important;
   display: inline-block !important;
   padding: 0 !important;
   font-weight: inherit;
@@ -347,7 +306,7 @@
 }
 
 .group-page__manage-funds-dialog-done-btn {
-  background: $cobudget-blue !important;
+  background: $cob-pink !important;
 }
 
 .md-button[disabled], .md-button.md-raised[disabled] {

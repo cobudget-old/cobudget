@@ -1,6 +1,7 @@
 .landing-page {
   width: 100%;
   background: white;
+  height: auto;
 }
 
 .landing-page__top-content-container {
@@ -8,14 +9,12 @@
 }
 
 .landing-page__top-content {
-  max-width: 1000px;
-  position: relative;
   margin: 0 auto;
   z-index: 2;
 }
 
 .landing-page__footer-content {
-  background: #000;
+  background: $cobudget-gunmetal;
   color: white;
   padding-top: 10px;
   margin-top: 50px;
@@ -48,17 +47,26 @@
 .landing-page__logo {
   max-width: 300px;
   margin-bottom: 15px;
+  margin-left: -13px;
+}
+
+.landing-page__beta {
+  font-size: 14px;
+  margin-left: -10px;
+  margin-top: 5px;
 }
 
 .landing-page__form-header {
-  font-size: 50px;
+  font-size: 94px;
   margin-top: 0;
   margin-bottom: 15px;
+  line-height: 90px;
+  font-weight: 100;
 }
 
 .landing-page__form-subheader {
   font-weight: 500;
-  font-size: 30px;
+  font-size: 20px;
   margin: 0;
   margin-bottom: 15px;
 }
@@ -108,18 +116,28 @@
   color: red;
 }
 
+.landing-page__beta-text {
+  margin-bottom: 5px;
+  color: $grey-on-white;
+}
+
+.landing-page__signin-text {
+  margin-top: 5px;
+  color: $grey-on-white;
+  font-size: 12px;
+}
+
+.landing-page__signin-text a {
+  cursor: pointer;
+}
+
 .landing-page__submit-btn {
-  font-size: 14px;
-  font-weight: bold;
-  background: #00B100 !important;
-  color: white !important;
+  font-size: 16px;
+  font-weight: 600;
+  background: $cob-pink !important;
   min-height: 37px;
-  height: 37px;
-  border: none;
-  width: 180px;
-  margin-top: 10px;
   margin-left: 0;
-  top: -2px;
+  padding: 14px 32px;
 }
 
 // virtual tour dialog
@@ -171,7 +189,7 @@
 }
 
 @media (min-width: 900px) {
-  .landing-page__logo {
+  .landing-page__logo, .landing-page__beta {
     display: none;
   }
 }
@@ -179,6 +197,11 @@
 @media (max-width: 900px) {
   .landing-page__top-content {
     margin-top: 100px;
+  }
+
+  .landing-page__form-header {
+    font-size: 50px;
+    line-height: 50px;
   }
 }
 

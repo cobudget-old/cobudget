@@ -1,25 +1,38 @@
 <div class="landing-page" layout="column" layout-fill>
   <landing-page-toolbar></landing-page-toolbar>
 
-  <main class="landing-page__top-content" layout="row" layout-align="space-around center" flex>
+  <main class="landing-page__top-content" layout="row" layout-align="center center" flex>
 
     <div class="landing-page__form-container" layout="column">
-      <img class="landing-page__logo" ng-src="/img/color_logo.svg" alt=""/>
+      <div class="" layout="row">
+        <img class="landing-page__logo" ng-src="/img/color_logo.svg" alt=""/>
+        <em class="landing-page__beta">beta</em>
+      </div>
 
       <h1 class="landing-page__form-header">Collaborative funding</h1>
 
       <h2 class="landing-page__form-subheader">Cobudget helps groups allocate funds</h2>
 
-      <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
+      <!-- <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
         <div class="landing-page__input-container">
           <input required class="landing-page__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
-          <md-button class="landing-page__submit-btn">create group</md-button>
+          <md-button class="landing-page__submit-btn" type="submit">create group</md-button>
           <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
           <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
         </div>
 
 
         <a ng-if="false" class="landing-page__virtual-tour-link" ng-click="openVirtualTourDialog()" href="">or take a virtual tour</a>
+      </form> -->
+
+      <form class="landing-page__form">
+        <div class="landing-page__input-container">
+          <p class="landing-page__beta-text">We're currently in private beta.</p>
+          <a href="https://greaterthan.typeform.com/to/pKLJ2v" target="_blank">
+            <md-button class="md-raised md-primary landing-page__submit-btn">request early access</md-button>
+          </a>
+          <p class="landing-page__signin-text">Already joined a Cobudget group? <a ng-click="redirectToLoginPage()">Sign in</a></p>
+        </div>
       </form>
     </div>
 
@@ -34,15 +47,17 @@
         <md-button class="landing-page-footer__content-btn" href="https://github.com/cobudget" target="_blank">Cobudget on Github</md-button>
 
       </div>
-      <div flex>
+      <div flex class="hide-xs">
         <md-button class="landing-page-footer__content-btn" ng-click="redirectToAboutPage()">Learn more</md-button>
       </div>
       <div flex>
-        <md-button class="landing-page-footer__content-btn" href="mailto:francesca@greater.finance" target="_blank">Contact us</md-button>
+        <md-button class="landing-page-footer__content-btn" href="mailto:hello@greater.finance" target="_blank">Contact us</md-button>
       </div>
     </div>
     <div class="landing-page__footer-love-container" layout="row" layout-align="space-around center">
-      <h6>built with ♥ by <a class="landing-page__footer-content-link" href="https://enspiral.com/" target="_blank">Enspiral</a></h6>
+      <h6>brought to you by <a class="landing-page__footer-content-link" href="https://greater.finance/" target="_blank">Greaterthan</a> //
+        from the <a class="landing-page__footer-content-link" href="https://enspiral.com/" target="_blank">Enspiral</a> ecosystem
+      </h6>
     </div>
   </footer>
 </div>

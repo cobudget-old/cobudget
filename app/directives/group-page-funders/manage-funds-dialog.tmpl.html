@@ -13,27 +13,23 @@
     <md-divider></md-divider>
 
     <div class="group-page__manage-funds-options" layout="row" layout-align="space-around center">
-      <div ng-class="mode == 'add' ? 'group-page__manage-funds-option-container-add' : 'group-page__manage-funds-option-container-disabled'"
+      <md-button class="md-raised md-primary group-page__manage-funds-add-btn"
+        ng-disabled="mode == 'add'"
         layout="column"
         layout-align="space-around center"
         ng-click="setMode('add')"
       >
-        <div class="group-page__manage-funds-option-icon-container">
-          <ng-md-icon icon="add" class="group-page__manage-funds-option-icon"></ng-md-icon>
-        </div>
-        <div class="group-page__manage-funds-option-label">Add</div>
-      </div>
+        Add
+      </md-button>
 
-      <div ng-class="mode == 'change' ? 'group-page__manage-funds-option-container-change' : 'group-page__manage-funds-option-container-disabled'"
+      <md-button class="md-raised md-primary group-page__manage-funds-change-btn"
+        ng-disabled="mode == 'change'"
         layout="column"
         layout-align="space-around center"
         ng-click="setMode('change')"
       >
-        <div class="group-page__manage-funds-option-icon-container">
-          <ng-md-icon icon="edit" class="group-page__manage-funds-option-icon group-page__manage-funds-change-icon"></ng-md-icon>
-        </div>
-        <div class="group-page__manage-funds-option-label">Change</div>
-      </div>
+        Change
+      </md-button>
     </div>
 
     <div class="group-page__manage-funds-calculation" ng-if="mode == 'add'">
@@ -51,7 +47,6 @@
           >
         </md-input-container>
       </div>
-      <div class="group-page__manage-funds-calculation-newline"></div>
       <div>
         <span class="group-page__manage-funds-operator">=</span>
         <span class="group-page__manage-funds-total-amount">
@@ -59,15 +54,16 @@
         </span>
         <span class="group-page__manage-funds-total-label">total</span>
       </div>
+      <div class="group-page__manage-funds-calculation-newline"></div>
     </div>
 
     <div class="group-page__manage-funds-calculation" ng-if="mode == 'change'">
+      <div class="group-page__manage-funds-calculation-newline"></div>
       <div>
         <span class="group-page__manage-funds-filler-text">Change from</span>
         <span class="group-page__manage-funds-current-amount">{{ managedMembership.balance | currency : group.currencySymbol : 2}}</span>
         <span class="group-page__manage-funds-filler-text">to</span>
       </div>
-      <div class="group-page__manage-funds-calculation-newline"></div>
       <div>
         <md-input-container class="group-page__manage-funds-input-container" md-no-float>
           <input placeholder="XX.XX"

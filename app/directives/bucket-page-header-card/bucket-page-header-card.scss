@@ -25,26 +25,15 @@
 
 // header card description
 
-.bucket-page__funding-target-icon {
+.bucket-page-header-card__icon {
   width: 26px;
   height: 26px;
   margin-right: 10px;
 }
 
-.bucket-page-header-card__funded-icon {
-  fill: $cob-green;
-  position: relative;
-  right: 2px;
-  margin-right: 6px;
-
-  & > svg {
-    width: 30px;
-    height: 30px;
-  }
-}
-
 .bucket-page__funding-target-text {
-  color: $cob-cyan;
+  color: $cob-pink;
+  font-weight: bold;
   font-size: 15px;
 }
 
@@ -55,6 +44,7 @@
 .bucket-page__accepted-funding-text {
   color: $cob-green;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .bucket-page__description {

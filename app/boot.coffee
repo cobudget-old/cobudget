@@ -4,12 +4,17 @@ null
 global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Records, $rootScope, Toast, $window) ->
 
   membershipsLoadedDeferred = $q.defer()
+  announcementsLoadedDeferred = $q.defer()
   global.cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise
+  global.cobudgetApp.announcementsLoaded = announcementsLoadedDeferred.promise
+
 
   $rootScope.$on 'auth:validation-success', (ev, user) ->
     global.cobudgetApp.currentUserId = user.id
     Records.memberships.fetchMyMemberships().then (data) ->
       membershipsLoadedDeferred.resolve(data)
+    Records.announcements.fetch({}).then (data) ->
+      announcementsLoadedDeferred.resolve(data)
 
   $rootScope.$on 'auth:login-error', (ev, reason) ->
     Dialog.alert(title: 'error!', content: reason.errors[0])
@@ -27,6 +32,7 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
       e.preventDefault()
       global.cobudgetApp.currentUserId = null
       membershipsLoadedDeferred.reject()
+      announcementsLoadedDeferred.reject()
       Toast.show('Please log in to continue')
       $location.path('/')
     else

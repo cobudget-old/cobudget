@@ -34,7 +34,9 @@
                 class="group-page-header__funds-icon"
                 layout="column"
                 layout-align="center center"
-              ></ng-md-icon>
+              >
+                <md-tooltip md-direction="top">Your funds</md-tooltip>
+              </ng-md-icon>
               <div layout="column" layout-align="center center">
                 <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}</span>
               </div>
@@ -45,7 +47,9 @@
                 class="group-page-header__funds-icon"
                 layout="column"
                 layout-align="center center"
-              ></ng-md-icon>
+              >
+                <md-tooltip md-direction="top">Total unspent funds</md-tooltip>
+              </ng-md-icon>
               <div layout="column" layout-align="center center">
                 <span class="group-page-header__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
               </div>
@@ -66,7 +70,7 @@
           </div>
 
           <div class="group-page-header__admin-btn" layout="row" layout-align="center center" ng-click="openManageFunds()">
-            <ng-md-icon icon="attach_money"
+            <ng-md-icon icon="account_balance"
               size="19"
               layout="column"
               layout-align="center center"

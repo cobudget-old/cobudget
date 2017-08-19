@@ -10,23 +10,11 @@ global.cobudgetApp.directive 'bucketPageManageCard', () ->
       $scope.edit = ->
         $location.path("/buckets/#{$scope.bucket.id}/edit")
 
-      $scope.archive = ->
-        archiveBucketDialog = require('./../../components/archive-bucket-dialog/archive-bucket-dialog.coffee')({
+      $scope.cancel = ->
+        cancelBucketDialog = require('./../../components/cancel-bucket-dialog/cancel-bucket-dialog.coffee')({
           scope: $scope
         })
-        Dialog.open(archiveBucketDialog)
-
-      $scope.finish = ->
-        finishBucketDialog = require('./../../components/finish-bucket-dialog/finish-bucket-dialog.coffee')({
-          scope: $scope
-        })
-        Dialog.open(finishBucketDialog)
-
-      $scope.paid = ->
-        paidBucketDialog = require('./../../components/paid-bucket-dialog/paid-bucket-dialog.coffee')({
-          scope: $scope
-        })
-        Dialog.open(paidBucketDialog)
+        Dialog.open(cancelBucketDialog)
 
       $scope.refund = ->
         refundBucketDialog = require('./../../components/refund-bucket-dialog/refund-bucket-dialog.coffee')({

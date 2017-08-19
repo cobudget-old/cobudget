@@ -9,8 +9,8 @@
 }
 
 .group-page__sidenav-toolbar {
-  background: $cobudget-happy-blue;
-  color: white;
+  background: white !important;
+  // color: black;
 }
 
 .group-page__user-avatar-container {
@@ -22,8 +22,8 @@
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  background: white;
-  color: black;
+  background: rgba(0, 0, 0, 0.27);
+  color: white;
   font-size: 40px;
   margin-bottom: 15px;
 }
@@ -33,6 +33,7 @@
   padding-top: 15px;
   padding-bottom: 15px;
   font-weight: bold;
+  color: black;
 }
 
 .group-page__sidenav-content {

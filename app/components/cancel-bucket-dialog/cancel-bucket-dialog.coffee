@@ -1,5 +1,5 @@
 module.exports = (params) ->
-  template: require('./archive-bucket-dialog.html')
+  template: require('./cancel-bucket-dialog.html')
   scope: params.scope
   controller: (Dialog, LoadBar, $location, $mdDialog, $scope) ->
 
@@ -9,7 +9,7 @@ module.exports = (params) ->
     $scope.proceed = ->
       $scope.cancel()
       LoadBar.start()
-      $scope.bucket.archive()
+      $scope.bucket.cancel()
         .then ->
           groupId = $scope.bucket.groupId
           $location.path("/groups/#{groupId}")

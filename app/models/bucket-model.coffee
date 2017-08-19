@@ -23,10 +23,10 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
     openForFunding: ->
       @remote.postMember(@id, 'open_for_funding')
 
-    archive: ->
+    cancel: ->
       @remote.postMember(@id, 'archive')
 
-    paid: ->
+    complete: ->
       @remote.postMember(@id, 'paid')
 
     hasComments: ->
@@ -49,7 +49,7 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
       @amountContributedByUser(user) / @target * 100
 
     isArchived: ->
-      !!@archivedAt
+      !!@archivedAt && !@paidAt
 
-    isPaid: ->
+    iscomplete: ->
       !!@paidAt

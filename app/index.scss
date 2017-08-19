@@ -33,6 +33,7 @@
 @import './directives/admin-toolbar/admin-toolbar.scss';
 @import './directives/landing-page-toolbar/landing-page-toolbar.scss';
 
+@import './directives/group-page-announcements/group-page-announcements.scss';
 @import './directives/group-page-sidenav/group-page-sidenav.scss';
 @import './directives/group-page-toolbar/group-page-toolbar.scss';
 @import './directives/group-page-buckets/group-page-buckets.scss';
@@ -52,9 +53,9 @@
 @import './components/bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.scss';
 @import './components/upload-csv-primer-dialog-error/upload-csv-primer-dialog-error.scss';
 @import './components/remove-membership-dialog/remove-membership-dialog.scss';
-@import './components/archive-bucket-dialog/archive-bucket-dialog.scss';
+@import './components/cancel-bucket-dialog/cancel-bucket-dialog.scss';
 @import './components/finish-bucket-dialog/finish-bucket-dialog.scss';
-@import './components/paid-bucket-dialog/paid-bucket-dialog.scss';
+@import './components/complete-bucket-dialog/complete-bucket-dialog.scss';
 @import './components/refund-bucket-dialog/refund-bucket-dialog.scss';
 
 @import './directives/error-page/error-page.scss';

@@ -7,7 +7,7 @@
 // toolbar heading
 
 .edit-bucket-page__toolbar {
-  background: $cobudget-gunmetal;
+  background: $cobudget-gunmetal !important;
   color: white;
 }
 
@@ -34,11 +34,12 @@
 // help text
 
 .edit-bucket-page__subheader-title {
-  color: $cobudget-blue;
+  color: $cob-pink;
+  padding: 0 10px;
 }
 
 .edit-bucket-page__subheader-text {
-  @include fontMedium;
+  padding: 0 10px;
 }
 
 .edit-bucket-page__subheader-text .md-subheader-inner {
@@ -50,6 +51,10 @@
 
 .edit-bucket-page__form {
   padding: 10px;
+}
+
+.edit-bucket-page__form md-input-container {
+  display: block;
 }
 
 .edit-bucket-page__target-optional-text {
@@ -66,4 +71,14 @@
   bottom: 8px;
   font-size: 12px;
   color: rgba(0,0,0,0.26);
+}
+
+.edit-bucket-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.edit-bucket-page__confirm-btn {
+  background: $cob-pink !important;
+  color: white;
 }

@@ -1,7 +1,6 @@
 // status card
 
 .bucket-page__status-card {
-  background: $cobudget-light-grey;
   width: 100%;
   margin: 0;
   margin-bottom: 16px;
@@ -18,9 +17,13 @@
   font-weight: 500;
 }
 
-.bucket-page__idea-icon {
+.bucket-page-status-card__idea-icon {
   margin-right: 15px;
-  width: 50px;
+}
+
+.bucket-page-status-card__funding-icon {
+  width: 44px;
+  margin-right: 15px;
 }
 
 .bucket-page__status {
@@ -37,7 +40,35 @@
   color: #333333;
 }
 
-.bucket-page__start-funding-btn, .bucket-page__paid-btn {
+.bucket-page__start-funding-btn, .bucket-page__complete-btn {
+  background-color: $cob-pink !important;
+  width: 100%;
+  height: 35px;
+  min-height: 35px;
+  line-height: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 3px;
+}
+
+.bucket-page__start-funding-btn:not([disabled]):hover, .bucket-page__complete-btn:not([disabled]):hover {
+  background-color: $cob-pink;
+}
+
+// funded bucket
+
+.bucket-page-status-card__funded-icon {
+  width: 44px;
+  margin-right: 15px;
+}
+
+.bucket-page-status-card__funded-status-container {
+  margin-bottom: 10px;
+}
+
+.bucket-page__accept-funding-btn, .bucket-page__complete-btn {
   background-color: $cob-green !important;
   width: 100%;
   height: 35px;
@@ -50,12 +81,10 @@
   margin-bottom: 3px;
 }
 
-.bucket-page__start-funding-btn:not([disabled]):hover, .bucket-page__paid-btn:not([disabled]):hover {
-  background-color: $cob-green;
-}
+// funded bucket
 
-.bucket-page__refund-funding-btn {
-  background-color: $cobudget-blue !important;
+.bucket-page__complete-btn, .bucket-page__complete-btn {
+  background-color: $cob-pink !important;
   width: 100%;
   height: 35px;
   min-height: 35px;
@@ -67,28 +96,12 @@
   margin-bottom: 3px;
 }
 
-.bucket-page__refund-funding-btn:not([disabled]):hover {
-  background-color: $cob-blue;
-}
+// cancelled bucket
 
-// funded bucket
-
-.bucket-page-status-card__funded-icon {
-  fill: $cob-green;
+.bucket-page-status-card__cancelled-icon {
   margin-right: 15px;
 }
 
-.bucket-page-status-card__funded-status-container {
-  margin-bottom: 10px;
-}
-
-// archived bucket
-
-.bucket-page-status-card__archived-icon {
-  fill: rgba(0,0,0,0.35);
-  margin-right: 15px;
-}
-
-.bucket-page-status-card__archived-status-container {
+.bucket-page-status-card__cancelled-status-container {
   margin-bottom: 10px;
 }
