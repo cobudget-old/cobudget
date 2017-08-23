@@ -40,7 +40,6 @@ module.exports =
       $location.path("/groups/#{groupId}")
 
     $scope.cancel = () ->
-      groupId = CurrentUser().primaryGroup().id
       $location.path("/groups/#{groupId}")
 
     return

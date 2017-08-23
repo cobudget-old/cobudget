@@ -8,12 +8,12 @@
 
   <md-card-content class="bucket-page__description">
     <div layout="row" layout-align="start center" ng-if="bucket.target > 0">
-      <img ng-src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-header-card__icon"/>
+      <img src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-header-card__icon"/>
       <span class="bucket-page__funding-target-text">Funding Target : {{ bucket.target | currency : group.currencySymbol : 0  }}</span>
     </div>
 
     <div layout="row" layout-align="start center" ng-if="bucket.status == 'funded'" class="bucket-page-header-card__accepted-funding-container">
-      <img ng-src="./img/bucket_full.svg" alt="bucket" class="bucket-page-header-card__icon"/>
+      <img src="./img/bucket_full.svg" alt="bucket" class="bucket-page-header-card__icon"/>
       <span class="bucket-page__accepted-funding-text">Accepted Funding : {{ bucket.totalContributions | currency : group.currencySymbol : 0  }}</span>
     </div>
 
