@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/settings'
   template: require('./admin-page.html')
-  controller: (CurrentUser, Error, $location, Records, $scope, UserCan, Toast, $stateParams) ->
+  controller: (CurrentUser, Error, Dialog, $location, Records, $scope, UserCan, Toast, $stateParams) ->
 
     groupId = parseInt($stateParams.groupId)
 
@@ -35,11 +35,20 @@ module.exports =
       Records.groups.findOrFetchById(groupId).then (group) ->
         group.save()
         Toast.show('You updated '+group.name)
+        $scope.cancel()
 
     $scope.viewGroup = (groupId) ->
       $location.path("/groups/#{groupId}")
 
     $scope.cancel = () ->
       $location.path("/groups/#{groupId}")
+
+    $scope.attemptCancel = (adminPageForm) ->
+      if adminPageForm.$dirty
+        Dialog.confirm({title: "Discard unsaved changes?"})
+          .then ->
+            $scope.cancel()
+      else
+        $scope.cancel()
 
     return

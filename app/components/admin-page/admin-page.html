@@ -1,7 +1,7 @@
 <div class="admin-page" ng-if="authorized">
   <md-toolbar class="md-whiteframe-z1 admin-page__toolbar">
     <div class="md-toolbar-tools">
-      <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+      <md-button class="md-icon-button" ng-click="attemptCancel(adminPageForm)" aria-label="cancel">
         <ng-md-icon icon="close"
           class="create-bucket-page__cancel-icon"
           layout="column"
@@ -16,7 +16,7 @@
     <h4 class="admin-page__group-list-subheader">Edit {{ group.name }}</h4>
 
     <div class="admin-page__group-options">
-      <form class="admin-page__form" ng-submit="updateGroup()">
+      <form name="adminPageForm" class="admin-page__form" ng-submit="updateGroup()">
         <md-input-container class='admin-page__currency-code-input'>
           <label>Name</label>
           <input ng-model="group.name">
