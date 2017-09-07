@@ -22,13 +22,13 @@ class Bucket < ActiveRecord::Base
            FROM comments
            GROUP BY bucket_id) AS com
            ON buckets.id = com.bucket_id
-           JOIN memberships 
+           JOIN memberships
            ON buckets.user_id = memberships.member_id AND buckets.group_id = memberships.group_id
            JOIN users
            ON buckets.user_id = users.id")
-    .select("buckets.*, 
-             COALESCE(contrib.total,0) AS total_contributions_db, 
-             COALESCE(count_contrib,0) AS num_of_contributors_db, 
+    .select("buckets.*,
+             COALESCE(contrib.total,0) AS total_contributions_db,
+             COALESCE(count_contrib,0) AS num_of_contributors_db,
              COALESCE(count_comments,0) AS num_of_comments_db,
              (CASE WHEN memberships.archived_at IS NULL THEN users.name ELSE '[removed user]' END) AS author_name_db")
   }
@@ -66,7 +66,7 @@ class Bucket < ActiveRecord::Base
   end
 
   def num_of_comments
-    has_attribute?(:num_of_comments_db) ? num_of_contributors_db : comments.length
+    has_attribute?(:num_of_comments_db) ? num_of_comments_db : comments.length
   end
 
   def description_as_markdown
