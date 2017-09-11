@@ -40,9 +40,8 @@
 
 .group-page-announcements__card-header {
   font-size: 18px;
-  @include truncatedText;
-  margin: 0;
   font-weight: 500;
+  margin: 0;
 }
 
 .group-page-announcements__card-description {

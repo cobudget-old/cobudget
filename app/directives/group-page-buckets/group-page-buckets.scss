@@ -104,7 +104,7 @@
 
 .group-page__live-bucket-personal-contribution {
   @include fontSmall;
-  color: $cob-green;
+  color: $cob-yellow;
 }
 
 .group-page__progress-bar-container {
@@ -120,8 +120,8 @@
 .group-page__progress-bar-primary {
   position: absolute;
   height: 100%;
+  background: $cob-green;
   left: 0;
-  background: $cob-yellow;
   z-index: 2;
   width: 0%;
   transition: 0.5s;
@@ -131,7 +131,7 @@
   position: absolute;
   height: 100%;
   left: 0;
-  background: $cob-green;
+  background: $cob-yellow;
   z-index: 1;
   width: 0%;
   transition: 0.5s;
