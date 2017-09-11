@@ -1,7 +1,11 @@
 html, body, .cobudget-app {
   position: relative;
   height: 100%;
-  background: #EAEAEA;
+  background: white;
+}
+
+a {
+  color: $cob-cyan;
 }
 
 md-toast {
@@ -28,4 +32,12 @@ input[type=number] {
 
 md-dialog-content {
   word-wrap: break-word;
+}
+
+md-content {
+  background-color: transparent;
+}
+
+md-backdrop.md-click-catcher {
+    position: fixed;
 }

@@ -18,16 +18,19 @@
   left: 50%;
   transform: translate(-50%,-50%);
 }
+md-progress-circular path {
+    stroke: $cob-cyan;
+}
 
 md-progress-circular .md-inner .md-left .md-half-circle {
-  border-left-color: $cob-cyan;
+  border-left-color: $cob-cyan !important;
 }
 
 md-progress-circular .md-inner .md-right .md-half-circle {
-  border-right-color: $cob-cyan;
+  border-right-color: $cob-cyan !important;
 }
 
 md-progress-circular .md-inner .md-left .md-half-circle,
 md-progress-circular .md-inner .md-right .md-half-circle {
-  border-top-color: $cob-cyan;
+  border-top-color: $cob-cyan !important;
 }

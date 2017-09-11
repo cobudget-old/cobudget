@@ -80,11 +80,11 @@ highchart {
 }
 
 .group-page__allocation-history-type-allocation {
-  color: #00BC8F !important;
+  color: $cob-green !important;
 }
 
-.group-page__allocation-history-type-payout {
-  color: #FF5250 !important;
+.group-page__allocation-history-type-complete {
+  color: $cob-pink !important;
 }
 
 //condense md-data-table

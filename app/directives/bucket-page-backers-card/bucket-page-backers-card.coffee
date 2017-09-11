@@ -8,6 +8,7 @@ global.cobudgetApp.directive 'bucketPageBackersCard', () ->
     scope:
       contributions: '='
       currentUser: '='
+      group: '='
     controller: ($scope) ->
       groupedContributions = _.groupBy $scope.contributions, 'userId'
 

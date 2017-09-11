@@ -27,7 +27,7 @@
   font-weight: 400 !important;
   letter-spacing: 0.02em !important;
   color: black;
-  margin-left: 4px;
+  margin-left: 10px;
   font-size: 15px !important;
 }
 
@@ -43,6 +43,7 @@
 
   .md-button {
     background: transparent !important;
+    z-index: 1;
   }
 
   &:hover {
@@ -64,13 +65,6 @@
 .group-page__bucket-subheader {
   @include fontSmall;
   color: $grey-on-white;
-}
-
-.group-page__bucket-unpaid-badge {
-  background-color: $grey-on-white;
-  color: white;
-  padding: 0 5px 2px 5px;
-  border-radius: 2px;
 }
 
 .group-page__bucket-container {
@@ -110,7 +104,7 @@
 
 .group-page__live-bucket-personal-contribution {
   @include fontSmall;
-  color: $cob-green;
+  color: $cob-yellow;
 }
 
 .group-page__progress-bar-container {
@@ -126,8 +120,8 @@
 .group-page__progress-bar-primary {
   position: absolute;
   height: 100%;
+  background: $cob-green;
   left: 0;
-  background: $cob-yellow;
   z-index: 2;
   width: 0%;
   transition: 0.5s;
@@ -137,7 +131,7 @@
   position: absolute;
   height: 100%;
   left: 0;
-  background: $cob-green;
+  background: $cob-yellow;
   z-index: 1;
   width: 0%;
   transition: 0.5s;
@@ -149,18 +143,18 @@
   fill: $cob-green;
 }
 
-// archived buckets
+// completed and cancelled buckets
 
-.group-page__bucket-list-archived-icon {
+.group-page__bucket-list-cancelled-icon, .group-page__bucket-list-completed-icon {
   fill: rgba(0,0,0,0.35);
 }
 
-.group-page-buckets__show-archived-buckets-btn-container {
+.group-page-buckets__show-cancelled-buckets-btn-container, .group-page-buckets__show-completed-buckets-btn-container {
   width: 100%;
   margin-top: 16px;
 }
 
-.group-page-buckets__show-archived-buckets-btn {
+.group-page-buckets__show-cancelled-buckets-btn, .group-page-buckets__show-completed-buckets-btn {
   background: rgba(0,0,0,0.05);
   text-transform: none;
   margin: 0 8px;
@@ -176,15 +170,19 @@
   color: rgba(0,0,0,0.6);
 }
 
-.group-page-buckets__show-archived-buckets-btn:focus {
+.group-page-buckets__show-completed-buckets-btn {
+  margin-bottom: 6px;
+}
+
+.group-page-buckets__show-cancelled-buckets-btn:focus, .group-page-buckets__show-completed-buckets-btn:focus {
   outline: none;
 }
 
-.group-page-buckets__show-archived-buckets-btn-label {
+.group-page-buckets__show-cancelled-buckets-btn-label, .group-page-buckets__show-completed-buckets-btn-label {
   margin-left: 10px;
 }
 
-.group-page-buckets__hide-archived-buckets-btn {
+.group-page-buckets__hide-cancelled-buckets-btn, .group-page-buckets__hide-completed-buckets-btn {
   margin: 0;
   border-radius: 1px;
   background: #E9E9E9;

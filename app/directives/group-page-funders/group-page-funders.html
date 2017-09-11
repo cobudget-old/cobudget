@@ -31,8 +31,8 @@
 
               <span class="group-page__funder-admin-label" ng-if="funderMembership.isAdmin">(admin)</span>
 
-              <span class="group-page__funder-admin-label" ng-if="membership.isAdmin && funderMembership.member().lastSignInAt">Last signed in {{ funderMembership.member().lastSignInAt | exactDateNoWeek }}</span>
-              <span class="group-page__funder-admin-label" ng-if="membership.isAdmin && !funderMembership.member().lastSignInAt">Funder has never signed in</span>
+              <span class="group-page__funder-admin-label" ng-if="membership.isAdmin && funderMembership.member().currentSignInAt">Last activity at {{ funderMembership.member().updatedAt | exactDateNoWeek }}</span>
+              <span class="group-page__funder-admin-label" ng-if="membership.isAdmin && !funderMembership.member().currentSignInAt">Funder has never signed in</span>
             </div>
 
             <div layout="column" layout-align="center end" class="group-page__funder-balance-container">

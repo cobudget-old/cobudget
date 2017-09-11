@@ -10,8 +10,15 @@
       </md-button>
 
       <toolbar-dropdown-menu></toolbar-dropdown-menu>
+
+      <md-button class="md-icon-button" aria-label="New" ng-click="openAnnouncements()">
+        <i class="fa fa-bullhorn fa-2x"
+          ng-class="unseenAnnoucements.length ? 'group-page-toolbar__menu-icon-active' : 'group-page-toolbar__menu-icon'"
+          aria-hidden="true"></i>
+      </md-button>
     </div>
   </md-toolbar>
 
   <group-page-sidenav></group-page-sidenav>
+  <group-page-announcements></group-page-announcements>
 </div>

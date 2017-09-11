@@ -36,7 +36,7 @@ global.cobudgetApp.directive 'groupPageStats', () ->
             xDateFormat: '%e. %b %Y',
             shared: true
           },
-          colors: ['#1EA9E3'],
+          colors: ['#2BABE2'],
           series: [{
               type: 'area',
               name: 'Balance ('+$scope.group.currencySymbol+')',

@@ -72,7 +72,7 @@
 }
 
 .group-setup-page__submit-btn {
-  @include cob-std-submit-btn;
+  background: $cob-pink !important;
   width: 78%;
   max-width: 298px;
   margin-top: 7px;

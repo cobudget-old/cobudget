@@ -7,7 +7,7 @@
 // toolbar heading
 
 .email-settings-page__toolbar {
-  background: $cobudget-gunmetal;
+  background: $cobudget-gunmetal !important;
   color: white;
 }
 
@@ -53,12 +53,8 @@
 }
 
 .email-settings-page__save-btn {
-  background: $cobudget-light-blue !important;
+  background: $cob-pink !important;
   margin: 0 !important;
   margin-top: 10px !important;
   width: 100%;
-}
-
-.email-settings-page__save-btn:disabled {
-  background: $grey-on-white !important;
 }

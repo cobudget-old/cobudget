@@ -7,7 +7,7 @@
 // toolbar heading
 
 .profile-settings-page__toolbar {
-  background: $cobudget-gunmetal;
+  background: $cobudget-gunmetal !important;
   color: white;
 }
 
@@ -84,14 +84,10 @@
 }
 
 .profile-settings-page__save-btn {
-  background: $cobudget-light-blue !important;
+  background: $cob-pink !important;
   margin: 0 !important;
   margin-top: 10px !important;
   width: 100%;
-}
-
-.profile-settings-page__save-btn:disabled {
-  background: $grey-on-white !important;
 }
 
 .profile-settings-page__input-error {

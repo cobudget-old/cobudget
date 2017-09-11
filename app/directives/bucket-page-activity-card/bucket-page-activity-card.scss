@@ -44,6 +44,10 @@
   padding: 13px 16px !important;
 }
 
+md-list-item.bucket-page__comment::before {
+  min-height: auto;
+}
+
 .bucket-page__comment-author-name {
   font-size: 15px;
   font-weight: 500;
@@ -72,6 +76,7 @@
 
 .bucket-page__comment-input-container {
   padding: 0;
+  display: block;
 }
 
 .bucket-page__comment-input {
@@ -104,6 +109,6 @@
 .bucket-page__submit-comment-btn {
   margin: 0;
   margin-top: 10px;
-  background: $cob-green !important;
+  background: $cob-pink !important;
   color: white !important;
 }

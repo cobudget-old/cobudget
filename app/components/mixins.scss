@@ -14,15 +14,14 @@ $cobudget-gold: gold;
 $cobudget-whitesmoke: #F6F6F6;
 $cobudget-red: #FF0045;
 $grey-on-white: #767676;
-$cobudget-gunmetal: #243239;
+$cobudget-gunmetal: #1b1b1b;
 $cobudget-dark-grey: #454545;
 $cobudget-pink: #FF85B7;
 
-$cob-yellow: #FFCB2A;
+$cob-yellow: rgb(255,167,38);
 $cob-cyan: #2BABE2;
-$cob-blue: #3B57F3;
-$cob-green: #15B805;
-$cob-red: #F50057;
+$cob-green: rgb(15,157,88);
+$cob-pink: #F50057;
 
 $small-height: 36px;
 $medium-height: 48px;
@@ -99,13 +98,4 @@ $large-height: 60px;
   &:focus {
     outline: none;
   }
-}
-
-@mixin cob-std-submit-btn {
-  @include fontSmall;
-  background: #00CF00 !important;
-  color: white !important;
-  min-height: 32px;
-  height: 32px;
-  border: none;
 }

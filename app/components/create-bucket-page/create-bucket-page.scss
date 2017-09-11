@@ -7,7 +7,7 @@
 // toolbar heading
 
 .create-bucket-page__toolbar {
-  background: $cobudget-gunmetal;
+  background: $cobudget-gunmetal !important;
   color: white;
 }
 
@@ -20,10 +20,6 @@
   @include fontLarge;
 }
 
-.create-bucket-page__done-button-text {
-  margin-right: 5px;
-}
-
 // content
 
 .create-bucket-page__content {
@@ -34,16 +30,13 @@
 // help text
 
 .create-bucket-page__subheader-title {
-  color: $cobudget-blue;
+  color: $cob-pink;
+  padding: 0 10px;
 }
 
 .create-bucket-page__subheader-text {
-  @include fontMedium;
-}
+  padding: 0 10px;
 
-.create-bucket-page__subheader-text .md-subheader-inner {
-  padding-top: 0;
-  padding-bottom: 0;
 }
 
 // form
@@ -52,12 +45,21 @@
   padding: 10px;
 }
 
+.create-bucket-page__form md-input-container {
+  display: block;
+}
+
+.create-bucket-page__form md-input-container md-select {
+  padding-bottom: 20px;
+}
+
 .create-bucket-page__target-optional-text {
   color: $cobudget-blue;
 }
 
 .create-bucket-page__description-container {
   position: relative;
+  margin: 18px 0;
 }
 
 .create-bucket-page__markdown-link {
@@ -66,4 +68,14 @@
   bottom: 8px;
   font-size: 12px;
   color: rgba(0,0,0,0.26);
+}
+
+.create-bucket-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.create-bucket-page__confirm-btn {
+  background: $cob-pink !important;
+  color: white;
 }

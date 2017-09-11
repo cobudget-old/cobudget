@@ -81,13 +81,13 @@
   line-height: 30px;
   min-height: 30px;
   margin: 0;
-  color: $cob-blue;
+  color: $cob-cyan;
   text-transform: none;
   font-size: 13px;
 }
 
 .login-page__submit-btn {
-  @include cob-std-submit-btn;
+  background: $cob-pink !important;
   max-width: 300px;
   width: 100%;
   margin: 0;

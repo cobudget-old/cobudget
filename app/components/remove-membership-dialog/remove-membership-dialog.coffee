@@ -7,14 +7,14 @@ module.exports = (params) ->
     $scope.warnings = [
       "All of their funds will be removed from currently funding buckets",
       "All of their funds will be removed from the group",
-      "All of their ideas will be archived",
-      "All of their funding buckets will be archived and money will be refunded"
+      "All of their ideas will be cancelled",
+      "All of their funding buckets will be cancelled and money will be refunded"
     ]
     $scope.cancel = ->
       $mdDialog.cancel()
     $scope.proceed = ->
       $mdDialog.hide()
-      membership.archive().then ->
+      membership.cancel().then ->
         Dialog.alert(
           title: 'Success!'
           content: "#{$scope.member.name} was removed from #{$scope.group.name}"
