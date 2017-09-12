@@ -71,6 +71,28 @@
   text-align: left;
 }
 
+.group-setup-page__select-field {
+  @include cob-std-input;
+  margin-top: 5px;
+  background: white;
+  width: 100%;
+  text-align: left;
+  padding: 1px 10px;
+}
+
+.group-setup-page__select-field md-select-value {
+  border: none !important;
+  padding-bottom: 1px !important;
+}
+
+.group-setup-page__select-field md-select:focus md-select-value {
+  border: none !important;
+}
+
+.group-setup-page__select-field .md-select-placeholder {
+  color: rgba(0,0,0,0.87) !important;
+}
+
 .group-setup-page__submit-btn {
   background: $cob-pink !important;
   width: 78%;

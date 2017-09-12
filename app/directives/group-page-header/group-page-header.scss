@@ -58,8 +58,12 @@
 }
 
 .group-page-header__funds-icon {
+    margin-right: 10px;
+}
+
+.group-page-header__admin-more-menu-item-icon {
   @include fontGrande;
-  margin-right: 10px;
+  margin-right: 13px;
   fill: black;
 }
 
@@ -157,7 +161,7 @@
 }
 
 @media (max-width: 670px) {
-  .group-page-header__admin-btn {
+  .group-page-header__admin-more-menu {
     display: none;
   }
 }

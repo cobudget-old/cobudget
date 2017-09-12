@@ -2,7 +2,7 @@
   <md-list>
     <md-list-item ng-repeat="action in adminActions" ng-click="action.onClick()">
       <div layout="row" layout-align="start center">
-        <ng-md-icon icon="{{ action.icon }}"
+        <ng-md-icon ng-if="action.icon == 'cancel'" icon="{{ action.icon }}"
           class="group-page-header__bottom-sheet-icon"
           layout="column"
           layout-align="center center"
