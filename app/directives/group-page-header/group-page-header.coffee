@@ -34,9 +34,9 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
           template: require('./bottom-sheet.tmpl.html')
           controller: ->
             $scope.adminActions = [
-              {label: 'Invite Members', onClick: $scope.openInvitePeople, icon: 'person_add'},
-              {label: 'Manage Funds', onClick: $scope.openManageFunds, icon: 'account_balance'},
-              {label: 'Settings', onClick: $scope.openGroupSettings, icon: 'settings'},
+              {label: 'Invite Members', onClick: $scope.openInvitePeople},
+              {label: 'Manage Funds', onClick: $scope.openManageFunds},
+              {label: 'Group Settings', onClick: $scope.openGroupSettings},
               {label: 'Cancel', onClick: $mdBottomSheet.cancel, icon: 'cancel'}
             ]
         })
