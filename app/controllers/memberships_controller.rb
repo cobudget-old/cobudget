@@ -45,7 +45,7 @@ class MembershipsController < AuthenticatedController
   api :GET, 'memberships/my_memberships?group_id', 'Get memberships for the current_user'
   def my_memberships
     memberships = Membership.with_totals.where(member_id: current_user.id).active
-    if current_user.is_super_admin && (params.key?(:group_id) && params[:group_id] != "null") && 
+    if current_user.is_super_admin && (params.key?(:group_id) && params[:group_id] != "null") &&
       group = Group.find(params[:group_id])
       print "*******************************\n\n"
       print "*******************************\n\n"
@@ -55,8 +55,9 @@ class MembershipsController < AuthenticatedController
       print group
       m = memberships.select { |m| m.group_id == group.id}.first
       # admin is not already a member of this group, make a fake membership
-      if not m 
+      if not m
         fake_membership = memberships.first.dup
+        fake_membership.id = 1
         fake_membership.is_admin = true
         fake_membership.total_contributions_db = 0
         fake_membership.total_allocations_db = 0
