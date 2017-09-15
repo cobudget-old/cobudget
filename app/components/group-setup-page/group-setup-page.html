@@ -24,6 +24,12 @@
             <div ng-if="newGroupForm.name.$error.required && newGroupForm.$submitted" class="group-setup-page__input-error">Name is required.</div>
           </div>
 
+          <div class="group-setup-page__input-container">
+            <md-select class="group-setup-page__select-field" ng-model="formData.currency" placeholder="currency">
+              <md-option ng-repeat="currency in currencies" ng-value={{currency}}>{{ currency.code + " - " + currency.symbol }}</md-option>
+            </md-select>
+          </div>
+
           <md-button class="md-raised md-primary group-setup-page__submit-btn" type="submit">let's go!</md-button>
         </form>
       </md-card-content>

@@ -11,27 +11,19 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
 
   $rootScope.$on 'auth:validation-success', (ev, user) ->
     global.cobudgetApp.currentUserId = user.id
-    pathComponents = $location.path().split('/')
-    if pathComponents[1] == "groups"
-      groupId = pathComponents[2]
-      Records.memberships.fetchByGroupId(groupId).then (data) ->
-        membershipsLoadedDeferred.resolve(data)
-    else if pathComponents[1] == "buckets"
-      bucketId = parseInt pathComponents[2]
-      console.log("bucketId")
-      console.log(bucketId)
-      Records.buckets.findOrFetchById(bucketId).then (bucket) ->
-        console.log("bucket")
-        console.log(bucket)
-        groupId = bucket.group().id
-        Records.memberships.fetchByGroupId(groupId).then (data) ->
+    if user.is_super_admin
+      pathComponents = $location.path().split('/')
+      if pathComponents[1] == "groups"
+        groupId = pathComponents[2]
+        Records.memberships.fetchOneMembership(groupId).then (data) ->
           membershipsLoadedDeferred.resolve(data)
-    else
-      groupId = null
-      Records.memberships.fetchMyMemberships().then (data) ->
-        membershipsLoadedDeferred.resolve(data)
-    console.log("groupId")
-    console.log(groupId)
+      else if pathComponents[1] == "buckets"
+        bucketId = parseInt pathComponents[2]
+        Records.buckets.findOrFetchById(bucketId).then (bucket) ->
+          groupId = bucket.group().id
+          $location.path('/groups/'+groupId)
+    Records.memberships.fetchMyMemberships().then (data) ->
+      membershipsLoadedDeferred.resolve(data)
     Records.announcements.fetch({}).then (data) ->
       announcementsLoadedDeferred.resolve(data)
 

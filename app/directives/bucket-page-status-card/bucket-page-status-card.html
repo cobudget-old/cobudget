@@ -28,7 +28,7 @@
 
       <div ng-if="bucket.status == 'live'">
         <div layout="row" layout-align="start center">
-          <img ng-src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-status-card__funding-icon"/>
+          <img src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-status-card__funding-icon"/>
           <div>
             <h3 class="bucket-page__status">Funding now</h3>
             <p class="bucket-page__status-description"><em>This bucket started funding on {{ bucket.liveAt | exactDateWithTime }}</em></p>
@@ -47,7 +47,7 @@
 
       <div ng-if="bucket.status == 'funded'">
         <div layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
-          <img ng-src="./img/bucket_full.svg" alt="bucket" class="bucket-page-status-card__funded-icon"/>
+          <img src="./img/bucket_full.svg" alt="bucket" class="bucket-page-status-card__funded-icon"/>
           <div>
             <h3 class="bucket-page__status">Funded</h3>
             <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.totalContributions | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
@@ -91,7 +91,7 @@
         </div>
       </div>
       <div ng-if="bucket.status == 'funded'" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
-        <img ng-src="./img/bucket_full.svg" alt="bucket" class="bucket-page-status-card__funded-icon"/>
+        <img src="./img/bucket_full.svg" alt="bucket" class="bucket-page-status-card__funded-icon"/>
         <div>
           <h3 class="bucket-page__status">Funded</h3>
           <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.totalContributions | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>

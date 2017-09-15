@@ -13,6 +13,12 @@ global.cobudgetApp.factory 'MembershipRecordsInterface', (config, BaseRecordsInt
       @fetch
         path: 'my_memberships'
 
+    fetchOneMembership: (groupId) ->
+      @fetch
+        path: 'my_memberships'
+        params:
+          group_id: groupId
+
     fetchByGroupId: (groupId) ->
       @fetch
         params:

@@ -8,7 +8,8 @@ global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toas
         groupId: group.id,
         memberId: global.cobudgetApp.currentUserId
       })
-      CurrentUser().isSuperAdmin || validMemberships.length == 1
+      console.log 'in view group'
+      validMemberships.length == 1
 
     viewBucket: (bucket) ->
       @viewGroup(bucket.group())
