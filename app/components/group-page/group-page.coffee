@@ -9,7 +9,7 @@ module.exports =
   params:
     openMembersTab: null
     firstTimeSeeingGroup: null
-  controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, UserCan) ->
+  controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, UserCan, $window) ->
     LoadBar.start()
 
     if $stateParams.openMembersTab
@@ -27,6 +27,8 @@ module.exports =
           Records.buckets.fetchByGroupId(groupId).then ->
             LoadBar.stop()
           Records.contributions.fetchByGroupId(groupId)
+        else if CurrentUser().isSuperAdmin
+          $window.location.reload()
         else
           $scope.authorized = false
           LoadBar.stop()
