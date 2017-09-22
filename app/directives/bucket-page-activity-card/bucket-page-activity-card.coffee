@@ -15,3 +15,12 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
           Toast.show('You posted a comment')
           $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)
           $scope.commentCreated = false
+
+      $scope.people = [
+        { label: 'Joe'},
+        { label: 'Mike'},
+        { label: 'Diane'}
+      ]
+
+      Records.memberships.fetchByGroupId($scope.group.id).then ->
+        console.log $scope.group.settledMemberships()

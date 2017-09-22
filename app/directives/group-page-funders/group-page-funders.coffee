@@ -10,6 +10,8 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
       Records.memberships.fetchByGroupId($scope.group.id).then ->
         $scope.fundersLoaded = true
 
+      console.log $scope.group.settledMemberships()
+
       $scope.toggleMemberAdmin = (membership) ->
         membership.isAdmin = !membership.isAdmin
         params =

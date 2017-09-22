@@ -1,0 +1,8 @@
+<md-menu-content class="mentio-menu" style="display:block">
+  <md-menu-item class="mentio-menu__item" mentio-menu-item="user" ng-repeat="user in items track by user.id">
+    <md-button>
+      <strong>{{user.name}}</strong>
+      {{user.username}}
+    </md-button>
+  </md-menu-item>
+</md-menu-content>

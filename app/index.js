@@ -29,6 +29,7 @@ require('angular-chart.js')
 require('angular-autodisable/angular-autodisable')
 require('highcharts-ng')
 require('angular-material-data-table')
+require('ment.io')
 
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
@@ -52,7 +53,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'chart.js',
   'ngAutodisable',
   'highcharts-ng',
-  'md.data.table'
+  'md.data.table',
+  'mentio'
 ])
 .constant('config', require('app/configs/app'))
 
