@@ -24,6 +24,7 @@ module.exports =
     $scope.currencies = [
       { code: 'USD', symbol: '$' },
       { code: 'NZD', symbol: '$' },
+      { code: 'CAD', symbol: '$' },
       { code: 'GBP', symbol: '£' },
       { code: 'EUR', symbol: '€' },
       { code: 'CHF', symbol: 'CHF' },
