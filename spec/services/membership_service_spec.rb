@@ -134,8 +134,8 @@ describe "MembershipService" do
       memberships = create_list(:membership, 2)
       csv_string = MembershipService.generate_csv(memberships: memberships)
       expect(CSV.parse(csv_string)).to eq([
-        [memberships.first.member.email, memberships.first.balance.to_f.to_s],
-        [memberships.last.member.email, memberships.last.balance.to_f.to_s],
+        [memberships.first.member.email, memberships.first.balance.to_f.to_s, memberships.first.member.updated_at.strftime("%b %-d %Y")],
+        [memberships.last.member.email, memberships.last.balance.to_f.to_s, memberships.last.member.updated_at.strftime("%b %-d %Y")],
       ])
     end
   end
