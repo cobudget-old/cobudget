@@ -28,6 +28,14 @@ class MembershipService
     end
   end
 
+  def self.generate_admin_csv(memberships:)
+    CSV.generate do |csv|
+      memberships.each do |membership|
+        csv << [membership.member.email, membership.member.name, membership.group.name]
+      end
+    end
+  end
+
   def self.check_csv_for_errors(csv: )
     errors = []
     if csv.nil? || csv.empty?
