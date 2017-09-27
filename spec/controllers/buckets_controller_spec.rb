@@ -347,7 +347,7 @@ RSpec.describe BucketsController, type: :controller do
           recipients = sent_emails.map { |email| email.to.first }
           contributor_emails = @memberships.map { |membership| membership.member.email }
           expect(recipients).to match_array(contributor_emails)
-          expect(sent_emails.first.body).to include("archived")
+          expect(sent_emails.first.body).to include("cancelled")
         end
 
         it "returns bucket as json" do
@@ -385,7 +385,7 @@ RSpec.describe BucketsController, type: :controller do
           recipients = sent_emails.map { |email| email.to.first }
           contributor_emails = @memberships.map { |membership| membership.member.email }
           expect(recipients).to match_array(contributor_emails)
-          expect(sent_emails.first.body).to include("archived")
+          expect(sent_emails.first.body).to include("cancelled")
         end
 
         it "returns bucket as json" do
@@ -421,7 +421,7 @@ RSpec.describe BucketsController, type: :controller do
           recipients = sent_emails.map { |email| email.to.first }
           contributor_emails = @memberships.map { |membership| membership.member.email }
           expect(recipients).to match_array(contributor_emails)
-          expect(sent_emails.first.body).to include("archived")
+          expect(sent_emails.first.body).to include("cancelled")
         end
 
         it "returns bucket as json" do
