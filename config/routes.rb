@@ -65,6 +65,7 @@ Rails.application.routes.draw do
 
     get "/analytics/report", to: "analytics#report"
     get "/groups/:id/analytics", to: "analytics#group_report"
+    get "/analytics/admins", to: "analytics#admins"
 
     get "/announcements", to: "announcements#index"
     post "/announcements/seen", to: "announcements#seen"
