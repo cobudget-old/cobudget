@@ -23,6 +23,9 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
           groupId = bucket.group().id
           Records.memberships.fetchMyMembershipsSuper(groupId).then (data) ->
             membershipsLoadedDeferred.resolve(data)
+      else
+        Records.memberships.fetchMyMemberships().then (data) ->
+          membershipsLoadedDeferred.resolve(data)
     else
       Records.memberships.fetchMyMemberships().then (data) ->
         membershipsLoadedDeferred.resolve(data)
