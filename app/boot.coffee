@@ -15,15 +15,17 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
       pathComponents = $location.path().split('/')
       if pathComponents[1] == "groups"
         groupId = pathComponents[2]
-        Records.memberships.fetchOneMembership(groupId).then (data) ->
+        Records.memberships.fetchMyMembershipsSuper(groupId).then (data) ->
           membershipsLoadedDeferred.resolve(data)
       else if pathComponents[1] == "buckets"
         bucketId = parseInt pathComponents[2]
         Records.buckets.findOrFetchById(bucketId).then (bucket) ->
           groupId = bucket.group().id
-          $location.path('/groups/'+groupId)
-    Records.memberships.fetchMyMemberships().then (data) ->
-      membershipsLoadedDeferred.resolve(data)
+          Records.memberships.fetchMyMembershipsSuper(groupId).then (data) ->
+            membershipsLoadedDeferred.resolve(data)
+    else
+      Records.memberships.fetchMyMemberships().then (data) ->
+        membershipsLoadedDeferred.resolve(data)
     Records.announcements.fetch({}).then (data) ->
       announcementsLoadedDeferred.resolve(data)
 
