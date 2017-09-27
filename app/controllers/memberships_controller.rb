@@ -47,12 +47,6 @@ class MembershipsController < AuthenticatedController
     memberships = Membership.with_totals.where(member_id: current_user.id).active
     if current_user.is_super_admin && (params.key?(:group_id) && params[:group_id] != "null") &&
       group = Group.find(params[:group_id])
-      print "*******************************\n\n"
-      print "*******************************\n\n"
-      print "*******************************\n\n"
-      print "*******************************\n\n"
-      print "*******************************\n\n"
-      print group
       m = memberships.select { |m| m.group_id == group.id}.first
       # admin is not already a member of this group, make a fake membership
       if not m
