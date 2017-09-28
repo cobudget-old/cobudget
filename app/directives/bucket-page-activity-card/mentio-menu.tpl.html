@@ -1,8 +1,7 @@
 <md-menu-content class="mentio-menu" style="display:block">
-  <md-menu-item class="mentio-menu__item" mentio-menu-item="user" ng-repeat="user in items track by user.id">
+  <md-menu-item class="mentio-menu__item" mentio-menu-item="user" ng-repeat="user in items track by $index">
     <md-button>
-      <strong>{{user.name}}</strong>
-      {{user.username}}
+      <strong>{{user.label}}</strong>
     </md-button>
   </md-menu-item>
 </md-menu-content>

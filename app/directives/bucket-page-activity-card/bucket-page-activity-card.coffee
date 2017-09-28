@@ -23,4 +23,5 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
       ]
 
       Records.memberships.fetchByGroupId($scope.group.id).then ->
-        console.log $scope.group.settledMemberships()
+        $scope.users = _.map $scope.group.settledMemberships(), (membership) ->
+          {label: membership.member().name}
