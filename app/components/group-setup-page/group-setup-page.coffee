@@ -15,7 +15,7 @@ module.exports =
     $scope.createGroup = (formData) ->
       LoadBar.start()
       Records.groups.build(name: formData.name, currencyCode: formData.currency.code, currencySymbol: formData.currency.symbol).save().then ->
-        Records.memberships.fetchMyMemberships().then (data) ->
+        Records.memberships.fetchMyMemberships(group.id).then (data) ->
           newGroup = _.find data.groups, (group) ->
             group.name == formData.name
           $state.go('group', {groupId: newGroup.id, firstTimeSeeingGroup: true})
