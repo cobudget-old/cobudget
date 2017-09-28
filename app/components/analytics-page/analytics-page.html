@@ -25,7 +25,7 @@
   <div ng-repeat="group in data.group_data | orderBy:propertyName:reverse">
     <table class="analytics-page__group-data-table">
       <tr>
-        <th colspan="4"> {{ group.name }} </th>
+        <th colspan="4"> {{ group.name }} <a href="/#/groups/{{group.id}}">({{ group.id }})</a> </th>
       </tr>
       <tr class="analytics-page__group-data-table-header">
         <td>age</td>
