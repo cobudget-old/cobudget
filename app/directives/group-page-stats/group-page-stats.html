@@ -57,51 +57,59 @@
     </md-list>
   </md-card>
 
-  <div ng-if="allocationsLoaded">
+  <div>
     <md-card class="group-page__allocation-history-card">
 
       <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
-        <h2 class="group-page__subheader-title">Group Transaction History</h2>
+        <h2 class="group-page__subheader-title">Transaction History</h2>
       </div>
 
       <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
 
 
-      <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
+      <!-- <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
         <highchart ng-if="allTransactions.length > 0" id="allocation-history" config="chartConfig"></highchart>
-      </div>
+      </div> -->
 
       <md-table-container>
         <table md-table multiple ng-model="allTransactions">
           <thead md-head md-order="initialOrder">
             <tr md-row>
-              <th md-column md-order-by="createdAt">Date</th>
-              <th md-column md-order-by="user">Name</th>
-              <th md-column md-order-by="type">Type</th>
+              <th md-column md-column-filter md-order-by="createdAt">Date</th>
+              <th md-column md-column-filter md-order-by="type">Account from</th>
+              <th md-column md-order-by="user">Account to</th>
               <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
-              <th md-column md-order-by="balance">Balance ({{group.currencySymbol}})</th>
+              <!-- <th md-column md-order-by="balance">Balance ({{group.currencySymbol}})</th> -->
             </tr>
           </thead>
           <tbody md-body>
+            <tr ng-if="!allocationsLoaded" md-row>
+              <td md-cell>Loading data...</td>
+              <td md-cell></td>
+              <td md-cell></td>
+              <td md-cell></td>
+              <!-- <td md-cell></td> -->
+            </tr>
             <tr ng-if="allTransactions.length == 0" md-row>
               <td md-cell>No transaction history</td>
               <td md-cell></td>
               <td md-cell></td>
               <td md-cell></td>
-              <td md-cell></td>
+              <!-- <td md-cell></td> -->
             </tr>
-            <tr ng-if="allTransactions.length > 0" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
+            <tr ng-if="allTransactions.length > 0 && allocationsLoaded" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
               <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
-              <td md-cell>{{transaction.user}}</td>
-              <td md-cell ng-if="transaction.type == 'Complete'" class="group-page__allocation-history-type-complete">{{transaction.type}}</td>
-              <td md-cell ng-if="transaction.type == 'Allocation'" class="group-page__allocation-history-type-allocation">{{transaction.type}}</td>
+              <td md-cell ng-if="transaction.type == 'Complete'">{{transaction.user}}</td>
+              <td md-cell ng-if="transaction.type == 'Allocation'">{{group.name}} Admin</td>
+              <td md-cell ng-if="transaction.type == 'Complete'"><a href="/#/buckets/{{transaction.bucketId}}">{{transaction.name}}</a></td>
+              <td md-cell ng-if="transaction.type == 'Allocation'">{{transaction.user}}</td>
               <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
-              <td md-cell>{{transaction.balance | currency : group.currencySymbol : 2}}</td>
+              <!-- <td md-cell>{{transaction.balance | currency : group.currencySymbol : 2}}</td> -->
             </tr>
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-limit="transactionLimit" md-page="startingPage" md-total="{{allTransactions.length}}"></md-table-pagination>
+      <md-table-pagination md-limit="transactionLimit" md-page="startingPage" md-page-select md-boundary-links md-total="{{allTransactions.length}}"></md-table-pagination>
     </md-card>
   </div>
 </div>

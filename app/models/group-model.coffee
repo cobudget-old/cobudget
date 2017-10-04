@@ -28,8 +28,10 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       paymentsByDate = _.map @completeBuckets(), (bucket) ->
         {
           'createdAt':bucket.paidAt
-          'amount': bucket.totalContributions * -1
+          'amount': bucket.totalContributions
           'user': bucket.authorName
+          'name': bucket.name
+          'bucketId': bucket.id
           'type': 'Complete'
         }
 
