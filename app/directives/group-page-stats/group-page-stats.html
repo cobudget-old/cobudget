@@ -83,7 +83,7 @@
             </tr>
           </thead>
           <tbody md-body>
-            <tr ng-if="!allocationsLoaded" md-row>
+            <tr ng-if="!transactionsLoaded" md-row>
               <td md-cell>Loading data...</td>
               <td md-cell></td>
               <td md-cell></td>
@@ -97,7 +97,7 @@
               <td md-cell></td>
               <!-- <td md-cell></td> -->
             </tr>
-            <tr ng-if="allTransactions.length > 0 && allocationsLoaded" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
+            <tr ng-if="allTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
               <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
               <td md-cell ng-if="transaction.type == 'Complete'">{{transaction.user}}</td>
               <td md-cell ng-if="transaction.type == 'Allocation'">{{group.name}} Admin</td>

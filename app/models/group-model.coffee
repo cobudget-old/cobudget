@@ -25,15 +25,22 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @completeBuckets()
 
     allTransactions: ->
+      console.log @completeBuckets()
       paymentsByDate = _.map @completeBuckets(), (bucket) ->
-        {
-          'createdAt':bucket.paidAt
-          'amount': bucket.totalContributions
-          'user': bucket.authorName
-          'name': bucket.name
-          'bucketId': bucket.id
-          'type': 'Complete'
-        }
+        console.log 'hii'
+        console.log bucket.id
+        # console.log bucket.contributionsByBucket(bucket)
+        contributionsByBucket = _.map bucket.contributionsByBucket(bucket), (contribution) ->
+          {
+            'createdAt': bucket.paidAt
+            'comments': bucket.numOfComments
+            'amount': bucket.totalContributions
+            'user': bucket.authorName
+            'name': bucket.name
+            'bucketId': bucket.id
+            'contributions': contribution.id
+            'type': 'Complete'
+          }
 
       allocationsByDate = _.map @allocations(), (allocation) ->
         {
