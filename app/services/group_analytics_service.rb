@@ -12,10 +12,6 @@ class GroupAnalyticsService
 
   def report
     {
-      # cumulative_confirmed_member_count_per_day: cumulative_confirmed_member_count_per_day,
-      # contribution_amounts_per_day: contribution_amounts_per_day,
-      # allocation_amounts_per_day: allocation_amounts_per_day,
-      # comment_counts_per_day: comment_counts_per_day
       group_data: group_data
     }
   end
