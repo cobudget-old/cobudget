@@ -12,14 +12,51 @@ class GroupAnalyticsService
 
   def report
     {
-      cumulative_confirmed_member_count_per_day: cumulative_confirmed_member_count_per_day,
-      contribution_amounts_per_day: contribution_amounts_per_day,
-      allocation_amounts_per_day: allocation_amounts_per_day,
-      comment_counts_per_day: comment_counts_per_day
+      # cumulative_confirmed_member_count_per_day: cumulative_confirmed_member_count_per_day,
+      # contribution_amounts_per_day: contribution_amounts_per_day,
+      # allocation_amounts_per_day: allocation_amounts_per_day,
+      # comment_counts_per_day: comment_counts_per_day
+      group_data: group_data
     }
   end
 
   private
+
+    def group_data
+      allocations = group.allocations.all
+      allocations_array = allocations.map do |allocation|
+        {
+          id: allocation.id,
+          createdAt: allocation.created_at,
+          amount: allocation.amount,
+          accountTo: allocation.user.name,
+          accountFrom: group.name + ' Admin',
+          type: 'Allocation'
+        }
+      end
+
+      contributions_array = []
+
+      group.buckets.where.not(paid_at: nil).map do |bucket|
+        contributions = Contribution.where(bucket_id: bucket.id)
+        contributions.map do |contribution|
+          new_contibution = {
+            id: contribution.id,
+            createdAt: bucket.paid_at,
+            amount: contribution.amount,
+            accountTo: bucket.name,
+            accountFrom: contribution.user.name,
+            bucketId: bucket.id,
+            type: 'Contribution'
+          }
+          contributions_array << new_contibution
+        end
+      end
+
+      allocations_array + contributions_array
+
+    end
+
     def cumulative_confirmed_member_count_per_day
       data = User.where(id: confirmed_group_member_ids).group_by_day(:created_at).count
       total_users = 0
