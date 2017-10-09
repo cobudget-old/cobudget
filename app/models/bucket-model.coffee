@@ -35,10 +35,6 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
     contributionsByUser: (user) ->
       @recordStore.contributions.find(bucketId: @id, userId: user.id)
 
-    contributionsByBucket: () ->
-      # console.log @recordStore.contributions.fetchByBucketId(bucketId: @id)
-      @recordStore.contributions.fetchByBucketId(@id)
-
     amountContributedByUser: (user) ->
       _.sum @contributionsByUser(user), (contribution) ->
         contribution.amount

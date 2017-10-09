@@ -66,11 +66,6 @@
 
       <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
 
-
-      <!-- <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
-        <highchart ng-if="allTransactions.length > 0" id="allocation-history" config="chartConfig"></highchart>
-      </div> -->
-
       <md-table-container>
         <table md-table multiple ng-model="allTransactions">
           <thead md-head md-order="initialOrder">
@@ -79,7 +74,6 @@
               <th md-column md-column-filter md-order-by="type">Account from</th>
               <th md-column md-order-by="user">Account to</th>
               <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
-              <!-- <th md-column md-order-by="balance">Balance ({{group.currencySymbol}})</th> -->
             </tr>
           </thead>
           <tbody md-body>
@@ -88,23 +82,19 @@
               <td md-cell></td>
               <td md-cell></td>
               <td md-cell></td>
-              <!-- <td md-cell></td> -->
             </tr>
             <tr ng-if="allTransactions.length == 0" md-row>
               <td md-cell>No transaction history</td>
               <td md-cell></td>
               <td md-cell></td>
               <td md-cell></td>
-              <!-- <td md-cell></td> -->
             </tr>
             <tr ng-if="allTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
               <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
-              <td md-cell ng-if="transaction.type == 'Complete'">{{transaction.user}}</td>
-              <td md-cell ng-if="transaction.type == 'Allocation'">{{group.name}} Admin</td>
-              <td md-cell ng-if="transaction.type == 'Complete'"><a href="/#/buckets/{{transaction.bucketId}}">{{transaction.name}}</a></td>
-              <td md-cell ng-if="transaction.type == 'Allocation'">{{transaction.user}}</td>
+              <td md-cell>{{transaction.accountFrom}}</td>
+              <td md-cell ng-if="transaction.type == 'Contribution'"><a href="/#/buckets/{{transaction.bucketId}}">{{transaction.accountTo}}</a></td>
+              <td md-cell ng-if="transaction.type == 'Allocation'">{{transaction.accountTo}}</td>
               <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
-              <!-- <td md-cell>{{transaction.balance | currency : group.currencySymbol : 2}}</td> -->
             </tr>
           </tbody>
         </table>
