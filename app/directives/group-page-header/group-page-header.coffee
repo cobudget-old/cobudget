@@ -13,7 +13,7 @@ global.cobudgetApp.directive 'groupPageHeader', () ->
       $scope.selectTab = (tabNum) ->
         $scope.tabSelected = parseInt tabNum
 
-      $scope.selectTab(2)
+      $scope.selectTab(0)
 
       $scope.openInvitePeople = ->
         $location.path("/groups/#{$scope.group.id}/invite_members")
