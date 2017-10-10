@@ -68,7 +68,7 @@
   margin-bottom: 1px;
 }
 
-// allocation card
+// transaction card
 
 highchart {
   width: 100%;
@@ -77,6 +77,18 @@ highchart {
 
 .highcharts-credits {
   display: none;
+}
+
+.group-page__transaction-history-search-icon {
+  padding-top: 10px;
+}
+
+.group-page__transaction-history-search-input {
+  border: 0;
+  padding-left: 15px;
+  &:focus {
+    outline: none;
+  }
 }
 
 //condense md-data-table

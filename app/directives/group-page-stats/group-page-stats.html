@@ -58,21 +58,30 @@
   </md-card>
 
   <div>
-    <md-card class="group-page__allocation-history-card">
+    <md-card class="group-page__transaction-history-card">
 
       <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
         <h2 class="group-page__subheader-title">Transaction History</h2>
       </div>
 
-      <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
+      <md-divider class="group-page__transaction-history-subheader-divider"></md-divider>
+
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <ng-md-icon class="group-page__transaction-history-search-icon" icon="search"></ng-md-icon>
+          <form flex name="filter.form">
+            <input class="group-page__transaction-history-search-input" type="text" ng-model="query" placeholder="search">
+          </form>
+        </div>
+      </md-toolbar>
 
       <md-table-container>
-        <table md-table multiple ng-model="allTransactions">
+        <table md-table multiple ng-model="filteredTransactions">
           <thead md-head md-order="initialOrder">
             <tr md-row>
               <th md-column md-column-filter md-order-by="createdAt">Date</th>
-              <th md-column md-column-filter md-order-by="type">Account from</th>
-              <th md-column md-order-by="user">Account to</th>
+              <th md-column md-column-filter md-order-by="accountFrom">Account from</th>
+              <th md-column md-order-by="accountTo">Account to</th>
               <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
             </tr>
           </thead>
@@ -83,13 +92,13 @@
               <td md-cell></td>
               <td md-cell></td>
             </tr>
-            <tr ng-if="allTransactions.length == 0" md-row>
+            <tr ng-if="filteredTransactions.length == 0" md-row>
               <td md-cell>No transaction history</td>
               <td md-cell></td>
               <td md-cell></td>
               <td md-cell></td>
             </tr>
-            <tr ng-if="allTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
+            <tr ng-if="filteredTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in filteredTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
               <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
               <td md-cell>{{transaction.accountFrom}}</td>
               <td md-cell ng-if="transaction.type == 'Contribution'"><a href="/#/buckets/{{transaction.bucketId}}">{{transaction.accountTo}}</a></td>
@@ -99,7 +108,7 @@
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-limit="transactionLimit" md-page="startingPage" md-page-select md-boundary-links md-total="{{allTransactions.length}}"></md-table-pagination>
+      <md-table-pagination md-limit="transactionLimit" md-page="startingPage" md-page-select md-boundary-links md-total="{{filteredTransactions.length}}"></md-table-pagination>
     </md-card>
   </div>
 </div>
