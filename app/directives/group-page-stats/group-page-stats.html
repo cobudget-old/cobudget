@@ -70,7 +70,7 @@
         <div class="md-toolbar-tools">
           <ng-md-icon class="group-page__transaction-history-search-icon" icon="search"></ng-md-icon>
           <form flex name="filter.form">
-            <input class="group-page__transaction-history-search-input" type="text" ng-model="query" placeholder="search">
+            <input class="group-page__transaction-history-search-input" type="text" ng-model="query" placeholder="search" ng-disabled="!transactionsLoaded">
           </form>
         </div>
       </md-toolbar>
