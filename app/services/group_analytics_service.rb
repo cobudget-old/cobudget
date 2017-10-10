@@ -33,12 +33,12 @@ class GroupAnalyticsService
 
       contributions_array = []
 
-      group.buckets.where.not(paid_at: nil).map do |bucket|
+      group.buckets.where.not(funded_at: nil).map do |bucket|
         contributions = Contribution.where(bucket_id: bucket.id)
         contributions.map do |contribution|
           new_contibution = {
             id: contribution.id,
-            createdAt: bucket.paid_at,
+            createdAt: bucket.funded_at,
             amount: contribution.amount,
             accountTo: bucket.name,
             accountFrom: contribution.user.name,
