@@ -134,6 +134,18 @@ LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contribu
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
 GROUP BY memberships.group_id;
 
+## Buckets where staus is funded and there's no paid_at date 
+
+SELECT groups.name, buckets.id, buckets.group_id, buckets.status, buckets.funded_at, buckets.paid_at,
+       buckets.archived_at, contrib.total
+FROM buckets
+LEFT JOIN (SELECT bucket_id, sum(amount) AS total
+           FROM contributions
+           GROUP BY bucket_id) AS contrib
+           ON buckets.id = contrib.bucket_id
+INNER JOIN groups ON groups.id = buckets.group_id
+WHERE buckets.paid_at IS NULL;
+
 ## Groups with money left in archived users
 
 SELECT memberships.group_id, groups.name, sum(alloc.total_allocations), sum(contrib.total_contributions), 
@@ -171,7 +183,16 @@ LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contribu
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
 WHERE memberships.group_id = 41 and memberships.archived_at IS NOT NULL;
 
+## Partially funded buckets
 
+SELECT buckets.id, buckets.name, buckets.group_id, buckets.status, buckets.funded_at, buckets.paid_at,
+       contrib.total
+FROM buckets
+LEFT JOIN (SELECT bucket_id, sum(amount) AS total
+           FROM contributions
+           GROUP BY bucket_id) AS contrib
+           ON buckets.id = contrib.bucket_id
+WHERE buckets.paid_at IS NULL AND buckets.group_id = 41;
 
 # Workspace
 
