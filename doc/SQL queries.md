@@ -134,6 +134,24 @@ LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contribu
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
 GROUP BY memberships.group_id;
 
+## Groups with money left in archived users
+
+SELECT memberships.group_id, groups.name, sum(alloc.total_allocations), sum(contrib.total_contributions), 
+       sum(alloc.total_allocations - COALESCE(contrib.total_contributions,0)) AS diff
+FROM memberships
+LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations
+           FROM allocations
+           GROUP BY user_id, group_id) AS alloc
+           ON memberships.member_id = alloc.user_id AND memberships.group_id = alloc.group_id
+LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contributions
+           FROM contributions, buckets
+           WHERE contributions.bucket_id = buckets.id
+           GROUP BY contributions.user_id, buckets.group_id) as contrib
+           ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
+INNER JOIN groups ON groups.id = memberships.group_id
+WHERE memberships.archived_at IS NOT NULL
+GROUP BY memberships.group_id, groups.name;
+
 # Some enspiral queries
 
 ## Amount left for all archived members
