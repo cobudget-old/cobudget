@@ -75,4 +75,9 @@ Vagrant.configure("2") do |config|
     sudo -u postgres createuser ubuntu -s
     gem install mailcatcher
   SHELL
+  config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+
+  # Setup SSH forwarding
+  config.ssh.forward_agent = true
+
 end
