@@ -34,7 +34,7 @@ class AllocationsController < AuthenticatedController
     allocation = Allocation.new(allocation_params)
     if allocation.save
       if notify && (amount > 0)
-        UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_now
+        UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_later
       end
       render json: [allocation], status: 201
     else
