@@ -11,7 +11,7 @@ class AllocationService
         allocation_amount = row[1]
         errors << "malformed email address: #{email}" unless /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/.match(email)
         if is_valid_float?(allocation_amount)
-          allocation_amount = allocation_amount.to_f
+          allocation_amount = allocation_amount.to_d
           if allocation_amount_overdrafts_member?(amount: allocation_amount, group: group, email: email)
             membership = membership_for(group: group, email: email)
             balance = membership ? membership.raw_balance : 0
