@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <md-divider ng-if="bucket.status == 'live'"></md-divider>
+    <md-divider ng-if="bucket.isFunding()"></md-divider>
 
     <div class="finish-bucket-dialog__details-container">
       <div class="finish-bucket-dialog__final-caution">

@@ -8,7 +8,7 @@
           layout-align="center center"
         ></ng-md-icon>
       </md-button>
-      <span class="edit-bucket-page__header-text">Edit {{ bucket.status == 'draft' ? 'Idea' : 'Bucket' }}</span>
+      <span class="edit-bucket-page__header-text">Edit {{ bucket.isIdea() ? 'Idea' : 'Bucket' }}</span>
     </div>
   </md-toolbar>
 
@@ -20,7 +20,7 @@
     <div>
       <p class="edit-bucket-page__subheader-text">
         You can continue to edit this bucket, propose it to your peers, and get feedback.
-        <span ng-if="bucket.status == 'draft'">When you're ready, you can request funding.</span>
+        <span ng-if="bucket.isIdea()">When you're ready, you can request funding.</span>
       </p>
     </div>
 
@@ -46,7 +46,7 @@
 
       <md-input-container>
         <label>Funding Target (required for funding)</label>
-        <input ng-disabled="bucket.status != 'draft'" name="target" min="1" type="text" ng-model="bucket.target" only-digits>
+        <input ng-disabled="!bucket.isIdea()" name="target" min="1" type="text" ng-model="bucket.target" only-digits>
         <div ng-messages="bucketForm.target.$error" multiple>
           <div ng-message="required">This is required.</div>
           <div ng-message="min">Bucket target must be greater than zero</div>
