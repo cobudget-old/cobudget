@@ -79,9 +79,9 @@
         <table md-table multiple ng-model="filteredTransactions">
           <thead md-head md-order="initialOrder">
             <tr md-row>
-              <th md-column md-column-filter md-order-by="createdAt">Date</th>
-              <th md-column md-column-filter md-order-by="accountFrom">Account from</th>
-              <th md-column md-order-by="accountTo">Account to</th>
+              <th md-column md-column-filter md-order-by="created_at">Date</th>
+              <th md-column md-column-filter md-order-by="account_from">Account from</th>
+              <th md-column md-order-by="account_to">Account to</th>
               <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
             </tr>
           </thead>
@@ -99,10 +99,10 @@
               <td md-cell></td>
             </tr>
             <tr ng-if="filteredTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in filteredTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
-              <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
-              <td md-cell>{{transaction.accountFrom}}</td>
-              <td md-cell ng-if="transaction.type == 'Contribution'"><a href="/#/buckets/{{transaction.bucketId}}">{{transaction.accountTo}}</a></td>
-              <td md-cell ng-if="transaction.type == 'Allocation'">{{transaction.accountTo}}</td>
+              <td md-cell>{{transaction.created_at | exactDateShort}}</td>
+              <td md-cell>{{transaction.account_from}}</td>
+              <td md-cell ng-if="transaction.to_link != ''"><a href="/#/{{transaction.to_link}}">{{transaction.account_to}}</a></td>
+              <td md-cell ng-if="transaction.to_link == ''">{{transaction.account_to}}</td>
               <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
             </tr>
           </tbody>

@@ -18,7 +18,7 @@ global.cobudgetApp.directive 'groupPageStats', () ->
           $scope.transactionsLoaded = true
           $scope.allTransactions = res.data.group_data
           $scope.filteredTransactions = $scope.allTransactions
-          $scope.initialOrder = '-createdAt'
+          $scope.initialOrder = '-created_at'
           $scope.transactionLimit = 10
           $scope.startingPage = 1
 
