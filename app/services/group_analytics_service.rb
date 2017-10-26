@@ -18,13 +18,13 @@ class GroupAnalyticsService
 
     def group_data
       Group.connection.select_all(%(
-        SELECT users.name AS accountto, groups.name || ' Admin' as accountfrom, amount, allocations.created_at, '' AS to_link
+        SELECT users.name AS account_to, groups.name || ' Admin' as account_from, amount.to_f, allocations.created_at, '' AS to_link
         FROM allocations
         INNER JOIN users ON allocations.user_id = users.id
         INNER JOIN groups ON allocations.group_id = groups.id
         WHERE group_id = #{@group.id}
         UNION
-        SELECT buckets.name AS accountto, users.name AS accountfrom, amount, contributions.created_at, 'buckets/' || buckets.id AS to_link
+        SELECT buckets.name AS account_to, users.name AS account_from, amount.to_f, contributions.created_at, 'buckets/' || buckets.id AS to_link
         FROM contributions
         INNER JOIN users ON contributions.user_id = users.id
         INNER JOIN buckets ON contributions.bucket_id = buckets.id
