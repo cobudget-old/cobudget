@@ -207,8 +207,7 @@
 }
 
 .group-page__manage-funds-dialog-header {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+  padding: 10px 20px !important;
 }
 
 .group-page__manage-funds-dialog-header-avatar {
@@ -227,9 +226,12 @@
   color: $cobudget-dark-grey;
 }
 
-.group-page__manage-funds-options {
-  padding: 24px 44px;
-  padding-top: 30px !important;
+.group-page__manage-funds-tab-label {
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: none;
+  color: black;
+  font-weight: 400;
 }
 
 .group-page__manage-funds-add-btn {
@@ -254,8 +256,12 @@
   overflow: auto;
 }
 
-.group-page__manage-funds-calculation-newline {
-  height: 20px;
+.group-page__manage-funds-calculation-newline-add {
+  height: 30px;
+}
+
+.group-page__manage-funds-calculation-newline-change {
+  height: 40px;
 }
 
 .group-page__manage-funds-operator {
