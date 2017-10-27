@@ -58,6 +58,7 @@ global.cobudgetApp = angular.module('cobudget', [
 
 require('app/configs/auth.coffee')
 require('app/configs/chart-js.coffee')
+require('app/configs/marked.coffee')
 
 require('app/routes.coffee')
 require('app/angular-record-store.coffee')
