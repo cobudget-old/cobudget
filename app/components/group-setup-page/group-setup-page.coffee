@@ -10,7 +10,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/setup_group'
   template: require('./group-setup-page.html')
-  controller: (LoadBar, Records, $scope, $state) ->
+  controller: (LoadBar, Records, $scope, $state, Currencies) ->
 
     $scope.createGroup = (formData) ->
       LoadBar.start()
@@ -21,14 +21,4 @@ module.exports =
           $state.go('group', {groupId: newGroup.id, firstTimeSeeingGroup: true})
           LoadBar.stop()
 
-    $scope.currencies = [
-      { code: 'USD', symbol: '$' },
-      { code: 'NZD', symbol: '$' },
-      { code: 'CAD', symbol: '$' },
-      { code: 'GBP', symbol: '£' },
-      { code: 'EUR', symbol: '€' },
-      { code: 'CHF', symbol: 'CHF' },
-      { code: 'JPY', symbol: '¥' },
-      { code: 'XBT', symbol: 'Ƀ' },
-      { code: 'ETH', symbol: 'Ξ' }
-    ]
+    $scope.currencies = Currencies()
