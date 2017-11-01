@@ -1,4 +1,5 @@
 class Membership < ActiveRecord::Base
+  after_create :add_account_after_create
   belongs_to :group
   belongs_to :member, class_name: "User"
 
@@ -73,6 +74,14 @@ class Membership < ActiveRecord::Base
     def update_member_if_this_is_their_first_membership
       unless member.has_ever_joined_a_group?
         member.update(joined_first_group_at: Time.now.utc)
+      end
+    end
+
+    def add_account_after_create
+      account = Account.new({group_id: group_id})
+      if account.save
+        self.status_account_id = account.id
+        save!
       end
     end
 end
