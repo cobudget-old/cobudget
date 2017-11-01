@@ -1,5 +1,5 @@
 class Membership < ActiveRecord::Base
-  after_create :add_account_after_create
+  after_create :add_accounts_after_create
   belongs_to :group
   belongs_to :member, class_name: "User"
 
@@ -77,10 +77,14 @@ class Membership < ActiveRecord::Base
       end
     end
 
-    def add_account_after_create
-      account = Account.new({group_id: group_id})
-      if account.save
-        self.status_account_id = account.id
+    def add_accounts_after_create
+      status_account = Account.new({group_id: group_id})
+      in_account = Account.new({group_id: group_id})
+      out_account = Account.new({group_id: group_id})
+      if status_account.save && in_account.save && out_account.save
+        self.status_account_id = status_account.id
+        self.incoming_account_id = in_account.id
+        self.outgoing_account_id = out_account.id
         save!
       end
     end
