@@ -3,7 +3,6 @@ module.exports = (params) ->
   scope: params.scope
   controller: (Dialog, $mdDialog, $scope, $window, $filter) ->
     membership = params.membership
-    console.log membership
     $scope.member = membership.member()
     $scope.userHasFunds = membership.rawBalance != 0
     if !$scope.userHasFunds
