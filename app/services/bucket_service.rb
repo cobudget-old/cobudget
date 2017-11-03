@@ -16,7 +16,7 @@ class BucketService
 
   def self.reverse_transactions(bucket, user)
     Transaction.where("to_account_id = ?", bucket.account_id).find_each do |transaction|
-      transaction = Transaction.create({
+      transaction = Transaction.create!({
           datetime: bucket.archived_at,
           from_account_id: transaction.to_account_id,
           to_account_id: transaction.from_account_id,

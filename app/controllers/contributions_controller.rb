@@ -22,7 +22,7 @@ class ContributionsController < AuthenticatedController
       contribution = Contribution.create(contribution_params)
       bucket = Bucket.find(params[:contribution][:bucket_id])
       membership = Membership.where("member_id = ? AND group_id = ?", current_user.id, bucket.group_id).first
-      transaction = Transaction.create({
+      transaction = Transaction.create!({
           datetime: contribution.created_at,
           from_account_id: membership.status_account_id,
           to_account_id: bucket.account_id,

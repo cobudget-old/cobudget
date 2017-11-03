@@ -59,7 +59,17 @@ class BucketsController < AuthenticatedController
     bucket = Bucket.with_totals.find(params[:id])
     group = bucket.group
     render nothing: true, status: 403 and return unless bucket.status == 'funded' && ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group))
-    bucket.update(paid_at: Time.now.utc, archived_at: nil)
+    ActiveRecord::Base.transaction do
+      bucket.update(paid_at: Time.now.utc, archived_at: nil)
+      membership = Membership.where("member_id = ? AND group_id = ?", bucket.user_id, bucket.group_id).first
+      transaction = Transaction.create!({
+          datetime: bucket.paid_at,
+          from_account_id: bucket.account_id,
+          to_account_id: membership.outgoing_account_id,
+          user_id: current_user.id,
+          amount: bucket.total_contributions
+        })
+    end
     render json: [bucket], status: 200
   end
 
