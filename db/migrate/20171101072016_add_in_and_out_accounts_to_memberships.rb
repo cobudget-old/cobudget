@@ -8,8 +8,8 @@ class AddInAndOutAccountsToMemberships < ActiveRecord::Migration
     # Create accounts for the new fields
     Membership.reset_column_information
     Membership.find_each do |membership|
-      in_account = Account.create({group_id: membership.group_id})
-      out_account = Account.create({group_id: membership.group_id})
+      in_account = Account.create!({group_id: membership.group_id})
+      out_account = Account.create!({group_id: membership.group_id})
       membership.incoming_account_id = in_account.id
       membership.outgoing_account_id = out_account.id
       membership.save!
