@@ -9,7 +9,6 @@ class MakeTransactionsFromAllocations < ActiveRecord::Migration
         password: "**NOLOGIN**",
         reset_password_token: %(not-a-token-group-#{group.id})
         })
-      puts %(Created admin user #{admin_user.name}, id: #{admin_user.id}, uid: #{admin_user.uid})
       handle_allocation_from_group(group.id, admin_user.id)
     end
   end
