@@ -14,20 +14,20 @@ class MakeTransactionsFromAllocations < ActiveRecord::Migration
       		created_at: allocation.created_at,
       		updated_at: allocation.updated_at
       	}
-      	Anomaly.new({
+      	Anomaly.create({
 	      		table: 'allocations',
 	      		data: allocation_as_json,
 	      		reason: %(Not copied to transactions table since there was no membership record with user=#{allocation.user_id}, group=#{allocation.group_id}),
 	      		who: %(Migration script #{name})
-      		}).save!
+      		})
       when 1
-	      Transaction.new({
+	      Transaction.create({
 	      		datetime: allocation.created_at,
 	      		from_account_id: memberships.first.incoming_account_id,
 	      		to_account_id: memberships.first.status_account_id,
 	      		user_id: allocation.user_id,
 	      		amount: allocation.amount
-	      	}).save!
+	      	})
 	    else
 	    	raise %(Too many membership records for user=#{allocation.user_id}, group=#{allocation.group_id})
 	    end

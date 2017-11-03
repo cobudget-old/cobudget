@@ -6,8 +6,7 @@ class AddStatusAccountToMemberships < ActiveRecord::Migration
     # Create accounts for the new field
     Membership.reset_column_information
     Membership.find_each do |membership|
-      account = Account.new({group_id: membership.group_id})
-      account.save!
+      account = Account.create({group_id: membership.group_id})
       membership.status_account_id = account.id
       membership.save!
     end

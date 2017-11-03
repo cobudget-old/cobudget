@@ -6,8 +6,7 @@ class AddAccountRefToBuckets < ActiveRecord::Migration
     # Create accounts for the new field
     Bucket.reset_column_information
     Bucket.find_each do |bucket|
-      account = Account.new({group_id: bucket.group_id})
-      account.save!
+      account = Account.create({group_id: bucket.group_id})
       bucket.account_id = account.id
       bucket.save!
     end
