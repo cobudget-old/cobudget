@@ -113,6 +113,14 @@ class Bucket < ActiveRecord::Base
     archived_at.present?
   end
 
+  def is_funding?
+    status == 'live' && !archived_at.present?
+  end
+
+  def is_funded?
+    status == 'funded' && !paid_at.present?
+  end
+
   private
     def set_timestamp_if_status_updated
       if status_changed?

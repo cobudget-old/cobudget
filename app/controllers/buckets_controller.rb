@@ -50,7 +50,7 @@ class BucketsController < AuthenticatedController
     bucket = Bucket.with_totals.find(params[:id])
     group = bucket.group
     render nothing: true, status: 403 and return unless (current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)
-    BucketService.archive(bucket: bucket)
+    BucketService.archive(bucket: bucket, user: current_user)
     render json: [bucket], status: 200
   end
 
