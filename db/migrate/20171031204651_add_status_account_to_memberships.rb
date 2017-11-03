@@ -4,12 +4,12 @@ class AddStatusAccountToMemberships < ActiveRecord::Migration
     add_foreign_key :memberships, :accounts, column: :status_account_id
 
     # Create accounts for the new field
+    Membership.reset_column_information
     Membership.find_each do |membership|
       account = Account.new({group_id: membership.group_id})
-      if account.save
-        membership.status_account_id = account.id
-        membership.save!
-      end
+      account.save!
+      membership.status_account_id = account.id
+      membership.save!
     end
   end
 end

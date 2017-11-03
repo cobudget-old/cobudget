@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101105658) do
+ActiveRecord::Schema.define(version: 20171103092033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20171101105658) do
     t.text     "body"
     t.datetime "expired_at"
     t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "anomalies", force: :cascade do |t|
+    t.text     "table"
+    t.jsonb    "data"
+    t.text     "reason"
+    t.text     "who"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -151,6 +160,7 @@ ActiveRecord::Schema.define(version: 20171101105658) do
   add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
 
   create_table "transactions", force: :cascade do |t|
+    t.datetime "datetime"
     t.integer  "from_account_id"
     t.integer  "to_account_id"
     t.integer  "user_id"
