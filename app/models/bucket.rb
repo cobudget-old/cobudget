@@ -113,12 +113,38 @@ class Bucket < ActiveRecord::Base
     archived_at.present?
   end
 
+  def is_idea? 
+    (status == 'draft') && !archived_at.present?
+  end 
+  
   def is_funding?
-    status == 'live' && !archived_at.present?
+    (status == 'live') && !archived_at.present?
   end
 
   def is_funded?
-    status == 'funded' && !paid_at.present?
+    (status == 'funded') && !paid_at.present?
+  end
+
+  def is_completed?
+    (status == 'funded') && paid_at.present?
+  end
+
+  def is_cancelled?
+    (['draft', 'live', 'refunded'].include? status) && archived_at.present? && !paid_at.present?
+  end
+
+  def balance_from_transactions
+    AccountService.balance(account_id)
+  end
+
+  def transactions_data_ok?
+    if is_idea? || is_completed? || is_cancelled?
+      balance_from_transactions == 0.00
+    elsif is_funding? || is_funded?
+      balance_from_transactions == total_contributions
+    else
+      false
+    end
   end
 
   private

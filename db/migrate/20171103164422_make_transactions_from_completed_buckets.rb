@@ -27,7 +27,7 @@ class MakeTransactionsFromCompletedBuckets < ActiveRecord::Migration
 	        updated_at: allocation.updated_at
 	      }
 	      Anomaly.create!({
-	          table: 'buckets',
+	          tablename: 'buckets',
 	          data: bucket_as_json,
 	          reason: %(Transaction for bucket completion not created since there was no membership record with user=#{bucket.user_id}, group=#{bucket.group_id}),
 	          who: %(Migration script #{name})
@@ -44,7 +44,5 @@ class MakeTransactionsFromCompletedBuckets < ActiveRecord::Migration
 	      raise %(Too many membership records for user=#{allocation.user_id}, group=#{allocation.group_id})
 	    end
 	  end
-  	
-    
   end
 end

@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20171103164422) do
   end
 
   create_table "anomalies", force: :cascade do |t|
-    t.text     "table"
+    t.text     "tablename"
     t.jsonb    "data"
     t.text     "reason"
     t.text     "who"

@@ -25,4 +25,21 @@ class BucketService
         })
     end
   end
+
+  def self.check_all_buckets
+    error_buckets = []
+    count = 0
+    Bucket.find_each do |bucket|
+      count += 1
+      if !bucket.transactions_data_ok?
+        error_buckets.push(bucket.id)
+      end
+    end
+    if error_buckets.length == 0
+      puts %(Checked #{count} buckets. No errors found.)
+    else
+      puts %(Checked #{count} buckets. Errors found in #{error_buckets})
+      # Known problems in 185, 194, 197, 202
+    end
+  end
 end

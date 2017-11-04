@@ -16,7 +16,7 @@ class MakeTransactionsFromContributions < ActiveRecord::Migration
       		updated_at: contribution.updated_at
       	}
       	Anomaly.create!({
-	      		table: 'contributions',
+	      		tablename: 'contributions',
 	      		data: contribution_as_json,
 	      		reason: %(Not copied to transactions table since there was no membership record with user=#{contribution.user_id}, group=#{bucket.group_id}),
 	      		who: %(Migration script #{name})

@@ -29,7 +29,7 @@ class MakeTransactionsFromAllocations < ActiveRecord::Migration
           updated_at: allocation.updated_at
         }
         Anomaly.create!({
-            table: 'allocations',
+            tablename: 'allocations',
             data: allocation_as_json,
             reason: %(Not copied to transactions table since there was no membership record with user=#{allocation.user_id}, group=#{allocation.group_id}),
             who: %(Migration script #{name})
