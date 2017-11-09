@@ -4,7 +4,7 @@
   <p>You have been invited by <%= @inviter.name %> to collaboratively budget with <%= @group.name %> on Cobudget.</p>
 <% end %>
 
-<p>Cobudget helps crowds with purpose create more together.</p>
+<p>Cobudget helps groups allocate funds transparently and collaboratively.</p>
 
 <% if @user.confirmed? %>
   <p>You can visit the group by clicking <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}" %></p>
