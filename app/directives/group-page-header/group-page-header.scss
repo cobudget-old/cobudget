@@ -71,6 +71,10 @@
   @include fontGrande;
 }
 
+.group-page-header__funds-overview-amount-total {
+  @include fontSmall;
+}
+
 .group-page-header__admin-btn {
   border: 0;
   height: 30px;
