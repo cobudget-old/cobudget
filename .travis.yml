@@ -10,6 +10,7 @@ before_script:
 addons:
   code_climate:
     repo_token: effc3fb597716a3eba53c6ce38e5ea7bf87d6ceb8956cedaba10aed6e7504e93
+    postgresql: "9.5"
 notifications:
   email: false
   slack: enspiral:K4bdjrP15egf0hBhQ0qJLea6#cobudget
