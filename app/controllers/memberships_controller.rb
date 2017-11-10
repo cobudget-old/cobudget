@@ -77,7 +77,7 @@ class MembershipsController < AuthenticatedController
   end
 
   def archive
-    if membership.balance == 0
+    if membership.raw_balance == 0
       MembershipService.archive_membership(membership: membership)
       render nothing: true, status: 200
     else
