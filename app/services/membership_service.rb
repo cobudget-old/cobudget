@@ -13,6 +13,10 @@ class MembershipService
     # destroy member's contributions on funding buckets
     Contribution.joins(:bucket).where(user_id: member.id, buckets: {group_id: group.id, status: 'live'}).destroy_all
 
+    # remove member's funds from group (by creating a negative allocation equal to the member's balance)
+    # this will only run if the user has a live bucket that they have given funds to because the membership_controller checks to make sure the user don't have any allocations
+    Allocation.create(user: member, group: group, amount: -membership.balance)
+
     # archive membership
     membership.archive!
   end
