@@ -77,8 +77,12 @@ class MembershipsController < AuthenticatedController
   end
 
   def archive
-    MembershipService.archive_membership(membership: membership)
-    render nothing: true, status: 200
+    if membership.balance == 0
+      MembershipService.archive_membership(membership: membership)
+      render nothing: true, status: 200
+    else
+      render status: 422, json: {errors: "You must zero out members funds in group before removing"}
+    end
   end
 
   api :POST, '/memberships/upload_review?group_id&csv'
