@@ -111,7 +111,27 @@ class Bucket < ActiveRecord::Base
   def archived?
     archived_at.present?
   end
+  
+  def is_idea? 
+    (status == 'draft') && !archived_at.present?
+  end 
+  
+  def is_funding?
+    (status == 'live') && !archived_at.present?
+  end
 
+  def is_funded?
+    (status == 'funded') && !paid_at.present?
+  end
+
+  def is_completed?
+    (status == 'funded') && paid_at.present?
+  end
+
+  def is_cancelled?
+    (['draft', 'live', 'refunded'].include? status) && archived_at.present? && !paid_at.present?
+  end
+  
   private
     def set_timestamp_if_status_updated
       if status_changed?
