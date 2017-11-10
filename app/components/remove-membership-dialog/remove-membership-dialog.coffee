@@ -20,9 +20,15 @@ module.exports = (params) ->
       $mdDialog.cancel()
     $scope.proceed = ->
       $mdDialog.hide()
-      membership.cancel().then ->
-        Dialog.alert(
-          title: 'Success!'
-          content: "#{$scope.member.name} was removed from #{$scope.group.name}"
-        ).then ->
-          $window.location.reload()
+      membership.cancel()
+        .then ->
+          Dialog.alert(
+            title: 'Success!'
+            content: "#{$scope.member.name} was removed from #{$scope.group.name}"
+          ).then ->
+            $window.location.reload()
+        .catch (err) ->
+          Dialog.alert(
+            title: 'Error!'
+            content: err.data.errors
+            )
