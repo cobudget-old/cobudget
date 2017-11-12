@@ -39,7 +39,6 @@ class BucketService
       puts %(Checked #{count} buckets. No errors found.)
     else
       puts %(Checked #{count} buckets. Errors found in #{error_buckets})
-      # Known problems in 185, 194, 197, 202
     end
   end
 end
