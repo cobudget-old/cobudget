@@ -4,7 +4,7 @@ class BucketService
       puts %(Bucket id=#{bucket.id} status=#{bucket.status} archived_at=#{bucket.archived_at} paid_at=#{bucket.paid_at})
       if bucket.is_funding? || bucket.is_funded?
         bucket.contributors(exclude_author: exclude_author_from_email_notifications).each do |funder|
-          UserMailer.notify_funder_that_bucket_was_archived(funder: funder, bucket: bucket).deliver_now
+          UserMailer.notify_funder_that_bucket_was_archived(funder: funder, bucket: bucket).deliver_later
         end
         bucket.update(archived_at: DateTime.now.utc)
         bucket.contributions.destroy_all

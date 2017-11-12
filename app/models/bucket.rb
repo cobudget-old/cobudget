@@ -112,7 +112,7 @@ class Bucket < ActiveRecord::Base
   def archived?
     archived_at.present?
   end
-
+  
   def is_idea? 
     (status == 'draft') && !archived_at.present?
   end 
@@ -162,7 +162,7 @@ class Bucket < ActiveRecord::Base
     end
 
     def target_cannot_be_updated_unless_idea
-      if target_changed? && status != 'draft'
+      if target_changed? && !is_idea?
         errors.add(:target, "target can only be changed for draft buckets")
       end
     end
