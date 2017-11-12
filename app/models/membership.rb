@@ -66,6 +66,18 @@ class Membership < ActiveRecord::Base
     update(archived_at: nil)
   end
 
+  def balance_on_status_account
+    AccountService.balance(status_account_id)
+  end
+
+  def balance_on_incoming_account
+    AccountService.balance(incoming_account_id)
+  end
+
+  def transactions_data_ok?
+    (balance_on_status_account == raw_balance) && (balance_on_incoming_account == total_allocations)
+  end
+
   private
     def currency_code
       group.currency_code

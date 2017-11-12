@@ -63,4 +63,20 @@ class MembershipService
       }
     end
   end
+
+  def self.check_all_memberships
+    error_memberships = []
+    count = 0
+    Membership.with_totals.find_each do |membership|
+      count += 1
+      if !membership.transactions_data_ok?
+        error_memberships.push(bucket.id)
+      end
+    end
+    if error_memberships.length == 0
+      puts %(Checked #{count} memberships. No errors found.)
+    else
+      puts %(Checked #{count} memberships. Errors found in #{error_memberships})
+    end
+  end
 end
