@@ -81,4 +81,10 @@ class UserMailer < ActionMailer::Base
       )
     end
   end
+
+  def check_transactions_email
+    mail(to: "devops@greaterthan.finance",
+      from: "Cobudget Updates <updates@cobudget.co>",
+      subject: "DB transactions consistency check")
+  end
 end

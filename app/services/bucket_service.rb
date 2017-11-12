@@ -36,9 +36,9 @@ class BucketService
       end
     end
     if error_buckets.length == 0
-      puts %(Checked #{count} buckets. No errors found.)
+      %(Checked #{count} buckets. No errors found.)
     else
-      puts %(Checked #{count} buckets. Errors found in #{error_buckets})
+      %(Checked #{count} buckets. Errors found in #{error_buckets})
     end
   end
 end
