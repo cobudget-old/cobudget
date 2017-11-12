@@ -26,7 +26,8 @@ class BucketsController < AuthenticatedController
   api :PATCH, '/buckets/:id', 'Update a bucket'
   def update
     bucket = Bucket.with_totals.find(params[:id])
-    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && (bucket.is_idea? || bucket.is_funding?)
+    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && 
+      (bucket.is_idea? || bucket.is_funding? || bucket.is_funded?)
     bucket.update_attributes(bucket_params_update)
     if bucket.save
       render json: [bucket]

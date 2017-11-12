@@ -152,7 +152,7 @@ namespace :greaterthan do
       sql[-1] = ';'
       ActiveRecord::Base.connection.execute(sql)
 
-      # Remove the fact the buckets was deleted
+      # Unarchive these buckets
       sql = %(UPDATE buckets set archived_at = NULL, status = 'funded' where id IN (743, 766, 810, 919, 934);)
       ActiveRecord::Base.connection.execute(sql)
     end
