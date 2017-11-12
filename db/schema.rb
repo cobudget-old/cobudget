@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806223700) do
+ActiveRecord::Schema.define(version: 20171031000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20170806223700) do
     t.text     "body"
     t.datetime "expired_at"
     t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "anomalies", force: :cascade do |t|
+    t.text     "tablename"
+    t.jsonb    "data"
+    t.text     "reason"
+    t.text     "who"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
