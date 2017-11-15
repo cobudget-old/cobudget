@@ -2,6 +2,7 @@
   position: relative;
   background: white;
   height: auto;
+  background-color: #F2F2F2;
 }
 
 .about-page__content {
@@ -42,12 +43,24 @@
   margin-right: 30px;
 }
 
+.about-page__img-greaterthan {
+  width: 100px;
+}
 
 .about-page__greaterthan {
   margin-top: 100px;
 }
 
-.about-page__subheader-text-greaterthan {
+.about-page__header-second-text {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+  line-height: 40px;
+  font-weight: 100;
+}
+
+.about-page__subheader-text-starting {
   margin-top: 100px;
 }
 

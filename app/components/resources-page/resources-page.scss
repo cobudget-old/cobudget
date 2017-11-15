@@ -40,6 +40,7 @@
 
 .resources-page__text-blockquote {
   margin-top: 40px;
+  font-size: 42px;
 }
 
 .resources-page__btn {
@@ -55,6 +56,16 @@
 .resources-page__img {
   width: 500px;
   margin: 0 30px;
+}
+
+.resources-page__testimonial {
+  margin-top: 100px;
+}
+
+.resources-page__testimonial-img {
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 30px;
 }
 
 @media (max-width: 900px) {
