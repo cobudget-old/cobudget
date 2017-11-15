@@ -7,7 +7,7 @@
     <div layout="row" layout-align="start start" class="bucket-page__desktop-layout-container">
       <div layout="column" layout-align="center center" class="bucket-page__left-column">
         <bucket-page-header-card></bucket-page-header-card>
-        <bucket-page-activity-card></bucket-page-activity-card>
+        <bucket-page-activity-card class="hide-xs"></bucket-page-activity-card>
       </div>
 
       <div layout="column" layout-align="center center" class="bucket-page__right-column">
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div layout="column" layout-align="center center" class="bucket-page__mobile-layout-container">
+    <div layout="column" layout-align="center center" class="bucket-page__mobile-layout-container hide-lg hide-md hide-sm" ng-if="false">
       <bucket-page-header-card></bucket-page-header-card>
       <bucket-page-manage-card ng-if="userCanManageBucket() && !bucket.paidAt"></bucket-page-manage-card>
       <bucket-page-status-card></bucket-page-status-card>

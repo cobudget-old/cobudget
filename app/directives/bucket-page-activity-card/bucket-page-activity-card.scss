@@ -119,9 +119,13 @@ md-list-item.bucket-page__comment::before {
 }
 
 .mentio-menu__item {
-    padding: 12px 16px;
-    height: auto;
-    cursor: pointer;
+  height: auto;
+  cursor: pointer;
+  min-height: 0;
+}
+
+.mentio-menu__item > .md-button {
+  margin: 0;
 }
 
 .mentio-menu__item.active, .mentio-menu__item:hover {
