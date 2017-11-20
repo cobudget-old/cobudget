@@ -9,6 +9,7 @@
 
         <span flex></span>
 
+
         <div class="group-page-header__settings-btn">
           <div layout="row" layout-align="center center" ng-if="currentUser.isAdminOf(group)">
 
@@ -64,7 +65,11 @@
         </div>
       </div>
 
-      <div class="group-page-header__second-row" layout="row" layout-align="center end">
+      <div class="group-page-header__second-row" layout="row" layout-align="start center">
+        <p>{{ group.description }}</p>
+      </div>
+
+      <div class="group-page-header__third-row" layout="row" layout-align="center end">
         <div layout="column" layout-align="center start" class="group-page-header__funds-overview-container">
           <div class="group-page-header__funds-overview-header">Available Funds</div>
           <div layout="row" layout-align="center center" class="group-page-header__funds-overview-content" >
