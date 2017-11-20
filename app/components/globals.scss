@@ -4,6 +4,10 @@ html, body, .cobudget-app {
   background: white;
 }
 
+button, select, html, textarea, input {
+    font-family: "Helvetica Neue", sans-serif;
+}
+
 a {
   color: $cob-cyan;
 }
