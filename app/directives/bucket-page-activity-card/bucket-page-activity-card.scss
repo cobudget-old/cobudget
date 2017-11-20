@@ -79,6 +79,10 @@ md-list-item.bucket-page__comment::before {
   display: block;
 }
 
+.bucket-page__comment-input-container textarea {
+  border: 1px solid #8C8C8C !important;
+}
+
 .bucket-page__comment-input {
   font-size: 15px !important;
   line-height: 17px !important;

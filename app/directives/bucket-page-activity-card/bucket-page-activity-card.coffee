@@ -16,12 +16,6 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
           $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)
           $scope.commentCreated = false
 
-      $scope.people = [
-        { label: 'Joe'},
-        { label: 'Mike'},
-        { label: 'Diane'}
-      ]
-
       Records.memberships.fetchByGroupId($scope.group.id).then ->
         $scope.users = _.map $scope.group.settledMemberships(), (membership) ->
           {label: membership.member().name}
