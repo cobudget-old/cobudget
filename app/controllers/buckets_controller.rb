@@ -26,7 +26,8 @@ class BucketsController < AuthenticatedController
   api :PATCH, '/buckets/:id', 'Update a bucket'
   def update
     bucket = Bucket.with_totals.find(params[:id])
-    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && !bucket.archived?
+    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && 
+      (bucket.is_idea? || bucket.is_funding? || bucket.is_funded?)
     bucket.update_attributes(bucket_params_update)
     if bucket.save
       render json: [bucket]
@@ -40,7 +41,7 @@ class BucketsController < AuthenticatedController
   api :POST, '/buckets/:id/open_for_funding'
   def open_for_funding
     bucket = Bucket.with_totals.find(params[:id])
-    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && !bucket.archived?
+    render status: 403, nothing: true and return unless bucket.is_editable_by?(current_user) && bucket.is_idea?
     bucket.update(status: "live")
     render json: [bucket]
   end
@@ -49,7 +50,8 @@ class BucketsController < AuthenticatedController
   def archive
     bucket = Bucket.with_totals.find(params[:id])
     group = bucket.group
-    render nothing: true, status: 403 and return unless (current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)
+    render nothing: true, status: 403 and return unless ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)) && 
+      (bucket.is_idea? || bucket.is_funding? || bucket.is_funded?)
     BucketService.archive(bucket: bucket)
     render json: [bucket], status: 200
   end
@@ -58,7 +60,8 @@ class BucketsController < AuthenticatedController
   def paid
     bucket = Bucket.with_totals.find(params[:id])
     group = bucket.group
-    render nothing: true, status: 403 and return unless bucket.status == 'funded' && ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group))
+    render nothing: true, status: 403 and return unless ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)) &&
+      bucket.is_funded?
     bucket.update(paid_at: Time.now.utc, archived_at: nil)
     render json: [bucket], status: 200
   end

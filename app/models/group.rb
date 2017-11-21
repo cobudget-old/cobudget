@@ -62,7 +62,7 @@
 
   def total_in_funded
       # amount of money in funded buckets
-      buckets.where("status = 'funded'").sum("target")
+      buckets.with_totals.where("status = 'funded'").sum("contrib.total")
   end
 
   def ready_to_pay_total
