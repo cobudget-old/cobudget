@@ -30,7 +30,7 @@
             </md-select>
           </div>
 
-          <md-button class="md-raised md-primary group-setup-page__submit-btn" type="submit">let's go!</md-button>
+          <md-button class="md-raised md-primary group-setup-page__submit-btn" type="submit" ng-disabled="newGroupForm.$pristine || !formData.currency">let's go!</md-button>
         </form>
       </md-card-content>
     </md-card>
