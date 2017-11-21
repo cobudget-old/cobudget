@@ -86,47 +86,6 @@ describe "MembershipService" do
 
       expect(live_group_bucket.contributions.length).to eq(0)
     end
-
-    it "removes the user's funds from the group" do
-      # create funded bucket, with target $100
-      funded_bucket = create(:bucket, group: @group, target: 100, status: 'funded')
-      # create live bucket, with target $100
-      live_bucket = create(:bucket, group: @group, target: 100, status: 'live')
-      # allocate user $100
-      create(:allocation, user: @user, group: @group, amount: 100)
-      # create other_user + membership
-      other_user = create(:user)
-      other_user_membership = create(:membership, member: other_user, group: @group)
-      # allocate other_user $100
-      create(:allocation, user: other_user, group: @group, amount: 100)
-
-      # user contributes $50 to funded bucket
-      create(:contribution, user: @user, bucket: funded_bucket, amount: 50)
-      # other_user contributes $50 to funded bucket
-      create(:contribution, user: other_user, bucket: funded_bucket, amount: 50)
-
-      # user contributes $20 to live_bucket, twice
-      create_list(:contribution, 2, user: @user, bucket: live_bucket, amount: 20)
-      # other_user contributes $20 to live bucket
-      create(:contribution, user: other_user, bucket: live_bucket, amount: 20)
-
-      expect(@membership.balance).to eq(10)
-      expect(other_user_membership.balance).to eq(30)
-      expect(@group.balance).to eq(40)
-
-      # delete membership service called
-      MembershipService.archive_membership(membership: @membership)
-
-      # funded bucket should still have 2 contributions, totalling to 100
-      expect(funded_bucket.contributions.length).to eq(2)
-      expect(funded_bucket.contributions.sum(:amount)).to eq(100)
-
-      # live bucket should have only 1 contribution, totalling to $20
-      expect(live_bucket.contributions.length).to eq(1)
-      expect(live_bucket.contributions.sum(:amount)).to eq(20)
-
-      expect(@group.balance).to eq(30)
-    end
   end
 
   describe "#generate_csv(memberships:)" do
