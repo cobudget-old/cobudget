@@ -11,11 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20171031000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_stat_statements"
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "accounts", ["group_id"], name: "index_accounts_on_group_id", using: :btree
 
   create_table "allocations", force: :cascade do |t|
     t.datetime "created_at"
@@ -69,6 +78,7 @@ ActiveRecord::Schema.define(version: 20171031000000) do
     t.datetime "live_at"
     t.datetime "archived_at"
     t.datetime "paid_at"
+    t.integer  "account_id"
   end
 
   add_index "buckets", ["group_id"], name: "index_buckets_on_group_id", using: :btree
@@ -132,6 +142,7 @@ ActiveRecord::Schema.define(version: 20171031000000) do
     t.datetime "archived_at"
     t.datetime "closed_member_help_card_at"
     t.datetime "closed_admin_help_card_at"
+    t.integer  "status_account_id"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
@@ -146,6 +157,19 @@ ActiveRecord::Schema.define(version: 20171031000000) do
   end
 
   add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "from_account_id"
+    t.integer  "to_account_id"
+    t.integer  "user_id"
+    t.decimal  "amount",          precision: 12, scale: 2, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "transactions", ["from_account_id"], name: "index_transactions_on_from_account_id", using: :btree
+  add_index "transactions", ["to_account_id"], name: "index_transactions_on_to_account_id", using: :btree
+  add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -174,4 +198,10 @@ ActiveRecord::Schema.define(version: 20171031000000) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "accounts", "groups"
+  add_foreign_key "buckets", "accounts"
+  add_foreign_key "memberships", "accounts", column: "status_account_id"
+  add_foreign_key "transactions", "accounts", column: "from_account_id"
+  add_foreign_key "transactions", "accounts", column: "to_account_id"
+  add_foreign_key "transactions", "users"
 end

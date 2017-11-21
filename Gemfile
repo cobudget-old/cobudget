@@ -9,7 +9,6 @@ gem 'stripe'
 
 # persistance
 gem 'pg'
-gem 'foreigner'
 
 # api
 gem 'apipie-rails'
