@@ -57,51 +57,58 @@
     </md-list>
   </md-card>
 
-  <div ng-if="allocationsLoaded">
-    <md-card class="group-page__allocation-history-card">
+  <div>
+    <md-card class="group-page__transaction-history-card">
 
       <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
-        <h2 class="group-page__subheader-title">Group Transaction History</h2>
+        <h2 class="group-page__subheader-title">Transaction History</h2>
       </div>
 
-      <md-divider class="group-page__allocation-history-subheader-divider"></md-divider>
+      <md-divider class="group-page__transaction-history-subheader-divider"></md-divider>
 
-
-      <div layout="row" layout-align="start center" class="group-page__allocation-chart-container">
-        <highchart ng-if="allTransactions.length > 0" id="allocation-history" config="chartConfig"></highchart>
-      </div>
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <ng-md-icon class="group-page__transaction-history-search-icon" icon="search"></ng-md-icon>
+          <form flex name="filter.form">
+            <input class="group-page__transaction-history-search-input" type="text" ng-model="query" placeholder="search" ng-disabled="!transactionsLoaded">
+          </form>
+        </div>
+      </md-toolbar>
 
       <md-table-container>
-        <table md-table multiple ng-model="allTransactions">
+        <table md-table multiple ng-model="filteredTransactions">
           <thead md-head md-order="initialOrder">
             <tr md-row>
-              <th md-column md-order-by="createdAt">Date</th>
-              <th md-column md-order-by="user">Name</th>
-              <th md-column md-order-by="type">Type</th>
-              <th md-column md-order-by="amount">Amount ({{group.currencySymbol}})</th>
-              <th md-column md-order-by="balance">Balance ({{group.currencySymbol}})</th>
+              <th md-column md-column-filter md-order-by="created_at">Date</th>
+              <th md-column md-column-filter md-order-by="account_from">Account from</th>
+              <th md-column md-order-by="account_to">Account to</th>
+              <th md-column md-order-by="amount" md-numeric>Amount ({{group.currencySymbol}})</th>
             </tr>
           </thead>
           <tbody md-body>
-            <tr ng-if="allTransactions.length == 0" md-row>
+            <tr ng-if="!transactionsLoaded" md-row>
+              <td md-cell>Loading data...</td>
+              <td md-cell></td>
+              <td md-cell></td>
+              <td md-cell></td>
+            </tr>
+            <tr ng-if="filteredTransactions.length == 0" md-row>
               <td md-cell>No transaction history</td>
               <td md-cell></td>
               <td md-cell></td>
               <td md-cell></td>
-              <td md-cell></td>
             </tr>
-            <tr ng-if="allTransactions.length > 0" md-row ng-repeat="transaction in allTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
-              <td md-cell>{{transaction.createdAt | exactDateShort}}</td>
-              <td md-cell>{{transaction.user}}</td>
-              <td md-cell ng-if="transaction.type == 'Complete'" class="group-page__allocation-history-type-complete">{{transaction.type}}</td>
-              <td md-cell ng-if="transaction.type == 'Allocation'" class="group-page__allocation-history-type-allocation">{{transaction.type}}</td>
+            <tr ng-if="filteredTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in filteredTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
+              <td md-cell>{{transaction.created_at | exactDateShort}}</td>
+              <td md-cell>{{transaction.account_from}}</td>
+              <td md-cell ng-if="transaction.to_link != ''"><a href="/#/{{transaction.to_link}}">{{transaction.account_to}}</a></td>
+              <td md-cell ng-if="transaction.to_link == ''">{{transaction.account_to}}</td>
               <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
-              <td md-cell>{{transaction.balance | currency : group.currencySymbol : 2}}</td>
             </tr>
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-limit="transactionLimit" md-page="startingPage" md-total="{{allTransactions.length}}"></md-table-pagination>
+      <md-table-pagination md-limit="transactionLimit" md-page="startingPage" md-page-select md-boundary-links md-total="{{filteredTransactions.length}}"></md-table-pagination>
     </md-card>
   </div>
 </div>
