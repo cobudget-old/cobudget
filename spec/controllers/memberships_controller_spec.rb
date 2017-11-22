@@ -371,12 +371,26 @@ describe MembershipsController, :type => :controller do
       end
     end
 
+    context "member still has funds" do
+      before do
+        group.add_admin(user)
+        create(:allocation, user: user, group: group, amount: 40)
+        post :archive, {id: @membership.id}
+        @membership.reload
+      end
+
+      it "returns http status unprocessable" do
+        expect(response).to have_http_status(422)
+      end
+    end
+
     context "not group admin" do
       it "returns http status forbidden" do
         post :archive, {id: @membership.id}
         expect(response).to have_http_status(:forbidden)
       end
     end
+
   end
 
   describe "#upload_review" do

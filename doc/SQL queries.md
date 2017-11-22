@@ -78,6 +78,24 @@ FROM (SELECT groups.id, groups.name, sum(allocations.amount) AS userallocations,
       GROUP BY groups.id, allocated) AS q
 WHERE diff != 0;
 
+## Groups with funds in archivers users accounts
+
+SELECT groups.name AS group, SUM(alloc.total_allocations), SUM(contrib.total_contributions),
+       SUM(alloc.total_allocations) - SUM(contrib.total_contributions) as balance
+FROM memberships
+JOIN groups ON memberships.group_id = groups.id
+LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations
+           FROM allocations
+           GROUP BY user_id, group_id) AS alloc
+           ON memberships.member_id = alloc.user_id AND memberships.group_id = alloc.group_id
+LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contributions
+           FROM contributions, buckets
+           WHERE contributions.bucket_id = buckets.id
+           GROUP BY contributions.user_id, buckets.group_id) as contrib
+           ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
+WHERE memberships.archived_at IS NOT NULL
+GROUP BY groups.name;
+
 # Queries for users
 
 ## Allocations for each user for each group
@@ -103,6 +121,30 @@ INNER JOIN (SELECT buckets.id AS bucketid, buckets.group_id, users.id AS userid,
 GROUP BY b.userid, b.name, groups.id
 ORDER BY b.userid;
 
+<<<<<<< HEAD
+## Balance for each user for each group 
+
+SELECT memberships.id, groups.name AS group, alloc.total_allocations, contrib.total_contributions, 
+       alloc.total_allocations - contrib.total_contributions as balance, memberships.archived_at
+FROM memberships
+JOIN groups ON memberships.group_id = groups.id
+LEFT JOIN (SELECT user_id, group_id, sum(amount) AS total_allocations
+           FROM allocations
+           GROUP BY user_id, group_id) AS alloc
+           ON memberships.member_id = alloc.user_id AND memberships.group_id = alloc.group_id
+LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contributions
+           FROM contributions, buckets
+           WHERE contributions.bucket_id = buckets.id
+           GROUP BY contributions.user_id, buckets.group_id) as contrib
+           ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id;
+
+## Balance for all archived users
+
+SELECT memberships.id, groups.name AS group, alloc.total_allocations, contrib.total_contributions, 
+       alloc.total_allocations - contrib.total_contributions as balance, memberships.archived_at
+FROM memberships
+JOIN groups ON memberships.group_id = groups.id
+
 ## Balance for each user based on memberships
 
 SELECT memberships.id, memberships.member_id, memberships.group_id, alloc.total_allocations, 
@@ -116,7 +158,9 @@ LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contribu
            FROM contributions, buckets
            WHERE contributions.bucket_id = buckets.id
            GROUP BY contributions.user_id, buckets.group_id) as contrib
-           ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id;
+           ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
+WHERE memberships.archived_at IS NOT NULL
+ORDER BY groups.name;
 
 ## Group balances based on memberships
 
@@ -161,6 +205,14 @@ LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contribu
            GROUP BY contributions.user_id, buckets.group_id) as contrib
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
 INNER JOIN groups ON groups.id = memberships.group_id
+LEFT JOIN allocations ON allocations.group_id = memberships.group_id AND allocations.user_id = memberships.member_id
+WHERE groups.id = 41
+GROUP BY groups.id;
+
+SELECT groups.name AS group, SUM(alloc.total_allocations), SUM(contrib.total_contributions),
+       SUM(alloc.total_allocations) - SUM(contrib.total_contributions) as balance
+FROM memberships
+JOIN groups ON memberships.group_id = groups.id
 WHERE memberships.archived_at IS NOT NULL
 GROUP BY memberships.group_id, groups.name;
 
@@ -181,7 +233,8 @@ LEFT JOIN (SELECT contributions.user_id, group_id, sum(amount) AS total_contribu
            WHERE contributions.bucket_id = buckets.id
            GROUP BY contributions.user_id, buckets.group_id) as contrib
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id
-WHERE memberships.group_id = 41 and memberships.archived_at IS NOT NULL;
+WHERE memberships.archived_at IS NOT NULL AND memberships.group_id = 41
+GROUP BY groups.name;
 
 ## Partially funded buckets
 
@@ -195,4 +248,5 @@ LEFT JOIN (SELECT bucket_id, sum(amount) AS total
 WHERE buckets.paid_at IS NULL AND buckets.group_id = 41;
 
 # Workspace
+
 
