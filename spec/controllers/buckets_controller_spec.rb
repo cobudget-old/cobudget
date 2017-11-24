@@ -84,7 +84,7 @@ RSpec.describe BucketsController, type: :controller do
 
       context "bucket archived" do
         before do
-          BucketService.archive(bucket: bucket)
+          BucketService.archive(bucket, user)
           post :open_for_funding, { id: bucket.id }
           bucket.reload
         end
@@ -94,7 +94,7 @@ RSpec.describe BucketsController, type: :controller do
         end
 
         it "does nothing to bucket" do
-          expect(bucket.status).to eq("draft")
+          expect(bucket.is_cancelled?).to be true
           expect(bucket.live_at).to be_nil
         end
       end
@@ -205,7 +205,7 @@ RSpec.describe BucketsController, type: :controller do
         context "bucket is archived" do
           before do
             group.add_admin(user)
-            BucketService.archive(bucket: bucket)
+            BucketService.archive(bucket, user)
             post :update, bucket_params
             bucket.reload
           end
@@ -398,7 +398,7 @@ RSpec.describe BucketsController, type: :controller do
         before do
           contributions = create_list(:contribution, 2, bucket: bucket, amount: 100)
           @memberships = contributions.map { |contribution| contribution.user.membership_for(group) }
-          BucketService.archive(bucket: bucket)
+          BucketService.archive(bucket, user)
           bucket.update(status: "funded")
           post :archive, { id: bucket.id }
           bucket.reload
@@ -524,7 +524,7 @@ RSpec.describe BucketsController, type: :controller do
       context "funded, archived bucket" do
         # this is to support legacy funded, archived buckets
         before do
-          BucketService.archive(bucket: bucket)
+          BucketService.archive(bucket, user)
           bucket.update(status: "funded")
           post :paid, { id: bucket.id }
           bucket.reload

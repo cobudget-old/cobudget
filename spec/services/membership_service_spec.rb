@@ -10,14 +10,14 @@ describe "MembershipService" do
     end
 
     it "archives membership" do
-      MembershipService.archive_membership(membership: @membership)
+      MembershipService.archive_membership(@membership, @user)
       expect(Membership.find_by_id(@membership).archived_at).to be_truthy
     end
 
     it "archives all member's draft buckets within the membership's group" do
       buckets_to_be_archived = create_list(:bucket, 3, user: @user, status: 'draft', group: @group)
 
-      MembershipService.archive_membership(membership: @membership)
+      MembershipService.archive_membership(@membership, @user)
 
       buckets_to_be_archived.each { |bucket| expect(bucket.reload.archived?).to be_truthy }
     end
@@ -52,10 +52,15 @@ describe "MembershipService" do
 
       # member who is about to be deleted has also contributed to their own bucket
       create(:allocation, user: @user, group: bucket_to_be_archived.group, amount: 1)
-      contribution4 = create(:contribution, user: @user, bucket: bucket_to_be_archived, amount: 1)
+      expect(@group.balance).to eq(41)
+      expect(@membership.balance).to eq(1)
 
+      contribution4 = create(:contribution, user: @user, bucket: bucket_to_be_archived, amount: 1)
+      expect(@group.balance).to eq(40)
+      expect(@membership.balance).to eq(0)
+      
       ActionMailer::Base.deliveries.clear
-      MembershipService.archive_membership(membership: @membership)
+      MembershipService.archive_membership(@membership, @user)
       sent_emails = ActionMailer::Base.deliveries
       email_recipients = sent_emails.map { |e| e.to.first }
 
@@ -68,7 +73,7 @@ describe "MembershipService" do
       expect(Contribution.find_by_id(contribution2.id)).to be_nil
       expect(membership1.balance).to eq(40)
       expect(membership2.balance).to eq(80)
-      expect(@group.balance).to eq(120)
+      expect(@group.balance).to eq(121)
       expect(sent_emails.length).to eq(2)
       expect(user_1_email.body.to_s).to include("$20")
       expect(user_2_email.body.to_s).to include("$60")
@@ -76,15 +81,15 @@ describe "MembershipService" do
       ActionMailer::Base.deliveries.clear
     end
 
-    it "destroys member's contributions on live buckets within membership's group" do
+    it "do not destroys member's contributions on live buckets within membership's group" do
       live_group_bucket = create(:bucket, group: @group, status: 'live', target: 1000)
 
       create(:allocation, user: @user, group: @group, amount: 200)
       create_list(:contribution, 3, user: @user, bucket: live_group_bucket, amount: 30)
 
-      MembershipService.archive_membership(membership: @membership)
+      MembershipService.archive_membership(@membership, @user)
 
-      expect(live_group_bucket.contributions.length).to eq(0)
+      expect(live_group_bucket.contributions.length).to eq(3)
     end
   end
 

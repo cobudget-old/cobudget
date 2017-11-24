@@ -107,7 +107,7 @@ RSpec.describe ContributionsController, type: :controller do
         before do
           group.add_member(user)
           create(:allocation, user: user, group: group, amount: 100)
-          BucketService.archive(bucket: bucket)
+          BucketService.archive(bucket, user)
           post :create, {contribution: { bucket_id: bucket.id, amount: 50 } }
         end
 

@@ -171,7 +171,7 @@ class Bucket < ActiveRecord::Base
       account = Account.new({group_id: group_id})
       if account.save
         self.account_id = account.id
-        save!
+        save
       end
     end
 end

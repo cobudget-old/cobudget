@@ -8,7 +8,9 @@ class MakeTransactionsFromCompletedBuckets < ActiveRecord::Migration
       uid: "bucketowneroradminstrator@noemail.co",
       email: "bucketowneroradminstrator@noemail.co",
       password: "**NOLOGIN**",
-      reset_password_token: "not-a-token-bucket-owner-or-admin"
+      reset_password_token: "not-a-token-bucket-owner-or-admin",
+      confirmation_token: nil,
+      confirmed_at: DateTime.now.utc()
       })
 
   	# Go through all completed buckets

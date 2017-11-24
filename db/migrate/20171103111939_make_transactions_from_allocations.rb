@@ -7,7 +7,9 @@ class MakeTransactionsFromAllocations < ActiveRecord::Migration
         uid: %(admin@group-#{group.id}.co),
         email: %(admin@group-#{group.id}.co),
         password: "**NOLOGIN**",
-        reset_password_token: %(not-a-token-group-#{group.id})
+        reset_password_token: %(admin-user-not-a-token-group-#{group.id}),
+        confirmation_token: nil,
+        confirmed_at: DateTime.now.utc()
         })
       handle_allocation_from_group(group.id, admin_user.id)
     end
