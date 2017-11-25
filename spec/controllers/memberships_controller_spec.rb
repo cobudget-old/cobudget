@@ -384,6 +384,47 @@ describe MembershipsController, :type => :controller do
       end
     end
 
+    context "member has buckets" do
+      before do
+        group.add_admin(user)
+        bucket_owner = create(:user)
+        bucket_owner_membership = group.add_member(bucket_owner)
+        @idea_bucket = create(:bucket, user: bucket_owner, group: group)
+        @funding_bucket = create(:bucket, user: bucket_owner, group: group, status: "live")
+        @funded_bucket = create(:bucket, user: bucket_owner, group: group, status: "funded")
+        @completed_bucket = create(:bucket, user: bucket_owner, group: group, status: "funded")
+        @completed_bucket.update(paid_at: DateTime.now.utc)
+        @cancelled_bucket = create(:bucket, user: bucket_owner, group: group, status: "refunded")
+        post :archive, {id: bucket_owner_membership.id}
+        @idea_bucket.reload
+        @funding_bucket.reload
+        @funded_bucket.reload
+        @completed_bucket.reload
+        @cancelled_bucket.reload
+      end
+
+      it "idea bucket is cancelled" do
+        expect(@idea_bucket.status).to eq("refunded")
+      end
+
+      it "funding bucket is cancelled" do
+        expect(@funding_bucket.status).to eq("refunded")
+      end
+
+      it "funded bucket is cancelled" do
+        expect(@funded_bucket.status).to eq("refunded")
+      end
+
+      it "completed bucket is still completed" do
+        expect(@completed_bucket.status).to eq("funded")
+        expect(@completed_bucket.paid_at).to be_truthy
+      end
+
+      it "cancelled bucket is still cancelled" do
+        expect(@cancelled_bucket.status).to eq("refunded")
+      end
+    end
+
     context "not group admin" do
       it "returns http status forbidden" do
         post :archive, {id: @membership.id}
