@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :comments,                              dependent: :destroy
   has_many :contributions,                         dependent: :destroy
   has_many :buckets,                               dependent: :destroy
+  has_many :transactions
   has_one :announcement_tracker,                   dependent: :destroy
 
   scope :with_active_announcements, -> { joins(:announcements).where(announcements: {title: nil}) }
