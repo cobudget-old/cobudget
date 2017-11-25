@@ -574,7 +574,7 @@ RSpec.describe BucketsController, type: :controller do
 
     context "behavior" do
       before do
-        group.add_member(user)
+        @membership = group.add_member(user)
         bucket.update(user: user)
         request.headers.merge!(user.create_new_auth_token)
       end
@@ -594,6 +594,12 @@ RSpec.describe BucketsController, type: :controller do
       context "funded bucket" do
         before do
           bucket.update(status: "funded")
+          contributors = create_list(:user, 2)
+          contributors.map.each { |contributor|
+            membership = group.add_member(contributor)
+            create(:transaction, from_account_id: membership.status_account_id,
+              to_account_id: bucket.account_id, amount:25, user_id: contributor.id)
+          }
           post :paid, { id: bucket.id }
           bucket.reload
         end
@@ -604,6 +610,13 @@ RSpec.describe BucketsController, type: :controller do
 
         it "make sure archived_at is null" do
           expect(bucket.archived_at).to be_nil
+        end
+
+        it "transfers money to bucket owner" do
+          expect(Account.find(bucket.account_id).balance).to eq(0)
+          expect(Account.find(@membership.outgoing_account_id).balance).to eq(50)
+
+          expect(Transaction.find_by(from_account_id: bucket.account_id, amount: 50, user_id: user.id))
         end
 
         it "returns bucket as json" do
