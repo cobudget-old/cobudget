@@ -80,7 +80,7 @@ RSpec.describe Bucket, :type => :model do
     it "has an existing account with a zero balance" do
       bucket = create(:bucket, status: 'live', target: 100)
       expect(bucket.account_id).to be > 0
-      expect(Account.find(bucket.account_id).balance).to  eq(0.0)
+      expect(Account.find(bucket.account_id).balance).to eq(0.0)
     end
   end
 end
