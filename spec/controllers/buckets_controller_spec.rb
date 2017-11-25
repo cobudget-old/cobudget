@@ -369,11 +369,11 @@ RSpec.describe BucketsController, type: :controller do
           @admins = create_list(:user, 2)
           @admins.each { |admin| create(:membership, group: group, member: admin, is_admin: true) }
           bucket.update(status: "live")
-          contributions = create_list(:contribution, 2, bucket: bucket, amount: 10)
+          contributions = create_list(:contribution, 2, bucket: bucket, amount: 20)
           @memberships = contributions.map { |contribution| 
             m = contribution.user.membership_for(group) 
             create(:transaction, from_account_id: m.status_account_id, 
-              to_account_id: bucket.account_id, amount: 10, user_id: contribution.user.id)
+              to_account_id: bucket.account_id, amount: 20, user_id: contribution.user.id)
             m
           }
           @memberships[1].update(archived_at: DateTime.now.utc)
@@ -398,17 +398,19 @@ RSpec.describe BucketsController, type: :controller do
               expect(membership.reload.balance).to eq(0)
               expect(Account.find(membership.status_account_id).balance).to eq(0)
               expect(Transaction.find_by(from_account_id: bucket.account_id,
-                to_account_id: @group_membership.status_account_id, amount: 10, user_id: user.id)).to be_truthy
+                to_account_id: @group_membership.status_account_id, amount: 20, user_id: user.id)).to be_truthy
             else
-              expect(membership.reload.balance).to eq(10)
-              expect(Account.find(membership.status_account_id).balance).to eq(10)
+              expect(membership.reload.balance).to eq(20)
+              expect(Account.find(membership.status_account_id).balance).to eq(20)
               expect(Transaction.find_by(from_account_id: bucket.account_id,
-                to_account_id: membership.status_account_id, amount: 10, user_id: user.id)).to be_truthy
+                to_account_id: membership.status_account_id, amount: 20, user_id: user.id)).to be_truthy
             end
           end
 
           expect(bucket.total_contributions).to eq(0)
           expect(Account.find(bucket.account_id).balance).to eq(0)
+
+          expect(Account.find(@group_membership.status_account_id).balance).to eq(20)
         end
 
         it "sends refund notification emails to funders and admins" do
@@ -419,10 +421,6 @@ RSpec.describe BucketsController, type: :controller do
           expected_emails = @admins.reduce(contributor_emails) { |l, a| l.push(a.email) }
           expect(recipients).to match_array(expected_emails)
           expect(sent_emails.first.body).to include("cancelled")
-        end
-
-        it "sends notification to admins" do
-
         end
 
         it "returns bucket as json" do
