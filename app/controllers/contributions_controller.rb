@@ -19,16 +19,21 @@ class ContributionsController < AuthenticatedController
   api :POST, '/contributions', 'Create new contribution'
   def create
     contribution = ActiveRecord::Base.transaction do
-      contribution = Contribution.create(contribution_params)
       bucket = Bucket.find(params[:contribution][:bucket_id])
-      membership = Membership.where("member_id = ? AND group_id = ?", current_user.id, bucket.group_id).first
-      transaction = Transaction.create!({
-          datetime: contribution.created_at,
-          from_account_id: membership.status_account_id,
-          to_account_id: bucket.account_id,
-          user_id: current_user.id,
-          amount: params[:contribution][:amount].to_d
-        })
+      membership = Membership.find_by(member_id: current_user.id, group_id: bucket.group_id)
+      amount = [bucket.target - bucket.total_contributions, params[:contribution][:amount].to_d].min      
+      contribution = Contribution.create(contribution_params)
+      # Contribution.valid? here tests if the contribution has failed because the member was
+      # overdrafting his account
+      if contribution.valid? && amount > 0
+        transaction = Transaction.create!({
+            datetime: contribution.created_at,
+            from_account_id: membership.status_account_id,
+            to_account_id: bucket.account_id,
+            user_id: current_user.id,
+            amount: amount
+          })
+      end
       contribution
     end
 
