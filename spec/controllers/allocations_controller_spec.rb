@@ -144,9 +144,11 @@ RSpec.describe AllocationsController, type: :controller do
 
   describe "#create" do
     context "user is group admin" do
+      let(:admin_user) { create(:user) }
       before do
-        @membership = make_user_group_admin
-        request.headers.merge!(user.create_new_auth_token)
+        create(:membership, group: group, member: admin_user, is_admin: true)
+        @membership = make_user_group_member
+        request.headers.merge!(admin_user.create_new_auth_token)
       end
 
       context "valid params" do
@@ -160,10 +162,17 @@ RSpec.describe AllocationsController, type: :controller do
           }
           post :create, valid_params
           @found_allocation = Allocation.find_by(valid_params[:allocation])
+          @found_transaction = Transaction.find_by(to_account_id: @membership.status_account_id,
+            from_account_id: @membership.incoming_account_id, amount: 420)
         end
 
         it "creates allocation with specified params" do
           expect(@found_allocation).to be_truthy
+        end
+
+        it "creates transaction and with admin as owner" do
+          expect(@found_transaction).to be_truthy
+          expect(@found_transaction.user_id).to eq(admin_user.id)
         end
 
         it "returns allocation as json" do
@@ -186,10 +195,16 @@ RSpec.describe AllocationsController, type: :controller do
           }
           post :create, invalid_params
           @found_allocation = Allocation.find_by(invalid_params[:allocation])
+          @found_transaction = Transaction.find_by(to_account_id: @membership.status_account_id,
+            from_account_id: @membership.incoming_account_id, amount: 0)
         end
 
         it "does not create an allocation" do
           expect(@found_allocation).to be_nil
+        end
+
+        it "does not create transaction" do
+          expect(@found_transaction).to be_nil
         end
 
         it "returns http status 400" do
@@ -211,10 +226,16 @@ RSpec.describe AllocationsController, type: :controller do
         }
         post :create, valid_params
         @found_allocation = Allocation.find_by(valid_params[:allocation])
+        @found_transaction = Transaction.find_by(to_account_id: membership.status_account_id,
+          from_account_id: membership.incoming_account_id, amount: 420)
       end
 
       it "does not create an allocation" do
         expect(@found_allocation).to be_nil
+      end
+
+      it "does not create transaction" do
+        expect(@found_transaction).to be_nil
       end
 
       it "returns http status 'forbidden'" do
