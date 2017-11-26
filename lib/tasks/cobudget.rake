@@ -5,5 +5,6 @@ namespace :cobudget do
     DeliverRecentActivityEmails.to_daily_digest_subscribers!
     DeliverRecentActivityEmails.to_weekly_digest_subscribers!
     DeliverCheckTransactionsEmail.check_transactions!
+    CobudgetCleanup.archived_members_with_funds!
   end
 end

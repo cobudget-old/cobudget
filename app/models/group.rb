@@ -108,7 +108,7 @@
   def mail_admins_about_members(memberlist)
     l = memberlist.map { |e| 
       e[:archived_at] = e[:archived_at].strftime("%B %d, %Y") 
-      e[:balance] = %(#{e[:balance]} #{currency_symbol}) 
+      e[:balance] = Money.new(e[:balance] * 100, currency_code).format
     }
     for_each_admin do |admin|
       UserMailer.notify_admins_archived_member_funds(admin: admin.member, group: self, memberlist: memberlist).deliver_later
