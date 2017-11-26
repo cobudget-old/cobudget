@@ -99,14 +99,16 @@ class UserMailer < ActionMailer::Base
     @memberlist = memberlist
     @group = group
     @group_user = group.ensure_group_user_exist()
-    mail(to: admin.name_and_email,
+    mail(to: admin,
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "Funds from archived members is returned to group account")
   end
 
   def check_transactions_email
-    mail(to: "devops@greaterthan.finance",
-      from: "Cobudget Updates <updates@cobudget.co>",
-      subject: "DB transactions consistency check")
+    if Rails.configuration.respond_to?('devops_user')
+      mail(to: Rails.configuration.devops_user,
+        from: "Cobudget Updates <updates@cobudget.co>",
+        subject: "DB transactions consistency check")
+    end        
   end
 end

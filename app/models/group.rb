@@ -106,12 +106,19 @@
   end
 
   def mail_admins_about_members(memberlist)
-    l = memberlist.map { |e| 
-      e[:archived_at] = e[:archived_at].strftime("%B %d, %Y") 
-      e[:balance] = Money.new(e[:balance] * 100, currency_code).format
-    }
-    for_each_admin do |admin|
-      UserMailer.notify_admins_archived_member_funds(admin: admin.member, group: self, memberlist: memberlist).deliver_later
+    if memberlist.length > 0
+      l = memberlist.map { |e| 
+        e[:archived_at] = e[:archived_at].strftime("%B %d, %Y") 
+        e[:balance] = Money.new(e[:balance] * 100, currency_code).format
+      }
+      for_each_admin do |admin|
+        UserMailer.notify_admins_archived_member_funds(admin: admin.member.name_and_email, 
+          group: self, memberlist: memberlist).deliver_later
+      end
+      if Rails.configuration.respond_to?('devops_user')
+        UserMailer.notify_admins_archived_member_funds(admin: Rails.configuration.devops_user, 
+          group: self, memberlist: memberlist).deliver_later
+      end        
     end
   end
 
