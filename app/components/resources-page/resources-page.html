@@ -1,35 +1,63 @@
-<div class="resources-page" layout="column">
+<div class="resources-page" layout="column" layout-fill>
   <landing-page-toolbar></landing-page-toolbar>
 
-  <h1 class="resources-page__header-text">About</h1>
-  <div class="resources-page__content" layout="column" flex>
-    <p>Cobudget helps organisations, networks, communities and groups allocate resources collaboratively and transparently.</p>
-
-    <p>It is the flagship product of <a href="http://greater.finance/" target="_blank">Greaterthan</a>, a venture that is bringing collaborative finance practices into organizations to help them increase engagement, transparency and agility.</p>
-
-    <p>Cobudget was originally developed by members of <a href="https://enspiral.com/" target="_blank">Enspiral</a> to support the internal collaborative funding process of the network.</p>
-
-    <p>What was a spreadsheet soon became an app and, led by Derek Razo with support from the Namaste Foundation, soon became used more broadly by groups around the world. In March 2017 a new team from within the Enspiral network, Greaterthan, took on the development of the tool to bring it to its next stage.</p>
-  </div>
-
-  <!-- <h1 class="resources-page__header-text">Resources and Stories</h1> -->
+  <h1 class="resources-page__header-text">How Organizations Use Cobudget</h1>
 
   <div class="resources-page__content" layout="column" flex>
-    <div layout="row" layout-align="start start" ng-repeat="article in articles">
-      <img class="resources-page__article-img" ng-src="{{article.imgUrl}}" />
+    <div layout="row" layout-align="start start">
+      <img class="resources-page__img" src="/img/outlandish.jpg" />
 
       <div>
-        <h2 class="resources-page__article-header-text">
-          <a href="{{ article.articleUrl }}" target="_blank" class="resources-page__article-link">
-            {{ article.title }}
-          </a>
-        </h2>
-        <p class="resources-page__article-description-text">{{ article.description }}</p>
+        <h1 class="resources-page__subheader-text"><a href="https://outlandish.com/" target="_blank">Outlandish</a></h1>
+
+        <p class="resources-page__text">Outlandish is a web services consultancy and worker-owned cooperative based in London.</p>
+
+        <p class="resources-page__text"><b>How do they use Cobudget?</b></p>
+
+        <p class="resources-page__text">To democratically distribute their dividends to all cooperative members and make it easy for them to invest in work they care about.</p>
+
+        <p class="resources-page__text"><b>What type of activities do they fund?</b></p>
+
+        <p class="resources-page__text">New tech products and platforms, social impact projects that need software, match funding of international initiatives.</p>
+
+        <blockquote class="resources-page__text resources-page__text-blockquote">Pre-Cobudget, there was a lack of transparency and the authority to spend surplus was limited.</blockquote>
+
       </div>
     </div>
 
     <div flex></div>
 
-    <a href="" class="resources-page__return-home-link" ng-click="redirectToLandingPage()">return home</a>
   </div>
+
+
+  <div class="resources-page__content" layout="column" flex>
+    <div layout="row" layout-align="start start">
+
+      <div>
+        <h1 class="resources-page__subheader-text"><a href="https://www.evoleadinstitute.com/" target="_blank">Evolutionary Leadership Institute</a></h1>
+
+        <p class="resources-page__text">IEL is a consulting company and community of practice that provides content, advice, and access to thought leaders for people ready to redesign our world and make it more just, sustainable, and flourishing.</p>
+
+        <p class="resources-page__text"><b>How do they use Cobudget?</b></p>
+
+        <p class="resources-page__text">To offer their member community a way to participate directly in the organization's financial decisions and empower them to fund each others workshops.</p>
+
+        <p class="resources-page__text"><b>What type of activities do they fund?</b></p>
+
+        <p class="resources-page__text">Events such as workshops, travel expenses, systemic change work.</p>
+
+        <blockquote class="resources-page__text resources-page__text-blockquote">This technology is an enabler of new ways of doing things. Without it we would be using ugly spreadsheets.</blockquote>
+
+      </div>
+
+      <img class="resources-page__img" src="/img/evoleadership.jpg" />
+
+    </div>
+
+    <div flex></div>
+
+  </div>
+
+  <landing-page-footer></landing-page-footer>
+
 </div>
