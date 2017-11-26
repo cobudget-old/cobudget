@@ -14,4 +14,22 @@ namespace :csv do
     end
   end
 
+  desc "export all buckets that is funded and has archived_at set as CSV"
+  task bucketinfo: :environment do
+    def group_info_as_string(g)
+      "#{g.name} (id:#{g.id})"
+    end
+
+    def bucket_info_as_string(b)
+      "#{b.name} (id:#{b.id})"
+    end
+
+    users = User.all
+    puts "Group; Bucket; total"
+    Group.find_each do |g|
+      Bucket.where(group_id: g.id, status: "funded", paid_at: nil).where.not(archived_at: nil).find_each do |b|
+        puts "#{group_info_as_string(g)}; #{bucket_info_as_string(b)}; #{b.total_contributions}"
+      end
+    end
+  end
 end
