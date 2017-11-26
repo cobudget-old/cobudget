@@ -25,6 +25,27 @@ class AllocationService
     errors if errors.any?
   end
 
+  def self.create_allocation(allocation_params, notify, current_user)
+    allocation = Allocation.new(allocation_params)
+    amount = allocation_params[:amount]
+    if allocation.save
+      m = Membership.find_by(group_id: allocation_params[:group_id], member_id: allocation_params[:user_id])
+      Transaction.create!({
+        datetime: allocation.created_at,
+        from_account_id: m.incoming_account_id,
+        to_account_id: m.status_account_id,
+        user_id: current_user.id,
+        amount: amount
+        })
+      if notify && (amount > 0)
+        UserMailer.notify_member_that_they_received_allocation(admin: current_user, member: user, group: group, amount: amount).deliver_later
+      end
+      allocation
+    else
+      nil
+    end
+  end
+
   def self.generate_csv_upload_preview(csv:, group:)
     csv.group_by { |row| row[0].downcase }.map do |email, rows|
       allocation_amount = rows.sum { |row| row[1].to_f }

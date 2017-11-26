@@ -76,6 +76,28 @@
     group_membership
   end
 
+  def find_archived_members_with_funds()
+    l = []
+    Membership.where(group_id: id).where.not(archived_at: nil).find_each do |membership|
+      if membership.raw_balance != 0
+        l.push({
+          membership_id: membership.id, 
+          user_name: User.find(membership.member_id).name,
+          archived_at: membership.archived_at,
+          balance: membership.raw_balance  
+          })
+      end
+    end
+    l
+  end
+
+  def transfer_memberships_to_group_account(transfer_from_list, current_user)
+    group_membership = ensure_group_account_exist
+    transfer_from_list.each do |e|
+      Membership.find(e[:membership_id]).transfer_funds_to_membership(group_membership, current_user)
+    end 
+  end
+
   def add_member(user)
     memberships.create!(member: user, is_admin: false)
   end
