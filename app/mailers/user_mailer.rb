@@ -95,6 +95,15 @@ class UserMailer < ActionMailer::Base
          subject: "Funds from cancelled bucket is returned to group account")
   end
 
+  def notify_admins_archived_member_funds(admin: , group: ,memberlist: )
+    @memberlist = memberlist
+    @group = group
+    @group_user = group.ensure_group_user_exist()
+    mail(to: admin.name_and_email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "Funds from archived members is returned to group account")
+  end
+
   def check_transactions_email
     mail(to: "devops@greaterthan.finance",
       from: "Cobudget Updates <updates@cobudget.co>",

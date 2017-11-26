@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Group, :type => :model do
+  after { ActionMailer::Base.deliveries.clear }
   describe "#add_admin(user)" do
     context "user already member of group" do
       it "makes the user an admin of group" do
@@ -62,6 +63,55 @@ RSpec.describe Group, :type => :model do
           create(:allocation, group: group, amount: 500.50)
           expect(subject.reload.balance).to eq 500
         end
+      end
+    end
+  end
+
+  describe "membership cleanup" do
+    context "by moving funds from archived member to group account" do
+      before do
+        admins = create_list(:user, 2)
+        admins.each { |a| group.add_admin(a) }
+        normal_users = create_list(:user, 3)
+        @normal_memberships = normal_users.map { |u| group.add_member(u) }
+        normal_users.each { |u| create(:allocation, user: u, group: group, amount: 10) }
+        @normal_memberships.each { |m| create(:transaction, from_account_id: m.incoming_account_id, 
+          to_account_id: m.status_account_id, user_id: user.id, amount: 10) }
+        archived_users = create_list(:user, 3)
+        @archived_memberships = archived_users.map { |u| group.add_member(u) }
+        archived_users.each { |u| create(:allocation, user: u, group: group, amount: 7) }
+        @archived_memberships.each { |m| create(:transaction, from_account_id: m.incoming_account_id, 
+          to_account_id: m.status_account_id, user_id: user.id, amount: 7) }
+        @archived_memberships.each { |m| m.archive! }
+        group.cleanup_archived_members_with_funds(group.ensure_group_user_exist())
+        @group_membership = group.ensure_group_account_exist()
+      end
+
+      it "has moved funds from archived users" do
+        @archived_memberships.each do |m|
+          expect(m.raw_balance).to eq(0)
+          expect(Account.find(m.status_account_id).balance).to eq(0)
+        end
+      end
+
+      it "has not touched funds in non-archived users" do
+        @normal_memberships.each do |m|
+          expect(m.raw_balance).to eq(10)
+          expect(Account.find(m.status_account_id).balance).to eq(10)
+        end
+      end
+
+      it "has moved the funds from echived users to group account" do
+        expect(@group_membership.raw_balance).to eq(21)
+        expect(Account.find(@group_membership.status_account_id).balance).to eq(21)
+      end
+
+      it "sends mails to admins" do
+        sent_emails = ActionMailer::Base.deliveries
+        recipients = sent_emails.map { |email| email.to.first }
+        admin_emails = Membership.where(group_id: group.id, is_admin: :true).map { |admin| admin.member.email }
+        expect(recipients).to match_array(admin_emails)
+        expect(sent_emails.first.body).to include("transferred")
       end
     end
   end

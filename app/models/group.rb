@@ -96,6 +96,28 @@
     transfer_from_list.each do |e|
       Membership.find(e[:membership_id]).transfer_funds_to_membership(group_membership, current_user)
     end 
+    mail_admins_about_members(transfer_from_list)
+  end
+
+  def for_each_admin
+    Membership.where(group_id: id, is_admin: :true).find_each do |admin|
+      yield admin
+    end
+  end
+
+  def mail_admins_about_members(memberlist)
+    l = memberlist.map { |e| 
+      e[:archived_at] = e[:archived_at].strftime("%B %d, %Y") 
+      e[:balance] = %(#{e[:balance]} #{currency_symbol}) 
+    }
+    for_each_admin do |admin|
+      UserMailer.notify_admins_archived_member_funds(admin: admin.member, group: self, memberlist: memberlist).deliver_later
+    end
+  end
+
+  def cleanup_archived_members_with_funds(current_user)
+    l = find_archived_members_with_funds()
+    transfer_memberships_to_group_account(l, current_user)
   end
 
   def add_member(user)

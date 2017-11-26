@@ -1,0 +1,23 @@
+<p>
+  Archived members with funds has been found in <%= @group.name %> 
+</p>
+
+<p>
+  The funds has been transferred to the group account <%= @group_user.name %> which you will find in the list of funders.
+</p>
+
+<table style="width:80%;border: 1px solid black;border-spacing: 5px;">
+  <caption><strong>Archived members with funds</strong></caption>
+  <tr>
+    <th style="text-align: left;">User</th>
+    <th style="text-align: left;">Archived</th> 
+    <th style="text-align: right;">Amount</th>
+  </tr>
+  <% @memberlist.each do |m| %>
+  <tr>
+    <td><%= m[:user_name] %></td>
+    <td><%= m[:archived_at] %></td> 
+    <td style="text-align: right;"><%= m[:balance] %></td>
+  </tr>
+  <% end %>
+</table>   
