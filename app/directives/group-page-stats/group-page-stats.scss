@@ -68,7 +68,7 @@
   margin-bottom: 1px;
 }
 
-// allocation card
+// transaction card
 
 highchart {
   width: 100%;
@@ -79,17 +79,23 @@ highchart {
   display: none;
 }
 
-.group-page__allocation-history-type-allocation {
-  color: $cob-green !important;
+.group-page__transaction-history-search-icon {
+  padding-top: 10px;
 }
 
-.group-page__allocation-history-type-complete {
-  color: $cob-pink !important;
+.group-page__transaction-history-search-input {
+  border: 0;
+  padding-left: 15px;
+  &:focus {
+    outline: none;
+  }
 }
 
 //condense md-data-table
 table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
-    padding: 0 24px 0 0;
+  padding: 0 24px 0 0;
+  max-width: 150px;
+  word-wrap: break-word;
 }
 
 @media (max-width: 380px) {
