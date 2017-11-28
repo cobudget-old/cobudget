@@ -1,7 +1,9 @@
 <md-menu-content class="mentio-menu" style="display:block">
-  <md-menu-item class="mentio-menu__item" mentio-menu-item="user" ng-repeat="user in items track by $index">
-    <md-button>
-      <strong>{{user.label}}</strong>
-    </md-button>
-  </md-menu-item>
+  <ul class="mentio-menu__ul">
+    <md-menu-item class="mentio-menu__item" mentio-menu-item="user" ng-repeat="user in items track by $index">
+      <md-button aria-label="{{user.label}}">
+        <strong ng-bind-html="user.label | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></strong>
+      </md-button>
+    </md-menu-item>
+  </ul>
 </md-menu-content>

@@ -43,6 +43,9 @@
   background: #F8F8F8;
   padding: 13px 16px !important;
 }
+.menu-highlighted {
+  color: $cob-pink;
+}
 
 md-list-item.bucket-page__comment::before {
   min-height: auto;
@@ -120,6 +123,11 @@ md-list-item.bucket-page__comment::before {
 .mentio-menu {
   box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
   padding: 0;
+}
+
+.mentio-menu__ul {
+  padding: 0;
+  margin: 0;
 }
 
 .mentio-menu__item {
