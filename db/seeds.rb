@@ -168,8 +168,21 @@ puts "created 2 - 3 archived funded buckets for both groups with 0 - 9 comments"
 ### ALLOCATIONS
 
 groups.each do |group|
-  group.members.each do |member|
-    rand(1..4).times { group.allocations.create(user: member, amount: rand(0.0..300.0), created_at:  DateTime.now.utc - rand(1..100).days)}
+  group.memberships.each do |membership|
+    rand(1..4).times { 
+      member = membership.member
+      amount = rand(0.0..300)
+      created_at = DateTime.now.utc - rand(1..100).days
+      group.allocations.create(user: member, amount: amount, created_at: created_at)
+      Transaction.create({
+        datetime: created_at,
+        created_at: created_at,
+        from_account_id: membership.incoming_account_id,
+        to_account_id: membership.status_account_id,
+        user_id: admin.id,
+        amount: amount
+        })
+    }
   end
 end
 puts "created 1 - 4 allocations for each member in each group"
@@ -183,7 +196,17 @@ groups.each do |group|
       membership = group.memberships.sample
       member = membership.member
       member_balance = membership.total_allocations - membership.total_contributions
-      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i, created_at: DateTime.now.utc - rand(1..10).days)
+      amount = (member_balance / 3).to_i
+      created_at = DateTime.now.utc - rand(1..10).days
+      bucket.contributions.create(user: member, amount: amount, created_at: created_at)
+      Transaction.create({
+        datetime: created_at,
+        created_at: created_at,
+        from_account_id: membership.status_account_id,
+        to_account_id: bucket.account_id,
+        user_id: member.id,
+        amount: amount
+        })
     end
   end
 end
@@ -195,7 +218,17 @@ groups.each do |group|
       membership = group.memberships.sample
       member = membership.member
       member_balance = membership.total_allocations - membership.total_contributions
-      bucket.contributions.create(user: member, amount: (member_balance / 3).to_i, created_at: DateTime.now.utc - rand(1..10).days)
+      amount = (member_balance / 3).to_i
+      created_at = DateTime.now.utc - rand(1..10).days
+      bucket.contributions.create(user: member, amount: amount, created_at: created_at)
+      Transaction.create({
+        datetime: created_at,
+        created_at: created_at,
+        from_account_id: membership.status_account_id,
+        to_account_id: bucket.account_id,
+        user_id: member.id,
+        amount: amount
+        })
     end
     bucket.update(archived_at: DateTime.now.utc)
   end

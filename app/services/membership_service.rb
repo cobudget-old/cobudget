@@ -1,23 +1,17 @@
 require 'csv'
 
 class MembershipService
-  def self.archive_membership(membership: )
+  def self.archive_membership(membership, user)
     member = membership.member
     group = membership.group
 
     # archives member's draft + live buckets
-    Bucket.where(group: group.id, user: member.id).where.not(status: "funded").find_each do |bucket|
-      BucketService.archive(bucket: bucket, exclude_author_from_email_notifications: true)
+    Bucket.where(group: group.id, user: member.id).find_each do |bucket|
+      if bucket.is_idea? || bucket.is_funding? || bucket.is_funded?
+        BucketService.archive(bucket, user, exclude_author_from_email_notifications: true)
+      end
     end
 
-    # destroy member's contributions on funding buckets
-    Contribution.joins(:bucket).where(user_id: member.id, buckets: {group_id: group.id, status: 'live'}).destroy_all
-
-    # remove member's funds from group (by creating a negative allocation equal to the member's balance)
-    # this will only run if the user has a live bucket that they have given funds to because the membership_controller checks to make sure the user don't have any allocations
-    Allocation.create(user: member, group: group, amount: -membership.balance)
-
-    # archive membership
     membership.archive!
   end
 
@@ -62,6 +56,22 @@ class MembershipService
         name: user && user.is_member_of?(group) ? user.name : "",
         new_member: !user || !user.is_member_of?(group)
       }
+    end
+  end
+
+  def self.check_all_memberships
+    error_memberships = []
+    count = 0
+    Membership.with_totals.find_each do |membership|
+      count += 1
+      if !membership.transactions_data_ok?
+        error_memberships.push(membership.id)
+      end
+    end
+    if error_memberships.length == 0
+      %(Checked #{count} memberships. No errors found.)
+    else
+      %(Checked #{count} memberships. Errors found in #{error_memberships})
     end
   end
 end

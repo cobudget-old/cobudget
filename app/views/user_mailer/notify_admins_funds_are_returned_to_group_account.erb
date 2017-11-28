@@ -1,0 +1,12 @@
+<p>
+  A bucket '<%= @bucket.name %>' was cancelled in <%= @group.name %> 
+  by <%= @done_by.name %>.
+</p>
+
+<p>
+  A previous member <%= @archived_member.name %>, have been funding the bucket with 
+  <%= @formatted_amount %>. As this person is no longer a member of the group, the funds
+  has been returned to the group account <%= @group_account.name %>.
+</p>
+   
+<p><%= link_to 'view', "#{root_url}#/buckets/#{@bucket.id}" %></p>

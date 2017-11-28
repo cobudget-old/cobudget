@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20171031000000) do
+ActiveRecord::Schema.define(version: 20171103164422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +142,8 @@ ActiveRecord::Schema.define(version: 20171031000000) do
     t.datetime "closed_member_help_card_at"
     t.datetime "closed_admin_help_card_at"
     t.integer  "status_account_id"
+    t.integer  "incoming_account_id"
+    t.integer  "outgoing_account_id"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
@@ -159,6 +160,7 @@ ActiveRecord::Schema.define(version: 20171031000000) do
   add_index "subscription_trackers", ["user_id"], name: "index_subscription_trackers_on_user_id", using: :btree
 
   create_table "transactions", force: :cascade do |t|
+    t.datetime "datetime"
     t.integer  "from_account_id"
     t.integer  "to_account_id"
     t.integer  "user_id"
@@ -200,6 +202,8 @@ ActiveRecord::Schema.define(version: 20171031000000) do
 
   add_foreign_key "accounts", "groups"
   add_foreign_key "buckets", "accounts"
+  add_foreign_key "memberships", "accounts", column: "incoming_account_id"
+  add_foreign_key "memberships", "accounts", column: "outgoing_account_id"
   add_foreign_key "memberships", "accounts", column: "status_account_id"
   add_foreign_key "transactions", "accounts", column: "from_account_id"
   add_foreign_key "transactions", "accounts", column: "to_account_id"

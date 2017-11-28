@@ -1,4 +1,5 @@
 class Membership < ActiveRecord::Base
+  after_create :add_accounts_after_create
   belongs_to :group
   belongs_to :member, class_name: "User"
 
@@ -65,6 +66,18 @@ class Membership < ActiveRecord::Base
     update(archived_at: nil)
   end
 
+  def balance_on_status_account
+    AccountService.balance(status_account_id)
+  end
+
+  def balance_on_incoming_account
+    AccountService.balance(incoming_account_id)
+  end
+
+  def transactions_data_ok?
+    (balance_on_status_account == raw_balance) && (balance_on_incoming_account + total_allocations == 0)
+  end
+
   private
     def currency_code
       group.currency_code
@@ -73,6 +86,18 @@ class Membership < ActiveRecord::Base
     def update_member_if_this_is_their_first_membership
       unless member.has_ever_joined_a_group?
         member.update(joined_first_group_at: Time.now.utc)
+      end
+    end
+
+    def add_accounts_after_create
+      status_account = Account.new({group_id: group_id})
+      in_account = Account.new({group_id: group_id})
+      out_account = Account.new({group_id: group_id})
+      if status_account.save && in_account.save && out_account.save
+        self.status_account_id = status_account.id
+        self.incoming_account_id = in_account.id
+        self.outgoing_account_id = out_account.id
+        save!
       end
     end
 end

@@ -78,7 +78,7 @@ class MembershipsController < AuthenticatedController
 
   def archive
     if membership.raw_balance == 0
-      MembershipService.archive_membership(membership: membership)
+      MembershipService.archive_membership(membership, current_user)
       render nothing: true, status: 200
     else
       render status: 422, json: {errors: "You must zero out members funds in group before removing"}
