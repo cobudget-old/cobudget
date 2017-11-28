@@ -26,7 +26,7 @@ class BucketService
         Allocation.create!(user: m.member, group: group_membership.group, amount: -transaction.amount)
         Allocation.create!(user: group_membership.member, group: group_membership.group, amount: transaction.amount)
         Membership.where(group_id: bucket.group_id, is_admin: :true).find_each do |admin|
-          UserMailer.notify_admins_funds_is_returned_to_group_account(admin: admin.member, 
+          UserMailer.notify_admins_funds_are_returned_to_group_account(admin: admin.member, 
             bucket: bucket, done_by: user, archived_member: m.member, amount: transaction.amount,
             group_account: group_membership.member).deliver_later 
         end 
