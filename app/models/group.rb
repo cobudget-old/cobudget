@@ -48,7 +48,7 @@
   end
 
   def ensure_group_user_exist()
-    uid = %(group@group-#{id}.co)
+    uid = %(group-#{id}@non-existing.email)
     group_user = User.find_by uid: uid
     if !group_user 
       group_user = User.create!({

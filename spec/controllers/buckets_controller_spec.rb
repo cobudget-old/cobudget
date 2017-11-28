@@ -379,7 +379,7 @@ RSpec.describe BucketsController, type: :controller do
           @memberships[1].update(archived_at: DateTime.now.utc)
           post :archive, { id: bucket.id }
           bucket.reload
-          @group_user = User.find_by(uid: %(group@group-#{group.id}.co))
+          @group_user = User.find_by(uid: %(group-#{group.id}@non-existing.email))
           @group_membership = Membership.find_by(member_id: @group_user.id, group_id: group.id)
         end
 

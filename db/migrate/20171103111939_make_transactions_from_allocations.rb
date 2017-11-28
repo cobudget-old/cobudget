@@ -4,8 +4,8 @@ class MakeTransactionsFromAllocations < ActiveRecord::Migration
       # Create new administrators user per group
       admin_user = User.create!({
         name: %(Administrators for #{group.name}),
-        uid: %(admin@group-#{group.id}.co),
-        email: %(admin@group-#{group.id}.co),
+        uid: %(admins-for-group-#{group.id}@non-existing.email),
+        email: %(admins-for-group-#{group.id}@non-existing.email),
         password: "**NOLOGIN**",
         reset_password_token: %(admin-user-not-a-token-group-#{group.id}),
         confirmation_token: nil,

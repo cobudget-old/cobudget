@@ -5,8 +5,8 @@ class MakeTransactionsFromCompletedBuckets < ActiveRecord::Migration
   	# that we don't know.
 	  dontknow_user = User.create!({
       name: "Bucket owner or administrator",
-      uid: "bucketowneroradminstrator@noemail.co",
-      email: "bucketowneroradminstrator@noemail.co",
+      uid: "bucket-owner-or-adminstrator@non-existing.email",
+      email: "bucket-owner-or-adminstrator@non-existing.email",
       password: "**NOLOGIN**",
       reset_password_token: "not-a-token-bucket-owner-or-admin",
       confirmation_token: nil,
