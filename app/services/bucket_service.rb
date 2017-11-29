@@ -21,15 +21,16 @@ class BucketService
       # Find the membership the money is returned to and check if it's archived
       m = Membership.find_by status_account_id: transaction.from_account_id
       if m.archived_at
-        group_membership = Group.find(m.group_id).ensure_group_account_exist()
+        group = Group.find(m.group_id)
+        group_membership = group.ensure_group_account_exist()
         to_account = group_membership.status_account_id
         Allocation.create!(user: m.member, group: group_membership.group, amount: -transaction.amount)
         Allocation.create!(user: group_membership.member, group: group_membership.group, amount: transaction.amount)
-        Membership.where(group_id: bucket.group_id, is_admin: :true).find_each do |admin|
-          UserMailer.notify_admins_funds_are_returned_to_group_account(admin: admin.member, 
+        group.for_each_admin do |admin|
+          UserMailer.notify_admins_funds_are_returned_to_group_account(admin: admin.member,
             bucket: bucket, done_by: user, archived_member: m.member, amount: transaction.amount,
-            group_account: group_membership.member).deliver_later 
-        end 
+            group_account: group_membership.member).deliver_later
+        end
       else
         to_account = transaction.from_account_id
       end
