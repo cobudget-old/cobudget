@@ -17,7 +17,7 @@ class UserService
       end
     end
 
-    %i( allocations contributions buckets comments ).each do |key|
+    %i( allocations contributions buckets comments transactions).each do |key|
       user_to_kill.send(key).update_all(user_id: user_to_keep.id)
     end
 

@@ -1,4 +1,5 @@
 class Bucket < ActiveRecord::Base
+  after_create :add_account_after_create
   has_many :contributions, -> { order("amount DESC") }, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :group
@@ -131,7 +132,21 @@ class Bucket < ActiveRecord::Base
   def is_cancelled?
     (['draft', 'live', 'refunded'].include? status) && archived_at.present? && !paid_at.present?
   end
-  
+
+  def balance_from_transactions
+    AccountService.balance(account_id)
+  end
+
+  def transactions_data_ok?
+    if is_idea? || is_completed? || is_cancelled?
+      balance_from_transactions == 0.00
+    elsif is_funding? || is_funded?
+      balance_from_transactions == total_contributions
+    else
+      false
+    end
+  end
+
   private
     def set_timestamp_if_status_updated
       if status_changed?
@@ -147,8 +162,16 @@ class Bucket < ActiveRecord::Base
     end
 
     def target_cannot_be_updated_unless_idea
-      if target_changed? && status != 'draft'
+      if target_changed? && !is_idea?
         errors.add(:target, "target can only be changed for draft buckets")
+      end
+    end
+
+    def add_account_after_create
+      account = Account.new({group_id: group_id})
+      if account.save
+        self.account_id = account.id
+        save
       end
     end
 end

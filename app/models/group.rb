@@ -47,6 +47,41 @@
     self.save
   end
 
+  def ensure_group_user_exist()
+    uid = %(group-#{id}@non-existing.email)
+    group_user = User.find_by uid: uid
+    if !group_user 
+      group_user = User.create!({
+          name: %(Group "#{name}"),
+          uid: uid,
+          email: uid,
+          password: "**NOLOGIN**",
+          reset_password_token: %(group-user-not-a-token-group-#{id}),
+          confirmation_token: nil,
+          confirmed_at: DateTime.now.utc()
+          })
+    end
+    group_user
+  end
+
+  def ensure_group_account_exist()
+    group_user = ensure_group_user_exist()
+    group_membership = Membership.find_by group_id: id, member_id: group_user.id
+    if !group_membership
+      group_membership = Membership.create!({
+        group_id: id,
+        member_id: group_user.id
+        })
+    end
+    group_membership
+  end
+
+  def for_each_admin
+    Membership.where(group_id: id, is_admin: :true, archived_at: nil).find_each do |admin|
+      yield admin
+    end
+  end
+
   def add_member(user)
     memberships.create!(member: user, is_admin: false)
   end

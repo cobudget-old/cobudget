@@ -84,7 +84,7 @@ RSpec.describe BucketsController, type: :controller do
 
       context "bucket archived" do
         before do
-          BucketService.archive(bucket: bucket)
+          BucketService.archive(bucket, user)
           post :open_for_funding, { id: bucket.id }
           bucket.reload
         end
@@ -94,7 +94,7 @@ RSpec.describe BucketsController, type: :controller do
         end
 
         it "does nothing to bucket" do
-          expect(bucket.status).to eq("draft")
+          expect(bucket.is_cancelled?).to be true
           expect(bucket.live_at).to be_nil
         end
       end
@@ -205,7 +205,7 @@ RSpec.describe BucketsController, type: :controller do
         context "bucket is archived" do
           before do
             group.add_admin(user)
-            BucketService.archive(bucket: bucket)
+            BucketService.archive(bucket, user)
             post :update, bucket_params
             bucket.reload
           end
@@ -325,7 +325,12 @@ RSpec.describe BucketsController, type: :controller do
         before do
           bucket.update(status: "live")
           contributions = create_list(:contribution, 2, bucket: bucket, amount: 10)
-          @memberships = contributions.map { |contribution| contribution.user.membership_for(group) }
+          @memberships = contributions.map { |contribution| 
+            m = contribution.user.membership_for(group) 
+            create(:transaction, from_account_id: m.status_account_id, 
+              to_account_id: bucket.account_id, amount: 10, user_id: contribution.user.id)
+            m
+          }
           post :archive, { id: bucket.id }
           bucket.reload
         end
@@ -337,9 +342,13 @@ RSpec.describe BucketsController, type: :controller do
         it "returns funds back to funders" do
           @memberships.each do |membership|
             expect(membership.reload.balance).to eq(10)
+            expect(Account.find(membership.status_account_id).balance).to eq(10)
+            expect(Transaction.find_by(from_account_id: bucket.account_id,
+              to_account_id: membership.status_account_id, amount: 10, user_id: user.id)).to be_truthy
           end
 
           expect(bucket.total_contributions).to eq(0)
+          expect(Account.find(bucket.account_id).balance).to eq(0)
         end
 
         it "sends refund notification emails to funders" do
@@ -355,11 +364,80 @@ RSpec.describe BucketsController, type: :controller do
         end
       end
 
+      context "live bucket, one member is archived before cancel" do
+        before do
+          @admins = create_list(:user, 2)
+          @admins.each { |admin| create(:membership, group: group, member: admin, is_admin: true) }
+          bucket.update(status: "live")
+          contributions = create_list(:contribution, 2, bucket: bucket, amount: 20)
+          @memberships = contributions.map { |contribution| 
+            m = contribution.user.membership_for(group) 
+            create(:transaction, from_account_id: m.status_account_id, 
+              to_account_id: bucket.account_id, amount: 20, user_id: contribution.user.id)
+            m
+          }
+          @memberships[1].update(archived_at: DateTime.now.utc)
+          post :archive, { id: bucket.id }
+          bucket.reload
+          @group_user = User.find_by(uid: %(group-#{group.id}@non-existing.email))
+          @group_membership = Membership.find_by(member_id: @group_user.id, group_id: group.id)
+        end
+
+        it "sets archived_at on bucket" do
+          expect(bucket.archived_at).not_to be_nil
+        end
+
+        it "group user and membership exists" do
+          expect(@group_user).to be_truthy
+          expect(@group_membership).to be_truthy
+        end
+
+        it "returns funds back to funders or group account" do
+          @memberships.each do |membership|
+            if membership.archived_at
+              expect(membership.reload.balance).to eq(0)
+              expect(Account.find(membership.status_account_id).balance).to eq(0)
+              expect(Transaction.find_by(from_account_id: bucket.account_id,
+                to_account_id: @group_membership.status_account_id, amount: 20, user_id: user.id)).to be_truthy
+            else
+              expect(membership.reload.balance).to eq(20)
+              expect(Account.find(membership.status_account_id).balance).to eq(20)
+              expect(Transaction.find_by(from_account_id: bucket.account_id,
+                to_account_id: membership.status_account_id, amount: 20, user_id: user.id)).to be_truthy
+            end
+          end
+
+          expect(bucket.total_contributions).to eq(0)
+          expect(Account.find(bucket.account_id).balance).to eq(0)
+
+          expect(Account.find(@group_membership.status_account_id).balance).to eq(20)
+        end
+
+        it "sends refund notification emails to funders and admins" do
+          sent_emails = ActionMailer::Base.deliveries
+          recipients = sent_emails.map { |email| email.to.first }
+          actual_memberships = @memberships.reduce([]) { |l, e| e.archived_at ? l : l.push(e) }
+          contributor_emails = actual_memberships.map { |membership| membership.member.email }
+          expected_emails = @admins.reduce(contributor_emails) { |l, a| l.push(a.email) }
+          expect(recipients).to match_array(expected_emails)
+          expect(sent_emails.first.body).to include("cancelled")
+        end
+
+        it "returns bucket as json" do
+          expect(parsed(response)["buckets"][0]["id"]).to eq(bucket.id)
+        end
+      end
+
       context "funded bucket" do
         before do
           bucket.update(status: "funded")
           contributions = create_list(:contribution, 2, bucket: bucket, amount: 100)
-          @memberships = contributions.map { |contribution| contribution.user.membership_for(group) }
+          @memberships = contributions.map { |contribution| 
+            m = contribution.user.membership_for(group) 
+            create(:transaction, from_account_id: m.status_account_id, 
+              to_account_id: bucket.account_id, amount: 100, user_id: contribution.user.id)
+            m
+          }
           post :archive, { id: bucket.id }
           bucket.reload
         end
@@ -375,9 +453,13 @@ RSpec.describe BucketsController, type: :controller do
         it "returns funds back to funders" do
           @memberships.each do |membership|
             expect(membership.reload.balance).to eq(100)
+            expect(Account.find(membership.status_account_id).balance).to eq(100)
+            expect(Transaction.find_by(from_account_id: bucket.account_id,
+              to_account_id: membership.status_account_id, amount: 100, user_id: user.id)).to be_truthy
           end
 
           expect(bucket.total_contributions).to eq(0)
+          expect(Account.find(bucket.account_id).balance).to eq(0)
         end
 
         it "sends refund notification emails to funders" do
@@ -397,9 +479,13 @@ RSpec.describe BucketsController, type: :controller do
         # this is to support legacy funded, archived buckets
         before do
           contributions = create_list(:contribution, 2, bucket: bucket, amount: 100)
-          @memberships = contributions.map { |contribution| contribution.user.membership_for(group) }
-          BucketService.archive(bucket: bucket)
-          bucket.update(status: "funded")
+          @memberships = contributions.map { |contribution| 
+            m = contribution.user.membership_for(group) 
+            create(:transaction, from_account_id: m.status_account_id, 
+              to_account_id: bucket.account_id, amount: 100, user_id: contribution.user.id)
+            m
+          }
+          bucket.update(status: "funded", archived_at: DateTime.now.utc)
           post :archive, { id: bucket.id }
           bucket.reload
         end
@@ -411,9 +497,13 @@ RSpec.describe BucketsController, type: :controller do
         it "returns funds back to funders" do
           @memberships.each do |membership|
             expect(membership.reload.balance).to eq(100)
+            expect(Account.find(membership.status_account_id).balance).to eq(100)
+            expect(Transaction.find_by(from_account_id: bucket.account_id,
+              to_account_id: membership.status_account_id, amount: 100, user_id: user.id)).to be_truthy
           end
 
           expect(bucket.total_contributions).to eq(0)
+          expect(Account.find(bucket.account_id).balance).to eq(0)
         end
 
         it "sends refund notification emails to funders" do
@@ -484,7 +574,7 @@ RSpec.describe BucketsController, type: :controller do
 
     context "behavior" do
       before do
-        group.add_member(user)
+        @membership = group.add_member(user)
         bucket.update(user: user)
         request.headers.merge!(user.create_new_auth_token)
       end
@@ -504,6 +594,12 @@ RSpec.describe BucketsController, type: :controller do
       context "funded bucket" do
         before do
           bucket.update(status: "funded")
+          contributors = create_list(:user, 2)
+          contributors.map.each { |contributor|
+            membership = group.add_member(contributor)
+            create(:transaction, from_account_id: membership.status_account_id,
+              to_account_id: bucket.account_id, amount:25, user_id: contributor.id)
+          }
           post :paid, { id: bucket.id }
           bucket.reload
         end
@@ -516,6 +612,13 @@ RSpec.describe BucketsController, type: :controller do
           expect(bucket.archived_at).to be_nil
         end
 
+        it "transfers money to bucket owner" do
+          expect(Account.find(bucket.account_id).balance).to eq(0)
+          expect(Account.find(@membership.outgoing_account_id).balance).to eq(50)
+
+          expect(Transaction.find_by(from_account_id: bucket.account_id, amount: 50, user_id: user.id))
+        end
+
         it "returns bucket as json" do
           expect(parsed(response)["buckets"][0]["id"]).to eq(bucket.id)
         end
@@ -524,7 +627,7 @@ RSpec.describe BucketsController, type: :controller do
       context "funded, archived bucket" do
         # this is to support legacy funded, archived buckets
         before do
-          BucketService.archive(bucket: bucket)
+          BucketService.archive(bucket, user)
           bucket.update(status: "funded")
           post :paid, { id: bucket.id }
           bucket.reload

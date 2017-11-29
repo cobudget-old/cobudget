@@ -86,8 +86,6 @@ GEM
       i18n (~> 0.5)
     faraday (0.12.0.1)
       multipart-post (>= 1.2, < 3)
-    foreigner (1.7.4)
-      activerecord (>= 3.0.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     groupdate (3.2.0)
@@ -256,7 +254,6 @@ DEPENDENCIES
   devise_token_auth (= 0.1.37)
   factory_girl_rails
   faker
-  foreigner
   groupdate
   money-rails
   newrelic_rpm
@@ -284,4 +281,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.14.6
+   1.15.3

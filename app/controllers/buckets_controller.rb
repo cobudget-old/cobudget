@@ -52,7 +52,7 @@ class BucketsController < AuthenticatedController
     group = bucket.group
     render nothing: true, status: 403 and return unless ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)) && 
       (bucket.is_idea? || bucket.is_funding? || bucket.is_funded?)
-    BucketService.archive(bucket: bucket)
+    BucketService.archive(bucket, current_user)
     render json: [bucket], status: 200
   end
 
@@ -62,7 +62,18 @@ class BucketsController < AuthenticatedController
     group = bucket.group
     render nothing: true, status: 403 and return unless ((current_user.is_member_of?(group) && bucket.user == current_user) || current_user.is_admin_for?(group)) &&
       bucket.is_funded?
-    bucket.update(paid_at: Time.now.utc, archived_at: nil)
+    ActiveRecord::Base.transaction do
+      bucket.update(paid_at: Time.now.utc, archived_at: nil)
+      membership = Membership.where("member_id = ? AND group_id = ?", bucket.user_id, bucket.group_id).first
+      total_contributions = Account.find(bucket.account_id).balance
+      transaction = Transaction.create!({
+          datetime: bucket.paid_at,
+          from_account_id: bucket.account_id,
+          to_account_id: membership.outgoing_account_id,
+          user_id: current_user.id,
+          amount: total_contributions
+        })
+    end
     render json: [bucket], status: 200
   end
 
