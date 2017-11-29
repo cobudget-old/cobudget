@@ -47,35 +47,6 @@
     self.save
   end
 
-  def ensure_group_user_exist()
-    uid = %(group@group-#{id}.co)
-    group_user = User.find_by uid: uid
-    if !group_user 
-      group_user = User.create!({
-          name: %(Group "#{name}"),
-          uid: uid,
-          email: uid,
-          password: "**NOLOGIN**",
-          reset_password_token: %(group-user-not-a-token-group-#{id}),
-          confirmation_token: nil,
-          confirmed_at: DateTime.now.utc()
-          })
-    end
-    group_user
-  end
-
-  def ensure_group_account_exist()
-    group_user = ensure_group_user_exist()
-    group_membership = Membership.find_by group_id: id, member_id: group_user.id
-    if !group_membership
-      group_membership = Membership.create!({
-        group_id: id,
-        member_id: group_user.id
-        })
-    end
-    group_membership
-  end
-
   def find_archived_members_with_funds()
     l = []
     Membership.where(group_id: id).where.not(archived_at: nil).find_each do |membership|
@@ -91,16 +62,32 @@
     l
   end
 
+  def transfer_balance_from_member_to_group_account(member_id, current_user)
+    m = Membership.find(member_id)
+    amount = m.raw_balance
+    ActiveRecord::Base.transaction do
+      a = Allocation.create(user_id: member_id, group_id: id, amount: -amount)
+      Transaction.create!({
+        datetime: a.created_at,
+        from_account_id: m.status_account_id,
+        to_account_id: status_account_id,
+        user_id: current_user.id,
+        amount: amount
+      })
+    end
+  end
+
   def transfer_memberships_to_group_account(transfer_from_list, current_user)
     group_membership = ensure_group_account_exist
     transfer_from_list.each do |e|
-      Membership.find(e[:membership_id]).transfer_funds_to_membership(group_membership, current_user)
-    end 
+      transfer_balance_from_member_to_group_account(e[:membership_id], current_user)
+    end
+
     mail_admins_about_members(transfer_from_list)
   end
 
   def for_each_admin
-    Membership.where(group_id: id, is_admin: :true).find_each do |admin|
+    Membership.where(group_id: id, is_admin: :true, archived_at: nil).find_each do |admin|
       yield admin
     end
   end
@@ -124,7 +111,9 @@
 
   def cleanup_archived_members_with_funds(current_user)
     l = find_archived_members_with_funds()
-    transfer_memberships_to_group_account(l, current_user)
+    if l.length > 0
+      transfer_memberships_to_group_account(l, current_user)
+    end
   end
 
   def add_member(user)

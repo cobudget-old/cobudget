@@ -78,23 +78,6 @@ class Membership < ActiveRecord::Base
     (balance_on_status_account == raw_balance) && (balance_on_incoming_account + total_allocations == 0)
   end
 
-  # This function will transfer all funds to a different membership
-  def transfer_funds_to_membership(receiver, current_user)
-    amount = raw_balance
-    ActiveRecord::Base.transaction do
-      a = Allocation.create(user_id: member_id, group_id: group_id, amount: -amount)
-      Allocation.create(user_id: receiver.member_id, group_id: receiver.group_id, amount: amount, 
-        created_at: a.created_at, updated_at: a.updated_at)
-      Transaction.create!({
-        datetime: a.created_at,
-        from_account_id: status_account_id,
-        to_account_id: receiver.status_account_id,
-        user_id: current_user.id,
-        amount: amount
-        })
-    end
-  end
-
   private
     def currency_code
       group.currency_code
