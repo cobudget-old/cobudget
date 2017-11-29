@@ -17,17 +17,17 @@
 
     <div class="admin-page__group-options">
       <form name="adminPageForm" class="admin-page__form" ng-submit="updateGroup()">
-        <md-input-container class='admin-page__currency-code-input'>
+        <md-input-container class='admin-page__input'>
           <label>Name</label>
           <input ng-model="group.name">
         </md-input-container>
-        <md-input-container class='admin-page__currency-code-input'>
+        <md-input-container class='admin-page__input'>
           <label>Currency</label>
           <md-select ng-model="group.currencyCode">
             <md-option ng-repeat="currency in currencies" value="{{currency.code}}">{{ currency.code + " - " + currency.symbol }}</md-option>
           </md-select>
         </md-input-container>
-        <md-input-container class='admin-page__description-input'>
+        <md-input-container class='admin-page__input'>
           <label>Description</label>
           <textarea ng-model="group.description"></textarea>
         </md-input-container>

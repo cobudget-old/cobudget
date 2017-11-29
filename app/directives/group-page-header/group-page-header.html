@@ -65,8 +65,9 @@
         </div>
       </div>
 
-      <div class="group-page-header__second-row" layout="row" layout-align="start center">
-        <p>{{ group.description }}</p>
+      <div ng-if="group.description || currentUser.isAdminOf(group)" class="group-page-header__second-row" layout="row" layout-align="start center">
+        <p ng-if="group.description" class="group-page-header__description">{{ group.description }}</p>
+        <p ng-if="!group.description" class="group-page-header__add-description"><a ng-click="openGroupSettings()">+ Add a group description</a></p>
       </div>
 
       <div class="group-page-header__third-row" layout="row" layout-align="center end">
