@@ -76,6 +76,12 @@
     group_membership
   end
 
+  def for_each_admin
+    Membership.where(group_id: id, is_admin: :true, archived_at: nil).find_each do |admin|
+      yield admin
+    end
+  end
+
   def add_member(user)
     memberships.create!(member: user, is_admin: false)
   end
