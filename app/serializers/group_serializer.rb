@@ -12,6 +12,6 @@ class GroupSerializer < ActiveModel::Serializer
              :ready_to_pay_total,
              :total_in_funded, 
              :total_allocations,
-             :total_contributions
+             :total_contributions,
              :group_account_balance
 end

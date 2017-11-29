@@ -82,14 +82,13 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def notify_admins_funds_are_returned_to_group_account(admin:, bucket:, done_by:, archived_member:, amount:, group_account:)
+  def notify_admins_funds_are_returned_to_group_account(admin:, bucket:, done_by:, archived_member:, amount:)
     @bucket = bucket
     @group = bucket.group
     @done_by = done_by
     @archived_member = archived_member
     @amount = amount
     @formatted_amount = Money.new(amount * 100, @group.currency_code).format
-    @group_account = group_account
     mail(to: admin.name_and_email,
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "Funds from cancelled bucket have been returned to group account")

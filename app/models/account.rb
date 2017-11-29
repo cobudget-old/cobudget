@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   	debit-credit
   end
 
-  def change_account_to(acount_id)
+  def change_account_to(account_id)
     Transaction.where(to_account_id: id).find_each do |transaction|
       transaction.update(to_account_id: account_id)
     end
