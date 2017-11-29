@@ -1,4 +1,6 @@
-  class Group < ActiveRecord::Base
+class Group < ActiveRecord::Base
+  after_create :add_account_after_create
+
   has_many :buckets, dependent: :destroy
   has_many :allocations, dependent: :destroy
   has_many :memberships
@@ -120,6 +122,10 @@
     (total_allocations - total_contributions).floor || 0
   end
 
+  def group_account_balance
+    Account.find(status_account_id).balance
+  end
+
   def formatted_balance
     Money.new(balance * 100, currency_code).format
   end
@@ -147,5 +153,10 @@
       if self.currency_code
         self.currency_symbol = Money.new(0, self.currency_code).symbol
       end
+    end
+
+    def add_account_after_create
+      account = Account.create!({group_id: id})
+      update!(status_account_id: account.id)
     end
 end
