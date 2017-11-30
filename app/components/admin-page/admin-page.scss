@@ -31,10 +31,6 @@
   margin-top: 10px;
 }
 
-.admin-page__group-options md-input-container {
-  display: block;
-}
-
 .admin-page__form {
   padding: 10px;
 }
@@ -60,7 +56,7 @@
 
 .admin-page__input {
   padding-left: 0;
-  height: 50px;
+  min-height: 50px;
 }
 
 .admin-page__upload-btn-container {
