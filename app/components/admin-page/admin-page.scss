@@ -59,6 +59,11 @@
   min-height: 50px;
 }
 
+.admin-page__input-help-text {
+  color: rgba(0,0,0,0.54);
+  font-size: 12px;
+}
+
 .admin-page__upload-btn-container {
   border: 1px solid $cobudget-grey;
   border-radius: 4px;
