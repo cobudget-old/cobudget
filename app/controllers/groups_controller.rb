@@ -18,8 +18,8 @@ class GroupsController < AuthenticatedController
   def show
     group = Group.find(params[:id])
     if current_user.is_member_of?(group)
-      memberships = group.memberships.where(member_id: current_user.id, group_id: group.id)
-      render json: [group, memberships]
+      membership = group.memberships.where(member_id: current_user.id, group_id: group.id)
+      render json: [group, membership]
     else
       render status: 403, nothing: true
     end
