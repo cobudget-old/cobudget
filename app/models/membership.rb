@@ -16,7 +16,7 @@ class Membership < ActiveRecord::Base
            WHERE contributions.bucket_id = buckets.id
            GROUP BY contributions.user_id, buckets.group_id) as contrib
            ON memberships.member_id = contrib.user_id AND memberships.group_id = contrib.group_id')
-    .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations_db, 
+    .select('memberships.*, COALESCE(alloc.total_allocations,0) AS total_allocations_db,
             COALESCE(contrib.total_contributions,0) AS total_contributions_db')
   }
 
@@ -38,7 +38,7 @@ class Membership < ActiveRecord::Base
     Contribution.where(bucket_id: group_bucket_ids, user_id: member_id).sum(:amount)
   end
 
-  def raw_balance
+  def self.raw_balance
     total_allocations - total_contributions
   end
 
