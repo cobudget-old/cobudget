@@ -38,7 +38,7 @@ class Membership < ActiveRecord::Base
     Contribution.where(bucket_id: group_bucket_ids, user_id: member_id).sum(:amount)
   end
 
-  def self.raw_balance
+  def raw_balance
     total_allocations - total_contributions
   end
 
