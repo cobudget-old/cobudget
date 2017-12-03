@@ -5,4 +5,5 @@ WORKDIR /cobudget
 COPY Gemfile /cobudget/Gemfile
 COPY Gemfile.lock /cobudget/Gemfile.lock
 RUN bundle install
+RUN gem install mailcatcher
 COPY . /cobudget

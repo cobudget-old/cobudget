@@ -74,6 +74,7 @@ Vagrant.configure("2") do |config|
     sudo -u postgres createuser ubuntu -s
     gem install mailcatcher
   SHELL
+
   config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
 
   # Install docker
@@ -85,6 +86,11 @@ Vagrant.configure("2") do |config|
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     apt-get update
     apt-get install -y docker-ce
+  SHELL
+
+  config.vm.provision "shell", inline: <<-SHELL
+    docker pull ruby:2.4.2
+    docker pull postgres:9.6
   SHELL
 
   # Setup SSH forwarding
