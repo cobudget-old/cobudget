@@ -43,7 +43,7 @@ Start cobudget on the host network connecting to docker DB:
 
 `docker network create --driver bridge cobudget`
 
-Start the database on the newly created network. Map a directory where I can place the the DB dumps. For now, don't map the `data directory, as it will be easier to test stuff.
+Start the database on the newly created network. Map a directory where I can place the the DB dumps. For now, don't map the `data` directory, as it will be easier to test stuff.
 
 `docker run --network=cobudget --name=db -v /vagrant:/dbdump -e POSTGRES_DB=cobudget_development -e POSTGRES_USER=ubuntu -e POSTGRES_PASSWORD=pw -d postgres:9.6` 
 
