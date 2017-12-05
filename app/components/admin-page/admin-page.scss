@@ -18,15 +18,6 @@
   margin: 10px 0;
 }
 
-.admin-page__group-list-subheader {
-  color: $cob-pink;
-  margin-left: 8px;
-}
-
-.admin-page__group-link {
-  cursor: pointer;
-}
-
 .admin-page__group-options {
   margin-top: 10px;
 }
@@ -35,17 +26,15 @@
   padding: 10px;
 }
 
-.admin-page__group-list {
-  padding: 0;
-}
-
 .admin-page__group-name {
   display: block;
   font-size: 20px;
   margin-top: 10px;
 }
 
-.admin-page__group-list-item {
+.admin-page__group-list-subheader {
+  color: $cob-pink;
+  margin-left: 8px;
 }
 
 .admin-page__group-list .admin-page__group-update-btn {
@@ -63,6 +52,19 @@
   color: rgba(0,0,0,0.54);
   font-size: 12px;
   margin: 5px 2px;
+}
+
+.admin-page__description-markdown-link {
+  position: relative;
+  font-size: 13px;
+  top: 2px;
+  left: 2px;
+  color: rgba(0,0,0,0.35);
+  text-decoration: none;
+}
+
+.admin-page__description-markdown-link-text {
+  text-decoration: underline;
 }
 
 .admin-page__upload-btn-container {
