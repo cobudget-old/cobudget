@@ -66,7 +66,7 @@
       </div>
 
       <div ng-if="group.description || currentUser.isAdminOf(group)" class="group-page-header__second-row" layout="row" layout-align="start center">
-        <p ng-if="group.description" class="group-page-header__description"><i><span marked="'<b>Purpose: </b>' + group.description"></span></i></p>
+        <div ng-if="group.description" class="group-page-header__description" marked="group.description"></div>
         <p ng-if="!group.description" class="group-page-header__add-description"><a ng-click="openGroupSettings()"><i>+ Add a group purpose</i></a></p>
       </div>
 
