@@ -5,7 +5,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
   class GroupModel extends BaseModel
     @singular: 'group'
     @plural: 'groups'
-    @serializableAttributes: ['name', 'currencyCode', 'currencySymbol', 'initialized']
+    @serializableAttributes: ['name', 'currencyCode', 'currencySymbol', 'initialized', 'groupAccountBalance']
 
     relationships: ->
       @hasMany 'buckets'
@@ -37,15 +37,11 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
 
     pendingMemberships: ->
       _.filter @memberships(), (membership) ->
-        membership.isPending() && membership.isGroupAccount()
+        membership.isPending()
 
     settledMemberships: ->
       _.filter @memberships(), (membership) ->
-        !membership.isPending() && membership.isGroupAccount()
-
-    groupMembership: ->
-      _.filter @memberships(), (membership) ->
-        !membership.isGroupAccount()
+        !membership.isPending()
 
     # hasManyThrough doesn't yet exist quite yet
     members: ->

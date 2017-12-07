@@ -33,9 +33,6 @@ global.cobudgetApp.factory 'UserModel', (BaseModel) ->
     isAGroupAdmin: () ->
       @administeredGroups().length > 0
 
-    isGroupAccount: () ->
-      _.includes(@email, "@non-existing.email");
-
     primaryGroup: ->
       @groups()[0]
 

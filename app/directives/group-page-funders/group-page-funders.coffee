@@ -79,8 +79,16 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
           controller: ($mdDialog, $scope, Records) ->
             $scope.formData = {}
             $scope.mode = 'add'
-            $scope.managedMembership = funderMembership
-            $scope.managedMember = funderMembership.member()
+
+            if funderMembership.groupAccountBalance
+              $scope.managedMembership = funderMembership
+              $scope.managedMembership.rawBalance = $scope.managedMembership.groupAccountBalance
+              $scope.managedMember = {}
+              $scope.managedMember.id = null
+              $scope.managedMember.name = 'Group Account'
+            else
+              $scope.managedMembership = funderMembership
+              $scope.managedMember = funderMembership.member()
 
             $scope.setMode = (mode) ->
               $scope.mode = mode

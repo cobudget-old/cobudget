@@ -5,28 +5,24 @@
 
   <div ng-if="fundersLoaded">
 
-    <md-card ng-if="group.groupMembership().length > 0" class="group-page__funders-card">
-      <div layout="row" layout-align="start center" class="group-page__funders-subheader-container">
-        <h2 class="group-page__funders-subheader">Group Account
-        </h2>
+    <md-card class="group-page__funders-card">
+      <!-- <div layout="row" layout-align="start center" class="group-page__funders-subheader-container">
+        <h2 class="group-page__funders-subheader">Group Account</h2>
         <ng-md-icon class="group-page__funders-subheader-info" icon="info" size="16">
-          <md-tooltip md-direction="top">Where unallocated money goes</md-tooltip>
+          <md-tooltip md-direction="top">Uncallocated funds that don't belong to any user in the groups</md-tooltip>
         </ng-md-icon>
 
         <span flex></span>
       </div>
 
-      <md-divider class="group-page__funders-subheader-divider"></md-divider>
+      <md-divider class="group-page__funders-subheader-divider"></md-divider> -->
 
       <md-list class="group-page__funders-list">
-        <md-list-item ng-repeat="groupMembership in group.groupMembership()">
+        <md-list-item>
           <div layout="row" layout-align="center center" class="group-page__funder-container">
-            <div class="group-page__funder-avatar" layout="column" layout-align="center center">
-              <div>{{ groupMembership.member().name[0] | uppercase }}</div>
-            </div>
-
             <div layout="column" layout-align="center start" class="group-page__funder-name-container" flex>
-              <span class="group-page__funder-name">{{ groupMembership.member().name }}</span>
+              <span class="group-page__funder-name">Group Account</span>
+              <span class="group-page__funder-admin-label">Uncallocated funds that don't belong to any user in the group</span>
             </div>
 
             <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
@@ -34,47 +30,20 @@
                 ng-class="{'group-page__funder-balance-btn' : membership.isAdmin, 'group-page__funder-balance-personal' : funderMembership.id == membership.id, 'group-page__funder-balance-other' : funderMembership.id != membership.id}"
                 ng-click="membership.isAdmin && openManageFundsDialog(groupMembership)"
               >
-                {{ groupMembership.balance | currency : group.currencySymbol : 0 }}
+                {{ group.groupAccountBalance | currency : group.currencySymbol : 0 }}
               </span>
             </div>
 
-            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
+            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(group)">
               <ng-md-icon
                 icon="add_circle_outline"
                 layout="column"
                 layout-align="center center"
                 class="group-page__funder-add-button-icon"
               >
-                <md-tooltip md-direction="top">Manage {{groupMembership.member().name}}'s funds</md-tooltip>
+                <md-tooltip md-direction="top">Manage Group Account funds</md-tooltip>
               </ng-md-icon>
             </md-button>
-
-            <md-menu md-offset="0 -7" class="group-page__funder-more-menu" ng-if="membership.isAdmin">
-              <md-button class="md-icon-button group-page__funder-more-button" aria-label="More" ng-click="$mdMenu.open($event)">
-                <ng-md-icon
-                  icon="more_vert"
-                  layout="column"
-                  layout-align="center center"
-                  class="group-page__funder-more-button-icon"
-                ></ng-md-icon>
-              </md-button>
-
-              <md-menu-content width="3">
-                <md-menu-item>
-                  <md-button ng-click="removeMembership(groupMembership)">
-                    <div layout="row" layout-align="start center">
-                      <ng-md-icon
-                        icon="cancel"
-                        layout="column"
-                        layout-align="center center"
-                        class="group-page__funder-more-menu-item-icon"
-                      ></ng-md-icon>
-                      <span md-menu-align-target class="group-page__funder-more-menu-item-label">Remove Group Account</span>
-                    </div>
-                  </md-button>
-                </md-menu-item>
-              </md-menu-content>
-            </md-menu>
           </div>
         </md-list-item>
       </md-list>
