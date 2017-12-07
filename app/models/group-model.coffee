@@ -37,11 +37,15 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
 
     pendingMemberships: ->
       _.filter @memberships(), (membership) ->
-        membership.isPending()
+        membership.isPending() && membership.isGroupAccount()
 
     settledMemberships: ->
       _.filter @memberships(), (membership) ->
-        !membership.isPending()
+        !membership.isPending() && membership.isGroupAccount()
+
+    groupMembership: ->
+      _.filter @memberships(), (membership) ->
+        !membership.isGroupAccount()
 
     # hasManyThrough doesn't yet exist quite yet
     members: ->
