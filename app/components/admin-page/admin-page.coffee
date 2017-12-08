@@ -27,8 +27,9 @@ module.exports =
     $scope.updateGroup = () ->
       Records.groups.findOrFetchById(groupId).then (group) ->
         group.save()
-        Toast.show('You updated '+group.name)
-        $scope.cancel()
+          .then ->
+            Toast.show('You updated '+group.name)
+            $scope.cancel()
 
     $scope.viewGroup = (groupId) ->
       $location.path("/groups/#{groupId}")
