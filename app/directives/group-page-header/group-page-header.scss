@@ -49,7 +49,6 @@
 
 .group-page-header__description {
   margin: 0 0 20px;
-  color: rgba(0, 0, 0, 0.54);
   background: rgba(0,0,0,0.05);
   padding: 0;
 }
@@ -62,6 +61,7 @@
 .group-page-header__add-description {
   margin-top: 0;
   cursor: pointer;
+  font-size: 13px;
 }
 
 // third row
