@@ -67,6 +67,6 @@ class GroupsController < AuthenticatedController
 
   private
     def group_params
-      params.require(:group).permit(:name, :currency_code, :plan)
+      params.require(:group).permit(:name, :currency_code, :plan, :description)
     end
 end
