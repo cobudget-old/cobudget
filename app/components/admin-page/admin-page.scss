@@ -25,7 +25,11 @@
 
 .admin-page__group-list-subheader {
   color: $cob-pink;
-  padding-left: 3px;
+  padding-left: 10px;
+}
+
+.admin-page__form {
+  padding-left: 10px;
 }
 
 .admin-page__input {
@@ -36,7 +40,9 @@
 .admin-page__input-help-text {
   color: rgba(0,0,0,0.54);
   font-size: 12px;
-  margin: 5px 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 3px;
 }
 
 .admin-page__description-markdown-link {
