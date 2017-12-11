@@ -36,11 +36,13 @@
     <meta name="theme-color" content="#ffffff">
   </head>
 
+  <!--[if IE]>
+  <p class="browsehappy">Cobudget is currently optimized for use in Firefox and Chrome. Please use one of those.</p>
+  <![endif]-->
+
+  <!--[if !IE]><!-->
   <body ng-app="cobudget" ng-controller="ApplicationController">
 
-    <!--[if IE]>
-    <p class="browsehappy">Cobudget is currently optimized for use in Firefox and Chrome. Please use one of those.</p>
-    <![endif]-->
 
     <error-page></error-page>
     <loading-page></loading-page>
@@ -74,4 +76,7 @@
     </script>
     <!-- End Inspectlet Embed Code -->
   </body>
+
+  <!--<![endif]-->
+
 </html>
