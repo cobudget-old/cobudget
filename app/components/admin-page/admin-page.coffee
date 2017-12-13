@@ -25,11 +25,10 @@ module.exports =
     $scope.currencies = Currencies()
 
     $scope.updateGroup = () ->
-      Records.groups.findOrFetchById(groupId).then (group) ->
-        group.save()
-          .then ->
-            Toast.show('You updated '+group.name)
-            $scope.cancel()
+      $scope.group.save()
+        .then ->
+          Toast.show('You updated ' + $scope.group.name)
+          $scope.cancel()
 
     $scope.viewGroup = (groupId) ->
       $location.path("/groups/#{groupId}")
