@@ -14,7 +14,6 @@ global.cobudgetApp.directive 'contenteditable', ($sce) ->
           if attrs.stripBr and html == '<br>'
             html = ''
           ngModel.$setViewValue html
-          console.log html
           return
 
         if !ngModel
@@ -25,7 +24,6 @@ global.cobudgetApp.directive 'contenteditable', ($sce) ->
         ngModel.$render = ->
           if ngModel.$viewValue != element.html()
             element.html $sce.getTrustedHtml(ngModel.$viewValue or '')
-          console.log 'view'
           return
 
         # Listen for change events to enable binding

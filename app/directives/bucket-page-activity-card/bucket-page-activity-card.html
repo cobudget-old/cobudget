@@ -35,28 +35,12 @@
         <div contenteditable mentio
             mentio-typed-term="typedTerm"
             mentio-require-leading-space="true"
-            mentio-select-not-found="true"
             class="bucket-page__comment-input"
             placeholder="Ask a question, offer support, give an update..."
             mentio-id="'newComment.body'"
             id="newComment.body"
             ng-model="newComment.body"
             ></div>
-
-        <!-- <textarea
-        contenteditable
-        type="text"
-        mentio=""
-        mentio-trigger-char="'@'"
-        mentio-items="users | filter:label:typedTerm"
-        mentio-template-url="/mentio-menu.tpl.html"
-        mentio-typed-term="typedTerm"
-        class="bucket-page__comment-input"
-        required
-        placeholder="Ask a question, offer support, give an update..."
-        name="body"
-        ng-model="newComment.body"
-        /> -->
       </md-input-container>
 
       <div>{{newComment.body}}</div>
