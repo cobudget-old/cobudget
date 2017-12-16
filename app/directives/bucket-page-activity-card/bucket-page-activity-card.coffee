@@ -11,16 +11,18 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
       $scope.newComment.mentions = []
 
       $scope.createComment = ->
-        $scope.commentCreated = true
+        # $scope.commentCreated = true
         $scope.newComment.save().then ->
           Toast.show('You posted a comment')
           $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)
           $scope.newComment.mentions = []
-          $scope.commentCreated = false
+          # $scope.commentCreated = false
 
       $scope.getUserText = (item) ->
         $scope.newComment.mentions.push(item.userId)
-        return '<a href="/">@' + item.name + '</a>'
+        # return '<a href="/users/'+item.userId+'">@' + item.name + '</a>'
+        return  "[@" + item.name + "](users/"+item.userId+ ")"
+
 
       $scope.searchUsers = (term) ->
         $scope.users = $filter('filter')($scope.allUsers, term)

@@ -58,6 +58,7 @@ global.cobudgetApp = angular.module('cobudget', [
 ])
 .constant('config', require('app/configs/app'))
 
+require('app/configs/location.coffee')
 require('app/configs/auth.coffee')
 require('app/configs/chart-js.coffee')
 require('app/configs/marked.coffee')
