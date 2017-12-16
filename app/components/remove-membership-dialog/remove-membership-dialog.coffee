@@ -7,9 +7,8 @@ module.exports = (params) ->
     $scope.userHasFunds = membership.rawBalance != 0
     if !$scope.userHasFunds
       $scope.warnings = [
-        "All of their funds will be removed from currently funding buckets",
         "All of their ideas will be cancelled",
-        "All of their funding buckets will be cancelled and money will be refunded"
+        "All of their funding and funded buckets will be cancelled and money will be refunded"
       ]
     else
       $scope.warnings = [

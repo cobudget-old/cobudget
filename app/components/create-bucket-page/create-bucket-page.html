@@ -62,7 +62,7 @@
       </md-input-container>
 
       <div layout="column" layout-align="center space-between">
-        <md-button type="submit" class="create-bucket-page__btn create-bucket-page__confirm-btn">Create bucket</md-button>
+        <md-button type="submit" class="create-bucket-page__btn create-bucket-page__confirm-btn" ng-disabled="!bucketForm.$dirty || bucketForm.$submitted">Create bucket</md-button>
       </div>
     </form>
   </md-content>

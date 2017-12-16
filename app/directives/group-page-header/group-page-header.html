@@ -9,6 +9,7 @@
 
         <span flex></span>
 
+
         <div class="group-page-header__settings-btn">
           <div layout="row" layout-align="center center" ng-if="currentUser.isAdminOf(group)">
 
@@ -64,33 +65,20 @@
         </div>
       </div>
 
-      <div class="group-page-header__second-row" layout="row" layout-align="center end">
+      <div ng-if="group.description || currentUser.isAdminOf(group)" class="group-page-header__second-row">
+        <div ng-if="group.description" class="group-page-header__description" layout="row" layout-align="start center" marked="group.description"></div>
+        <p ng-if="!group.description" class="group-page-header__add-description"><a ng-click="openGroupSettings()"><i>+ Add a group purpose</i></a></p>
+      </div>
+
+      <div class="group-page-header__third-row" layout="row" layout-align="center end">
         <div layout="column" layout-align="center start" class="group-page-header__funds-overview-container">
-          <div class="group-page-header__funds-overview-header">Available Funds</div>
+          <div class="group-page-header__funds-overview-header">Your Available Funds</div>
           <div layout="row" layout-align="center center" class="group-page-header__funds-overview-content" >
             <div layout="row" class="group-page-header__personal-funds-container">
-              <ng-md-icon icon="person"
-                class="group-page-header__funds-icon"
-                layout="column"
-                layout-align="center center"
-              >
-                <md-tooltip md-direction="top">Your funds</md-tooltip>
-              </ng-md-icon>
               <div layout="column" layout-align="center center">
-                <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}</span>
-              </div>
-            </div>
-
-            <div layout="row" class="group-page-header__group-funds-container">
-              <ng-md-icon icon="group"
-                class="group-page-header__funds-icon"
-                layout="column"
-                layout-align="center center"
-              >
-                <md-tooltip md-direction="top">Total unspent funds</md-tooltip>
-              </ng-md-icon>
-              <div layout="column" layout-align="center center">
-                <span class="group-page-header__funds-overview-amount">{{ group.balance | currency : group.currencySymbol : 0  }}</span>
+                <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}
+                  <span class="group-page-header__funds-overview-amount-total">(of <b>{{ group.balance | currency : group.currencySymbol : 0  }}</b> in group)</span>
+                </span>
               </div>
             </div>
           </div>
