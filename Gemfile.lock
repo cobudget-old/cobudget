@@ -189,6 +189,8 @@ GEM
     redcarpet (3.4.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    reverse_markdown (1.0.4)
+      nokogiri
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -270,6 +272,7 @@ DEPENDENCIES
   rails_12factor
   redcarpet
   responders
+  reverse_markdown
   rspec-rails
   simplecov
   sinatra
