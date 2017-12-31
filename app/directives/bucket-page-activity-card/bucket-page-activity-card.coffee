@@ -8,21 +8,16 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
     controller: (Records, $scope, Toast, $filter) ->
 
       $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)
-      $scope.newComment.mentions = []
 
       $scope.createComment = ->
-        # $scope.commentCreated = true
+        $scope.commentCreated = true
         $scope.newComment.save().then ->
           Toast.show('You posted a comment')
           $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)
-          $scope.newComment.mentions = []
-          # $scope.commentCreated = false
+          $scope.commentCreated = false
 
       $scope.getUserText = (item) ->
-        $scope.newComment.mentions.push(item.userId)
-        # return '<a href="/users/'+item.userId+'">@' + item.name + '</a>'
-        return  "[@" + item.name + "](users/"+item.userId+ ")"
-
+        return '<a href="/users/'+item.userId+'" name='+item.userId+'>@' + item.name + '</a>'
 
       $scope.searchUsers = (term) ->
         $scope.users = $filter('filter')($scope.allUsers, term)
@@ -31,3 +26,6 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
         $scope.allUsers = _.map $scope.group.settledMemberships(), (membership) ->
           {name: membership.member().name, email: membership.member().email, userId: membership.member().id}
         $scope.users = $scope.allUsers
+
+      $scope.openUserPage = ->
+        $location.path('/user/:id').search('previous_bucket_id', $scope.bucket.id)
