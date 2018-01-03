@@ -7,7 +7,7 @@
 
 .review-bulk-allocation-page__header {
   height: 138px;
-  background: rgba(36,50,57,1);
+  background: $cobudget-gunmetal;;
   padding-bottom: 25px;
 }
 
@@ -161,7 +161,7 @@
 }
 
 .review-bulk-allocation-page__confirm-btn {
-  background: #4A90E2 !important;
+  background: $cob-pink !important;
   color: white;
 }
 
