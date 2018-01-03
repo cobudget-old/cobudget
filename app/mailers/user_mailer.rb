@@ -108,6 +108,6 @@ class UserMailer < ActionMailer::Base
     @author = author
     mail(to: member.email,
          from: "Cobudget Updates <updates@cobudget.co>",
-         subject: "#{@author.name} mentioned you on the bucket #{@bucket.name}")
+         subject: "#{@author.name} mentioned you in the bucket #{@bucket.name}")
   end
 end
