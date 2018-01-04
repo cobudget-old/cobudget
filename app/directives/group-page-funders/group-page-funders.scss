@@ -311,6 +311,15 @@
   letter-spacing: normal;
 }
 
+.group-page__manage-funds-group-account-option {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: normal;
+  padding: 0;
+  justify-content: flex-start !important;
+  -webkit-justify-content: flex-start !important;
+}
+
 .group-page__manage-funds-dialog-cancel-btn {
   color: $cobudget-grey;
 }

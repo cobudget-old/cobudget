@@ -6,17 +6,6 @@
   <div ng-if="fundersLoaded">
 
     <md-card class="group-page__funders-card">
-      <!-- <div layout="row" layout-align="start center" class="group-page__funders-subheader-container">
-        <h2 class="group-page__funders-subheader">Group Account</h2>
-        <ng-md-icon class="group-page__funders-subheader-info" icon="info" size="16">
-          <md-tooltip md-direction="top">Uncallocated funds that don't belong to any user in the groups</md-tooltip>
-        </ng-md-icon>
-
-        <span flex></span>
-      </div>
-
-      <md-divider class="group-page__funders-subheader-divider"></md-divider> -->
-
       <md-list class="group-page__funders-list">
         <md-list-item>
           <div layout="row" layout-align="center center" class="group-page__funder-container">
@@ -26,24 +15,11 @@
             </div>
 
             <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
-              <span class="group-page__funder-balance"
-                ng-class="{'group-page__funder-balance-btn' : membership.isAdmin, 'group-page__funder-balance-personal' : funderMembership.id == membership.id, 'group-page__funder-balance-other' : funderMembership.id != membership.id}"
-                ng-click="membership.isAdmin && openManageFundsDialog(groupMembership)"
-              >
+              <span class="group-page__funder-balance">
                 {{ group.groupAccountBalance | currency : group.currencySymbol : 0 }}
               </span>
             </div>
 
-            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(group)">
-              <ng-md-icon
-                icon="add_circle_outline"
-                layout="column"
-                layout-align="center center"
-                class="group-page__funder-add-button-icon"
-              >
-                <md-tooltip md-direction="top">Manage Group Account funds</md-tooltip>
-              </ng-md-icon>
-            </md-button>
           </div>
         </md-list-item>
       </md-list>
@@ -83,13 +59,13 @@
             <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
               <span class="group-page__funder-balance"
                 ng-class="{'group-page__funder-balance-btn' : membership.isAdmin, 'group-page__funder-balance-personal' : funderMembership.id == membership.id, 'group-page__funder-balance-other' : funderMembership.id != membership.id}"
-                ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)"
+                ng-click="membership.isAdmin && openManageFundsDialog(funderMembership, group)"
               >
                 {{ funderMembership.balance | currency : group.currencySymbol : 0 }}
               </span>
             </div>
 
-            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
+            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership, group)">
               <ng-md-icon
                 icon="add_circle_outline"
                 layout="column"
@@ -177,13 +153,13 @@
             <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
               <span class="group-page__funder-balance group-page__funder-balance-pending"
                 ng-class="membership.isAdmin ? 'group-page__funder-balance-btn' : 'group-page__funder-balance'"
-                ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)"
+                ng-click="membership.isAdmin && openManageFundsDialog(funderMembership, group)"
               >
                 {{ funderMembership.balance | currency : group.currencySymbol : 0 }}
               </span>
             </div>
 
-            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership)">
+            <md-button class="md-icon-button group-page__funder-add-button" aria-label="Add Funds" ng-if="membership.isAdmin" ng-click="membership.isAdmin && openManageFundsDialog(funderMembership, group)">
               <ng-md-icon
                 icon="add_circle_outline"
                 layout="column"

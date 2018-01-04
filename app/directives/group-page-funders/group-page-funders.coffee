@@ -72,38 +72,44 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
 
 
       # TODO: refactor
-      $scope.openManageFundsDialog = (funderMembership) ->
+      $scope.openManageFundsDialog = (funderMembership, group) ->
         Dialog.custom
           scope: $scope
           template: require('./../../directives/group-page-funders/manage-funds-dialog.tmpl.html')
           controller: ($mdDialog, $scope, Records) ->
             $scope.formData = {}
             $scope.mode = 'add'
+            $scope.formData.fromGroupAccount = false
 
-            if funderMembership.groupAccountBalance
-              $scope.managedMembership = funderMembership
-              $scope.managedMembership.rawBalance = $scope.managedMembership.groupAccountBalance
-              $scope.managedMember = {}
-              $scope.managedMember.id = null
-              $scope.managedMember.name = 'Group Account'
-            else
-              $scope.managedMembership = funderMembership
-              $scope.managedMember = funderMembership.member()
+            $scope.managedMembership = funderMembership
+            $scope.managedMember = funderMembership.member()
+            $scope.group = group
 
             $scope.setMode = (mode) ->
               $scope.mode = mode
 
+            # for 'add' mode
             $scope.normalizeAllocationAmount = ->
               allocationAmount = $scope.formData.allocationAmount || 0
               if allocationAmount + $scope.managedMembership.rawBalance < 0
                 $scope.formData.allocationAmount = -$scope.managedMembership.rawBalance
+              # if money should come from group account, set the groupAccountBalance as the upper limit
+              if $scope.formData.fromGroupAccount
+                if allocationAmount > $scope.group.groupAccountBalance
+                  $scope.formData.allocationAmount = $scope.group.groupAccountBalance
 
+
+            # for 'change' mode
             $scope.normalizeNewBalance = ->
               if $scope.formData.newBalance < 0
                 $scope.formData.newBalance = 0
 
             $scope.isValidForm = ->
               ($scope.mode == 'add' && $scope.formData.allocationAmount) || ($scope.mode == 'change' && ( $scope.formData.newBalance || $scope.formData.newBalance == 0))
+
+            $scope.transferFromGroupAccount = ->
+              # if checked, renormalize
+              $scope.normalizeAllocationAmount()
 
             $scope.cancel = ->
               $mdDialog.cancel()
@@ -113,7 +119,7 @@ global.cobudgetApp.directive 'groupPageFunders', () ->
                 amount = $scope.formData.allocationAmount
               if $scope.mode == 'change'
                 amount = $scope.formData.newBalance - $scope.managedMembership.rawBalance
-              params = {groupId: $scope.group.id, userId: $scope.managedMember.id, amount: amount }
+              params = {groupId: $scope.group.id, userId: $scope.managedMember.id, amount: amount, fromGroupAccount: $scope.formData.fromGroupAccount, notify: true }
               allocation = Records.allocations.build(params)
               allocation.save()
                 .then (res) ->
