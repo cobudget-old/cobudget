@@ -17,8 +17,9 @@ class CommentsController < AuthenticatedController
     user_links = noko_body.css("a").map {|a|
       a.attributes.values[1].value
     }
+
     noko_body.css("a").each do |a|
-      a.attributes["href"].value = "#{root_url}##{a['href']}"
+      a.attributes["href"].value = "#{Rails.application.config.action_mailer.default_url_options[:host]}/##{a['href']}"
     end
 
     email_body = noko_body.children.to_html
@@ -29,7 +30,7 @@ class CommentsController < AuthenticatedController
       bucket = Bucket.find(comment_params[:bucket_id])
       user_links.each do |userId|
         user = User.find(userId)
-        UserMailer.notify_member_that_they_were_mentioned(author: current_user, member: user, bucket: bucket, body: body_html).deliver_later
+        UserMailer.notify_member_that_they_were_mentioned(author: current_user, member: user, bucket: bucket, body: body_html).deliver_now
       end
     end
     if comment.valid?
