@@ -23,7 +23,7 @@
           </div>
 
           <div class="confirm-account-page__input-container">
-            <input required class="confirm-account-page__input-field" name="name" type="text" ng-model="formData.name" placeholder="your full name" autocomplete="off">
+            <input required class="confirm-account-page__input-field" required name="name" type="text" ng-model="formData.name" placeholder="your full name" autocomplete="off">
             <div ng-if="newUserForm.name.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Name is required.</div>
           </div>
 
