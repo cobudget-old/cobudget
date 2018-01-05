@@ -69,6 +69,7 @@ class MembershipsController < AuthenticatedController
     member.generate_confirmation_token! unless member.confirmed?
     UserMailer.invite_email(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance.to_f).deliver_later
     UserMailer.invite_email_reminder(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance.to_f).deliver_later(wait_until: 36.hours.from_now)
+    UserMailer.invite_email_reminder(user: member, group: group, inviter: current_user, initial_allocation_amount: membership.balance.to_f).deliver_later(wait_until: 168.hours.from_now)
     render json: [membership], status: 200
   end
 
