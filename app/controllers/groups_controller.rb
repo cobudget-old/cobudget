@@ -18,7 +18,8 @@ class GroupsController < AuthenticatedController
   def show
     group = Group.find(params[:id])
     if current_user.is_member_of?(group)
-      render json: [group]
+      membership = group.memberships.where(member_id: current_user.id, group_id: group.id)
+      render json: [group, membership]
     else
       render status: 403, nothing: true
     end
@@ -66,6 +67,6 @@ class GroupsController < AuthenticatedController
 
   private
     def group_params
-      params.require(:group).permit(:name, :currency_code, :plan)
+      params.require(:group).permit(:name, :currency_code, :plan, :description)
     end
 end
