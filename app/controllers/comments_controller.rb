@@ -30,7 +30,7 @@ class CommentsController < AuthenticatedController
       bucket = Bucket.find(comment_params[:bucket_id])
       user_links.each do |userId|
         user = User.find(userId)
-        UserMailer.notify_member_that_they_were_mentioned(author: current_user, member: user, bucket: bucket, body: body_html).deliver_now
+        UserMailer.notify_member_that_they_were_mentioned(author: current_user, member: user, bucket: bucket, body: body_html).deliver_later
       end
     end
     if comment.valid?
