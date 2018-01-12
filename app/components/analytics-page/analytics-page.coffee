@@ -16,7 +16,9 @@ module.exports =
       $http.get(config.apiPrefix + '/analytics/report')
         .then (res) ->
           $scope.data = res.data
+          $scope.groups = res.data.group_data
           $scope.dataLoaded = true
+          $scope.initialOrder = '-created_at'
 
       $scope.sortBy = (propertyName) ->
         $scope.reverse = if $scope.propertyName == propertyName then !$scope.reverse else false
