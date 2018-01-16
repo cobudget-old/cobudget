@@ -1,25 +1,17 @@
 <div class="analytics-page" ng-if="authorized && dataLoaded">
 
   <div class="analytics-page__unconfirmed-user-count-container">
-    <h2>number of unconfirmed users right now: {{ data.unconfirmed_user_count }}</h2>
-    <h2>number of confirmed users right now: {{ data.confirmed_user_count }}</h2>
+    <p>invited users all time: {{ data.user_counts.con + data.user_counts.un }} ({{ data.user_counts.con }} have confirmed)</p>
+    <p>{{ (100 * data.user_counts.con / ( data.user_counts.con + data.user_counts.un )) | number:0 }}% invite acceptance rate total</p>
+    <p>invited users last 7 days: {{ data.user_counts.con_7 + data.user_counts.un_7 }} ({{ data.user_counts.con_7 }} have confirmed)</p>
+    <p>{{ (100 * data.user_counts.con_7 / ( data.user_counts.con_7 + data.user_counts.un_7 )) | number:0 }}% invite acceptance rate last 7 days</p>
+    <p>invited users last 7 days: {{ data.user_counts.con_90 + data.user_counts.un_90 }} ({{ data.user_counts.con_90 }} have confirmed)</p>
+    <p>{{ (100 * data.user_counts.con_90 / ( data.user_counts.con_90 + data.user_counts.un_90 )) | number:0 }}% invite acceptance rate last 90 days</p>
   </div>
 
   <md-divider></md-divider>
 
-  <h2>download csv of admins</h2>
-
-  <button ng-click="adminCSV()" name="button">Download as CSV</button>
-
-  <h2>group data</h2>
-
-  <!-- <button ng-click="sortBy('created_at')">sort by age</button>
-  <button ng-click="sortBy('last_activity_at')">sort by last activity</button>
-  <button ng-click="sortBy('confirmed_member_count')">sort by confirmed member count</button>
-  <button ng-click="sortBy('funded_bucket_count')">sort by funded bucket count</button>
-  <button ng-click="sortBy('total_allocations')">sort by total allocations</button>
-  <button ng-click="sortBy('total_in_funded')">sort by total in funded buckets</button> -->
-
+  <md-button class="md-raised md-primary" ng-click="adminCSV()">CSV of all admins</md-button>
 
   <md-table-container>
     <table md-table multiple ng-model="group">
@@ -32,6 +24,9 @@
           <th md-column md-order-by="confirmed_member_count">Confirmed member count</th>
           <th md-column md-order-by="unconfirmed_member_count">Unconfirmed member count</th>
           <th md-column md-order-by="funded_bucket_count">Funded bucket count</th>
+          <th md-column md-order-by="buckets_last_week">New buckets this week</th>
+          <th md-column md-order-by="buckets_last_quarter">New buckets this quarter</th>
+          <th md-column md-order-by="buckets_all_time">Buckets all time</th>
           <th md-column md-order-by="total_allocations">Total allocations</th>
           <th md-column md-order-by="total_in_funded">Total in funded buckets</th>
           <th md-column>Admins</th>
@@ -47,44 +42,15 @@
           <td md-cell>{{ group.confirmed_member_count }}</td>
           <td md-cell>{{ group.unconfirmed_member_count }}</td>
           <td md-cell>{{ group.funded_bucket_count }}</td>
-          <td md-cell>{{ group.total_allocations | currency : group.currencySymbol : 0 }}</td>
-          <td md-cell>{{ group.total_in_funded | currency : group.currencySymbol : 0 }}</td>
+          <td md-cell>{{ group.buckets_last_week }}</td>
+          <td md-cell>{{ group.buckets_last_quarter }}</td>
+          <td md-cell>{{ group.bucket_all_time }}</td>
+          <td md-cell>{{ group.total_allocations | currency : group.currency_symbol : 0 }}</td>
+          <td md-cell>{{ group.total_in_funded | currency : group.currency_symbol : 0 }}</td>
           <td md-cell><span ng-repeat="admin in group.admins">{{ admin.email }}, </span></td>
         </tr>
       </tbody>
     </table>
   </md-table-container>
 
-  <!-- <div ng-repeat="group in groups | orderBy:propertyName:reverse">
-    <table class="analytics-page__group-data-table">
-      <tr>
-        <th colspan="4"> {{ group.name }} <a href="/#/groups/{{group.id}}">({{ group.id }})</a> </th>
-      </tr>
-      <tr class="analytics-page__group-data-table-header">
-        <td>age</td>
-        <td>last activity</td>
-        <td>confirmed member count</td>
-        <td>unconfirmed member count</td>
-        <td>funded bucket count</td>
-        <td>total allocations</td>
-        <td>total in funded buckets</td>
-      </tr>
-      <tr>
-        <td>{{ group.created_at | timeFromNowInWords }}</td>
-        <td>{{ group.last_activity_at | timeFromNowInWords }}</td>
-        <td>{{ group.confirmed_member_count }}</td>
-        <td>{{ group.unconfirmed_member_count }}</td>
-        <td>{{ group.funded_bucket_count }}</td>
-        <td>{{ group.total_allocations | currency : group.currencySymbol : 0 }}</td>
-        <td>{{ group.total_in_funded | currency : group.currencySymbol : 0 }}</td>
-      </tr>
-    </table>
-
-    <div class="analytics-page__group-admins-container">
-      <span>
-        <b>contact:</b>
-        <span ng-repeat="admin in group.admins">{{ admin.name }} ({{admin.email}}), </span>
-      </span>
-    </div>
-  </div> -->
 </div>
