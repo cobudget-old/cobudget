@@ -29,7 +29,7 @@ class GroupAnalyticsService
         INNER JOIN users ON contributions.user_id = users.id
         INNER JOIN buckets ON contributions.bucket_id = buckets.id
         WHERE group_id = #{@group.id}
-        ORDER BY created_at;)).map { |r| 
+        ORDER BY created_at;)).map { |r|
           r["amount"] = r["amount"].to_f
           r
         }
