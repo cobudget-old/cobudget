@@ -11,7 +11,9 @@ class AnalyticsService
         con_7: confirmed_user_count_7,
         un_7: unconfirmed_user_count_7,
         con_90: confirmed_user_count_90,
-        un_90: unconfirmed_user_count_90
+        un_90: unconfirmed_user_count_90,
+        buckets_count: buckets_count,
+        users_that_proposed_buckets_count: users_that_proposed_buckets_count
       },
       group_data: group_data
     }
@@ -43,6 +45,18 @@ class AnalyticsService
       User.where(created_at: 90.days.ago..Time.current).where.not(confirmed_at: nil).count
     end
 
+    def buckets_count
+      Bucket.all.count
+    end
+
+    def users_that_proposed_buckets_count
+      Bucket.distinct.count(:user_id)
+    end
+
+    def users_that_proposed_buckets_percentage (group)
+       100 * group.buckets.select(:user_id).distinct.count / (group.members.count == 0 ? 1 : group.members.count)
+    end
+
     def group_data
       groups = Group.all
       groups.map do |group|
@@ -58,9 +72,10 @@ class AnalyticsService
           funded_bucket_count: group.buckets.where(status:'funded').count,
           buckets_last_week: group.buckets.where(created_at: 7.days.ago..Time.current).count,
           buckets_last_quarter: group.buckets.where(created_at: 90.days.ago..Time.current).count,
-          buckets_all_time: group.buckets.count,
+          buckets_all_time: group.buckets.all.count,
           total_allocations: group.total_allocations,
-          total_in_funded: group.total_in_funded
+          total_in_funded: group.total_in_funded,
+          users_that_proposed_buckets_percentage: users_that_proposed_buckets_percentage(group)
         }
       end
     end
