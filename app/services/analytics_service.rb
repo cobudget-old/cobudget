@@ -13,7 +13,17 @@ class AnalyticsService
         con_90: confirmed_user_count_90,
         un_90: unconfirmed_user_count_90,
         buckets_count: buckets_count,
-        users_that_proposed_buckets_count: users_that_proposed_buckets_count
+        users_that_proposed_buckets_count: users_that_proposed_buckets_count,
+        cumulative_user_invite_count_data: cumulative_user_invite_count_data,
+      },
+      group_counts: {
+        new_group_count_7: new_group_count_7,
+        new_group_count_90: new_group_count_90,
+        cumulative_group_count_data: cumulative_group_count_data
+      },
+      bucket_counts: {
+        new_buckets_data: new_buckets_data,
+        funded_buckets_data: funded_buckets_data
       },
       group_data: group_data
     }
@@ -21,12 +31,20 @@ class AnalyticsService
 
   private
 
+    def new_group_count_7
+      Group.where(created_at: 7.days.ago..Time.current).count
+    end
+
+    def new_group_count_90
+      Group.where(created_at: 90.days.ago..Time.current).count
+    end
+
     def unconfirmed_user_count
       User.where(confirmed_at: nil).count
     end
 
     def confirmed_user_count
-      User.where.not(confirmed_at: nil).count
+      User.where.not(confirmed_at: nil).where.not("email like ?", "%admin@group%").count
     end
 
     def unconfirmed_user_count_7
@@ -34,7 +52,7 @@ class AnalyticsService
     end
 
     def confirmed_user_count_7
-      User.where(created_at: 7.days.ago..Time.current).where.not(confirmed_at: nil).count
+      User.where(created_at: 7.days.ago..Time.current).where.not(confirmed_at: nil).where.not("email like ?", "%admin@group%").count
     end
 
     def unconfirmed_user_count_90
@@ -42,7 +60,7 @@ class AnalyticsService
     end
 
     def confirmed_user_count_90
-      User.where(created_at: 90.days.ago..Time.current).where.not(confirmed_at: nil).count
+      User.where(created_at: 90.days.ago..Time.current).where.not(confirmed_at: nil).where.not("email like ?", "%admin@group%").count
     end
 
     def buckets_count
@@ -57,8 +75,24 @@ class AnalyticsService
        100 * group.buckets.select(:user_id).distinct.count / (group.members.count == 0 ? 1 : group.members.count)
     end
 
+    def cumulative_user_invite_count_data
+      User.where(created_at: Date.parse("january 1 2017")..Time.current).where.not("email like ?", "%admin@group%").group_by_day(:created_at).count.map {|k,v| [k.strftime('%Q').to_i, v]}
+    end
+
+    def cumulative_group_count_data
+      Group.where(created_at: Date.parse("january 1 2017")..Time.current).group_by_day(:created_at).count.map {|k,v| [k.strftime('%Q').to_i, v]}
+    end
+
+    def new_buckets_data
+      Bucket.where(created_at: Date.parse("january 1 2017")..Time.current).group_by_day(:created_at).count.map {|k,v| [k.strftime('%Q').to_i, v]}
+    end
+
+    def funded_buckets_data
+      Bucket.where(funded_at: Date.parse("january 1 2017")..Time.current).group_by_day(:funded_at).count.map {|k,v| [k.strftime('%Q').to_i, v]}
+    end
+
     def group_data
-      groups = Group.all
+      groups = Group.where(created_at: Date.parse("january 1 2017")..Time.current)
       groups.map do |group|
         {
           admins: group.members.joins(:memberships).where(memberships: {is_admin: true}).distinct.order(:created_at).as_json(only: [:name, :email]).map { |h| h.symbolize_keys },
