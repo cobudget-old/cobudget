@@ -10,6 +10,19 @@ class UserMailer < ActionMailer::Base
         subject: "#{inviter.name} invited you to join \"#{group.name}\" on Cobudget")
   end
 
+  def invite_email_reminder(user: , group: , inviter: , initial_allocation_amount:)
+    @user = user
+    @group = group
+    @inviter = inviter
+    @initial_allocation_amount = initial_allocation_amount.floor
+    @initial_allocation_amount_formatted = Money.new(initial_allocation_amount * 100, @group.currency_code).format
+    if !@user.confirmed_at?
+      mail(to: @user.name_and_email,
+          from: "Cobudget Accounts <accounts@cobudget.co>",
+          subject: "Your invitation to Cobudget is waiting")
+    end
+  end
+
   def notify_member_that_they_received_allocation(admin: , member: , group: , amount:)
     @member = member
     @group = group

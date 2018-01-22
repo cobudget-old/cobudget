@@ -253,7 +253,7 @@ describe MembershipsController, :type => :controller do
 
           it "sends invite email with link to 'confirm-account-page' to specified user" do
             sent_emails = ActionMailer::Base.deliveries
-            expect(sent_emails.length).to eq(1)
+            expect(sent_emails.length).to eq(4)
             expect(sent_emails.first.to).to eq([@user_to_invite.email])
             expect(sent_emails.first.body.to_s).to include("#/confirm_account?confirmation_token=#{@user_to_invite.confirmation_token}")
           end
