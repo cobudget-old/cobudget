@@ -42,7 +42,7 @@
           placeholder="10, 100, 500"
           only-digits
         />
-        <p class="bucket-page-progress-card__freeze-msg" ng-if="group.fundingFreeze"><i>Funding for this group is currently frozen.</i></p>
+        <p class="bucket-page-progress-card__freeze-msg" ng-if="group.fundingFreeze"><i>Funding in this group is currently off</i></p>
       </div>
 
       <md-button class="md-raised md-primary bucket-page-progress-card__fund-btn" ng-click='submitContribution()' ng-disabled="fundForm.$pristine || fundForm.$invalid" ng-autodisable>Fund Now</md-button>
