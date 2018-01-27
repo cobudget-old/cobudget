@@ -12,48 +12,17 @@
       <div layout="row" layout-align="space-around center" layout-margin class="group-page-header__stats-overview-container">
 
         <div>
-
-          <div layout="row" class="group-page-header__stats-overview-label">Total Incomplete&nbsp;
-            <ng-md-icon icon="info"
-              size="16"
-            >
-              <md-tooltip md-direction="top">Total value of funded, incomplete buckets</md-tooltip>
-            </ng-md-icon>
-          </div>
-          <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
-              <ng-md-icon icon="payment"
-                class="group-page-header__funds-icon"
-                  layout="column"
-                  layout-align="center center"
-              ></ng-md-icon>
-              <div layout="column" layout-align="center center">
-                <span class="group-page-header__stats-overview-amount">{{ group.readyToPayTotal | currency : group.currencySymbol : 2 }}</span>
-              </div>
-          </div>
+          <p>{{group.balance}} (funds in members accounts)</p>
+          <p>{{group.totalInUnfunded}} (funds in funding now buckets)</p>
+          <p>{{group.readyToPayTotal}} (funds in funded buckets)</p>
+          <p>{{group.totalPaid}} (funds in complete buckets)</p>
+          <p ng-if="group.totalInArchived != 0">{{group.totalInArchived}} (funds in cancelled buckets)</p>
+          <hr>
+          <!-- <p>{{group.totalAllocations}}</p> -->
+          <p>{{group.balance + group.readyToPayTotal + group.totalInUnfunded + group.totalPaid + group.totalInArchived}} (total funds)</p>
+          <!-- <p>added2: {{group.balance + group.totalInFunded + group.totalInUnfunded}}</p> -->
         </div>
-
-        <div>
-          <div layout="row" class="group-page-header__stats-overview-label">Balance in Group&nbsp;
-            <ng-md-icon icon="info"
-              size="16"
-            >
-              <md-tooltip md-direction="top">Available funds plus funds in incomplete buckets</md-tooltip>
-            </ng-md-icon>
-          </div>
-          <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
-              <ng-md-icon icon="timeline"
-                class="group-page-header__funds-icon"
-                  layout="column"
-                  layout-align="center center"
-              ></ng-md-icon>
-              <div layout="column" layout-align="center center">
-                <span class="group-page-header__stats-overview-amount">{{ group.totalInCirculation | currency : group.currencySymbol : 2 }}</span>
-              </div>
-          </div>
-        </div>
-
       </div>
-
     </md-list>
   </md-card>
 
