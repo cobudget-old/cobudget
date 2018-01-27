@@ -50,7 +50,7 @@
   def ensure_group_user_exist()
     uid = %(group-#{id}@non-existing.email)
     group_user = User.find_by uid: uid
-    if !group_user 
+    if !group_user
       group_user = User.create!({
           name: %(Group "#{name}"),
           uid: uid,
@@ -100,8 +100,17 @@
       buckets.with_totals.where("status = 'funded'").sum("contrib.total")
   end
 
+  def total_in_unfunded
+      # amount of money in unfunded buckets
+      buckets.with_totals.where("status = 'live'").sum("contrib.total")
+  end
+
   def ready_to_pay_total
       buckets.with_totals.where("status = 'funded' AND buckets.archived_at IS NULL AND paid_at IS NULL").sum("contrib.total")
+  end
+
+  def total_in_archived
+      buckets.with_totals.where("buckets.archived_at IS NOT NULL AND paid_at IS NULL").sum("contrib.total")
   end
 
   def total_paid
