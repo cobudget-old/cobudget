@@ -9,20 +9,39 @@
 
       <md-divider class="group-page__stats-divider"></md-divider>
 
-      <div layout="row" layout-align="space-around center" layout-margin class="group-page-header__stats-overview-container">
-
-        <div>
-          <p>{{group.balance}} (funds in members accounts)</p>
-          <p>{{group.totalInUnfunded}} (funds in funding now buckets)</p>
-          <p>{{group.readyToPayTotal}} (funds in funded buckets)</p>
-          <p>{{group.totalPaid}} (funds in complete buckets)</p>
-          <p ng-if="group.totalInArchived != 0">{{group.totalInArchived}} (funds in cancelled buckets)</p>
-          <hr>
-          <!-- <p>{{group.totalAllocations}}</p> -->
-          <p>{{group.balance + group.readyToPayTotal + group.totalInUnfunded + group.totalPaid + group.totalInArchived}} (total funds)</p>
-          <!-- <p>added2: {{group.balance + group.totalInFunded + group.totalInUnfunded}}</p> -->
-        </div>
-      </div>
+      <md-list-item>
+        <ng-md-icon icon="group"
+        class="group-page__stats-list-icon"
+        layout="column"
+        layout-align="center center"
+        ></ng-md-icon>
+        In members accounts
+        <span class="md-secondary">{{group.balance | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <md-list-item>
+        <img src="./img/bucket_empty.svg" alt="bucket" class="group-page__stats-list-icon"/>
+        In funding now buckets
+        <span class="md-secondary">{{group.totalInUnfunded | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <md-list-item>
+        <img src="./img/bucket_full.svg" alt="bucket" class="group-page__stats-list-icon"/>
+        In funded buckets
+        <span class="md-secondary">{{group.readyToPayTotal | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <!-- <p>{{group.totalPaid}} (funds in complete buckets)</p>
+      <p ng-if="group.totalInArchived != 0">{{group.totalInArchived}} (funds in cancelled buckets)</p> -->
+      <hr>
+      <!-- <p>{{group.totalAllocations}}</p> -->
+      <md-list-item>
+        <ng-md-icon icon="payment"
+          class="group-page__stats-list-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        Total
+        <span class="md-secondary">{{group.balance + group.readyToPayTotal + group.totalInUnfunded | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <!-- <p>added2: {{group.balance + group.totalInFunded + group.totalInUnfunded}}</p> -->
     </md-list>
   </md-card>
 
