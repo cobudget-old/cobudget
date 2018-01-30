@@ -126,7 +126,7 @@
 
   def balance
     # remaining to be spent
-    (total_allocations - total_contributions).floor || 0
+    (total_allocations - total_contributions) || 0
   end
 
   def formatted_balance
