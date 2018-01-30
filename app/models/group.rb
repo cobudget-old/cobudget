@@ -109,10 +109,6 @@
       buckets.with_totals.where("status = 'funded' AND buckets.archived_at IS NULL AND paid_at IS NULL").sum("contrib.total")
   end
 
-  def total_in_archived
-      buckets.with_totals.where("buckets.archived_at IS NOT NULL AND paid_at IS NULL").sum("contrib.total")
-  end
-
   def total_paid
       # buckets.with_totals.map {|b| b.paid_at ? b.total_contributions : 0 }.sum
       buckets.with_totals.where("paid_at IS NOT NULL").sum("contrib.total")
