@@ -58,9 +58,9 @@ RSpec.describe Group, :type => :model do
           expect(subject.reload.balance).to eq 600
         end
 
-        it "rounds the balance down" do
+        it "doesn't round the balance down" do
           create(:allocation, group: group, amount: 500.50)
-          expect(subject.reload.balance).to eq 500
+          expect(subject.reload.balance).to eq 500.50
         end
       end
     end
