@@ -279,7 +279,7 @@
 }
 
 .landing-page__about-section-img-greaterthan {
-  width: 70px;
+  width: 600px;
   margin-right: 30px;
 }
 
@@ -308,6 +308,11 @@
   .landing-page__about-section-header-text {
     font-size: 50px;
     line-height: 50px;
+  }
+
+  .landing-page__about-section-img-greaterthan {
+    margin-bottom: 30px;
+    width: 300px;
   }
 }
 

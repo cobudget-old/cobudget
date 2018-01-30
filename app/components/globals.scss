@@ -51,3 +51,7 @@ blockquote {
   padding-left: 1.5rem;
   border-left: 5px solid $cob-pink;
 }
+
+md-switch.md-default-theme.md-checked .md-thumb, md-switch.md-checked .md-thumb, md-switch.md-default-theme.md-checked .md-ink-ripple, md-switch.md-checked .md-ink-ripple {
+  background-color: $cob-pink;
+}

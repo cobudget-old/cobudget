@@ -15,7 +15,8 @@
       // https://github.com/angular/angular.js/pull/3642
       formats.DEFAULT_PRECISION = angular.isUndefined(formats.DEFAULT_PRECISION) ? 2 : formats.DEFAULT_PRECISION;
       return function ( amount, currencySymbol, fractionSize, suffixSymbol, customFormat ) {
-        if ( currencySymbol != '$' ) { suffixSymbol = true }
+        suffixSymbol = true
+        if ( currencySymbol == '$' || currencySymbol == '£' || currencySymbol == '€' || currencySymbol == '¥' ) { suffixSymbol = false }
         if ( !angular.isNumber(amount) ) { amount = 0; }
         if ( angular.isObject(currencySymbol) ) { customFormat = currencySymbol; }
         if ( angular.isUndefined(currencySymbol) || angular.isObject(currencySymbol) ) { currencySymbol = formats.CURRENCY_SYM; }
