@@ -55,6 +55,10 @@
   margin-bottom: 0 !important;
 }
 
+.group-page__stats-divider-total {
+  border-top-color: rgba(0,0,0,5);
+}
+
 .group-page__stats-title {
   @include fontMedLarge;
   @include truncatedText;

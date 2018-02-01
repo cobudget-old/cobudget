@@ -18,7 +18,9 @@
         Total
         <span class="md-secondary"><b>{{group.balance + group.readyToPayTotal + group.totalInUnfunded | currency : group.currencySymbol : 2}}</b></span>
       </md-list-item>
-      <hr>
+
+      <md-divider class="group-page__stats-divider group-page__stats-divider-total"></md-divider>
+      
       <md-list-item class="group-page__stats-total-sub">
         <ng-md-icon icon="group"
         class="group-page__stats-list-icon"
