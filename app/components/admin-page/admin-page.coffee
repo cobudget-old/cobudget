@@ -6,7 +6,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/groups/:groupId/settings'
   template: require('./admin-page.html')
-  controller: (CurrentUser, Error, Dialog, $location, Records, $scope, UserCan, Toast, $stateParams) ->
+  controller: (CurrentUser, Error, Dialog, $location, Records, $scope, UserCan, Toast, $stateParams, Currencies) ->
 
     groupId = parseInt($stateParams.groupId)
 
@@ -22,21 +22,13 @@ module.exports =
       .catch ->
         Error.set('group not found')
 
-    $scope.currencies = [
-      { code: 'USD', symbol: '$' },
-      { code: 'NZD', symbol: '$' },
-      { code: 'CAD', symbol: '$' },
-      { code: 'GBP', symbol: '£' },
-      { code: 'EUR', symbol: '€' },
-      { code: 'CHF', symbol: 'CHF' },
-      { code: 'JPY', symbol: '¥' }
-    ]
+    $scope.currencies = Currencies()
 
     $scope.updateGroup = () ->
-      Records.groups.findOrFetchById(groupId).then (group) ->
-        group.save()
-        Toast.show('You updated '+group.name)
-        $scope.cancel()
+      $scope.group.save()
+        .then ->
+          Toast.show('You updated ' + $scope.group.name)
+          $scope.cancel()
 
     $scope.viewGroup = (groupId) ->
       $location.path("/groups/#{groupId}")

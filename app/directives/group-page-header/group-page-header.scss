@@ -45,6 +45,34 @@
 // second row
 
 .group-page-header__second-row {
+}
+
+.group-page-header__description {
+  margin: 0 0 20px;
+  background: rgba(0,0,0,0.05);
+  padding: 0;
+}
+
+.group-page-header__description p {
+  padding: 10px;
+  margin: 0;
+}
+
+.group-page-header__add-description {
+  margin-top: 0;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.group-page-header__funding-freeze {
+  margin-top: 0;
+  font-size: 13px;
+  color: $cob-pink;
+}
+
+// third row
+
+.group-page-header__third-row {
   height: $medium-height;
 }
 
@@ -69,6 +97,10 @@
 
 .group-page-header__funds-overview-amount {
   @include fontGrande;
+}
+
+.group-page-header__funds-overview-amount-total {
+  @include fontSmall;
 }
 
 .group-page-header__admin-btn {

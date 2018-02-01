@@ -79,6 +79,11 @@
   color: $grey-on-white;
 }
 
+.bucket-page-progress-card__freeze-msg {
+  font-size: 13px;
+  color: $cob-pink;
+}
+
 // funding form
 
 .bucket-page-progress-card__fund-form {
@@ -112,6 +117,10 @@
 
 .bucket-page-progress-card__text-input:focus {
   outline: none;
+}
+
+.bucket-page-progress-card__text-input:disabled {
+  cursor: no-drop;
 }
 
 .bucket-page-progress-card__text-input.ng-dirty {

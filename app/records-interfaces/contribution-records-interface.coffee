@@ -1,12 +1,12 @@
-null 
+null
 
 ### @ngInject ###
-global.cobudgetApp.factory 'ContributionRecordsInterface', (config, BaseRecordsInterface, ContributionModel) -> 
+global.cobudgetApp.factory 'ContributionRecordsInterface', (config, BaseRecordsInterface, ContributionModel) ->
   class ContributionRecordsInterface extends BaseRecordsInterface
     model: ContributionModel
     constructor: (recordStore) ->
       @baseConstructor recordStore
-      @remote.apiPrefix = config.apiPrefix 
+      @remote.apiPrefix = config.apiPrefix
 
     fetchByBucketId: (bucketId) ->
       @fetch
@@ -17,4 +17,3 @@ global.cobudgetApp.factory 'ContributionRecordsInterface', (config, BaseRecordsI
       @fetch
         params:
           group_id: groupid
-    

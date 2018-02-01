@@ -9,9 +9,9 @@
         <em class="landing-page__beta">beta</em>
       </div>
 
-      <h1 class="landing-page__form-header">Collaborative funding</h1>
+      <h1 class="landing-page__form-header">Where<br>money gets collaborative</h1>
 
-      <h2 class="landing-page__form-subheader">Cobudget helps groups allocate funds</h2>
+      <!-- <h2 class="landing-page__form-subheader">Cobudget helps groups allocate funds</h2> -->
 
       <!-- <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
         <div class="landing-page__input-container">
@@ -41,23 +41,131 @@
     </div>
   </main>
 
-  <footer class="landing-page__footer-content">
-    <div class="landing-page__footer-container" layout="row" layout-sm="column" layout-align="center center">
-      <div flex>
-        <md-button class="landing-page-footer__content-btn" href="https://github.com/cobudget" target="_blank">Cobudget on Github</md-button>
+  <h1 class="landing-page__about-section-header-second-text hide-sm hide-xs">Cobudget makes it easy for organizations and groups<br> to allocate funds collaboratively and transparently.</h1>
+  <h1 class="landing-page__about-section-header-second-text hide-md hide-lg">Cobudget makes it easy for organizations and groups to allocate funds collaboratively and transparently.</h1>
+
+  <div class="landing-page__about-section">
+    <h1 class="landing-page__resources-section-header-text">What is Cobudget?</h1>
+    <div class="landing-page__about-section-content" layout="column" flex>
+      <div layout-gt-sm="row" layout-align="start start">
+        <img class="landing-page__about-section-img" src="/img/how-cobudget-works.png" />
+
+        <div>
+          <!-- <p class="landing-page__about-section-subheader-text"><b>Cobudget</b> helps organisations and groups allocate funds <b>collaboratively and transparently</b>.</p> -->
+
+          <p class="landing-page__about-section-subheader-text landing-page__about-section-subheader-text-starting">The idea is simple: group members receive funds in their cobudget account. They can propose projects and activities and allocate their own funds to support the proposals of others in the group.</p>
+
+
+        </div>
+      </div>
+
+      <div layout="row" layout-align="center center" class="landing-page__about-section-video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/8d1zrxNgFS8" frameborder="0" gesture="media" allowfullscreen></iframe>
+      </div>
+
+      <div layout="row" layout-align="center center">
+        <a href="https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/cobudget.html" target="_blank">
+          <md-button class="md-raised md-primary landing-page__about-section-btn">tell me more</md-button>
+        </a>
+      </div>
+
+      <div flex></div>
+
+    </div>
+  </div>
+
+  <div class="landing-page__resources-section">
+
+    <h1 class="landing-page__resources-section-header-text">Organizations Using Cobudget</h1>
+
+    <div class="landing-page__resources-section-content" layout="column" flex>
+      <div layout="row" layout-align="start start">
+
+        <img class="landing-page__resources-section-img-1" src="/img/outlandish1.jpg" />
+
+        <div>
+          <h1 class="landing-page__resources-section-subheader-text"><a href="https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/use-case-outlandish.html" target="_blank">Outlandish</a></h1>
+
+          <p class="landing-page__resources-section-text">Outlandish is a web services consultancy and worker-owned cooperative.</p>
+
+          <p class="landing-page__resources-section-text"><b>How do they use Cobudget?</b></p>
+
+          <p class="landing-page__resources-section-text">To democratically distribute their dividends to everyone in the organization and make it easy for them to invest in work they care about.</p>
+
+          <p class="landing-page__resources-section-text"><b>What type of activities do they fund?</b></p>
+
+          <p class="landing-page__resources-section-text">New tech products and platforms, social impact projects in need of software and political activism.</p>
+
+        </div>
+      </div>
+
+      <div flex></div>
+
+      <div layout="row" layout-align="start start" class="landing-page__resources-section-testimonial">
+        <img class="landing-page__resources-section-testimonial-img" src="/img/testimonial-brian.jpg" />
+        <blockquote class="landing-page__resources-section-text landing-page__resources-section-text-blockquote">
+          Pre-Cobudget, there was a lack of transparency and the authority to spend surplus was limited.
+          <br><cite>- Brian Spurling, Co-Owner Outlandish</cite>
+        </blockquote>
+      </div>
+
+    </div>
+
+
+    <div class="landing-page__resources-section-content" layout="column" flex>
+      <div layout="row" layout-align="start start">
+
+        <div>
+          <h1 class="landing-page__resources-section-subheader-text"><a href="https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/case-study-evolutionary-leadership-institute.html" target="_blank">Institute for Evolutionary Leadership</a></h1>
+
+          <p class="landing-page__resources-section-text">IEL is a consulting company and community of thought leaders working towards a more just, sustainable, and flourishing world.</p>
+
+          <p class="landing-page__resources-section-text"><b>How do they use Cobudget?</b></p>
+
+          <p class="landing-page__resources-section-text">To offer their member community a way to participate directly in the organization's financial decisions and empower them to fund each others workshops.</p>
+
+          <p class="landing-page__resources-section-text"><b>What type of activities do they fund?</b></p>
+
+          <p class="landing-page__resources-section-text">Events such as workshops and trainings, travel expenses and systemic change work.</p>
+
+        </div>
+
+        <img class="landing-page__resources-section-img-2" src="/img/evoleadership1.jpg" />
 
       </div>
-      <div flex class="hide-xs">
-        <md-button class="landing-page-footer__content-btn" ng-click="redirectToAboutPage()">Learn more</md-button>
+
+      <div flex></div>
+
+      <div layout="row" layout-align="start start" class="landing-page__resources-section-testimonial">
+        <img class="landing-page__resources-section-testimonial-img" src="/img/testimonial-fedor.jpg" />
+        <blockquote class="landing-page__resources-section-text landing-page__resources-section-text-blockquote">
+          This technology is an enabler of new ways of doing things. Without it we would be using ugly spreadsheets.
+          <br><cite>- Fyodor Ovchinnikov, Co-Founder IEL</cite>
+        </blockquote>
       </div>
-      <div flex>
-        <md-button class="landing-page-footer__content-btn" href="mailto:hello@greater.finance" target="_blank">Contact us</md-button>
+
+    </div>
+    <div layout="row" layout-align="center center">
+      <a href="https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/case-studies.html" target="_blank">
+        <md-button class="md-raised md-primary landing-page__submit-btn">more case studies</md-button>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="landing-page__greaterthan-section">
+
+    <div class="landing-page__greaterthan-section-content" layout="column" layout-align="center center">
+
+      <a href="http://greaterthan.finance/" target="_blank"><img class="landing-page__about-section-img-greaterthan" src="/img/LOGO-HORIZONTAL_B.png" /></a>
+
+      <div>
+        <p class="landing-page__about-section-subheader-text landing-page__about-section-subheader-text-greaterthan"><b>Cobudget</b> is the flagship product of <a href="http://greaterthan.finance/" target="_blank">Greaterthan</a>, a venture that is bringing collaborative finance practices into organizations to help them increase engagement, transparency and agility.</p>
       </div>
     </div>
-    <div class="landing-page__footer-love-container" layout="row" layout-align="space-around center">
-      <h6>brought to you by <a class="landing-page__footer-content-link" href="https://greater.finance/" target="_blank">Greaterthan</a> //
-        from the <a class="landing-page__footer-content-link" href="https://enspiral.com/" target="_blank">Enspiral</a> ecosystem
-      </h6>
-    </div>
-  </footer>
+
+  </div>
+
+  <landing-page-footer></landing-page-footer>
+
 </div>

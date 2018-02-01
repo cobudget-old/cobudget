@@ -6,12 +6,12 @@
 
   <span class="landing-page-toolbar__logo-link-buffer" flex></span>
 
-  <div class="landing-page-toolbar__header-btns">
-    <md-button ng-if="false" class="landing-page-toolbar__header-btn" ng-click="redirectToAboutPage()">About</md-button>
-    <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToAboutPage()">Learn more</md-button>
-  </div>
+  <!-- <div class="landing-page-toolbar__header-btns">
+    <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToCaseStudiesPage()">Case Studies</md-button>
+    <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToAboutPage()">About</md-button>
+  </div> -->
 
-  <md-menu class="landing-page-toolbar__menu">
+  <!-- <md-menu class="landing-page-toolbar__menu">
     <div layout="column" layout-align="center center" ng-click="$mdMenu.open($event)" class="landing-page-toolbar__menu-icon-container">
       <ng-md-icon icon="menu"
       class="landing-page-toolbar__menu-icon"
@@ -21,17 +21,23 @@
     </div>
 
     <md-menu-content>
-      <!-- <md-menu-item>
-        <md-button aria-label="about" ng-click="redirectToAboutPage()">About</md-button>
-      </md-menu-item> -->
-
       <md-menu-item>
-        <md-button aria-label="resources" ng-click="redirectToResourcesPage()">Learn more</md-button>
+        <md-button aria-label="home" ng-click="redirectToHomePage()">Home</md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button aria-label="case studies" ng-click="redirectToCaseStudiesPage()">Case Studies</md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button aria-label="about" ng-click="redirectToAboutPage()">About</md-button>
       </md-menu-item>
     </md-menu-content>
-  </md-menu>
+  </md-menu> -->
 
   <span flex class="landing-page-toolbar__header-separator"></span>
+
+  <a href="https://greaterthan.typeform.com/to/P4fB1O" target="_blank">
+    <md-button class="md-raised md-primary landing-page-toolbar__early-access-btn">request early access</md-button>
+  </a>
 
   <md-button class="landing-page-toolbar__login-btn" aria-label="login" ng-click="redirectToLoginPage()">
     Sign in

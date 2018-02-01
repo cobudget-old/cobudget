@@ -110,6 +110,6 @@ module.exports =
       $scope.cancel()
 
     $scope.seeAllMembers = ->
-      $state.go('group', {groupId: groupId, openMembersTab: true})
+      $state.go('group', {groupId: groupId, tab: 'funders'})
 
     return

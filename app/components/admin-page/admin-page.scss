@@ -5,42 +5,17 @@
 .admin-page__content {
   max-width: 640px;
   margin: 0 auto;
-}
-
-.admin-page__form {
-  margin-top: 25px;
-  padding-right: 16px;
-  padding-left: 16px;
+  overflow: hidden;
 }
 
 .admin-page__form-btn {
   background: $cob-pink !important;
-  margin: 10px 0;
-}
-
-.admin-page__group-list-subheader {
-  color: $cob-pink;
-  margin-left: 8px;
-}
-
-.admin-page__group-link {
-  cursor: pointer;
+  margin: 20px 0;
+  padding-left: 3px;
 }
 
 .admin-page__group-options {
-  margin-top: 10px;
-}
-
-.admin-page__group-options md-input-container {
-  display: block;
-}
-
-.admin-page__form {
-  padding: 10px;
-}
-
-.admin-page__group-list {
-  padding: 0;
+  margin-top: 40px;
 }
 
 .admin-page__group-name {
@@ -49,24 +24,31 @@
   margin-top: 10px;
 }
 
-.admin-page__group-list-item {
+.admin-page__group-list-subheader {
+  color: $cob-pink;
+  padding-left: 10px;
 }
 
-.admin-page__group-list .admin-page__group-update-btn {
-  border: 1px solid $cobudget-blue;
-  margin-left: 0;
-  color: $cobudget-blue;
+.admin-page__form {
+  padding-left: 10px;
 }
 
-.admin-page__currency-code-input {
+.admin-page__input {
   padding-left: 0;
+  min-height: 50px;
 }
 
-.admin-page__upload-btn-container {
-  border: 1px solid $cobudget-grey;
-  border-radius: 4px;
-  padding: 10px;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 500;
- }
+.admin-page__input-help-text {
+  color: rgba(0,0,0,0.54);
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 3px;
+}
+
+.admin-page__description-markdown-link {
+  font-size: 13px;
+  color: rgba(0,0,0,0.35);
+  position: absolute;
+  right: 0px;
+}
