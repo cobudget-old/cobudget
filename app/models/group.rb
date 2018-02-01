@@ -102,7 +102,7 @@
 
   def total_in_unfunded
       # amount of money in unfunded buckets
-      buckets.with_totals.where("status = 'live'").sum("contrib.total")
+      buckets.with_totals.where("status = 'live' AND buckets.archived_at IS NULL").sum("contrib.total")
   end
 
   def ready_to_pay_total
