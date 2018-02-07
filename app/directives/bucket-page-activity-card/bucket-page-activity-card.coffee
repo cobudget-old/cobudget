@@ -18,6 +18,7 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
 
       $scope.getUserText = (item) ->
         return '<a href="/users/'+item.userId+'" name='+item.userId+'>@' + item.name + '</a>'
+        # return '<!---name:' + item.name + ', id:' + item.userId + '--> @' +item.name
 
       $scope.searchUsers = (term) ->
         $scope.users = $filter('filter')($scope.allUsers, term)
