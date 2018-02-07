@@ -73,6 +73,11 @@ class Group < ActiveRecord::Base
       buckets.with_totals.where("status = 'funded'").sum("contrib.total")
   end
 
+  def total_in_unfunded
+      # amount of money in unfunded buckets
+      buckets.with_totals.where("status = 'live' AND buckets.archived_at IS NULL").sum("contrib.total")
+  end
+
   def ready_to_pay_total
       buckets.with_totals.where("status = 'funded' AND buckets.archived_at IS NULL AND paid_at IS NULL").sum("contrib.total")
   end
@@ -90,7 +95,7 @@ class Group < ActiveRecord::Base
 
   def balance
     # remaining to be spent
-    (total_allocations - total_contributions).floor || 0
+    (total_allocations - total_contributions) || 0
   end
 
   def group_account_balance
