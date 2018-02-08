@@ -10,16 +10,24 @@ class CommentsController < AuthenticatedController
   api :POST, '/comments'
   def create
     body = comment_params[:body]
-    new_body = ReverseMarkdown.convert body
+    comment = Comment.create(body: body, user_id: comment_params[:user_id], bucket_id: comment_params[:bucket_id])
 
-    comment = Comment.create(body: new_body, user_id: comment_params[:user_id], bucket_id: comment_params[:bucket_id])
-    noko_body = Nokogiri::HTML.fragment(body)
+    # convert markdown body to html
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
+    red_body = markdown.render(body)
+
+    # break the html into fragments
+    noko_body = Nokogiri::HTML.fragment(red_body)
+
+    # get an array of all the user ids from the link values
     user_links = noko_body.css("a").map {|a|
-      a.attributes.values[1].value
+      a.attributes.values[0].value.sub! 'uid:', ''
     }
 
-    noko_body.css("a").each do |a|
-      a.attributes["href"].value = "#{Rails.application.config.action_mailer.default_url_options[:host]}/##{a['href']}"
+    # format the links with the correct base url
+    noko_body.css("a").map do |a|
+      a['href'].sub! 'uid:', ''
+      a.attributes["href"].value = "#{Rails.application.config.action_mailer.default_url_options[:host]}/##{a['href'].sub! 'uid:', '/users/'}"
     end
 
     if user_links
@@ -27,7 +35,7 @@ class CommentsController < AuthenticatedController
       bucket = Bucket.find(comment_params[:bucket_id])
       user_links.each do |userId|
         user = User.find(userId)
-        UserMailer.notify_member_that_they_were_mentioned(author: current_user, member: user, bucket: bucket, body: email_body).deliver_later
+        UserMailer.notify_member_that_they_were_mentioned(author: current_user, member: user, bucket: bucket, body: email_body).deliver_now
       end
     end
     if comment.valid?
