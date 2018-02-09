@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20180126001655) do
 
   # These are extensions that must be enabled in order to support this database
@@ -131,9 +130,9 @@ ActiveRecord::Schema.define(version: 20180126001655) do
     t.string   "customer_id"
     t.datetime "trial_end"
     t.string   "plan"
-    t.integer  "status_account_id"
     t.text     "description"
-    t.boolean  "funding_freeze",  default: false
+    t.boolean  "funding_freeze",    default: false
+    t.integer  "status_account_id"
   end
 
   create_table "memberships", force: :cascade do |t|
