@@ -31,7 +31,7 @@ class CommentsController < AuthenticatedController
     end
 
     if user_links
-      email_body = noko_body.to_html.html_safe
+      email_body = noko_body.to_html
       bucket = Bucket.find(comment_params[:bucket_id])
       user_links.each do |userId|
         user = User.find(userId)
