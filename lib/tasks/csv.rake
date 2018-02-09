@@ -14,7 +14,7 @@ namespace :csv do
     end
   end
 
-  desc "export all buckets that is funded and has archived_at set as CSV"
+  desc "export all buckets that are funded and has archived_at set as CSV"
   task bucketinfo: :environment do
     def group_info_as_string(g)
       "#{g.name} (id:#{g.id})"
