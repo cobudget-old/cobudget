@@ -4,10 +4,10 @@
   <p>Recently, <%= @inviter.name %> invited you to collaboratively budget with <%= @group.name %> on Cobudget.</p>
 <% end %>
 
-<p>Cobudget helps groups allocate funds transparently and collaboratively.</p>
-
 <% if @user.confirmed? %>
   <p>You can visit the group by clicking <%= link_to 'this link', "#{root_url}#/groups/#{@group.id}" %></p>
 <% else %>
-    <p><%= link_to "See how it works", "https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/learn-how-to-use-cobudget/key-features.html" %> and <%= link_to "accept invitation", "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}&email=#{@user.email}&name=#{@user.name}"%>.</p>
+    <p><%= link_to "Accept your invitation", "#{root_url}#/confirm_account?confirmation_token=#{@user.confirmation_token}&email=#{@user.email}&name=#{@user.name}"%> and <%= link_to "see how it works", "https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/learn-how-to-use-cobudget/key-features.html" %>.</p>
 <% end %>
+
+<p>Cobudget helps groups allocate funds transparently and collaboratively.</p>
