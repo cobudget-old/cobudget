@@ -33,8 +33,7 @@ class AnalyticsService
           unconfirmed_member_count: group.members.where(confirmed_at: nil).count,
           name: group.name,
           funded_bucket_count: group.buckets.where(status:'funded').count,
-          total_allocations: group.total_allocations,
-          total_in_funded: group.total_in_funded
+          total_allocations: group.total_allocations
         }
       end
     end

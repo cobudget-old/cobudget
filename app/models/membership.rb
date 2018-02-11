@@ -75,7 +75,7 @@ class Membership < ActiveRecord::Base
   end
 
   def transactions_data_ok?
-    (balance_on_status_account == raw_balance) && (balance_on_incoming_account + total_allocations == 0)
+    (balance_on_status_account == raw_balance) 
   end
 
   private

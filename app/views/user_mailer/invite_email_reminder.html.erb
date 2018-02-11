@@ -1,7 +1,7 @@
 <% if @initial_allocation_amount > 0 %>
-  <p>You have been invited by <%= @inviter.name %> to collaboratively budget with <%= @group.name %> on Cobudget. You've got <%= @initial_allocation_amount_formatted %> to spend!</p>
+  <p>Recently, <%= @inviter.name %> invited you to collaboratively budget with <%= @group.name %> on Cobudget. You've got <%= @initial_allocation_amount_formatted %> to spend!</p>
 <% else %>
-  <p>You have been invited by <%= @inviter.name %> to collaboratively budget with <%= @group.name %> on Cobudget.</p>
+  <p>Recently, <%= @inviter.name %> invited you to collaboratively budget with <%= @group.name %> on Cobudget.</p>
 <% end %>
 
 <% if @user.confirmed? %>

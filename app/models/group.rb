@@ -1,4 +1,6 @@
-  class Group < ActiveRecord::Base
+class Group < ActiveRecord::Base
+  after_create :add_account_after_create
+
   has_many :buckets, dependent: :destroy
   has_many :allocations, dependent: :destroy
   has_many :memberships
@@ -129,9 +131,9 @@
     Contribution.where(bucket_id: buckets.map(&:id)).sum(:amount)
   end
 
-  def total_in_funded
-      # amount of money in funded buckets
-      buckets.with_totals.where("status = 'funded'").sum("contrib.total")
+  def total_in_unfunded
+      # amount of money in unfunded buckets
+      buckets.with_totals.where("status = 'live' AND buckets.archived_at IS NULL").sum("contrib.total")
   end
 
   def ready_to_pay_total
@@ -151,7 +153,11 @@
 
   def balance
     # remaining to be spent
-    (total_allocations - total_contributions).floor || 0
+    (total_allocations - total_contributions) || 0
+  end
+
+  def group_account_balance
+    Account.find(status_account_id).balance
   end
 
   def formatted_balance
@@ -181,5 +187,10 @@
       if self.currency_code
         self.currency_symbol = Money.new(0, self.currency_code).symbol
       end
+    end
+
+    def add_account_after_create
+      account = Account.create!({group_id: id})
+      update!(status_account_id: account.id)
     end
 end

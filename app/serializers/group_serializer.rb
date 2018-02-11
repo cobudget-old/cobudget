@@ -5,12 +5,15 @@ class GroupSerializer < ActiveModel::Serializer
              :balance,
              :currency_symbol,
              :currency_code,
+             :description,
              :is_launched,
              :plan,
-             :trial_end, 
+             :trial_end,
              :total_in_circulation,
              :ready_to_pay_total,
-             :total_in_funded, 
              :total_allocations,
-             :total_contributions
+             :total_contributions,
+             :group_account_balance,
+             :total_in_unfunded,
+             :funding_freeze
 end

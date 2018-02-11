@@ -27,6 +27,8 @@ class AllocationsController < AuthenticatedController
     group = Group.find(allocation_params[:group_id])
     notify = allocation_params[:notify]
     params[:allocation].delete(:notify)
+    from_group_account = allocation_params[:from_group_account]
+    params[:allocation].delete(:from_group_account)
     render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
 
     if (allocation = AllocationService.create_allocation(allocation_params, notify, current_user))
@@ -38,6 +40,6 @@ class AllocationsController < AuthenticatedController
 
   private
     def allocation_params
-      params.require(:allocation).permit(:group_id, :user_id, :amount, :notify)
+      params.require(:allocation).permit(:group_id, :user_id, :amount, :notify, :from_group_account)
     end
 end
