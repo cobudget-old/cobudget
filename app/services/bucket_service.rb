@@ -5,7 +5,9 @@ class BucketService
         bucket.contributors(exclude_author: exclude_author_from_email_notifications).each do |funder|
           # Don't notify archived members
           if !Membership.find_by(group_id: bucket.group_id, member_id: funder.id).archived_at
-            UserMailer.notify_funder_that_bucket_was_archived(funder: funder, bucket: bucket).deliver_later
+            refund_amount = bucket.contributions.where(user: funder).sum(:amount)
+            UserMailer.notify_funder_that_bucket_was_archived(funder: funder, bucket: bucket, 
+              refund_amount: refund_amount).deliver_later
           end
         end
         bucket.update(archived_at: DateTime.now.utc)
