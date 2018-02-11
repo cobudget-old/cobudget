@@ -68,11 +68,6 @@ class Group < ActiveRecord::Base
     Contribution.where(bucket_id: buckets.map(&:id)).sum(:amount)
   end
 
-  def total_in_funded
-      # amount of money in funded buckets
-      buckets.with_totals.where("status = 'funded'").sum("contrib.total")
-  end
-
   def total_in_unfunded
       # amount of money in unfunded buckets
       buckets.with_totals.where("status = 'live' AND buckets.archived_at IS NULL").sum("contrib.total")

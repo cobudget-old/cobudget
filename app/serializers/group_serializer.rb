@@ -11,7 +11,6 @@ class GroupSerializer < ActiveModel::Serializer
              :trial_end,
              :total_in_circulation,
              :ready_to_pay_total,
-             :total_in_funded,
              :total_allocations,
              :total_contributions,
              :group_account_balance,
