@@ -5,13 +5,13 @@
 
   <div ng-if="fundersLoaded">
 
-    <md-card class="group-page__funders-card">
+    <md-card class="group-page__funders-card" ng-if="group.groupAccountBalance">
       <md-list class="group-page__funders-list">
         <md-list-item>
           <div layout="row" layout-align="center center" class="group-page__funder-container">
             <div layout="column" layout-align="center start" class="group-page__funder-name-container" flex>
               <span class="group-page__funder-name">Group Account</span>
-              <span class="group-page__funder-admin-label">Uncallocated funds that don't belong to any user in the group</span>
+              <span class="group-page__funder-admin-label">Unallocated funds that don't belong to any user in the group</span>
             </div>
 
             <div layout="column" layout-align="center end" class="group-page__funder-balance-container">
