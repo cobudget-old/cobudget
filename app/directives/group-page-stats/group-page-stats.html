@@ -16,19 +16,28 @@
           layout-align="center center"
         ></ng-md-icon>
         Total
-        <span class="md-secondary"><b>{{group.balance + group.readyToPayTotal + group.totalInUnfunded | currency : group.currencySymbol : 2}}</b></span>
+        <span class="md-secondary"><b>{{group.balance + group.groupAccountBalance + group.readyToPayTotal + group.totalInUnfunded | currency : group.currencySymbol : 2}}</b></span>
       </md-list-item>
 
       <md-divider class="group-page__stats-divider group-page__stats-divider-total"></md-divider>
-      
+
       <md-list-item class="group-page__stats-total-sub">
-        <ng-md-icon icon="group"
+        <ng-md-icon icon="person"
         class="group-page__stats-list-icon"
         layout="column"
         layout-align="center center"
         ></ng-md-icon>
         In members accounts
         <span class="md-secondary">{{group.balance | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <md-list-item class="group-page__stats-total-sub" ng-if="group.groupAccountBalance">
+        <ng-md-icon icon="group"
+        class="group-page__stats-list-icon"
+        layout="column"
+        layout-align="center center"
+        ></ng-md-icon>
+        In group account
+        <span class="md-secondary">{{group.groupAccountBalance | currency : group.currencySymbol : 2}}</span>
       </md-list-item>
       <md-list-item class="group-page__stats-total-sub">
         <img src="./img/bucket_empty.svg" alt="bucket" class="group-page__stats-list-icon"/>
