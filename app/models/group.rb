@@ -74,7 +74,7 @@ class Group < ActiveRecord::Base
   end
 
   def ready_to_pay_total
-      buckets.with_totals.where("status = 'funded' AND buckets.archived_at IS NULL AND paid_at IS NULL").sum("contrib.total")
+      buckets.with_totals.where("status = 'funded' AND paid_at IS NULL").sum("contrib.total")
   end
 
   def total_paid
