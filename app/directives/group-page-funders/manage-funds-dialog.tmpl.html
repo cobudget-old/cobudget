@@ -74,6 +74,12 @@
     </md-tabs>
   </md-dialog-content>
 
+  <div ng-if="group.groupAccountBalance" class="md-actions group-page__manage-funds-group-account-option" layout="row">
+    <md-checkbox ng-model="formData.fromGroupAccount" ng-change="transferFromGroupAccount()" aria-label="Use group funds">
+      Transfer from group: {{ group.groupAccountBalance | currency : group.currencySymbol : 0 }}
+    </md-checkbox>
+  </div>
+
   <div class="md-actions" layout="row">
     <md-button class="group-page__manage-funds-dialog-cancel-btn" ng-click="cancel()">cancel</md-button>
     <md-button class="md-raised md-primary group-page__manage-funds-dialog-done-btn" ng-disabled="!isValidForm()" ng-click="createAllocation()" ng-autodisable>done</md-button>

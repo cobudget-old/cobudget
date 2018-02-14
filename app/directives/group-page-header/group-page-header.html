@@ -78,7 +78,7 @@
             <div layout="row" class="group-page-header__personal-funds-container">
               <div layout="column" layout-align="center center">
                 <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}
-                  <span class="group-page-header__funds-overview-amount-total">(of <b>{{ group.balance | currency : group.currencySymbol : 0  }}</b> in group)</span>
+                  <span class="group-page-header__funds-overview-amount-total">(of <b>{{ group.balance + group.groupAccountBalance | currency : group.currencySymbol : 0  }}</b> in group)</span>
                 </span>
               </div>
             </div>
