@@ -29,14 +29,19 @@ class AllocationsController < AuthenticatedController
     amount = allocation_params[:amount]
     notify = allocation_params[:notify]
     params[:allocation].delete(:notify)
+    from_group_account = allocation_params[:from_group_account]
+    params[:allocation].delete(:from_group_account)
     render status: 403, nothing: true and return unless current_user.is_admin_for?(group)
 
     allocation = Allocation.new(allocation_params)
     if allocation.save
+      if from_group_account
+        from_account_id = group.status_account_id
+      end
       m = Membership.find_by(group_id: allocation_params[:group_id], member_id: allocation_params[:user_id])
       Transaction.create!({
         datetime: allocation.created_at,
-        from_account_id: m.incoming_account_id,
+        from_account_id: from_account_id || m.incoming_account_id,
         to_account_id: m.status_account_id,
         user_id: current_user.id,
         amount: amount
@@ -52,6 +57,6 @@ class AllocationsController < AuthenticatedController
 
   private
     def allocation_params
-      params.require(:allocation).permit(:group_id, :user_id, :amount, :notify)
+      params.require(:allocation).permit(:group_id, :user_id, :amount, :notify, :from_group_account)
     end
 end
