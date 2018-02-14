@@ -20,6 +20,10 @@
   font-size: 15px !important;
 }
 
+.group-page__funders-subheader-info {
+  padding: 3px 0 0 6px;
+}
+
 .group-page__funders-subheader-divider {
   margin-top: 0 !important;
 }
@@ -305,6 +309,15 @@
   color: $cobudget-grey;
   font-weight: 500;
   letter-spacing: normal;
+}
+
+.group-page__manage-funds-group-account-option {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: normal;
+  padding: 0;
+  justify-content: center !important;
+  -webkit-justify-content: center !important;
 }
 
 .group-page__manage-funds-dialog-cancel-btn {
