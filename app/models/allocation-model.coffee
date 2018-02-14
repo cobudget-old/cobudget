@@ -6,7 +6,7 @@ global.cobudgetApp.factory 'AllocationModel', (BaseModel) ->
     @singular: 'allocation'
     @plural: 'allocations'
     @indices: ['groupId', 'userId']
-    @serializableAttributes: ['groupId', 'userId', 'amount', 'notify']
+    @serializableAttributes: ['groupId', 'userId', 'amount', 'notify', 'fromGroupAccount']
 
     relationships: ->
       @belongsTo 'group'

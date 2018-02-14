@@ -66,6 +66,7 @@
       </div>
 
       <div ng-if="group.description || currentUser.isAdminOf(group)" class="group-page-header__second-row">
+        <p ng-if="group.fundingFreeze" class="group-page-header__funding-freeze"><i>Funding in this group is off</i></p>
         <div ng-if="group.description" class="group-page-header__description" layout="row" layout-align="start center" marked="group.description"></div>
         <p ng-if="!group.description" class="group-page-header__add-description"><a ng-click="openGroupSettings()"><i>+ Add a group purpose</i></a></p>
       </div>
@@ -77,7 +78,7 @@
             <div layout="row" class="group-page-header__personal-funds-container">
               <div layout="column" layout-align="center center">
                 <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}
-                  <span class="group-page-header__funds-overview-amount-total">(of <b>{{ group.balance | currency : group.currencySymbol : 0  }}</b> in group)</span>
+                  <span class="group-page-header__funds-overview-amount-total">(of <b>{{ group.balance + group.groupAccountBalance | currency : group.currencySymbol : 0  }}</b> in group)</span>
                 </span>
               </div>
             </div>
