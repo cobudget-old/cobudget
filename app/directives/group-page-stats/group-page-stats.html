@@ -9,51 +9,46 @@
 
       <md-divider class="group-page__stats-divider"></md-divider>
 
-      <div layout="row" layout-align="space-around center" layout-margin class="group-page-header__stats-overview-container">
+      <md-list-item>
+        <ng-md-icon icon="payment"
+          class="group-page__stats-list-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+        Total
+        <span class="md-secondary"><b>{{group.balance + group.groupAccountBalance + group.readyToPayTotal + group.totalInUnfunded | currency : group.currencySymbol : 2}}</b></span>
+      </md-list-item>
 
-        <div>
+      <md-divider class="group-page__stats-divider group-page__stats-divider-total"></md-divider>
 
-          <div layout="row" class="group-page-header__stats-overview-label">Total Incomplete&nbsp;
-            <ng-md-icon icon="info"
-              size="16"
-            >
-              <md-tooltip md-direction="top">Total value of funded, incomplete buckets</md-tooltip>
-            </ng-md-icon>
-          </div>
-          <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
-              <ng-md-icon icon="payment"
-                class="group-page-header__funds-icon"
-                  layout="column"
-                  layout-align="center center"
-              ></ng-md-icon>
-              <div layout="column" layout-align="center center">
-                <span class="group-page-header__stats-overview-amount">{{ group.readyToPayTotal | currency : group.currencySymbol : 2 }}</span>
-              </div>
-          </div>
-        </div>
-
-        <div>
-          <div layout="row" class="group-page-header__stats-overview-label">Balance in Group&nbsp;
-            <ng-md-icon icon="info"
-              size="16"
-            >
-              <md-tooltip md-direction="top">Available funds plus funds in incomplete buckets</md-tooltip>
-            </ng-md-icon>
-          </div>
-          <div layout="row" layout-align="center center" class="group-page-header__stats-overview-content" >
-              <ng-md-icon icon="timeline"
-                class="group-page-header__funds-icon"
-                  layout="column"
-                  layout-align="center center"
-              ></ng-md-icon>
-              <div layout="column" layout-align="center center">
-                <span class="group-page-header__stats-overview-amount">{{ group.totalInCirculation | currency : group.currencySymbol : 2 }}</span>
-              </div>
-          </div>
-        </div>
-
-      </div>
-
+      <md-list-item class="group-page__stats-total-sub">
+        <ng-md-icon icon="person"
+        class="group-page__stats-list-icon"
+        layout="column"
+        layout-align="center center"
+        ></ng-md-icon>
+        In members accounts
+        <span class="md-secondary">{{group.balance | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <md-list-item class="group-page__stats-total-sub" ng-if="group.groupAccountBalance">
+        <ng-md-icon icon="group"
+        class="group-page__stats-list-icon"
+        layout="column"
+        layout-align="center center"
+        ></ng-md-icon>
+        In group account
+        <span class="md-secondary">{{group.groupAccountBalance | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <md-list-item class="group-page__stats-total-sub">
+        <img src="./img/bucket_empty.svg" alt="bucket" class="group-page__stats-list-icon"/>
+        In funding now buckets
+        <span class="md-secondary">{{group.totalInUnfunded | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
+      <md-list-item class="group-page__stats-total-sub">
+        <img src="./img/bucket_full.svg" alt="bucket" class="group-page__stats-list-icon"/>
+        In funded buckets
+        <span class="md-secondary">{{group.readyToPayTotal | currency : group.currencySymbol : 2}}</span>
+      </md-list-item>
     </md-list>
   </md-card>
 
