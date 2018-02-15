@@ -2,7 +2,7 @@
   <md-card-content class="bucket-page-manage-card__content">
     <div class="bucket-page-manage-card__header">Manage</div>
     <div layout="row" layout-align="start center">
-      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="edit()" ng-if="!bucket.archivedAt">
+      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="edit()" ng-if="!bucket.isCompleted() && !bucket.isCancelled()">
         <ng-md-icon icon="edit"
           size="20"
           layout="column"
@@ -11,7 +11,7 @@
         Edit
       </md-button>
 
-      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="cancel()" ng-if="!bucket.archivedAt">
+      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="cancel()" ng-if="!bucket.isCompleted() && !bucket.isCancelled() && !bucket.isFundedAndArchived()">
         <ng-md-icon icon="cancel"
           size="20"
           layout="column"
@@ -20,7 +20,7 @@
         Cancel
       </md-button>
 
-      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="refund()" ng-if="bucket.isArchived() && bucket.status == 'funded'">
+      <md-button layout="column" layout-align="center center" class="bucket-page-manage-card__btn" ng-click="refund()" ng-if="bucket.isFundedAndArchived()">
         <ng-md-icon icon="undo"
           size="20"
           layout="column"

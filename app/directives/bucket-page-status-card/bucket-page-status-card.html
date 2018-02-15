@@ -2,102 +2,57 @@
   <md-card-content class="bucket-page__status-card-content">
     <div class="bucket-page__status-header">Status</div>
 
-    <div ng-if="!bucket.isArchived()">
-      <div ng-if="bucket.status == 'draft'">
-        <div layout="row" layout-align="start center">
-          <ng-md-icon icon="lightbulb_outline"
-            layout="column"
-            size="44"
-            class="bucket-page-status-card__idea-icon"
-          ></ng-md-icon>
-          <div>
-            <h3 class="bucket-page__status">Idea</h3>
-            <p class="bucket-page__status-description"><em>This bucket idea is still being discussed and designed</em></p>
-          </div>
-        </div>
-
-        <md-button
-          class="md-raised md-primary bucket-page__start-funding-btn"
-          ng-click='openForFunding()'
-          ng-autodisable
-          ng-show='userCanManageBucket()'
-        >
-          Start Funding
-        </md-button>
-      </div>
-
-      <div ng-if="bucket.status == 'live'">
-        <div layout="row" layout-align="start center">
-          <img src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-status-card__funding-icon"/>
-          <div>
-            <h3 class="bucket-page__status">Funding now</h3>
-            <p class="bucket-page__status-description"><em>This bucket started funding on {{ bucket.liveAt | exactDateWithTime }}</em></p>
-          </div>
-        </div>
-
-        <md-button
-          class="md-raised md-primary bucket-page__accept-funding-btn"
-          ng-click='acceptFunding()'
-          ng-autodisable
-          ng-show='userCanManageBucket()'
-        >
-          Accept Funding
-        </md-button>
-      </div>
-
-      <div ng-if="bucket.status == 'funded'">
-        <div layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
-          <img src="./img/bucket_full.svg" alt="bucket" class="bucket-page-status-card__funded-icon"/>
-          <div>
-            <h3 class="bucket-page__status">Funded</h3>
-            <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.totalContributions | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
-          </div>
-        </div>
-        <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
-          <ng-md-icon icon="done_all"
-            layout="column"
-            size="44"
-            class="bucket-page-status-card__funded-icon"
-          ></ng-md-icon>
-
-          <div>
-            <h3 class="bucket-page__status">Completed</h3>
-            <p class="bucket-page__status-description"><em>This bucket was marked as complete on {{ bucket.paidAt | exactDateWithTime }}</em></p>
-          </div>
-        </div>
-
-        <md-button
-          class="md-raised md-primary bucket-page__complete-btn"
-          ng-click='complete()'
-          ng-autodisable
-          ng-show='userCanManageBucket()'
-        >
-          Complete
-        </md-button>
-      </div>
-    </div>
-
-    <div ng-if="bucket.isArchived()">
-      <div layout="row" layout-align="start center" class="bucket-page-status-card__cancelled-status-container">
-        <ng-md-icon icon="cancel"
+    <div ng-if="bucket.isIdea()">
+      <div layout="row" layout-align="start center">
+        <ng-md-icon icon="lightbulb_outline"
           layout="column"
           size="44"
-          class="bucket-page-status-card__cancelled-icon"
+          class="bucket-page-status-card__idea-icon"
         ></ng-md-icon>
-
         <div>
-          <h3 class="bucket-page__status">Cancelled</h3>
-          <p class="bucket-page__status-description"><em>This bucket was cancelled on {{ bucket.archivedAt | exactDateWithTime }}</em></p>
+          <h3 class="bucket-page__status">Idea</h3>
+          <p class="bucket-page__status-description"><em>This bucket idea is still being discussed and designed</em></p>
         </div>
       </div>
-      <div ng-if="bucket.status == 'funded'" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
+
+      <md-button
+        class="md-raised md-primary bucket-page__start-funding-btn"
+        ng-click='openForFunding()'
+        ng-autodisable
+        ng-show='userCanManageBucket()'
+      >
+        Start Funding
+      </md-button>
+    </div>
+
+    <div ng-if="bucket.isFunding()">
+      <div layout="row" layout-align="start center">
+        <img src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-status-card__funding-icon"/>
+        <div>
+          <h3 class="bucket-page__status">Funding now</h3>
+          <p class="bucket-page__status-description"><em>This bucket started funding on {{ bucket.liveAt | exactDateWithTime }}</em></p>
+        </div>
+      </div>
+
+      <md-button
+        class="md-raised md-primary bucket-page__accept-funding-btn"
+        ng-click='acceptFunding()'
+        ng-autodisable
+        ng-show='userCanManageBucket()'
+      >
+        Accept Funding
+      </md-button>
+    </div>
+
+    <div ng-if="bucket.isFunded() || bucket.isComplete()">
+      <div layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
         <img src="./img/bucket_full.svg" alt="bucket" class="bucket-page-status-card__funded-icon"/>
         <div>
           <h3 class="bucket-page__status">Funded</h3>
           <p class="bucket-page__status-description"><em>This bucket was funded {{ bucket.totalContributions | currency : group.currencySymbol : 0 }} on {{ bucket.fundedAt | exactDateWithTime }}</em></p>
         </div>
       </div>
-      <div ng-if="bucket.paidAt" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
+      <div ng-if="bucket.isComplete()" layout="row" layout-align="start center" class="bucket-page-status-card__funded-status-container">
         <ng-md-icon icon="done_all"
           layout="column"
           size="44"
@@ -119,5 +74,19 @@
         Complete
       </md-button>
     </div>
+
+    <div ng-if="bucket.isCancelled()" layout="row" layout-align="start center" class="bucket-page-status-card__cancelled-status-container">
+      <ng-md-icon icon="cancel"
+        layout="column"
+        size="44"
+        class="bucket-page-status-card__cancelled-icon"
+      ></ng-md-icon>
+
+      <div>
+        <h3 class="bucket-page__status">Cancelled</h3>
+        <p class="bucket-page__status-description"><em>This bucket was cancelled on {{ bucket.archivedAt | exactDateWithTime }}</em></p>
+      </div>
+    </div>
+
   </md-card-content>
 </md-card>

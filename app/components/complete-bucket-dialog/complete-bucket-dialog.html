@@ -5,7 +5,7 @@
       <ng-md-icon icon="warning"
         layout="column"
         layout-align="center center"
-        ng-class="bucket.status == 'live' ? 'complete-bucket-dialog__red-warning-icon' : 'complete-bucket-dialog__yellow-warning-icon'"
+        ng-class="bucket.isFunding() ? 'complete-bucket-dialog__red-warning-icon' : 'complete-bucket-dialog__yellow-warning-icon'"
         size="35"
       ></ng-md-icon>
 
@@ -25,7 +25,7 @@
     <md-button class="complete-bucket-dialog__btn complete-bucket-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
     <md-button
       class="md-raised complete-bucket-dialog__btn complete-bucket-dialog__proceed-btn"
-      ng-class="bucket.status == 'live' ? 'complete-bucket-dialog__red-proceed-btn' : 'complete-bucket-dialog__yellow-proceed-btn'"
+      ng-class="bucket.isFunding() ? 'complete-bucket-dialog__red-proceed-btn' : 'complete-bucket-dialog__yellow-proceed-btn'"
       ng-click="proceed()"
     >yes, this bucket is complete</md-button>
   </div>

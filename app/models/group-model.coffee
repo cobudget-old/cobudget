@@ -13,27 +13,22 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @hasMany 'memberships', sortBy: 'createdAt', sortDesc: false
 
     draftBuckets: ->
-      @getActiveBuckets('draft', 'createdAt')
+      @getBuckets ((bucket) -> bucket.isIdea()), 'createdAt'
 
     liveBuckets: ->
-      @getActiveBuckets('live', 'liveAt')
+      @getBuckets ((bucket) -> bucket.isFunding()), 'liveAt' 
 
     fundedBuckets: ->
-      @getActiveBuckets('funded', 'fundedAt')
+      @getBuckets ((bucket) -> bucket.isFunded()), 'fundedAt'
 
     completedBuckets: ->
       @completeBuckets()
 
     completeBuckets: ->
-      _.filter @buckets(), (bucket) ->
-        bucket.iscomplete()
+      @getBuckets ((bucket) -> bucket.isComplete()), 'paidAt'
 
     cancelledBuckets: ->
-      buckets = _.filter @buckets(), (bucket) ->
-        bucket.isArchived() && !bucket.iscomplete()
-      sortedBuckets = _.sortBy buckets, (bucket) ->
-        bucket.archivedAt
-      sortedBuckets.reverse()
+      @getBuckets ((bucket) -> bucket.isCancelled()), 'archivedAt'
 
     pendingMemberships: ->
       _.filter @memberships(), (membership) ->
@@ -53,12 +48,12 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
         membership.memberId == member.id
 
     # private
-    filterActiveBucketsByStatus: (status) ->
-      _.filter @buckets(), (bucket) ->
-        bucket.status == status && !bucket.isArchived() && !bucket.iscomplete()
+    filterBucketsByFunction: (fun) ->
+      _.filter @buckets(), fun
 
-    getActiveBuckets: (status, datePropToSortBy) ->
-      filteredBuckets = @filterActiveBucketsByStatus(status)
+    getBuckets: (fun, datePropToSortBy) ->
+      filteredBuckets = @filterBucketsByFunction(fun)
       _.sortBy filteredBuckets, (bucket) ->
         bucket[datePropToSortBy].format()
       .reverse()
+
