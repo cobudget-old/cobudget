@@ -69,15 +69,15 @@
       <md-toolbar class="md-table-toolbar md-default">
         <div class="md-toolbar-tools">
           <ng-md-icon class="group-page__transaction-history-search-icon" icon="search"></ng-md-icon>
-          <form flex name="filter.form">
-            <input class="group-page__transaction-history-search-input" type="text" ng-model="query" placeholder="search" ng-disabled="!transactionsLoaded">
+          <form flex>
+            <input class="group-page__transaction-history-search-input" type="text" ng-model="transactionQuery" placeholder="search" ng-disabled="!transactionsLoaded">
           </form>
         </div>
       </md-toolbar>
 
       <md-table-container>
         <table md-table multiple ng-model="filteredTransactions">
-          <thead md-head md-order="initialOrder">
+          <thead md-head md-order="initialOrderTransactions">
             <tr md-row>
               <th md-column md-column-filter md-order-by="created_at">Date</th>
               <th md-column md-column-filter md-order-by="account_from">Account from</th>
@@ -98,7 +98,7 @@
               <td md-cell></td>
               <td md-cell></td>
             </tr>
-            <tr ng-if="filteredTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in filteredTransactions | orderBy: initialOrder | limitTo: transactionLimit: (startingPage - 1) * transactionLimit">
+            <tr ng-if="filteredTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in filteredTransactions | orderBy: initialOrderTransactions | limitTo: transactionLimit: (startingPageTransactions - 1) * transactionLimit">
               <td md-cell>{{transaction.created_at | exactDateShort}}</td>
               <td md-cell>{{transaction.account_from}}</td>
               <td md-cell ng-if="transaction.to_link != ''"><a href="/#/{{transaction.to_link}}">{{transaction.account_to}}</a></td>
@@ -108,7 +108,66 @@
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-limit="transactionLimit" md-page="startingPage" md-page-select md-boundary-links md-total="{{filteredTransactions.length}}"></md-table-pagination>
+      <md-table-pagination md-limit="transactionLimit" md-page="startingPageTransactions" md-page-select md-boundary-links md-total="{{filteredTransactions.length}}"></md-table-pagination>
     </md-card>
   </div>
+
+  <div>
+    <md-card class="group-page__bucket-history-card">
+
+      <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
+        <h2 class="group-page__subheader-title">Buckets</h2>
+        <span flex></span>
+        <div class="group-page__stats-download-buckets-btn" layout="row" layout-align="center center" ng-click="downloadBucketsCSV()">
+          <div class="group-page__stats-download-buckets-btn-label">Download Buckets as CSV</div>
+        </div>
+      </div>
+
+      <md-divider class="group-page__bucket-history-subheader-divider"></md-divider>
+
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <ng-md-icon class="group-page__bucket-history-search-icon" icon="search"></ng-md-icon>
+          <form flex>
+            <input class="group-page__bucket-history-search-input" type="text" ng-model="bucketQuery" placeholder="search">
+          </form>
+        </div>
+      </md-toolbar>
+
+      <md-table-container>
+        <table md-table multiple ng-model="filteredBuckets">
+          <thead md-head md-order="initialOrderBuckets">
+            <tr md-row>
+              <th md-column md-column-filter md-order-by="created_at">Created at</th>
+              <th md-column md-column-filter md-order-by="author_name">Author</th>
+              <th md-column md-column-filter md-order-by="name">Name</th>
+              <th md-column md-order-by="status">Status</th>
+              <th md-column md-order-by="target" md-numeric>Target ({{group.currencySymbol}})</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr ng-if="filteredBuckets.length == 0" md-row>
+              <td md-cell>No bucket history</td>
+              <td md-cell></td>
+              <td md-cell></td>
+              <td md-cell></td>
+            </tr>
+            <tr ng-if="filteredBuckets.length > 0 && bucketsLoaded" md-row ng-repeat="bucket in filteredBuckets | orderBy: initialOrderBuckets | limitTo: bucketLimit: (startingPageBuckets - 1) * bucketLimit">
+              <td md-cell>{{bucket.created_at | exactDateShort}}</td>
+              <td md-cell>{{bucket.author_name}}</td>
+              <td md-cell><a href="/#/buckets/{{bucket.id}}">{{bucket.name}}</a></td>
+              <td md-cell ng-if="!bucket.archived_at && bucket.status == 'draft'">Idea</td>
+              <td md-cell ng-if="!bucket.archived_at && bucket.status == 'live'">Funding</td>
+              <td md-cell ng-if="!bucket.archived_at && bucket.status == 'funded' && !bucket.paid_at">Funded</td>  
+              <td md-cell ng-if="!!bucket.archived_at && !bucket.paid_at">Cancelled</td>
+              <td md-cell ng-if="!!bucket.paid_at">Complete</td>
+              <td md-cell>{{bucket.target | currency : group.currencySymbol : 2}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-table-pagination md-limit="bucketLimit" md-page="startingPageBuckets" md-page-select md-boundary-links md-total="{{filteredBuckets.length}}"></md-table-pagination>
+    </md-card>
+  </div>
+
 </div>
