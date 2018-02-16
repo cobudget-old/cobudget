@@ -12,6 +12,10 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @hasMany 'allocations'
       @hasMany 'memberships', sortBy: 'createdAt', sortDesc: false
 
+    allBuckets: ->
+      _.filter @buckets(), (bucket) ->
+        bucket.createdAt
+
     draftBuckets: ->
       @getBuckets ((bucket) -> bucket.isIdea()), 'createdAt'
 
