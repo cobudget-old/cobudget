@@ -96,6 +96,15 @@ class Bucket < ActiveRecord::Base
     participants(exclude_author: exclude_author, type: :commenters)
   end
 
+  def author_email
+    has_attribute?(:author_name_db) ? user.email : get_author_email
+  end
+
+  def get_author_email
+    membership = user.membership_for(group)
+    !membership || membership.archived? ? "[removed user]" : user.email
+  end
+
   def author_name
     has_attribute?(:author_name_db) ? author_name_db : get_author_name
   end
@@ -112,11 +121,11 @@ class Bucket < ActiveRecord::Base
   def archived?
     archived_at.present?
   end
-  
-  def is_idea? 
+
+  def is_idea?
     (status == 'draft') && !archived_at.present?
-  end 
-  
+  end
+
   def is_funding?
     (status == 'live') && !archived_at.present?
   end
