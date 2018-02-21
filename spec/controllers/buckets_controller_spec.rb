@@ -379,17 +379,10 @@ RSpec.describe BucketsController, type: :controller do
           @memberships[1].update(archived_at: DateTime.now.utc)
           post :archive, { id: bucket.id }
           bucket.reload
-          @group_user = User.find_by(uid: %(group-#{group.id}@non-existing.email))
-          @group_membership = Membership.find_by(member_id: @group_user.id, group_id: group.id)
         end
 
         it "sets archived_at on bucket" do
           expect(bucket.archived_at).not_to be_nil
-        end
-
-        it "group user and membership exists" do
-          expect(@group_user).to be_truthy
-          expect(@group_membership).to be_truthy
         end
 
         it "returns funds back to funders or group account" do
@@ -398,7 +391,7 @@ RSpec.describe BucketsController, type: :controller do
               expect(membership.reload.balance).to eq(0)
               expect(Account.find(membership.status_account_id).balance).to eq(0)
               expect(Transaction.find_by(from_account_id: bucket.account_id,
-                to_account_id: @group_membership.status_account_id, amount: 20, user_id: user.id)).to be_truthy
+                to_account_id: group.status_account_id, amount: 20, user_id: user.id)).to be_truthy
             else
               expect(membership.reload.balance).to eq(20)
               expect(Account.find(membership.status_account_id).balance).to eq(20)
@@ -410,7 +403,7 @@ RSpec.describe BucketsController, type: :controller do
           expect(bucket.total_contributions).to eq(0)
           expect(Account.find(bucket.account_id).balance).to eq(0)
 
-          expect(Account.find(@group_membership.status_account_id).balance).to eq(20)
+          expect(Account.find(group.status_account_id).balance).to eq(20)
         end
 
         it "sends refund notification emails to funders and admins" do

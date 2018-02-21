@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120195702) do
+ActiveRecord::Schema.define(version: 20180126001655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,12 +125,14 @@ ActiveRecord::Schema.define(version: 20171120195702) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "currency_symbol", default: "$"
-    t.string   "currency_code",   default: "USD"
+    t.string   "currency_symbol",   default: "$"
+    t.string   "currency_code",     default: "USD"
     t.string   "customer_id"
     t.datetime "trial_end"
     t.string   "plan"
     t.text     "description"
+    t.boolean  "funding_freeze",    default: false
+    t.integer  "status_account_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -203,6 +205,7 @@ ActiveRecord::Schema.define(version: 20171120195702) do
 
   add_foreign_key "accounts", "groups"
   add_foreign_key "buckets", "accounts"
+  add_foreign_key "groups", "accounts", column: "status_account_id"
   add_foreign_key "memberships", "accounts", column: "incoming_account_id"
   add_foreign_key "memberships", "accounts", column: "outgoing_account_id"
   add_foreign_key "memberships", "accounts", column: "status_account_id"

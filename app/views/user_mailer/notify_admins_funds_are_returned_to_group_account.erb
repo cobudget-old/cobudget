@@ -6,7 +6,11 @@
 <p>
   A previous member (<%= @archived_member.name %>, <%= @archived_member.email %>) funded this bucket with
   <%= @formatted_amount %>. As this person is no longer a member of the group, the funds
-  have been returned to the group account <%= @group_account.name %>.
+  have been returned to the group account.
+</p>
+
+<p>
+  You can find the group account in the funders tab.
 </p>
 
 <p><%= link_to 'view', "#{root_url}#/buckets/#{@bucket.id}" %></p>

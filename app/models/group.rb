@@ -1,4 +1,6 @@
-  class Group < ActiveRecord::Base
+class Group < ActiveRecord::Base
+  after_create :add_account_after_create
+
   has_many :buckets, dependent: :destroy
   has_many :allocations, dependent: :destroy
   has_many :memberships
@@ -47,35 +49,6 @@
     self.save
   end
 
-  def ensure_group_user_exist()
-    uid = %(group-#{id}@non-existing.email)
-    group_user = User.find_by uid: uid
-    if !group_user 
-      group_user = User.create!({
-          name: %(Group "#{name}"),
-          uid: uid,
-          email: uid,
-          password: "**NOLOGIN**",
-          reset_password_token: %(group-user-not-a-token-group-#{id}),
-          confirmation_token: nil,
-          confirmed_at: DateTime.now.utc()
-          })
-    end
-    group_user
-  end
-
-  def ensure_group_account_exist()
-    group_user = ensure_group_user_exist()
-    group_membership = Membership.find_by group_id: id, member_id: group_user.id
-    if !group_membership
-      group_membership = Membership.create!({
-        group_id: id,
-        member_id: group_user.id
-        })
-    end
-    group_membership
-  end
-
   def for_each_admin
     Membership.where(group_id: id, is_admin: :true, archived_at: nil).find_each do |admin|
       yield admin
@@ -95,13 +68,13 @@
     Contribution.where(bucket_id: buckets.map(&:id)).sum(:amount)
   end
 
-  def total_in_funded
-      # amount of money in funded buckets
-      buckets.with_totals.where("status = 'funded'").sum("contrib.total")
+  def total_in_unfunded
+      # amount of money in unfunded buckets
+      buckets.with_totals.where("status = 'live' AND buckets.archived_at IS NULL").sum("contrib.total")
   end
 
   def ready_to_pay_total
-      buckets.with_totals.where("status = 'funded' AND buckets.archived_at IS NULL AND paid_at IS NULL").sum("contrib.total")
+      buckets.with_totals.where("status = 'funded' AND paid_at IS NULL").sum("contrib.total")
   end
 
   def total_paid
@@ -117,7 +90,11 @@
 
   def balance
     # remaining to be spent
-    (total_allocations - total_contributions).floor || 0
+    (total_allocations - total_contributions) || 0
+  end
+
+  def group_account_balance
+    Account.find(status_account_id).balance
   end
 
   def formatted_balance
@@ -147,5 +124,10 @@
       if self.currency_code
         self.currency_symbol = Money.new(0, self.currency_code).symbol
       end
+    end
+
+    def add_account_after_create
+      account = Account.create!({group_id: id})
+      update!(status_account_id: account.id)
     end
 end
