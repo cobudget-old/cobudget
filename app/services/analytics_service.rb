@@ -108,7 +108,6 @@ class AnalyticsService
           buckets_last_quarter: group.buckets.where(created_at: 90.days.ago..Time.current).count,
           buckets_all_time: group.buckets.all.count,
           total_allocations: group.total_allocations,
-          total_in_funded: group.total_in_funded,
           users_that_proposed_buckets_percentage: users_that_proposed_buckets_percentage(group)
         }
       end
