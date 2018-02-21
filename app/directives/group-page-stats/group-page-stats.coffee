@@ -28,8 +28,8 @@ global.cobudgetApp.directive 'groupPageStats', () ->
 
       # bucket table
       $scope.bucketQuery = ''
-      $scope.bucketColumns = ['id', 'name', 'authorName', 'authorEmail', 'totalContributions']
-      $scope.bucketHeaders = ['id', 'Bucket Name', 'Author Name', 'Author Email', 'Total Contributions']
+      $scope.bucketColumns = ['id', 'name', 'authorName', 'authorEmail', 'totalContributions', 'fundedAt']
+      $scope.bucketHeaders = ['id', 'Bucket Name', 'Author Name', 'Author Email', 'Total Contributions', 'Funded At']
 
       $scope.$watch 'bucketQuery', ->
         $scope.filteredBuckets = $filter('filter')($scope.fundedBuckets, {name: $scope.bucketQuery})

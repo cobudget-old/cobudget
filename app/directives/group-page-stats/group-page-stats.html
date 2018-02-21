@@ -57,7 +57,7 @@
     <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
       <h2 class="group-page__subheader-title">Transaction History</h2>
       <span flex></span>
-      <div class="group-page__stats-download-transactions-btn" layout="row" layout-align="center center" ng-csv="allTransactions" csv-column-order="transactionColumns" csv-header="transactionHeaders" filename="{{group.name}}-transaction-data-{{Date.now() | exactDateNoSpaces}}">
+      <div class="group-page__stats-download-transactions-btn" layout="row" layout-align="center center" ng-csv="allTransactions" csv-column-order="transactionColumns" csv-header="transactionHeaders" filename="{{group.name}}-transaction-data-{{Date.now() | exactDateNoSpaces}}.csv">
         <div class="group-page__stats-download-transactions-btn-label">Download Transactions as CSV</div>
       </div>
     </div>
@@ -114,7 +114,7 @@
     <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
       <h2 class="group-page__subheader-title">Funded Buckets</h2>
       <span flex></span>
-      <div class="group-page__stats-download-transactions-btn" layout="row" layout-align="center center" ng-csv="fundedBuckets" csv-column-order="bucketColumns" csv-header="bucketHeaders" filename="{{group.name}}-bucket-data-{{Date.now() | exactDateNoSpaces}}">
+      <div class="group-page__stats-download-transactions-btn" layout="row" layout-align="center center" ng-csv="fundedBuckets" csv-column-order="bucketColumns" csv-header="bucketHeaders" filename="{{group.name}}-bucket-data-{{Date.now() | exactDateNoSpaces}}.csv">
         <div class="group-page__stats-download-buckets-btn-label">Download Funded Buckets as CSV</div>
       </div>
     </div>
@@ -134,7 +134,7 @@
       <table md-table multiple ng-model="filteredBuckets">
         <thead md-head md-order="initialOrderBuckets">
           <tr md-row>
-            <th md-column md-order-by="createdAt">Created at</th>
+            <th md-column md-order-by="fundedAt">Funded At</th>
             <th md-column md-column-filter md-order-by="authorName">Author</th>
             <th md-column md-column-filter md-order-by="name">Name</th>
             <th md-column md-order-by="totalContributions" md-numeric>Total Contribution ({{group.currencySymbol}})</th>
@@ -148,7 +148,7 @@
             <td md-cell></td>
           </tr>
           <tr ng-if="filteredBuckets.length > 0 && bucketsLoaded" md-row ng-repeat="bucket in filteredBuckets | orderBy: initialOrderBuckets | limitTo: bucketLimit: (startingPageBuckets - 1) * bucketLimit">
-            <td md-cell>{{bucket.createdAt | exactDateShort}}</td>
+            <td md-cell>{{bucket.fundedAt | exactDateShort}}</td>
             <td md-cell>{{bucket.authorName}}</td>
             <td md-cell><a href="/#/buckets/{{bucket.id}}">{{bucket.name}}</a></td>
             <td md-cell>{{bucket.totalContributions | currency : group.currencySymbol : 2}}</td>
