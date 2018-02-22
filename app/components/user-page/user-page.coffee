@@ -4,7 +4,7 @@ module.exports =
       $auth.validateUser()
     membershipsLoaded: ->
       global.cobudgetApp.membershipsLoaded
-  url: '/users/:userId?previous_bucket_id'
+  url: '/users/:userId'
   template: require('./user-page.html')
   controller: (CurrentUser, Error, $location, Records, $scope, $stateParams, LoadBar) ->
 
