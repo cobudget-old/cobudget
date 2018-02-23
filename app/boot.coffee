@@ -35,6 +35,7 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
       HS.beacon.identify
         name: user.name
         email: user.email
+        url: location.href
 
   $rootScope.$on 'auth:login-error', (ev, reason) ->
     Dialog.alert(title: 'error!', content: reason.errors[0])
@@ -42,6 +43,7 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
       HS.beacon.identify
         name: null
         email: null
+        url: null
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
     console.log('$stateChangeError signal fired!')
