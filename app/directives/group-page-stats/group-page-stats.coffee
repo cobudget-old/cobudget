@@ -28,8 +28,8 @@ global.cobudgetApp.directive 'groupPageStats', () ->
 
       # bucket table
       $scope.bucketQuery = ''
-      $scope.bucketColumns = ['id', 'name', 'authorName', 'authorEmail', 'totalContributions', 'fundedAt', 'paidAt']
-      $scope.bucketHeaders = ['id', 'Bucket Name', 'Author Name', 'Author Email', 'Total Contributions', 'Funded At', 'Completed At']
+      $scope.bucketHeaders = ['Link', 'Bucket Name', 'Author Name', 'Author Email', 'Total Contributions', 'Funded At', 'Completed At']
+      $scope.bucketColumns = ['url', 'name', 'authorName', 'authorEmail', 'totalContributions', 'fundedAt', 'paidAt']
 
       $scope.$watch 'bucketQuery', ->
         $scope.filteredBuckets = $filter('filter')($scope.fundedBuckets, {name: $scope.bucketQuery})
@@ -39,7 +39,10 @@ global.cobudgetApp.directive 'groupPageStats', () ->
         $scope.fundedBuckets = $scope.group.fundedBuckets()
         $scope.filteredBuckets = $scope.fundedBuckets
         $scope.fundedCompletedBuckets = $scope.group.fundedCompletedBuckets()
-        console.log $scope.fundedCompletedBuckets
+        console.log $scope.fundedCompletedBuckets[0].author().email
+        _.each $scope.fundedCompletedBuckets, (bucket) ->
+          bucket.url = location.origin + '/#/buckets/' + bucket.id
+          bucket.authorEmail = bucket.author().email
         $scope.bucketLimit = 10
         $scope.startingPageBuckets = 1
         $scope.initialOrderBuckets = '-createdAt'
