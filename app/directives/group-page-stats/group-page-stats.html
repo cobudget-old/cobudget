@@ -114,7 +114,7 @@
     <div layout="row" layout-align="start center" class="group-page__stats-subheader-container">
       <h2 class="group-page__subheader-title">Funded Buckets</h2>
       <span flex></span>
-      <div class="group-page__stats-download-transactions-btn" layout="row" layout-align="center center" ng-csv="fundedBuckets" csv-column-order="bucketColumns" csv-header="bucketHeaders" filename="{{group.name}}-bucket-data-{{Date.now() | exactDateNoSpaces}}.csv">
+      <div class="group-page__stats-download-transactions-btn" layout="row" layout-align="center center" ng-csv="fundedCompletedBuckets" csv-column-order="bucketColumns" csv-header="bucketHeaders" filename="{{group.name}}-bucket-data-{{Date.now() | exactDateNoSpaces}}.csv">
         <div class="group-page__stats-download-buckets-btn-label">Download Funded Buckets as CSV</div>
       </div>
     </div>

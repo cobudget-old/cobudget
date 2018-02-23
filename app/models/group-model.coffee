@@ -30,6 +30,9 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
     cancelledBuckets: ->
       @getBuckets ((bucket) -> bucket.isCancelled()), 'archivedAt'
 
+    fundedCompletedBuckets: ->
+      @getBuckets ((bucket) -> bucket.isFunded() || bucket.isComplete()), 'fundedAt'
+
     pendingMemberships: ->
       _.filter @memberships(), (membership) ->
         membership.isPending()
