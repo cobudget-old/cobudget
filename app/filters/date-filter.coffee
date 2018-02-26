@@ -22,6 +22,10 @@ global.cobudgetApp.filter 'exactDateWithTime', ->
   (date) ->
     moment(date).format('dddd MMMM Do YYYY [at] h:mm a')
 
+global.cobudgetApp.filter 'exactDateNoSpaces', ->
+  (date) ->
+    moment(date).format('YYYY-MM-DD-HH-mm-ss')
+
 global.cobudgetApp.filter 'exactDate', ->
   (date) ->
     moment(date).format('dddd MMMM Do YYYY')

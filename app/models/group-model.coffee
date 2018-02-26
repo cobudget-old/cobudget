@@ -16,7 +16,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       @getBuckets ((bucket) -> bucket.isIdea()), 'createdAt'
 
     liveBuckets: ->
-      @getBuckets ((bucket) -> bucket.isFunding()), 'liveAt' 
+      @getBuckets ((bucket) -> bucket.isFunding()), 'liveAt'
 
     fundedBuckets: ->
       @getBuckets ((bucket) -> bucket.isFunded()), 'fundedAt'
@@ -29,6 +29,9 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
 
     cancelledBuckets: ->
       @getBuckets ((bucket) -> bucket.isCancelled()), 'archivedAt'
+
+    fundedCompletedBuckets: ->
+      @getBuckets ((bucket) -> bucket.isFunded() || bucket.isComplete()), 'fundedAt'
 
     pendingMemberships: ->
       _.filter @memberships(), (membership) ->
@@ -56,4 +59,3 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
       _.sortBy filteredBuckets, (bucket) ->
         bucket[datePropToSortBy].format()
       .reverse()
-

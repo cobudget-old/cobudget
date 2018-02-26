@@ -89,11 +89,31 @@ highchart {
   display: none;
 }
 
-.group-page__transaction-history-search-icon {
+.group-page__stats-download-buckets-btn, .group-page__stats-download-transactions-btn {
+  border: 0;
+  height: 30px;
+  padding: 5px 10px;
+  color: black;
+  font-weight: 400;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid #8C8C8C;
+  transition: 0.5s;
+
+  &:hover {
+    border-color: transparent;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.group-page__transaction-history-search-icon, .group-page__bucket-history-search-icon {
   padding-top: 10px;
 }
 
-.group-page__transaction-history-search-input {
+.group-page__transaction-history-search-input, .group-page__bucket-history-search-input {
   border: 0;
   padding-left: 15px;
   &:focus {

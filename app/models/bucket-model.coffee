@@ -67,5 +67,5 @@ global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
       !!@archivedAt && !@paidAt && @status != 'funded'
 
     ## Legacy funded and archived bucket
-    isFundedAndArchived: -> 
+    isFundedAndArchived: ->
       @status == 'funded' && !@paidAt && !!@archivedAt
