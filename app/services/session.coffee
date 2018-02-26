@@ -7,6 +7,11 @@ global.cobudgetApp.factory 'Session', ($auth, CurrentUser, Dialog, LoadBar, $loc
       promise = $auth.submitLogin(formData)
       promise.then (user) =>
         global.cobudgetApp.currentUserId = user.id
+        HS.beacon.ready ->
+          HS.beacon.identify
+            name: user.name
+            email: user.email
+            url: location.href
         membershipsLoadedDeferred = $q.defer()
         global.cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise
         Records.users.updateProfile(utc_offset: moment().utcOffset())
@@ -43,6 +48,11 @@ global.cobudgetApp.factory 'Session', ($auth, CurrentUser, Dialog, LoadBar, $loc
       if CurrentUser()
         $auth.signOut().then ->
           global.cobudgetApp.currentUserId = null
+          HS.beacon.ready ->
+            HS.beacon.identify
+              name: null
+              email: null
+              url: null
           deferred.resolve()
       else
         deferred.resolve()

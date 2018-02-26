@@ -6,6 +6,7 @@ util = require('gulp-util')
 plumber = require('gulp-plumber')
 sourcemaps = require('gulp-sourcemaps')
 extend = require('xtend')
+ngConfig = require('gulp-ng-config')
 _ = require('lodash')
 
 refresh = require('gulp-livereload')
@@ -148,6 +149,8 @@ assets = (isWatch) ->
 gulp.task 'assets-build', assets(false)
 gulp.task 'assets-watch', assets(true)
 
+gulp.task 'ng-config', ->
+  gulp.src('./defaults.json').pipe(ngConfig('cobudgetApp.config', createModule: false)).pipe gulp.dest('./config/')
 
 #
 # server
