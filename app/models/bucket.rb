@@ -1,5 +1,6 @@
 class Bucket < ActiveRecord::Base
   after_create :add_account_after_create
+  after_create :bucket_to_zapier
   has_many :contributions, -> { order("amount DESC") }, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :group
@@ -183,5 +184,9 @@ class Bucket < ActiveRecord::Base
         self.account_id = account.id
         save
       end
+    end
+
+    def bucket_to_zapier
+      Zapier::Bucket.new(self).post_to_zapier
     end
 end
