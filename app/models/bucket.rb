@@ -1,6 +1,6 @@
 class Bucket < ActiveRecord::Base
   after_create :add_account_after_create
-  after_create :bucket_to_zapier
+  after_save :bucket_to_zapier
   has_many :contributions, -> { order("amount DESC") }, dependent: :destroy
   has_many :comments, dependent: :destroy
   belongs_to :group
@@ -144,6 +144,21 @@ class Bucket < ActiveRecord::Base
     (['draft', 'live', 'refunded'].include? status) && archived_at.present? && !paid_at.present?
   end
 
+  def status_readable
+    case
+      when is_idea?
+        'idea'
+      when is_funding?
+        'funding'
+      when is_funded?
+        'funded'
+      when is_completed?
+        'completed'
+      when is_cancelled?
+        'cancelled'
+    end
+  end
+
   def balance_from_transactions
     AccountService.balance(account_id)
   end
@@ -187,6 +202,6 @@ class Bucket < ActiveRecord::Base
     end
 
     def bucket_to_zapier
-      Zapier::Bucket.new(self).post_to_zapier
+      Zapier::NewBucket.new(self).post_to_zapier
     end
 end

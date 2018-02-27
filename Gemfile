@@ -37,6 +37,7 @@ gem 'newrelic_rpm'
 
 gem 'redcarpet'
 gem 'httparty'
+gem 'figaro'
 
 group :development do
   gem 'capistrano', '2.15.5'
