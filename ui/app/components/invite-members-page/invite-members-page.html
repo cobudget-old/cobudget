@@ -1,0 +1,52 @@
+<div class="invite-members-page" ng-if="authorized">
+  <admin-toolbar></admin-toolbar>
+
+  <div class="invite-members-page__header" layout="column" layout-align="end center">
+    <div layout="row" layout-align="center center">
+      <ng-md-icon icon="person_add"
+        class="invite-members-page__money-icon"
+        size="30"
+        layout="column"
+        layout-align="center center"
+      ></ng-md-icon>
+      <h1 class="invite-members-page__header-text">
+        Invite Members
+      </h1>
+    </div>
+  </div>
+
+  <md-content class="invite-members-page__content">
+    <h2 class="invite-members-page__subheader">
+      Members can see, comment on, and fund buckets in {{ group.name }}
+    </h2>
+
+    <md-divider></md-divider>
+
+    <form novalidate class="invite-members-page__details-form" name="inviteMemberForm">
+      <div class="invite-members-page__input-container">
+        <label class="invite-members-page__input-label" for="name">EMAIL ADDRESS</label>
+        <input class="invite-members-page__text-input" type="email" required name="email" ng-model="inviteMemberFormParams.email"/>
+        <div ng-if="inviteMemberForm.email.$error.required && formSubmitted" class="invite-members-page__input-error">Email is required.</div>
+        <div ng-if="inviteMemberForm.email.$error.email && formSubmitted" class="invite-members-page__input-error">Email address must be valid.</div>
+      </div>
+
+      <div class="invite-members-page__input-container">
+        <label class="invite-members-page__input-label" for="name">NAME (OPTIONAL)</label>
+        <input class="invite-members-page__text-input" type="text" name="name" ng-model="inviteMemberFormParams.name" />
+      </div>
+    </form>
+
+    <div class="invite-members-page__bulk-invite-btn-container">
+      big group?
+      <a class="invite-members-page__bulk-invite-btn" href="" ng-click="openInviteMembersPrimerDialog()">
+        Add many members at once
+      </a>
+    </div>
+
+    <div layout="column" layout-align="center space-between">
+      <md-button class="invite-members-page__btn invite-members-page__confirm-btn" ng-click="formSubmitted = true; inviteMemberForm.$valid && inviteMember(); inviteMemberForm.$setUntouched()" ng-autodisable>Invite 1 Member</md-button>
+      <md-button class="invite-members-page__btn invite-members-page__cancel-btn" ng-click="cancel()">Cancel</md-button>
+    </div>
+
+  </md-content>
+</div>

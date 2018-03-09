@@ -1,0 +1,38 @@
+.group-analytics-page {
+  padding: 40px;
+}
+
+.group-analytics-page__chart-container {
+  height: 300px;
+  margin-bottom: 80px;
+}
+
+.group-analytics-page__chart {
+  height: 300px;
+}
+
+.group-analytics-page__group-data-table {
+  border: 1px solid black;
+  text-align: center;
+  border-collapse: collapse;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.group-analytics-page__group-data-table td {
+  border: 1px solid black;
+  width: 200px;
+}
+
+.group-analytics-page__group-data-table th {
+  line-height: 30px;
+}
+
+.group-analytics-page__group-data-table-header {
+  font-weight: bold;
+}
+
+.group-analytics-page__group-admins-container {
+  margin-bottom: 15px;
+  font-size: 12px;
+}

@@ -1,0 +1,61 @@
+<div class="edit-bucket-page" ng-if="authorized">
+  <md-toolbar class="md-whiteframe-z1 edit-bucket-page__toolbar" layout-align="column">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+        <ng-md-icon icon="close"
+          class="edit-bucket-page__cancel-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+      </md-button>
+      <span class="edit-bucket-page__header-text">Edit {{ bucket.isIdea() ? 'Idea' : 'Bucket' }}</span>
+    </div>
+  </md-toolbar>
+
+  <md-content class="edit-bucket-page__content">
+    <div>
+      <h4 class="edit-bucket-page__subheader-title">You're about to edit a bucket</h4>
+    </div>
+
+    <div>
+      <p class="edit-bucket-page__subheader-text">
+        You can continue to edit this bucket, propose it to your peers, and get feedback.
+        <span ng-if="bucket.isIdea()">When you're ready, you can request funding.</span>
+      </p>
+    </div>
+
+    <form name='bucketForm' class="edit-bucket-page__form" ng-submit="done(bucketForm)">
+      <md-input-container>
+        <label>Bucket title</label>
+        <input required name="name" type="text" ng-model="bucket.name">
+        <div ng-messages="bucketForm.name.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <div class="edit-bucket-page__description-container">
+        <md-input-container>
+          <label>Description</label>
+          <textarea required name="description" ng-model="bucket.description"></textarea>
+          <div ng-messages="bucketForm.description.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <a class="edit-bucket-page__markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
+      </div>
+
+      <md-input-container>
+        <label>Funding Target (required for funding)</label>
+        <input ng-disabled="!bucket.isIdea()" name="target" min="1" type="text" ng-model="bucket.target" only-digits>
+        <div ng-messages="bucketForm.target.$error" multiple>
+          <div ng-message="required">This is required.</div>
+          <div ng-message="min">Bucket target must be greater than zero</div>
+        </div>
+      </md-input-container>
+
+      <div layout="column" layout-align="center space-between">
+        <md-button type="submit" class="edit-bucket-page__btn edit-bucket-page__confirm-btn" ng-disabled="!bucketForm.$dirty || bucketForm.$submitted">Edit bucket</md-button>
+      </div>
+    </form>
+  </md-content>
+</div>

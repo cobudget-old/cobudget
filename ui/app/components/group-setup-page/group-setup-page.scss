@@ -1,0 +1,101 @@
+.group-setup-page {
+  position: relative;
+  height: 100%;
+  background: white;
+}
+
+.group-setup-page__logo {
+  display: block;
+  width: 63%;
+  max-width: 300px;
+  margin: 30px auto;
+  margin-bottom: 20px;
+}
+
+.group-setup-page__content {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.group-setup-page__content-card {
+  background: #FBFBFB;
+}
+
+.group-setup-page__person-icon-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid #D8D8D8;
+  background: white;
+  font-size: 16px;
+  margin: 15px auto;
+  cursor: pointer;
+}
+
+.group-setup-page__person-icon {
+  fill: #D8D8D8;
+}
+
+.group-setup-page__form {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.group-setup-page__logo-subheader {
+  font-weight: 300;
+  @include fontMedLarge;
+  text-align: center;
+  margin: 0;
+}
+
+.group-setup-page__input-container {
+  width: 80%;
+  max-width: 300px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.group-setup-page__input-field {
+  @include cob-std-input;
+  margin-top: 5px;
+  background: white;
+  width: 100%;
+}
+
+.group-setup-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+  text-align: left;
+}
+
+.group-setup-page__select-field {
+  @include cob-std-input;
+  margin-top: 5px;
+  background: white;
+  width: 100%;
+  text-align: left;
+  padding: 1px 10px;
+}
+
+.group-setup-page__select-field md-select-value {
+  border: none !important;
+  padding-bottom: 1px !important;
+}
+
+.group-setup-page__select-field md-select:focus md-select-value {
+  border: none !important;
+}
+
+.group-setup-page__select-field .md-select-placeholder {
+  color: rgba(0,0,0,0.87) !important;
+}
+
+.group-setup-page__submit-btn {
+  background: $cob-pink !important;
+  width: 78%;
+  max-width: 298px;
+  margin-top: 7px;
+}

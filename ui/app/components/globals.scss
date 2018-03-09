@@ -1,0 +1,57 @@
+html, body, .cobudget-app {
+  position: relative;
+  height: 100%;
+  background: white;
+}
+
+a {
+  color: $cob-cyan;
+}
+
+md-toast {
+  position: fixed;
+}
+
+md-toast > span.ng-binding {
+  @include fontTiny;
+}
+
+md-toast > button.md-button {
+  color: $cobudget-jade;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield !important;
+}
+
+md-dialog-content {
+  word-wrap: break-word;
+}
+
+md-content {
+  background-color: transparent;
+}
+
+md-backdrop.md-click-catcher {
+    position: fixed;
+}
+
+md-backdrop {
+  position: fixed;
+}
+
+blockquote {
+  margin: 20px 0;
+  padding-left: 1.5rem;
+  border-left: 5px solid $cob-pink;
+}
+
+md-switch.md-default-theme.md-checked .md-thumb, md-switch.md-checked .md-thumb, md-switch.md-default-theme.md-checked .md-ink-ripple, md-switch.md-checked .md-ink-ripple {
+  background-color: $cob-pink;
+}

@@ -1,0 +1,143 @@
+// buckets
+
+.group-page__stats-card {
+  margin-bottom: 35px;
+}
+
+.group-page__stats-content {
+  position: relative;
+  width: 100%;
+}
+
+.group-page md-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.group-page__stats-list {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.group-page__stats-subheader-container {
+  padding: 5px 20px;
+}
+
+.group-page__stats-subheader {
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  margin: 0;
+  font-size: 15px !important;
+}
+
+.group-page__stats-total-sub {
+  margin-left: 30px;
+}
+
+.group-page__stats-list-icon {
+  width: 27px;
+  height: 27px;
+  display: inline;
+  margin-right: 10px;
+}
+
+.group-page-header__stats-overview-container {
+  margin: 25px;
+}
+
+.group-page-header__stats-overview-label {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.group-page__stats-divider {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.group-page__stats-title {
+  @include fontMedLarge;
+  @include truncatedText;
+  margin-bottom: 4px;
+}
+
+.group-page__stats-subheader {
+  @include fontSmall;
+}
+
+.group-page__stats-divider-total {
+  border-top-color: rgba(0,0,0,5);
+}
+
+.group-page__stats-container {
+  position: relative;
+  min-width: 0;
+}
+
+.group-page__stats-header-container {
+  margin-bottom: 1px;
+}
+
+// transaction card
+
+highchart {
+  width: 100%;
+  display: block;
+}
+
+.highcharts-credits {
+  display: none;
+}
+
+.group-page__stats-download-buckets-btn, .group-page__stats-download-transactions-btn {
+  border: 0;
+  height: 30px;
+  padding: 5px 10px;
+  color: black;
+  font-weight: 400;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid #8C8C8C;
+  transition: 0.5s;
+
+  &:hover {
+    border-color: transparent;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.group-page__transaction-history-search-icon, .group-page__bucket-history-search-icon {
+  padding-top: 10px;
+}
+
+.group-page__transaction-history-search-input, .group-page__bucket-history-search-input {
+  border: 0;
+  padding-left: 15px;
+  &:focus {
+    outline: none;
+  }
+}
+
+//condense md-data-table
+table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
+  padding: 0 24px 0 0;
+  max-width: 150px;
+  word-wrap: break-word;
+}
+
+@media (max-width: 380px) {
+  .group-page__stats-title {
+    @include fontMedium;
+  }
+
+  .group-page__stats-subheader {
+    @include fontTiny;
+  }
+
+  .group-page__live-bucket-personal-contribution {
+    @include fontTiny;
+  }
+}

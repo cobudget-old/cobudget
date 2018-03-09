@@ -1,0 +1,155 @@
+// progress card
+
+.bucket-page-progress-card {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.bucket-page-progress-card__content {
+  padding: 0;
+}
+
+.bucket-page-progress-card__top {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.bucket-page-progress-card__progress-header {
+  margin-bottom: 20px;
+  margin-top: 16px;
+}
+
+.bucket-page-progress-card__progress-header-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+}
+
+.bucket-page-progress-card__progress-header-text {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.bucket-page-progress-card__progress-bar-container {
+  position: relative;
+  height: 13px;
+  z-index: 0;
+  width: 100%;
+  background: #B0B0B0;
+}
+
+.bucket-page-progress-card__progress-bar-primary {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  background: $cob-green;
+  z-index: 2;
+  width: 0;
+  transition: 0.5s;
+}
+
+.bucket-page-progress-card__progress-bar-secondary {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  background: $cob-yellow;
+  z-index: 1;
+  width: 0;
+  transition: 1s;
+}
+
+.bucket-page-progress-card__progress-info {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.bucket-page-progress-card__progress-value-container {
+  margin-right: 20px;
+}
+
+.bucket-page-progress-card__progress-amount {
+  display: block;
+  font-size: 20px;
+}
+
+.bucket-page-progress-card__progress-unit {
+  display: block;
+  font-size: 15px;
+  color: $grey-on-white;
+}
+
+.bucket-page-progress-card__freeze-msg {
+  font-size: 13px;
+  color: $cob-pink;
+}
+
+// funding form
+
+.bucket-page-progress-card__fund-form {
+  margin-top: 15px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.bucket-page-progress-card__input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 13px;
+}
+
+.bucket-page-progress-card__input-label {
+  display: block;
+  margin-bottom: 13px;
+  font-size: 13px;
+}
+
+.bucket-page-progress-card__text-input {
+  display: block;
+  border: 1px solid #8C8C8C;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background: inherit;
+  font-size: 18px;
+  padding: 8px 10px;
+}
+
+.bucket-page-progress-card__text-input:focus {
+  outline: none;
+}
+
+.bucket-page-progress-card__text-input:disabled {
+  cursor: no-drop;
+}
+
+.bucket-page-progress-card__text-input.ng-dirty {
+  border-color: $cobudget-light-blue;
+}
+
+.bucket-page-progress-card__fund-btn {
+  background-color: $cob-pink !important;
+  width: 100%;
+  height: 35px;
+  min-height: 35px;
+  line-height: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 13px;
+}
+
+.bucket-page-progress-card__fund-btn:not([disabled]):hover {
+  background-color: $cob-green;
+}
+
+.bucket-page-progress-card__fund-form-input-container {
+  margin-right: 8px;
+  padding-bottom: 0;
+}
+
+.bucket-page input[type=number]::-webkit-inner-spin-button,
+.bucket-page input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

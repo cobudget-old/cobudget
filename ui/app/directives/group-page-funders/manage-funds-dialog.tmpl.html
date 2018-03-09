@@ -1,0 +1,87 @@
+<md-dialog class="group-page__manage-funds-dialog" aria-label="manage funds dialog">
+  <md-dialog-content class="sticky-container group-page__manage-funds-dialog-content">
+    <div class="group-page__manage-funds-dialog-header" layout="column" layout-align="space-between center">
+      <div class="group-page__manage-funds-dialog-header-avatar" layout="column" layout-align="center center">
+        <div>{{ managedMember.name[0] | uppercase }}</div>
+      </div>
+
+      <div class="group-page__manage-funds-dialog-header-title">
+        Manage {{ managedMember.name }}'s funds
+      </div>
+    </div>
+
+    <md-tabs md-border-bottom md-center-tabs class="group-page__manage-funds-tabs">
+      <md-tab md-on-select="setMode('add')">
+        <md-tab-label>
+          <span class="group-page__manage-funds-tab-label">Add</span>
+        </md-tab-label>
+        <md-tab-body>
+          <md-content class="md-padding group-page__manage-funds-calculation">
+            <div class="group-page__manage-funds-calculation-newline-add"></div>
+            <div>
+              <span class="group-page__manage-funds-current-amount">{{ managedMembership.rawBalance | currency : group.currencySymbol : 2 }}</span>
+              <span class="group-page__manage-funds-operator">+</span>
+              <md-input-container class="group-page__manage-funds-input-container" md-no-float>
+                <input placeholder="XX.XX"
+                  class="group-page__manage-funds-input group-page__manage-funds-input-add"
+                  type="number"
+                  step="any"
+                  ng-model="formData.allocationAmount"
+                  ng-change="normalizeAllocationAmount()"
+                  ng-keypress="normalizeAllocationAmount()"
+                >
+              </md-input-container>
+            </div>
+            <div>
+              <span class="group-page__manage-funds-operator">=</span>
+              <span class="group-page__manage-funds-total-amount">
+                {{ (formData.allocationAmount || 0) + managedMembership.rawBalance | currency : group.currencySymbol : 2}}
+              </span>
+              <span class="group-page__manage-funds-total-label">total</span>
+            </div>
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+
+      <md-tab md-on-select="setMode('change')">
+        <md-tab-label>
+          <span class="group-page__manage-funds-tab-label">Change</span>
+        </md-tab-label>
+        <md-tab-body>
+          <md-content class="md-padding group-page__manage-funds-calculation">
+            <div class="group-page__manage-funds-calculation-newline-change"></div>
+            <div>
+              <span class="group-page__manage-funds-filler-text">Change from</span>
+              <span class="group-page__manage-funds-current-amount">{{ managedMembership.rawBalance | currency : group.currencySymbol : 2}}</span>
+              <span class="group-page__manage-funds-filler-text">to</span>
+            </div>
+            <div>
+              <md-input-container class="group-page__manage-funds-input-container" md-no-float>
+                <input placeholder="XX.XX"
+                  class="group-page__manage-funds-input"
+                  type="number"
+                  step="any"
+                  ng-model="formData.newBalance"
+                  ng-change="normalizeNewBalance()"
+                  ng-keypress="normalizeNewBalance()"
+                >
+              </md-input-container>
+              <span class="group-page__manage-funds-total-label">total</span>
+            </div>
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </md-dialog-content>
+
+  <div ng-if="group.groupAccountBalance" class="md-actions group-page__manage-funds-group-account-option" layout="row">
+    <md-checkbox ng-model="formData.fromGroupAccount" ng-change="transferFromGroupAccount()" aria-label="Use group funds">
+      Transfer from group: {{ group.groupAccountBalance | currency : group.currencySymbol : 0 }}
+    </md-checkbox>
+  </div>
+
+  <div class="md-actions" layout="row">
+    <md-button class="group-page__manage-funds-dialog-cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button class="md-raised md-primary group-page__manage-funds-dialog-done-btn" ng-disabled="!isValidForm()" ng-click="createAllocation()" ng-autodisable>done</md-button>
+  </div>
+</md-dialog>

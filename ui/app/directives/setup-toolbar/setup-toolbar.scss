@@ -1,0 +1,34 @@
+.setup-toolbar {
+  background: $cobudget-gunmetal;
+  color: white;
+  height: 55px;
+  padding-right: 10px;
+}
+
+// .setup-toolbar__menu-icon {
+//   @include fontMedLarge;
+//   fill: white;
+// }
+
+.setup-toolbar__login-btn {
+  cursor: pointer;
+}
+
+.setup-toolbar__login-btn-label {
+  @include fontMedium;
+}
+
+.setup-toolbar__person-icon-container {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: white;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.setup-toolbar__person-icon {
+  fill: #D8D8D8;
+}

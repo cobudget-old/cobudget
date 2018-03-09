@@ -1,0 +1,84 @@
+.edit-bucket-page {
+  position: relative;
+  height: 100%;
+  background: white;
+}
+
+// toolbar heading
+
+.edit-bucket-page__toolbar {
+  background: $cobudget-gunmetal !important;
+  color: white;
+}
+
+.edit-bucket-page__cancel-icon {
+  @include fontGrande;
+  fill: white;
+}
+
+.edit-bucket-page__header-text {
+  @include fontLarge;
+}
+
+.edit-bucket-page__done-button-text {
+  margin-right: 5px;
+}
+
+// content
+
+.edit-bucket-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+// help text
+
+.edit-bucket-page__subheader-title {
+  color: $cob-pink;
+  padding: 0 10px;
+}
+
+.edit-bucket-page__subheader-text {
+  padding: 0 10px;
+}
+
+.edit-bucket-page__subheader-text .md-subheader-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// form
+
+.edit-bucket-page__form {
+  padding: 10px;
+}
+
+.edit-bucket-page__form md-input-container {
+  display: block;
+}
+
+.edit-bucket-page__target-optional-text {
+  color: $cobudget-blue;
+}
+
+.edit-bucket-page__description-container {
+  position: relative;
+}
+
+.edit-bucket-page__markdown-link {
+  position: absolute;
+  right: 0px;
+  bottom: 8px;
+  font-size: 12px;
+  color: rgba(0,0,0,0.26);
+}
+
+.edit-bucket-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.edit-bucket-page__confirm-btn {
+  background: $cob-pink !important;
+  color: white;
+}

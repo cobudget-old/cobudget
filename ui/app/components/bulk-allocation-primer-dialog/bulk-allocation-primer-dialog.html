@@ -1,0 +1,39 @@
+<md-dialog class="bulk-allocation-primer-dialog" aria-label="bulk-allocation-primer-dialog">
+  <md-dialog-content class="sticky-container bulk-allocation-primer-dialog__content">
+    <h2 class="bulk-allocation-primer-dialog__header">Give many members funds at once using a CSV file</h2>
+
+    <p class="bulk-allocation-primer-dialog__paragraph">
+      In order to give many members funds and / or invite them at the same time, you'll need to create a csv file to upload. <a target="_blank" href="https://docs.google.com/document/d/1_a2Wn8z27tZl08Tk80akGdScEBkWczS43YM7wlXesQY/edit#heading=h.cpommtpjsm9r" class="bulk-allocation-primer-dialog__link">How do I do that?</a>
+    </p>
+
+    <p class="bulk-allocation-primer-dialog__paragraph">
+      Please upload a csv file with 2 columns (no headings), with email addresses in the first column, and an amount that you want to <b>ADD</b> to their account in the second column. Check out the example below.
+    </p>
+
+    <img class="bulk-allocation-primer-dialog__upload-csv-primer-img" src="./img/example-csv.png" alt="example csv" />
+
+    <p class="bulk-allocation-primer-dialog__upload-csv-primer-img-caption">
+      Example spreadsheet
+    </p>
+
+    <p class="bulk-allocation-primer-dialog__paragraph">
+      <b>PS.</b> Don't worry, you'll be able to review and confirm changes before they are applied.
+    </p>
+  </md-dialog-content>
+
+  <div class="md-actions bulk-allocation-primer-dialog__btns" layout="row">
+    <md-button class="bulk-allocation-primer-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+
+    <md-button class="bulk-allocation-primer-dialog__ok-btn" ng-click="openCSVUploadDialog()">ok, select file</md-button>
+
+    <div upload-button
+      class="bulk-allocation-primer-dialog__hidden-btn"
+      url="{{ uploadPath() }}"
+      param="csv"
+      accept="text/csv"
+      on-success="onCSVUploadSuccess(response)"
+      on-complete="onCSVUploadCompletion()"
+      on-error="onCSVUploadError(response)"
+    ></div>
+  </div>
+</md-dialog>

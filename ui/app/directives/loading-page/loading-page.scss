@@ -1,0 +1,36 @@
+// loading-bar
+
+.loading-page {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+}
+
+.loading-page__msg {
+  margin-bottom: 20px;
+}
+
+.loading-page__load-bar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+md-progress-circular path {
+    stroke: $cob-cyan;
+}
+
+md-progress-circular .md-inner .md-left .md-half-circle {
+  border-left-color: $cob-cyan !important;
+}
+
+md-progress-circular .md-inner .md-right .md-half-circle {
+  border-right-color: $cob-cyan !important;
+}
+
+md-progress-circular .md-inner .md-left .md-half-circle,
+md-progress-circular .md-inner .md-right .md-half-circle {
+  border-top-color: $cob-cyan !important;
+}

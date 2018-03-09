@@ -1,0 +1,54 @@
+.admin-page__toolbar {
+  background: $cobudget-gunmetal !important;
+}
+
+.admin-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.admin-page__form-btn {
+  background: $cob-pink !important;
+  margin: 20px 0;
+  padding-left: 3px;
+}
+
+.admin-page__group-options {
+  margin-top: 40px;
+}
+
+.admin-page__group-name {
+  display: block;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.admin-page__group-list-subheader {
+  color: $cob-pink;
+  padding-left: 10px;
+}
+
+.admin-page__form {
+  padding-left: 10px;
+}
+
+.admin-page__input {
+  padding-left: 0;
+  min-height: 50px;
+}
+
+.admin-page__input-help-text {
+  color: rgba(0,0,0,0.54);
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 3px;
+}
+
+.admin-page__description-markdown-link {
+  font-size: 13px;
+  color: rgba(0,0,0,0.35);
+  position: absolute;
+  right: 0px;
+}

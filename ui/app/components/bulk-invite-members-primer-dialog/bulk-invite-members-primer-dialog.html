@@ -1,0 +1,43 @@
+<md-dialog class="bulk-invite-members-primer-dialog" aria-label="bulk-invite-members-primer-dialog">
+  <md-dialog-content class="sticky-container bulk-invite-members-primer-dialog__content">
+    <h2 class="bulk-invite-members-primer-dialog__header">Invite many members at once using a CSV file</h2>
+
+    <p class="bulk-invite-members-primer-dialog__paragraph">
+      In order to invite many members at the same time, you'll need to create a csv file to upload. <a target="_blank" href="https://docs.google.com/document/d/1_a2Wn8z27tZl08Tk80akGdScEBkWczS43YM7wlXesQY/edit#heading=h.cpommtpjsm9r" class="bulk-invite-members-primer-dialog__link">How do I do that?</a>
+    </p>
+
+    <p class="bulk-invite-members-primer-dialog__paragraph">
+      Please upload a csv file with 1 column (no heading), with the email addresses of the members you want to invite. Check out the example below.
+    </p>
+
+    <img class="bulk-invite-members-primer-dialog__upload-csv-primer-img" src="./img/example-members-csv.png" alt="example csv" />
+
+    <p class="bulk-invite-members-primer-dialog__upload-csv-primer-img-caption">
+      Example spreadsheet
+    </p>
+
+    <p class="bulk-invite-members-primer-dialog__paragraph">
+      If you want to add many members and give them funds at the same time,  <a href="" class="bulk-invite-members-primer-dialog__link" ng-click="redirectToManageGroupFundsPage()">click here.</a>
+    </p>
+
+    <p class="bulk-invite-members-primer-dialog__paragraph">
+      <b>PS.</b> Don't worry, you'll be able to review and confirm changes before they are applied.
+    </p>
+  </md-dialog-content>
+
+  <div class="md-actions bulk-invite-members-primer-dialog__btns" layout="row">
+    <md-button class="bulk-invite-members-primer-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+
+    <md-button class="bulk-invite-members-primer-dialog__ok-btn" ng-click="openCSVUploadDialog()">ok, select file</md-button>
+
+    <div upload-button
+      class="bulk-invite-members-primer-dialog__hidden-btn"
+      url="{{ uploadPath() }}"
+      param="csv"
+      accept="text/csv"
+      on-success="onCSVUploadSuccess(response)"
+      on-complete="onCSVUploadCompletion()"
+      on-error="onCSVUploadError(response)"
+    ></div>
+  </div>
+</md-dialog>

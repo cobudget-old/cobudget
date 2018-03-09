@@ -1,0 +1,434 @@
+.landing-page {
+  width: 100%;
+  background: white;
+  height: auto;
+}
+
+.landing-page__top-content-container {
+  position: relative;
+}
+
+.landing-page__top-content {
+  margin: 150px auto 20px;
+  z-index: 2;
+}
+
+// mobile preview
+
+.landing-page__mobile-preview {
+  position: relative;
+}
+
+.landing-page__smartphone-img {
+  width: 600px;
+}
+
+// form
+
+.landing-page__logo {
+  max-width: 300px;
+  margin-bottom: 15px;
+  margin-left: -13px;
+}
+
+.landing-page__beta {
+  font-size: 14px;
+  margin-left: -10px;
+  margin-top: 5px;
+}
+
+.landing-page__form-header {
+  font-size: 94px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  line-height: 90px;
+  font-weight: 100;
+}
+
+.landing-page__form-subheader {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.landing-page__form-subheader-faded {
+  color: #AEB0B3;
+}
+
+.landing-page__form-container {
+  width: 530px;
+}
+
+.landing-page__form {
+  width: 100%;
+}
+
+.landing-page__input-container {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 5px;
+  display: inline;
+}
+
+.landing-page__email-field {
+  font-size: 20px;
+  display: inline;
+  // margin: 0 auto;
+  border: 2px solid #B5B8BB;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background: inherit;
+  font-weight: 400;
+  text-align: center;
+  width: 220px;
+  margin-bottom: 5px;
+  margin-top: 40px;
+}
+
+.landing-page__email-field:focus {
+  outline: none;
+}
+
+.landing-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+
+.landing-page__beta-text {
+  margin-bottom: 5px;
+  color: $grey-on-white;
+}
+
+.landing-page__signin-text {
+  margin-top: 5px;
+  color: $grey-on-white;
+  font-size: 12px;
+}
+
+.landing-page__signin-text a {
+  cursor: pointer;
+}
+
+.landing-page__submit-btn {
+  font-size: 16px;
+  font-weight: 600;
+  background: $cob-pink !important;
+  min-height: 37px;
+  margin-left: 0;
+  padding: 14px 32px;
+}
+
+// virtual tour dialog
+
+.landing-page__virtual-tour-link {
+  display: block;
+  font-size: 14px;
+  color: #939699;
+  margin-top: 7px;
+  font-weight: 500;
+}
+
+.landing-page__virtual-tour-link:focus {
+  outline: none;
+}
+
+.landing-page__virtual-tour-dialog {
+  width: 80%;
+}
+
+.landing-page__video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.landing-page__video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1140px) {
+  .landing-page__smartphone-img {
+    width: 450px;
+  }
+}
+
+// mobile
+
+@media (max-width: 960px) {
+  .landing-page__mobile-preview {
+    display: none;
+  }
+
+  .landing-page-toolbar__logo-link {
+    display: none;
+  }
+
+  .landing-page-toolbar__logo-link-buffer {
+    display: none;
+  }
+}
+
+@media (min-width: 960px) {
+  .landing-page__logo, .landing-page__beta {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .landing-page__top-content {
+    margin-top: 100px;
+  }
+
+  .landing-page__form-header {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}
+
+@media (max-height: 420px) {
+  .landing-page {
+    padding-top: 50px;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .landing-page__menu {
+    display: block;
+  }
+
+  .landing-page__header-btns {
+    display: none;
+  }
+
+  .landing-page__header-separator {
+    display: flex;
+  }
+
+  .landing-page__menu {
+    margin-left: 20px;
+  }
+
+  .landing-page__menu-icon {
+    fill: #ACACAC;
+  }
+
+  .landing-page__form-container {
+    width: 300px;
+  }
+}
+
+// about section
+
+.landing-page__about-section {
+  position: relative;
+  background: white;
+  height: auto;
+  background-color: #F2F2F2;
+  margin-top: 100px;
+  padding: 50px 0;
+}
+
+.landing-page__about-section-content {
+  max-width: 850px;
+  margin: 60px auto 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.landing-page__about-section-header-text {
+  text-align: center;
+  font-size: 94px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+  line-height: 90px;
+  font-weight: 100;
+}
+
+.landing-page__about-section-subheader-text {
+  font-weight: 300;
+  font-size: 20px;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.landing-page__about-section-video {
+  margin: 50px 0;
+}
+
+.landing-page__about-section-btn {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: $cob-pink !important;
+  min-height: 37px;
+  margin-left: 0;
+  padding: 14px 32px;
+  margin-top: 30px;
+}
+
+.landing-page__about-section-img {
+  width: 400px;
+  margin-right: 30px;
+}
+
+.landing-page__about-section-img-greaterthan {
+  width: 600px;
+  margin-right: 30px;
+}
+
+.landing-page__about-section-greaterthan {
+  margin-top: 100px;
+}
+
+.landing-page__about-section-header-second-text {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+  line-height: 40px;
+  font-weight: 100;
+}
+
+.landing-page__about-section-subheader-text-starting {
+  margin-top: 100px;
+}
+
+@media (max-width: 960px) {
+  .landing-page__about-section-img {
+    width: 100%;
+  }
+
+  .landing-page__about-section-header-text {
+    font-size: 50px;
+    line-height: 50px;
+  }
+
+  .landing-page__about-section-img-greaterthan {
+    margin-bottom: 30px;
+    width: 300px;
+  }
+}
+
+// resources section
+.landing-page__resources-section {
+  position: relative;
+  background: white;
+  height: auto;
+  padding: 50px 0;
+}
+
+.landing-page__resources-section-content {
+  max-width: 1050px;
+  margin: 60px auto 30px;
+  padding: 30px;
+  // outline: 2px solid $cob-pink;
+}
+
+.landing-page__resources-section-header-text {
+  text-align: center;
+  font-size: 94px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+  line-height: 90px;
+  font-weight: 100;
+}
+
+.landing-page__resources-section-subheader-text {
+  font-weight: 300;
+  font-size: 42px;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.landing-page__resources-section-subheader-text a {
+  text-decoration: none;
+}
+
+.landing-page__resources-section-text {
+  font-weight: 300;
+  font-size: 20px;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.landing-page__resources-section-text-blockquote {
+  font-size: 42px;
+}
+
+.landing-page__resources-section-text-blockquote cite{
+  font-size: 20px;
+}
+
+.landing-page__resources-section-btn {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: $cob-pink !important;
+  min-height: 37px;
+  margin-left: 0;
+  padding: 14px 32px;
+  margin-top: 30px;
+}
+
+.landing-page__resources-section-img-1 {
+  width: 500px;
+  margin: 20px 30px 0 0;
+}
+
+.landing-page__resources-section-img-2 {
+  width: 500px;
+  margin: 20px 0 0 30px;
+}
+
+.landing-page__resources-section-testimonial {
+  margin-top: 100px;
+}
+
+.landing-page__resources-section-testimonial-img {
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+@media (max-width: 960px) {
+  .landing-page__resources-section-img-1, .landing-page__resources-section-img-2 {
+    display: none;
+  }
+
+  .landing-page__resources-section-header-text {
+    font-size: 50px;
+    line-height: 50px;
+  }
+
+  .landing-page__resources-section-text-blockquote {
+    font-size: 22px;
+  }
+
+  .landing-page__resources-section-text-blockquote cite{
+    font-size: 12px;
+  }
+}
+
+// greaterthan section
+
+.landing-page__greaterthan-section {
+  position: relative;
+  background: white;
+  height: auto;
+  background-color: #F2F2F2;
+  margin-top: 100px;
+  padding: 50px 0;
+}
+
+.landing-page__greaterthan-section-content {
+  max-width: 850px;
+  margin: 60px auto 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}

@@ -1,0 +1,51 @@
+<md-card class="bucket-page-progress-card">
+  <md-card-content class="bucket-page-progress-card__content">
+    <div class="bucket-page-progress-card__top">
+      <div layout="row" layout-align="start center" class="bucket-page-progress-card__progress-header">
+        <img src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-progress-card__progress-header-icon"/>
+        <span class="bucket-page-progress-card__progress-header-text">Progress</span>
+      </div>
+
+      <div class="bucket-page-progress-card__progress-bar-container">
+        <div class="bucket-page-progress-card__progress-bar-primary" style="width: {{ bucket.percentContributedByOthers(currentUser) }}%"></div>
+        <div class="bucket-page-progress-card__progress-bar-secondary" style="width: {{ bucket.percentContributedByOthers(currentUser) + bucket.percentContributedByUser(currentUser) + percentContributed() }}%"></div>
+      </div>
+
+      <div layout="row" class="bucket-page-progress-card__progress-info" layout-align="start center">
+        <div class="bucket-page-progress-card__progress-value-container">
+          <span class="bucket-page-progress-card__progress-amount">{{ bucket.numOfContributors }}</span>
+          <span class="bucket-page-progress-card__progress-unit">funders</span>
+        </div>
+
+        <div class="bucket-page-progress-card__progress-value-container">
+          <span class="bucket-page-progress-card__progress-amount">{{ totalAmountFunded() | currency : group.currencySymbol : 0 }}</span>
+          <span class="bucket-page-progress-card__progress-unit">funded of {{ bucket.target | currency : group.currencySymbol : 0 }}</span>
+        </div>
+      </div>
+    </div>
+
+    <md-divider></md-divider>
+
+
+    <form novalidate class="bucket-page-progress-card__fund-form" ng-if="membership.balance > 0" name="fundForm">
+      <div class="bucket-page-progress-card__input-container">
+        <label class="bucket-page-progress-card__input-label" for="amount"><b>Fund Bucket</b> (you have <b class="bucket-page-progress-card__personal-funds-left">{{ membership.balance - newContribution.amount | currency : group.currencySymbol : 0 }}</b> left)</label>
+        <input class="bucket-page-progress-card__text-input"
+          type="number"
+          name="amount"
+          required
+          min="1"
+          pattern="[0-9]*"
+          ng-model="newContribution.amount"
+          ng-change="normalizeContributionAmount()"
+          ng-disabled="group.fundingFreeze"
+          placeholder="10, 100, 500"
+          only-digits
+        />
+        <p class="bucket-page-progress-card__freeze-msg" ng-if="group.fundingFreeze"><i>Funding in this group is off</i></p>
+      </div>
+
+      <md-button class="md-raised md-primary bucket-page-progress-card__fund-btn" ng-click='submitContribution()' ng-disabled="fundForm.$pristine || fundForm.$invalid" ng-autodisable>Fund Now</md-button>
+    </form>
+  </md-card-content>
+</md-card>

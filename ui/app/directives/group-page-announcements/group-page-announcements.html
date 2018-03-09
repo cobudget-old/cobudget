@@ -1,0 +1,39 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 group-page__announcements" md-component-id="right">
+  <md-toolbar class="group-page__announcements-toolbar">
+    <div layout="column" layout-align="space-between start" class="group-page__user-avatar-container">
+      <div layout="row" layout-align="start center">
+        <div class="group-page__announcements-header">
+          What's New
+        </div>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <md-divider></md-divider>
+
+  <md-content class="group-page__announcements-content">
+
+    <md-card
+    class="group-page-announcements__card"
+    ng-repeat="announcement in announcements">
+      <div layout="row" class="group-page-announcements__card-container"
+      ng-class="announcement.seen ? 'group-page-announcements__card-container' : 'group-page-announcements__card-container-unread'">
+        <div layout="column" class="group-page-announcements__card-content">
+          <p class="group-page-announcements__card-date">{{announcement.createdAt | exactDateNoWeek}}</p>
+          <h2 class="group-page-announcements__card-header">{{announcement.title}}</h2>
+
+          <p class="group-page-announcements__card-description">
+            {{announcement.body}}
+          </p>
+
+          <div flex></div>
+
+          <div ng-if="announcement.url" class="group-page-announcements__card-btns" layout="row" layout-align="center center">
+            <span flex></span>
+            <md-button class="group-page-announcements__card-btn" href="{{announcement.url}}" target="_blank">learn more</md-button>
+          </div>
+        </div>
+      </div>
+    </md-card>
+  </md-content>
+</md-sidenav>

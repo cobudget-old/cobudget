@@ -1,0 +1,49 @@
+<div class="group-analytics-page" ng-if="authorized && dataLoaded">
+  <a href="" ng-click="back()">back to group page!</a>
+
+  <div class="group-analytics-page__chart-container">
+    <h2>cumulative confirmed member count per day</h2>
+    <canvas
+      class="chart chart-line group-analytics-page__chart"
+      chart-data="[data.cumulative_confirmed_member_count_per_day.y]"
+      chart-labels="data.cumulative_confirmed_member_count_per_day.x"
+      chart-series="['cumulative confirmed member count per day']"
+    ></canvas>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="group-analytics-page__chart-container">
+    <h2>total contribution amount per day</h2>
+    <canvas
+      class="chart chart-line group-analytics-page__chart"
+      chart-data="[data.contribution_amounts_per_day.y]"
+      chart-labels="data.contribution_amounts_per_day.x"
+      chart-series="['total contribution amount per day']"
+    ></canvas>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="group-analytics-page__chart-container">
+    <h2>total allocation amounts per day</h2>
+    <canvas
+      class="chart chart-line group-analytics-page__chart"
+      chart-data="[data.allocation_amounts_per_day.y]"
+      chart-labels="data.allocation_amounts_per_day.x"
+      chart-series="['total allocation amounts per day']"
+    ></canvas>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="group-analytics-page__chart-container">
+    <h2>total comments per day</h2>
+    <canvas
+      class="chart chart-line group-analytics-page__chart"
+      chart-data="[data.comment_counts_per_day.y]"
+      chart-labels="data.comment_counts_per_day.x"
+      chart-series="['total comments per day']"
+    ></canvas>
+  </div>
+</div>

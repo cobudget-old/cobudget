@@ -1,0 +1,154 @@
+.review-bulk-invite-members-page {
+  position: relative;
+  background: white;
+  padding-bottom: 25px;
+}
+
+// header
+
+.review-bulk-invite-members-page__header {
+  height: 138px;
+  background: rgba(36,50,57,1);
+  padding-bottom: 25px;
+}
+
+.review-bulk-invite-members-page__header-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.review-bulk-invite-members-page__upload-icon-container {
+  border: 4px solid white;
+  border-radius: 50%;
+  margin-right: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+.review-bulk-invite-members-page__upload-icon {
+  position: relative;
+  top: 3px;
+  fill: white;
+}
+
+.review-bulk-invite-members-page__upload-pending-icon {
+  fill: white;
+  margin-right: 10px;
+  -webkit-animation: spin 1s linear infinite;
+  -webkit-animation-direction: reverse;
+  -moz-animation: spin 1s linear infinite;
+  -moz-animation-direction: reverse;
+  animation: spin 1s linear infinite;
+  animation-direction: reverse;
+}
+
+.review-bulk-invite-members-page__upload-complete-icon {
+  fill: white;
+  margin-right: 10px;  
+}
+
+// content
+
+.review-bulk-invite-members-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+// text overview
+
+.review-bulk-invite-members-page__subheader {
+  font-weight: normal;
+  font-size: 22px;
+  margin-top: 35px;
+}
+
+.review-bulk-invite-members-page__text-overview {
+  color: #6E6E6E;
+  font-size: 15px;
+  line-height: 18px;
+  margin-top: -7px;
+  margin-bottom: 35px;
+}
+
+// people + status list
+
+.review-bulk-invite-members-page__list-header {
+  font-weight: 500;
+  font-size: 19px;
+}
+
+.review-bulk-invite-members-page__list-row {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.review-bulk-invite-members-page__top-divider {
+  margin-bottom: 23px;
+  margin-top: 7px;
+}
+
+.review-bulk-invite-members-page__name-and-email {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.review-bulk-invite-members-page__invitation-text {
+  font-size: 15px;
+}
+
+.review-bulk-invite-members-page__item-icon {
+  fill: #757575;
+  margin-right: 7px;
+}
+
+.review-bulk-invite-members-page__bottom-divider {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.review-bulk-invite-members-page__upload-member-status-icon {
+  margin-right: 10px;
+  position: relative;
+  bottom: 1px;
+}
+
+.review-bulk-invite-members-page__upload-member-pending-icon {
+  fill: #757575;
+  -webkit-animation: spin 1s linear infinite;
+  -webkit-animation-direction: reverse;
+  -moz-animation: spin 1s linear infinite;
+  -moz-animation-direction: reverse;
+  animation: spin 1s linear infinite;
+  animation-direction: reverse;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(359deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(359deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(359deg); transform:rotate(359deg); } }
+
+.review-bulk-invite-members-page__upload-member-complete-icon {
+  fill: $cobudget-green;
+}
+
+.review-bulk-invite-members-page__upload-member-skipped-icon {
+  fill: #FEC300;
+}
+
+// bottom btns
+
+.review-bulk-invite-members-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.review-bulk-invite-members-page__confirm-btn {
+  background: #4A90E2 !important;
+  color: white;
+}
+
+.review-bulk-invite-members-page__try-again-btn, .review-bulk-invite-members-page__cancel-btn {
+  color: #7B7B7B;
+}

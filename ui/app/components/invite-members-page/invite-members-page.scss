@@ -1,0 +1,122 @@
+.invite-members-page {
+  position: relative;
+  height: 100%;
+  background: white;
+}
+
+// header
+
+.invite-members-page__header {
+  height: 138px;
+  background: $cobudget-gunmetal;
+  padding-bottom: 25px;
+}
+
+.invite-members-page__header-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.invite-members-page__money-icon {
+  margin-right: 15px;
+  fill: white;
+}
+
+// content
+
+.invite-members-page__content {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.invite-members-page__subheader {
+  font-weight: normal;
+  font-size: 18px;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+// invite member form
+
+.invite-members-page__details-form {
+  position: relative;
+  max-width: 640px;
+  margin-top: 30px;
+}
+
+.invite-members-page__input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.invite-members-page__input-label {
+  display: block;
+  margin-bottom: 15px;
+  color: $grey-on-white;
+  font-size: 15px;
+}
+
+.invite-members-page__text-input {
+  display: block;
+  border: 1px solid $grey-on-white;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 2px;
+  background: inherit;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.invite-members-page__text-input:focus {
+  outline: none;
+}
+
+.invite-members-page__text-input.ng-dirty {
+  border-color: $cobudget-light-blue;
+}
+
+.invite-members-page__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+
+// bulk invite btn
+
+.invite-members-page__bulk-invite-btn-container {
+  margin-top: 25px;
+  margin-bottom: 40px;
+  border: 1px solid #DFDFDF !important;
+  box-shadow: none;
+  border-radius: 5px;
+  font-size: 13px;
+  background-color: #F8F8F8;
+  padding: 10px;
+}
+
+.invite-members-page__bulk-invite-btn {
+  text-decoration: none;
+  color: #50A3E8;
+  font-weight: 500;
+}
+
+// btns
+
+.invite-members-page__btn {
+  margin: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+.invite-members-page__confirm-btn {
+  background: $cob-pink !important;
+  color: white;
+}
+
+.invite-members-page__cancel-btn {
+  color: #7B7B7B;
+}

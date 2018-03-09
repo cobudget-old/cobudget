@@ -1,0 +1,24 @@
+<md-card class="bucket-page__header-card">
+  <md-card-content class="bucket-page__meta">
+    <div class="bucket-page__title">{{ bucket.name }}</div>
+    <div class="bucket-page__author">created by {{ bucket.authorName }} {{ bucket.createdAt | timeFromNowInWords }} ago</div>
+  </md-card-content>
+
+  <md-divider></md-divider>
+
+  <md-card-content class="bucket-page__description">
+    <div layout="row" layout-align="start center" ng-if="bucket.target > 0">
+      <img src="./img/bucket_empty.svg" alt="bucket" class="bucket-page-header-card__icon"/>
+      <span class="bucket-page__funding-target-text">Funding Target : {{ bucket.target | currency : group.currencySymbol : 0  }}</span>
+    </div>
+
+    <div layout="row" layout-align="start center" ng-if="bucket.isFunded() || bucket.isComplete()" class="bucket-page-header-card__accepted-funding-container">
+      <img src="./img/bucket_full.svg" alt="bucket" class="bucket-page-header-card__icon"/>
+      <span class="bucket-page__accepted-funding-text">Accepted Funding : {{ bucket.totalContributions | currency : group.currencySymbol : 0  }}</span>
+    </div>
+
+    <div class="bucket-page__description-text-container">
+      <p class="bucket-page__description-text" marked="bucket.description"></p>
+    </div>
+  </md-card-content>
+</md-card>

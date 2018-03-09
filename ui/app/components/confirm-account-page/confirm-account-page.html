@@ -1,0 +1,52 @@
+<div class="confirm-account-page">
+  <setup-toolbar></setup-toolbar>
+
+  <img class="confirm-account-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
+
+  <md-content layout-padding class="confirm-account-page__content">
+    <md-card class="confirm-account-page__content-card">
+      <md-card-content>
+        <div class="confirm-account-page__person-icon-container" layout="column" layout-align="center center">
+          <ng-md-icon icon="person"
+            size="60"
+            class="confirm-account-page__person-icon"
+            layout="column"
+            layout-align="center center"
+          ></ng-md-icon>
+        </div>
+
+        <h2 class="confirm-account-page__logo-subheader">Let's set up your account</h2>
+        <form novalidate class="confirm-account-page__form" name="newUserForm" ng-submit="newUserForm.$valid && confirmAccount(formData)" ng-autodisable>
+
+          <div class="confirm-account-page__input-container">
+            <label>Email</label>
+            <input disabled class="confirm-account-page__input-field" name="email" type="text" ng-model="email">
+          </div>
+
+          <div class="confirm-account-page__input-container">
+            <label>Name</label>
+            <input required class="confirm-account-page__input-field" required name="name" type="text" ng-model="formData.name" placeholder="your full name" autocomplete="off">
+            <div ng-if="newUserForm.name.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Name is required.</div>
+          </div>
+
+          <div class="confirm-account-page__input-container">
+            <label>Password</label>
+            <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="create password" autocomplete="off">
+            <div ng-if="newUserForm.password.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Password is required.</div>
+            <div ng-if="newUserForm.password.$error.minlength && newUserForm.$submitted" class="confirm-account-page__input-error">Password must be longer than 8 characters.</div>
+          </div>
+
+          <div class="confirm-account-page__input-container">
+            <label>Confirm Password</label>
+            <input class="confirm-account-page__input-field" required type="password" ng-model="formData.passwordConfirm" placeholder="confirm password" autocomplete="off">
+            <div ng-if="formData.password != formData.passwordConfirm && formData.passwordConfirm.length" class="confirm-account-page__input-error">Passwords don't match.</div>
+          </div>
+
+          <div class="confirm-account-page__input-container">
+            <md-button class="md-raised md-primary confirm-account-page__submit-btn" type="submit">next</md-button>
+          </div>
+        </form>
+      </md-card-content>
+    </md-card>
+  </md-content>
+</div>

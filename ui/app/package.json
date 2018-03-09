@@ -1,0 +1,13 @@
+{
+  "browserify": {
+    "transform": [
+      ["coffeeify", { "extension": ".coffee" } ],
+      ["browserify-ngannotate", { "ext": [ ".js", ".coffee" ] } ],
+      "babelify",
+      "envify",
+      ["evalify", { "files": ["app/configs/app.js", "node_modules/app/configs/app.js"] } ],
+      ["txtify2", { "extensions": [ "html" ] } ],
+      "concatenify"
+    ]
+  }
+}

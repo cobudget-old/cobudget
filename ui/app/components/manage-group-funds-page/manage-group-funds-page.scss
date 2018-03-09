@@ -1,0 +1,149 @@
+.manage-group-funds-page {
+  position: relative;
+  height: 100%;
+  background: white;
+}
+
+// header
+
+.manage-group-funds-page__header {
+  height: 138px;
+  background: $cobudget-gunmetal;
+  padding-bottom: 25px;
+}
+
+.manage-group-funds-page__header-text {
+  color: white;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.manage-group-funds-page__money-icon {
+  border: 2px solid white;
+  border-radius: 50%;
+  margin-right: 15px;
+  fill: white;
+}
+
+.manage-group-funds-page__money-icon svg {
+  position: relative;
+  left: 1px;
+}
+
+// content
+
+.manage-group-funds-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.manage-group-funds-page__subheader {
+  font-weight: normal;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+// btns
+
+.manage-group-funds-page__btns-container {
+  padding-top: 30px;
+}
+
+.manage-group-funds-page__btn {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.manage-group-funds-page__btn-icon {
+  fill: $cob-cyan;
+  border: 3px solid $cob-cyan;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.manage-group-funds-page__btn-label {
+  color: $cob-cyan;
+  font-weight: 700;
+  font-size: 18px;
+  margin-left: 15px;
+}
+
+@media (max-width: 525px) {
+
+  .manage-group-funds-page__header-text {
+    font-size: 20px;
+  }
+
+  .manage-group-funds-page__subheader {
+    font-size: 16px;
+  }
+
+  .manage-group-funds-page__btns-container {
+    padding-bottom: 40px;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .manage-group-funds-page__btn-container {
+    width: 80%;
+  }
+
+  .manage-group-funds-page__upload-btn-container {
+    border-bottom: 1px solid #DCDCDC;
+    padding-bottom: 5px;
+  }
+
+}
+
+
+@media (min-width: 525px) {
+
+  .manage-group-funds-page__upload-btn-container {
+    border-right: 1px solid #DCDCDC;
+    margin-right: 30px;
+    padding-right: 15px;
+  }
+
+  .manage-group-funds-page__btns-container {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+}
+
+.manage-group-funds-page__btn-info {
+  color: #A2A2A2;
+  @include fontMedium;
+}
+
+.manage-group-funds-page__safari-help {
+  font-size: 12px;
+}

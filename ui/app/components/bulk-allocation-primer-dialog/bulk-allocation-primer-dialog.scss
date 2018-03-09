@@ -1,0 +1,69 @@
+// upload csv primer dialog
+
+.bulk-allocation-primer-dialog {
+  background: #FAFAFA;
+}
+
+.bulk-allocation-primer-dialog__content {
+  padding: 30px !important;
+}
+
+.bulk-allocation-primer-dialog__header {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.bulk-allocation-primer-dialog__paragraph {
+  font-size: 15px;
+  line-height: 21px;
+}
+
+.bulk-allocation-primer-dialog__link {
+  text-decoration: none;
+  color: #50A3E8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bulk-allocation-primer-dialog__upload-csv-primer-img {
+  width: 275px;
+  margin: 0 auto;
+  margin-top: 30px;
+  display: block;
+}
+
+@media (max-width: 450px) {
+  .bulk-allocation-primer-dialog__upload-csv-primer-img {
+    width: 200px;
+  }
+}
+
+.bulk-allocation-primer-dialog__upload-csv-primer-img-caption {
+  font-size: 14px;
+  color: #C5C5C5;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.bulk-allocation-primer-dialog__btns {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
+
+.bulk-allocation-primer-dialog__ok-btn {
+  color: #50A3E8;
+}
+
+.bulk-allocation-primer-dialog__cancel-btn {
+  color: #B9B9B9;
+}
+
+.bulk-allocation-primer-dialog__hidden-btn {
+  display: none;
+}
+
+.bulk-allocation-primer-dialog__error {
+  font-size: 14px;
+}

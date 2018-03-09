@@ -1,0 +1,15 @@
+/node_modules
+/build
+.tmp
+.sass-cache
+.DS_Store
+.idea
+!config/default.coffee
+phantomjsdriver.log
+*.log
+*.swp
+/config
+/app/assets/CNAME
+.ruby-version
+yarn.lock
+.env

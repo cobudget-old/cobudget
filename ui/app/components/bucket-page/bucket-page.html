@@ -1,0 +1,30 @@
+<div class="bucket-page" ng-if="authorized">
+  <group-page-toolbar></group-page-toolbar>
+
+  <md-content class="bucket-page__content">
+    <md-button class="bucket-page__group-btn" ng-click="back()">{{ group.name }}</md-button>
+
+    <div layout="row" layout-align="start start" class="bucket-page__desktop-layout-container">
+      <div layout="column" layout-align="center center" class="bucket-page__left-column">
+        <bucket-page-header-card></bucket-page-header-card>
+        <bucket-page-activity-card></bucket-page-activity-card>
+      </div>
+
+      <div layout="column" layout-align="center center" class="bucket-page__right-column">
+        <bucket-page-manage-card ng-if="userCanManageBucket() && !bucket.isCompleted()"></bucket-page-manage-card>
+        <bucket-page-status-card></bucket-page-status-card>
+        <bucket-page-progress-card ng-if="bucket.isFunding()"></bucket-page-progress-card>
+        <bucket-page-backers-card ng-if="(bucket.isFunding() || bucket.isFunded() || bucket.isCompleted()) && contributions.length > 0" contributions="contributions" current-user="currentUser" group="group"></bucket-page-backers-card>
+      </div>
+    </div>
+
+    <div layout="column" layout-align="center center" class="bucket-page__mobile-layout-container">
+      <bucket-page-header-card></bucket-page-header-card>
+      <bucket-page-manage-card ng-if="userCanManageBucket() && !bucket.isComplete()"></bucket-page-manage-card>
+      <bucket-page-status-card></bucket-page-status-card>
+      <bucket-page-progress-card ng-if="bucket.isFunding()"></bucket-page-progress-card>
+      <bucket-page-backers-card ng-if="(bucket.isFunding() || bucket.isFunded() || bucket.isCompleted()) && contributions.length > 0" contributions="contributions" current-user="currentUser"></bucket-page-backers-card>
+      <bucket-page-activity-card></bucket-page-activity-card>
+    </div>
+  </md-content>
+</div>

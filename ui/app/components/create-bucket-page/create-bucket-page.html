@@ -1,0 +1,69 @@
+<div class="create-bucket-page">
+  <md-toolbar class="md-whiteframe-z1 create-bucket-page__toolbar" layout-align="column">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+        <ng-md-icon icon="close"
+          class="create-bucket-page__cancel-icon"
+          layout="column"
+          layout-align="center center"
+        ></ng-md-icon>
+      </md-button>
+      <span class="create-bucket-page__header-text">New Bucket</span>
+    </div>
+  </md-toolbar>
+
+  <md-content class="create-bucket-page__content">
+    <div>
+      <h4 class="create-bucket-page__subheader-title">You're about to propose a bucket</h4>
+    </div>
+
+    <div>
+      <p class="create-bucket-page__subheader-text">Members in your group can comment on your bucket, and when you're ready you can request funding.</p>
+    </div>
+
+    <form name="bucketForm" class="create-bucket-page__form" ng-submit="done()">
+      <md-input-container>
+        <label>Bucket name</label>
+        <input required name="name" type="text" ng-model="bucket.name">
+        <div ng-messages="bucketForm.name.$error" ng-if="bucketForm.name.$dirty || formSubmitted">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <div class="create-bucket-page__description-container">
+        <md-input-container>
+          <label>Description</label>
+          <textarea required name="description" ng-model="bucket.description"></textarea>
+          <div ng-messages="bucketForm.description.$error" ng-if="bucketForm.description.$dirty || formSubmitted">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <a class="create-bucket-page__markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
+      </div>
+
+      <md-input-container>
+        <label>Group</label>
+        <md-select required name="groupId" ng-model="bucket.groupId">
+          <md-option required ng-repeat="group in accessibleGroups" ng-value="group.id">
+            {{group.name}}
+          </md-option>
+        </md-select>
+        <div ng-messages="bucketForm.groupId.$error" ng-if="bucketForm.groupId.$dirty || formSubmitted">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Funding Target (required for funding)</label>
+        <input name="target" type="text" ng-model="bucket.target" min="1" only-digits>
+        <div ng-messages="bucketForm.target.$error" ng-if="bucketForm.target.$dirty || formSubmitted">
+          <div ng-message="min">Bucket target must be greater than zero</div>
+        </div>
+      </md-input-container>
+
+      <div layout="column" layout-align="center space-between">
+        <md-button type="submit" class="create-bucket-page__btn create-bucket-page__confirm-btn" ng-disabled="!bucketForm.$dirty || bucketForm.$submitted">Create bucket</md-button>
+      </div>
+    </form>
+  </md-content>
+</div>

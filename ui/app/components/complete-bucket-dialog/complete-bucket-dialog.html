@@ -1,0 +1,32 @@
+<md-dialog aria-label="complete bucket dialog" class="complete-bucket-dialog">
+  <md-dialog-content class="sticky-container">
+
+    <div class="complete-bucket-dialog__header" layout="column" layout-align="center center">
+      <ng-md-icon icon="warning"
+        layout="column"
+        layout-align="center center"
+        ng-class="bucket.isFunding() ? 'complete-bucket-dialog__red-warning-icon' : 'complete-bucket-dialog__yellow-warning-icon'"
+        size="35"
+      ></ng-md-icon>
+
+      <div class="complete-bucket-dialog__header-text">
+        Have you completed this bucket?
+      </div>
+    </div>
+
+    <div class="complete-bucket-dialog__details-container">
+      <div class="complete-bucket-dialog__final-caution">
+        Caution: This cannot be undone
+      </div>
+    </div>
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button class="complete-bucket-dialog__btn complete-bucket-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+    <md-button
+      class="md-raised complete-bucket-dialog__btn complete-bucket-dialog__proceed-btn"
+      ng-class="bucket.isFunding() ? 'complete-bucket-dialog__red-proceed-btn' : 'complete-bucket-dialog__yellow-proceed-btn'"
+      ng-click="proceed()"
+    >yes, this bucket is complete</md-button>
+  </div>
+</md-dialog>

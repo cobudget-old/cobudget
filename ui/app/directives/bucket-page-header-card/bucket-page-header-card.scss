@@ -1,0 +1,60 @@
+// header card meta
+
+.bucket-page__header-card {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.bucket-page__meta {
+  color: black;
+  padding: 12px 22px;
+}
+
+.bucket-page__title {
+  @include fontGrande;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.bucket-page__author {
+  font-size: 15px;
+  color: #838383;
+}
+
+// header card description
+
+.bucket-page-header-card__icon {
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+}
+
+.bucket-page__funding-target-text {
+  color: $cob-pink;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.bucket-page-header-card__accepted-funding-container {
+  margin-top: 7px;
+}
+
+.bucket-page__accepted-funding-text {
+  color: $cob-green;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.bucket-page__description {
+  padding: 12px 22px;
+}
+
+.bucket-page__description-text {
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  @include wordWrap;
+  @include markdown;
+}

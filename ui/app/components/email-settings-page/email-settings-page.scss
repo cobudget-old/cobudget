@@ -1,0 +1,60 @@
+.email-settings-page {
+  position: relative;
+  height: 100%;
+  background: white;
+}
+
+// toolbar heading
+
+.email-settings-page__toolbar {
+  background: $cobudget-gunmetal !important;
+  color: white;
+}
+
+.email-settings-page__cancel-icon {
+  @include fontGrande;
+  fill: white;
+}
+
+.email-settings-page__header-text {
+  @include fontLarge;
+}
+
+// settings
+
+.email-settings-page__form {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.email-settings-page__content {
+  padding: 15px;
+}
+
+.email-settings-page__checkbox.md-checked .md-icon {
+  background-color: $grey-on-white;
+}
+
+.email-settings-page__email-setting {
+  font-size: 18px;
+  height: 42px !important;
+}
+
+.email-settings-page__email-setting-note {
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.email-settings-page__notification-frequency-options {
+  position: relative;
+  bottom: 2px;
+  font-size: 15px;
+  max-width: 300px;
+}
+
+.email-settings-page__save-btn {
+  background: $cob-pink !important;
+  margin: 0 !important;
+  margin-top: 10px !important;
+  width: 100%;
+}

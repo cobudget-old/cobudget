@@ -1,0 +1,101 @@
+$grey-on-grey:  #666;
+$cobudget-blue: #6064FF;
+$cobudget-happy-blue: #00B8D4;
+$cobudget-navy: #3A11B4;
+$cobudget-cyan: #00BCD7;
+$cobudget-light-blue: #3E88E8;
+$cobudget-grey: #BDBDBD;
+$cobudget-orange: #FF8600;
+$cobudget-light-grey: #FAFAFA;
+$cobudget-green: #00DD28;
+$cobudget-lime: #00C504;
+$cobudget-jade: #69D2C7;
+$cobudget-gold: gold;
+$cobudget-whitesmoke: #F6F6F6;
+$cobudget-red: #FF0045;
+$grey-on-white: #767676;
+$cobudget-gunmetal: #1b1b1b;
+$cobudget-dark-grey: #454545;
+$cobudget-pink: #FF85B7;
+
+$cob-yellow: rgb(255,167,38);
+$cob-cyan: #2BABE2;
+$cob-green: rgb(15,157,88);
+$cob-pink: #F50057;
+
+$small-height: 36px;
+$medium-height: 48px;
+$large-height: 60px;
+
+// text
+
+@mixin fontTiny {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+@mixin fontSmall {
+  font-size: 13px;
+  line-height: 15px;
+}
+
+@mixin fontMedium {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@mixin fontMedLarge {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+@mixin fontLarge {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@mixin fontGrande {
+  font-size: 24px;
+  line-height: 27px;
+}
+
+@mixin truncatedText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin wordWrap {
+  word-break:     break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens:    auto;
+  hyphens:         auto;
+}
+
+@mixin markdown {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+// inputs
+
+@mixin cob-std-input {
+  @include fontMedium;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #E4E4E4;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background: inherit;
+  font-weight: 300;
+
+  &:focus {
+    outline: none;
+  }
+}

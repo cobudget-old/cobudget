@@ -1,0 +1,46 @@
+<div class="bucket-page__activity-card-container">
+  <md-card class="bucket-page__activity-card">
+    <md-card-content class="bucket-page__activity-card-content">
+      <div class="bucket-page__activity-header" layout="row">
+        <span>
+          <div layout="column" layout-align="center center">
+            Comments
+          </div>
+        </span>
+        <span flex></span>
+        <span>
+          <ng-md-icon icon="mode_comment"
+            layout="column"
+            layout-align="center center"
+            ng-class="bucket.hasComments() ? 'bucket-page__comment-icon-active' : 'bucket-page__comment-icon-inactive'"
+          ></ng-md-icon>
+          <div class="bucket-page__comment-count" ng-if="bucket.hasComments()">{{ bucket.comments().length }}</div>
+        </span>
+      </div>
+    </md-card-content>
+
+    <md-list class="bucket-page__comment-list">
+      <md-list-item class="bucket-page__comment" ng-repeat="comment in bucket.comments()" layout="column" layout-align="center start">
+        <md-divider></md-divider>
+        <div class="bucket-page__comment-author-name">{{ comment.authorName }}</div>
+        <div class="bucket-page__comment-body" marked="comment.body"></div>
+        <div class="bucket-page__comment-timestamp">{{ comment.createdAt | timeFromNowInWords }} ago</div>
+      </md-list-item>
+    </md-list>
+  </md-card>
+
+  <md-card class="bucket-page__comment-form-card">
+    <form name='commentForm' class="bucket-page__comment-form" ng-submit="createComment()">
+      <md-input-container class="bucket-page__comment-input-container" md-no-float>
+        <textarea type="text" class="bucket-page__comment-input" required placeholder="Ask a question, offer support, give an update..." name="body" ng-model="newComment.body" />
+      </md-input-container>
+
+      <div class="bucket-page__submit-comment-container">
+        <a class="bucket-page__comment-form-markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
+        <md-input-container class="bucket-page__submit-comment-btn-container">
+          <md-button class="md-primary bucket-page__submit-comment-btn" type="submit" ng-disabled="commentForm.$invalid || commentCreated">submit</md-button>
+        </md-input-container>
+      </div>
+    </form>
+  </md-card>
+</div>

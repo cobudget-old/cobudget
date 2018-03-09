@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+- '0.10'
+rvm:
+  - 2.0.0
+before_install: 
+- npm install -g protractor grunt-cli bower mocha
+- bundle install
+- bower install
+before_script:
+- ./bin/copy_environments_for_travis.sh
+- grunt build
+script: 'grunt sauce'
+addons:
+  sauce_connect: true
+cache:
+  bundler: true
+  directories:
+  - node_modules
+  - app/bower_components
+notifications:
+  hipchat:
+    rooms:
+    - secure: m9kN3OYpV5LV3mZTss0VhGdg7widFGz6ZCDzlqylg3uCYaV7Uensic6fijLPeLLaTM0ALgm+NuXVll8lXYhO8gYb++I4OZxvEIfy1mlEC/kxw362MIkiBx0fcORFVmKlOcyQW/FrT4l/JpfLnMm97Ddq1YqXXAg6mcxdxdZT7cM=
+    template: '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}):
+      %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change
+      view</a>)'
+    format: html
+env:
+  global:
+  - secure: bE5AxOCgoO3/VBpj4kMReZrzjfn4+V4A0qpyHGum0TGxMPLCKUZA/07ru6+hsauOUME/8DT+Zr/3q52e8CBT5aQBmOcCkz9JZiM5ONDj/ZXW7sFGUyqZaNpw+uHcLetR8qzx/0V1MjpOde/3lVMWVQSXOD15BmwrtmRnxKr7xVk=
+  - secure: SeK8fz3BY7nnRoMEAL8miEqEX/J6ZGWNbiKgSEPugZ2M4LpERffdkBbMSbLLJgx1d11pl0eYd4ghszLOU7VSzmg366jSFWB54G77xVAcapI0kdN0uY6MNiQgSaRZ+hEWUhU0V4ANVFE4rTxY1otRxqANkmp9QMHkrLXBQU801fc=

@@ -1,0 +1,92 @@
+<div class="analytics-page" ng-if="authorized && dataLoaded">
+
+  <h3>Cumulative data</h3>
+
+  <div class="analytics-page__chart-container">
+    <h2>user invites vs time</h2>
+    <highchart config="chartConfigInvites"></highchart>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div class="analytics-page__chart-container">
+    <h2>group count vs time</h2>
+    <highchart config="chartConfigGroups"></highchart>
+  </div>
+
+  <div class="analytics-page__chart-container">
+    <h2>new buckets count vs time</h2>
+    <highchart config="chartConfigNewBuckets"></highchart>
+  </div>
+
+  <div class="analytics-page__chart-container">
+    <h2>funded buckets count vs time</h2>
+    <highchart config="chartConfigFundedBuckets"></highchart>
+  </div>
+
+  <div class="analytics-page__unconfirmed-user-count-container">
+    <div layout="row" layout-align="left right">
+        <div flex="66">
+          <p>invited users all time: {{ data.user_counts.con + data.user_counts.un }} ({{ data.user_counts.con }} have confirmed)</p>
+          <p>{{ (100 * data.user_counts.con / ( data.user_counts.con + data.user_counts.un )) | number:0 }}% invite acceptance rate total</p>
+          <p>invited users last 7 days: {{ data.user_counts.con_7 + data.user_counts.un_7 }} ({{ data.user_counts.con_7 }} have confirmed)</p>
+          <p>{{ (100 * data.user_counts.con_7 / ( data.user_counts.con_7 + data.user_counts.un_7 )) | number:0 }}% invite acceptance rate last 7 days</p>
+          <p>invited users last 90 days: {{ data.user_counts.con_90 + data.user_counts.un_90 }} ({{ data.user_counts.con_90 }} have confirmed)</p>
+          <p>{{ (100 * data.user_counts.con_90 / ( data.user_counts.con_90 + data.user_counts.un_90 )) | number:0 }}% invite acceptance rate last 90 days</p>
+          <p>{{ data.user_counts.buckets_count }} total buckets proposed by {{ data.user_counts.users_that_proposed_buckets_count }} users</p>
+          <p>{{ 100 * data.user_counts.users_that_proposed_buckets_count / data.user_counts.con | number:0 }}% of confirmed users that have proposed buckets</p>
+          <p>New groups in the last week: {{ data.group_counts.new_group_count_7}}</p>
+          <p>New groups in the last quarter: {{ data.group_counts.new_group_count_90}}</p>
+        </div>
+        <div flex="33">
+          <md-button class="md-raised md-primary" ng-click="adminCSV()">CSV of all admins</md-button>
+        </div>
+    </div>
+  </div>
+
+  <md-divider></md-divider>
+
+  <h3>Group data</h3>
+  <md-table-container>
+    <table md-table multiple ng-model="group">
+      <thead md-head md-order="initialOrder">
+        <tr md-row>
+          <th md-column md-column-filter md-order-by="name">Name</th>
+          <th md-column md-column-filter md-order-by="id">Id</th>
+          <th md-column md-order-by="created_at">Created at</th>
+          <th md-column md-order-by="last_activity_at">Last activity at</th>
+          <th md-column md-order-by="confirmed_member_count">Confirmed member count</th>
+          <th md-column md-order-by="unconfirmed_member_count">Unconfirmed member count</th>
+          <th md-column md-order-by="funded_bucket_count">Funded bucket count</th>
+          <th md-column md-order-by="buckets_last_week">New buckets this week</th>
+          <th md-column md-order-by="buckets_last_quarter">New buckets this quarter</th>
+          <th md-column md-order-by="buckets_all_time">Buckets all time</th>
+          <th md-column md-order-by="total_allocations">Total allocations</th>
+          <th md-column md-order-by="total_in_funded">Total in funded buckets</th>
+          <th md-column md-order-by="users_that_proposed_buckets_percentage">Percent members with buckets</th>
+          <th md-column>Admins</th>
+
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="group in groups | orderBy: initialOrder">
+          <td md-cell><a href="/#/groups/{{group.id}}">{{ group.name }}</a></td>
+          <td md-cell>{{ group.id }}</td>
+          <td md-cell>{{ group.created_at | timeFromNowInWords }}</a></td>
+          <td md-cell>{{ group.last_activity_at | timeFromNowInWords }}</td>
+          <td md-cell>{{ group.confirmed_member_count }}</td>
+          <td md-cell>{{ group.unconfirmed_member_count }}</td>
+          <td md-cell>{{ group.funded_bucket_count }}</td>
+          <td md-cell>{{ group.buckets_last_week }}</td>
+          <td md-cell>{{ group.buckets_last_quarter }}</td>
+          <td md-cell>{{ group.buckets_all_time }}</td>
+          <td md-cell>{{ group.total_allocations | currency : group.currency_symbol : 0 }}</td>
+          <td md-cell>{{ group.total_in_funded | currency : group.currency_symbol : 0 }}</td>
+          <td md-cell>{{ group.users_that_proposed_buckets_percentage }}%</td>
+          <td md-cell><span ng-repeat="admin in group.admins">{{ admin.email }}, </span></td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+
+</div>
