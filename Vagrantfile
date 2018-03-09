@@ -68,13 +68,30 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update; apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs
-    git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.4.0 /usr/local; ruby -v
+    git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.4.2 /usr/local; ruby -v
     gem install bundler
     apt-get install -y postgresql postgresql-server-dev-9.5
     sudo -u postgres createuser ubuntu -s
     gem install mailcatcher
   SHELL
+
   config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+
+  # Install docker
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get remove docker docker-engine docker.io
+    apt-get update
+    apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    apt-get update
+    apt-get install -y docker-ce
+  SHELL
+
+  config.vm.provision "shell", inline: <<-SHELL
+    docker pull ruby:2.4.2
+    docker pull postgres:9.6
+  SHELL
 
   # Setup SSH forwarding
   config.ssh.forward_agent = true
