@@ -1,0 +1,18 @@
+language: ruby
+env:
+  - DB=postgres
+rvm:
+  - 2.4.0
+bundler_args: --without development
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - bundle exec rake db:setup
+addons:
+  postgresql: "9.5"
+  code_climate:
+    repo_token: effc3fb597716a3eba53c6ce38e5ea7bf87d6ceb8956cedaba10aed6e7504e93
+notifications:
+  email: false
+  slack: enspiral:K4bdjrP15egf0hBhQ0qJLea6#cobudget
+cache:
+  bundler: true
