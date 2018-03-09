@@ -85,6 +85,12 @@ class UsersController < AuthenticatedController
     render status: 200, json: [current_user]
   end
 
+  api :GET, '/users/:id', 'User details'
+  def show
+    user = User.find(params[:id])
+    render json: user
+  end
+
   private
     def user_params
       params.require(:user).permit(
