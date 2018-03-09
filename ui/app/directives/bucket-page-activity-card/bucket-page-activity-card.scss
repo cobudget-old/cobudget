@@ -43,6 +43,9 @@
   background: #F8F8F8;
   padding: 13px 16px !important;
 }
+.menu-highlighted {
+  color: $cob-pink;
+}
 
 md-list-item.bucket-page__comment::before {
   min-height: auto;
@@ -79,6 +82,10 @@ md-list-item.bucket-page__comment::before {
   display: block;
 }
 
+.bucket-page__comment-input-container textarea {
+  border: 1px solid #8C8C8C !important;
+}
+
 .bucket-page__comment-input {
   font-size: 15px !important;
   line-height: 17px !important;
@@ -111,4 +118,32 @@ md-list-item.bucket-page__comment::before {
   margin-top: 10px;
   background: $cob-pink !important;
   color: white !important;
+}
+
+.mentio-menu {
+  box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+  padding: 0;
+}
+
+.mentio-menu__ul {
+  padding: 0;
+  margin: 0;
+}
+
+.mentio-menu__item {
+  height: auto;
+  cursor: pointer;
+  min-height: 0;
+}
+
+.mentio-menu__item > .md-button {
+  margin: 0;
+}
+
+.mentio-menu__item.active, .mentio-menu__item:hover {
+    background: #ebebeb;
+}
+
+.mentio-menu__item:not(:last-child) {
+    border-bottom: 1px solid #dcdcdc;
 }

@@ -1,6 +1,7 @@
 var http = require('http')
 var url = require('url')
 var express = require('express')
+var path = require('path')
 
 var env = process.env
 var nodeEnv = env.NODE_ENV || 'development'
@@ -21,14 +22,11 @@ module.exports = function (options) {
     }))
   }
 
-  webapp.use(require('ecstatic')({
-    root: options.root || __dirname + '/../build',
-    cache: options.cache ||
-      env.NODE_ENV == 'production' ? 3600 : 0
-    ,
-    showDir: false,
-    autoIndex: true
-  }))
+  webapp.use(express.static(__dirname + '/../build'));
+
+  webapp.get('*', function(req, res, next) {
+    res.sendFile(path.resolve(__dirname + '/../build/index.html'));
+  })
 
   return webapp
 }

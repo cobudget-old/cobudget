@@ -1,0 +1,24 @@
+<div class="user-page">
+  <md-toolbar class="md-whiteframe-z1 user-page__toolbar">
+    <div class="md-toolbar-tools">
+      <span class="user-page__header-text">User Profile</span>
+    </div>
+  </md-toolbar>
+
+  <md-content class="user-page__content">
+    <div layout="row" layout-align="center center" class="user-page__container">
+      <div class="user-page__avatar" layout="column" layout-align="center center">
+        <div>{{ user.name[0] | uppercase }}</div>
+      </div>
+
+      <div layout="column" layout-align="center start" class="user-page__name-container" flex>
+        <span class="user-page__name">{{ user.name }}</span>
+
+        <span class="user-page__email">{{ user.email }}</span>
+
+        <span class="user-page__activity">User joined on {{ user.confirmed_at | exactDate }}</span>
+      </div>
+    </div>
+
+  </md-content>
+</div>

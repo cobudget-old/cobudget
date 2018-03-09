@@ -1,9 +1,9 @@
 ### @ngInject ###
 
 # Since Angular 1.6 the default hash-prefix used for $location has changed from the empty string
-# to the bank ('!'). Since we're sending out links with only the hash, this needs to be set 
-# to the empty string 
-global.cobudgetApp.config(['$locationProvider', ($locationProvider) -> 
+# to the bank ('!'). Since we're sending out links with only the hash, this needs to be set
+# to the empty string
+global.cobudgetApp.config(['$locationProvider', ($locationProvider) ->
   $locationProvider.hashPrefix('')])
 
 global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
@@ -15,6 +15,7 @@ global.cobudgetApp.config ($stateProvider, $urlRouterProvider) ->
     .state 'create-bucket', require('app/components/create-bucket-page/create-bucket-page.coffee')
     .state 'bucket', require('app/components/bucket-page/bucket-page.coffee')
     .state 'edit-bucket', require('app/components/edit-bucket-page/edit-bucket-page.coffee')
+    .state 'user', require('app/components/user-page/user-page.coffee')
     .state 'admin', require('app/components/admin-page/admin-page.coffee')
     .state 'confirm-account', require('app/components/confirm-account-page/confirm-account-page.coffee')
     .state 'group-setup', require('app/components/group-setup-page/group-setup-page.coffee')

@@ -4,7 +4,7 @@
   <md-content class="bucket-page__content">
     <md-button class="bucket-page__group-btn" ng-click="back()">{{ group.name }}</md-button>
 
-    <div layout="row" layout-align="start start" class="bucket-page__desktop-layout-container">
+    <div layout="row" layout-align="start start" class="bucket-page__desktop-layout-container" ng-if="windowWidth >= xsWidth">
       <div layout="column" layout-align="center center" class="bucket-page__left-column">
         <bucket-page-header-card></bucket-page-header-card>
         <bucket-page-activity-card></bucket-page-activity-card>
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div layout="column" layout-align="center center" class="bucket-page__mobile-layout-container">
+    <div layout="column" layout-align="center center" class="bucket-page__mobile-layout-container" ng-if="windowWidth <= xsWidth">
       <bucket-page-header-card></bucket-page-header-card>
       <bucket-page-manage-card ng-if="userCanManageBucket() && !bucket.isComplete()"></bucket-page-manage-card>
       <bucket-page-status-card></bucket-page-status-card>
