@@ -14,4 +14,4 @@ A collaborative funding tool for crowds with purpose. [See how it works!](https:
 
 The materials in this repo are licensed under Creative Commons 1.0 Universal while the component apps are licensed separately under the Affero GPL.
 
->>>>>>> ui/master
+
