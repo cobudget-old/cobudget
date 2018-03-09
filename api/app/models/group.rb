@@ -49,9 +49,72 @@ class Group < ActiveRecord::Base
     self.save
   end
 
+  def find_archived_members_with_funds()
+    l = []
+    Membership.where(group_id: id).where.not(archived_at: nil).find_each do |membership|
+      if membership.raw_balance != 0
+        l.push({
+          membership_id: membership.id, 
+          user_name: User.find(membership.member_id).name,
+          archived_at: membership.archived_at,
+          balance: membership.raw_balance  
+          })
+      end
+    end
+    l
+  end
+
+  def transfer_balance_from_member_to_group_account(member_id, current_user)
+    m = Membership.find(member_id)
+    amount = m.raw_balance
+    ActiveRecord::Base.transaction do
+      a = Allocation.create(user_id: member_id, group_id: id, amount: -amount)
+      Transaction.create!({
+        datetime: a.created_at,
+        from_account_id: m.status_account_id,
+        to_account_id: status_account_id,
+        user_id: current_user.id,
+        amount: amount
+      })
+    end
+  end
+
+  def transfer_memberships_to_group_account(transfer_from_list, current_user)
+    group_membership = ensure_group_account_exist
+    transfer_from_list.each do |e|
+      transfer_balance_from_member_to_group_account(e[:membership_id], current_user)
+    end
+
+    mail_admins_about_members(transfer_from_list)
+  end
+
   def for_each_admin
     Membership.where(group_id: id, is_admin: :true, archived_at: nil).find_each do |admin|
       yield admin
+    end
+  end
+
+  def mail_admins_about_members(memberlist)
+    if memberlist.length > 0
+      l = memberlist.map { |e| 
+        e[:archived_at] = e[:archived_at].strftime("%B %d, %Y") 
+        e[:balance] = Money.new(e[:balance] * 100, currency_code).format
+      }
+      for_each_admin do |admin|
+        UserMailer.notify_admins_archived_member_funds(admin: admin.member.name_and_email, 
+          group: self, memberlist: memberlist).deliver_later
+      end
+      if Rails.configuration.respond_to?('devops_user')
+        UserMailer.notify_admins_archived_member_funds(admin: Rails.configuration.devops_user, 
+          group: self, memberlist: memberlist).deliver_later
+      end        
+    end
+  end
+
+  def cleanup_archived_members_with_funds(current_user)
+    l = find_archived_members_with_funds()
+    if l.length > 0
+      transfer_memberships_to_group_account(l, current_user)
     end
   end
 

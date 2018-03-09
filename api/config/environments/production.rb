@@ -92,6 +92,9 @@ Rails.application.configure do
     :password       => ENV['SMTP_PASSWORD'],
     :domain         => ENV['SMTP_DOMAIN'],
     :enable_starttls_auto => true
+
+  config.devops_user = ENV['DEVOPS_MAIL']
+
   }
 
 end
