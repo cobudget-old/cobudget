@@ -28,3 +28,6 @@ ubuntu-xenial-16.04-cloudimg-console.log
 dump.rb
 
 npm-debug.log
+
+# Ignore application configuration
+/config/application.yml
