@@ -27,7 +27,7 @@ class CommentsController < AuthenticatedController
     # format the links with the correct base url
     noko_body.css("a").map do |a|
       a['href'].sub! 'uid:', ''
-      a.attributes["href"].value = "#{Rails.application.config.action_mailer.default_url_options[:host]}/##{a['href'].sub! 'uid:', '/users/'}"
+      a.attributes["href"].value = "http://#{Rails.application.config.action_mailer.default_url_options[:host]}/##{a['href'].sub! 'uid:', '/users/'}"
     end
 
     if user_links
