@@ -1,0 +1,51 @@
+.user-page__toolbar {
+  background: $cobudget-gunmetal !important;
+}
+
+.user-page__content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.user-page__group-list-subheader {
+  color: $cob-pink;
+  padding-left: 10px;
+}
+
+.user-page__container {
+  margin-bottom: 10px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.user-page__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.27);
+  color: white;
+  font-size: 50px;
+  margin-right: 10px;
+}
+
+.user-page__name-container {
+  min-width: 0;
+}
+
+.user-page__name {
+  width: 100%;
+  @include truncatedText;
+  @include fontLarge;
+}
+
+.user-page__email {
+  width: 100%;
+  @include truncatedText;
+  @include fontMedium;
+}
+
+.user-page__activity {
+  margin-top: 3px;
+  color: $grey-on-white;
+  font-size: 11px;
+}

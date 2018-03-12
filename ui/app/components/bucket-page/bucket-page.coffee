@@ -9,6 +9,8 @@ module.exports =
   controller: (CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, Toast, UserCan, $window) ->
 
     LoadBar.start()
+    $scope.windowWidth = $window.innerWidth
+    $scope.xsWidth = 768
     bucketId = parseInt $stateParams.bucketId
     Records.buckets.findOrFetchById(bucketId)
       .then (bucket) ->

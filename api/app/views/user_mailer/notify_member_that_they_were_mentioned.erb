@@ -1,0 +1,7 @@
+<p>
+  <%= @author.name %> mentioned you in the bucket <%= link_to "#{@bucket.name}", "#{root_url}#/buckets/#{@bucket.id}" %> in <%= @group.name %>.
+</p>
+
+<p>
+  <%= render html: @body.html_safe %>
+</p>

@@ -27,6 +27,12 @@ global.cobudgetApp.factory 'UserRecordsInterface', (config, BaseRecordsInterface
     updatePassword: (params) ->
       @remote.post('update_password', params)
 
+    fetchUserById: (userId) ->
+      deferred = $q.defer()
+      @remote.get(userId, {}).then (user) ->
+        deferred.resolve(user)
+      deferred.promise
+
     fetchMe: ->
       deferred = $q.defer()
       if @find(global.cobudgetApp.currentUserId)

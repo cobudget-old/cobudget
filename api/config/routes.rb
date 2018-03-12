@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       sessions: 'overrides/sessions'
     }
 
-    resources :users, only: :create, defaults: { format: :json } do
+    resources :users, only: [:show, :create], defaults: { format: :json } do
       collection do
         post :confirm_account
         post :request_password_reset

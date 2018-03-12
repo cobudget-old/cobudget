@@ -111,4 +111,14 @@ class UserMailer < ActionMailer::Base
       from: "Cobudget Updates <updates@cobudget.co>",
       subject: "DB transactions consistency check")
   end
+
+  def notify_member_that_they_were_mentioned(author:, member:, bucket:, body:)
+    @bucket = bucket
+    @group = bucket.group
+    @body = body
+    @author = author
+    mail(to: member.email,
+         from: "Cobudget Updates <updates@cobudget.co>",
+         subject: "#{@author.name} mentioned you in the bucket #{@bucket.name}")
+  end
 end

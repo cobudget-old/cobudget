@@ -16,13 +16,17 @@ curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -; apt-
 
 ### system dependencies
 
-`apt-get update; apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs`                                                                                                                                                                                          
+```
+apt-get update; apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs                                                                                                                                                                                          
 apt-get install -y postgresql postgresql-server-dev-9.5
 sudo -u postgres createuser <your username> -s
+```
 
 ### get your ruby organized
+```
 git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.4.0 /usr/local; ruby -v
 gem install bundler
+```
 
 ## Traditional development environment setup
 
@@ -78,7 +82,7 @@ First, clone the repo from git. Then
 cd cobudget-api
 vagrant up
 vagrant ssh
-cd /vagrant
+cd /vagrant/api
 bundle install
 ```
 
@@ -91,7 +95,7 @@ edit `config/database.yml`.
 ### Setup database
 
 ```
-bundle exec rake db:setup`
+bundle exec rake db:setup
 ```
 
 ### Run tests

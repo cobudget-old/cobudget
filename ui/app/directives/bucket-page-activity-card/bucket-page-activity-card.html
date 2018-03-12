@@ -32,8 +32,24 @@
   <md-card class="bucket-page__comment-form-card">
     <form name='commentForm' class="bucket-page__comment-form" ng-submit="createComment()">
       <md-input-container class="bucket-page__comment-input-container" md-no-float>
-        <textarea type="text" class="bucket-page__comment-input" required placeholder="Ask a question, offer support, give an update..." name="body" ng-model="newComment.body" />
+        <div contenteditable mentio
+            mentio-typed-term="typedTerm"
+            mentio-require-leading-space="true"
+            class="bucket-page__comment-input"
+            placeholder="Ask a question, offer support, give an update..."
+            mentio-id="'newComment.bodyInput'"
+            ng-model="newComment.bodyInput"
+            ></div>
       </md-input-container>
+
+      <mentio-menu
+      mentio-for="'newComment.bodyInput'"
+      mentio-trigger-char="'@'"
+      mentio-items="users"
+      mentio-template-url="/mentio-menu.tpl.html"
+      mentio-select="getUserText(item)"
+      mentio-search="searchUsers(term)"
+      ></mentio-menu>
 
       <div class="bucket-page__submit-comment-container">
         <a class="bucket-page__comment-form-markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
