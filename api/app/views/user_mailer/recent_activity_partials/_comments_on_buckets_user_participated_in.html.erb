@@ -11,7 +11,7 @@
         <a href="<%= "#{root_url}#/buckets/#{bucket.id}" %>"><b><%= bucket.name %></b></a><br>
         <% comments.each do |comment| %>
           <%= comment.user.name %><br>
-          "<%= comment.body %>"<br><br>
+          "<%= comment.body_html %>"<br><br>
         <% end %>
       </li>
     <% end %>
