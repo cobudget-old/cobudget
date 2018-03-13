@@ -8,7 +8,9 @@
 
 This requires a password to be set for Postgresql user ubuntu. Connect with `psql` and use the `\password` command.
 
-`docker run --network=host -e "DATABASE_URL=postgres://ubuntu:ubuntu@localhost/cobudget_development" cobudget rails s -b 0.0.0.0`
+Assuming the password is "pw" the command to run in docker is:
+
+`docker run --network=host -e "DATABASE_URL=postgres://vagrant:pw@localhost/cobudget_development" cobudget rails s -b 0.0.0.0`
 
 ## Run postgresql from a container
 

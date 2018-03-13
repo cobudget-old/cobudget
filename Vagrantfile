@@ -71,7 +71,7 @@ Vagrant.configure("2") do |config|
     git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.4.2 /usr/local; ruby -v
     gem install bundler
     apt-get install -y postgresql postgresql-server-dev-9.5
-    sudo -u postgres createuser ubuntu -s
+    sudo -u postgres createuser vagrant -s
     gem install mailcatcher
   SHELL
 
