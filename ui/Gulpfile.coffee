@@ -184,7 +184,8 @@ gulp.task('livereload', livereload)
 gulp.task 'branch', ['build'], ->
   branch = require('gulp-build-branch')
   branch(
-    folder: 'build'
+    folder: 'ui/build'
+    cwd: process.cwd() + '/..'
   )
 
 # prod tasks
