@@ -1,3 +1,4 @@
 FROM nginx
 COPY build /var/www/cobudget
-COPY nginx/stage-nginx.conf /etc/nginx/nginx.conf
+COPY nginx/nginx-conf-template /etc/nginx/conf.d
+CMD /bin/bash -c "envsubst '\$DOMAIN' < /etc/nginx/conf.d/nginx-conf-template >/etc/nginx/nginx.conf && nginx -g 'daemon off;'"

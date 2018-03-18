@@ -1,7 +1,7 @@
 # Makefile
 
 docker-ui:
-	cd ui; gulp build; sudo docker build -t greatherthanfinance/cobudget-ui .
+	cd ui; gulp build; sudo docker build -t greaterthanfinance/cobudget-ui .
 	sudo docker push greaterthanfinance/cobudget-ui
 
 docker-api:

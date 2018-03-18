@@ -1,0 +1,2 @@
+#! /bin/bash
+cd /cobudget-api; rake cobudget:deliver_recent_activity_emails
