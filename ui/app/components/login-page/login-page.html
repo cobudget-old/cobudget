@@ -1,19 +1,12 @@
 <div class="login-page" ng-if="authorized">
   <md-content layout-padding class="login-page__content">
-    <img class="login-page__logo" src="./img/color_logo.svg" alt="Cobudget" />
 
-    <h1 class="login-page__heading">Sign in to continue</h1>
 
     <md-card class="login-page__content-card">
       <md-card-content>
-        <div class="login-page__person-icon-container" layout="column" layout-align="center center">
-          <ng-md-icon icon="person"
-            size="60"
-            class="login-page__person-icon"
-            layout="column"
-            layout-align="center center"
-          ></ng-md-icon>
-        </div>
+        <img class="login-page__logo" src="./img/logo_icon.svg" alt="Cobudget" />
+
+        <h1 class="login-page__heading">Sign in to continue</h1>
 
         <form novalidate class="login-page__form" name="loginForm" ng-submit="login(formData)" ng-autodisable>
           <div class="login-page__form-errors">{{ formError }}</div>
@@ -34,7 +27,6 @@
 
         <div class="login-page__buttons-container" layout="column" layout-align="center end">
           <md-button class="login-page__forgot-password-btn" ng-click="visitForgotPasswordPage()">Forgot your password?</md-button>
-          <md-button class="login-page__forgot-password-btn" ng-click="openFeedbackForm()">Give us feedback!</md-button>
         </div>
       </md-card-content>
     </md-card>

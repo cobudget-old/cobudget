@@ -10,7 +10,7 @@ module.exports =
       global.cobudgetApp.membershipsLoaded
   url: '/setup_group'
   template: require('./group-setup-page.html')
-  controller: (LoadBar, Records, $scope, $state, Currencies) ->
+  controller: (LoadBar, Records, $scope, $state, Currencies, $location) ->
 
     $scope.createGroup = (formData) ->
       LoadBar.start()
@@ -22,3 +22,6 @@ module.exports =
           LoadBar.stop()
 
     $scope.currencies = Currencies()
+
+    $scope.cancel = () ->
+      $location.path('/')

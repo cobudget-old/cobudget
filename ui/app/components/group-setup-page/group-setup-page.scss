@@ -4,6 +4,15 @@
   background: white;
 }
 
+.group-setup-page__toolbar {
+  background: $cobudget-gunmetal !important;
+  color: white;
+}
+
+.group-setup-page__cancel-icon {
+  fill: white;
+}
+
 .group-setup-page__logo {
   display: block;
   width: 63%;
@@ -45,7 +54,7 @@
 
 .group-setup-page__logo-subheader {
   font-weight: 300;
-  @include fontMedLarge;
+  @include fontLarge;
   text-align: center;
   margin: 0;
 }
