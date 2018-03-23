@@ -98,9 +98,15 @@
           </tr>
           <tr ng-if="filteredTransactions.length > 0 && transactionsLoaded" md-row ng-repeat="transaction in filteredTransactions | orderBy: initialOrderTransactions | limitTo: transactionLimit: (startingPageTransactions - 1) * transactionLimit">
             <td md-cell>{{transaction.created_at | exactDateShort}}</td>
-            <td md-cell>{{transaction.account_from}}</td>
-            <td md-cell ng-if="transaction.to_link != ''"><a href="/#/{{transaction.to_link}}">{{transaction.account_to}}</a></td>
-            <td md-cell ng-if="transaction.to_link == ''">{{transaction.account_to}}</td>
+            <td md-cell ng-if="transaction.from_link != ''"><a href="/#/{{transaction.from_link}}" target="_blank">{{transaction.account_from}}</a></td>
+            <td md-cell ng-if="transaction.from_link == ''">{{transaction.account_from}}</td>
+            <td md-cell>
+              <ng-md-icon ng-if="transaction.type == 'allocation'" class="group-page__transaction-history-list-person-icon" icon="person" size="16"></ng-md-icon>
+              <img ng-if="transaction.type == 'contribution'" src="./img/bucket_empty.svg" alt="bucket" class="group-page__transaction-history-list-bucket-icon"/>
+              <a href="/#/{{transaction.to_link}}" target="_blank">
+              {{transaction.account_to}}
+              </a>
+            </td>
             <td md-cell>{{transaction.amount | currency : group.currencySymbol : 2}}</td>
           </tr>
         </tbody>
