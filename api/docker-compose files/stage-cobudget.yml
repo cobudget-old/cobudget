@@ -28,7 +28,7 @@ services:
       - SMTP_SERVER=mailcatcher
   activity-emails:
     image: greaterthanfinance/cobudget-api:latest
-    command: /bin/bash -c "cron -f"
+    command: /bin/bash -c "env >/root/env-vars && cron -f"
     environment:
       - DATABASE_URL=<STAGE_DB>
       - RAILS_ENV=production
