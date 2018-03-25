@@ -39,7 +39,6 @@ global.cobudgetApp.directive 'groupPageStats', () ->
         $scope.fundedBuckets = $scope.group.fundedBuckets()
         $scope.filteredBuckets = $scope.fundedBuckets
         $scope.fundedCompletedBuckets = $scope.group.fundedCompletedBuckets()
-        console.log $scope.fundedCompletedBuckets[0].author().email
         _.each $scope.fundedCompletedBuckets, (bucket) ->
           bucket.url = location.origin + '/#/buckets/' + bucket.id
           bucket.authorEmail = bucket.author().email

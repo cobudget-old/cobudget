@@ -121,6 +121,15 @@ highchart {
   }
 }
 
+.group-page__transaction-history-list-person-icon svg{
+  height: 16px;
+  margin-bottom: -4px;
+}
+
+.group-page__transaction-history-list-bucket-icon {
+  height: 16px;
+}
+
 //condense md-data-table
 table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
   padding: 0 24px 0 0;
