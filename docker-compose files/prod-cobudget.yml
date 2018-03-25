@@ -10,7 +10,7 @@ services:
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
       - DEVOPS_MAIL=devops@greaterthan.finance
       - SMTP_DOMAIN=cobudget.co
-      - SMTP_PASSWORD=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
+      - SMTP_PASSWORD=<SMTP_PW>
       - SMTP_PORT=587
       - SMTP_SERVER=smtp.sendgrid.net
       - SMTP_USERNAME=apikey
@@ -25,7 +25,7 @@ services:
       - CANONICAL_HOST=cobudget.co
       - DEVOPS_MAIL=devops@greaterthan.finance
       - SMTP_DOMAIN=cobudget.co
-      - SMTP_PASSWORD=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
+      - SMTP_PASSWORD=<SMTP_PW>
       - SMTP_PORT=587
       - SMTP_SERVER=smtp.sendgrid.net
       - SMTP_USERNAME=apikey
@@ -39,7 +39,7 @@ services:
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
       - DEVOPS_MAIL=devops@greaterthan.finance
       - SMTP_DOMAIN=cobudget.co
-      - SMTP_PASSWORD=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
+      - SMTP_PASSWORD=<SMTP_PW>
       - SMTP_PORT=587
       - SMTP_SERVER=smtp.sendgrid.net
       - SMTP_USERNAME=apikey
