@@ -4,43 +4,47 @@ services:
     image: greaterthanfinance/cobudget-api:latest
     command: rails s -b 0.0.0.0
     environment:
-      - DATABASE_URL=<STAGE_DB>
+      - DATABASE_URL=<PROD_DB>
       - RAILS_ENV=production
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
-      - CANONICAL_HOST=stage.cobudget.co
       - DEVOPS_MAIL=devops@greaterthan.finance
-      - SMTP_DOMAIN=stage.cobudget.co
-      - SMTP_PORT=1025
-      - SMTP_SERVER=mailcatcher
+      - SMTP_DOMAIN=cobudget.co
+      - SMTP_PASSWORD=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
+      - SMTP_PORT=587
+      - SMTP_SERVER=smtp.sendgrid.net
+      - SMTP_USERNAME=apikey
   delayed-job:
     image: greaterthanfinance/cobudget-api:latest
     command: rake jobs:work
     environment:
-      - DATABASE_URL=<STAGE_DB>
+      - DATABASE_URL=<PROD_DB>
       - RAILS_ENV=production
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
-      - CANONICAL_HOST=stage.cobudget.co
+      - CANONICAL_HOST=cobudget.co
       - DEVOPS_MAIL=devops@greaterthan.finance
-      - SMTP_DOMAIN=stage.cobudget.co
-      - SMTP_PORT=1025
-      - SMTP_SERVER=mailcatcher
+      - SMTP_DOMAIN=cobudget.co
+      - SMTP_PASSWORD=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
+      - SMTP_PORT=587
+      - SMTP_SERVER=smtp.sendgrid.net
+      - SMTP_USERNAME=apikey
   activity-emails:
     image: greaterthanfinance/cobudget-api:latest
     command: /bin/bash -c "env >/root/env-vars && cron -f"
     environment:
-      - DATABASE_URL=<STAGE_DB>
+      - DATABASE_URL=<PROD_DB>
       - RAILS_ENV=production
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
-      - CANONICAL_HOST=stage.cobudget.co
       - DEVOPS_MAIL=devops@greaterthan.finance
-      - SMTP_DOMAIN=stage.cobudget.co
-      - SMTP_PORT=1025
-      - SMTP_SERVER=mailcatcher
+      - SMTP_DOMAIN=cobudget.co
+      - SMTP_PASSWORD=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
+      - SMTP_PORT=587
+      - SMTP_SERVER=smtp.sendgrid.net
+      - SMTP_USERNAME=apikey
   cobudget-ui:
-    image: greaterthanfinance/cobudget-ui:latest
+    image: greaterthanfinance/cobudget-ui-prod:latest
     ports:
       - target: 80
         published: 80
@@ -52,10 +56,4 @@ services:
         target: /etc/letsencrypt
         read_only: true
     environment:
-      - DOMAIN=stage.cobudget.co
-  mailcatcher:
-    image: greaterthanfinance/cobudget-api:latest
-    command: mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0
-    ports:
-      - target: 1080
-        published: 1080
+      - DOMAIN=cobudget.co
