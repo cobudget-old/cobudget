@@ -34,6 +34,11 @@
           <a class="admin-page__description-markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
         </md-input-container>
         <md-input-container class="admin-page__input md-block">
+          <label>Add Funds</label>
+          <input ng-model="group.addFunds" type="url"/>
+          <div class="admin-page__input-help-text">A url of a page with info about adding funds to an account (include http(s)://).</div>
+        </md-input-container>
+        <md-input-container class="admin-page__input md-block">
           <md-switch ng-model="group.fundingFreeze" aria-label="Freeze Funding">
             Funding: {{ group.fundingFreeze ? 'Off' : 'On' }}
           </md-switch>
