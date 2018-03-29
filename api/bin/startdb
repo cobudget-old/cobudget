@@ -1,4 +1,0 @@
-#
-# Start the database
-
-sudo docker run --network=cobudget --name=db -v /vagrant:/dbdump -e POSTGRES_DB=cobudget_development -e POSTGRES_USER=ubuntu -e POSTGRES_PASSWORD=pw -d postgres:9.6

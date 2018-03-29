@@ -1,3 +1,0 @@
-#
-
-sudo docker exec -it db psql -U ubuntu -d cobudget_development
