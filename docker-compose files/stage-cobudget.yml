@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   cobudget-api:
-    image: greaterthanfinance/cobudget-api:latest
+    image: greaterthanfinance/cobudget-api-stage:latest
     command: rails s -b 0.0.0.0
     environment:
       - DATABASE_URL=<STAGE_DB>
@@ -14,7 +14,7 @@ services:
       - SMTP_PORT=1025
       - SMTP_SERVER=mailcatcher
   delayed-job:
-    image: greaterthanfinance/cobudget-api:latest
+    image: greaterthanfinance/cobudget-api-stage:latest
     command: rake jobs:work
     environment:
       - DATABASE_URL=<STAGE_DB>
@@ -27,7 +27,7 @@ services:
       - SMTP_PORT=1025
       - SMTP_SERVER=mailcatcher
   activity-emails:
-    image: greaterthanfinance/cobudget-api:latest
+    image: greaterthanfinance/cobudget-api-stage:latest
     command: /bin/bash -c "env >/root/env-vars && cron -f"
     environment:
       - DATABASE_URL=<STAGE_DB>
@@ -54,7 +54,7 @@ services:
     environment:
       - DOMAIN=stage.cobudget.co
   mailcatcher:
-    image: greaterthanfinance/cobudget-api:latest
+    image: greaterthanfinance/cobudget-api-stage:latest
     command: mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0
     ports:
       - target: 1080
