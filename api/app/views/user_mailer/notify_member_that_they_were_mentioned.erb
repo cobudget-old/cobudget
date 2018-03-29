@@ -1,5 +1,5 @@
 <p>
-  <%= @author.name %> mentioned you in the bucket <%= link_to "#{@bucket.name}", "#{root_url}#/buckets/#{@bucket.id}" %> in <%= @group.name %>.
+  <%= @author.name %> mentioned you in the bucket <%= link_to "#{@bucket.name}", "#{root_url}#/buckets/#{@bucket.id}".html_safe %> in <%= @group.name %>.
 </p>
 
 <p>
