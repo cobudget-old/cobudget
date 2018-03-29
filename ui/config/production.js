@@ -1,3 +1,3 @@
 module.exports = {
-  apiPrefix: "https://api.cobudget.co/api/v1"
+  apiPrefix: "https://cobudget.co/api/v1"
 }

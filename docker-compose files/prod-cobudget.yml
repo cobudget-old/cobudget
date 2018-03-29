@@ -1,0 +1,59 @@
+version: "3.2"
+services:
+  cobudget-api:
+    image: greaterthanfinance/cobudget-api:latest
+    command: rails s -b 0.0.0.0
+    environment:
+      - DATABASE_URL=<PROD_DB>
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - SECRET_KEY_BASE=<SECRET_KEY_BASE>
+      - DEVOPS_MAIL=devops@greaterthan.finance
+      - SMTP_DOMAIN=cobudget.co
+      - SMTP_PASSWORD=<SMTP_PW>
+      - SMTP_PORT=587
+      - SMTP_SERVER=smtp.sendgrid.net
+      - SMTP_USERNAME=apikey
+  delayed-job:
+    image: greaterthanfinance/cobudget-api:latest
+    command: rake jobs:work
+    environment:
+      - DATABASE_URL=<PROD_DB>
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - SECRET_KEY_BASE=<SECRET_KEY_BASE>
+      - CANONICAL_HOST=cobudget.co
+      - DEVOPS_MAIL=devops@greaterthan.finance
+      - SMTP_DOMAIN=cobudget.co
+      - SMTP_PASSWORD=<SMTP_PW>
+      - SMTP_PORT=587
+      - SMTP_SERVER=smtp.sendgrid.net
+      - SMTP_USERNAME=apikey
+  activity-emails:
+    image: greaterthanfinance/cobudget-api:latest
+    command: /bin/bash -c "env >/root/env-vars && cron -f"
+    environment:
+      - DATABASE_URL=<PROD_DB>
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - SECRET_KEY_BASE=<SECRET_KEY_BASE>
+      - DEVOPS_MAIL=devops@greaterthan.finance
+      - SMTP_DOMAIN=cobudget.co
+      - SMTP_PASSWORD=<SMTP_PW>
+      - SMTP_PORT=587
+      - SMTP_SERVER=smtp.sendgrid.net
+      - SMTP_USERNAME=apikey
+  cobudget-ui:
+    image: greaterthanfinance/cobudget-ui-prod:latest
+    ports:
+      - target: 80
+        published: 80
+      - target: 443
+        published: 443
+    volumes:
+      - type: bind
+        source: /etc/letsencrypt
+        target: /etc/letsencrypt
+        read_only: true
+    environment:
+      - DOMAIN=cobudget.co
