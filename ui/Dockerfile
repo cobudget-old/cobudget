@@ -1,5 +1,4 @@
 FROM node:6 as builder
-ARG NODE_ENV
 RUN mkdir /src
 WORKDIR /src
 COPY . /src
@@ -7,6 +6,7 @@ RUN npm install bower
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 RUN npm install -g gulp
 RUN npm install
+ARG NODE_ENV
 RUN gulp build
 
 FROM nginx
