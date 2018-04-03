@@ -28,8 +28,3 @@ docker-api-stage:
 docker-api-prod:
 	cd api; sudo docker build -t $(DOCKER_REPO)/$(API_PROD_NAME) .
 	sudo docker push $(DOCKER_REPO)/$(API_PROD_NAME)
-
-stage-deploy:
-	$(STAGE_SSH) echo sudo docker pull $(DOCKER_REPO)/$(API_STAGE_NAME)
-	$(STAGE_SSH) echo sudo docker pull $(DOCKER_REPO)/$(UI_STAGE_NAME)
-	$(STAGE_SSH) echo sudo docker stack deploy --compose-file stage-cobudget.yml cobudget
