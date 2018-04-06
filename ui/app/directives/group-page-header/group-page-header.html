@@ -78,17 +78,17 @@
             <div layout="row" class="group-page-header__personal-funds-container">
               <div layout="column" layout-align="center center">
                 <span class="group-page-header__funds-overview-amount">{{ membership.balance | currency : group.currencySymbol : 0 }}
-                  <span class="group-page-header__funds-overview-amount-total">(of <b>{{ group.balance + group.groupAccountBalance | currency : group.currencySymbol : 0  }}</b> in group)</span>
                   <span ng-if="group.addFunds"><a ng-href="{{ group.addFunds }}" target="_blank" class="group-page-header__funds-overview-add-funds">Add Funds</a></span>
                 </span>
               </div>
+
             </div>
           </div>
         </div>
-
         <div flex></div>
-
-
+        <div layout="column" layout-align="right" class="">
+          <span class="group-page-header__funds-overview-amount-total"><b>{{ group.balance + group.groupAccountBalance | currency : group.currencySymbol : 0  }}</b> in group</span>
+        </div>
       </div>
     </div>
 
