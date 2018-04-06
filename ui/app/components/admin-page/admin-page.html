@@ -30,16 +30,20 @@
         <md-input-container class="admin-page__input md-block">
           <label>Group Purpose</label>
           <textarea ng-model="group.description" md-maxlength="280"></textarea>
-          <div class="admin-page__input-help-text">i.e. In this group, members of {{ group.name }} fund projects to improve their work environment and support each other.</div>
+          <div class="admin-page__textarea-help-text">i.e. In this group, members of {{ group.name }} fund projects to improve their work environment and support each other.</div>
           <a class="admin-page__description-markdown-link" href="https://www.loomio.org/markdown" target="_blank">formatting help</a>
         </md-input-container>
         <md-input-container class="admin-page__input md-block">
-          <label>Add Funds</label>
-          <input ng-model="group.addFunds" type="url"/>
-          <div class="admin-page__input-help-text">A url of a page with info about adding funds to an account (include http(s)://).</div>
+          <label>Add Funds URL</label>
+          <input name="addFunds" ng-model="group.addFunds" ng-pattern="/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/"/>
+          <div ng-messages="adminPageForm.addFunds.$error" md-auto-hide="false" multiple>
+            <div ng-message="pattern">
+              Must be a url (this means is needs to include http:// or https:// at the start)
+            </div>
+          </div>
         </md-input-container>
         <md-input-container class="admin-page__input md-block">
-          <md-switch ng-model="group.fundingFreeze" aria-label="Freeze Funding">
+          <md-switch ng-model="group.fundingFreeze" ng-true-value="false" ng-false-value="true" aria-label="Freeze Funding">
             Funding: {{ group.fundingFreeze ? 'Off' : 'On' }}
           </md-switch>
         </md-input-container>
