@@ -194,6 +194,10 @@
   .group-page-header__funds-overview-amount {
     @include fontLarge;
   }
+
+  .group-page-header__create-bucket-fab {
+    right: -5px;
+  }
 }
 
 @media (max-width: 670px) {
