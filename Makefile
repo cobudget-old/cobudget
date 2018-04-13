@@ -28,3 +28,4 @@ docker-api-stage:
 docker-api-prod:
 	cd api; sudo docker build -t $(DOCKER_REPO)/$(API_PROD_NAME) .
 	sudo docker push $(DOCKER_REPO)/$(API_PROD_NAME)
+
