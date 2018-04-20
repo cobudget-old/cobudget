@@ -103,6 +103,10 @@
   @include fontSmall;
 }
 
+.group-page-header__funds-overview-add-funds {
+  @include fontSmall;
+}
+
 .group-page-header__admin-btn {
   border: 0;
   height: 30px;
@@ -189,6 +193,10 @@
 
   .group-page-header__funds-overview-amount {
     @include fontLarge;
+  }
+
+  .group-page-header__create-bucket-fab {
+    right: -5px;
   }
 }
 

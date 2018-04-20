@@ -15,5 +15,6 @@ class GroupSerializer < ActiveModel::Serializer
              :total_contributions,
              :group_account_balance,
              :total_in_unfunded,
-             :funding_freeze
+             :funding_freeze,
+             :add_funds
 end
