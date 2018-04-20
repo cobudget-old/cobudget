@@ -55,18 +55,3 @@ blockquote {
 md-switch.md-default-theme.md-checked .md-thumb, md-switch.md-checked .md-thumb, md-switch.md-default-theme.md-checked .md-ink-ripple, md-switch.md-checked .md-ink-ripple {
   background-color: $cob-pink;
 }
-
-#cookie_assistant_wrapper {
-  font-family: inherit !important;
-}
-
-#cookie_assistant_wrapper h2 {
-    font-weight: 300;
-}
-
-#cookie_assistant_wrapper .buttons a.btn-accept {
-  background: #0f9d58 !important;
-  border-radius: 0 !important;
-  border: none !important;
-  text-transform: uppercase;
-}
