@@ -43,6 +43,13 @@
           </div>
 
           <div class="confirm-account-page__input-container">
+            <md-checkbox class="confirm-account-page__checkbox-field" name="tos" ng-model="formData.tos" name="tos" required>
+              <label>By continuing, you agree to our <a href="https://greaterthan.gitbooks.io/cobudget/content/terms-of-service.html" target="_blank">Terms of Service</a> and <a href="https://greaterthan.gitbooks.io/cobudget/content/privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
+            </md-checkbox>
+            <div ng-if="newUserForm.tos.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">You must accept before you can proceed.</div>
+          </div>
+
+          <div class="confirm-account-page__input-container">
             <md-button class="md-raised md-primary confirm-account-page__submit-btn" type="submit">next</md-button>
           </div>
         </form>
