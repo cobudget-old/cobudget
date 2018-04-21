@@ -5,7 +5,7 @@ global.cobudgetApp.factory 'GroupModel', (BaseModel) ->
   class GroupModel extends BaseModel
     @singular: 'group'
     @plural: 'groups'
-    @serializableAttributes: ['name', 'currencyCode', 'currencySymbol', 'description', 'initialized', 'fundingFreeze']
+    @serializableAttributes: ['name', 'currencyCode', 'currencySymbol', 'description', 'initialized', 'fundingFreeze', 'addFunds']
 
     relationships: ->
       @hasMany 'buckets'
