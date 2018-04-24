@@ -9,7 +9,7 @@ services:
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
       - CANONICAL_HOST=stage.cobudget.co
-      - DEVOPS_MAIL=devops@greaterthan.finance
+      - DEVOPS_MAIL=devops@yourdomain.org
       - SMTP_DOMAIN=stage.cobudget.co
       - SMTP_PORT=1025
       - SMTP_SERVER=mailcatcher
@@ -22,7 +22,7 @@ services:
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
       - CANONICAL_HOST=stage.cobudget.co
-      - DEVOPS_MAIL=devops@greaterthan.finance
+      - DEVOPS_MAIL=devops@yourdomain.org
       - SMTP_DOMAIN=stage.cobudget.co
       - SMTP_PORT=1025
       - SMTP_SERVER=mailcatcher
@@ -35,7 +35,7 @@ services:
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
       - CANONICAL_HOST=stage.cobudget.co
-      - DEVOPS_MAIL=devops@greaterthan.finance
+      - DEVOPS_MAIL=devops@yourdomain.org
       - SMTP_DOMAIN=stage.cobudget.co
       - SMTP_PORT=1025
       - SMTP_SERVER=mailcatcher

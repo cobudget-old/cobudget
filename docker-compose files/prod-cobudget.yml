@@ -8,7 +8,7 @@ services:
       - RAILS_ENV=production
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
-      - DEVOPS_MAIL=devops@greaterthan.finance
+      - DEVOPS_MAIL=devops@yourdomain.org
       - SMTP_DOMAIN=cobudget.co
       - SMTP_PASSWORD=<SMTP_PW>
       - SMTP_PORT=587
@@ -23,7 +23,7 @@ services:
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
       - CANONICAL_HOST=cobudget.co
-      - DEVOPS_MAIL=devops@greaterthan.finance
+      - DEVOPS_MAIL=devops@yourdomain.org
       - SMTP_DOMAIN=cobudget.co
       - SMTP_PASSWORD=<SMTP_PW>
       - SMTP_PORT=587
@@ -37,7 +37,7 @@ services:
       - RAILS_ENV=production
       - RACK_ENV=production
       - SECRET_KEY_BASE=<SECRET_KEY_BASE>
-      - DEVOPS_MAIL=devops@greaterthan.finance
+      - DEVOPS_MAIL=devops@yourdomain.org
       - SMTP_DOMAIN=cobudget.co
       - SMTP_PASSWORD=<SMTP_PW>
       - SMTP_PORT=587
