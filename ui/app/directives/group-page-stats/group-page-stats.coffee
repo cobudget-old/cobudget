@@ -11,7 +11,7 @@ global.cobudgetApp.directive 'groupPageStats', () ->
 
       # transaciton table
       $scope.transactionQuery = ''
-      $scope.transactionColumns = ['created_at', 'account_from', 'account_to', 'amount']
+      $scope.transactionColumns = ['createdAtFormatted', 'account_from', 'account_to', 'amount']
       $scope.transactionHeaders = ['Created At', 'Account From', 'Account To', 'Amount']
 
       $scope.$watch 'transactionQuery', ->
@@ -25,11 +25,13 @@ global.cobudgetApp.directive 'groupPageStats', () ->
           $scope.initialOrderTransactions = '-created_at'
           $scope.transactionLimit = 10
           $scope.startingPageTransactions = 1
+          _.each $scope.allTransactions, (transaction) ->
+            transaction.createdAtFormatted = moment(transaction.created_at).format('MMMM D YYYY HH:mm')
 
       # bucket table
       $scope.bucketQuery = ''
-      $scope.bucketHeaders = ['Link', 'Bucket Name', 'Author Name', 'Author Email', 'Total Contributions', 'Funded At', 'Completed At']
-      $scope.bucketColumns = ['url', 'name', 'authorName', 'authorEmail', 'totalContributions', 'fundedAt', 'paidAt']
+      $scope.bucketHeaders = ['Bucket Name', 'Link', 'Bucket Owner', 'Bucket Owner Email', 'Total Contributions', 'Funded At', 'Completed At']
+      $scope.bucketColumns = ['name', 'url', 'authorName', 'authorEmail', 'totalContributions', 'fundedAtFormatted', 'paidAtFormatted']
 
       $scope.$watch 'bucketQuery', ->
         $scope.filteredBuckets = $filter('filter')($scope.fundedBuckets, {name: $scope.bucketQuery})
@@ -39,12 +41,13 @@ global.cobudgetApp.directive 'groupPageStats', () ->
         $scope.fundedBuckets = $scope.group.fundedBuckets()
         $scope.filteredBuckets = $scope.fundedBuckets
         $scope.fundedCompletedBuckets = $scope.group.fundedCompletedBuckets()
-        console.log $scope.fundedCompletedBuckets[0].author().email
         _.each $scope.fundedCompletedBuckets, (bucket) ->
           bucket.url = location.origin + '/#/buckets/' + bucket.id
           bucket.authorEmail = bucket.author().email
+          bucket.fundedAtFormatted = moment(bucket.fundedAt).format('MMMM D YYYY HH:mm')
+          bucket.paidAtFormatted = if bucket.paidAt then moment(bucket.paidAt).format('MMMM D YYYY HH:mm') else 'Not Complete'
         $scope.bucketLimit = 10
         $scope.startingPageBuckets = 1
-        $scope.initialOrderBuckets = '-createdAt'
+        $scope.initialOrderBuckets = '-fundedAt'
 
       return

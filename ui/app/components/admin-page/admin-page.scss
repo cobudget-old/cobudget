@@ -38,12 +38,16 @@
   min-height: 50px;
 }
 
-.admin-page__input-help-text {
+.admin-page__textarea-help-text {
   color: rgba(0,0,0,0.54);
   font-size: 12px;
   margin-top: 5px;
   margin-bottom: 5px;
   padding-left: 3px;
+}
+
+.admin-page__input-error-text {
+  padding-left: 3px !important;
 }
 
 .admin-page__description-markdown-link {

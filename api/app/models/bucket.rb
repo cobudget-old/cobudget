@@ -31,8 +31,7 @@ class Bucket < ActiveRecord::Base
              COALESCE(contrib.total,0) AS total_contributions_db,
              COALESCE(count_contrib,0) AS num_of_contributors_db,
              COALESCE(count_comments,0) AS num_of_comments_db,
-             (CASE WHEN memberships.archived_at IS NULL THEN users.name ELSE '[removed user]' END) AS author_name_db,
-             (CASE WHEN memberships.archived_at IS NULL THEN users.email ELSE '[removed user]' END) AS author_email_db")
+             (CASE WHEN memberships.archived_at IS NULL THEN users.name ELSE '[removed user]' END) AS author_name_db")
   }
 
   def total_contributions
@@ -95,15 +94,6 @@ class Bucket < ActiveRecord::Base
 
   def commenters(exclude_author: nil)
     participants(exclude_author: exclude_author, type: :commenters)
-  end
-
-  def author_email
-    has_attribute?(:author_email_db) ? author_email_db : get_author_email
-  end
-
-  def get_author_email
-    membership = user.membership_for(group)
-    !membership || membership.archived? ? "[removed user]" : user.email
   end
 
   def author_name

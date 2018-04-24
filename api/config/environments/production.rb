@@ -82,7 +82,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => ENV['CANONICAL_HOST'] }
+  config.action_mailer.default_url_options = { host: ENV['CANONICAL_HOST'], protocol: 'https' }
 
   config.action_mailer.smtp_settings = {
     :address        => ENV['SMTP_SERVER'],
@@ -93,5 +93,7 @@ Rails.application.configure do
     :domain         => ENV['SMTP_DOMAIN'],
     :enable_starttls_auto => true
   }
+
+  config.devops_user = ENV['DEVOPS_MAIL']
 
 end

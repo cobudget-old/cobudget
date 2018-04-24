@@ -1,0 +1,2 @@
+#
+sudo docker run -e DATABASE_URL=<DB_URL> greaterthanfinance/cobudget-api-stage rake db:migrate
