@@ -49,6 +49,21 @@ class Group < ActiveRecord::Base
     self.save
   end
 
+  def find_archived_members_with_funds()
+    l = []
+    Membership.where(group_id: id).where.not(archived_at: nil).find_each do |membership|
+      if membership.raw_balance != 0
+        l.push({
+          membership_id: membership.id, 
+          user_name: User.find(membership.member_id).name,
+          archived_at: membership.archived_at,
+          balance: membership.raw_balance  
+          })
+      end
+    end
+    l
+  end
+
   def for_each_admin
     Membership.where(group_id: id, is_admin: :true, archived_at: nil).find_each do |admin|
       yield admin
