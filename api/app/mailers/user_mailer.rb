@@ -109,7 +109,6 @@ class UserMailer < ActionMailer::Base
   def notify_admins_archived_member_funds(admin: , group: ,memberlist: )
     @memberlist = memberlist
     @group = group
-    @group_user = group.ensure_group_user_exist()
     mail(to: admin,
          from: "Cobudget Updates <updates@cobudget.co>",
          subject: "Funds from archived members is returned to group account")
