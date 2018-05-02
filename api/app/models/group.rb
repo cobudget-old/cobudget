@@ -64,11 +64,11 @@ class Group < ActiveRecord::Base
     l
   end
 
-  def transfer_balance_from_member_to_group_account(member_id, current_user)
-    m = Membership.find(member_id)
+  def transfer_balance_from_member_to_group_account(membership_id, current_user)
+    m = Membership.find(membership_id)
     amount = m.raw_balance
     ActiveRecord::Base.transaction do
-      a = Allocation.create(user_id: member_id, group_id: id, amount: -amount)
+      a = Allocation.create(user_id: m.member_id, group_id: id, amount: -amount)
       Transaction.create!({
         datetime: a.created_at,
         from_account_id: m.status_account_id,
