@@ -42,7 +42,7 @@
         </div>
       </div>
 
-    <div class="profile-settings-page__password-fields" ng-show="showPasswordFields">
+      <div class="profile-settings-page__password-fields" ng-show="showPasswordFields">
         <md-divider class="profile-settings-page__form-divider"></md-divider>
 
         <div class="profile-settings-page__input-container">
@@ -64,6 +64,10 @@
           <div ng-if="passwordErrors.newPassword" class="profile-settings-page__input-error">{{ passwordErrors.newPassword }}</div>
           <div ng-if="passwordParams.confirm_password.length < 8 && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
         </div>
+      </div>
+
+      <div layout="row" layout-align="space-between center">
+        <p> If you would like your personal data in Cobudget to be deleted or modified, or download a copy of your data, please email <a href="mailto:hello@greaterthan.finance">support@greaterthan.finance</a>.</p>
       </div>
 
       <md-button type="submit" class="md-raised md-primary profile-settings-page__save-btn" ng-disabled="accountDetailsForm.$pristine">save</md-button>
