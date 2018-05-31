@@ -6,6 +6,7 @@ RUN npm install bower
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 RUN npm install -g gulp
 RUN npm install
+RUN npm rebuild node-sass
 ARG NODE_ENV
 RUN gulp build
 
