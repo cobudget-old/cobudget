@@ -10,6 +10,7 @@ module.exports =
         template: require('./virtual-tour-dialog.tmpl.html')
 
     $scope.startGroup = ->
+      $location.hash('')
       LoadBar.start()
       newUser = Records.users.build($scope.formData)
       newUser.save()
@@ -18,5 +19,5 @@ module.exports =
         .catch (err) ->
           LoadBar.stop()
           $location.path('/login').search({setup_group: true, email: newUser.email})
-          
+
     return

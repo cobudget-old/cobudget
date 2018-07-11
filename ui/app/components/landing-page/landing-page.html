@@ -9,29 +9,13 @@
         <em class="landing-page__beta">beta</em>
       </div>
 
-      <h1 class="landing-page__form-header">Where<br>money gets collaborative</h1>
+      <h1 class="landing-page__form-header" id="createGroup">Collaborative funding made easy</h1>
 
       <!-- <h2 class="landing-page__form-subheader">Cobudget helps groups allocate funds</h2> -->
 
-      <!-- <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
+      <form class="landing-page__take-tour">
         <div class="landing-page__input-container">
-          <input required class="landing-page__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
-          <md-button class="landing-page__submit-btn" type="submit">create group</md-button>
-          <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
-          <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
-        </div>
-
-
-        <a ng-if="false" class="landing-page__virtual-tour-link" ng-click="openVirtualTourDialog()" href="">or take a virtual tour</a>
-      </form> -->
-
-      <form class="landing-page__form">
-        <div class="landing-page__input-container">
-          <p class="landing-page__beta-text">We're currently in private beta.</p>
-          <a href="https://greaterthan.typeform.com/to/P4fB1O" target="_blank">
-            <md-button class="md-raised md-primary landing-page__submit-btn">request early access</md-button>
-          </a>
-          <p class="landing-page__signin-text">Already joined a Cobudget group? <a ng-click="redirectToLoginPage()">Sign in</a></p>
+          <md-button class="md-raised md-primary landing-page__tour-btn" ng-click="scrollTo('tour')">take tour</md-button>
         </div>
       </form>
     </div>
@@ -43,6 +27,17 @@
 
   <h1 class="landing-page__about-section-header-second-text hide-sm hide-xs">Cobudget makes it easy for organizations and groups<br> to allocate funds collaboratively and transparently.</h1>
   <h1 class="landing-page__about-section-header-second-text hide-md hide-lg">Cobudget makes it easy for organizations and groups to allocate funds collaboratively and transparently.</h1>
+
+  <form novalidate name="emailForm" class="landing-page__form" ng-submit="emailForm.$valid && startGroup()">
+    <div class="landing-page__input-container">
+      <input required class="landing-page__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
+      <md-button class="md-raised md-primary landing-page__submit-btn" type="submit">create group</md-button>
+      <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
+      <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
+    </div>
+    <p class="landing-page__signin-text">Already joined a Cobudget group? <a ng-click="redirectToLoginPage()">Sign in</a></p>
+    <!-- <a ng-if="false" class="landing-page__virtual-tour-link" ng-click="openVirtualTourDialog()" href="">or take a virtual tour</a> -->
+  </form>
 
   <div class="landing-page__about-section">
     <h1 class="landing-page__resources-section-header-text">What is Cobudget?</h1>
@@ -61,7 +56,7 @@
         </div>
       </div>
 
-      <div layout="row" layout-align="center center" class="landing-page__about-section-video">
+      <div layout="row" layout-align="center center" class="landing-page__about-section-video" id="tour">
         <iframe width="630" height="394" src="https://www.useloom.com/embed/b4d26448e1fc4d3bbf1015344e88291d" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       </div>
 
@@ -76,23 +71,90 @@
     </div>
   </div>
 
-  <div class="landing-page__how-section">
+  <div class="landing-page__how-section" id="pricing">
     <h1 class="landing-page__resources-section-header-text">How do I start?</h1>
-    <div class="landing-page__how-section-content" layout="column" flex>
+    <div class="landing-page__how-section-content" flex>
       <div layout-gt-sm="row" layout-align="start start">
-        <img class="landing-page__how-section-img" src="/img/services_fran.jpg" />
+        <!-- <img class="landing-page__how-section-img" src="/img/services_fran.jpg" /> -->
+        <div class="landing-page__how-section-free-container" layout="column">
+          <div class="landing-page__how-section-free-header">
+            <h1 class="landing-page__how-section-header">Explore</h1>
+            <p class="landing-page__how-section-header-info"><i>For evaluating the software</i></p>
+            <h3 class="landing-page__how-section-header-price">FREE</h3>
+            <md-input-container class="md-block">
+              <md-button class="md-raised md-primary landing-page__how-section-free-price-cta" ng-click="scrollTo('createGroup')">create group</md-button>
+            </md-input-container>
+          </div>
+          <div class="landing-page__how-section-price-body">
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Unlimited users</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              All basic Cobudget features</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Up to 5 completed budgets (buckets)</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Access to our open source resources</p>
+          </div>
+        </div>
 
-        <div>
+        <div class="landing-page__how-section-paid-container" layout="column">
+          <div class="landing-page__how-section-paid-header">
+            <h1 class="landing-page__how-section-header">Take Off</h1>
+            <p class="landing-page__how-section-header-info"><i>When you’re ready to ramp up <br> your Cobudgeting</i></p>
+            <h3 class="landing-page__how-section-header-price">24,99 €/month <br>
+              <small class="landing-page__how-section-header-price-sub">per group or 250 € per year</small>
+            </h3>
+
+            <md-input-container class="md-block">
+              <md-button class="md-raised md-primary landing-page__how-section-paid-price-cta" ng-click="redirectToHomePageCreateGroup()">create group</md-button>
+            </md-input-container>
+          </div>
+          <div class="landing-page__how-section-price-body">
+            <p class="landing-page__how-section-price-body-header">Everything in EXPLORE, and:</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Unlimited completed budgets (buckets)</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Individual support</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              30 min support session with a Cobudget expert</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Access to our curated Community of Practice</p>
+          </div>
+        </div>
+
+        <div class="landing-page__how-section-enterprise-container" layout="column">
+          <div class="landing-page__how-section-enterprise-header">
+            <h1 class="landing-page__how-section-header">Let's Talk</h1>
+            <p class="landing-page__how-section-header-info"><i>Cobudgeting with in-depth expert support</i></p>
+            <h3 class="landing-page__how-section-header-price">CUSTOM</h3>
+            <md-input-container class="md-block">
+              <md-button class="md-raised md-primary landing-page__how-section-enterprise-price-cta" ng-click="redirectToServicesPage()">learn more</md-button>
+            </md-input-container>
+          </div>
+          <div class="landing-page__how-section-price-body">
+            <p class="landing-page__how-section-price-body-header">Everything in TAKE OFF, and:</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Setup, onboarding assistance & user training</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Tailored support materials</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Innovation process diagnostic</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Governance consulting</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Ongoing support & facilitation</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Custom Development</p>
+            <p><ng-md-icon icon="done" size="12"></ng-md-icon>
+              Usage Analytics</p>
+          </div>
+        </div>
+
+        <!-- <div>
           <p class="landing-page__about-section-subheader-text landing-page__about-section-subheader-text-starting">
             The <b>Greaterthan</b> team offers services to help you get started with Cobudget and optimize it for your needs. We cater to all types of organizations, from emerging networks, to cooperatives, to corporates.
           </p>
-        </div>
-      </div>
-
-      <div layout="row" layout-align="center center">
-        <a href="https://www.greaterthan.finance/cobudget" target="_blank">
-          <md-button class="md-raised md-primary landing-page__about-section-btn">our services</md-button>
-        </a>
+        </div> -->
       </div>
 
       <div flex></div>
@@ -100,7 +162,7 @@
     </div>
   </div>
 
-  <div class="landing-page__resources-section">
+  <div class="landing-page__resources-section" id="studies">
 
     <h1 class="landing-page__resources-section-header-text">Organizations Using Cobudget</h1>
 
@@ -110,7 +172,7 @@
         <img class="landing-page__resources-section-img-1" src="/img/outlandish1.jpg" />
 
         <div>
-          <h1 class="landing-page__resources-section-subheader-text"><a href="https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/use-case-outlandish.html" target="_blank">Outlandish</a></h1>
+          <h1 class="landing-page__resources-section-subheader-text"><a href="https://stories.greaterthan.finance/investing-surplus-for-impact-cobudgeting-at-outlandish-efa9890d0d4f" target="_blank">Outlandish</a></h1>
 
           <p class="landing-page__resources-section-text">Outlandish is a web services consultancy and worker-owned cooperative.</p>
 
@@ -142,7 +204,7 @@
       <div layout="row" layout-align="start start">
 
         <div>
-          <h1 class="landing-page__resources-section-subheader-text"><a href="https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/case-study-evolutionary-leadership-institute.html" target="_blank">Institute for Evolutionary Leadership</a></h1>
+          <h1 class="landing-page__resources-section-subheader-text"><a href="https://stories.greaterthan.finance/cobudgeting-for-member-engagement-bd1c54ed434" target="_blank">Institute for Evolutionary Leadership</a></h1>
 
           <p class="landing-page__resources-section-text">IEL is a consulting company and community of thought leaders working towards a more just, sustainable, and flourishing world.</p>
 
@@ -172,8 +234,8 @@
 
     </div>
     <div layout="row" layout-align="center center">
-      <a href="https://greaterthan.gitbooks.io/greaterthan-s-guide-to-collaborative-finance/content/case-studies.html" target="_blank">
-        <md-button class="md-raised md-primary landing-page__submit-btn">more case studies</md-button>
+      <a href="https://stories.greaterthan.finance/tagged/cobudget" target="_blank">
+        <md-button class="md-raised md-primary landing-page__resources-section-btn">more case studies</md-button>
       </a>
     </div>
   </div>
