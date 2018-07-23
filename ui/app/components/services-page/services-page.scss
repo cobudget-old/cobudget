@@ -25,7 +25,7 @@
 
 .services-page__subheader-text {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 20px;
   margin: 0;
   margin-bottom: 15px;
 }
@@ -46,7 +46,7 @@
 
 
 .services-page__header-second-text {
-  margin-top: 50px;
+  margin-top: 0;
   font-size: 40px;
 }
 
@@ -61,7 +61,7 @@
 
 .services-page__info-text {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   margin-top: -10px;
 }
@@ -87,9 +87,10 @@
 }
 
 .services-page__steps-details {
-  height: 150px;
+  height: 200px;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 20px;
+  min-width: 300px;
 }
 
 @media (max-width: 900px) {

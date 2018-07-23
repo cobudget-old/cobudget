@@ -35,7 +35,7 @@
       <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="landing-page__input-error">Email is required.</div>
       <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="landing-page__input-error">Email address must be valid.</div>
     </div>
-    <p class="landing-page__signin-text">Already joined a Cobudget group? <a ng-click="redirectToLoginPage()">Sign in</a></p>
+    <p class="landing-page__signin-text">Already joined a Cobudget group? <a ng-click="redirectToLoginPage()">Log in</a></p>
     <!-- <a ng-if="false" class="landing-page__virtual-tour-link" ng-click="openVirtualTourDialog()" href="">or take a virtual tour</a> -->
   </form>
 
@@ -79,10 +79,10 @@
         <div class="landing-page__how-section-free-container" layout="column">
           <div class="landing-page__how-section-free-header">
             <h1 class="landing-page__how-section-header">Explore</h1>
-            <p class="landing-page__how-section-header-info"><i>For evaluating the software</i></p>
-            <h3 class="landing-page__how-section-header-price">FREE</h3>
+            <p class="landing-page__how-section-header-info">For evaluating the software</p>
+            <h2 class="landing-page__how-section-header-price">FREE</h2>
             <md-input-container class="md-block">
-              <md-button class="md-raised md-primary landing-page__how-section-free-price-cta" ng-click="scrollTo('createGroup')">create group</md-button>
+              <md-button class="md-raised md-primary landing-page__how-section-free-price-cta" ng-click="createGroupDialog()">create group</md-button>
             </md-input-container>
           </div>
           <div class="landing-page__how-section-price-body">
@@ -100,13 +100,13 @@
         <div class="landing-page__how-section-paid-container" layout="column">
           <div class="landing-page__how-section-paid-header">
             <h1 class="landing-page__how-section-header">Take Off</h1>
-            <p class="landing-page__how-section-header-info"><i>When you’re ready to ramp up <br> your Cobudgeting</i></p>
-            <h3 class="landing-page__how-section-header-price">24,99 €/month <br>
-              <small class="landing-page__how-section-header-price-sub">per group or 250 € per year</small>
-            </h3>
+            <p class="landing-page__how-section-header-info">To ramp up your Cobudgeting</p>
+            <h2 class="landing-page__how-section-header-price">49,99 €/month <br>
+              <small class="landing-page__how-section-header-price-sub">per group or 500 € per year</small>
+            </h2>
 
             <md-input-container class="md-block">
-              <md-button class="md-raised md-primary landing-page__how-section-paid-price-cta" ng-click="redirectToHomePageCreateGroup()">create group</md-button>
+              <md-button class="md-raised md-primary landing-page__how-section-paid-price-cta" ng-click="createGroupDialog()">create group</md-button>
             </md-input-container>
           </div>
           <div class="landing-page__how-section-price-body">
@@ -116,7 +116,7 @@
             <p><ng-md-icon icon="done" size="12"></ng-md-icon>
               Individual support</p>
             <p><ng-md-icon icon="done" size="12"></ng-md-icon>
-              30 min support session with a Cobudget expert</p>
+              1 hour support session with a Cobudget expert</p>
             <p><ng-md-icon icon="done" size="12"></ng-md-icon>
               Access to our curated Community of Practice</p>
           </div>
@@ -125,8 +125,8 @@
         <div class="landing-page__how-section-enterprise-container" layout="column">
           <div class="landing-page__how-section-enterprise-header">
             <h1 class="landing-page__how-section-header">Let's Talk</h1>
-            <p class="landing-page__how-section-header-info"><i>Cobudgeting with in-depth expert support</i></p>
-            <h3 class="landing-page__how-section-header-price">CUSTOM</h3>
+            <p class="landing-page__how-section-header-info">Cobudget with expert support</p>
+            <h2 class="landing-page__how-section-header-price">CUSTOM</h2>
             <md-input-container class="md-block">
               <md-button class="md-raised md-primary landing-page__how-section-enterprise-price-cta" ng-click="redirectToServicesPage()">learn more</md-button>
             </md-input-container>

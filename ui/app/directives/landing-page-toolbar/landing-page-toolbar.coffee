@@ -5,7 +5,13 @@ global.cobudgetApp.directive 'landingPageToolbar', () ->
     restrict: 'E'
     template: require('./landing-page-toolbar.html')
     replace: true
-    controller: ($location, $scope, $anchorScroll) ->
+    controller: ($location, $scope, $anchorScroll, Dialog) ->
+
+      $scope.createGroupDialog = (membership) ->
+        createGroupDialog = require('./../../components/create-group-dialog/create-group-dialog.coffee')({
+          scope: $scope
+        })
+        Dialog.open(createGroupDialog)
 
       $scope.scrollTo = (id) ->
         $location.hash(id)

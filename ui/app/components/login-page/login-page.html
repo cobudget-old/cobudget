@@ -6,7 +6,7 @@
       <md-card-content>
         <img class="login-page__logo" src="./img/logo_icon.svg" alt="Cobudget" />
 
-        <h1 class="login-page__heading">Sign in to continue</h1>
+        <h1 class="login-page__heading">Log in to continue</h1>
 
         <form novalidate class="login-page__form" name="loginForm" ng-submit="login(formData)" ng-autodisable>
           <div class="login-page__form-errors">{{ formError }}</div>
@@ -22,7 +22,7 @@
             <div ng-if="loginForm.password.$error.required && loginForm.$submitted" class="login-page__input-error">This is required.</div>
           </div>
 
-          <md-button class="md-raised md-primary login-page__submit-btn" type="submit">Sign In</md-button>
+          <md-button class="md-raised md-primary login-page__submit-btn" type="submit">Log In</md-button>
         </form>
 
         <div class="login-page__buttons-container" layout="column" layout-align="center end">

@@ -98,10 +98,6 @@
   color: red;
 }
 
-.landing-page__or {
-  text-align: center;
-}
-
 .landing-page__signin-text {
   margin-top: 5px;
   color: $grey-on-white;
@@ -366,7 +362,7 @@
 .landing-page__how-section-price-body {
   text-align: left;
   height: 340px;
-  font-weight: 200;
+  font-weight: 300;
   padding: 10px 14px;
 }
 
@@ -375,8 +371,20 @@
 }
 
 .landing-page__how-section-free-header {
-  background-color: #ffe5c0;
+  background-color: #fff0da;
   padding: 8px;
+}
+
+.landing-page__how-section-free-header .landing-page__how-section-header, .landing-page__how-section-free-header .landing-page__how-section-header-info {
+  color: $cob-yellow;
+}
+
+.landing-page__how-section-paid-header .landing-page__how-section-header, .landing-page__how-section-paid-header .landing-page__how-section-header-info {
+  color: $cob-pink;
+}
+
+.landing-page__how-section-enterprise-header .landing-page__how-section-header, .landing-page__how-section-enterprise-header .landing-page__how-section-header-info {
+  color: $cob-cyan;
 }
 
 .landing-page__how-section-paid-header {
@@ -423,8 +431,8 @@
 
 .landing-page__how-section-header-info {
   height: 30px;
-  font-size: 12px;
-  font-weight: 100;
+  font-size: 16px;
+  font-weight: 300;
 }
 
 .landing-page__how-section-header-price {
@@ -434,7 +442,7 @@
 
 .landing-page__how-section-header-price-sub {
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 .landing-page__how-section-img {

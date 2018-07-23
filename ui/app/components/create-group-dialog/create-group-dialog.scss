@@ -1,0 +1,48 @@
+// create group dialog
+
+.create-group-dialog__form {
+  text-align: center;
+}
+
+.create-group-dialog__email-field {
+  font-size: 20px;
+  display: inline;
+  border: 2px solid #B5B8BB;
+  box-sizing: border-box;
+  padding: 6px 0;
+  border-radius: 3px;
+  background: inherit;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.create-group-dialog__email-field:focus {
+  outline: none;
+}
+
+.create-group-dialog__input-error {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+
+.create-group-dialog__signin-text {
+  margin-top: 5px;
+  color: $grey-on-white;
+  font-size: 12px;
+}
+
+.create-group-dialog__signin-text a {
+  cursor: pointer;
+}
+
+.create-group-dialog__submit-btn {
+  background: $cob-pink !important;
+}
+
+.create-group-dialog__cancel-btn {
+  color: $grey-on-white !important;
+  background: transparent !important;
+}
