@@ -3,7 +3,7 @@
 
     <form novalidate name="emailForm" class="create-group-dialog__form" ng-submit="emailForm.$valid && startGroup()">
       <div class="landing-page__input-container">
-        <input required class="create-group-dialog__email-field" type="email" name="email" placeholder="Email Address" ng-model="formData.email">
+        <input required class="create-group-dialog__email-field" type="email" name="email" placeholder="Your Email Address" ng-model="formData.email">
         <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="create-group-dialog__input-error">Email is required.</div>
         <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="create-group-dialog__input-error">Email address must be valid.</div>
       </div>

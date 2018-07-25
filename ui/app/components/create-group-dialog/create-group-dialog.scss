@@ -2,6 +2,7 @@
 
 .create-group-dialog__form {
   text-align: center;
+  padding: 20px 40px;
 }
 
 .create-group-dialog__email-field {
@@ -32,6 +33,7 @@
   margin-top: 5px;
   color: $grey-on-white;
   font-size: 12px;
+  margin-bottom: 30px;
 }
 
 .create-group-dialog__signin-text a {
@@ -40,6 +42,7 @@
 
 .create-group-dialog__submit-btn {
   background: $cob-pink !important;
+  padding: 0 12px;
 }
 
 .create-group-dialog__cancel-btn {
