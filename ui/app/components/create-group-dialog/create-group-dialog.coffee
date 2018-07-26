@@ -1,13 +1,7 @@
-module.exports =
-  url: '/'
-  template: require('./landing-page.html')
-  controller: (Dialog, LoadBar, $location, Records, $scope, Session, ValidateAndRedirectLoggedInUser) ->
-
-    ValidateAndRedirectLoggedInUser()
-
-    $scope.openVirtualTourDialog = ->
-      Dialog.custom
-        template: require('./virtual-tour-dialog.tmpl.html')
+module.exports = (params) ->
+  template: require('./create-group-dialog.html')
+  scope: params.scope
+  controller: (Dialog, $mdDialog, $scope, $window, $location, LoadBar, Records, Session) ->
 
     $scope.startGroup = ->
       $location.hash('')
@@ -20,4 +14,5 @@ module.exports =
           LoadBar.stop()
           $location.path('/login').search({setup_group: true, email: newUser.email})
 
-    return
+    $scope.cancel = ->
+      $mdDialog.cancel()

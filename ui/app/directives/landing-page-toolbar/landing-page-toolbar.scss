@@ -87,6 +87,12 @@
   display: none;
 }
 
+.landing-page-toolbar__xs-menu-btn {
+  min-height: 0;
+  min-width: 0;
+  padding-top: 10px;
+}
+
 // media
 
 @media (max-width: 450px) {

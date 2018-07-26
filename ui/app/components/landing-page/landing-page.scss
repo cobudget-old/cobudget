@@ -37,6 +37,10 @@
   margin-top: -4px;
 }
 
+.landing-page__form {
+  text-align: center;
+}
+
 .landing-page__form-header {
   font-size: 94px;
   margin-top: 0;
@@ -62,29 +66,26 @@
 
 .landing-page__form {
   width: 100%;
+  margin-top: 40px;
 }
 
 .landing-page__input-container {
   width: 100%;
   margin: 0 auto;
-  margin-top: 5px;
   display: inline;
 }
 
 .landing-page__email-field {
   font-size: 20px;
   display: inline;
-  // margin: 0 auto;
   border: 2px solid #B5B8BB;
   box-sizing: border-box;
-  padding: 6px 10px;
+  padding: 6px 0;
   border-radius: 3px;
   background: inherit;
   font-weight: 400;
   text-align: center;
-  width: 220px;
   margin-bottom: 5px;
-  margin-top: 40px;
 }
 
 .landing-page__email-field:focus {
@@ -95,11 +96,6 @@
   font-size: 12px;
   margin-top: 5px;
   color: red;
-}
-
-.landing-page__beta-text {
-  margin-bottom: 5px;
-  color: $grey-on-white;
 }
 
 .landing-page__signin-text {
@@ -116,9 +112,18 @@
   font-size: 16px;
   font-weight: 600;
   background: $cob-pink !important;
-  min-height: 37px;
+  margin-left: 0;
+  padding: 2px 16px;
+  margin-top: 0;
+}
+
+.landing-page__tour-btn {
+  font-size: 16px;
+  font-weight: 600;
+  background: $cob-cyan !important;
   margin-left: 0;
   padding: 14px 32px;
+  margin-top: 40px;
 }
 
 // virtual tour dialog
@@ -329,6 +334,115 @@
   max-width: 850px;
   margin: 60px auto 30px;
   padding: 30px;
+  text-align: center;
+}
+
+.landing-page__how-section-free-container {
+  border: 2px solid $cob-yellow;
+  width: 33%;
+  margin: 5px;
+}
+
+.landing-page__how-section-paid-container {
+  border: 2px solid $cob-pink;
+  width: 33%;
+  margin: 5px;
+}
+
+.landing-page__how-section-enterprise-container {
+  border: 2px solid $cob-cyan;
+  width: 33%;
+  margin: 5px;
+}
+
+.landing-page__how-section-header {
+  text-transform: uppercase;
+}
+
+.landing-page__how-section-price-body {
+  text-align: left;
+  height: 340px;
+  font-weight: 300;
+  padding: 10px 14px;
+}
+
+.landing-page__how-section-price-body-header {
+  font-weight: 500;
+}
+
+.landing-page__how-section-free-header {
+  background-color: #fff0da;
+  padding: 8px;
+}
+
+.landing-page__how-section-free-header .landing-page__how-section-header, .landing-page__how-section-free-header .landing-page__how-section-header-info {
+  color: $cob-yellow;
+}
+
+.landing-page__how-section-paid-header .landing-page__how-section-header, .landing-page__how-section-paid-header .landing-page__how-section-header-info {
+  color: $cob-pink;
+}
+
+.landing-page__how-section-enterprise-header .landing-page__how-section-header, .landing-page__how-section-enterprise-header .landing-page__how-section-header-info {
+  color: $cob-cyan;
+}
+
+.landing-page__how-section-paid-header {
+  background-color: #ffdde9;
+  padding: 8px;
+}
+
+.landing-page__how-section-enterprise-header {
+  background-color: #ddf2fa;
+  padding: 8px;
+}
+
+.landing-page__how-section-price-cta {
+  width: 100%;
+  margin: 0;
+  font-size: 16px;
+  background: $cob-pink !important;
+  margin-left: 0;
+}
+
+.landing-page__how-section-free-price-cta {
+  width: 100%;
+  margin: 0;
+  font-size: 16px;
+  background: $cob-yellow !important;
+  margin-left: 0;
+}
+
+.landing-page__how-section-paid-price-cta {
+  width: 100%;
+  margin: 0;
+  font-size: 16px;
+  background: $cob-pink !important;
+  margin-left: 0;
+}
+
+.landing-page__how-section-enterprise-price-cta {
+  width: 100%;
+  margin: 0;
+  font-size: 16px;
+  background: $cob-cyan !important;
+  margin-left: 0;
+}
+
+.landing-page__how-section-header-info {
+  height: 30px;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.landing-page__how-section-header-price {
+  margin-bottom: -3px;
+  height: 50px;
+}
+
+.landing-page__how-section-header-price-sub {
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .landing-page__how-section-img {
@@ -425,6 +539,10 @@
 }
 
 @media (max-width: 960px) {
+  .landing-page__how-section-free-container, .landing-page__how-section-paid-container, .landing-page__how-section-enterprise-container {
+    width: 100%;
+  }
+
   .landing-page__resources-section-img-1, .landing-page__resources-section-img-2 {
     display: none;
   }

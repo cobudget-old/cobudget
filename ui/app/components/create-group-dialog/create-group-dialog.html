@@ -1,0 +1,17 @@
+<md-dialog aria-label="create group dialog">
+  <md-dialog-content class="sticky-container">
+
+    <form novalidate name="emailForm" class="create-group-dialog__form" ng-submit="emailForm.$valid && startGroup()">
+      <div class="landing-page__input-container">
+        <input required class="create-group-dialog__email-field" type="email" name="email" placeholder="Your Email Address" ng-model="formData.email">
+        <div ng-if="emailForm.email.$error.required && emailForm.$submitted" class="create-group-dialog__input-error">Email is required.</div>
+        <div ng-if="emailForm.email.$error.email && emailForm.$submitted" class="create-group-dialog__input-error">Email address must be valid.</div>
+      </div>
+      <p class="create-group-dialog__signin-text">Already joined a Cobudget group? <a ng-click="redirectToLoginPage()">Log in</a></p>
+      <div class="md-actions" layout="row">
+        <md-button class="create-group-dialog__cancel-btn" ng-click="cancel()">cancel</md-button>
+        <md-button class="md-raised md-primary create-group-dialog__submit-btn" type="submit">create group</md-button>
+      </div>
+    </form>
+  </md-dialog-content>
+</md-dialog>

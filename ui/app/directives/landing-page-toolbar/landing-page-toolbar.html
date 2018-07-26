@@ -33,13 +33,72 @@
     </md-menu-content>
   </md-menu> -->
 
+  <md-menu hide-gt-xs>
+    <md-button class="landing-page-toolbar__xs-menu-btn" ng-click="$mdMenu.open($event)">
+      <ng-md-icon icon="menu"></ng-md-icon>
+    </md-button>
+    <md-menu-content>
+      <md-menu-item>
+        <md-button ng-click="createGroupDialog()">
+          Create group
+        </md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ng-click="redirectToHomePageTour()">
+          Tour
+        </md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ng-click="redirectToHomePageStudies()">
+          Case studies
+        </md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ng-click="redirectToHomePagePricing()">
+          Pricing
+        </md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button aria-label="login" ng-click="redirectToServicesPage()">
+          Services
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
   <span flex class="landing-page-toolbar__header-separator"></span>
 
-  <a href="https://greaterthan.typeform.com/to/P4fB1O" target="_blank">
-    <md-button class="md-raised md-primary landing-page-toolbar__early-access-btn">request early access</md-button>
-  </a>
+  <md-menu hide-xs>
+    <md-button ng-click="$mdMenu.open($event)">
+      About
+    </md-button>
+    <md-menu-content>
+      <md-menu-item>
+        <md-button ng-click="redirectToHomePageTour()">
+          Tour
+        </md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ng-click="redirectToHomePageStudies()">
+          Case studies
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+
+  <md-button hide-xs ng-click="redirectToHomePagePricing()">
+    Pricing
+  </md-button>
+
+  <md-button hide-xs aria-label="login" ng-click="redirectToServicesPage()">
+    Services
+  </md-button>
+
+  <md-button hide-xs class="md-raised md-primary landing-page-toolbar__early-access-btn" ng-click="createGroupDialog()">
+    Create group
+  </md-button>
 
   <md-button class="landing-page-toolbar__login-btn" aria-label="login" ng-click="redirectToLoginPage()">
-    Sign in
+    Log in
   </md-button>
 </div>
