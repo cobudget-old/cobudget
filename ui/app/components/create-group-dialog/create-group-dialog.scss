@@ -5,6 +5,12 @@
   padding: 20px 40px;
 }
 
+@media (max-width: 960px) {
+  .create-group-dialog__form {
+    padding: 20px 10px;
+}
+}
+
 .create-group-dialog__email-field {
   font-size: 20px;
   display: inline;
