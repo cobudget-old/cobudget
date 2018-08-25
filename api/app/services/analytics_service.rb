@@ -92,7 +92,7 @@ class AnalyticsService
     end
 
     def group_data
-      groups = Group.where(created_at: Date.parse("january 1 2017")..Time.current)
+      groups = Group.all
       groups.map do |group|
         {
           admins: group.members.joins(:memberships).where(memberships: {is_admin: true}).distinct.order(:created_at).as_json(only: [:name, :email]).map { |h| h.symbolize_keys },
