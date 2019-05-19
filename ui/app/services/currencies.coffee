@@ -10,4 +10,5 @@ global.cobudgetApp.factory 'Currencies', () ->
     { code: 'EUR', symbol: '€' },
     { code: 'CHF', symbol: 'CHF' },
     { code: 'JPY', symbol: '¥' },
-    { code: 'DKK', symbol: 'DKK'}]
+    { code: 'DKK', symbol: 'DKK'},
+    { code: 'SEC', symbol: 'SEC'}]
