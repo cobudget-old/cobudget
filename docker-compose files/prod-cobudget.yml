@@ -44,7 +44,7 @@ services:
       - SMTP_SERVER=smtp.sendgrid.net
       - SMTP_USERNAME=apikey
   cobudget-ui:
-    image: greaterthanfinance/cobudget-ui:latest
+    image: cobudget-ui:latest
     ports:
       - target: 80
         published: 80
