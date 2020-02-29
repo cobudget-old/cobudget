@@ -56,5 +56,5 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: cobudget-api-service
-        cluster: default
+        cluster: cobudget-prod-cluster
         wait-for-service-stability: true
