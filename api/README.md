@@ -10,10 +10,6 @@ cobudget's backend api. for more information on the project as a whole, check ou
 ---
 ## System setup/prerequisites
 
-### set up heroku
-add-apt-repository "deb https://cli-assets.heroku.com/branches/stable/apt ./"; 
-curl -L https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -; apt-get update; apt-get install heroku
-
 ### system dependencies
 
 ```
