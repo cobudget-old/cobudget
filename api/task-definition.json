@@ -1,5 +1,5 @@
 {
-    "family": "cofamily",
+    "family": "cobudget-ecs-family",
     "executionRoleArn": "arn:aws:iam::041454725975:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "cpu": "512",
