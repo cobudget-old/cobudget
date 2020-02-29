@@ -1,0 +1,54 @@
+{
+    "family": "cofamily",
+    "executionRoleArn": "arn:aws:iam::041454725975:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "cpu": "512",
+    "memory": "1024",
+
+    "containerDefinitions": [
+        {
+            "name": "cobudget-api",
+            "image": "",
+            "cpu": 512,
+            "memory": 1024,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "command": [
+                "rails s -b 0.0.0.0"
+            ],
+            "environment": [
+                { "name": "RAILS_ENV", "value": "production" },
+                { "name": "RACK_ENV", "value": "production" }
+            ],
+            "secrets": [
+                { "name": "DATABASE_URL", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/DATABASE_URL" },
+                { "name": "SECRET_KEY_BASE", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SECRET_KEY_BASE" },
+                { "name": "CANONICAL_HOST", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/CANONICAL_HOST" },
+                { "name": "DEVOPS_MAIL", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/DEVOPS_MAIL" },
+                { "name": "SMTP_DOMAIN", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SMTP_DOMAIN" },
+                { "name": "SMTP_PASSWORD", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SMTP_PASSWORD" },
+                { "name": "SMTP_PORT", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SMTP_PORT" },
+                { "name": "SMTP_SERVER", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SMTP_SERVER" },
+                { "name": "SMTP_USERNAME", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SMTP_USERNAME" }                
+            ],
+            "hostname": "cobudget.co",
+            "logConfiguration":{  
+                "logDriver":"awslogs",
+                "options":{  
+                   "awslogs-group":"/ecs/cobudget",
+                   "awslogs-region":"us-west-2",
+                   "awslogs-stream-prefix":"ecs"
+                }
+             }
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ]
+}
