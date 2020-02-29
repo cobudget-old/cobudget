@@ -47,7 +47,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: task-definition.json
+        task-definition: api/task-definition.json
         container-name: cobudget-api
         image: ${{ steps.build-image.outputs.image }}
 
