@@ -21,6 +21,6 @@ jobs:
         node-version: '6'
     - run: |
         npm install -g gulp bower
-        npm install
+        npm install --quiet
         NODE_ENV=production npm run build
       working-directory: ui
