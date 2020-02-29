@@ -37,7 +37,6 @@
                 { "name": "SMTP_SERVER", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SMTP_SERVER" },
                 { "name": "SMTP_USERNAME", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/SMTP_USERNAME" }                
             ],
-            "hostname": "cobudget.co",
             "logConfiguration":{  
                 "logDriver":"awslogs",
                 "options":{  
