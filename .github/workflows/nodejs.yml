@@ -19,9 +19,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '6'
-    - run: npm install -g gulp bower && npm install
-      working-directory: ui
-    - run: CI=true npm run test-e2e
-      working-directory: ui
-    - run: NODE_ENV=production npm run build
+    - run: |
+        npm install -g gulp bower
+        npm install
+        NODE_ENV=production npm run build
       working-directory: ui
