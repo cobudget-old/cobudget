@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "ui/**"
   pull_request:
     branches:
       - master
+    paths:
+      - "ui/**"
 
 jobs:
   build:
