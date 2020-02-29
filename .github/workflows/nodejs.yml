@@ -21,7 +21,7 @@ jobs:
         node-version: '6'
     - run: npm install -g gulp bower && npm install
       working-directory: ui
-    - run: CI=true npm test
+    - run: CI=true npm run test-spec
       working-directory: ui
     - run: NODE_ENV=production npm run build
       working-directory: ui
