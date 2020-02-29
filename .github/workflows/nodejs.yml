@@ -1,0 +1,21 @@
+name: Cobudget UI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and deploy
+      uses: actions/setup-node@v1
+      with:
+        node-version: '6'
+    - run: npm install
+    - run: CI=true npm test
+    - run: NODE_ENV=production npm run build
