@@ -1,1 +1,1 @@
-DEVOPS_MAIL was not set in SSM Parameter Store which caused a Stopped reason "Fetching secret data from SSM Parameter Store in us-west-2: invalid parameters: /DEVOPS_MAIL"
+Restrictive ECR lifecycle policy prevented image from being pulled.
