@@ -1,1 +1,1 @@
-unfortunately github actions can't be manually triggered.
+ecsTaskExecutionRole did not have access to read secrets in SSM. This has been rectified.
