@@ -1,1 +1,1 @@
-Adding new ECS service that uses public networking in attempt to resolve CannotPullContainerError
+Adding a log groupd to work around "CannotStartContainerError: Error response from daemon: failed to initialize logging driver: failed to create Cloudwatch log stream: ResourceNotFoundException: The specified log group does not exist. status code: 400" error
