@@ -55,6 +55,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: cobudget-api-service
+          service: cobudget-prod-service
           cluster: cobudget-prod-cluster
           wait-for-service-stability: true
