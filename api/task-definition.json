@@ -1,7 +1,7 @@
 {
     "family": "cobudget-ecs-family",
     "executionRoleArn": "arn:aws:iam::041454725975:role/ecsTaskExecutionRole",
-    "networkMode": "bridge",
+    "networkMode": "awsvpc",
     "cpu": "512",
     "memory": "1024",
 
