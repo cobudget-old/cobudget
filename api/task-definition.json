@@ -20,12 +20,12 @@
             ],
             "essential": true,
             "command": [
-                "find /"
+                "rails s -b 0.0.0.0"
             ],
             "environment": [
                 { "name": "RAILS_ENV", "value": "production" },
                 { "name": "RACK_ENV", "value": "production" },
-                { "name": "PATH", "value": "PATH /usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" }
+                { "name": "PATH", "value": "/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" }
             ],
             "secrets": [
                 { "name": "DATABASE_URL", "valueFrom": "arn:aws:ssm:us-west-2:041454725975:parameter/DATABASE_URL" },
