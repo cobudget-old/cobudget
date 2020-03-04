@@ -20,7 +20,7 @@
             ],
             "essential": true,
             "command": [
-                "rails s -b 0.0.0.0"
+                "rails", "s", "-b", "0.0.0.0"
             ],
             "environment": [
                 { "name": "RAILS_ENV", "value": "production" },
