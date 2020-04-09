@@ -1,6 +1,6 @@
 class DropAllocators < ActiveRecord::Migration
   def up
-    remove_foreign_key(:allocations, name: 'allocations_allocator_id_fk')
+    remove_foreign_key :allocations, :allocators
     drop_table :allocation_rights
     drop_table :reserve_buckets
     drop_table :allocators

@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20180328223945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "group_id"
@@ -131,8 +130,8 @@ ActiveRecord::Schema.define(version: 20180328223945) do
     t.datetime "trial_end"
     t.string   "plan"
     t.text     "description"
-    t.boolean  "funding_freeze",    default: false
     t.integer  "status_account_id"
+    t.boolean  "funding_freeze",    default: false
     t.string   "add_funds"
   end
 

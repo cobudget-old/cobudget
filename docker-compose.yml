@@ -1,0 +1,66 @@
+version: "3.2"
+
+services:
+
+  cobudget-api:
+    build: ./api
+    restart: "unless-stopped"
+    command: rails s -b 0.0.0.0
+    env_file: .env.example
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/cobudget-api
+    depends_on:
+      - cobudget-db
+
+  delayed-job:
+    build: ./api
+    restart: "unless-stopped"
+    command: rake jobs:work
+    env_file: .env.example
+    volumes:
+      - ./api:/cobudget-api
+    depends_on:
+      - cobudget-db
+  
+  activity-emails:
+    build: ./api
+    restart: "unless-stopped"
+    command: /bin/bash -c "env >/root/env-vars && cron -f"
+    env_file: .env.example
+    volumes:
+      - ./api:/cobudget-api
+    depends_on:
+      - cobudget-db
+  
+  mailcatcher:
+    build: ./api
+    restart: "unless-stopped"
+    command: mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0
+    ports:
+      - 1080:1080
+
+  cobudget-ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile.dev
+    restart: "unless-stopped"
+    ports:
+      - 9000:9000
+    volumes:
+      - ./ui:/app
+    environment:
+      - DOMAIN=cobudget.local
+      - NODE_ENV=development
+    depends_on:
+      - cobudget-api
+    
+  cobudget-db:
+    image: postgres:9.6
+    restart: "no"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+
