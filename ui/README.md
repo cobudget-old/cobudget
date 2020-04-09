@@ -20,8 +20,8 @@ Install bower: `npm install -g bower`
 ### Download and install cobudget-ui
 
 ```
-git clone https://github.com/cobudget/cobudget-ui
-cd cobudget-ui
+git clone https://github.com/cobudget/cobudget
+cd cobudget/ui
 npm install
 ```
 
