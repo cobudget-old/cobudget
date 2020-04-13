@@ -33,8 +33,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
-  config.action_mailer.default_url_options = { host: 'localhost:9000'}
+  config.action_mailer.smtp_settings = { :address => "mailcatcher", :port => 1025 }
+  config.action_mailer.default_url_options = { host: 'mailcatcher:9000'}
   config.action_mailer.raise_delivery_errors = true
 
   # Devops user. Mails will be sent to the user when it's sent to group admins
