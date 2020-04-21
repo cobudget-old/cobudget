@@ -1,6 +1,6 @@
 
 import codebuild = require('@aws-cdk/aws-codebuild');
-import codecommit = require('@aws-cdk/aws-codecommit');
+// import codecommit = require('@aws-cdk/aws-codecommit');
 import codepipeline = require('@aws-cdk/aws-codepipeline');
 import codepipeline_actions = require('@aws-cdk/aws-codepipeline-actions');
 import lambda = require('@aws-cdk/aws-lambda');
@@ -42,6 +42,7 @@ export class PipelineStack extends Stack {
         buildImage: codebuild.LinuxBuildImage.UBUNTU_14_04_NODEJS_10_14_1,
       },
     });
+
     const lambdaBuild = new codebuild.PipelineProject(this, 'LambdaBuild', {
       buildSpec: codebuild.BuildSpec.fromObject({
         version: '0.2',
@@ -77,10 +78,13 @@ export class PipelineStack extends Stack {
         {
           stageName: 'Source',
           actions: [
-            new codepipeline_actions.CodeCommitSourceAction({
-              actionName: 'CodeCommit_Source',
-              repository: code,
+            new codepipeline_actions.GitHubSourceAction({
+              actionName: 'GitHub',
+              owner: 'cobudget',
+              repo: 'cobudget',
+              oauthToken: cdk.SecretValue.secretsManager('my-github-token'),
               output: sourceOutput,
+              trigger: codepipeline_actions.GitHubTrigger.Webhook,
             }),
           ],
         },
