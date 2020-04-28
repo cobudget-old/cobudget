@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-- '0.10'
+  - 6.17.1
 rvm:
   - 2.0.0
-before_install: 
+before_install:
 - npm install -g protractor grunt-cli bower mocha
 - bundle install
 - bower install
