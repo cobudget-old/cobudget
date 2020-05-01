@@ -5,6 +5,7 @@ This directory contains three stacks that interoperate.
 ## The Pipeline Stack
 
 This stack describes:
+
 1. A GitHub repository where a hook is installed.
 1. ECR repository that hosts the Docker containers.
 1. A build pipeline that builds a Docker container from source and publishes it to ECR.
@@ -12,12 +13,21 @@ This stack describes:
 ## The Backend Stack
 
 This stack describes:
-1. A Fargate service that hosts the Docker container
-1. 
+
+1. A Fargate service that hosts the Docker container and postgres RDS
+1. A frontend stack that hosts the static web app files
+1. A pipeline stack that defines the CI/CD system that deploys the code automatically
+
 
 SSM Variables must be set before standing up a new stack 
 
 ```
+
+aws secretsmanager create-secret \
+    --name GitHubToken \
+    --secret-string abcdefg1234abcdefg56789abcdefg \
+    --region us-east-1
+
 aws ssm put-parameter \
     --name /serverless-pipeline/sns/notifications/primary-email \
     --description "Email address for primary recipient of Pipeline notifications" \

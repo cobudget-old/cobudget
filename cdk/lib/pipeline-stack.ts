@@ -84,7 +84,7 @@ export class PipelineStack extends Stack {
               repo: 'cobudget',
               oauthToken: cdk.SecretValue.secretsManager('my-github-token'),
               output: sourceOutput,
-              trigger: codepipeline_actions.GitHubTrigger.Webhook,
+              trigger: codepipeline_actions.GitHubTrigger.WEBHOOK,
             }),
           ],
         },
