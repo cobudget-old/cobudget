@@ -9,13 +9,9 @@ cobudget's user interface. For more information on the project as a whole, check
 
 ## Install
 
-### Install npm and bower
-
-If you don't have node, npm and bower already, please install these.
+### Install npm
 
 Install node and npm from the [node.js homepage](https://nodejs.org)
-
-Install bower: `npm install -g bower`
 
 ### Download and install cobudget-ui
 
