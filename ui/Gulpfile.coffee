@@ -4,7 +4,7 @@ source = require('vinyl-source-stream')
 buffer = require('vinyl-buffer')
 util = require('gulp-util')
 plumber = require('gulp-plumber')
-sourcemaps = require('gulp-sourcemaps')
+# sourcemaps = require('gulp-sourcemaps')
 extend = require('xtend')
 ngConfig = require('gulp-ng-config')
 _ = require('lodash')
@@ -54,17 +54,17 @@ styles = ->
         # https://github.com/floatdrop/gulp-plumber/issues/8
         this.emit('end')
     ))
-    .pipe(sourcemaps.init())
+    # .pipe(sourcemaps.init())
     .pipe(entryFilter)
     .pipe(sass(
       includePaths: sassPaths
     ))
-    .pipe(sourcemaps.write(includeContent: false))
-    .pipe(sourcemaps.init(loadMaps: true))
+    # .pipe(sourcemaps.write(includeContent: false))
+    # .pipe(sourcemaps.init(loadMaps: true))
     .pipe(autoprefix(
       browsers: ['> 1%', 'last 2 versions']
     ))
-    .pipe(sourcemaps.write('../maps', sourceRoot: '../styles/'))
+    # .pipe(sourcemaps.write('../maps', sourceRoot: '../styles/'))
     .pipe(gulp.dest('build/styles'))
     .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
@@ -92,14 +92,14 @@ scripts = (isWatch) ->
         .pipe(plumber({ errorHandler }))
         .pipe(source('index.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init(loadMaps: true))
-        .pipe(sourcemaps.write('../maps'))
+        # .pipe(sourcemaps.init(loadMaps: true))
+        # .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))
         .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
     args = {
       entries: ['.']
-      debug: false
+      debug: isWatch
     }
 
     if (isWatch)
