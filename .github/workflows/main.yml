@@ -9,8 +9,6 @@ on:
       - master
     paths:
       - "ui/**"
-    paths-ignore:
-      - 'api/**'
 
 jobs:
   build:
