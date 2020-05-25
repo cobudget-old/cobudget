@@ -2,8 +2,6 @@ FROM node:6 as builder
 RUN mkdir /src
 WORKDIR /src
 COPY . /src
-RUN npm install bower
-RUN echo '{ "allow_root": true }' > /root/.bowerrc
 RUN npm install -g gulp
 RUN npm install
 RUN npm rebuild node-sass

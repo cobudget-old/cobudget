@@ -25,7 +25,7 @@ global.cobudgetApp.directive 'toolbarDropdownMenu', () ->
       $scope.signOut = ->
         $auth.signOut().then ->
           global.cobudgetApp.currentUserId = null
-          HS.beacon.ready ->
+          HS?.beacon?.ready ->
             HS.beacon.identify
               name: null
               email: null
