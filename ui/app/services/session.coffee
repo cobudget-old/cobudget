@@ -7,7 +7,7 @@ global.cobudgetApp.factory 'Session', ($auth, CurrentUser, Dialog, LoadBar, $loc
       promise = $auth.submitLogin(formData)
       promise.then (user) =>
         global.cobudgetApp.currentUserId = user.id
-        HS.beacon.ready ->
+        HS?.beacon?.ready ->
           HS.beacon.identify
             name: user.name
             email: user.email
@@ -48,7 +48,7 @@ global.cobudgetApp.factory 'Session', ($auth, CurrentUser, Dialog, LoadBar, $loc
       if CurrentUser()
         $auth.signOut().then ->
           global.cobudgetApp.currentUserId = null
-          HS.beacon.ready ->
+          HS?.beacon?.ready ->
             HS.beacon.identify
               name: null
               email: null
