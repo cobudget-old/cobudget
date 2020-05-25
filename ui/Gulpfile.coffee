@@ -11,12 +11,15 @@ _ = require('lodash')
 
 refresh = require('gulp-livereload')
 lrServer = require('tiny-lr')()
+fs = require('fs')
 
 # default environment to development
 process.env.NODE_ENV or= 'development'
 
 env = process.env
 nodeEnv = env.NODE_ENV
+
+fs.symlink('../app', './node_modules/app', (err) -> return true)
 
 isDeploy = (env) ->
   env == "production" or env == "staging"

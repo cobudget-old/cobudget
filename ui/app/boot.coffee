@@ -31,7 +31,7 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
         membershipsLoadedDeferred.resolve(data)
     Records.announcements.fetch({}).then (data) ->
       announcementsLoadedDeferred.resolve(data)
-    HS.beacon.ready ->
+    HS?.beacon?.ready ->
       HS.beacon.identify
         name: user.name
         email: user.email
@@ -39,7 +39,7 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
 
   $rootScope.$on 'auth:login-error', (ev, reason) ->
     Dialog.alert(title: 'error!', content: reason.errors[0])
-    HS.beacon.ready ->
+    HS?.beacon?.ready ->
       HS.beacon.identify
         name: null
         email: null
