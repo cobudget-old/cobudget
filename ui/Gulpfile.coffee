@@ -140,7 +140,7 @@ assetPaths = {
   "node_modules/angular-material/angular-material.css" : "build/styles"
   "node_modules/angular-material-data-table/dist/md-data-table.min.css" : "build/styles"
   "app/directives/bucket-page-activity-card/mentio-menu.tpl.html" : "build"
-  "app/assets/img/favicon/manifest.json": "build"
+  "app/assets/img/manifest.json": "build"
 }
 
 assets = (isWatch) ->
