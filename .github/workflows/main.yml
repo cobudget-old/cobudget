@@ -2,11 +2,15 @@ name: Cobudget UI
 
 on:
   watch:
-    types: [started]  push:
+    types: [started]
+
+  push:
     branches:
       - master
     paths:
       - "ui/**"
+    paths-ignore:
+      - 'api/**'
 
 jobs:
   build:
@@ -14,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - name: Build and deploy
-        uses: actions/checkout@v2
         uses: actions/setup-node@v1
         with:
           node-version: '6'
