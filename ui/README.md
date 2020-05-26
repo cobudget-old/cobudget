@@ -6,7 +6,7 @@ cobudget's user interface. For more information on the project as a whole, check
 
 ## Install
 
-### Install npm
+### Install node v8
 
 Install node and npm from the [node.js homepage](https://nodejs.org)
 
