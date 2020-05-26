@@ -1,0 +1,23 @@
+name: Test Cobudget UI
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+    paths:
+      - "ui/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        uses: actions/setup-node@v1
+        with:
+          node-version: '8'
+      - run: |
+          cd ui
+          npm install --silent
+          NODE_ENV=production npm run build
