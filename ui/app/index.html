@@ -71,8 +71,8 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
     <script>
-    if (window.cookieconsent) {
-      window.addEventListener("load", function() {
+    window.addEventListener("load", function() {
+      if (window.cookieconsent) {
         window.cookieconsent.initialise({
           "palette": {
             "popup": {
@@ -88,8 +88,8 @@
             "href": "https://greaterthan.gitbooks.io/cobudget/content/privacy-policy.html"
           }
         })
-      });
-    }
+      }
+    });
     </script>
     <!-- End Cookie Consent Code -->
 
