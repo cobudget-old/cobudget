@@ -1,6 +1,6 @@
 {
   "name": "cobudget-ui",
-  "version": "1.0.0-beta",
+  "version": "1.0.1",
   "description": "user interface for Cobudget!",
   "main": "./server.js",
   "browser": "./index.js",
@@ -8,19 +8,10 @@
     "start": "gulp build && node .",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
-    "test-spec": "testling -x firefox",
-    "test-e2e": "protractor protractor.js",
-    "test": "(export NODE_ENV=test; npm run test-spec && npm run test-e2e)",
-    "build": "gulp build",
+    "test": "echo No tests; exit 1",
+    "build": "NODE_ENV=production gulp build ; du -h build/ | grep scripts",
     "develop": "gulp develop",
-    "set-remote": "git remote add deploy-beta git@github.com:cobudget/cobudget.co",
-    "deploy-cname": "cp app/assets/CNAME.deploy app/assets/CNAME",
-    "deploy-push": "git push deploy-beta gh-pages -f",
-    "deploy": "(export NODE_ENV=production; npm run deploy-cname && gulp branch && npm run deploy-push)",
-    "set-remote-stage": "git remote add stage-beta git@github.com:cobudget/staging.cobudget.co",
-    "stage-cname": "cp app/assets/CNAME.stage app/assets/CNAME",
-    "stage-push": "git push stage-beta gh-pages -f",
-    "stage": "(export NODE_ENV=staging; npm run stage-cname && gulp branch && npm run stage-push)"
+    "preversion": "npm run build"
   },
   "repository": {
     "type": "git",
