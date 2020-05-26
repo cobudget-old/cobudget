@@ -26,6 +26,7 @@ jobs:
           npm install -g gulp bower
           npm install --quiet
           NODE_ENV=production npm run build
+          npm run sentry
           aws s3 cp ./build/ s3://${AWS_S3_BUCKET}/ --recursive --acl public-read
           aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
         env:
