@@ -106,8 +106,10 @@ scripts = (isWatch) ->
 
     args = {
       entries: ['.']
-      debug: isWatch
+      debug: isWatch && !isDeploy(nodeEnv)
     }
+
+    console.log('Browserify debug: ' + args.debug)
 
     if (isWatch)
       watchify = require('watchify')
