@@ -6,16 +6,14 @@
   "browser": "./index.js",
   "scripts": {
     "start": "gulp build && node .",
-    "webdriver-update": "webdriver-manager update",
-    "webdriver-start": "webdriver-manager start",
     "test": "echo No tests; exit 1",
-    "build": "NODE_ENV=production gulp build ; du -h build/ | grep scripts",
+    "build": "NODE_ENV=production gulp build",
     "develop": "gulp develop",
     "preversion": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/open-app/cobudget-ui.git"
+    "url": "git://github.com/cobudget/cobudget.git"
   },
   "testling": {
     "files": "src/node_modules/**/spec/**/*.coffee",
@@ -110,7 +108,7 @@
     "protractor": "^1.4.0",
     "sinon": "^1.10.3",
     "sinon-chai": "^2.5.0",
-    "testling": "^1.7.1",
+    "testling": "^1.7.3",
     "tiny-lr": "^0.1.4",
     "txtify2": "^2.0.0",
     "uglifyify": "^3.0.1",
