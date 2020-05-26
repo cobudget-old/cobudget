@@ -25,6 +25,8 @@ jobs:
           npm install --silent
           npm run build
           npm run sentry
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       - name: deploy staging
         if: github.ref == 'refs/heads/develop'
         run: |
