@@ -99,6 +99,7 @@ scripts = (isWatch) ->
         .pipe(plumber({ errorHandler }))
         .pipe(source('index.js'))
         .pipe(buffer())
+        .pipe(replace('COBUDGET_RELEASE_VERSION', 'cobudget@' + pkgVersion + '-' + git.short()))
         .pipe(sourcemaps.init(loadMaps: true))
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))
@@ -132,7 +133,6 @@ html = (isWatch) ->
   ->
     gulp.src(glob)
       .pipe(if isWatch then watch(glob) else util.noop())
-      .pipe(replace('cobudget@develop', 'cobudget@' + pkgVersion + '-' + git.short()))
       .pipe(gulp.dest('build'))
       .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
