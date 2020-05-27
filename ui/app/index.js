@@ -31,6 +31,19 @@ require('highcharts-ng')
 require('angular-material-data-table')
 require('ment.io')
 
+import * as Sentry from '@sentry/browser';
+import { Angular as AngularIntegration } from '@sentry/integrations';
+
+Sentry.init({
+  dsn: 'https://c87f3b754cba4467ba54eb82cea06e83@o365863.ingest.sentry.io/5253228',
+  debug: true,
+  release: 'COBUDGET_RELEASE_VERSION',
+  integrations: [
+    new AngularIntegration(),
+  ],
+});
+
+
 if (process.env.NODE_ENV != 'production') {
   global.localStorage.debug = "*"
 }
@@ -54,7 +67,8 @@ global.cobudgetApp = angular.module('cobudget', [
   'ngAutodisable',
   'highcharts-ng',
   'md.data.table',
-  'mentio'
+  'mentio',
+  'ngSentry'
 ])
 .constant('config', require('app/configs/app'))
 
