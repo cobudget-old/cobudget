@@ -6,11 +6,14 @@ services:
     ports:
       - 3000:3000
     env_file: .env-prod
+    restart: unless-stopped
   delayed-job:
     image: gardner/cobudget-api:latest
     command: rake jobs:work
     env_file: .env-prod
+    restart: unless-stopped
   activity-emails:
     image: gardner/cobudget-api:latest
     command: /bin/bash -c "env >/root/env-vars && cron -f"
     env_file: .env-prod
+    restart: unless-stopped
