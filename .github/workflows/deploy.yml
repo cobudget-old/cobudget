@@ -23,14 +23,12 @@ jobs:
       - run: |
           cd ui
           npm install --silent
-          npm run build
-          npm run sentry
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       - name: deploy staging
         if: github.ref == 'refs/heads/develop'
         run: |
           cd ui || find .
+          npm run build
+          npm run sentry
           aws s3 sync ./build/ s3://${AWS_S3_BUCKET}/ --acl public-read --cache-control max-age=86400 --delete
           aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
         env:
@@ -39,11 +37,16 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           DISTRIBUTION_ID: ${{ secrets.STAGING_DISTRIBUTION_ID }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          APP_ENV: staging
+          NODE_ENV: production
   
       - name: deploy production
         if: github.ref == 'refs/heads/master'
         run: |
           cd ui || find .
+          npm run build
+          npm run sentry
           aws s3 sync ./build/ s3://${AWS_S3_BUCKET}/ --acl public-read --cache-control max-age=86400 --delete
           aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
         env:
@@ -52,4 +55,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           DISTRIBUTION_ID: ${{ secrets.DISTRIBUTION_ID }}
-  
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          APP_ENV: production
+          NODE_ENV: production
