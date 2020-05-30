@@ -4,6 +4,9 @@ gem 'rails'
 gem 'rails-api'
 gem 'spring', :group => :development
 
+# crashlogs
+gem "sentry-raven"
+
 # payments
 gem 'stripe'
 
