@@ -22,13 +22,20 @@ npm install
 
 The cobudget frontend needs to know where to find the backend. Currently it's configured for three different backends:
 
+It is not recomended to use `NODE_ENV=staging` as many build tools rely on NODE_ENV to determine build.
+`APP_ENV` can be set to use different environment configurations, such as the API endpoint. 
+If `APP_ENV` is not set then `NODE_ENV` will be used. In practice `APP_ENV` is set for stagng only.  
+
 * `development`: Will connect to a backend running locally on your development machine.
 * `staging`: Will connect to the backend running on the current cobudget staging server.
 * `production`: Will connect to the backend running on the current cobudget production server.
 
 Choose which backend to connect to using the environment variable `NODE_ENV`
 
-`$ export NODE_ENV=staging`
+```
+export APP_ENV=staging
+export NODE_ENV=production
+```
 
 If NODE_ENV is not set it will default to using `development`
 
