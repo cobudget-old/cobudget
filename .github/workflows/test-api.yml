@@ -1,0 +1,19 @@
+name: Test Cobudget API
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+    paths-ignore:
+      - 'ui/**'
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        uses: actions/checkout@v2
+        run: |
+          cd api
+          cp docker-compose.test.yml docker-compose.override.yml ; docker-compose run cobudget-api

@@ -28,6 +28,12 @@ fs.symlink('../app', './node_modules/app', (err) -> return true)
 isDeploy = (env) ->
   env == "production" or env == "staging"
 
+getCobudgetVersion = () ->
+  if (fs.existsSync('./.git'))
+    'cobudget@' + pkgVersion + '-' + git.short()
+  else
+    'cobudget@' + pkgVersion + '-dev'
+
 lr = undefined
 errorHandler = (err) ->
   util.beep()
@@ -99,7 +105,7 @@ scripts = (isWatch) ->
         .pipe(plumber({ errorHandler }))
         .pipe(source('index.js'))
         .pipe(buffer())
-        .pipe(replace('COBUDGET_RELEASE_VERSION', 'cobudget@' + pkgVersion + '-' + git.short()))
+        .pipe(replace('COBUDGET_RELEASE_VERSION', getCobudgetVersion()))
         .pipe(sourcemaps.init(loadMaps: true))
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))
