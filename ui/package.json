@@ -9,7 +9,7 @@
     "develop": "gulp develop",
     "start": "gulp build && node .",
     "test": "echo No tests; exit 1",
-    "sentry": "sentry-cli releases -o principal-zc -p angular files $npm_package_name@$npm_package_version-$(git rev-parse --short HEAD) upload-sourcemaps ./build/maps",
+    "sentry": "sentry-cli releases -o principal-zc -p cobudget-ui files $npm_package_name@$npm_package_version-$(git rev-parse --short HEAD) upload-sourcemaps ./build/maps",
     "preversion": "npm run build"
   },
   "repository": {
