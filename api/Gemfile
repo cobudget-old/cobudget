@@ -15,7 +15,6 @@ gem 'pg'
 
 # api
 gem 'apipie-rails'
-gem 'graphql'
 gem 'active_model_serializers', '~> 0.8.0'
 gem 'activesupport-json_encoder'
 gem 'rack-cors', :require => 'rack/cors'
@@ -48,5 +47,3 @@ group :development, :test do
 end
 
 ruby "2.5.8"
-
-gem 'graphiql-rails', group: :development
