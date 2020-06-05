@@ -24,7 +24,7 @@ sudo -u postgres createuser <your username> -s
 
 ### get your ruby organized
 ```
-git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.4.0 /usr/local; ruby -v
+git clone https://github.com/rbenv/ruby-build.git; cd ruby-build/; ./install.sh; ruby-build 2.5.8 /usr/local; ruby -v
 gem install bundler
 ```
 

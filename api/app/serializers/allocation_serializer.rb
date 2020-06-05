@@ -1,5 +1,5 @@
 class AllocationSerializer < ActiveModel::Serializer
-  embed :ids, include: true
+  # embed :ids, include: true
   attributes :id,
              :amount,
              :group_id,

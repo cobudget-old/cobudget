@@ -1,5 +1,5 @@
 class AnnouncementSerializer < ActiveModel::Serializer
-  embed :ids, include: true
+  # embed :ids, include: true
   attributes :id,
              :title,
              :body,

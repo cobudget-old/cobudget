@@ -22,7 +22,7 @@ services:
       - ./api:/cobudget-api
     depends_on:
       - cobudget-db
-  
+
   activity-emails:
     build: ./api
     restart: "unless-stopped"
@@ -32,13 +32,6 @@ services:
       - ./api:/cobudget-api
     depends_on:
       - cobudget-db
-  
-  mailcatcher:
-    build: ./api
-    restart: "unless-stopped"
-    command: mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0
-    ports:
-      - 1080:1080
 
   cobudget-ui:
     build:
@@ -52,6 +45,7 @@ services:
     environment:
       - DOMAIN=cobudget.local
       - NODE_ENV=development
+      - APP_ENV=development
     depends_on:
       - cobudget-api
 

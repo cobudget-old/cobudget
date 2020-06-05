@@ -259,6 +259,7 @@ describe MembershipsController, :type => :controller do
           end
 
           it "returns the user as json" do
+            raise response.body
             expect(parsed(response)["users"][0]["email"]).to eq(@user_to_invite.email)
           end
         end
@@ -286,6 +287,7 @@ describe MembershipsController, :type => :controller do
           end
 
           it "returns the user as json" do
+            raise response.body
             expect(parsed(response)["users"][0]["email"]).to eq(@user_to_invite.email)
           end
         end

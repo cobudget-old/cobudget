@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 4.2'
 gem 'rails-api'
 gem 'spring', :group => :development
 
@@ -15,6 +15,7 @@ gem 'pg'
 
 # api
 gem 'apipie-rails'
+gem 'graphql'
 gem 'active_model_serializers', '~> 0.8.0'
 gem 'activesupport-json_encoder'
 gem 'rack-cors', :require => 'rack/cors'
@@ -26,25 +27,14 @@ gem 'groupdate'
 
 # auth
 gem 'devise', '3.5.6'
-gem 'pundit'
 gem 'devise_token_auth',  '0.1.37'
 gem 'omniauth'
 
 # server
 gem 'puma'
 gem 'delayed_job_active_record'
-gem 'daemons'
-gem 'sinatra', :require => nil
-
-gem 'newrelic_rpm'
 
 gem 'redcarpet'
-
-group :development do
-  gem 'capistrano', '2.15.5'
-  gem "capistrano-rails", '~> 1.0.0'
-  gem "rails-erd"
-end
 
 group :development, :test do
   gem 'rspec-rails'
@@ -55,11 +45,8 @@ group :development, :test do
   gem 'timecop'
   gem 'faker'
   gem 'factory_girl_rails'
-  gem 'mailcatcher'
 end
 
-group :production do
-  gem 'rails_12factor'
-end
+ruby "2.5.8"
 
-ruby "2.4.2"
+gem 'graphiql-rails', group: :development

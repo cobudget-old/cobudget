@@ -6,9 +6,9 @@ services:
     restart: "no"
     command: >
       bash -c "/wait-for-it.sh cobudget-db:5432 -t 30
-      && bundle exec rake db:reset || bundle exec rake db:setup 
-      && bundle exec rake db:migrate 
-      && bundle exec rspec"      
+      && bundle exec rake db:setup || bundle exec rake db:reset
+      ; bundle exec rake db:migrate
+      && bundle exec rspec"
     env_file: .env.test
     ports:
       - 3000:3000
@@ -20,3 +20,11 @@ services:
       - delayed-job
       - activity-emails
       - mailcatcher
+
+  mailcatcher:
+    image: ruby:2.5.8
+    restart: "unless-stopped"
+    command: bash -c "gem install mailcatcher && mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0"
+    ports:
+      - 1080:1080
+
