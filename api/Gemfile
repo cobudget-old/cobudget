@@ -4,6 +4,9 @@ gem 'rails'
 gem 'rails-api'
 gem 'spring', :group => :development
 
+# crashlogs
+gem "sentry-raven"
+
 # payments
 gem 'stripe'
 
@@ -52,6 +55,7 @@ group :development, :test do
   gem 'timecop'
   gem 'faker'
   gem 'factory_girl_rails'
+  gem 'mailcatcher'
 end
 
 group :production do

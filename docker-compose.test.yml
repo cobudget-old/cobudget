@@ -1,0 +1,22 @@
+version: "3.2"
+
+services:
+  cobudget-api:
+    build: ./api
+    restart: "no"
+    command: >
+      bash -c "/wait-for-it.sh cobudget-db:5432 -t 30
+      && bundle exec rake db:reset || bundle exec rake db:setup 
+      && bundle exec rake db:migrate 
+      && bundle exec rspec"      
+    env_file: .env.test
+    ports:
+      - 3000:3000
+    volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh
+      - ./api:/cobudget-api
+    depends_on:
+      - cobudget-db
+      - delayed-job
+      - activity-emails
+      - mailcatcher

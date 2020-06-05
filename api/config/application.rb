@@ -49,5 +49,9 @@ module CobudgetApi
     config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
 
     ActiveSupport.encode_big_decimal_as_string = false
+
+    Raven.configure do |config|
+      config.dsn = 'https://7f3b57cf140f4b1a88545d2c168c81b2:6c6590daad314f0aafa2f36547cbbc98@o365863.ingest.sentry.io/5258893'
+    end
   end
 end

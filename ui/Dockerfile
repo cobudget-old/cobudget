@@ -1,14 +1,14 @@
-FROM node:6 as builder
-RUN mkdir /src
-WORKDIR /src
-COPY . /src
-RUN npm install -g gulp
-RUN npm install
-RUN npm rebuild node-sass
-ARG NODE_ENV
-RUN gulp build
+FROM node:8
 
-FROM nginx
-COPY --from=builder /src/build /var/www/cobudget
-COPY nginx/nginx-conf-template /etc/nginx/conf.d
-CMD /bin/bash -c "envsubst '\$DOMAIN' < /etc/nginx/conf.d/nginx-conf-template >/etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+WORKDIR /app
+COPY package*.json /app/
+RUN npm i && \
+    cd /app/node_modules && \
+    ln -s ../app ./
+
+ARG NODE_ENV
+ENV APP_ENV production
+EXPOSE 9000
+VOLUME [ "/app/node_modules" ]
+
+CMD npm start

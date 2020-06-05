@@ -30,7 +30,7 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'mailcatcher:1080' }
 
   # commented out because it is overriding application.rb active_job.queue_adapter = :delayed_job
   # config.active_job.queue_adapter = :test
