@@ -1,5 +1,5 @@
 class ContributionSerializer < ActiveModel::Serializer
-  #embed :ids, include: true
+  embed :ids, include: true
   has_one :user
   attributes :id, 
              :bucket_id,

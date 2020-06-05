@@ -1,5 +1,5 @@
 class BucketSerializer < ActiveModel::Serializer
-  #embed :ids, include: true
+  embed :ids, include: true
   has_one :user
   has_one :group
   attributes :id,
