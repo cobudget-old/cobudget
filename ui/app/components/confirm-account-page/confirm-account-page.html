@@ -23,9 +23,12 @@
 
           <div class="confirm-account-page__input-container">
             <label>Password</label>
-            <input class="confirm-account-page__input-field" minlength="8" required name="password" type="password" ng-model="formData.password" placeholder="create password" autocomplete="off">
+            <input class="confirm-account-page__input-field" minlength="10" required name="password" type="password" ng-pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$" ng-model="formData.password" placeholder="create password" autocomplete="off">
+            <div ng-message="pattern" class="confirm-account-page__input-error">
+              The password must be at least 10 characters long and have at least one uppercase, one lowercase, one number, and one special character.
+            </div>
             <div ng-if="newUserForm.password.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Password is required.</div>
-            <div ng-if="newUserForm.password.$error.minlength && newUserForm.$submitted" class="confirm-account-page__input-error">Password must be longer than 8 characters.</div>
+            <div ng-if="newUserForm.password.$error.minlength && newUserForm.$submitted" class="confirm-account-page__input-error">Password must be longer than 10 characters.</div>
           </div>
 
           <div class="confirm-account-page__input-container">

@@ -53,7 +53,10 @@
 
         <div class="profile-settings-page__input-container">
           <label class="profile-settings-page__input-label" for="password">NEW PASSWORD</label>
-          <input class="profile-settings-page__text-input" type="password" name="password" ng-model="passwordParams.password"/>
+          <input class="profile-settings-page__text-input" type="password" ng-pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$" name="password" ng-model="passwordParams.password"/>
+          <div ng-message="pattern" class="profile-settings-page__input-error">
+            The password must be at least 10 characters long and have at least one uppercase, one lowercase, one number, and one special character.
+          </div>
           <div ng-if="passwordErrors.newPassword" class="profile-settings-page__input-error">{{ passwordErrors.newPassword }}</div>
           <div ng-if="passwordParams.password.length < 8 && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
         </div>

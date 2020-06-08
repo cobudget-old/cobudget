@@ -21,6 +21,7 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
           .replace(/<\/div>/gi,'')
           .replace(/<br>/gi,'\n')
         $scope.newComment.body = newComment.text()
+        console.log($scope.newComment)
 
         $scope.newComment.save().then ->
           Toast.show('You posted a comment')
