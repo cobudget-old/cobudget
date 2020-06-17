@@ -62,7 +62,7 @@
     "highcharts": "^5.0.9",
     "highcharts-ng": "^1.0.1",
     "is-empty-object": "^1.1.1",
-    "jquery": "^2.2.4",
+    "jquery": "^3.5.0",
     "json3": "^3.3.2",
     "listify": "^1.0.0",
     "lodash": "^3.0.0",
