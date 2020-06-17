@@ -10,7 +10,7 @@ gem "sentry-raven"
 gem 'stripe'
 
 # persistance
-gem 'pg'
+gem 'pg', '= 0.20.0'
 
 # api
 gem 'apipie-rails'
@@ -43,3 +43,5 @@ group :development, :test do
   gem 'faker'
   gem 'factory_girl_rails'
 end
+
+ruby "2.4.2"

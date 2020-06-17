@@ -1,4 +1,4 @@
-# [CoBudget](http://cobudget.co/)
+# [Cobudget](https://cobudget.co/)
 
 [![Build Status](https://travis-ci.org/cobudget/cobudget-api.svg?branch=master)](https://travis-ci.org/cobudget/cobudget-api)
 [![Code Climate](https://codeclimate.com/github/cobudget/cobudget-api/badges/gpa.svg)](https://codeclimate.com/github/cobudget/cobudget-api)
@@ -15,8 +15,7 @@ The backend (api) and the frontend has been merged into this repository in March
 
 A local development environment can be created by running: 
 
-    docker-compose up -d
-    docker-compose run cobudget-api rake db:migrate
+    docker-compose up -d && docker-compose run cobudget-api rake db:migrate
 
 Then open http://localhost:9000/
 

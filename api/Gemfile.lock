@@ -215,7 +215,7 @@ DEPENDENCIES
   groupdate
   money-rails
   omniauth
-  pg
+  pg (= 0.20.0)
   pry-byebug
   pry-rails
   puma
@@ -228,6 +228,9 @@ DEPENDENCIES
   simplecov
   stripe
   timecop
+
+RUBY VERSION
+   ruby 2.4.2p198
 
 BUNDLED WITH
    1.17.3
