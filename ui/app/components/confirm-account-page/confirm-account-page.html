@@ -41,8 +41,8 @@
 
           <div class="confirm-account-page__input-container">
             <label>Confirm Password</label>
-            <input class="confirm-account-page__input-field" required type="password" ng-model="formData.passwordConfirm" placeholder="confirm password" autocomplete="off">
-            <div ng-if="!newUserForm.password.$error.pattern && formData.passwordConfirm.length && formData.password != formData.passwordConfirm" class="confirm-account-page__input-error">Passwords don't match.</div>
+            <input class="confirm-account-page__input-field" required type="password" ng-model="formData.confirmPassword" placeholder="confirm password" autocomplete="off">
+            <div ng-if="!newUserForm.password.$error.pattern && formData.confirmPassword.length && formData.password != formData.confirmPassword" class="confirm-account-page__input-error">Passwords don't match.</div>
           </div>
 
           <div class="confirm-account-page__input-container">
