@@ -23,18 +23,26 @@
 
           <div class="confirm-account-page__input-container">
             <label>Password</label>
-            <input class="confirm-account-page__input-field" minlength="10" required name="password" type="password" ng-pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$" ng-model="formData.password" placeholder="create password" autocomplete="off">
-            <div ng-message="pattern" class="confirm-account-page__input-error">
-              The password must be at least 10 characters long and have at least one uppercase, one lowercase, one number, and one special character.
+            <input class="confirm-account-page__input-field" minlength="10" required name="password" type="password" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/" ng-model="formData.password" placeholder="create password" autocomplete="off">
+            <div ng-messages="newUserForm.password.$error" multiple>
+              <div ng-message="pattern" ng-class="newUserForm.$submitted ? 'confirm-account-page__input-error' : 'confirm-account-page__password-help'" >
+                The password must have at least:
+                <ul>
+                  <li>one uppercase character</li>
+                  <li>one lowercase character</li>
+                  <li>one number</li>
+                  <li>one special character</li>
+                  <li>must be longer than 10 characters</li>
+                </ul>
+              </div>
+              <div ng-message="required" class="confirm-account-page__input-error">Password is required.</div>
             </div>
-            <div ng-if="newUserForm.password.$error.required && newUserForm.$submitted" class="confirm-account-page__input-error">Password is required.</div>
-            <div ng-if="newUserForm.password.$error.minlength && newUserForm.$submitted" class="confirm-account-page__input-error">Password must be longer than 10 characters.</div>
           </div>
 
           <div class="confirm-account-page__input-container">
             <label>Confirm Password</label>
             <input class="confirm-account-page__input-field" required type="password" ng-model="formData.passwordConfirm" placeholder="confirm password" autocomplete="off">
-            <div ng-if="formData.password != formData.passwordConfirm && formData.passwordConfirm.length" class="confirm-account-page__input-error">Passwords don't match.</div>
+            <div ng-if="!newUserForm.password.$error.pattern && formData.passwordConfirm.length && formData.password != formData.passwordConfirm" class="confirm-account-page__input-error">Passwords don't match.</div>
           </div>
 
           <div class="confirm-account-page__input-container">
