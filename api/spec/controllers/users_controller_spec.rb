@@ -12,9 +12,9 @@ describe UsersController, :type => :controller do
   describe "#create" do
     context "specified email does not yet exist in DB" do
       before do
-        user_params = { user: { email: Faker::Internet.email } }
-        post :create, user_params
-        @new_user = User.find_by(user_params[:user])
+        email = Faker::Internet.email
+        post :create, { user: { email: email, password: "P@ssw0rd10" } }
+        @new_user = User.find_by({ email: email})
         @sent_email = ActionMailer::Base.deliveries.first
       end
 
@@ -42,9 +42,10 @@ describe UsersController, :type => :controller do
 
     context "specified email already exists in DB" do
       before do
-        create(:user, email: "meow@meow.com")
-        @user_params = { user: {email: "meow@meow.com"} }
-        post :create, @user_params
+        test_email = "meow@meow.com"
+        create(:user, email: test_email)
+        @user_params = { user: { email: test_email} }
+        post :create, { user: { email: test_email, password: "P@ssw0rd10" } }
       end
 
       it "does not create user" do
@@ -63,7 +64,7 @@ describe UsersController, :type => :controller do
         @user = User.create_with_confirmation_token(email: Faker::Internet.email)
         @request_params = {
           name: "new name",
-          password: "password",
+          password: "P@ssw0rd10",
           confirmation_token: @user.confirmation_token
         }
       end
@@ -129,7 +130,7 @@ describe UsersController, :type => :controller do
         @user.update(confirmation_token: nil)
         request_params = {
           name: "new name",
-          password: "password",
+          password: "P@ssw0rd10",
           confirmation_token: confirmation_token
         }
         post :confirm_account, request_params
@@ -148,7 +149,7 @@ describe UsersController, :type => :controller do
       before do
         request_params = {
           name: "new name",
-          password: "password",
+          password: "P@ssw0rd10",
           confirmation_token: nil
         }
         post :confirm_account, request_params
@@ -260,7 +261,7 @@ describe UsersController, :type => :controller do
           reset_password_token = SecureRandom.urlsafe_base64.to_s
           user.update(reset_password_token: reset_password_token)
           @old_encrypted_password = user.encrypted_password
-          post :reset_password, {reset_password_token: reset_password_token, password: "password", confirm_password: "password"}
+          post :reset_password, {reset_password_token: reset_password_token, password: "P@ssw0rd10", confirm_password: "P@ssw0rd10"}
           user.reload
         end
 
@@ -286,7 +287,7 @@ describe UsersController, :type => :controller do
         before do
           reset_password_token = SecureRandom.urlsafe_base64.to_s
           user.update(reset_password_token: reset_password_token)
-          post :reset_password, {reset_password_token: reset_password_token, password: "password", confirm_password: "potato"}
+          post :reset_password, {reset_password_token: reset_password_token, password: "P@ssw0rd10", confirm_password: "potato"}
         end
 
         it "returns http status unprocessable" do
@@ -296,7 +297,7 @@ describe UsersController, :type => :controller do
 
       context "reset_password_token does not match user" do
         it "returns http status forbidden" do
-          post :reset_password, {reset_password_token: "meow", password: "password", confirm_password: "password"}
+          post :reset_password, {reset_password_token: "meow", password: "P@ssw0rd10", confirm_password: "P@ssw0rd10"}
           expect(response).to have_http_status(:forbidden)
         end
       end
@@ -311,18 +312,18 @@ describe UsersController, :type => :controller do
   end
 
   describe "#update_password" do
-    let!(:user) { create(:user, password: "password") }
+    let!(:user) { create(:user, password: "P@ssw0rd10") }
 
     context "user logged in" do
       before { request.headers.merge!(user.create_new_auth_token) }
 
       context "correct current_password specified" do
-        let!(:params) { {current_password: "password"} }
+        let!(:params) { {current_password: "P@ssw0rd10"} }
         let!(:old_encrypted_password) { user.encrypted_password }
 
         context "password and confirm_password match" do
           before do
-            params.merge!({password: "420blazeit", confirm_password: "420blazeit"})
+            params.merge!({password: "420blaze!T", confirm_password: "420blaze!T"})
             post :update_password, params
             user.reload
           end
@@ -338,7 +339,7 @@ describe UsersController, :type => :controller do
 
         context "password and confirm_password don't match" do
           before do
-            params.merge!({password: "420blazeit", confirm_password: "421blazeit"})
+            params.merge!({password: "420blaze!T", confirm_password: "421blazeit"})
             post :update_password, params
           end
 
@@ -371,7 +372,7 @@ describe UsersController, :type => :controller do
 
     context "user not logged in" do
       before do
-        post :update_password, {current_password: "password", password: "420blazeit", confirm_password: "420blazeit"}
+        post :update_password, {current_password: "P@ssw0rd10", password: "420blazeit", confirm_password: "420blazeit"}
       end
 
       it "returns http status unauthorized" do

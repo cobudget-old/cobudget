@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
+  validate :password_requirements_are_met
 
   def name_and_email
     "#{name} <#{email}>"
@@ -32,7 +33,7 @@ class User < ActiveRecord::Base
 
   def self.create_with_confirmation_token(email:, password: nil, name: nil)
     name = name || email[/[^@]+/]
-    tmp_password = password || SecureRandom.hex
+    tmp_password = password || (SecureRandom.base64 + SecureRandom.uuid + ('A'..'Z').to_a.shuffle.first(5).join).split('').shuffle.join
     new_user = self.create(name: name, email: email, password: tmp_password)
     new_user.generate_confirmation_token!
     new_user
@@ -86,5 +87,20 @@ class User < ActiveRecord::Base
 
     def create_default_subscription_tracker
       SubscriptionTracker.create(user: self)
+    end
+
+    def password_requirements_are_met
+      rules = {
+        " must contain at least one lowercase letter"  => /[a-z]+/,
+        " must contain at least one uppercase letter"  => /[A-Z]+/,
+        " must contain at least one digit"             => /\d+/,
+        " must contain at least one special character" => /[^A-Za-z0-9]+/,
+        " must be at least 10 characters long"         => /.{10,}/
+      }
+
+      rules.each do |message, regex|
+        next if password.blank?
+        errors.add( :password, message ) unless password.match( regex )
+      end
     end
 end

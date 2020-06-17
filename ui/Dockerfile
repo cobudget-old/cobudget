@@ -7,7 +7,7 @@ RUN npm i && \
     ln -s ../app ./
 
 ARG NODE_ENV
-ENV APP_ENV production
+ENV APP_ENV development
 EXPOSE 9000
 VOLUME [ "/app/node_modules" ]
 
