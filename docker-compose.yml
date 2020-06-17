@@ -33,13 +33,6 @@ services:
     depends_on:
       - cobudget-db
   
-  mailcatcher:
-    image: ruby:2.4.2
-    restart: "unless-stopped"
-    command: bash -c "gem install mailcatcher && mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0"
-    ports:
-      - 1080:1080
-
   cobudget-ui:
     build:
       context: ./ui
@@ -60,8 +53,18 @@ services:
   cobudget-db:
     image: postgres:9.6
     restart: "no"
+    volumes:
+      - ./docker/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: cobudget
+      POSTGRES_USER: cobudget
       POSTGRES_DB: cobudget
 
+  mailcatcher:
+    image: ruby:2.4.2
+    restart: "unless-stopped"
+    command: bash -c "gem install mailcatcher && mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0"
+    ports:
+      - 1080:1080
+
+    
