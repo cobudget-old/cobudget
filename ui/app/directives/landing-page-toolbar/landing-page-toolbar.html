@@ -6,60 +6,33 @@
 
   <span class="landing-page-toolbar__logo-link-buffer" flex></span>
 
-  <!-- <div class="landing-page-toolbar__header-btns">
-    <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToCaseStudiesPage()">Case Studies</md-button>
-    <md-button class="landing-page-toolbar__header-btn" ng-click="redirectToAboutPage()">About</md-button>
-  </div> -->
-
-  <!-- <md-menu class="landing-page-toolbar__menu">
-    <div layout="column" layout-align="center center" ng-click="$mdMenu.open($event)" class="landing-page-toolbar__menu-icon-container">
-      <ng-md-icon icon="menu"
-      class="landing-page-toolbar__menu-icon"
-      layout="column"
-      layout-align="center center"
-      ></ng-md-icon>
-    </div>
-
-    <md-menu-content>
-      <md-menu-item>
-        <md-button aria-label="home" ng-click="redirectToHomePage()">Home</md-button>
-      </md-menu-item>
-      <md-menu-item>
-        <md-button aria-label="case studies" ng-click="redirectToCaseStudiesPage()">Case Studies</md-button>
-      </md-menu-item>
-      <md-menu-item>
-        <md-button aria-label="about" ng-click="redirectToAboutPage()">About</md-button>
-      </md-menu-item>
-    </md-menu-content>
-  </md-menu> -->
-
   <md-menu hide-gt-xs>
-    <md-button class="landing-page-toolbar__xs-menu-btn" ng-click="$mdMenu.open($event)">
+    <md-button aria-label="home" aria-label="menu" class="landing-page-toolbar__xs-menu-btn" ng-click="$mdMenu.open($event)">
       <ng-md-icon icon="menu"></ng-md-icon>
     </md-button>
     <md-menu-content>
       <md-menu-item>
-        <md-button ng-click="createGroupDialog()">
+        <md-button aria-label="create group" ng-click="createGroupDialog()">
           Create group
         </md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button ng-click="redirectToHomePageTour()">
+        <md-button aria-label="take a tour" ng-click="redirectToHomePageTour()">
           Tour
         </md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button ng-click="redirectToHomePageStudies()">
+        <md-button aria-label="case studies" ng-click="redirectToHomePageStudies()">
           Case studies
         </md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button ng-click="redirectToHomePagePricing()">
+        <md-button aria-label="pricing" ng-click="redirectToHomePagePricing()">
           Pricing
         </md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button aria-label="login" ng-click="redirectToServicesPage()">
+        <md-button aria-label="services" aria-label="login" ng-click="redirectToServicesPage()">
           Services
         </md-button>
       </md-menu-item>
@@ -69,36 +42,36 @@
   <span flex class="landing-page-toolbar__header-separator"></span>
 
   <md-menu hide-xs>
-    <md-button ng-click="$mdMenu.open($event)">
+    <md-button aria-label="about" ng-click="$mdMenu.open($event)">
       About
     </md-button>
     <md-menu-content>
       <md-menu-item>
-        <md-button ng-click="redirectToHomePageTour()">
+        <md-button aria-label="tour" ng-click="redirectToHomePageTour()">
           Tour
         </md-button>
       </md-menu-item>
       <md-menu-item>
-        <md-button ng-click="redirectToHomePageStudies()">
+        <md-button aria-label="case studies" ng-click="redirectToHomePageStudies()">
           Case studies
         </md-button>
       </md-menu-item>
     </md-menu-content>
   </md-menu>
 
-  <md-button hide-xs ng-click="redirectToHomePagePricing()">
+  <md-button aria-label="pricing" hide-xs ng-click="redirectToHomePagePricing()">
     Pricing
   </md-button>
 
-  <md-button hide-xs aria-label="login" ng-click="redirectToServicesPage()">
+  <md-button aria-label="service" hide-xs aria-label="login" ng-click="redirectToServicesPage()">
     Services
   </md-button>
 
-  <md-button hide-xs class="md-raised md-primary landing-page-toolbar__early-access-btn" ng-click="createGroupDialog()">
+  <md-button aria-label="create a group" hide-xs class="md-raised md-primary landing-page-toolbar__early-access-btn" ng-click="createGroupDialog()">
     Create group
   </md-button>
 
-  <md-button class="landing-page-toolbar__login-btn" aria-label="login" ng-click="redirectToLoginPage()">
+  <md-button aria-label="login" class="landing-page-toolbar__login-btn" aria-label="login" ng-click="redirectToLoginPage()">
     Log in
   </md-button>
 </div>
