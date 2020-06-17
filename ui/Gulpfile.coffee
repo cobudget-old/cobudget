@@ -29,7 +29,7 @@ isDeploy = (env) ->
   env == "production" or env == "staging"
 
 getCobudgetVersion = () ->
-  if (fs.existsSync('./.git'))
+  if (fs.existsSync('./.git') || fs.existsSync('../.git'))
     'cobudget@' + pkgVersion + '-' + git.short()
   else
     'cobudget@' + pkgVersion + '-dev'
