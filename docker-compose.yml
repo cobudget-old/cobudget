@@ -4,7 +4,7 @@ services:
   cobudget-api:
     build: ./api
     restart: "unless-stopped"
-    command: rails s -b 0.0.0.0
+    command: bundle exec rails s -b 0.0.0.0
     env_file: .env.example
     ports:
       - 3000:3000
@@ -16,7 +16,7 @@ services:
   delayed-job:
     build: ./api
     restart: "unless-stopped"
-    command: rake jobs:work
+    command: bundle exec rake jobs:work
     env_file: .env.example
     volumes:
       - ./api:/cobudget-api
@@ -33,13 +33,6 @@ services:
     depends_on:
       - cobudget-db
   
-  mailcatcher:
-    build: ./api
-    restart: "unless-stopped"
-    command: mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0
-    ports:
-      - 1080:1080
-
   cobudget-ui:
     build:
       context: ./ui
@@ -52,6 +45,7 @@ services:
     environment:
       - DOMAIN=cobudget.local
       - NODE_ENV=development
+      - APP_ENV=development
     depends_on:
       - cobudget-api
 

@@ -76,7 +76,7 @@ describe MembershipsController, :type => :controller do
         let!(:membership) { create(:membership, member: user, group: group, is_admin: true) }
 
         context "specified email address belongs to existing user" do
-          let!(:existing_user) { create(:user, email: valid_email) }
+          let!(:existing_user) { create(:user, email: valid_email, password: "P@ssw0rd10") }
 
           before do
             post :create, {group_id: group.id, email: valid_email}

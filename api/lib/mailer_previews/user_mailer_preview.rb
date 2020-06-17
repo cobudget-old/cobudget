@@ -87,7 +87,7 @@ class UserMailerPreview < ActionMailer::Preview
     end
 
     def generate_user
-      user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "password")
+      user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "P@ssw0rd10")
       user.confirm!
       user
     end

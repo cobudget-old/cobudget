@@ -20,6 +20,20 @@ A local development environment can be created by running:
 
 Then open http://localhost:9000/
 
+## Testing
+
+cp docker-compose.test.yml docker-compose.override.yml && \
+docker-compose down && \
+docker-compose build > /dev/null && \
+docker-compose run cobudget-api ; \
+rm -f docker-compose.override.yml
+
+cp docker-compose.test.yml docker-compose.override.yml && \
+docker-compose run cobudget-api ; \
+rm -f docker-compose.override.yml
+
+
+
 ### Licensing
 
 The materials in this repo are licensed under Creative Commons 1.0 Universal while the component apps are licensed separately under the Affero GPL.
