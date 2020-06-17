@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
   def self.create_with_confirmation_token(email:, password: nil, name: nil)
     name = name || email[/[^@]+/]
-    tmp_password = password || (SecureRandom.base64 + SecureRandom.random_bytes + SecureRandom.uuid).split("").shuffle.join
+    tmp_password = password || (SecureRandom.base64 + SecureRandom.uuid + ('A'..'Z').to_a.shuffle.first(5).join).split('').shuffle.join
     new_user = self.create(name: name, email: email, password: tmp_password)
     new_user.generate_confirmation_token!
     new_user
