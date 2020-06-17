@@ -106,6 +106,7 @@ scripts = (isWatch) ->
         .pipe(source('index.js'))
         .pipe(buffer())
         .pipe(replace('COBUDGET_RELEASE_VERSION', getCobudgetVersion()))
+        .pipe(replace('SENTRY_ENVIRONMENT', env.APP_ENV || nodeEnv))
         .pipe(sourcemaps.init(loadMaps: true))
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('build/scripts'))

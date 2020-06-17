@@ -31,6 +31,7 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
         membershipsLoadedDeferred.resolve(data)
     Records.announcements.fetch({}).then (data) ->
       announcementsLoadedDeferred.resolve(data)
+    Sentry?.setUser({email: email})
     HS?.beacon?.ready ->
       HS.beacon.identify
         name: user.name
@@ -46,6 +47,8 @@ global.cobudgetApp.run ($auth, CurrentUser, Dialog, LoadBar, $location, $q, Reco
         url: null
 
   $rootScope.$on '$stateChangeError', (e, toState, toParams, fromState, fromParams, error) ->
+    Sentry?.captureException(error, { e, toState, toParams, fromState, fromParams });
+
     console.log('$stateChangeError signal fired!')
     console.log('e: ', e)
     console.log('toState: ', toState)
