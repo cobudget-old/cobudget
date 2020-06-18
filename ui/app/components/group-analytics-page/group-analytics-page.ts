@@ -1,28 +1,39 @@
-module.exports =
-  resolve:
-    userValidated: ($auth) ->
-      $auth.validateUser()
-    membershipsLoaded: ->
-      global.cobudgetApp.membershipsLoaded
-  url: '/groups/:groupId/analytics'
-  template: require('./group-analytics-page.html')
-  controller: (config, CurrentUser, Error, $http, Records, $scope, $state, $stateParams, UserCan) ->
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+export default {
+  resolve: {
+    userValidated($auth) {
+      return $auth.validateUser();
+    },
+    membershipsLoaded() {
+      return global.cobudgetApp.membershipsLoaded;
+    }
+  },
+  url: '/groups/:groupId/analytics',
+  template: require('./group-analytics-page.html'),
+  controller(config, CurrentUser, Error, $http, Records, $scope, $state, $stateParams, UserCan) {
 
-    groupId = parseInt($stateParams.groupId)
+    const groupId = parseInt($stateParams.groupId);
     Records.groups.findOrFetchById(groupId)
-      .then (group) ->
-        if UserCan.viewGroup(group)
-          $scope.authorized = true
-          Error.clear()
-          $http.get(config.apiPrefix + "/groups/#{groupId}/analytics")
-            .then (res) ->
-              $scope.data = res.data
-              $scope.dataLoaded = true
-        else
-          $scope.authorized = false
-          Error.set("you can't view this page")
+      .then(function(group) {
+        if (UserCan.viewGroup(group)) {
+          $scope.authorized = true;
+          Error.clear();
+          return $http.get(config.apiPrefix + `/groups/${groupId}/analytics`)
+            .then(function(res) {
+              $scope.data = res.data;
+              return $scope.dataLoaded = true;
+          });
+        } else {
+          $scope.authorized = false;
+          return Error.set("you can't view this page");
+        }
+    });
 
-    $scope.back = ->
-      $state.go('group', {groupId: groupId})
+    $scope.back = () => $state.go('group', {groupId});
 
-    return
+  }
+};

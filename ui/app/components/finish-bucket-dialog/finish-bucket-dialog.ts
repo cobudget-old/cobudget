@@ -1,21 +1,31 @@
-module.exports = (params) ->
-  template: require('./finish-bucket-dialog.html')
-  scope: params.scope
-  controller: (Dialog, LoadBar, $location, $mdDialog, $scope, Toast) ->
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+export default params => ({
+  template: require('./finish-bucket-dialog.html'),
+  scope: params.scope,
 
-    $scope.cancel = ->
-      $mdDialog.cancel()
+  controller(Dialog, LoadBar, $location, $mdDialog, $scope, Toast) {
 
-    $scope.proceed = ->
-      LoadBar.start()
-      $scope.cancel()
-      params =
-        bucket:
+    $scope.cancel = () => $mdDialog.cancel();
+
+    return $scope.proceed = function() {
+      LoadBar.start();
+      $scope.cancel();
+      params = {
+        bucket: {
           status: 'funded'
-      $scope.bucket.remote.update($scope.bucket.id, params)
-        .then ->
-          LoadBar.stop()
-          Toast.show('Funding Accepted!')
-        .catch ->
-          LoadBar.stop()
-          Dialog.alert({title: "Error!"})
+        }
+      };
+      return $scope.bucket.remote.update($scope.bucket.id, params)
+        .then(function() {
+          LoadBar.stop();
+          return Toast.show('Funding Accepted!');}).catch(function() {
+          LoadBar.stop();
+          return Dialog.alert({title: "Error!"});
+      });
+    };
+  }
+});

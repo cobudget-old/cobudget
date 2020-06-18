@@ -1,6 +1,7 @@
-module.exports =
-  url: '/services'
-  template: require('./services-page.html')
-  controller: ($scope) ->
+export default {
+  url: '/services',
+  template: require('./services-page.html'),
+  controller($scope) {
 
-    return
+  }
+};

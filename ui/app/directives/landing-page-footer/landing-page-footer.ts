@@ -1,19 +1,23 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.directive 'landingPageFooter', () ->
-    restrict: 'E'
-    template: require('./landing-page-footer.html')
-    replace: true
-    controller: ($location, $scope) ->
+/* @ngInject */
+global.cobudgetApp.directive('landingPageFooter', () => ({
+  restrict: 'E',
+  template: require('./landing-page-footer.html'),
+  replace: true,
 
-      $scope.redirectToLoginPage = ->
-        $location.path('/login')
+  controller($location, $scope) {
 
-      $scope.redirectToResourcesPage = ->
-        $location.path('/about')
+    $scope.redirectToLoginPage = () => $location.path('/login');
 
-      $scope.redirectToAboutPage = ->
-        $location.path('/about')
+    $scope.redirectToResourcesPage = () => $location.path('/about');
 
-      return
+    $scope.redirectToAboutPage = () => $location.path('/about');
+
+  }
+}));

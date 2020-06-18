@@ -1,16 +1,21 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.directive 'groupPageToolbar', () ->
-    restrict: 'E'
-    template: require('./group-page-toolbar.html')
-    replace: true
-    controller: ($rootScope, $scope) ->
+/* @ngInject */
+global.cobudgetApp.directive('groupPageToolbar', () => ({
+  restrict: 'E',
+  template: require('./group-page-toolbar.html'),
+  replace: true,
 
-      $scope.openSidenav = ->
-        $rootScope.$broadcast('open sidenav')
+  controller($rootScope, $scope) {
 
-      $scope.openAnnouncements = ->
-        $rootScope.$broadcast('open announcements')
+    $scope.openSidenav = () => $rootScope.$broadcast('open sidenav');
 
-      return
+    $scope.openAnnouncements = () => $rootScope.$broadcast('open announcements');
+
+  }
+}));

@@ -1,25 +1,27 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.directive 'groupPageBuckets', () ->
-    restrict: 'E'
-    template: require('./group-page-buckets.html')
-    replace: true
-    controller: ($scope, $location) ->
+/* @ngInject */
+global.cobudgetApp.directive('groupPageBuckets', () => ({
+  restrict: 'E',
+  template: require('./group-page-buckets.html'),
+  replace: true,
 
-      $scope.showBucket = (bucketId) ->
-        $location.path("/buckets/#{bucketId}")
+  controller($scope, $location) {
 
-      $scope.showCompletedBuckets = ->
-        $scope.completedBucketsShown = true
+    $scope.showBucket = bucketId => $location.path(`/buckets/${bucketId}`);
 
-      $scope.hideCompletedBuckets = ->
-        $scope.completedBucketsShown = false
+    $scope.showCompletedBuckets = () => $scope.completedBucketsShown = true;
 
-      $scope.showCancelledBuckets = ->
-        $scope.cancelledBucketsShown = true
+    $scope.hideCompletedBuckets = () => $scope.completedBucketsShown = false;
 
-      $scope.hideCancelledBuckets = ->
-        $scope.cancelledBucketsShown = false
+    $scope.showCancelledBuckets = () => $scope.cancelledBucketsShown = true;
 
-      return
+    $scope.hideCancelledBuckets = () => $scope.cancelledBucketsShown = false;
+
+  }
+}));

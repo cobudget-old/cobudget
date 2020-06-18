@@ -1,47 +1,54 @@
-module.exports =
-  resolve:
-    userValidated: ($auth) ->
-      $auth.validateUser()
-    membershipsLoaded: ->
-      global.cobudgetApp.membershipsLoaded
-  url: '/groups/:groupId/settings'
-  template: require('./admin-page.html')
-  controller: (CurrentUser, Error, Dialog, $location, Records, $scope, UserCan, Toast, $stateParams, Currencies) ->
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+export default {
+  resolve: {
+    userValidated($auth) {
+      return $auth.validateUser();
+    },
+    membershipsLoaded() {
+      return global.cobudgetApp.membershipsLoaded;
+    }
+  },
+  url: '/groups/:groupId/settings',
+  template: require('./admin-page.html'),
+  controller(CurrentUser, Error, Dialog, $location, Records, $scope, UserCan, Toast, $stateParams, Currencies) {
 
-    groupId = parseInt($stateParams.groupId)
+    const groupId = parseInt($stateParams.groupId);
 
     Records.groups.findOrFetchById(groupId)
-      .then (group) ->
-        if CurrentUser().isAdminOf(group)
-          $scope.authorized = true
-          Error.clear()
-          $scope.group = group
-        else
-          $scope.authorized = false
-          Error.set("you can't view this page")
-      .catch ->
-        Error.set('group not found')
+      .then(function(group) {
+        if (CurrentUser().isAdminOf(group)) {
+          $scope.authorized = true;
+          Error.clear();
+          return $scope.group = group;
+        } else {
+          $scope.authorized = false;
+          return Error.set("you can't view this page");
+        }}).catch(() => Error.set('group not found'));
 
-    $scope.currencies = Currencies()
+    $scope.currencies = Currencies();
 
-    $scope.updateGroup = () ->
-      $scope.group.save()
-        .then ->
-          Toast.show('You updated ' + $scope.group.name)
-          $scope.cancel()
+    $scope.updateGroup = () => $scope.group.save()
+      .then(function() {
+        Toast.show('You updated ' + $scope.group.name);
+        return $scope.cancel();
+    });
 
-    $scope.viewGroup = (groupId) ->
-      $location.path("/groups/#{groupId}")
+    $scope.viewGroup = groupId => $location.path(`/groups/${groupId}`);
 
-    $scope.cancel = () ->
-      $location.path("/groups/#{groupId}")
+    $scope.cancel = () => $location.path(`/groups/${groupId}`);
 
-    $scope.attemptCancel = (adminPageForm) ->
-      if adminPageForm.$dirty
-        Dialog.confirm({title: "Discard unsaved changes?"})
-          .then ->
-            $scope.cancel()
-      else
-        $scope.cancel()
+    $scope.attemptCancel = function(adminPageForm) {
+      if (adminPageForm.$dirty) {
+        return Dialog.confirm({title: "Discard unsaved changes?"})
+          .then(() => $scope.cancel());
+      } else {
+        return $scope.cancel();
+      }
+    };
 
-    return
+  }
+};

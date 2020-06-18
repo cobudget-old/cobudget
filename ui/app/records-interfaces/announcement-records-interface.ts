@@ -1,9 +1,34 @@
-global.cobudgetApp.factory 'AnnouncementRecordsInterface', (config, BaseRecordsInterface, $q, AnnouncementModel) ->
-  class AnnouncementRecordsInterface extends BaseRecordsInterface
-    model: AnnouncementModel
-    constructor: (recordStore) ->
-      @baseConstructor recordStore
-      @remote.apiPrefix = config.apiPrefix
+/*
+ * decaffeinate suggestions:
+ * DS001: Remove Babel/TypeScript constructor workaround
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS206: Consider reworking classes to avoid initClass
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+global.cobudgetApp.factory('AnnouncementRecordsInterface', function(config, BaseRecordsInterface, $q, AnnouncementModel) {
+  let AnnouncementRecordsInterface;
+  return AnnouncementRecordsInterface = (function() {
+    AnnouncementRecordsInterface = class AnnouncementRecordsInterface extends BaseRecordsInterface {
+      static initClass() {
+        this.prototype.model = AnnouncementModel;
+      }
+      constructor(recordStore) {
+        {
+          // Hack: trick Babel/TypeScript into allowing this before super.
+          if (false) { super(); }
+          let thisFn = (() => { return this; }).toString();
+          let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
+          eval(`${thisName} = this;`);
+        }
+        this.baseConstructor(recordStore);
+        this.remote.apiPrefix = config.apiPrefix;
+      }
 
-    seen: (params) ->
-      @remote.post('seen', params)
+      seen(params) {
+        return this.remote.post('seen', params);
+      }
+    };
+    AnnouncementRecordsInterface.initClass();
+    return AnnouncementRecordsInterface;
+  })();
+});

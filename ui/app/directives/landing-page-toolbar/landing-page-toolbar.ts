@@ -1,52 +1,62 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.directive 'landingPageToolbar', () ->
-    restrict: 'E'
-    template: require('./landing-page-toolbar.html')
-    replace: true
-    controller: ($location, $scope, $anchorScroll, Dialog) ->
+/* @ngInject */
+global.cobudgetApp.directive('landingPageToolbar', () => ({
+  restrict: 'E',
+  template: require('./landing-page-toolbar.html'),
+  replace: true,
 
-      $scope.createGroupDialog = (membership) ->
-        createGroupDialog = require('./../../components/create-group-dialog/create-group-dialog.coffee')({
-          scope: $scope
-        })
-        Dialog.open(createGroupDialog)
+  controller($location, $scope, $anchorScroll, Dialog) {
 
-      $scope.scrollTo = (id) ->
-        $location.hash(id)
-        $anchorScroll()
+    $scope.createGroupDialog = function(membership) {
+      const createGroupDialog = require('./../../components/create-group-dialog/create-group-dialog.coffee')({
+        scope: $scope
+      });
+      return Dialog.open(createGroupDialog);
+    };
 
-      $scope.redirectToLoginPage = ->
-        $location.path('/login')
+    $scope.scrollTo = function(id) {
+      $location.hash(id);
+      return $anchorScroll();
+    };
 
-      $scope.redirectToHomePage = ->
-        $location.path('/')
+    $scope.redirectToLoginPage = () => $location.path('/login');
 
-      $scope.redirectToHomePageCreateGroup = ->
-        $location.path('/')
-        $location.hash('createGroup')
+    $scope.redirectToHomePage = () => $location.path('/');
 
-      $scope.redirectToHomePageTour = ->
-        $location.path('/')
-        $location.hash('tour')
+    $scope.redirectToHomePageCreateGroup = function() {
+      $location.path('/');
+      return $location.hash('createGroup');
+    };
 
-      $scope.redirectToHomePageStudies = ->
-        $location.path('/')
-        $location.hash('studies')
+    $scope.redirectToHomePageTour = function() {
+      $location.path('/');
+      return $location.hash('tour');
+    };
 
-      $scope.redirectToHomePagePricing = ->
-        $location.path('/')
-        $location.hash('pricing')
+    $scope.redirectToHomePageStudies = function() {
+      $location.path('/');
+      return $location.hash('studies');
+    };
 
-      $scope.redirectToCaseStudiesPage = ->
-        $location.path('/case-studies')
+    $scope.redirectToHomePagePricing = function() {
+      $location.path('/');
+      return $location.hash('pricing');
+    };
 
-      $scope.redirectToServicesPage = ->
-        $location.hash('')
-        $location.path('/services')
+    $scope.redirectToCaseStudiesPage = () => $location.path('/case-studies');
 
-      $scope.redirectToAboutPage = ->
-        $location.path('/about')
+    $scope.redirectToServicesPage = function() {
+      $location.hash('');
+      return $location.path('/services');
+    };
 
-      return
+    $scope.redirectToAboutPage = () => $location.path('/about');
+
+  }
+}));

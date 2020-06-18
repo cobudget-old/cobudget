@@ -1,3 +1,3 @@
-### @ngInject ###
+/* @ngInject */
 
-global.cobudgetApp.controller 'ApplicationController', (Records) ->
+global.cobudgetApp.controller('ApplicationController', function(Records) {});

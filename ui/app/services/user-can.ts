@@ -1,37 +1,53 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.factory 'UserCan', (CurrentUser, $location, $q, Records, Toast) ->
-  new class UserCan
-    viewGroup: (group) ->
-      validMemberships = Records.memberships.find({
+/* @ngInject */
+global.cobudgetApp.factory('UserCan', function(CurrentUser, $location, $q, Records, Toast) {
+  let UserCan;
+  return new (UserCan = class UserCan {
+    viewGroup(group) {
+      const validMemberships = Records.memberships.find({
         groupId: group.id,
         memberId: global.cobudgetApp.currentUserId
-      })
-      validMemberships.length == 1
+      });
+      return validMemberships.length === 1;
+    }
 
-    viewBucket: (bucket) ->
-      @viewGroup(bucket.group())
+    viewBucket(bucket) {
+      return this.viewGroup(bucket.group());
+    }
 
-    editBucket: (bucket) ->
-      isBucketAuthor = bucket.userId == global.cobudgetApp.currentUserId
-      isBucketAuthor || CurrentUser().isAdminOf(bucket.group())
+    editBucket(bucket) {
+      const isBucketAuthor = bucket.userId === global.cobudgetApp.currentUserId;
+      return isBucketAuthor || CurrentUser().isAdminOf(bucket.group());
+    }
 
-    viewAdminPanel: ->
-      validMemberships = Records.memberships.find({
+    viewAdminPanel() {
+      const validMemberships = Records.memberships.find({
         memberId: global.cobudgetApp.currentUserId,
         isAdmin: true
-      })
-      validMemberships.length > 0
+      });
+      return validMemberships.length > 0;
+    }
 
-    changeEmailSettings: ->
-      CurrentUser().isConfirmed()
+    changeEmailSettings() {
+      return CurrentUser().isConfirmed();
+    }
 
-    manageFundsForGroup: (group) ->
-      CurrentUser().isAdminOf(group)
+    manageFundsForGroup(group) {
+      return CurrentUser().isAdminOf(group);
+    }
 
-    inviteMembersToGroup: (group) ->
-      @manageFundsForGroup(group)
+    inviteMembersToGroup(group) {
+      return this.manageFundsForGroup(group);
+    }
 
-    viewAnalyticsPage: ->
-      CurrentUser().isSuperAdmin
+    viewAnalyticsPage() {
+      return CurrentUser().isSuperAdmin;
+    }
+  });
+});

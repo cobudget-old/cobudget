@@ -1,23 +1,36 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.factory 'Toast', ($mdToast, $location) ->
-  new class Toast
+/* @ngInject */
+global.cobudgetApp.factory('Toast', function($mdToast, $location) {
+  let Toast;
+  return new (Toast = class Toast {
 
-    show: (msg) ->
-      toast = $mdToast.simple()
-        .content(msg)
-      $mdToast.show(toast)
+    show(msg) {
+      const toast = $mdToast.simple()
+        .content(msg);
+      return $mdToast.show(toast);
+    }
 
-    showWithRedirect: (msg, path) ->
-      toast = $mdToast.simple()
+    showWithRedirect(msg, path) {
+      const toast = $mdToast.simple()
         .content(msg)
         .action('VIEW')
-        .highlightAction(false)
+        .highlightAction(false);
 
-      $mdToast.show(toast).then (res) ->
-        if res == 'ok'
-          $location.path(path)
+      return $mdToast.show(toast).then(function(res) {
+        if (res === 'ok') {
+          return $location.path(path);
+        }
+      });
+    }
 
-    hide: ->
-      angular.element('md-toast').hide()
+    hide() {
+      return angular.element('md-toast').hide();
+    }
+  });
+});

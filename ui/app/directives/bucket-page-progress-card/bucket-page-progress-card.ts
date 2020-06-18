@@ -1,35 +1,42 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.directive 'bucketPageProgressCard', () ->
-  restrict: 'E'
-  template: require('./bucket-page-progress-card.html')
-  replace: true
-  controller: (Dialog, $q, Records, $scope, $state, Toast) ->
+/* @ngInject */
+global.cobudgetApp.directive('bucketPageProgressCard', () => ({
+  restrict: 'E',
+  template: require('./bucket-page-progress-card.html'),
+  replace: true,
 
-    maxAllowableContribution = _.min([$scope.bucket.amountRemaining(), $scope.membership.balance])
+  controller(Dialog, $q, Records, $scope, $state, Toast) {
 
-    $scope.percentContributed = ->
-      ($scope.newContribution.amount || 0) / $scope.bucket.target * 100
+    const maxAllowableContribution = _.min([$scope.bucket.amountRemaining(), $scope.membership.balance]);
 
-    $scope.totalAmountFunded = ->
-      parseFloat($scope.bucket.totalContributions) + ($scope.newContribution.amount || 0)
+    $scope.percentContributed = () => (($scope.newContribution.amount || 0) / $scope.bucket.target) * 100;
 
-    $scope.normalizeContributionAmount = ->
-      if $scope.newContribution.amount > maxAllowableContribution
-        $scope.newContribution.amount = +maxAllowableContribution.toFixed(2)
+    $scope.totalAmountFunded = () => parseFloat($scope.bucket.totalContributions) + ($scope.newContribution.amount || 0);
 
-    $scope.submitContribution = ->
-      $scope.contributionSubmitted = true
-      $scope.newContribution.save()
-        .then ->
-          membershipPromise = Records.memberships.remote.fetchById($scope.membership.id)
-          bucketPromise = Records.buckets.remote.fetchById($scope.bucket.id)
-          $q.allSettled([membershipPromise, bucketPromise]).then ->
-            $scope.newContribution = {}
-            $state.reload()
-            Toast.show('You funded a bucket')
-        .catch (err) ->
-          console.log('err: ', err)
+    $scope.normalizeContributionAmount = function() {
+      if ($scope.newContribution.amount > maxAllowableContribution) {
+        return $scope.newContribution.amount = +maxAllowableContribution.toFixed(2);
+      }
+    };
 
-    return
+    $scope.submitContribution = function() {
+      $scope.contributionSubmitted = true;
+      return $scope.newContribution.save()
+        .then(function() {
+          const membershipPromise = Records.memberships.remote.fetchById($scope.membership.id);
+          const bucketPromise = Records.buckets.remote.fetchById($scope.bucket.id);
+          return $q.allSettled([membershipPromise, bucketPromise]).then(function() {
+            $scope.newContribution = {};
+            $state.reload();
+            return Toast.show('You funded a bucket');
+          });}).catch(err => console.log('err: ', err));
+    };
+
+  }
+}));

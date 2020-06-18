@@ -1,19 +1,29 @@
-module.exports = (params) ->
-  template: require('./complete-bucket-dialog.html')
-  scope: params.scope
-  controller: (Dialog, LoadBar, $location, $mdDialog, $scope, Toast) ->
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+export default params => ({
+  template: require('./complete-bucket-dialog.html'),
+  scope: params.scope,
 
-    $scope.cancel = ->
-      $mdDialog.cancel()
+  controller(Dialog, LoadBar, $location, $mdDialog, $scope, Toast) {
 
-    $scope.proceed = ->
-      $scope.cancel()
-      LoadBar.start()
-      $scope.bucket.complete()
-        .then ->
-          groupId = $scope.bucket.groupId
-          Toast.show('Bucket marked as complete!')
-          LoadBar.stop()
-        .catch ->
-          Dialog.alert({title: "Error!"})
-          LoadBar.stop()
+    $scope.cancel = () => $mdDialog.cancel();
+
+    return $scope.proceed = function() {
+      $scope.cancel();
+      LoadBar.start();
+      return $scope.bucket.complete()
+        .then(function() {
+          const {
+            groupId
+          } = $scope.bucket;
+          Toast.show('Bucket marked as complete!');
+          return LoadBar.stop();}).catch(function() {
+          Dialog.alert({title: "Error!"});
+          return LoadBar.stop();
+      });
+    };
+  }
+});

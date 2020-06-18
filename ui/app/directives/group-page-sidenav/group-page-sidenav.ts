@@ -1,25 +1,31 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.directive 'groupPageSidenav', () ->
-    restrict: 'E'
-    template: require('./group-page-sidenav.html')
-    replace: true
-    controller: ($scope, $state, CurrentUser, $mdSidenav, $location, Toast) ->
+/* @ngInject */
+global.cobudgetApp.directive('groupPageSidenav', () => ({
+  restrict: 'E',
+  template: require('./group-page-sidenav.html'),
+  replace: true,
 
-      $scope.$on 'open sidenav', ->
-        $mdSidenav('left').open()
+  controller($scope, $state, CurrentUser, $mdSidenav, $location, Toast) {
 
-      $scope.accessibleGroups = ->
-        CurrentUser() && CurrentUser().groups()
+    $scope.$on('open sidenav', () => $mdSidenav('left').open());
 
-      $scope.redirectToGroupPage = (groupId) ->
-        if $state.current.name == 'group' && $scope.group.id == parseInt(groupId)
-          $mdSidenav('left').close()
-        else
-          $location.path("/groups/#{groupId}")
+    $scope.accessibleGroups = () => CurrentUser() && CurrentUser().groups();
 
-      $scope.redirectToGroupSetupPage = ->
-        $location.path('/setup_group')
+    $scope.redirectToGroupPage = function(groupId) {
+      if (($state.current.name === 'group') && ($scope.group.id === parseInt(groupId))) {
+        return $mdSidenav('left').close();
+      } else {
+        return $location.path(`/groups/${groupId}`);
+      }
+    };
 
-      return
+    $scope.redirectToGroupSetupPage = () => $location.path('/setup_group');
+
+  }
+}));

@@ -1,19 +1,37 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS206: Consider reworking classes to avoid initClass
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.factory 'MembershipModel', (BaseModel) ->
-  class MembershipModel extends BaseModel
-    @singular: 'membership'
-    @plural: 'memberships'
-    @indices: ['groupId', 'memberId']
-    @serializableAttributes: ['isAdmin', 'closedAdminHelpCardAt', 'closedMemberHelpCardAt']
+/* @ngInject */
+global.cobudgetApp.factory('MembershipModel', function(BaseModel) {
+  let MembershipModel;
+  return MembershipModel = (function() {
+    MembershipModel = class MembershipModel extends BaseModel {
+      static initClass() {
+        this.singular = 'membership';
+        this.plural = 'memberships';
+        this.indices = ['groupId', 'memberId'];
+        this.serializableAttributes = ['isAdmin', 'closedAdminHelpCardAt', 'closedMemberHelpCardAt'];
+      }
 
-    relationships: ->
-      @belongsTo 'member', from: 'users'
-      @belongsTo 'group'
+      relationships() {
+        this.belongsTo('member', {from: 'users'});
+        return this.belongsTo('group');
+      }
 
-    isPending: ->
-      !@member().isConfirmed()
+      isPending() {
+        return !this.member().isConfirmed();
+      }
 
-    cancel: ->
-      @remote.postMember(@id, 'archive')
+      cancel() {
+        return this.remote.postMember(this.id, 'archive');
+      }
+    };
+    MembershipModel.initClass();
+    return MembershipModel;
+  })();
+});

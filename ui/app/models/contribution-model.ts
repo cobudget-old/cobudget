@@ -1,13 +1,29 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS206: Consider reworking classes to avoid initClass
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.factory 'ContributionModel', (BaseModel) ->
-  class ContributionModel extends BaseModel
-    @singular: 'contribution'
-    @plural: 'contributions'
-    @indices: ['bucketId', 'userId']
-    @serializableAttributes: ['amount', 'bucketId']
+/* @ngInject */
+global.cobudgetApp.factory('ContributionModel', function(BaseModel) {
+  let ContributionModel;
+  return ContributionModel = (function() {
+    ContributionModel = class ContributionModel extends BaseModel {
+      static initClass() {
+        this.singular = 'contribution';
+        this.plural = 'contributions';
+        this.indices = ['bucketId', 'userId'];
+        this.serializableAttributes = ['amount', 'bucketId'];
+      }
 
-    relationships: ->
-      @belongsTo 'bucket'
-      @belongsTo 'user'
+      relationships() {
+        this.belongsTo('bucket');
+        return this.belongsTo('user');
+      }
+    };
+    ContributionModel.initClass();
+    return ContributionModel;
+  })();
+});

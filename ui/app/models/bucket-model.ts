@@ -1,71 +1,104 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * DS206: Consider reworking classes to avoid initClass
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.factory 'BucketModel', (BaseModel) ->
-  class BucketModel extends BaseModel
-    @singular: 'bucket'
-    @plural: 'buckets'
-    @indices: ['groupId', 'userId']
-    @serializableAttributes: ['description', 'name', 'target', 'groupId']
+/* @ngInject */
+global.cobudgetApp.factory('BucketModel', function(BaseModel) {
+  let BucketModel;
+  return BucketModel = (function() {
+    BucketModel = class BucketModel extends BaseModel {
+      static initClass() {
+        this.singular = 'bucket';
+        this.plural = 'buckets';
+        this.indices = ['groupId', 'userId'];
+        this.serializableAttributes = ['description', 'name', 'target', 'groupId'];
+      }
 
-    relationships: ->
-      @hasMany 'comments', sortBy: 'createdAt', sortDesc: false
-      @hasMany 'contributions', sortBy: 'createdAt', sortDesc: false
-      @belongsTo 'group'
-      @belongsTo 'author', from: 'users', by: 'userId'
+      relationships() {
+        this.hasMany('comments', {sortBy: 'createdAt', sortDesc: false});
+        this.hasMany('contributions', {sortBy: 'createdAt', sortDesc: false});
+        this.belongsTo('group');
+        return this.belongsTo('author', {from: 'users', by: 'userId'});
+      }
 
-    amountRemaining: ->
-      @target - @totalContributions
+      amountRemaining() {
+        return this.target - this.totalContributions;
+      }
 
-    percentFunded: ->
-      @totalContributions / @target * 100
+      percentFunded() {
+        return (this.totalContributions / this.target) * 100;
+      }
 
-    openForFunding: ->
-      @remote.postMember(@id, 'open_for_funding')
+      openForFunding() {
+        return this.remote.postMember(this.id, 'open_for_funding');
+      }
 
-    cancel: ->
-      @remote.postMember(@id, 'archive')
+      cancel() {
+        return this.remote.postMember(this.id, 'archive');
+      }
 
-    complete: ->
-      @remote.postMember(@id, 'paid')
+      complete() {
+        return this.remote.postMember(this.id, 'paid');
+      }
 
-    hasComments: ->
-      @numOfComments > 0
+      hasComments() {
+        return this.numOfComments > 0;
+      }
 
-    contributionsByUser: (user) ->
-      @recordStore.contributions.find(bucketId: @id, userId: user.id)
+      contributionsByUser(user) {
+        return this.recordStore.contributions.find({bucketId: this.id, userId: user.id});
+      }
 
-    amountContributedByUser: (user) ->
-      _.sum @contributionsByUser(user), (contribution) ->
-        contribution.amount
+      amountContributedByUser(user) {
+        return _.sum(this.contributionsByUser(user), contribution => contribution.amount);
+      }
 
-    amountContributedByOthers: (user) ->
-      @totalContributions - @amountContributedByUser(user)
+      amountContributedByOthers(user) {
+        return this.totalContributions - this.amountContributedByUser(user);
+      }
 
-    percentContributedByOthers: (user) ->
-      @amountContributedByOthers(user) / @target * 100
+      percentContributedByOthers(user) {
+        return (this.amountContributedByOthers(user) / this.target) * 100;
+      }
 
-    percentContributedByUser: (user) ->
-      @amountContributedByUser(user) / @target * 100
+      percentContributedByUser(user) {
+        return (this.amountContributedByUser(user) / this.target) * 100;
+      }
 
-    isArchived: ->
-      !!@archivedAt && !@paidAt
+      isArchived() {
+        return !!this.archivedAt && !this.paidAt;
+      }
 
-    isIdea: ->
-      @status == 'draft' && !@archivedAt
+      isIdea() {
+        return (this.status === 'draft') && !this.archivedAt;
+      }
 
-    isFunding: ->
-      @status == 'live' && !@archivedAt
+      isFunding() {
+        return (this.status === 'live') && !this.archivedAt;
+      }
 
-    isFunded: ->
-      @status == 'funded' && !@paidAt
+      isFunded() {
+        return (this.status === 'funded') && !this.paidAt;
+      }
 
-    isComplete: ->
-      !!@paidAt && @status == 'funded'
+      isComplete() {
+        return !!this.paidAt && (this.status === 'funded');
+      }
 
-    isCancelled: ->
-      !!@archivedAt && !@paidAt && @status != 'funded'
+      isCancelled() {
+        return !!this.archivedAt && !this.paidAt && (this.status !== 'funded');
+      }
 
-    ## Legacy funded and archived bucket
-    isFundedAndArchived: ->
-      @status == 'funded' && !@paidAt && !!@archivedAt
+      //# Legacy funded and archived bucket
+      isFundedAndArchived() {
+        return (this.status === 'funded') && !this.paidAt && !!this.archivedAt;
+      }
+    };
+    BucketModel.initClass();
+    return BucketModel;
+  })();
+});

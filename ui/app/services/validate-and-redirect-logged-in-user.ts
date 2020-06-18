@@ -1,16 +1,19 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
+/* @ngInject */
 
-global.cobudgetApp.factory 'ValidateAndRedirectLoggedInUser', ($auth, Error, LoadBar, $location, Records) ->
-  ->
-    LoadBar.start()
-    Error.clear()
-    $auth.validateUser()
-      .then ->
-        global.cobudgetApp.membershipsLoaded.then (data) ->
-          groupId = data.groups[0].id
-          $location.path("/groups/#{groupId}")
-          LoadBar.stop()
-      .catch ->
-        LoadBar.stop()
+global.cobudgetApp.factory('ValidateAndRedirectLoggedInUser', ($auth, Error, LoadBar, $location, Records) => (function() {
+  LoadBar.start();
+  Error.clear();
+  return $auth.validateUser()
+    .then(() => global.cobudgetApp.membershipsLoaded.then(function(data) {
+    const groupId = data.groups[0].id;
+    $location.path(`/groups/${groupId}`);
+    return LoadBar.stop();
+  })).catch(() => LoadBar.stop());
+}));

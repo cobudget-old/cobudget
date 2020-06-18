@@ -1,17 +1,23 @@
-null
+/*
+ * decaffeinate suggestions:
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
+null;
 
-### @ngInject ###
-global.cobudgetApp.directive 'loadingPage', () ->
-    restrict: 'E', 
-    scope: {},
-    template: require('./loading-page.html'),
-    replace: true
-    controller: ($scope) ->
+/* @ngInject */
+global.cobudgetApp.directive('loadingPage', () => ({
+  restrict: 'E',
+  scope: {},
+  template: require('./loading-page.html'),
+  replace: true,
 
-      $scope.loading = false
+  controller($scope) {
 
-      $scope.$on 'loading', ->
-        $scope.loading = true
+    $scope.loading = false;
 
-      $scope.$on 'loaded', ->
-        $scope.loading = false
+    $scope.$on('loading', () => $scope.loading = true);
+
+    return $scope.$on('loaded', () => $scope.loading = false);
+  }
+}));
