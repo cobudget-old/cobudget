@@ -1,3 +1,8 @@
+/* eslint-disable
+    babel/new-cap,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,12 +15,12 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/groups/:groupId?tab',
   template: require('./group-page.html'),
   params: {
-    firstTimeSeeingGroup: null
+    firstTimeSeeingGroup: null,
   },
   controller(CurrentUser, Error, LoadBar, $location, Records, $scope, $stateParams, UserCan, $window) {
     LoadBar.start();
@@ -42,5 +47,5 @@ export default {
         return Error.set('group not found');
     });
 
-  }
+  },
 };

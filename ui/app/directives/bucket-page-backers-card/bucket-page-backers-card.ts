@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -14,7 +19,7 @@ global.cobudgetApp.directive('bucketPageBackersCard', () => ({
   scope: {
     contributions: '=',
     currentUser: '=',
-    group: '='
+    group: '=',
   },
 
   controller($scope) {
@@ -26,5 +31,5 @@ global.cobudgetApp.directive('bucketPageBackersCard', () => ({
       return {id: contributions[0].user().id, name: contributions[0].user().name, contributionAmount: totalContributionAmount};
   });
 
-  }
+  },
 }));

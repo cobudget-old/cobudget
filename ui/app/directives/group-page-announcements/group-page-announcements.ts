@@ -1,3 +1,10 @@
+/* eslint-disable
+    babel/new-cap,
+    no-undef,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -30,7 +37,7 @@ global.cobudgetApp.directive('groupPageAnnouncements', () => ({
 
     $scope.currentUser = CurrentUser();
     $scope.announcements = Records.announcements.find({});
-    $scope.unseenAnnoucements = Records.announcements.find({'seen':{ '$eq' : false }});
+    $scope.unseenAnnoucements = Records.announcements.find({seen:{ $eq : false }});
 
-  }
+  },
 }));

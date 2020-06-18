@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-shadow,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -22,7 +28,7 @@ global.cobudgetApp.factory('UserModel', function(BaseModel) {
           'subscribedToDailyDigest',
           'subscribedToParticipantActivity',
           'confirmationToken',
-          'isSuperAdmin'
+          'isSuperAdmin',
         ];
       }
 

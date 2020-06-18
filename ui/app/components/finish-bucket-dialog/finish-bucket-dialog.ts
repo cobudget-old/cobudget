@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -16,16 +18,16 @@ export default params => ({
       $scope.cancel();
       params = {
         bucket: {
-          status: 'funded'
-        }
+          status: 'funded',
+        },
       };
       return $scope.bucket.remote.update($scope.bucket.id, params)
         .then(function() {
           LoadBar.stop();
           return Toast.show('Funding Accepted!');}).catch(function() {
           LoadBar.stop();
-          return Dialog.alert({title: "Error!"});
+          return Dialog.alert({title: 'Error!'});
       });
     };
-  }
+  },
 });

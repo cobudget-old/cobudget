@@ -1,3 +1,9 @@
+/* eslint-disable
+    babel/new-cap,
+    no-shadow,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +16,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/groups/:groupId/settings',
   template: require('./admin-page.html'),
@@ -43,12 +49,12 @@ export default {
 
     $scope.attemptCancel = function(adminPageForm) {
       if (adminPageForm.$dirty) {
-        return Dialog.confirm({title: "Discard unsaved changes?"})
+        return Dialog.confirm({title: 'Discard unsaved changes?'})
           .then(() => $scope.cancel());
       } else {
         return $scope.cancel();
       }
     };
 
-  }
+  },
 };

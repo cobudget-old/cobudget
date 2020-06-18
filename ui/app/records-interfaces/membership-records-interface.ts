@@ -1,3 +1,11 @@
+/* eslint-disable
+    constructor-super,
+    no-constant-condition,
+    no-shadow,
+    no-this-before-super,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS001: Remove Babel/TypeScript constructor workaround
@@ -37,16 +45,16 @@ global.cobudgetApp.factory('MembershipRecordsInterface', function(config, BaseRe
         return this.fetch({
           path: 'my_memberships',
           params: {
-            group_id: groupId
-          }
+            group_id: groupId,
+          },
         });
       }
 
       fetchByGroupId(groupId) {
         return this.fetch({
           params: {
-            group_id: groupId
-          }
+            group_id: groupId,
+          },
         });
       }
 

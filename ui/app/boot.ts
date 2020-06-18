@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -21,10 +26,10 @@ global.cobudgetApp.run(function($auth, CurrentUser, Dialog, LoadBar, $location, 
     if (user.is_super_admin) {
       let groupId;
       const pathComponents = $location.path().split('/');
-      if (pathComponents[1] === "groups") {
+      if (pathComponents[1] === 'groups') {
         groupId = pathComponents[2];
         Records.memberships.fetchMyMembershipsSuper(groupId).then(data => membershipsLoadedDeferred.resolve(data));
-      } else if (pathComponents[1] === "buckets") {
+      } else if (pathComponents[1] === 'buckets') {
         const bucketId = parseInt(pathComponents[2]);
         Records.buckets.findOrFetchById(bucketId).then(function(bucket) {
           groupId = bucket.group().id;
@@ -43,7 +48,7 @@ global.cobudgetApp.run(function($auth, CurrentUser, Dialog, LoadBar, $location, 
     return __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
       name: user.name,
       email: user.email,
-      url: location.href
+      url: location.href,
     })));
   });
 
@@ -52,7 +57,7 @@ global.cobudgetApp.run(function($auth, CurrentUser, Dialog, LoadBar, $location, 
     return __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
       name: null,
       email: null,
-      url: null
+      url: null,
     })));
   });
 

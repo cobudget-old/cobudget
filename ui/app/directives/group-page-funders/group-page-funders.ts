@@ -1,3 +1,11 @@
+/* eslint-disable
+    babel/new-cap,
+    no-shadow,
+    no-undef,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -21,8 +29,8 @@ global.cobudgetApp.directive('groupPageFunders', () => ({
       membership.isAdmin = !membership.isAdmin;
       const params = {
         membership: {
-          is_admin: membership.isAdmin
-        }
+          is_admin: membership.isAdmin,
+        },
       };
       return membership.remote.update(membership.id, params);
     };
@@ -32,13 +40,13 @@ global.cobudgetApp.directive('groupPageFunders', () => ({
       const filename = `${$scope.group.name}-member-data-${timestamp}`;
       const params = {
         url: `${config.apiPrefix}/memberships.csv?group_id=${$scope.group.id}`,
-        filename
+        filename,
       };
       return DownloadCSV(params);
     };
 
     $scope.openResendInvitesDialog = () => Dialog.confirm({
-      content: `Resend invitations to ${$scope.group.pendingMemberships().length} people?`
+      content: `Resend invitations to ${$scope.group.pendingMemberships().length} people?`,
     }).then(() => $scope.resendInvites());
 
     $scope.resendInvites = function() {
@@ -71,13 +79,13 @@ global.cobudgetApp.directive('groupPageFunders', () => ({
           .then(function() {
             $scope.cancel();
             return Toast.show('Invitation sent!');}).catch(() => Dialog.alert({title: 'Error!'}));
-      }
+      },
     });
 
     $scope.removeMembership = function(membership) {
       const removeMembershipDialog = require('./../../components/remove-membership-dialog/remove-membership-dialog.coffee')({
         scope: $scope,
-        membership
+        membership,
       });
       return Dialog.open(removeMembershipDialog);
     };
@@ -142,8 +150,8 @@ global.cobudgetApp.directive('groupPageFunders', () => ({
               Records.memberships.findOrFetchById($scope.managedMembership.id);
               return Dialog.alert({title: 'Success!'});}).catch(err => Dialog.alert({title: 'Error!'})).finally(() => $scope.cancel());
         };
-      }
+      },
     });
 
-  }
+  },
 }));

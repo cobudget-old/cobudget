@@ -1,3 +1,8 @@
+/* eslint-disable
+    babel/new-cap,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +15,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/groups/:groupId/invite_members',
   template: require('./invite-members-page.html'),
@@ -37,7 +42,7 @@ export default {
 
     $scope.openInviteMembersPrimerDialog = function() {
       const inviteMembersPrimerDialog = require('./../bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.coffee')({
-        scope: $scope
+        scope: $scope,
       });
       return Dialog.open(inviteMembersPrimerDialog);
     };
@@ -59,5 +64,5 @@ export default {
           return Toast.show('Invitation sent!');
         });}).catch(() => Dialog.alert({title: 'error!', content: 'member already exists'}));
 
-  }
+  },
 };

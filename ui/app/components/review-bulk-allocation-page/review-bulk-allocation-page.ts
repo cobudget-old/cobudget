@@ -1,3 +1,9 @@
+/* eslint-disable
+    babel/new-cap,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,13 +16,13 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/groups/:groupId/manage_funds/review_upload',
   template: require('./review-bulk-allocation-page.html'),
   params: {
     people: null,
-    groupId: null
+    groupId: null,
   },
   controller(config, CurrentUser, Dialog, Error, LoadBar, $location, $q, Records, $scope, $state, $stateParams, $timeout, UserCan) {
 
@@ -76,7 +82,7 @@ export default {
 
     $scope.openUploadCSVPrimerDialog = function() {
       const uploadCSVPrimerDialog = require('./../bulk-allocation-primer-dialog/bulk-allocation-primer-dialog.coffee')({
-        scope: $scope
+        scope: $scope,
       });
       return Dialog.open(uploadCSVPrimerDialog);
     };
@@ -131,5 +137,5 @@ export default {
 
     $scope.seeAllMembers = () => $state.go('group', {groupId, tab: 'funders'});
 
-  }
+  },
 };

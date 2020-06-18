@@ -1,3 +1,9 @@
+/* eslint-disable
+    babel/new-cap,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +16,7 @@ export default {
   },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-  }
+  },
 },
   url: '/analytics',
   template: require('./analytics-page.html'),
@@ -34,118 +40,118 @@ export default {
 
           $scope.chartConfigInvites = {
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
             },
             title: {
-                text: null
+                text: null,
             },
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
             },
             yAxis: {
                 title: {
-                    text: 'User invites'
-                }
+                    text: 'User invites',
+                },
             },
             legend: {
-              enabled: false
+              enabled: false,
             },
             tooltip: {
-              shared: true
+              shared: true,
             },
             colors: ['#2BABE2'],
             series: [{
                 type: 'area',
                 name: 'Invites',
-                data: inviteData
-            }]
+                data: inviteData,
+            }],
           };
 
           $scope.chartConfigGroups = {
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
             },
             title: {
-                text: null
+                text: null,
             },
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
             },
             yAxis: {
                 title: {
-                    text: 'Groups Created'
-                }
+                    text: 'Groups Created',
+                },
             },
             legend: {
-              enabled: false
+              enabled: false,
             },
             tooltip: {
-              shared: true
+              shared: true,
             },
             colors: ['#2BABE2'],
             series: [{
                 type: 'area',
                 name: 'Groups Created',
-                data: groupData
-            }]
+                data: groupData,
+            }],
           };
 
           $scope.chartConfigNewBuckets = {
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
             },
             title: {
-                text: null
+                text: null,
             },
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
             },
             yAxis: {
                 title: {
-                    text: 'Buckets Created'
-                }
+                    text: 'Buckets Created',
+                },
             },
             legend: {
-              enabled: false
+              enabled: false,
             },
             tooltip: {
-              shared: true
+              shared: true,
             },
             colors: ['#2BABE2'],
             series: [{
                 type: 'area',
                 name: 'Buckets Created',
-                data: newBucketData
-            }]
+                data: newBucketData,
+            }],
           };
 
           return $scope.chartConfigFundedBuckets = {
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
             },
             title: {
-                text: null
+                text: null,
             },
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
             },
             yAxis: {
                 title: {
-                    text: 'Buckets Funded'
-                }
+                    text: 'Buckets Funded',
+                },
             },
             legend: {
-              enabled: false
+              enabled: false,
             },
             tooltip: {
-              shared: true
+              shared: true,
             },
             colors: ['#2BABE2'],
             series: [{
                 type: 'area',
                 name: 'Buckets Funded',
-                data: fundedBucketData
-            }]
+                data: fundedBucketData,
+            }],
           };});
 
       $scope.sortBy = function(propertyName) {
@@ -158,7 +164,7 @@ export default {
         const filename = `admin-contact-info-${timestamp}`;
         const params = {
           url: `${config.apiPrefix}/analytics/admins.csv`,
-          filename
+          filename,
       };
         return DownloadCSV(params);
     };
@@ -168,5 +174,5 @@ export default {
       Error.set("you can't view this page");
   }
 
-}
+},
 };

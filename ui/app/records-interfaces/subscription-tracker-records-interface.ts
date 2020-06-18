@@ -1,3 +1,12 @@
+/* eslint-disable
+    constructor-super,
+    no-constant-condition,
+    no-shadow,
+    no-this-before-super,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS001: Remove Babel/TypeScript constructor workaround
@@ -27,7 +36,7 @@ global.cobudgetApp.factory('SubscriptionTrackerRecordsInterface', function(confi
       updateEmailSettings(subscriptionTracker) {
         const params = _.pick(subscriptionTracker, [
           'subscribedToEmailNotifications',
-          'emailDigestDeliveryFrequency'
+          'emailDigestDeliveryFrequency',
         ]);
         return this.remote.post('update_email_settings', { subscription_tracker: morph.toSnake(params) });
       }

@@ -1,3 +1,11 @@
+/* eslint-disable
+    babel/new-cap,
+    no-shadow,
+    no-undef,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +18,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/profile_settings?previous_group_id',
   template: require('./profile-settings-page.html'),
@@ -36,7 +44,7 @@ export default {
               $mdDialog.cancel();
               return $scope.back();
             };
-          }
+          },
         });
 
       } else {
@@ -94,15 +102,15 @@ export default {
           return deferred.resolve('password');}).catch(function(err) {
           if (err.status === 401) {
             $scope.passwordErrors.currentPassword = 'Sorry, we couldn\'t confirm your current password.';
-            $scope.passwordParams.current_password = "";
+            $scope.passwordParams.current_password = '';
           } else if (err.status === 400) {
             $scope.passwordErrors.newPassword = 'Sorry, your repeated new password didn\'t match.';
-            $scope.passwordParams.password = "";
-            $scope.passwordParams.confirm_password = "";
+            $scope.passwordParams.password = '';
+            $scope.passwordParams.confirm_password = '';
           }
           return deferred.reject();
       });
       return deferred.promise;
     };
-  }
+  },
 };

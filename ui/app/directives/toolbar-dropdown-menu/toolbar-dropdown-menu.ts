@@ -1,3 +1,9 @@
+/* eslint-disable
+    no-undef,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -30,7 +36,7 @@ global.cobudgetApp.directive('toolbarDropdownMenu', () => ({
       global.cobudgetApp.currentUserId = null;
       __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
         name: null,
-        email: null
+        email: null,
       })));
       $location.path('/');
       return Toast.show('You\'ve been signed out');
@@ -42,12 +48,12 @@ global.cobudgetApp.directive('toolbarDropdownMenu', () => ({
       // {label: 'Give Feedback', onClick: $scope.openFeedbackForm, icon: 'live_help', isDisplayed: true},
       // {label: 'Group Analytics', onClick: $scope.openGroupAnalytics, icon: 'trending_up', isDisplayed: true},
       // {label: 'Admin Panel', onClick: $scope.openAdminPanel, icon: 'local_pizza', isDisplayed: $scope.currentUser.isAGroupAdmin()},
-      {label: 'Log Out', onClick: $scope.signOut, icon: 'exit_to_app', isDisplayed: true}
+      {label: 'Log Out', onClick: $scope.signOut, icon: 'exit_to_app', isDisplayed: true},
     ];
 
     $scope.accessibleMenuItems = () => _.filter($scope.menuItems, {isDisplayed: true});
 
-  }
+  },
 }));
 
 function __guard__(value, transform) {

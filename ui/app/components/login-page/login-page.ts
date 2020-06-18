@@ -1,3 +1,8 @@
+/* eslint-disable
+    babel/new-cap,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -12,7 +17,7 @@ export default {
 
     $scope.formData = {};
     const {
-      email
+      email,
     } = $location.search();
     const setupGroup = $location.search().setup_group;
 
@@ -31,5 +36,5 @@ export default {
 
     $scope.openFeedbackForm = () => $window.location.href = 'https://docs.google.com/forms/d/1-_zDQzdMmq_WndQn2bPUEW2DZQSvjl7nIJ6YkvUcp0I/viewform?usp=send_form';
 
-  }
+  },
 };

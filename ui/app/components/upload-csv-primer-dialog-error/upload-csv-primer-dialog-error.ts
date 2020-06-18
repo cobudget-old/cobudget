@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -16,14 +18,14 @@ export default params => ({
       let uploadCSVPrimerDialog;
       if (params.type === 'invite-members') {
         uploadCSVPrimerDialog = require('./../bulk-invite-members-primer-dialog/bulk-invite-members-primer-dialog.coffee')({
-          scope: $scope
+          scope: $scope,
         });
       } else if (params.type === 'allocation') {
         uploadCSVPrimerDialog = require('./../bulk-allocation-primer-dialog/bulk-allocation-primer-dialog.coffee')({
-          scope: $scope
+          scope: $scope,
         });
       }
       return Dialog.open(uploadCSVPrimerDialog);
     };
-  }
+  },
 });

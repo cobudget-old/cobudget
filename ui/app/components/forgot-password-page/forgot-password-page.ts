@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -11,5 +16,5 @@ export default {
     $scope.formData = {};
     return $scope.requestPassword = () => Records.users.requestPasswordReset($scope.formData)
       .then(res => Dialog.alert({title: 'Help is on the way!', content: 'Go check your email to reset your account.'}).then(() => $location.path('/'))).catch(err => Dialog.alert({title: 'Error', content: 'That email does not exist.'}));
-  }
+  },
 };

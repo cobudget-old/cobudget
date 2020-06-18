@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -17,13 +22,13 @@ export default params => ({
       return $scope.bucket.cancel()
         .then(function() {
           const {
-            groupId
+            groupId,
           } = $scope.bucket;
           Toast.show('Bucket refunded!');
           return LoadBar.stop();}).catch(function() {
-          Dialog.alert({title: "Error!"});
+          Dialog.alert({title: 'Error!'});
           return LoadBar.stop();
       });
     };
-  }
+  },
 });

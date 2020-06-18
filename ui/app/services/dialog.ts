@@ -1,3 +1,11 @@
+/* eslint-disable
+    eqeqeq,
+    no-shadow,
+    no-undef,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -16,7 +24,7 @@ global.cobudgetApp.factory('Dialog', function($mdDialog) {
       const alert = $mdDialog.alert({
         title: args.title,
         content: args.content,
-        ok: args.ok || 'ok'
+        ok: args.ok || 'ok',
       });
       return $mdDialog.show(alert);
     }
@@ -27,7 +35,7 @@ global.cobudgetApp.factory('Dialog', function($mdDialog) {
         title: args.title,
         content: args.content,
         ok: args.ok || 'ok',
-        cancel: args.cancel || 'cancel'
+        cancel: args.cancel || 'cancel',
       });
       return $mdDialog.show(confirm);
     }
@@ -36,7 +44,7 @@ global.cobudgetApp.factory('Dialog', function($mdDialog) {
       if (args == null) { args = {}; }
       const defaults = {
         clickOutsideToClose: true,
-        preserveScope: true
+        preserveScope: true,
       };
       const custom = _.merge(defaults, args);
       return $mdDialog.show(custom);

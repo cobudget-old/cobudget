@@ -1,3 +1,9 @@
+/* eslint-disable
+    babel/new-cap,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -15,7 +21,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/setup_group',
   template: require('./group-setup-page.html'),
@@ -33,5 +39,5 @@ export default {
     $scope.currencies = Currencies();
 
     return $scope.cancel = () => $location.path('/');
-  }
+  },
 };

@@ -1,3 +1,8 @@
+/* eslint-disable
+    babel/new-cap,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -11,7 +16,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   template: require('./email-settings-page.html'),
   reloadOnSearch: false,
@@ -38,7 +43,7 @@ export default {
 
     $scope.attemptCancel = function(emailSettingsForm) {
       if (emailSettingsForm.$dirty) {
-        return Dialog.confirm({title: "Discard unsaved changes?"})
+        return Dialog.confirm({title: 'Discard unsaved changes?'})
           .then(() => $scope.cancel());
       } else {
         return $scope.cancel();
@@ -50,5 +55,5 @@ export default {
       return $scope.cancel();
     });
 
-  }
+  },
 };

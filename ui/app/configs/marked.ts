@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -12,5 +14,5 @@ global.cobudgetApp.config(markedProvider => markedProvider.setRenderer({
     } else {
       return '<a href=\'' + href + '\'' + (title ? ' title=\'' + title + '\'' : '') + ' target=\'_blank\'>' + text + '</a>';
     }
-  }
+  },
 }));

@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -28,15 +33,15 @@ global.cobudgetApp.directive('groupPageHelp', () => ({
 
     $scope.closeLaunchCard = () => $scope.membership.remote.update($scope.membership.id, {
       membership: {
-        closed_admin_help_card_at: moment()
-      }
+        closed_admin_help_card_at: moment(),
+      },
     }
     );
 
     $scope.closeMemberWelcomeCard = () => $scope.membership.remote.update($scope.membership.id, {
       membership: {
-        closed_member_help_card_at: moment()
-      }
+        closed_member_help_card_at: moment(),
+      },
     }
     );
 
@@ -46,5 +51,5 @@ global.cobudgetApp.directive('groupPageHelp', () => ({
 
     $scope.redirectToCreateBucketPage = () => $location.path('/buckets/new').search('group_id', $scope.group.id);
 
-  }
+  },
 }));

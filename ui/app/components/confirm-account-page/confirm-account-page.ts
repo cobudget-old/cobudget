@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +12,7 @@ export default {
   resolve: {
     clearSession(Session) {
       return Session.clear();
-    }
+    },
   },
   url: '/confirm_account?confirmation_token&setup_group&email&name',
   template: require('./confirm-account-page.html'),
@@ -28,13 +30,13 @@ export default {
       const params = {
         name: formData.name,
         password: formData.password,
-        confirmation_token: $scope.confirmationToken
+        confirmation_token: $scope.confirmationToken,
       };
       return Records.users.confirmAccount(params)
         .then(function(data) {
           const loginParams = { email: data.users[0].email, password: formData.password };
           if ($scope.setupGroup) {
-            return Session.create(loginParams).then(() => $location.path("/setup_group"));
+            return Session.create(loginParams).then(() => $location.path('/setup_group'));
           } else {
             return Session.create(loginParams, {redirectTo: 'group'});
           }}).catch(function() {
@@ -42,5 +44,5 @@ export default {
           return $location.path('/');
       });
     };
-  }
+  },
 };

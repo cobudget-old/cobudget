@@ -1,3 +1,10 @@
+/* eslint-disable
+    babel/new-cap,
+    no-shadow,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -12,7 +19,7 @@ global.cobudgetApp.factory('UserCan', function(CurrentUser, $location, $q, Recor
     viewGroup(group) {
       const validMemberships = Records.memberships.find({
         groupId: group.id,
-        memberId: global.cobudgetApp.currentUserId
+        memberId: global.cobudgetApp.currentUserId,
       });
       return validMemberships.length === 1;
     }
@@ -29,7 +36,7 @@ global.cobudgetApp.factory('UserCan', function(CurrentUser, $location, $q, Recor
     viewAdminPanel() {
       const validMemberships = Records.memberships.find({
         memberId: global.cobudgetApp.currentUserId,
-        isAdmin: true
+        isAdmin: true,
       });
       return validMemberships.length > 0;
     }

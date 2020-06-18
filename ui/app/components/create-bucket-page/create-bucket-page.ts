@@ -1,3 +1,9 @@
+/* eslint-disable
+    babel/new-cap,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +16,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/buckets/new?group_id',
   template: require('./create-bucket-page.html'),
@@ -28,7 +34,7 @@ export default {
       $location.search('group_id', null);
       if ($scope.bucket.groupId) {
         ({
-          groupId
+          groupId,
         } = $scope.bucket);
       } else {
         groupId = CurrentUser().primaryGroup().id;
@@ -48,5 +54,5 @@ export default {
         });
       }
     };
-  }
+  },
 };

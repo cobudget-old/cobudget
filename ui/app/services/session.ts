@@ -1,3 +1,12 @@
+/* eslint-disable
+    babel/new-cap,
+    eqeqeq,
+    no-shadow,
+    no-undef,
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -19,7 +28,7 @@ global.cobudgetApp.factory('Session', function($auth, CurrentUser, Dialog, LoadB
         __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
           name: user.name,
           email: user.email,
-          url: location.href
+          url: location.href,
         })));
         const membershipsLoadedDeferred = $q.defer();
         global.cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise;
@@ -51,7 +60,7 @@ global.cobudgetApp.factory('Session', function($auth, CurrentUser, Dialog, LoadB
                   });
                 }
               case 'group setup':
-                return $location.path("/setup_group");
+                return $location.path('/setup_group');
             }
           });
         });
@@ -68,7 +77,7 @@ global.cobudgetApp.factory('Session', function($auth, CurrentUser, Dialog, LoadB
           __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
             name: null,
             email: null,
-            url: null
+            url: null,
           })));
           return deferred.resolve();
         });

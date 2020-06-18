@@ -1,3 +1,9 @@
+/* eslint-disable
+    babel/new-cap,
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +16,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/groups/:groupId/manage_funds',
   template: require('./manage-group-funds-page.html'),
@@ -42,17 +48,17 @@ export default {
       const filename = `${$scope.group.name}-member-data-${timestamp}`;
       const params = {
         url: `${config.apiPrefix}/memberships.csv?group_id=${groupId}`,
-        filename
+        filename,
       };
       return DownloadCSV(params);
     };
 
     $scope.openUploadCSVPrimerDialog = function() {
       const uploadCSVPrimerDialog = require('./../bulk-allocation-primer-dialog/bulk-allocation-primer-dialog.coffee')({
-        scope: $scope
+        scope: $scope,
       });
       return Dialog.open(uploadCSVPrimerDialog);
     };
 
-  }
+  },
 };

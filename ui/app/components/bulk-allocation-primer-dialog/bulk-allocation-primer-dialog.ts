@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-undef,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -26,9 +31,9 @@ export default params => ({
       const uploadCSVPrimerDialogError = require('./../upload-csv-primer-dialog-error/upload-csv-primer-dialog-error.coffee')({
         scope: $scope,
         response,
-        type: 'allocation'
+        type: 'allocation',
       });
       return Dialog.open(uploadCSVPrimerDialogError);
     };
-  }
+  },
 });

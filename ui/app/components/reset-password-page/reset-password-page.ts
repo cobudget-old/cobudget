@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -15,10 +20,10 @@ export default {
     return $scope.resetPassword = function() {
       LoadBar.start();
       const {
-        password
+        password,
       } = $scope.formData;
       const {
-        confirmPassword
+        confirmPassword,
       } = $scope.formData;
       $scope.formData = {};
       if (password === confirmPassword) {
@@ -26,7 +31,7 @@ export default {
         const requestParams = {
           password,
           confirm_password: confirmPassword,
-          reset_password_token: resetPasswordToken
+          reset_password_token: resetPasswordToken,
         };
         return Records.users.resetPassword(requestParams)
           .then(function(res) {
@@ -41,5 +46,5 @@ export default {
         return Dialog.alert({title: 'Error!', content: 'Passwords must match.'});
       }
     };
-  }
+  },
 };

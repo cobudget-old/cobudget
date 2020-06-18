@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -23,23 +25,23 @@ global.cobudgetApp.directive('bucketPageStatusCard', () => ({
         return Dialog.alert({
           title: 'hi friend ~~',
           content: 'an estimated funding target must be specified before funding starts',
-          ok: 'oh, ok!'
+          ok: 'oh, ok!',
         });
       }
     };
 
     $scope.acceptFunding = function() {
       const finishBucketDialog = require('./../../components/finish-bucket-dialog/finish-bucket-dialog.coffee')({
-        scope: $scope
+        scope: $scope,
       });
       return Dialog.open(finishBucketDialog);
     };
 
     return $scope.complete = function() {
       const completeBucketDialog = require('./../../components/complete-bucket-dialog/complete-bucket-dialog.coffee')({
-        scope: $scope
+        scope: $scope,
       });
       return Dialog.open(completeBucketDialog);
     };
-  }
+  },
 }));

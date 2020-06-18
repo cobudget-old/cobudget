@@ -1,3 +1,8 @@
+/* eslint-disable
+    no-unused-vars,
+*/
+// TODO: This file was created by bulk-decaffeinate.
+// Fix any style issues and re-enable lint.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -15,7 +20,7 @@ global.cobudgetApp.directive('landingPageToolbar', () => ({
 
     $scope.createGroupDialog = function(membership) {
       const createGroupDialog = require('./../../components/create-group-dialog/create-group-dialog.coffee')({
-        scope: $scope
+        scope: $scope,
       });
       return Dialog.open(createGroupDialog);
     };
@@ -58,5 +63,5 @@ global.cobudgetApp.directive('landingPageToolbar', () => ({
 
     $scope.redirectToAboutPage = () => $location.path('/about');
 
-  }
+  },
 }));

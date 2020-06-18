@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -17,12 +19,12 @@ export default params => ({
       return $scope.bucket.cancel()
         .then(function() {
           const {
-            groupId
+            groupId,
           } = $scope.bucket;
           return $location.path(`/groups/${groupId}`);}).catch(function() {
-          Dialog.alert({title: "Error!"});
+          Dialog.alert({title: 'Error!'});
           return LoadBar.stop();
       });
     };
-  }
+  },
 });

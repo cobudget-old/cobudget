@@ -1,3 +1,5 @@
+// TODO: This file was created by bulk-decaffeinate.
+// Sanity-check the conversion and remove this comment.
 /*
  * decaffeinate suggestions:
  * DS102: Remove unnecessary code created because of implicit returns
@@ -10,7 +12,7 @@ export default {
     },
     membershipsLoaded() {
       return global.cobudgetApp.membershipsLoaded;
-    }
+    },
   },
   url: '/groups/:groupId/analytics',
   template: require('./group-analytics-page.html'),
@@ -35,5 +37,5 @@ export default {
 
     $scope.back = () => $state.go('group', {groupId});
 
-  }
+  },
 };
