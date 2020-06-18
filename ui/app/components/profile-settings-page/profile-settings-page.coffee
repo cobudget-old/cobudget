@@ -59,7 +59,7 @@ module.exports =
           updatedFields = _.map resolvedPromises, (promise) ->
             promise.$$state.value
           if updatedFields.length > 0
-            Toast.show("Your new #{listify(updatedFields)} #{if updatedFields.length > 1 then 'were' else 'was'} saved")
+            Toast.show("Your new #{updatedFields} #{if updatedFields.length > 1 then 'were' else 'was'} saved")
 
     $scope.updateProfile = ->
       deferred = $q.defer()

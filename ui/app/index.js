@@ -2,7 +2,6 @@ global._ = require('lodash')
 global.moment = require('moment')
 global.camelize = require('camelize')
 global.morph = require('morph')
-global.listify = require('listify')
 global.Highcharts = require('highcharts')
 
 require('angular')
