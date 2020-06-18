@@ -1,12 +1,8 @@
-global.jQuery = require('jquery')
-global.$ = global.jQuery
 global._ = require('lodash')
 global.moment = require('moment')
 global.camelize = require('camelize')
 global.morph = require('morph')
 global.listify = require('listify')
-global.isEmptyObject = require('is-empty-object')
-global.browser = require('bowser')
 global.Highcharts = require('highcharts')
 
 require('angular')
@@ -32,8 +28,9 @@ require('highcharts-ng')
 require('angular-material-data-table')
 require('ment.io')
 
-import * as Sentry from '@sentry/browser';
-import { Angular as AngularIntegration } from '@sentry/integrations';
+const Sentry = require('@sentry/browser')
+global.Sentry = Sentry
+const AngularIntegration = require('@sentry/integrations').Angular
 
 Sentry.init({
   dsn: 'https://c87f3b754cba4467ba54eb82cea06e83@o365863.ingest.sentry.io/5253228',
@@ -80,12 +77,12 @@ require('app/configs/marked.coffee')
 require('app/routes.coffee')
 require('app/angular-record-store.coffee')
 
-var concatenify = require('concatenify')
-concatenify('./controllers/*.{js,coffee}')
-concatenify('./records-interfaces/*.{js,coffee}')
-concatenify('./models/*.{js,coffee}')
-concatenify('./filters/*.{js,coffee}')
-concatenify('./services/*.{js,coffee}')
-concatenify('./directives/**/*.{js,coffee}')
+// var concatenify = require('concatenify')
+// concatenify('./controllers/*.{js,coffee}')
+// concatenify('./records-interfaces/*.{js,coffee}')
+// concatenify('./models/*.{js,coffee}')
+// concatenify('./filters/*.{js,coffee}')
+// concatenify('./services/*.{js,coffee}')
+// concatenify('./directives/**/*.{js,coffee}')
 
 require('app/boot.coffee')

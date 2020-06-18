@@ -37,6 +37,13 @@ export APP_ENV=staging
 export NODE_ENV=production
 ```
 
+
+    npm i -D webpack webpack-cli webpack-dev-server \
+      sass-loader css-loader style-loader ng-annotate-loader \
+      terser-webpack-plugin coffeescript coffee-loader \
+      node-sass ngtemplate-loader babel-loader @babel/core
+
+
 If NODE_ENV is not set it will default to using `development`
 
 The actual connection strings is placed in the js files in the `config` directory

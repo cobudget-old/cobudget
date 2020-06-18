@@ -27,13 +27,7 @@ module.exports =
             $scope.okay = ->
               $mdDialog.cancel()
               $scope.back()
-            $scope.unsavedFields = ->
-              fields = []
-              if $scope.accountDetailsForm.name.$dirty
-                fields.push('name')
-              if !isEmptyObject($scope.passwordParams)
-                fields.push('password')
-              listify(_.map(fields, (field) -> "<b>#{field}</b>"))
+
       else
         $scope.back()
 
