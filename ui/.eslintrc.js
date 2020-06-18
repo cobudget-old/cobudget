@@ -3,10 +3,16 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
+    "prettier",
   ],
   extends: [
-    'extends: plugin:angular/johnpapa',
+    'plugin:angular/johnpapa',
     'eslint:recommended',
+    "plugin:prettier/recommended",
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
   ],
+  rules: {
+    "prettier/prettier": "error"
+  },
 };
