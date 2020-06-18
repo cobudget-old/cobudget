@@ -12,7 +12,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('CommentModel', function(BaseModel) {
+cobudgetApp.factory('CommentModel', function(BaseModel) {
   let CommentModel;
   return CommentModel = (function() {
     CommentModel = class CommentModel extends BaseModel {

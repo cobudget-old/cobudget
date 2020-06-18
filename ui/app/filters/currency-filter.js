@@ -6,7 +6,7 @@
     return obj === true || obj === false || Object.prototype.toString.call(obj) === '[object Boolean]';
   };
 
-  global.cobudgetApp.
+  cobudgetApp.
     filter('currency', ['$injector', '$locale', function ( $injector, $locale ) {
       var $filter = $injector.get('$filter');
       var numberFilter = $filter('number');

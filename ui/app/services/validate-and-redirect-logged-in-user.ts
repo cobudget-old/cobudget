@@ -12,11 +12,11 @@ null;
 
 /* @ngInject */
 
-global.cobudgetApp.factory('ValidateAndRedirectLoggedInUser', ($auth, Error, LoadBar, $location, Records) => (function() {
+cobudgetApp.factory('ValidateAndRedirectLoggedInUser', ($auth, Error, LoadBar, $location, Records) => (function() {
   LoadBar.start();
   Error.clear();
   return $auth.validateUser()
-    .then(() => global.cobudgetApp.membershipsLoaded.then(function(data) {
+    .then(() => cobudgetApp.membershipsLoaded.then(function(data) {
     const groupId = data.groups[0].id;
     $location.path(`/groups/${groupId}`);
     return LoadBar.stop();

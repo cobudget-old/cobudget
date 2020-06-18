@@ -5,4 +5,4 @@
 // Fix any style issues and re-enable lint.
 /* @ngInject */
 
-global.cobudgetApp.controller('ApplicationController', function(Records) {});
+cobudgetApp.controller('ApplicationController', function(Records) {});

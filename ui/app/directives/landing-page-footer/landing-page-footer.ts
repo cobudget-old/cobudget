@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('landingPageFooter', () => ({
+cobudgetApp.directive('landingPageFooter', () => ({
   restrict: 'E',
   template: require('./landing-page-footer.html'),
   replace: true,

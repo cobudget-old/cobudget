@@ -17,30 +17,44 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('GroupRecordsInterface', function(config, BaseRecordsInterface, GroupModel) { 
-  let GroupRecordsInterface;
-  return GroupRecordsInterface = (function() {
-    GroupRecordsInterface = class GroupRecordsInterface extends BaseRecordsInterface {
-      static initClass() {
-        this.prototype.model = GroupModel;
-      }
-      constructor(recordStore) {
-        {
-          // Hack: trick Babel/TypeScript into allowing this before super.
-          if (false) { super(); }
-          let thisFn = (() => { return this; }).toString();
-          let thisName = thisFn.match(/return (?:_assertThisInitialized\()*(\w+)\)*;/)[1];
-          eval(`${thisName} = this;`);
+angular
+  .module("cobudget")
+  .factory("GroupRecordsInterface", function (
+    config,
+    BaseRecordsInterface,
+    GroupModel
+  ) {
+    let GroupRecordsInterface;
+    return (GroupRecordsInterface = (function () {
+      GroupRecordsInterface = class GroupRecordsInterface extends BaseRecordsInterface {
+        static initClass() {
+          this.prototype.model = GroupModel;
         }
-        this.baseConstructor(recordStore);
-        this.remote.apiPrefix = config.apiPrefix; 
-      }
+        constructor(recordStore) {
+          {
+            // Hack: trick Babel/TypeScript into allowing this before super.
+            if (false) {
+              super();
+            }
+            const thisFn = (() => {
+              return this;
+            }).toString();
+            const thisName = thisFn.match(
+              /return (?:_assertThisInitialized\()*(\w+)\)*;/
+            )[1];
+            eval(`${thisName} = this;`);
+          }
+          this.baseConstructor(recordStore);
+          this.remote.apiPrefix = config.apiPrefix;
+        }
 
-      getAll() {
-        return this.remote.getCollection().then(data => camelize(data.groups));
-      }
-    };
-    GroupRecordsInterface.initClass();
-    return GroupRecordsInterface;
-  })();
-});
+        getAll() {
+          return this.remote
+            .getCollection()
+            .then((data) => camelize(data.groups));
+        }
+      };
+      GroupRecordsInterface.initClass();
+      return GroupRecordsInterface;
+    })());
+  });

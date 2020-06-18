@@ -11,7 +11,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('groupPageHelp', () => ({
+cobudgetApp.directive('groupPageHelp', () => ({
   restrict: 'E',
   template: require('./group-page-help.html'),
   replace: true,

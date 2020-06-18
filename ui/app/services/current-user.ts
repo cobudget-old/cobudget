@@ -8,4 +8,4 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('CurrentUser', Records => () => Records.users.find(global.cobudgetApp.currentUserId));
+cobudgetApp.factory('CurrentUser', Records => () => Records.users.find(cobudgetApp.currentUserId));

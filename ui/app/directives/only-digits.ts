@@ -12,7 +12,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('onlyDigits', () => ({
+cobudgetApp.directive('onlyDigits', () => ({
   restrict: 'A',
 
   link(scope, el, attrs) {

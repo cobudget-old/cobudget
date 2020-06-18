@@ -13,7 +13,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('Toast', function($mdToast, $location) {
+cobudgetApp.factory('Toast', function($mdToast, $location) {
   let Toast;
   return new (Toast = class Toast {
 

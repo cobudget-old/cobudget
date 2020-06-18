@@ -13,7 +13,7 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-global.cobudgetApp.factory('AnnouncementRecordsInterface', function(config, BaseRecordsInterface, $q, AnnouncementModel) {
+cobudgetApp.factory('AnnouncementRecordsInterface', function(config, BaseRecordsInterface, $q, AnnouncementModel) {
   let AnnouncementRecordsInterface;
   return AnnouncementRecordsInterface = (function() {
     AnnouncementRecordsInterface = class AnnouncementRecordsInterface extends BaseRecordsInterface {

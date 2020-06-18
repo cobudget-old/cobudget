@@ -11,7 +11,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('errorPage', () => ({
+cobudgetApp.directive('errorPage', () => ({
   restrict: 'E',
   scope: {},
   template: require('./error-page.html'),

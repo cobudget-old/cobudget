@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('adminToolbar', () => ({
+cobudgetApp.directive('adminToolbar', () => ({
   restrict: 'E',
   template: require('./admin-toolbar.html'),
   replace: true,

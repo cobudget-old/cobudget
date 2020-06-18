@@ -11,7 +11,7 @@ export default {
       return $auth.validateUser();
     },
     membershipsLoaded() {
-      return global.cobudgetApp.membershipsLoaded;
+      return cobudgetApp.membershipsLoaded;
     },
   },
   url: '/groups/:groupId/analytics',

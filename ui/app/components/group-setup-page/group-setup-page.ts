@@ -20,24 +20,38 @@ export default {
       return $auth.validateUser();
     },
     membershipsLoaded() {
-      return global.cobudgetApp.membershipsLoaded;
+      return cobudgetApp.membershipsLoaded;
     },
   },
-  url: '/setup_group',
-  template: require('./group-setup-page.html'),
+  url: "/setup_group",
+  template: require("./group-setup-page.html"),
   controller(LoadBar, Records, $scope, $state, Currencies, $location) {
-
-    $scope.createGroup = function(formData) {
+    $scope.createGroup = function (formData) {
       LoadBar.start();
-      return Records.groups.build({name: formData.name, currencyCode: formData.currency.code, currencySymbol: formData.currency.symbol}).save().then(() => Records.memberships.fetchMyMemberships().then(function(data) {
-        const newGroup = _.find(data.groups, group => group.name === formData.name);
-        $state.go('group', {groupId: newGroup.id, firstTimeSeeingGroup: true});
-        return LoadBar.stop();
-      }));
+      return Records.groups
+        .build({
+          name: formData.name,
+          currencyCode: formData.currency.code,
+          currencySymbol: formData.currency.symbol,
+        })
+        .save()
+        .then(() =>
+          Records.memberships.fetchMyMemberships().then(function (data) {
+            const newGroup = _.find(
+              data.groups,
+              (group) => group.name === formData.name
+            );
+            $state.go("group", {
+              groupId: newGroup.id,
+              firstTimeSeeingGroup: true,
+            });
+            return LoadBar.stop();
+          })
+        );
     };
 
     $scope.currencies = Currencies();
 
-    return $scope.cancel = () => $location.path('/');
+    return ($scope.cancel = () => $location.path("/"));
   },
 };

@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('loadingPage', () => ({
+cobudgetApp.directive('loadingPage', () => ({
   restrict: 'E',
   scope: {},
   template: require('./loading-page.html'),

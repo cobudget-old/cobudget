@@ -15,7 +15,7 @@ export default {
       return $auth.validateUser();
     },
     membershipsLoaded() {
-      return global.cobudgetApp.membershipsLoaded;
+      return cobudgetApp.membershipsLoaded;
     },
   },
   url: '/groups/:groupId/manage_funds/review_upload',

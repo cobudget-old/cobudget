@@ -34,6 +34,7 @@
   "dependencies": {
     "@sentry/browser": "^5.15.5",
     "@sentry/integrations": "^5.15.5",
+    "@types/angular": "^1.7.0",
     "ampersand-state": "^4.5.6",
     "angular": "=1.6.1",
     "angular-animate": "=1.6.1",
@@ -126,6 +127,7 @@
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^3.0.5",
     "tiny-lr": "^0.1.4",
+    "ts-loader": "^7.0.5",
     "txtify2": "^2.0.0",
     "typescript": "^3.9.5",
     "uglifyify": "^3.0.1",

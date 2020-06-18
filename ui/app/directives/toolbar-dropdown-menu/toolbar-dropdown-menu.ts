@@ -14,7 +14,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('toolbarDropdownMenu', () => ({
+cobudgetApp.directive('toolbarDropdownMenu', () => ({
   restrict: 'E',
   template: require('./toolbar-dropdown-menu.html'),
   replace: true,
@@ -33,7 +33,7 @@ global.cobudgetApp.directive('toolbarDropdownMenu', () => ({
     $scope.openGroupAnalytics = () => $state.go('group-analytics', {groupId: $scope.group.id});
 
     $scope.signOut = () => $auth.signOut().then(function() {
-      global.cobudgetApp.currentUserId = null;
+      cobudgetApp.currentUserId = null;
       __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
         name: null,
         email: null,

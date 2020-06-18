@@ -12,7 +12,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('SubscriptionTrackerModel', function(BaseModel) {
+cobudgetApp.factory('SubscriptionTrackerModel', function(BaseModel) {
   let SubscriptionTrackerModel;
   return SubscriptionTrackerModel = (function() {
     SubscriptionTrackerModel = class SubscriptionTrackerModel extends BaseModel {

@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('Currencies', () => () => [{ code: 'USD', symbol: '$' },
+cobudgetApp.factory('Currencies', () => () => [{ code: 'USD', symbol: '$' },
 { code: 'NZD', symbol: '$' },
 { code: 'CAD', symbol: '$' },
 { code: 'GBP', symbol: '£' },

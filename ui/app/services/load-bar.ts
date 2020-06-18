@@ -12,7 +12,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('LoadBar', function($rootScope) {
+cobudgetApp.factory('LoadBar', function($rootScope) {
   let LoadBar;
   return new (LoadBar = class LoadBar {
 

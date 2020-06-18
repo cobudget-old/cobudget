@@ -14,7 +14,7 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-global.cobudgetApp.factory('UserRecordsInterface', function(config, BaseRecordsInterface, $q, UserModel) {
+cobudgetApp.factory('UserRecordsInterface', function(config, BaseRecordsInterface, $q, UserModel) {
   let UserRecordsInterface;
   return UserRecordsInterface = (function() {
     UserRecordsInterface = class UserRecordsInterface extends BaseRecordsInterface {
@@ -70,7 +70,7 @@ global.cobudgetApp.factory('UserRecordsInterface', function(config, BaseRecordsI
 
       fetchMe() {
         const deferred = $q.defer();
-        if (this.find(global.cobudgetApp.currentUserId)) {
+        if (this.find(cobudgetApp.currentUserId)) {
           // if it becomes necessary, re-fetch the current_user in the background
           deferred.resolve();
         } else {

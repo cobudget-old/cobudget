@@ -17,21 +17,21 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('Session', function($auth, CurrentUser, Dialog, LoadBar, $location, $q, Records, $state) {
+cobudgetApp.factory('Session', function($auth, CurrentUser, Dialog, LoadBar, $location, $q, Records, $state) {
   let Session;
   return new (Session = class Session {
     create(formData, options) {
       if (options == null) { options = {}; }
       const promise = $auth.submitLogin(formData);
       promise.then(user => {
-        global.cobudgetApp.currentUserId = user.id;
+        cobudgetApp.currentUserId = user.id;
         __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
           name: user.name,
           email: user.email,
           url: location.href,
         })));
         const membershipsLoadedDeferred = $q.defer();
-        global.cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise;
+        cobudgetApp.membershipsLoaded = membershipsLoadedDeferred.promise;
         Records.users.updateProfile({utc_offset: moment().utcOffset()});
         return Records.memberships.fetchMyMemberships().then(data => {
           membershipsLoadedDeferred.resolve(data);
@@ -73,7 +73,7 @@ global.cobudgetApp.factory('Session', function($auth, CurrentUser, Dialog, LoadB
       const deferred = $q.defer();
       if (CurrentUser()) {
         $auth.signOut().then(function() {
-          global.cobudgetApp.currentUserId = null;
+          cobudgetApp.currentUserId = null;
           __guard__(typeof HS !== 'undefined' && HS !== null ? HS.beacon : undefined, x => x.ready(() => HS.beacon.identify({
             name: null,
             email: null,

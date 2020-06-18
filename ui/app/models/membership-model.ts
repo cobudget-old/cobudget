@@ -12,7 +12,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('MembershipModel', function(BaseModel) {
+cobudgetApp.factory('MembershipModel', function(BaseModel) {
   let MembershipModel;
   return MembershipModel = (function() {
     MembershipModel = class MembershipModel extends BaseModel {

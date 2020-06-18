@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('bucketPageManageCard', () => ({
+cobudgetApp.directive('bucketPageManageCard', () => ({
   restrict: 'E',
   template: require('./bucket-page-manage-card.html'),
   replace: true,

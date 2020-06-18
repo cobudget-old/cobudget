@@ -12,7 +12,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('Error', function($rootScope) {
+cobudgetApp.factory('Error', function($rootScope) {
   let Error;
   return new (Error = class Error {
     set(msg) {

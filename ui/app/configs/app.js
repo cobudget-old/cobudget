@@ -1,8 +1,5 @@
-import assign from 'lodash/assign'
+import defaults from "../../config/defaults";
+const config = require("../../config/" +
+  (process.env.APP_ENV || process.env.NODE_ENV || "development"));
 
-const defaults = require('../../config/defaults')
-const config = require('../../config/' + (process.env.APP_ENV || process.env.NODE_ENV || 'development'))
-
-module.exports = assign({}, defaults, config, {
-  env: process.env.NODE_ENV
-});
+export default { ...defaults, ...config, env: process.env.NODE_ENV };

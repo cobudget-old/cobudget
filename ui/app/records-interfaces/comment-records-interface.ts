@@ -16,7 +16,7 @@
 null; 
 
 /* @ngInject */
-global.cobudgetApp.factory('CommentRecordsInterface', function(config, BaseRecordsInterface, CommentModel) { 
+cobudgetApp.factory('CommentRecordsInterface', function(config, BaseRecordsInterface, CommentModel) { 
   let CommentRecordsInterface;
   return CommentRecordsInterface = (function() {
     CommentRecordsInterface = class CommentRecordsInterface extends BaseRecordsInterface {

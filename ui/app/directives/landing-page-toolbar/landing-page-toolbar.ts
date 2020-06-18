@@ -11,7 +11,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('landingPageToolbar', () => ({
+cobudgetApp.directive('landingPageToolbar', () => ({
   restrict: 'E',
   template: require('./landing-page-toolbar.html'),
   replace: true,

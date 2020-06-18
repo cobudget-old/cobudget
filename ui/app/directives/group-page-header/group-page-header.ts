@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('groupPageHeader', () => ({
+cobudgetApp.directive('groupPageHeader', () => ({
   restrict: 'E',
   template: require('./group-page-header.html'),
   replace: true,

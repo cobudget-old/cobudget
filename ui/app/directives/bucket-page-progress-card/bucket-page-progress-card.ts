@@ -11,7 +11,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('bucketPageProgressCard', () => ({
+cobudgetApp.directive('bucketPageProgressCard', () => ({
   restrict: 'E',
   template: require('./bucket-page-progress-card.html'),
   replace: true,

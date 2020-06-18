@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('groupPageToolbar', () => ({
+cobudgetApp.directive('groupPageToolbar', () => ({
   restrict: 'E',
   template: require('./group-page-toolbar.html'),
   replace: true,

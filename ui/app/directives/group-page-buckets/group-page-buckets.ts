@@ -8,7 +8,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('groupPageBuckets', () => ({
+cobudgetApp.directive('groupPageBuckets', () => ({
   restrict: 'E',
   template: require('./group-page-buckets.html'),
   replace: true,

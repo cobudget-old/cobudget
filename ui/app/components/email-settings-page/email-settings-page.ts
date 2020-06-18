@@ -15,7 +15,7 @@ export default {
       return $auth.validateUser();
     },
     membershipsLoaded() {
-      return global.cobudgetApp.membershipsLoaded;
+      return cobudgetApp.membershipsLoaded;
     },
   },
   template: require('./email-settings-page.html'),

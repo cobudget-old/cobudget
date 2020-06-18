@@ -1,22 +1,24 @@
-const webpack = require('webpack');
-const TerserPlugin = require('terser-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const path = require('path');
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+const path = require("path");
 
 module.exports = {
   // stats: 'verbose',
   // target: 'node',
-  mode: 'production',
-  entry: path.resolve(__dirname, 'index.js'),
+  mode: "production",
+  entry: path.resolve(__dirname, "index.js"),
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
   },
   resolve: {
+    extensions: [".tsx", ".ts"],
     alias: {
-      app: path.resolve('./app'),
+      app: path.resolve("./app"),
     },
   },
   module: {
@@ -24,49 +26,66 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['ng-annotate-loader'],
+        use: [{ loader: "ng-annotate-loader" }],
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              plugins: ["lodash"],
+              presets: [["env", { modules: false, targets: { node: 4 } }]],
+            },
+          },
+          { loader: "ts-loader" },
+        ],
       },
       {
         test: /\.coffee$/,
+        exclude: /node_modules/,
         use: [
+          { loader: "ng-annotate-loader" },
           {
-            loader: 'babel-loader',
-            options: { plugins: ['lodash'], presets: [['env', { modules: false, targets: { node: 4 } }]] }
+            loader: "coffee-loader",
+            options: {
+              sourceMap: true,
+              filename: "bundle.map.js",
+              header: false,
+            },
           },
-          { loader: 'ng-annotate-loader' },
-         { loader: 'coffee-loader', options: { sourceMap: true, filename: 'bundle.map.js', header: false } }]
+        ],
       },
       {
         test: /\.html$/,
         exclude: /node_modules|index.html|404.html/,
-        loader: ['raw-loader']
-        // use: [
-        //   { loader:'ngtemplate-loader?relativeTo=' + (path.resolve(__dirname, './')) },
-        //   { loader: 'html-loader' }
-        // ]
+        loader: ["raw-loader"],
       },
       {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader','sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin({
-      test: /\.js(\?.*)?$/i,
-    })],
+    minimizer: [
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+      }),
+    ],
     runtimeChunk: false,
-    splitChunks: {
-      vendor: {
-        test: /[\/]node_modules[\/]/,
-        priority: 1,
-        enforce: true,
-        chunks: (chunk) => chunk.name === frameElement,
-        name: vendor,
-      },
-    },
+    // splitChunks: {
+    //   vendor: {
+    //     test: /[\/]node_modules[\/]/,
+    //     priority: 1,
+    //     enforce: true,
+    //     chunks: (chunk) => chunk.name === frameElement,
+    //     name: vendor,
+    //   },
+    // },
   },
   plugins: [
     // new HtmlWebpackPlugin({

@@ -16,7 +16,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('MembershipRecordsInterface', function(config, BaseRecordsInterface, MembershipModel) {
+cobudgetApp.factory('MembershipRecordsInterface', function(config, BaseRecordsInterface, MembershipModel) {
   let MembershipRecordsInterface;
   return MembershipRecordsInterface = (function() {
     MembershipRecordsInterface = class MembershipRecordsInterface extends BaseRecordsInterface {

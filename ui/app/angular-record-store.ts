@@ -7,7 +7,7 @@
  */
 import Loki from 'lokijs';
 
-const app = global.cobudgetApp;
+const app = cobudgetApp;
 
 import AngularRecordStore from 'angular_record_store';
 

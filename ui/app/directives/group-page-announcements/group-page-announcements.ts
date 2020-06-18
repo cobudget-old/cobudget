@@ -13,7 +13,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.directive('groupPageAnnouncements', () => ({
+cobudgetApp.directive('groupPageAnnouncements', () => ({
   restrict: 'E',
   template: require('./group-page-announcements.html'),
   replace: true,

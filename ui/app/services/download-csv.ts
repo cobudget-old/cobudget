@@ -12,7 +12,7 @@ null;
 
 /* @ngInject */
 
-global.cobudgetApp.factory('DownloadCSV', $http => params => $http({
+cobudgetApp.factory('DownloadCSV', $http => params => $http({
   method: 'GET',
   url: params.url}).then(function(response) {
   const anchor = angular.element('<a/>');

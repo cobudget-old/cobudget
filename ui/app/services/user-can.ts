@@ -13,13 +13,13 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('UserCan', function(CurrentUser, $location, $q, Records, Toast) {
+cobudgetApp.factory('UserCan', function(CurrentUser, $location, $q, Records, Toast) {
   let UserCan;
   return new (UserCan = class UserCan {
     viewGroup(group) {
       const validMemberships = Records.memberships.find({
         groupId: group.id,
-        memberId: global.cobudgetApp.currentUserId,
+        memberId: cobudgetApp.currentUserId,
       });
       return validMemberships.length === 1;
     }
@@ -29,13 +29,13 @@ global.cobudgetApp.factory('UserCan', function(CurrentUser, $location, $q, Recor
     }
 
     editBucket(bucket) {
-      const isBucketAuthor = bucket.userId === global.cobudgetApp.currentUserId;
+      const isBucketAuthor = bucket.userId === cobudgetApp.currentUserId;
       return isBucketAuthor || CurrentUser().isAdminOf(bucket.group());
     }
 
     viewAdminPanel() {
       const validMemberships = Records.memberships.find({
-        memberId: global.cobudgetApp.currentUserId,
+        memberId: cobudgetApp.currentUserId,
         isAdmin: true,
       });
       return validMemberships.length > 0;

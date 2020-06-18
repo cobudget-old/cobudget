@@ -12,7 +12,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('AnnouncementModel', function(BaseModel) {
+cobudgetApp.factory('AnnouncementModel', function(BaseModel) {
   let AnnouncementModel;
   return AnnouncementModel = (function() {
     AnnouncementModel = class AnnouncementModel extends BaseModel {

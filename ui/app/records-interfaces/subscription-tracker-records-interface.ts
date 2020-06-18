@@ -14,7 +14,7 @@
  * DS206: Consider reworking classes to avoid initClass
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-global.cobudgetApp.factory('SubscriptionTrackerRecordsInterface', function(config, BaseRecordsInterface, $q, SubscriptionTrackerModel) {
+cobudgetApp.factory('SubscriptionTrackerRecordsInterface', function(config, BaseRecordsInterface, $q, SubscriptionTrackerModel) {
   let SubscriptionTrackerRecordsInterface;
   return SubscriptionTrackerRecordsInterface = (function() {
     SubscriptionTrackerRecordsInterface = class SubscriptionTrackerRecordsInterface extends BaseRecordsInterface {

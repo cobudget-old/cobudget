@@ -13,7 +13,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('BucketModel', function(BaseModel) {
+cobudgetApp.factory('BucketModel', function(BaseModel) {
   let BucketModel;
   return BucketModel = (function() {
     BucketModel = class BucketModel extends BaseModel {

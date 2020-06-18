@@ -9,7 +9,7 @@ null;
 
 /* @ngInject */
 
-global.cobudgetApp.directive('contenteditable', $sce => ({
+cobudgetApp.directive('contenteditable', $sce => ({
   restrict: 'A',
   require: '?ngModel',
 

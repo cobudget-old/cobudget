@@ -15,7 +15,7 @@
 null;
 
 /* @ngInject */
-global.cobudgetApp.factory('Dialog', function($mdDialog) {
+cobudgetApp.factory('Dialog', function($mdDialog) {
   let Dialog;
   return new (Dialog = class Dialog {
 

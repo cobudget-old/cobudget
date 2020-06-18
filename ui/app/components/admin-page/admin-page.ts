@@ -15,46 +15,59 @@ export default {
       return $auth.validateUser();
     },
     membershipsLoaded() {
-      return global.cobudgetApp.membershipsLoaded;
+      return cobudgetApp.membershipsLoaded;
     },
   },
-  url: '/groups/:groupId/settings',
-  template: require('./admin-page.html'),
-  controller(CurrentUser, Error, Dialog, $location, Records, $scope, UserCan, Toast, $stateParams, Currencies) {
-
+  url: "/groups/:groupId/settings",
+  template: require("./admin-page.html"),
+  controller(
+    CurrentUser,
+    Error,
+    Dialog,
+    $location,
+    Records,
+    $scope,
+    UserCan,
+    Toast,
+    $stateParams,
+    Currencies
+  ) {
     const groupId = parseInt($stateParams.groupId);
 
-    Records.groups.findOrFetchById(groupId)
-      .then(function(group) {
+    Records.groups
+      .findOrFetchById(groupId)
+      .then(function (group) {
         if (CurrentUser().isAdminOf(group)) {
           $scope.authorized = true;
           Error.clear();
-          return $scope.group = group;
+          return ($scope.group = group);
         } else {
           $scope.authorized = false;
           return Error.set("you can't view this page");
-        }}).catch(() => Error.set('group not found'));
+        }
+      })
+      .catch(() => Error.set("group not found"));
 
     $scope.currencies = Currencies();
 
-    $scope.updateGroup = () => $scope.group.save()
-      .then(function() {
-        Toast.show('You updated ' + $scope.group.name);
+    $scope.updateGroup = () =>
+      $scope.group.save().then(function () {
+        Toast.show("You updated " + $scope.group.name);
         return $scope.cancel();
-    });
+      });
 
-    $scope.viewGroup = groupId => $location.path(`/groups/${groupId}`);
+    $scope.viewGroup = (groupId) => $location.path(`/groups/${groupId}`);
 
     $scope.cancel = () => $location.path(`/groups/${groupId}`);
 
-    $scope.attemptCancel = function(adminPageForm) {
+    $scope.attemptCancel = function (adminPageForm) {
       if (adminPageForm.$dirty) {
-        return Dialog.confirm({title: 'Discard unsaved changes?'})
-          .then(() => $scope.cancel());
+        return Dialog.confirm({ title: "Discard unsaved changes?" }).then(() =>
+          $scope.cancel()
+        );
       } else {
         return $scope.cancel();
       }
     };
-
   },
 };
