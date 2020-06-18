@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
@@ -31,12 +31,9 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            'options': {
-              'plugins': ['lodash'],
-              'presets': [['env', { 'modules': false, 'targets': { 'node': 4 } }]]
-            }
-        },
-        { loader: 'ng-annotate-loader' },
+            options: { plugins: ['lodash'], presets: [['env', { modules: false, targets: { node: 4 } }]] }
+          },
+          { loader: 'ng-annotate-loader' },
          { loader: 'coffee-loader', options: { sourceMap: true, filename: 'bundle.map.js', header: false } }]
       },
       {
@@ -60,6 +57,16 @@ module.exports = {
     minimizer: [new TerserPlugin({
       test: /\.js(\?.*)?$/i,
     })],
+    runtimeChunk: false,
+    splitChunks: {
+      vendor: {
+        test: /[\/]node_modules[\/]/,
+        priority: 1,
+        enforce: true,
+        chunks: (chunk) => chunk.name === frameElement,
+        name: vendor,
+      },
+    },
   },
   plugins: [
     // new HtmlWebpackPlugin({
@@ -68,5 +75,5 @@ module.exports = {
     new LodashModuleReplacementPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new BundleAnalyzerPlugin(),
-  ]
+  ],
 };
