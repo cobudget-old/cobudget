@@ -22,9 +22,10 @@ module.exports =
         else
           $scope.authorized = false
           Error.set("you can't view this page")
-      .catch ->
+      .catch (err) ->
         LoadBar.stop()
-        Error.set('group not found')
+        Sentry?.captureException(err, "groupId: #{groupId}");
+        Toast.show('group not found')
 
     $scope.usingSafari = browser.safari
 

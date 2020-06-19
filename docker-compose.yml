@@ -4,11 +4,17 @@ services:
   cobudget-api:
     build: ./api
     restart: "unless-stopped"
-    command: rails s -b 0.0.0.0
+    command: >
+      bash -c "/wait-for-it.sh cobudget-db:5432 -t 30
+      ; sleep 10
+      ; rm -rf /cobudget-api/tmp
+      ; bundle exec rake db:migrate
+      ; bundle exec rails s -b 0.0.0.0"
     env_file: .env.example
     ports:
       - 3000:3000
     volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh
       - ./api:/cobudget-api
     depends_on:
       - cobudget-db
@@ -16,9 +22,13 @@ services:
   delayed-job:
     build: ./api
     restart: "unless-stopped"
-    command: rake jobs:work
+    command: >
+      bash -c "/wait-for-it.sh cobudget-api:3000 -t 30
+      ; sleep 5
+      ; bundle exec rake jobs:work"
     env_file: .env.example
     volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh
       - ./api:/cobudget-api
     depends_on:
       - cobudget-db
@@ -33,33 +43,41 @@ services:
     depends_on:
       - cobudget-db
   
-  mailcatcher:
-    build: ./api
-    restart: "unless-stopped"
-    command: mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0
-    ports:
-      - 1080:1080
-
   cobudget-ui:
     build:
       context: ./ui
       dockerfile: Dockerfile
+    command: npm run develop
     restart: "unless-stopped"
     ports:
       - 9000:9000
+      - 35729:35729
     volumes:
       - ./ui:/app
     environment:
       - DOMAIN=cobudget.local
       - NODE_ENV=development
+      - APP_ENV=development
     depends_on:
       - cobudget-api
 
   cobudget-db:
     image: postgres:9.6
     restart: "no"
+    volumes:
+      - ./docker/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+    ports:
+      - 5432:5432
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: cobudget
+      POSTGRES_USER: cobudget
       POSTGRES_DB: cobudget
 
+  mailcatcher:
+    image: ruby:2.4.2
+    restart: "unless-stopped"
+    command: bash -c "gem install mailcatcher && mailcatcher --foreground --http-ip 0.0.0.0 --smtp-ip 0.0.0.0"
+    ports:
+      - 1080:1080
+
+    

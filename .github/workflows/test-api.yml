@@ -15,4 +15,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: test
         run: |
-          docker-compose -f docker-compose.yml -f docker-compose.test.yml run cobudget-api
+          cp docker/docker-compose.test.yml docker-compose.override.yml
+          docker-compose run cobudget-api

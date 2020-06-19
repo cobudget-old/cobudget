@@ -47,22 +47,33 @@
 
         <div class="profile-settings-page__input-container">
           <label class="profile-settings-page__input-label" for="current_password">CURRENT PASSWORD</label>
-          <input class="profile-settings-page__text-input" type="password" name="current_password" ng-model="passwordParams.current_password"/>
+          <input class="profile-settings-page__text-input" type="password" name="current_password" ng-model="passwordParams.current_password" />
           <div ng-if="passwordErrors.currentPassword" class="profile-settings-page__input-error">{{ passwordErrors.currentPassword }}</div>
         </div>
 
         <div class="profile-settings-page__input-container">
           <label class="profile-settings-page__input-label" for="password">NEW PASSWORD</label>
-          <input class="profile-settings-page__text-input" type="password" name="password" ng-model="passwordParams.password"/>
-          <div ng-if="passwordErrors.newPassword" class="profile-settings-page__input-error">{{ passwordErrors.newPassword }}</div>
-          <div ng-if="passwordParams.password.length < 8 && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
+          <input class="profile-settings-page__text-input" type="password" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/" name="password" ng-model="passwordParams.password"/>
+          <div ng-messages="accountDetailsForm.password.$error" multiple>
+            <div ng-message="pattern" ng-class="accountDetailsForm.$submitted ? 'profile-settings-page__input-error' : 'profile-settings-page__password-help'" >
+              The password must have at least:
+              <ul>
+                <li>one uppercase character</li>
+                <li>one lowercase character</li>
+                <li>one number</li>
+                <li>one special character</li>
+                <li>must be at least 10 characters</li>
+              </ul>
+            </div>
+            <div ng-message="required" class="profile-settings-page__input-error">Password is required.</div>
+          </div>
         </div>
 
         <div class="profile-settings-page__input-container">
           <label class="profile-settings-page__input-label" for="confirm_password">REPEAT NEW PASSWORD</label>
           <input class="profile-settings-page__text-input" type="password" name="confirm_password" ng-model="passwordParams.confirm_password"/>
           <div ng-if="passwordErrors.newPassword" class="profile-settings-page__input-error">{{ passwordErrors.newPassword }}</div>
-          <div ng-if="passwordParams.confirm_password.length < 8 && formSubmitted" class="profile-settings-page__input-error">Password must be longer than 8 characters</div>
+          <div ng-if="!accountDetailsForm.password.$error.pattern && passwordParams.confirm_password.length && passwordParams.password != passwordParams.confirm_password" class="confirm-account-page__input-error">Passwords don't match.</div>
         </div>
       </div>
 
