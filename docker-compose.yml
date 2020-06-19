@@ -4,11 +4,17 @@ services:
   cobudget-api:
     build: ./api
     restart: "unless-stopped"
-    command: bash -c "rm -rf /cobudget-api/tmp && rails s -b 0.0.0.0"
+    command: >
+      bash -c "/wait-for-it.sh cobudget-db:5432 -t 30
+      ; sleep 10
+      ; rm -rf /cobudget-api/tmp
+      ; bundle exec rake db:migrate
+      ; bundle exec rails s -b 0.0.0.0"
     env_file: .env.example
     ports:
       - 3000:3000
     volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh
       - ./api:/cobudget-api
     depends_on:
       - cobudget-db
@@ -16,9 +22,13 @@ services:
   delayed-job:
     build: ./api
     restart: "unless-stopped"
-    command: bundle exec rake jobs:work
+    command: >
+      bash -c "/wait-for-it.sh cobudget-api:3000 -t 30
+      ; sleep 5
+      ; bundle exec rake jobs:work"
     env_file: .env.example
     volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh
       - ./api:/cobudget-api
     depends_on:
       - cobudget-db
@@ -41,6 +51,7 @@ services:
     restart: "unless-stopped"
     ports:
       - 9000:9000
+      - 35729:35729
     volumes:
       - ./ui:/app
     environment:
@@ -55,6 +66,8 @@ services:
     restart: "no"
     volumes:
       - ./docker/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: cobudget
       POSTGRES_USER: cobudget

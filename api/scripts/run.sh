@@ -7,6 +7,6 @@ cd ${DIR}/../../
 rm -f docker-compose.override.yml
 
 docker-compose up -d
-sleep 10
-docker-compose run cobudget-api rake db:migrate
+
+docker-compose logs -f
 

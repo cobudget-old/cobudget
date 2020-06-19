@@ -2,7 +2,7 @@ FROM node:8
 
 WORKDIR /app
 COPY package*.json /app/
-RUN npm i && \
+RUN npm ci && \
     cd /app/node_modules && \
     ln -s ../app ./
 
