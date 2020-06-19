@@ -1,6 +1,8 @@
 git = require('git-rev-sync')
 pkgVersion = require('./package.json').version
 gulp = require('gulp')
+uglify = require('gulp-uglify');
+streamify = require('gulp-streamify');
 watch = require('gulp-watch')
 source = require('vinyl-source-stream')
 buffer = require('vinyl-buffer')
@@ -70,6 +72,7 @@ styles = ->
     .pipe(sourcemaps.init())
     .pipe(entryFilter)
     .pipe(sass(
+      outputStyle: 'compressed'
       includePaths: sassPaths
     ))
     .pipe(sourcemaps.write(includeContent: false))
@@ -93,44 +96,46 @@ gulp.task 'styles-watch', ['styles-build'], ->
 browserify = require('browserify')
 
 scripts = (isWatch) ->
-  ->
-    setup = (bundler) ->
-      if isDeploy(nodeEnv)
-        bundler.transform(global: true, mangle: false, 'uglifyify')
-      bundler
 
-    bundle = (bundler) ->
-      bundler.bundle()
-        .on('error', util.log.bind(util, "browserify error"))
-        .pipe(plumber({ errorHandler }))
-        .pipe(source('index.js'))
-        .pipe(buffer())
-        .pipe(replace('COBUDGET_RELEASE_VERSION', getCobudgetVersion()))
-        .pipe(replace('SENTRY_ENVIRONMENT', env.APP_ENV || nodeEnv))
-        .pipe(sourcemaps.init(loadMaps: true))
-        .pipe(sourcemaps.write('../maps'))
-        .pipe(gulp.dest('build/scripts'))
-        .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
+  bundle = (bundler) ->
+    bundler.bundle()
+      .on('error', util.log.bind(util, "browserify error"))
+      .pipe(plumber({ errorHandler }))
+      .pipe(source('index.js'))
+      .pipe(if isDeploy(nodeEnv) then streamify(uglify())else util.noop())
+      .pipe(buffer())
+      .pipe(replace('COBUDGET_RELEASE_VERSION', getCobudgetVersion()))
+      .pipe(replace('SENTRY_ENVIRONMENT', env.APP_ENV || nodeEnv))
+      .pipe(sourcemaps.init(loadMaps: true))
+      .pipe(sourcemaps.write('../maps'))
+      .pipe(gulp.dest('build/scripts'))
+      .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
-    args = {
-      entries: ['.']
-      debug: isWatch && !isDeploy(nodeEnv)
-    }
+  args = {
+    entries: ['.']
+    debug: isWatch && !isDeploy(nodeEnv)
+    fullPaths: true
+  }
 
-    console.log('Browserify debug: ' + args.debug)
+  console.log('Browserify debug: ' + args.debug)
 
-    if (isWatch)
-      watchify = require('watchify')
-      bundler = setup(watchify(browserify(extend(args, watchify.args))))
-      rebundle = -> bundle(bundler)
-      bundler.on('update', rebundle)
-      bundler.on('log', console.log.bind(console))
-      rebundle()
-    else
-      bundle(setup(browserify(args)))
+  if (isWatch)
+    watchify = require('watchify')
+    bundler = watchify(browserify(extend(args, watchify.args)))
+    rebundle = -> bundle(bundler)
+    bundler.on('update', rebundle)
+    bundler.on('log', console.log.bind(console))
+    rebundle()
+  else
+    bundle(browserify(args))
 
-gulp.task 'scripts-build', scripts(false)
-gulp.task 'scripts-watch', scripts(true)
+gulp.task 'scripts-build', (done) ->
+  scripts(false)
+  done()
+
+gulp.task 'scripts-watch', (done) ->
+  scripts(true)
+  done()
 
 #
 # assets
@@ -151,7 +156,7 @@ assetPaths = {
   "node_modules/es5-shim/es5-shim*": "build/lib/es5-shim"
   "node_modules/json3/lib/json3*": "build/lib/json3"
   "node_modules/font-awesome/**/*": "build/fonts/font-awesome"
-  "node_modules/angular-material/angular-material.css" : "build/styles"
+  "node_modules/angular-material/angular-material.min.css" : "build/styles"
   "node_modules/angular-material-data-table/dist/md-data-table.min.css" : "build/styles"
   "app/directives/bucket-page-activity-card/mentio-menu.tpl.html" : "build"
   "app/assets/img/manifest.json": "build"
