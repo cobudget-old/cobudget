@@ -16,7 +16,8 @@ module.exports =
       .then (data) ->
         LoadBar.stop()
         $scope.user = data.user
-      .catch ->
-        Error.set('user not found')
+      .catch (err) ->
+        Sentry?.captureException(err, "A logged in user could not find their own record in the store: #{userId}");
+        Toast.show('user not found')
 
     return

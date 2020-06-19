@@ -29,8 +29,9 @@ module.exports =
           $scope.authorized = false
           LoadBar.stop()
           Error.set('cannot view group')
-      .catch ->
+      .catch (err) ->
         LoadBar.stop()
-        Error.set('group not found')
+        Sentry?.captureException(err, "groupId: #{groupId}");
+        Toast.show('group not found')
 
     return

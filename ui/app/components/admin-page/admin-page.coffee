@@ -19,8 +19,9 @@ module.exports =
         else
           $scope.authorized = false
           Error.set("you can't view this page")
-      .catch ->
-        Error.set('group not found')
+      .catch (err) ->
+        Sentry?.captureException(err, "groupId: #{groupId}");
+        Toast.show('group not found')
 
     $scope.currencies = Currencies()
 
