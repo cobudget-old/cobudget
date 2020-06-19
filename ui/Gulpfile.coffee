@@ -1,6 +1,7 @@
 git = require('git-rev-sync')
 pkgVersion = require('./package.json').version
 gulp = require('gulp')
+ngAnnotate = require('gulp-ng-annotate')
 uglify = require('gulp-uglify');
 streamify = require('gulp-streamify');
 watch = require('gulp-watch')
@@ -102,7 +103,8 @@ scripts = (isWatch) ->
       .on('error', util.log.bind(util, "browserify error"))
       .pipe(plumber({ errorHandler }))
       .pipe(source('index.js'))
-      .pipe(if isDeploy(nodeEnv) then streamify(uglify())else util.noop())
+      .pipe(ngAnnotate())
+      .pipe(if isDeploy(nodeEnv) then streamify(uglify({ mangle: false })) else util.noop())
       .pipe(buffer())
       .pipe(replace('COBUDGET_RELEASE_VERSION', getCobudgetVersion()))
       .pipe(replace('SENTRY_ENVIRONMENT', env.APP_ENV || nodeEnv))

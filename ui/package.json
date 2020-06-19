@@ -5,6 +5,7 @@
   "main": "./server.js",
   "browser": "./index.js",
   "scripts": {
+    "mini": "cd build/scripts/ ; uglifyjs index.js -c -m > index.min.js; mv index.min.js index.js",
     "build": "NODE_ENV=production gulp build",
     "develop": "gulp develop",
     "start": "gulp build && node .",
@@ -96,6 +97,7 @@
     "gulp-autoprefixer": "^3.1.1",
     "gulp-filter": "^1.0.2",
     "gulp-livereload": "^2.1.1",
+    "gulp-ng-annotate": "^2.1.0",
     "gulp-nodemon": "^1.0.4",
     "gulp-plumber": "^0.6.6",
     "gulp-rename": "^1.2.0",
@@ -109,6 +111,7 @@
     "node-sass": "^4.14.1",
     "tiny-lr": "^0.1.4",
     "txtify2": "^2.0.0",
+    "uglify-js": "^3.9.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^3.2.3"
