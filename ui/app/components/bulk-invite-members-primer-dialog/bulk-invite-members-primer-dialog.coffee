@@ -10,7 +10,7 @@ module.exports = (params) ->
 
     $scope.openCSVUploadDialog = ->
       $timeout( ->
-        angular.element('.bulk-invite-members-primer-dialog__hidden-btn input').trigger('click')
+        angular.element(document.querySelector('.bulk-invite-members-primer-dialog__hidden-btn input')).trigger('click')
       , 100)
 
     $scope.onCSVUploadSuccess = (response) ->

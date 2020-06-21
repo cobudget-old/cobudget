@@ -11,7 +11,7 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
 
       $scope.createComment = ->
         $scope.commentCreated = true
-        newComment = angular.element('.bucket-page__comment-input').clone()
+        newComment = angular.element(document.querySelector('.bucket-page__comment-input')).clone()
 
         newComment[0].innerHTML = newComment[0].innerHTML
           .replace(/(<a(.*?)<\/a>)/g, '')
