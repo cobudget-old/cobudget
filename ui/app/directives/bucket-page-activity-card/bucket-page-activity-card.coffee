@@ -11,17 +11,6 @@ global.cobudgetApp.directive 'bucketPageActivityCard', () ->
 
       $scope.createComment = ->
         $scope.commentCreated = true
-        newComment = angular.element('.bucket-page__comment-input').clone()
-
-        newComment[0].innerHTML = newComment[0].innerHTML
-          .replace(/(<a(.*?)<\/a>)/g, '')
-          .replace(/(<!---)/g, '')
-          .replace(/(-->)/g, '')
-          .replace(/<div>/gi,'\n')
-          .replace(/<\/div>/gi,'')
-          .replace(/<br>/gi,'\n')
-        $scope.newComment.body = newComment.text()
-
         $scope.newComment.save().then ->
           Toast.show('You posted a comment')
           $scope.newComment = Records.comments.build(bucketId: $scope.bucket.id)

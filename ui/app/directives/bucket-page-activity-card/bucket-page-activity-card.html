@@ -37,13 +37,13 @@
             mentio-require-leading-space="true"
             class="bucket-page__comment-input"
             placeholder="Ask a question, offer support, give an update..."
-            mentio-id="'newComment.bodyInput'"
-            ng-model="newComment.bodyInput"
+            mentio-id="'comment'"
+            ng-model="newComment.body"
             ></div>
       </md-input-container>
 
       <mentio-menu
-      mentio-for="'newComment.bodyInput'"
+      mentio-for="'comment'"
       mentio-trigger-char="'@'"
       mentio-items="users"
       mentio-template-url="/mentio-menu.tpl.html"

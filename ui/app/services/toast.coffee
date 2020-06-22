@@ -19,5 +19,3 @@ global.cobudgetApp.factory 'Toast', ($mdToast, $location) ->
         if res == 'ok'
           $location.path(path)
 
-    hide: ->
-      angular.element('md-toast').hide()
