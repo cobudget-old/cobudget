@@ -37,7 +37,6 @@ module.exports =
     $scope.newContribution = Records.contributions.build(bucketId: bucketId)
 
     $scope.back = ->
-      Toast.hide()
       $location.path("/groups/#{$scope.group.id}")
 
     $scope.userCanManageBucket = ->
