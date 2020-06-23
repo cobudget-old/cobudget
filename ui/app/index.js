@@ -1,3 +1,5 @@
+global.jQuery = require('jquery')
+global.$ = global.jQuery
 global._ = require('lodash')
 global.moment = require('moment')
 global.camelize = require('camelize')
