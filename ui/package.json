@@ -60,7 +60,7 @@
     "font-awesome": "^4.2.0",
     "gulp-build-branch": "^0.1.4",
     "gulp-ng-config": "^1.5.0",
-    "highcharts": "^5.0.9",
+    "highcharts": "^6.1.0",
     "highcharts-ng": "^1.0.1",
     "is-empty-object": "^1.1.1",
     "jquery": "^2.2.4",
