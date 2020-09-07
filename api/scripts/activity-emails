@@ -1,2 +1,2 @@
 #! /bin/bash
-cd /cobudget-api; env -i $(cat /root/env-vars) rake cobudget:deliver_recent_activity_emails
+cd /cobudget-api; env -i $(cat /root/env-vars) rake cobudget:deliver_recent_activity_emails > /dev/stdout
