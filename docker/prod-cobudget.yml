@@ -2,18 +2,36 @@ version: "3.7"
 services:
   cobudget-api:
     image: gardner/cobudget-api:latest
-    command: rails s -b 0.0.0.0
+    command: bash -c "rm -rf /cobudget-api/tmp && rails s -b 0.0.0.0"
     ports:
       - 3000:3000
     env_file: .env-prod
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+                
   delayed-job:
     image: gardner/cobudget-api:latest
     command: rake jobs:work
     env_file: .env-prod
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
   activity-emails:
     image: gardner/cobudget-api:latest
     command: /bin/bash -c "env >/root/env-vars && cron -f"
     env_file: .env-prod
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
