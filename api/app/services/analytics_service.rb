@@ -35,13 +35,13 @@ class AnalyticsService
     def new_group_count_7
       Rails.cache.fetch("new_group_count_7", :expires_in => 12.hours) do
         Group.where(created_at: 7.days.ago..Time.current).count
-      done
+      end
     end
 
     def new_group_count_90
       Rails.cache.fetch("new_group_count_90", :expires_in => 12.hours) do
         Group.where(created_at: 90.days.ago..Time.current).count
-      done
+      end
     end
 
     def unconfirmed_user_count
