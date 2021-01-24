@@ -14,7 +14,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-.idea
 /config/database.yml
 
 #Ignore vagrant related files
@@ -28,3 +27,5 @@ ubuntu-xenial-16.04-cloudimg-console.log
 dump.rb
 
 npm-debug.log
+/.generators
+/.rakeTasks
