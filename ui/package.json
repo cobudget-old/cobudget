@@ -109,7 +109,7 @@
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.1",
     "gulp-watch": "^1.2.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "tiny-lr": "^0.1.4",
     "txtify2": "^2.0.0",
     "uglify-js": "^3.9.4",
