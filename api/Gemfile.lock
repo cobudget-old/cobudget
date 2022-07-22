@@ -196,7 +196,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     timecop (0.8.1)
-    tzinfo (1.2.7)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     warden (1.2.7)
       rack (>= 1.0)
